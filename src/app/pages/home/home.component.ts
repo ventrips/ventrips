@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.seoService.setMetaTags({
       title: `Welcome to ${this.environment.name}!`,
-      description: `Manually oputting custom description here`
+      description: `Manually putting custom description here`
     });
   }
 
