@@ -41,7 +41,6 @@ export class ContactComponent implements OnInit {
       this.isLoading = false;
     }, () => {
       this.isLoading = false;
-      this.seoService.setMetaTags();
     });
   }
 

@@ -11,7 +11,10 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router
-  ) {}
+  ) {
+    // Initialize Default Metatags on first component load
+    this.setMetaTags();
+  }
 
   setMetaTags(config?: any) {
     // Default Metatags if not set
