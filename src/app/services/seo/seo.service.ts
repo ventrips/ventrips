@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
 import { environment } from './../../../environments/environment';
+import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +11,13 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router
-  ) {}
+  ) {
+    // Initialize Default Metatags on first component load
+    this.setMetaTags();
+  }
 
-  generateTags(config?: any) {
-    // default values
+  setMetaTags(config?: any) {
+    // Default Metatags if not set
     config = {
       title: `${!_.isEmpty(_.startCase(this.router.url)) ? _.startCase(this.router.url) : 'Home'}`,
       description: environment.description,
