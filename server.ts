@@ -1,8 +1,10 @@
-(global as any).WebSocket = require('ws');
-(global as any).XMLHttpRequest = require('xhr2');
-
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
+
+// DOM libs required for Firebase
+(global as any).WebSocket = require('ws');
+(global as any).XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+
 import {enableProdMode} from '@angular/core';
 // Express Engine
 import {ngExpressEngine} from '@nguniversal/express-engine';
