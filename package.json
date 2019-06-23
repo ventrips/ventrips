@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-ssr": "npm run build:ssr && npm run serve:ssr",
     "build": "ng build",
     "build:install": "npm run build:ssr",
     "deploy": "npm run build:ssr && node movedist.js && cd functions && firebase deploy",
