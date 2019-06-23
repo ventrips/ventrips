@@ -11,13 +11,13 @@ import * as _ from 'lodash';
 export class HomeComponent implements OnInit {
   public environment = environment;
   public data;
+  public test = 'testing string from home component ts';
 
   constructor(
     private seoService: SeoService,
     private http: HttpClient
   ) {
-
-    this.http.get(`https://api.myjson.com/bins/12qook`).toPromise()
+    this.http.get(`https://reqres.in/api/users?delay=2`).toPromise()
     .then(response => {
       if (!_.isNil(response)) {
         this.data = response;
