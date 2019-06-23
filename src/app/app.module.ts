@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import { environment } from '../environments/environment';
 
 // Libraries
@@ -13,6 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { HomeResolve } from './pages/home/home.resolve';
 import { ContactComponent } from './pages/contact/contact.component';
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { ContactComponent } from './pages/contact/contact.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    TransferHttpCacheModule,
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
@@ -29,7 +32,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [],
+  providers: [HomeResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
