@@ -27,9 +27,13 @@ export class ContactComponent implements OnInit {
     private router: Router,
     public db: AngularFirestore
   ) {
+    this.seoService.setMetaTags();
     this.url = this.router.url;
     this.collection = this.router.url.split('/')[1];
-    db.collection(this.collection).doc(this.id).valueChanges()
+  }
+
+  ngOnInit() {
+    this.db.collection(this.collection).doc(this.id).valueChanges()
     .subscribe(response => {
       if (!_.isNil(response)) {
         this.item = response;
@@ -41,10 +45,7 @@ export class ContactComponent implements OnInit {
       this.isLoading = false;
     }, () => {
       this.isLoading = false;
-      this.seoService.setMetaTags();
     });
   }
-
-  ngOnInit() {}
 
 }

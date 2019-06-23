@@ -17,19 +17,19 @@ export class HomeComponent implements OnInit {
     private seoService: SeoService,
     private http: HttpClient
   ) {
-    this.http.get(`https://reqres.in/api/users?delay=2`).toPromise()
-    .then(response => {
-      if (!_.isNil(response)) {
-        this.data = response;
-      }
-    }).catch(error => {});
-
     this.seoService.setMetaTags({
       title: `Custom Homepage Title`,
       description: `Manually putting custom description here`
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.http.get(`https://reqres.in/api/users?delay=2`).toPromise()
+    .then(response => {
+      if (!_.isNil(response)) {
+        this.data = response;
+      }
+    }).catch(error => {});
+  }
 
 }
