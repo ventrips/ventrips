@@ -25,9 +25,7 @@ export class ContactComponent implements OnInit {
     private seoService: SeoService,
     private router: ActivatedRoute,
     private transferState: TransferState
-  ) {
-    this.seoService.setMetaTags();
-  }
+  ) {}
 
   ngOnInit() {
     const id = `contact`;

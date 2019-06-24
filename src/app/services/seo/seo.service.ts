@@ -16,15 +16,12 @@ export class SeoService {
   setMetaTags(config?: any) {
     // Default Metatags if not set
     config = {
-      title: `${!_.isEmpty(_.startCase(this.router.url)) ? _.startCase(this.router.url) : 'Home'}`,
+      title: `${!_.isEmpty(_.startCase(this.router.url)) ? _.startCase(this.router.url) : environment.name}`,
       description: environment.description,
-      image: `${environment.url}/favicon.ico`,
+      image: `${environment.url}/assets/img/horse-shoe-bend-min.jpg`,
       url: `${environment.url}${!_.isEmpty(_.startCase(this.router.url)) ? this.router.url : ''}`,
       ...config
     };
-
-    config.title = `${config.title} - ${environment.name}`;
-    config.description = config.description;
 
     // Set HTML Document Title
     this.title.setTitle(config.title);

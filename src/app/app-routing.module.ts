@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 /* Pages */
 
 import { HomeComponent } from './pages/home/home.component';
-import { HomeResolve } from './pages/home/home.resolve';
 
 import { ContactComponent } from './pages/contact/contact.component';
 

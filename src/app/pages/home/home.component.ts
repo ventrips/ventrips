@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SeoService } from '../../services/seo/seo.service';
+import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 @Component({
@@ -11,7 +12,7 @@ import * as _ from 'lodash';
 export class HomeComponent implements OnInit {
   public environment = environment;
   public data;
-  public test = 'testing string from home component ts';
+  public test = 'Test string from the home.component.ts';
 
   constructor(
     private seoService: SeoService,

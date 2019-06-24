@@ -14,7 +14,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { HomeResolve } from './pages/home/home.resolve';
 import { ContactComponent } from './pages/contact/contact.component';
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [HomeResolve],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
