@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
       if (!_.isNil(response)) {
         this.data = response;
         this.seoService.setMetaTags({
-          title: `Inside Custom Homepage Title`,
-          description: `Manually putting custom description here`
+          title: `${this.data.data[0].first_name} - Test API`,
+          description: `${this.data.data[0].email}`
         });
       }
     }).catch(error => {});
