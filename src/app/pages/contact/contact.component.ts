@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../../services/seo/seo.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Params } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Params, ActivatedRoute } from '@angular/router';
+import { map, tap, startWith } from 'rxjs/operators';
+import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
+
+const CONTACT_KEY = makeStateKey<any>('contact');
 
 @Component({
   selector: 'app-contact',
@@ -16,36 +18,33 @@ import * as _ from 'lodash';
 export class ContactComponent implements OnInit {
   public _ = _;
   public environment = environment;
-  public url: string;
-  public collection: string;
-  public id = `GvfJVJeR9TeTDVF7OGRf`;
-  public isLoading = true;
-  public item: any;
+  public data$: any;
 
   constructor(
+    private afs: AngularFirestore,
     private seoService: SeoService,
-    private router: Router,
-    public db: AngularFirestore
+    private router: ActivatedRoute,
+    private transferState: TransferState
   ) {
     this.seoService.setMetaTags();
-    this.url = this.router.url;
-    this.collection = this.router.url.split('/')[1];
   }
 
   ngOnInit() {
-    this.db.collection(this.collection).doc(this.id).valueChanges()
-    .subscribe(response => {
-      if (!_.isNil(response)) {
-        this.item = response;
-        this.seoService.setMetaTags({
-          title: this.item.title,
-          description: this.item.description
-        });
-      }
-      this.isLoading = false;
-    }, () => {
-      this.isLoading = false;
-    });
+    const id = `contact`;
+    this.data$ = this.ssrFirestoreDoc(`pages/${id}`);
   }
 
+  ssrFirestoreDoc(path: string) {
+    const exists = this.transferState.get(CONTACT_KEY, {} as any);
+    return this.afs.doc<any>(path).valueChanges().pipe(
+      tap(page => {
+        this.transferState.set(CONTACT_KEY, page);
+        this.seoService.setMetaTags({
+          title: page.title,
+          description: page.description
+        });
+      }),
+      startWith(exists)
+    );
+  }
 }
