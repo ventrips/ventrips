@@ -1,3 +1,4 @@
+// These are important and needed before anything else
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
@@ -5,6 +6,7 @@ import 'reflect-metadata';
 (global as any).WebSocket = require('ws');
 (global as any).XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
+// Faster server renders with Prod Mode (dev mode)
 import {enableProdMode} from '@angular/core';
 // Express Engine
 import {ngExpressEngine} from '@nguniversal/express-engine';
