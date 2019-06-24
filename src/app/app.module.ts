@@ -22,7 +22,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     ContactComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'angular-seo-starter' }),
     BrowserTransferStateModule,
     HttpClientModule,
     AppRoutingModule,
