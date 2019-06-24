@@ -16,18 +16,17 @@ export class HomeComponent implements OnInit {
   constructor(
     private seoService: SeoService,
     private http: HttpClient
-  ) {
-    this.seoService.setMetaTags({
-      title: `Custom Homepage Title`,
-      description: `Manually putting custom description here`
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.http.get(`https://reqres.in/api/users?delay=2`).toPromise()
     .then(response => {
       if (!_.isNil(response)) {
         this.data = response;
+        this.seoService.setMetaTags({
+          title: `Inside Custom Homepage Title`,
+          description: `Manually putting custom description here`
+        });
       }
     }).catch(error => {});
   }
