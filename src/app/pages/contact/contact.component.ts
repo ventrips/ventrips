@@ -32,6 +32,7 @@ export class ContactComponent implements OnInit {
     this.data$ = this.ssrFirestoreDoc(`pages/${id}`);
   }
 
+  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreDoc(path: string) {
     const exists = this.transferState.get(CONTACT_KEY, {} as any);
     return this.afs.doc<any>(path).valueChanges().pipe(
