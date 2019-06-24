@@ -1,8 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { TransferHttpCacheModule } from '@nguniversal/common';
 import { environment } from '../environments/environment';
 
 // Libraries
@@ -24,7 +23,7 @@ import { ContactComponent } from './pages/contact/contact.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    TransferHttpCacheModule,
+    BrowserTransferStateModule,
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
