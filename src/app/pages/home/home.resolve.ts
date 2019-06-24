@@ -15,7 +15,6 @@ export class HomeResolve implements Resolve<Observable<any>> {
 
    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         if (!isPlatformBrowser(this.platformId)) {
-            console.log('hey');
             return null;
         }
         return new Observable<any>(observer => {

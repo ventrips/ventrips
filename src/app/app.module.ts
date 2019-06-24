@@ -1,4 +1,5 @@
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,7 @@ import { ContactComponent } from './pages/contact/contact.component';
   imports: [
     BrowserModule.withServerTransition({ appId: 'angular-seo-starter' }),
     BrowserTransferStateModule,
+    TransferHttpCacheModule,
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything

@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component: HomeComponent, resolve: { data: HomeResolve } },
       { path: 'contact', component: ContactComponent }
     ]
   },
