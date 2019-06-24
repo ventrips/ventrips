@@ -41,7 +41,8 @@ export class ContactComponent implements OnInit {
         this.transferState.set(CONTACT_KEY, page);
         this.seoService.setMetaTags({
           title: page.title,
-          description: page.description
+          description: page.description,
+          image: page.image
         });
       }),
       startWith(exists)
