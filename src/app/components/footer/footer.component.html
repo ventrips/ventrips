@@ -1,0 +1,25 @@
+<footer class="bg-light py-3">
+  <section class="container-fluid">
+    <section class="d-flex">
+      <p class="mt-2 mr-5 mb-0">Follow Us</p>
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item mt-1 mr-4" *ngFor="let item of socialMedia">
+          <a class="text-dark" [title]="item?.name" [href]="item?.url" target="__blank">
+            <i class="fab fa-2x {{item?.class}}"></i>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <hr>
+    <section class="d-flex">
+      <p class="mt-2 mr-5 mb-0 text-capitalize">{{environment?.name}}</p>
+      <ul class="list-inline">
+        <li class="list-inline-item mt-2 mr-4" *ngFor="let item of footerLinks">
+          <a [title]="item?.name" [routerLink]="item?.url">
+            {{item?.name}}
+          </a>
+        </li>
+      </ul>
+    </section>
+  </section>
+</footer>
