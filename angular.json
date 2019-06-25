@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-seo-starter": {
+    "ventrips": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -31,9 +31,12 @@
               "src/googlef83ed21bb34faab0.html"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/lodash/lodash.min.js"
             ]
           },
@@ -67,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-seo-starter:build"
+            "browserTarget": "ventrips:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-seo-starter:build:production"
+              "browserTarget": "ventrips:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-seo-starter:build"
+            "browserTarget": "ventrips:build"
           }
         },
         "test": {
@@ -96,9 +99,12 @@
               "src/googlef83ed21bb34faab0.html"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/lodash/lodash.min.js"
             ]
           }
@@ -120,11 +126,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-seo-starter:serve"
+            "devServerTarget": "ventrips:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-seo-starter:serve:production"
+              "devServerTarget": "ventrips:serve:production"
             }
           }
         },
@@ -149,5 +155,5 @@
       }
     }
   },
-  "defaultProject": "angular-seo-starter"
+  "defaultProject": "ventrips-website"
 }

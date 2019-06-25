@@ -11,18 +11,23 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
-// Components
+// Pages
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
+
+// Components
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    NavbarComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'angular-seo-starter' }),
+    BrowserModule.withServerTransition({ appId: 'ventrips' }),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
     HttpClientModule,
