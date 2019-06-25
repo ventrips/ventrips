@@ -34,15 +34,15 @@ export class FooterComponent implements OnInit {
   ];
   public footerLinks = [
     {
-      name: `Privacy`,
+      title: `Privacy`,
       url: `privacy`
     },
     {
-      name: `Terms`,
+      title: `Terms`,
       url: `terms`
     },
     {
-      name: `About ${_.capitalize(environment.name)}`,
+      title: `About ${environment.name}`,
       url: `terms`
     }
   ];
