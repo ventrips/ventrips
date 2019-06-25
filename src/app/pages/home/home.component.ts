@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.http.get(`https://reqres.in/api/users?delay=2`).toPromise()
+    this.http.get(`https://reqres.in/api/users?delay=1`).toPromise()
     .then(response => {
       if (!_.isNil(response)) {
         this.data = response;
