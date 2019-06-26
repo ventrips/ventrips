@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand text-capitalize" [title]="environment?.name" [routerLink]="''">{{environment?.name}}</a>
+  <a [routerLink]="['']" [title]="environment?.name" class="navbar-brand text-capitalize">{{environment?.name}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#customNavBar" aria-controls="customNavBar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="customNavBar">
     <div class="navbar-nav">
-      <a *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" [title]="item?.title" [routerLink]="item?.url" class="nav-item nav-link">
+      <a *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" [routerLink]="['', item?.url]" [title]="item?.title" class="nav-item nav-link">
         {{item?.title}}
         <span *ngIf="isActive(item?.url)" class="sr-only">(current)</span>
       </a>
