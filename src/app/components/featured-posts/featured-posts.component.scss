@@ -1,0 +1,11 @@
+.card-img-overlay {
+    top: unset;
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .container {
+        width: 100%;
+        padding: 0;
+    }
+}

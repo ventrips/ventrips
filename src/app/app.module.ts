@@ -19,6 +19,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FeaturedPostsComponent } from './components/featured-posts/featured-posts.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     ContactComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    FeaturedPostsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
