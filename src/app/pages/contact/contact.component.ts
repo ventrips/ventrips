@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SeoService } from '../../services/seo/seo.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Params, ActivatedRoute } from '@angular/router';
 import { map, tap, startWith } from 'rxjs/operators';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { SeoService } from '../../services/seo/seo.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 
@@ -24,13 +25,16 @@ export class ContactComponent implements OnInit {
     private afs: AngularFirestore,
     private seoService: SeoService,
     private router: ActivatedRoute,
-    private transferState: TransferState
+    private transferState: TransferState,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     const id = `contact`;
+    this.spinner.show();
     this.ssrFirestoreDoc(`pages/${id}`).subscribe(response => {
       this.data = response;
+      this.spinner.hide();
     });
   }
 

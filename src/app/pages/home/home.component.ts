@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SeoService } from '../../services/seo/seo.service';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SeoService } from '../../services/seo/seo.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 @Component({
@@ -15,11 +16,13 @@ export class HomeComponent implements OnInit {
   public test = 'Test string from the home.component.ts';
 
   constructor(
+    private http: HttpClient,
+    private spinner: NgxSpinnerService,
     private seoService: SeoService,
-    private http: HttpClient
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.http.get(`https://reqres.in/api/users?delay=1`).toPromise()
     .then(response => {
       if (!_.isNil(response)) {
@@ -29,7 +32,10 @@ export class HomeComponent implements OnInit {
           description: `${this.data.data[0].email}`
         });
       }
-    }).catch(error => {});
+      this.spinner.hide();
+    }).catch(error => {
+      this.spinner.hide();
+    });
   }
 
 }

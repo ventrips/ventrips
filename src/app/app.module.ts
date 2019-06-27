@@ -10,6 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ import { DetailsComponent } from './pages/details/details.component';
     TransferHttpCacheModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
