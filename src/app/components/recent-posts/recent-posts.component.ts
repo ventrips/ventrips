@@ -3,11 +3,11 @@ import * as faker from 'faker';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-featured-posts',
-  templateUrl: './featured-posts.component.html',
-  styleUrls: ['./featured-posts.component.scss']
+  selector: 'app-recent-posts',
+  templateUrl: './recent-posts.component.html',
+  styleUrls: ['./recent-posts.component.scss']
 })
-export class FeaturedPostsComponent implements OnInit {
+export class RecentPostsComponent implements OnInit {
   public featuredPosts = [];
 
   constructor() {}

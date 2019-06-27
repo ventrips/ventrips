@@ -1,7 +1,12 @@
-<section class="container-fluid my-3">
-  <div *ngIf="data$ | async as data">
-    <h1>{{data?.title}}</h1>
-    <p>{{data?.description}}</p>
-    <img [src]="data?.image"/>
-  </div>
+<section class="container-fluid py-4">
+  <section>
+      <div *ngIf="data$ | async as data">
+        <h3>{{data?.title}}</h3>
+        <p>{{data?.description}}</p>
+        <img [src]="data?.image" [alt]="data?.title"/>
+      </div>
+  </section>
+  <section>
+    <div>Loading ...</div>
+  </section> 
 </section>

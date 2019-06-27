@@ -1,4 +1,4 @@
-<footer class="bg-light py-3">
+<footer class="bg-white border-top py-3">
   <section class="container-fluid">
     <section class="d-flex">
       <p class="mt-2 mr-5 mb-0">Follow Us</p>
@@ -12,7 +12,7 @@
     </section>
     <hr>
     <section class="d-flex">
-      <p class="mt-2 mr-5 mb-0 text-capitalize">{{environment?.name}}</p>
+      <a [routerLink]="['']" class="mt-2 mr-5 mb-0 text-dark text-capitalize text-decoration-none">{{environment?.name}}</a>
       <ul class="list-inline">
         <li *ngFor="let item of footerLinks" class="list-inline-item mt-2 mr-4">
           <a [title]="item?.title" [routerLink]="item?.url" class="text-capitalize">

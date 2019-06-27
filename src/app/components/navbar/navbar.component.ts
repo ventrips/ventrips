@@ -11,6 +11,10 @@ export class NavbarComponent implements OnInit {
   public environment = environment;
   public navBarLinks = [
     {
+      title: `About`,
+      url: `about`
+    },
+    {
       title: `Contact`,
       url: `contact`
     }
@@ -28,7 +32,7 @@ export class NavbarComponent implements OnInit {
       return true;
     }
 
-    return _.isEqual(this.router.url, currentNav);
+    return _.includes(this.router.url, currentNav);
   }
 
 }

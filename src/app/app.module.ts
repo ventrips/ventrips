@@ -15,20 +15,28 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { TermsComponent } from './pages/terms/terms.component';
+import { AboutComponent } from './pages/about/about.component';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FeaturedPostsComponent } from './components/featured-posts/featured-posts.component';
+import { RecentPostsComponent } from './components/recent-posts/recent-posts.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ContactComponent,
+    PrivacyComponent,
+    TermsComponent,
+    AboutComponent,
     NavbarComponent,
     FooterComponent,
-    FeaturedPostsComponent
+    RecentPostsComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),

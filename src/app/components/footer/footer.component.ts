@@ -43,7 +43,7 @@ export class FooterComponent implements OnInit {
     },
     {
       title: `About ${environment.name}`,
-      url: `terms`
+      url: `about`
     }
   ];
 
