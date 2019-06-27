@@ -1,9 +1,7 @@
 <section class="container-fluid py-4">
-  <section>
-      <div *ngIf="data$ | async as data">
-        <h3>{{data?.title}}</h3>
-        <p>{{data?.description}}</p>
-        <img [src]="data?.image" [alt]="data?.title"/>
-      </div>
-  </section>
+  <div *ngIf="!_.isEmpty(data)">
+    <h3>{{data?.title}}</h3>
+    <p>{{data?.description}}</p>
+    <img [src]="data?.image" [alt]="data?.title"/>
+  </div>
 </section>

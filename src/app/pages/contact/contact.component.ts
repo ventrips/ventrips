@@ -18,7 +18,7 @@ const CONTACT_KEY = makeStateKey<any>('contact');
 export class ContactComponent implements OnInit {
   public _ = _;
   public environment = environment;
-  public data$: any;
+  public data: any;
 
   constructor(
     private afs: AngularFirestore,
@@ -29,7 +29,9 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     const id = `contact`;
-    this.data$ = this.ssrFirestoreDoc(`pages/${id}`);
+    this.ssrFirestoreDoc(`pages/${id}`).subscribe(response => {
+      this.data = response;
+    });
   }
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
