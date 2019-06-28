@@ -13,6 +13,14 @@ export class DetailsComponent implements OnInit {
   public slug;
   public category;
   public tempAd = faker.image.imageUrl();
+  public data = {
+    uid: faker.random.uuid(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    title: faker.name.title(),
+    description: faker.lorem.sentences(),
+    timestamp: faker.date.past()
+  };
 
   constructor(
     private seoService: SeoService,
