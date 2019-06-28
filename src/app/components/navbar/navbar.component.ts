@@ -17,7 +17,11 @@ export class NavbarComponent implements OnInit {
     {
       title: `Contact`,
       url: `contact`
-    }
+    },
+    {
+      title: `Login`,
+      url: `login`
+    },
   ];
 
   constructor(

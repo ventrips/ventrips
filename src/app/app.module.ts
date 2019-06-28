@@ -19,6 +19,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { AboutComponent } from './pages/about/about.component';
+import { LoginComponent } from './pages/login/login.component';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -34,10 +35,11 @@ import { DetailsComponent } from './pages/details/details.component';
     PrivacyComponent,
     TermsComponent,
     AboutComponent,
+    LoginComponent,
     NavbarComponent,
     FooterComponent,
     RecentPostsComponent,
-    DetailsComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
