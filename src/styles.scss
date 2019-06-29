@@ -6,6 +6,11 @@ main {
     min-height: 100vh;
 }
 
+::selection {
+    background: #fed136;
+    text-shadow: none;
+}
+
 .fill-available {
     height: 100%;
     height: -moz-available;
@@ -23,4 +28,8 @@ main {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.text-shadow {
+    text-shadow: 0 1px 2px #212529!important;
 }
