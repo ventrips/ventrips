@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
       return true;
     }
 
-    return _.includes(this.router.url, currentNav);
+    return _.isEqual(this.router.url, `/${currentNav}`);
   }
 
 }
