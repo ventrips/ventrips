@@ -3,7 +3,7 @@
   <a [routerLink]="['', featuredPost?.slug]" class="card bg-dark text-white rounded-0 border-0">
     <img class="card-img rounded-0" [src]="featuredPost?.image" [alt]="featuredPost?.title">
     <div class="card-img-overlay">
-      <a [routerLink]="['', featuredPost?.category]" [title]="featuredPost?.category" class="text-uppercase text-shadow text-white bg-primary d-inline-block p-2 mb-3">{{featuredPost?.category}}</a>
+      <a [routerLink]="['', featuredPost?.category]" [title]="featuredPost?.category" class="text-uppercase text-shadow text-white bg-warning d-inline-block p-2 mb-3">{{featuredPost?.category}}</a>
       <h5 class="card-title text-capitalize">
         <a [routerLink]="['', featuredPost?.slug]" [title]="featuredPost?.title" class="text-white text-shadow">{{featuredPost?.title}}</a>
       </h5>
