@@ -12,10 +12,6 @@ export class NavbarComponent implements OnInit {
   public environment = environment;
   public navBarLinks = [
     {
-      title: `Home`,
-      url: `''`
-    },
-    {
       title: `About`,
       url: `about`
     },
