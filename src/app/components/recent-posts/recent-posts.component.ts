@@ -17,7 +17,7 @@ export class RecentPostsComponent implements OnInit {
       const featuredPost = {
         uid: faker.random.uuid(),
         name: faker.name.findName(),
-        slug: faker.internet.domainWord(),
+        slug: faker.lorem.slug(),
         title: faker.name.title(),
         category: faker.commerce.department(),
         caption: faker.lorem.sentences(),
