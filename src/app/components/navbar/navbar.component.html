@@ -4,11 +4,36 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="customNavBar">
-    <div class="navbar-nav ml-auto">
-      <a *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" [routerLink]="['', item?.url]" [title]="item?.title" class="nav-item nav-link">
-        {{item?.title}}
-        <span *ngIf="isActive(item?.url)" class="sr-only">(current)</span>
-      </a>
-    </div>
+    <ul class="navbar-nav ml-auto">
+      <li *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" class="nav-item">
+        <a [routerLink]="['', item?.url]" [title]="item?.title" class="nav-link">
+          {{item?.title}}
+          <span *ngIf="isActive(item?.url)" class="sr-only">(current)</span>
+        </a>      
+      </li>
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.collapse.show" *ngIf="!authService?.getUser()">
+        <a [routerLink]="['/login']" [ngClass]="{'active': isActive('/login')}" class="nav-link text-shadow" title="Log In" >
+          Log In
+        </a>
+      </li>
+      <li class="nav-item dropdown cursor-pointer" *ngIf="authService?.getUser()">
+        <a class="nav-link text-shadow dropdown-toggle" title="User Dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          [ngClass]="{'active': isActive('/admin')}">
+          <img class="rounded-circle avatar box-shadow mr-3" [src]="authService?.getPhotoURL()" alt="Avatar">
+          <span class="text-shadow">{{authService?.getDisplayName()}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-toggle="collapse" data-target=".navbar-collapse.collapse.show">
+          <ng-container *ngIf="authService?.isAdmin()">
+            <a class="dropdown-item" title="Admin" [routerLink]="['/admin']" [ngClass]="{'active': isActive('/admin')}">
+              Admin
+            </a>
+            <div class="dropdown-divider"></div>
+          </ng-container>
+          <a class="dropdown-item" (click)="authService.signOut()">
+            Log Out
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>

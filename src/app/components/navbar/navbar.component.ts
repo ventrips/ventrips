@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 import { environment } from './../../../environments/environment';
 import * as _ from 'lodash';
 @Component({
@@ -17,15 +18,12 @@ export class NavbarComponent implements OnInit {
     {
       title: `Contact`,
       url: `contact`
-    },
-    {
-      title: `Login`,
-      url: `login`
-    },
+    }
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
