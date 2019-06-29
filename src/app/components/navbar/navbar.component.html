@@ -12,7 +12,7 @@
         </a>      
       </li>
       <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.collapse.show" *ngIf="!authService?.getUser()">
-        <a [routerLink]="['/login']" [ngClass]="{'active': isActive('/login')}" class="nav-link text-shadow" title="Log In" >
+        <a [routerLink]="['/login']" [ngClass]="{'active': isActive('/login')}" class="nav-link" title="Log In" >
           Log In
         </a>
       </li>
