@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { SeoService } from '../../services/seo/seo.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   public user: any;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private seoService: SeoService,
     private toastrService: ToastrService
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithGoogle().then(response => {
       if (!_.isNil(response)) {
         this.user = response.user;
+        this.router.navigate(['']);
       } else {
         this.user = undefined;
       }
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithFacebook().then(response => {
       if (!_.isNil(response)) {
         this.user = response.user;
+        this.router.navigate(['']);
       } else {
         this.user = undefined;
       }

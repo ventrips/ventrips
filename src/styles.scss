@@ -6,6 +6,17 @@ main {
     min-height: 100vh;
 }
 
+.fill-available {
+    height: 100%;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: stretch;
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: stretch;
+}
+
 .text-decoration-none {
     text-decoration: none;
 }
