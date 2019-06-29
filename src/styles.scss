@@ -33,3 +33,7 @@ main {
 .text-shadow {
     text-shadow: 0 1px 2px #212529!important;
 }
+
+quill-editor .ql-container {
+    max-height: 90%;
+}
