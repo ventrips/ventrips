@@ -1,5 +1,22 @@
 <section class="container-fluid py-3">
-  <h3 class="text-capitalize">
-    Privacy
-  </h3>
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="section-heading text-uppercase">Privacy Policy</h2>
+      <p class="text-muted">
+        Similar to many websites, {{environment?.name}} collects non-sensitive information such as the browser type, language preference, referring site, and the date and time of each visitor request using <a href="https://marketingplatform.google.com/about/analytics/" target="_blank">Google Analytics</a>.
+        {{environment?.name}}' purpose in collecting non-sensitive information is to better understand how visitors use its website and how to improve their user experience. {{environment?.name}} may sometimes change its <a [routerLink]="['/privacy']">Privacy Policy</a> from time to time to conform to modern regulations.
+      </p>
+      <h2 class="section-heading text-uppercase">Advertisements</h2>
+      <p class="text-muted">
+        Advertisements displaying on any pages of <a [title]="environment?.url" [href]="environment?.url">{{environment.name}}.com</a> may be provided by its partners.
+        {{environment?.name}}' partners may set cookies to allow advertisement networks to deliver targeted advertisements that they believe will be of most interest to users.
+      </p>
+      <h2 class="section-heading text-uppercase">Affiliate Disclaimer</h2>
+      <p class="text-muted">
+        {{environment?.name}} operates <a title="{{environment?.url}}" [href]="environment?.url">{{environment.name}}.com</a> and is a participant in the <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Services LLC Associates Program</a>.
+        This is an affiliate advertising program that allows sites like this to earn comission fees by advertising and linking products to <a href="https://www.amazon.com/" target="_blank">Amazon.com</a>.
+      </p>
+    </div>
+  </div>
 </section>
+    

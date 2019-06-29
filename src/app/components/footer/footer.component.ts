@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
     {
       name: 'Email',
       class: 'fa fa-envelope',
-      url: `mailto:huynhjjk@gmail.com?Subject=Hey Johnson`
+      url: `mailto:${_.startCase(environment.name)}@gmail.com?Subject=Hey ${_.startCase(environment.name)}`
     },
     {
       name: 'Facebook',
