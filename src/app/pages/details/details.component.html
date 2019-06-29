@@ -5,7 +5,8 @@
       <div>{{data?.firstName}} {{data?.lastName}}</div>
       <div>{{data?.timestamp | date}}</div>
       <p>{{data?.description}}</p>
-      <quill-editor></quill-editor>
+      <p [innerHTML]="data?.content"></p>
+      <quill-editor [(ngModel)]="data.content"></quill-editor>
     </div>
     <div class="col">
       <img [src]="tempAd" alt="Temp Ad" class="img-fluid w-100"/>

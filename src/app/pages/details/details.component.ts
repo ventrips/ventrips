@@ -20,7 +20,8 @@ export class DetailsComponent implements OnInit {
     lastName: faker.name.lastName(),
     title: faker.name.title(),
     description: faker.lorem.sentences(),
-    timestamp: faker.date.past()
+    timestamp: faker.date.past(),
+    content: ``
   };
 
   constructor(

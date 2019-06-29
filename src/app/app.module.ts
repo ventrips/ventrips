@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 
 // Libraries
@@ -48,6 +49,7 @@ import { DetailsComponent } from './pages/details/details.component';
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
+    FormsModule,
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
