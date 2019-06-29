@@ -13,6 +13,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { QuillModule } from 'ngx-quill';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { DetailsComponent } from './pages/details/details.component';
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    QuillModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

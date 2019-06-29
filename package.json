@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --aot",
     "start:ssr": "npm run build:ssr && npm run serve:ssr",
     "build": "ng build",
     "build:install": "npm run build:ssr",
@@ -41,8 +41,10 @@
     "fs-extra": "^8.1.0",
     "jquery": "^3.4.1",
     "lodash": "^4.17.11",
+    "ngx-quill": "^6.1.0",
     "ngx-spinner": "^7.1.4",
     "ngx-toastr": "^10.0.4",
+    "quill": "^1.3.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
