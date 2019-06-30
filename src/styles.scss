@@ -34,6 +34,7 @@ main {
     text-shadow: 0 1px 2px #212529!important;
 }
 
+/* Custom ngx-quill */
 quill-view-html .ql-container {
     height: unset;
     .ql-editor {
@@ -43,4 +44,17 @@ quill-view-html .ql-container {
 
 quill-editor .ql-container {
     max-height: 90%;
+}
+
+/* Custom ng-bootstrap */
+.modal-100 {
+    .modal-dialog {
+        max-width: unset;
+        margin: unset;
+        .modal-content {
+            border: unset;
+            border-radius: unset;
+            min-height: 100vh;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,6 +7,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./edit-mode.component.scss']
 })
 export class EditModeComponent implements OnInit {
+  @Input() data;
+  @Input() new = false;
+
   public closeResult: string;
 
   constructor(
@@ -17,7 +20,12 @@ export class EditModeComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content,
+      {
+        ariaLabelledBy: 'modal-basic-title',
+        windowClass: 'modal-100'
+      }
+    ).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

@@ -1,13 +1,12 @@
 <section class="container-fluid py-4">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-xl-8">
-      <h2 class="text-capitalize">{{post?.title}} - {{post?.topic}} / {{post?.slug}}</h2>
-      <div>UID: {{post?.uid}}</div>
-      <div>Date Created: {{post?.dateCreated | date}}</div>
-      <div>Date Edited: {{post?.dateEdited | date}}</div>
-      <app-edit-mode></app-edit-mode>
-      <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
-      <quill-editor [(ngModel)]="post.body"></quill-editor>
+      <app-edit-mode [data]="data" [new]="false"></app-edit-mode>
+      <h2 class="text-capitalize">{{data?.title}} - {{data?.topic}} / {{data?.slug}}</h2>
+      <div>UID: {{data?.uid}}</div>
+      <div>Date Created: {{data?.dateCreated | date}}</div>
+      <div>Date Edited: {{data?.dateEdited | date}}</div>
+      <quill-view-html [content]="data?.body" theme="snow"></quill-view-html>
     </div>
     <div class="col">
       <img [src]="tempAd" alt="Temp Ad" class="img-fluid w-100"/>

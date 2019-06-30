@@ -6,6 +6,10 @@
         </button>
     </div>
     <div class="modal-body">
+        <pre>
+            {{data | json}} {{new}}
+        </pre>                
+        <quill-editor [(ngModel)]="data.body"></quill-editor>
         <form>
         <div class="form-group">
             <label for="dateOfBirth">Date of birth</label>
@@ -26,5 +30,4 @@
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
 
 <hr>
-
 <pre>{{closeResult}}</pre>

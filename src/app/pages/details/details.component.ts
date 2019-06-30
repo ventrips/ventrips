@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 })
 export class DetailsComponent implements OnInit {
   public tempAd = faker.image.imageUrl();
-  public post: Post;
+  public data: Post;
 
   constructor(
     private seoService: SeoService,
@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.post = {
+        this.data = {
           postId: faker.random.uuid(),
           uid: faker.random.uuid(),
           slug: this.activatedRoute.snapshot.params.slug,
@@ -48,8 +48,8 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.seoService.setMetaTags({
-      title: `${_.capitalize(this.post.slug)} - ${_.capitalize(this.post.topic)}`,
-      description: `${_.capitalize(this.post.slug)}/${_.capitalize(this.post.topic)} Description`
+      title: `${_.capitalize(this.data.slug)} - ${_.capitalize(this.data.topic)}`,
+      description: `${_.capitalize(this.data.slug)}/${_.capitalize(this.data.topic)} Description`
     });
   }
 
