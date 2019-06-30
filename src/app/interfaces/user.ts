@@ -4,7 +4,7 @@ export interface IUser {
     lastName: string;
     email: string;
     dateJoined: Date;
-    role: string;
+    role: string; // “admin”, “editor”, “contributor”, or “member”
 }
 
 export class User implements IUser {
