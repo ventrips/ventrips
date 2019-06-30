@@ -35,7 +35,7 @@ export class DetailsComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.slug = this.activatedRoute.snapshot.params.slug;
         this.category = this.activatedRoute.snapshot.params.category;
-        if (isPlatformServer(this.platformId)) {
+        if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);
         }
       }
