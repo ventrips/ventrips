@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SeoService } from '../../services/seo/seo.service';
@@ -27,13 +28,16 @@ export class DetailsComponent implements OnInit {
   constructor(
     private seoService: SeoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.slug = this.activatedRoute.snapshot.params.slug;
         this.category = this.activatedRoute.snapshot.params.category;
-        window.scrollTo(0, 0);
+        if (isPlatformServer(this.platformId)) {
+          window.scrollTo(0, 0);
+        }
       }
     });
   }

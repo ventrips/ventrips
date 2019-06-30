@@ -21,7 +21,7 @@ export class AppComponent {
 
   // Scroll to top whenever route changes
   onActivate(event) {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (isPlatformServer(this.platformId)) {
       return;
     }
     window.scrollTo(0, 0);
