@@ -29,6 +29,7 @@
     "@angular/platform-server": "^8.0.3",
     "@angular/router": "^8.0.3",
     "@fortawesome/fontawesome-free": "^5.9.0",
+    "@ng-bootstrap/ng-bootstrap": "^5.0.0-rc.1",
     "@nguniversal/common": "^7.1.1",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "v7.0.2",

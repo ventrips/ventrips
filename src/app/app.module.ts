@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
 // Libraries
@@ -30,6 +31,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecentPostsComponent } from './components/recent-posts/recent-posts.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { DetailsComponent } from './pages/details/details.component';
     NavbarComponent,
     FooterComponent,
     RecentPostsComponent,
-    DetailsComponent
+    DetailsComponent,
+    EditModeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
@@ -54,6 +57,7 @@ import { DetailsComponent } from './pages/details/details.component';
     AppRoutingModule,
     NgxSpinnerModule,
     QuillModule,
+    NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
