@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SeoService } from '../../services/seo/seo.service';
@@ -20,6 +21,7 @@ export class DetailsComponent implements OnInit {
     private seoService: SeoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.router.events.subscribe((event) => {
@@ -49,5 +51,9 @@ export class DetailsComponent implements OnInit {
       title: `${_.capitalize(this.post.slug)} - ${_.capitalize(this.post.topic)}`,
       description: `${_.capitalize(this.post.slug)}/${_.capitalize(this.post.topic)} Description`
     });
+  }
+
+  byPassHTML(html: string) {
+    return this.domSanitizer.bypassSecurityTrustHtml(html);
   }
 }
