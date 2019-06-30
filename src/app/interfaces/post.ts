@@ -1,8 +1,11 @@
 export interface IPost {
     postId: string;
-    slugName: string;
     uid: string;
+    topic: string;
+    slug: string;
     title: string;
+    description: string;
+    image: string;
     body: string;
     published: boolean;
     dateEdited: Date;
@@ -11,9 +14,12 @@ export interface IPost {
 
 export class Post implements IPost {
     postId;
-    slugName;
     uid;
+    topic;
+    slug;
     title;
+    description;
+    image;
     body;
     published;
     dateEdited;

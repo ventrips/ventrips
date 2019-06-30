@@ -3,6 +3,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SeoService } from '../../services/seo/seo.service';
+import { Post } from './../../interfaces/post';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 
@@ -12,18 +13,8 @@ import * as _ from 'lodash';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  public slug;
-  public category;
   public tempAd = faker.image.imageUrl();
-  public data = {
-    uid: faker.random.uuid(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    title: faker.name.title(),
-    description: faker.lorem.sentences(),
-    timestamp: faker.date.past(),
-    content: ``
-  };
+  public post: Post;
 
   constructor(
     private seoService: SeoService,
@@ -33,8 +24,19 @@ export class DetailsComponent implements OnInit {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.slug = this.activatedRoute.snapshot.params.slug;
-        this.category = this.activatedRoute.snapshot.params.category;
+        this.post = {
+          postId: faker.random.uuid(),
+          uid: faker.random.uuid(),
+          slug: this.activatedRoute.snapshot.params.slug,
+          topic: this.activatedRoute.snapshot.params.topic,
+          title: faker.name.title(),
+          description: faker.lorem.sentence(),
+          image: faker.image.image(),
+          body: faker.lorem.sentences(),
+          published: false,
+          dateEdited: faker.date.recent(),
+          dateCreated: faker.date.past()
+        };
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);
         }
@@ -44,8 +46,8 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.seoService.setMetaTags({
-      title: `${_.capitalize(this.slug)} - ${_.capitalize(this.category)}`,
-      description: `${_.capitalize(this.slug)}/${_.capitalize(this.category)} Description`
+      title: `${_.capitalize(this.post.slug)} - ${_.capitalize(this.post.topic)}`,
+      description: `${_.capitalize(this.post.slug)}/${_.capitalize(this.post.topic)} Description`
     });
   }
 }

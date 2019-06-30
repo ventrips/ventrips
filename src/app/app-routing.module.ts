@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: HomeComponent },
-      { path: ':category/:slug', component: DetailsComponent },
+      { path: ':topic/:slug', component: DetailsComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PrivacyComponent },
       { path: 'terms', component: TermsComponent },

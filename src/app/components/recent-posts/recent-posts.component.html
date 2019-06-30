@@ -1,14 +1,14 @@
 <h4 class="my-3">Recent Posts</h4>
-<section class="mb-3" *ngFor="let featuredPost of featuredPosts">
-  <a [routerLink]="['', featuredPost?.category, featuredPost?.slug]" class="card bg-dark text-white rounded-0 border-0">
-    <img class="card-img rounded-0" [src]="featuredPost?.image" [alt]="featuredPost?.title">
+<section class="mb-3" *ngFor="let post of posts">
+  <a [routerLink]="['', post?.topic, post?.slug]" class="card bg-dark text-white rounded-0 border-0">
+    <img class="card-img rounded-0" [src]="post?.image" [alt]="post?.title">
     <div class="card-img-overlay">
-      <a [routerLink]="['']" [queryParams]="{category: featuredPost?.category}" [title]="featuredPost?.category" class="text-uppercase text-shadow text-white bg-warning d-inline-block p-2 mb-3">{{featuredPost?.category}}</a>
+      <a [routerLink]="['']" [queryParams]="{category: post?.topic}" [title]="post?.topic" class="text-uppercase text-shadow text-white bg-warning d-inline-block p-2 mb-3">{{post?.topic}}</a>
       <h5 class="card-title text-capitalize">
-        <a [routerLink]="['', featuredPost?.category, featuredPost?.slug]" [title]="featuredPost?.title" class="text-white text-shadow">{{featuredPost?.title}}</a>
+        <a [routerLink]="['', post?.category, post?.slug]" [title]="post?.title" class="text-white text-shadow">{{post?.title}}</a>
       </h5>
-      <p class="card-text text-shadow">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text text-shadow">Last updated 3 mins ago</p>
+      <p class="card-text text-shadow">{{post?.description}}</p>
+      <p class="card-text text-shadow">{{post?.dateCreated | date}}</p>
     </div>
   </a>
 </section>
