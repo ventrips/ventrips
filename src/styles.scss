@@ -34,6 +34,13 @@ main {
     text-shadow: 0 1px 2px #212529!important;
 }
 
+quill-view-html .ql-container {
+    height: unset;
+    .ql-editor {
+        padding: 0;
+    }
+}
+
 quill-editor .ql-container {
     max-height: 90%;
 }

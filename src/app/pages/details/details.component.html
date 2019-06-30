@@ -5,7 +5,7 @@
       <div>UID: {{post?.uid}}</div>
       <div>Date Created: {{post?.dateCreated | date}}</div>
       <div>Date Edited: {{post?.dateEdited | date}}</div>
-      <p [innerHTML]="byPassHTML(post?.body)"></p>
+      <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       <quill-editor [(ngModel)]="post.body"></quill-editor>
     </div>
     <div class="col">

@@ -35,9 +35,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/quill/dist/quill.core.css",
-              "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/quill/dist/quill.bubble.css"           
+              "./node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -109,9 +107,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/quill/dist/quill.core.css",
-              "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/quill/dist/quill.bubble.css"
+              "./node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
