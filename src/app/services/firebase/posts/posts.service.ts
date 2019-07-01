@@ -11,7 +11,7 @@ export class PostsService {
     const post: Post = {
       postId: faker.random.uuid(),
       uid: faker.random.uuid(),
-      topic: _.toLower(faker.name.jobArea()),
+      topic: faker.name.jobArea(),
       slug: faker.lorem.slug(),
       title: faker.name.title(),
       description: faker.lorem.sentence(),

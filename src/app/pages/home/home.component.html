@@ -1,10 +1,59 @@
 <section class="container-fluid py-4">
-  <pre>
-    {{test | json}}
-  </pre>
   <div class="row">
-    <div class="col-4 mb-4" *ngFor="let post of posts">
-      <app-post [post]="post"></app-post>
+    <div class="col-12">
+      <div class="form-group position-relative">
+        <input type="text" id="typeahead-config" class="form-control form-control-lg mb-4" aria-label="Search for posts" placeholder="Search for posts"
+          [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+        <div class="feedback-icon">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <hr class="my-0">
     </div>
+    <div class="col-12">
+      <div class="d-flex flex-wrap">
+        <div class="my-4">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-warning text-white" id="order-by-dropdown" ngbDropdownToggle>
+              {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Relevance' }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+              <button class="dropdown-item" [class.cursor-pointer]="selectedOrderBy" [class.active]="!selectedOrderBy" [disabled]="!selectedOrderBy"
+                (click)="selectedOrderBy = undefined">
+                Relevance
+              </button>
+              <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="option !== selectedOrderBy" [class.active]="option === selectedOrderBy"
+                [disabled]="option === selectedOrderBy" *ngFor="let option of orderByOptions" (click)="selectedOrderBy = option">
+                {{option.label}}
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Create New -->
+        <div class="ml-auto my-4 align-self-center">
+          <app-edit-mode [new]="true"></app-edit-mode>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-right mb-4">
+      <p class="h5 font-weight-bold text-capitalize">{{(posts | searchBy: searchTerm).length}} Results</p>
+    </div>
+    <!-- No results -->
+    <ng-container *ngIf="_.isEmpty((posts | searchBy: searchTerm))">
+      <div class="col-lg-12 text-center">
+        <h2 class="text-uppercase">Sorry!</h2>
+        <p class=" text-muted">We couldn't find anything with these search terms.
+          <span class="cursor-pointer text-warning" (click)="searchTerm = undefined">Clear and search again</span>!
+        </p>
+      </div>
+    </ng-container>
+    <!-- Has results -->
+    <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
+      <div class="col-xs-12 col-sm-6 col-xl-4 mb-4" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
+        <!-- Edit Mode -->
+        <app-edit-mode [post]="post" [new]="false"></app-edit-mode>
+        <app-post [post]="post"></app-post>
+      </div>
+    </ng-container>
   </div>
 </section>          

@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
+// Pipes
+import { OrderByPipe } from './pipes/order-by/order-by.pipe';
+import { SearchByPipe } from './pipes/search-by/search-by.pipe';
+
 // Services
 import { PostsService } from '../app/services/firebase/posts/posts.service';
 
@@ -38,6 +42,8 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 
 @NgModule({
   declarations: [
+    OrderByPipe,
+    SearchByPipe,
     AppComponent,
     HomeComponent,
     ContactComponent,

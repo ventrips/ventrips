@@ -7,9 +7,9 @@
     </div>
     <div class="modal-body">
         <pre>
-            {{data | json}} {{new}}
+            {{post | json}} {{new}}
         </pre>                
-        <quill-editor [(ngModel)]="data.body"></quill-editor>
+        <quill-editor [(ngModel)]="post.body"></quill-editor>
         <form>
         <div class="form-group">
             <label for="dateOfBirth">Date of birth</label>
@@ -23,11 +23,22 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <!-- [ngClass]="{ 'btn-primary': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()" -->
+        <button type="button" class="btn btn-warning text-white ml-auto" (click)="modal.close('Save click')">
+          <span *ngIf="new">
+            <i class="fa fa-plus-circle"></i> Create
+          </span>
+          <span *ngIf="!new">
+            <i class="fa fa-save"></i> Update
+          </span>
+        </button>    
     </div>
 </ng-template>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-
-<hr>
-<pre>{{closeResult}}</pre>
+<button class="btn btn-warning text-white btn-md mb-3" (click)="open(content)">
+    <span *ngIf="new">
+        <i class="fa fa-plus-circle"></i> Create
+    </span>
+    <span *ngIf="!new">
+        <i class="fa fa-pen" ></i> Edit
+    </span>
+</button>

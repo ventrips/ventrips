@@ -1,13 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+import { Post } from '../../interfaces/post';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
   styleUrls: ['./edit-mode.component.scss']
 })
 export class EditModeComponent implements OnInit {
-  @Input() data;
+  @Input() post: Post;
   @Input() new = false;
 
   public closeResult: string;
@@ -17,6 +18,7 @@ export class EditModeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.post = _.assign(new Post(), this.post);
   }
 
   open(content) {
