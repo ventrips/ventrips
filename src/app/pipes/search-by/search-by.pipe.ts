@@ -11,7 +11,8 @@ export class SearchByPipe implements PipeTransform {
     if (_.isEmpty(searchTerm)) { return posts; }
     return _.filter(posts, (post: Post) =>
       _.includes(_.toLower(post.title), _.toLower(searchTerm)) ||
-      _.includes(_.toLower(post.topic), _.toLower(searchTerm))
+      _.includes(_.toLower(post.topic), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(post.description), _.toLower(searchTerm))
     );
   }
 

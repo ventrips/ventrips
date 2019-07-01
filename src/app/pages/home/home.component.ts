@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.searchTerm = params.topic;
+      this.searchTerm = params.query;
     });
     this.posts = this.postsService.getPosts();
     this.searchOptions = _.map(this.posts, (post) => post.title);
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     debounceTime(0),
     distinctUntilChanged(),
     map(term => {
-      const queryParams = _.isEmpty(term) ? {} : { queryParams: { topic: term } };
+      const queryParams = _.isEmpty(term) ? {} : { queryParams: { query: term } };
       this.router.navigate( [], queryParams);
       return term.length < 1 ? []
       : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);
