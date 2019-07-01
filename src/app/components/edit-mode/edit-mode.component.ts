@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
   @Input() isNew = false;
+  public tempPost: Post;
   public _ = _;
   public keys: Array<string>;
 
@@ -30,26 +31,37 @@ export class EditModeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.post = _.assign(new Post(), this.post);
-    // Converting string dates to date type
-    this.post.created = !_.isDate(this.post.created) ? new Date() : new Date(this.post.created);
-    this.post.modified = !_.isDate(this.post.modified) ? new Date() : new Date(this.post.modified);
+    this.resetTempPost();
 
-    this.modalTitle = (this.isNew) ? `Create` : `Update ${this.post.title}`;
-    this.keys = _.keys(this.post);
+    this.modalTitle = (this.isNew) ? `Create` : `Update ${this.tempPost.title}`;
+    this.keys = _.keys(this.tempPost);
+  }
+
+  resetTempPost() {
+    this.tempPost = _.assign(new Post(), this.post);
+    // Converting string dates to date type
+    this.tempPost.created = !_.isDate(this.tempPost.created) ? new Date() : new Date(this.tempPost.created);
+    this.tempPost.modified = !_.isDate(this.tempPost.modified) ? new Date() : new Date(this.tempPost.modified);
   }
 
   isValid() {
     return _.every(this.keys, (key) => {
-      if (_.includes(this.inputTypes.date, this.post[key]) && !_.isDate(this.post[key])) {
+      if (_.includes(this.inputTypes.date, this.tempPost[key]) && !_.isDate(this.tempPost[key])) {
         return false;
       }
-      return !_.isNil(this.post[key]);
+      return !_.isNil(this.tempPost[key]);
     });
   }
 
-  save() {
-    // Update Post
+  save(modal: any) {
+    this.post = _.assign(this.post, this.tempPost);
+    this.resetTempPost();
+    modal.close();
+  }
+
+  dismiss(modal: any) {
+    this.resetTempPost();
+    modal.dismiss();
   }
 
   open(content) {
