@@ -37,7 +37,8 @@ export class DetailsComponent implements OnInit {
         if (!_.isNil(this.post)) {
           this.seoService.setMetaTags({
             title: `${_.capitalize(this.post.slug)}`,
-            description: `${_.capitalize(this.post.slug)} Description`
+            description: `${_.capitalize(this.post.slug)} Description`,
+            image: this.post.image
           });
         } else {
           this.seoService.setMetaTags();
@@ -57,7 +58,8 @@ export class DetailsComponent implements OnInit {
     if (!_.isNil(this.post)) {
       this.seoService.setMetaTags({
         title: `${_.capitalize(this.post.slug)}`,
-        description: `${_.capitalize(this.post.slug)} Description`
+        description: `${_.capitalize(this.post.slug)} Description`,
+        image: this.post.image
       });
     } else {
       this.seoService.setMetaTags();
