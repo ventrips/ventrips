@@ -7,29 +7,27 @@ import * as faker from 'faker';
   providedIn: 'root'
 })
 export class PostsService {
-  public posts = [];
+  public posts: Array<Post> = _.map(_.range(0, 6), (item) => {
+    const post: Post = {
+      postId: faker.random.uuid(),
+      uid: faker.random.uuid(),
+      topic: _.toLower(faker.name.jobArea()),
+      slug: faker.lorem.slug(),
+      title: faker.name.title(),
+      description: faker.lorem.sentence(),
+      image: faker.image.image(),
+      body: faker.lorem.sentences(),
+      created: faker.date.past(),
+      modified: faker.date.recent(),
+      published: true
+    };
+    return post;
+  });
 
-  constructor() {
-    _.forEach(_.range(0, 6), (item) => {
-      const post: Post = {
-        postId: faker.random.uuid(),
-        uid: faker.random.uuid(),
-        topic: _.toLower(faker.name.jobArea()),
-        slug: faker.lorem.slug(),
-        title: faker.name.title(),
-        description: faker.lorem.sentence(),
-        image: faker.image.image(),
-        body: faker.lorem.sentences(),
-        created: faker.date.past(),
-        modified: faker.date.recent(),
-        published: true
-      };
-      this.posts.push(post);
-    });
-  }
+  constructor() {}
 
-  getPostByUID() {
-
+  getPostByUID(uid: string) {
+    return _.filter(this.posts, (post) => _.isEqual(post.uid, uid));
   }
 
   getPosts() {

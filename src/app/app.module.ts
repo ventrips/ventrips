@@ -71,9 +71,7 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [
-    PostsService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
