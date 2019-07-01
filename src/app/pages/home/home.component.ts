@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, merge } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private postsService: PostsService,
     private seoService: SeoService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -74,12 +75,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(0),
-      distinctUntilChanged(),
-      map(term => term.length < 1 ? []
-        : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10))
-    )
+  search = (text$: Observable<string>) => text$.pipe(
+    debounceTime(0),
+    distinctUntilChanged(),
+    map(term => {
+      const queryParams = _.isEmpty(term) ? {} : { queryParams: { topic: term } };
+      this.router.navigate( [], queryParams);
+      return term.length < 1 ? []
+      : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);
+    })
+  )
 
 }
