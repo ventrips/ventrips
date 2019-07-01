@@ -30,19 +30,9 @@ export class DetailsComponent implements OnInit {
     this.posts = this.postsService.getPosts();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.post = {
-          postId: faker.random.uuid(),
-          uid: faker.random.uuid(),
-          slug: this.activatedRoute.snapshot.params.slug,
-          topic: this.activatedRoute.snapshot.params.topic,
-          title: faker.name.title(),
-          description: faker.lorem.sentence(),
-          image: faker.image.image(),
-          body: faker.lorem.sentences(),
-          created: faker.date.past(),
-          modified: faker.date.recent(),
-          published: false,
-        };
+        this.post = _.find(this.posts, {
+          slug: this.activatedRoute.snapshot.params.slug
+        });
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);
         }

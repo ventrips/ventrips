@@ -9,10 +9,9 @@ import * as faker from 'faker';
 export class PostsService {
   public posts: Array<Post> = _.map(_.range(0, 6), (item) => {
     const post: Post = {
-      postId: faker.random.uuid(),
+      slug: faker.lorem.slug(),
       uid: faker.random.uuid(),
       topic: faker.name.jobArea(),
-      slug: faker.lorem.slug(),
       title: faker.name.title(),
       description: faker.lorem.sentence(),
       image: faker.image.image(),
