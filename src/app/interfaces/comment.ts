@@ -3,8 +3,8 @@ export interface IComment {
     uid: string;
     articleId: string;
     body: string;
-    dateEdited: Date;
-    dateCreated: Date;
+    modified: Date;
+    created: Date;
 }
 
 export class Comment implements IComment {
@@ -12,6 +12,6 @@ export class Comment implements IComment {
     uid;
     articleId;
     body;
-    dateEdited;
-    dateCreated;
+    modified;
+    created;
 }

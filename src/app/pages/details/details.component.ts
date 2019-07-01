@@ -39,9 +39,9 @@ export class DetailsComponent implements OnInit {
           description: faker.lorem.sentence(),
           image: faker.image.image(),
           body: faker.lorem.sentences(),
+          created: faker.date.past(),
+          modified: faker.date.recent(),
           published: false,
-          dateEdited: faker.date.recent(),
-          dateCreated: faker.date.past()
         };
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);

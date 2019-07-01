@@ -6,6 +6,6 @@
       <a [routerLink]="['', post?.topic, post?.slug]" [title]="post?.title" class="text-white text-shadow">{{post?.title}}</a>
     </h5>
     <p class="card-text text-shadow">{{post?.description}}</p>
-    <p class="card-text text-shadow">{{post?.dateCreated | date}}</p>
+    <p class="card-text text-shadow">{{post?.created | date}}</p>
   </div>
 </a>

@@ -7,9 +7,9 @@ export interface IPost {
     description: string;
     image: string;
     body: string;
+    created: Date;
+    modified: Date;
     published: boolean;
-    dateEdited: Date;
-    dateCreated: Date;
 }
 
 export class Post implements IPost {
@@ -21,7 +21,7 @@ export class Post implements IPost {
     description;
     image;
     body;
+    created;
+    modified;
     published;
-    dateEdited;
-    dateCreated;
 }

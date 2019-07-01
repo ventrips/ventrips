@@ -20,9 +20,9 @@ export class PostsService {
         description: faker.lorem.sentence(),
         image: faker.image.image(),
         body: faker.lorem.sentences(),
-        published: true,
-        dateEdited: faker.date.recent(),
-        dateCreated: faker.date.past()
+        created: faker.date.past(),
+        modified: faker.date.recent(),
+        published: true
       };
       this.posts.push(post);
     });
