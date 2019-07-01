@@ -15,10 +15,10 @@
                     <div class="input-group custom-input-group mb-3">
                         <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="post[key]" [required]="true">
                         <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i class="fa"
-                            [ngClass]="{ 'fa-check text-success': !_.isEmpty(post[key]), 'fa-asterisk text-danger': _.isEmpty(post[key]) }"></i>
-                        </span>
+                            <span class="input-group-text">
+                                <i class="fa"
+                                [ngClass]="{ 'fa-check text-success': !_.isEmpty(post[key]), 'fa-asterisk text-danger': _.isEmpty(post[key]) }"></i>
+                            </span>
                         </div>
                     </div>
                 </ng-container>
@@ -28,23 +28,38 @@
                 </ng-container>
                 <!-- Date Inputs: ['created', 'modified'] -->
                 <ng-container *ngIf="_.includes(['created', 'modified'], key)" >
-                    <div class="input-group">
-                        <input [(ngModel)]="post[key]" id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle()">
+                    <div class="input-group custom-input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                                name="datePicker" [(ngModel)]="post[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary fa fa-calendar" (click)="dp.toggle()" type="button"></button>
+                            <div class="input-group-text">
+                                <i class="fa"
+                                [ngClass]="{ 'fa-check text-success': _.isDate(post[key]), 'fa-asterisk text-danger': !_.isDate(post[key]) }"></i>
+                            </div>            
                         </div>
                     </div>
                 </ng-container>
                 <!-- Boolean Inputs: ['published'] -->
                 <ng-container *ngIf="_.includes(['published'], key)" >
-                    {{post[key]}}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="post[key]" checked>
+                            Yes
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="post[key]">
+                            No
+                        </label>
+                    </div>
                 </ng-container>    
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <!-- [ngClass]="{ 'btn-primary': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()" -->
-        <button type="button" class="btn btn-warning text-white ml-auto" (click)="modal.close('Save click')">
+        <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
+        type="button" class="btn text-white ml-auto" (click)="modal.close('Save click')">
           <span *ngIf="isNew">
             <i class="fa fa-plus-circle"></i> Create
           </span>

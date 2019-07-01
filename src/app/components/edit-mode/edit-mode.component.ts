@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
-  styleUrls: ['./edit-mode.component.scss']
+  styleUrls: ['./edit-mode.component.scss'],
+  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
@@ -22,21 +23,21 @@ export class EditModeComponent implements OnInit {
 
   ngOnInit() {
     this.post = _.assign(new Post(), this.post);
+    // Converting string dates to date type
+    this.post.created = !_.isDate(this.post.created) ? new Date() : new Date(this.post.created);
+    this.post.modified = !_.isDate(this.post.modified) ? new Date() : new Date(this.post.modified);
+
     this.modalTitle = (this.isNew) ? `Create` : `Update ${this.post.title}`;
     this.keys = _.keys(this.post);
   }
 
-  getInputType(key: string): string {
-    let value;
-    switch (_.toLower(key)) {
-      case 'url':
-        value = 'url';
-        break;
-      case 'text':
-        value = 'text';
-        break;
-    }
-    return value;
+  isValid() {
+    return _.every(this.keys, (key) => {
+      if (_.includes(['created', 'modified'], this.post[key]) && !_.isDate(this.post[key])) {
+        return false;
+      }
+      return !_.isNil(this.post[key]);
+    });
   }
 
   open(content) {
