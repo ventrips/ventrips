@@ -10,6 +10,8 @@ import * as _ from 'lodash';
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
   @Input() isNew = false;
+  public _ = _;
+  public keys: Array<string>;
 
   public modalTitle: string;
   public closeResult: string;
@@ -21,6 +23,20 @@ export class EditModeComponent implements OnInit {
   ngOnInit() {
     this.post = _.assign(new Post(), this.post);
     this.modalTitle = (this.isNew) ? `Create` : `Update ${this.post.title}`;
+    this.keys = _.keys(this.post);
+  }
+
+  getInputType(key: string): string {
+    let value;
+    switch (_.toLower(key)) {
+      case 'url':
+        value = 'url';
+        break;
+      case 'text':
+        value = 'text';
+        break;
+    }
+    return value;
   }
 
   open(content) {

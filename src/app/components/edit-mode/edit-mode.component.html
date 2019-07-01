@@ -6,21 +6,41 @@
         </button>
     </div>
     <div class="modal-body">
-        <pre>
-            {{post | json}} {{isNew}}
-        </pre>                
-        <quill-editor [(ngModel)]="post.body"></quill-editor>
-        <form>
-        <div class="form-group">
-            <label for="dateOfBirth">Date of birth</label>
-            <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary fa fa-calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
+        <div *ngFor="let key of keys">
+            <h4 class="text-capitalize mb-2">{{key}}</h4>
+            <!-- Dynamic Forms -->
+            <div class="mb-3">
+                <!-- String Inputs: ['slug', 'uid', 'topic', 'title', 'description', 'image'] -->
+                <ng-container *ngIf="_.includes(['slug', 'uid', 'topic', 'title', 'description', 'image'], key)" >
+                    <div class="input-group custom-input-group mb-3">
+                        <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="post[key]" [required]="true">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa"
+                            [ngClass]="{ 'fa-check text-success': !_.isEmpty(post[key]), 'fa-asterisk text-danger': _.isEmpty(post[key]) }"></i>
+                        </span>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- Quill Inputs: ['body'] -->
+                <ng-container *ngIf="_.includes(['body'], key)">
+                    <quill-editor [(ngModel)]="post[key]"></quill-editor>
+                </ng-container>
+                <!-- Date Inputs: ['created', 'modified'] -->
+                <ng-container *ngIf="_.includes(['created', 'modified'], key)" >
+                    <div class="input-group">
+                        <input [(ngModel)]="post[key]" id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle()">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary fa fa-calendar" (click)="dp.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- Boolean Inputs: ['published'] -->
+                <ng-container *ngIf="_.includes(['published'], key)" >
+                    {{post[key]}}
+                </ng-container>    
             </div>
         </div>
-        </form>
     </div>
     <div class="modal-footer">
         <!-- [ngClass]="{ 'btn-primary': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()" -->
