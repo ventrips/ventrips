@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { PostsService } from '../../services/firebase/posts/posts.service';
+import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
 @Component({
@@ -27,7 +28,8 @@ export class EditModeComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,17 @@ export class EditModeComponent implements OnInit {
       }
       return !_.isNil(this.tempPost[key]);
     });
+  }
+
+  copyToClipboard(record) {
+    const content = JSON.stringify(record, null, 4);
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', content);
+      e.preventDefault();
+      document.removeEventListener('copy', () => {});
+    });
+    document.execCommand('copy');
+    this.toastrService.info(`Copied. Paste where you want`);
   }
 
   save(modal: any) {

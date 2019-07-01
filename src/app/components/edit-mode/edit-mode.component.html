@@ -58,6 +58,9 @@
         </div>
     </div>
     <div class="modal-footer">
+        <button class="btn btn-primary" (click)="copyToClipboard(tempPost)">
+            Copy JSON
+        </button>
         <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
         type="button" class="btn text-white ml-auto" (click)="save(modal)">
           <span *ngIf="isNew">
