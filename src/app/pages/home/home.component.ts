@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PostsService } from '../../services/firebase/posts/posts.service';
+import { Post } from '../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
@@ -12,24 +14,27 @@ import * as _ from 'lodash';
 })
 export class HomeComponent implements OnInit {
   public environment = environment;
-  public data;
-  public test = 'Test string from the home.component.ts';
+  public posts: Array<Post>;
+  public test;
 
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private seoService: SeoService,
+    private postsService: PostsService,
+    private seoService: SeoService
   ) {}
 
   ngOnInit() {
+    this.posts = this.postsService.getPosts();
+
     this.spinner.show();
     this.http.get(`https://reqres.in/api/users?delay=1`).toPromise()
     .then(response => {
       if (!_.isNil(response)) {
-        this.data = response;
+        this.test = response;
         this.seoService.setMetaTags({
-          title: `${this.data.data[0].first_name} - Test API`,
-          description: `${this.data.data[0].email}`
+          title: `${this.test.data[0].first_name} - Test API`,
+          description: `${this.test.data[0].email}`
         });
       }
       this.spinner.hide();

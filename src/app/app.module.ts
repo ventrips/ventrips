@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
+// Services
+import { PostsService } from '../app/services/firebase/posts/posts.service';
+
 // Libraries
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -29,7 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RecentPostsComponent } from './components/recent-posts/recent-posts.component';
+import { PostComponent } from './components/post/post.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 
@@ -44,7 +47,7 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    RecentPostsComponent,
+    PostComponent,
     DetailsComponent,
     EditModeComponent
   ],
@@ -68,7 +71,9 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [],
+  providers: [
+    PostsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

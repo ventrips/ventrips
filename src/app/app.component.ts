@@ -1,7 +1,7 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { SeoService } from './services/seo/seo.service';
-import { AuthService } from './services/auth/auth.service';
+import { AuthService } from './services/firebase/auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({

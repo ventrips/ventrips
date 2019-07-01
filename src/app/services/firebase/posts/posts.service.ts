@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from './../../interfaces/post';
-import * as faker from 'faker';
+import { Injectable } from '@angular/core';
+import { Post } from './../../../interfaces/post';
 import * as _ from 'lodash';
+import * as faker from 'faker';
 
-@Component({
-  selector: 'app-recent-posts',
-  templateUrl: './recent-posts.component.html',
-  styleUrls: ['./recent-posts.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class RecentPostsComponent implements OnInit {
+export class PostsService {
   public posts = [];
 
-  constructor() {}
-
-  ngOnInit() {
+  constructor() {
     _.forEach(_.range(0, 6), (item) => {
       const post: Post = {
         postId: faker.random.uuid(),
@@ -32,4 +28,11 @@ export class RecentPostsComponent implements OnInit {
     });
   }
 
+  getPostByUID() {
+
+  }
+
+  getPosts() {
+    return this.posts;
+  }
 }

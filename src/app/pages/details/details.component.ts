@@ -3,8 +3,9 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { SeoService } from '../../services/seo/seo.service';
+import { PostsService } from './../../services/firebase/posts/posts.service';
 import { Post } from './../../interfaces/post';
+import { SeoService } from '../../services/seo/seo.service';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 
@@ -16,14 +17,17 @@ import * as _ from 'lodash';
 export class DetailsComponent implements OnInit {
   public tempAd = faker.image.imageUrl();
   public data: Post;
+  public posts: Array<Post>;
 
   constructor(
     private seoService: SeoService,
+    private postsService: PostsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
+    this.posts = this.postsService.getPosts();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.data = {

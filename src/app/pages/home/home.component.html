@@ -1,15 +1,10 @@
 <section class="container-fluid py-4">
-  <h2>Text coming directly from the HTML</h2>
-  <a [routerLink]="['finance', 'slug']">Finance Details</a>
-  <p>
-    home works! - text directly from html
-  </p>
-  <h2>Text coming from TypeScript</h2>
-  <p>
-    {{test}}
-  </p>
-  <h2>Angular Universal cannot pre-render external APIs. Must be absolute URL</h2>
   <pre>
-    {{data | json}}
+    {{test | json}}
   </pre>
+  <div class="row">
+    <div class="col-4 mb-4" *ngFor="let post of posts">
+      <app-post [post]="post"></app-post>
+    </div>
+  </div>
 </section>          
