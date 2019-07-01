@@ -9,8 +9,9 @@ import * as _ from 'lodash';
 })
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
-  @Input() new = false;
+  @Input() isNew = false;
 
+  public modalTitle: string;
   public closeResult: string;
 
   constructor(
@@ -19,6 +20,7 @@ export class EditModeComponent implements OnInit {
 
   ngOnInit() {
     this.post = _.assign(new Post(), this.post);
+    this.modalTitle = (this.isNew) ? `Create` : `Update ${this.post.title}`;
   }
 
   open(content) {
@@ -35,9 +37,9 @@ export class EditModeComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
+    if (_.isEqual(reason, ModalDismissReasons.ESC)) {
       return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    } else if (_.isEqual(reason, ModalDismissReasons.BACKDROP_CLICK)) {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;

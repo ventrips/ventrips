@@ -1,13 +1,13 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{ new ? 'Create New Post' : 'Update'}}</h4>
+        <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <pre>
-            {{post | json}} {{new}}
+            {{post | json}} {{isNew}}
         </pre>                
         <quill-editor [(ngModel)]="post.body"></quill-editor>
         <form>
@@ -25,20 +25,20 @@
     <div class="modal-footer">
         <!-- [ngClass]="{ 'btn-primary': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()" -->
         <button type="button" class="btn btn-warning text-white ml-auto" (click)="modal.close('Save click')">
-          <span *ngIf="new">
+          <span *ngIf="isNew">
             <i class="fa fa-plus-circle"></i> Create
           </span>
-          <span *ngIf="!new">
+          <span *ngIf="!isNew">
             <i class="fa fa-save"></i> Update
           </span>
         </button>    
     </div>
 </ng-template>
 <button class="btn btn-warning text-white btn-md mb-3" (click)="open(content)">
-    <span *ngIf="new">
+    <span *ngIf="isNew">
         <i class="fa fa-plus-circle"></i> Create
     </span>
-    <span *ngIf="!new">
+    <span *ngIf="!isNew">
         <i class="fa fa-pen" ></i> Edit
     </span>
 </button>

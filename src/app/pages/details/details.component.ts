@@ -27,12 +27,19 @@ export class DetailsComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
-    this.posts = this.postsService.getPosts();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.post = _.find(this.posts, {
           slug: this.activatedRoute.snapshot.params.slug
         });
+        if (!_.isNil(this.post)) {
+          this.seoService.setMetaTags({
+            title: `${_.capitalize(this.post.slug)}`,
+            description: `${_.capitalize(this.post.slug)} Description`
+          });
+        } else {
+          this.seoService.setMetaTags();
+        }
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);
         }
@@ -41,10 +48,18 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.seoService.setMetaTags({
-      title: `${_.capitalize(this.post.slug)}`,
-      description: `${_.capitalize(this.post.slug)} Description`
+    this.posts = this.postsService.getPosts();
+    this.post = _.find(this.posts, {
+      slug: this.activatedRoute.snapshot.params.slug
     });
+    if (!_.isNil(this.post)) {
+      this.seoService.setMetaTags({
+        title: `${_.capitalize(this.post.slug)}`,
+        description: `${_.capitalize(this.post.slug)} Description`
+      });
+    } else {
+      this.seoService.setMetaTags();
+    }
   }
 
   byPassHTML(html: string) {
