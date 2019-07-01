@@ -8,11 +8,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
+import { environment } from './../../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public admins: Array<any>;
+  public environment = environment;
+  public roles: any;
   public user: any;
 
   constructor(
@@ -23,9 +25,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: any,
   ) {
     if (isPlatformBrowser) {
-      // this.getAdminIds().subscribe(admins => {
-      //   this.admins = admins;
-      // }, () => {});
+      this.roles = this.environment.roles;
       this.angularFireAuth.authState.subscribe((user) => {
         if (!_.isNil(user)) {
           this.user = user;
@@ -80,11 +80,22 @@ export class AuthService {
   }
 
   getAdmins(): Array<string> {
-    return this.admins;
+    return this.roles.admins;
+  }
+
+  getContributors(): Array<string> {
+    return this.roles.contributors;
   }
 
   getAdminIds(): Observable<any[]> {
     return this.afs.collection('/admins').snapshotChanges()
+    .pipe(map(actions => actions.map((obj: any) => {
+        return obj.payload.doc.id;
+    })));
+  }
+
+  getContributorIds(): Observable<any[]> {
+    return this.afs.collection('/contributors').snapshotChanges()
     .pipe(map(actions => actions.map((obj: any) => {
         return obj.payload.doc.id;
     })));
@@ -95,12 +106,26 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return !_.isNil(this.admins) && this.isUser() && _.includes(this.admins, this.user.uid);
+    return this.isUser() && !_.isNil(this.roles.admins) && _.includes(this.roles.admins, this.user.uid);
+  }
+
+  isContributor(): boolean {
+    if (this.isAdmin()) {
+      return true;
+    }
+
+    return this.isUser() && !_.isNil(this.roles.contributors) && _.includes(this.roles.contributors, this.user.uid);
+  }
+
+  isAuthor(uid: string): boolean {
+    if (this.isAdmin()) {
+      return true;
+    }
+
+    return this.isContributor() && _.isEqual(this.user.uid, uid);
   }
 
   signOut(): void {
-    this.angularFireAuth.auth.signOut().then(() => {
-      this.router.navigate(['']);
-    });
+    this.angularFireAuth.auth.signOut().then();
   }
 }

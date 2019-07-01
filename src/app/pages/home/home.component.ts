@@ -9,6 +9,7 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PostsService } from '../../services/firebase/posts/posts.service';
 import { Post } from '../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
+import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 @Component({
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private postsService: PostsService,
     private seoService: SeoService,
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}

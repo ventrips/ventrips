@@ -31,7 +31,7 @@
         </div>
         <!-- Create New -->
         <div class="ml-auto my-4 align-self-center">
-          <app-edit-mode [isNew]="true"></app-edit-mode>
+          <app-edit-mode *ngIf="authService?.isContributor()" [isNew]="true"></app-edit-mode>
         </div>
       </div>
     </div>
@@ -50,8 +50,6 @@
     <!-- Has results -->
     <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
       <div class="col-xs-12 col-sm-6 col-xl-4 mb-4" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
-        <!-- Edit Mode -->
-        <app-edit-mode [post]="post" [isNew]="false"></app-edit-mode>
         <app-post [post]="post"></app-post>
       </div>
     </ng-container>

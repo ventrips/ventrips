@@ -15,7 +15,7 @@ export class MockData {
     },
     {
       slug: 'aut-voluptatum-accusantium',
-      uid: 'efe1f976-f571-4f73-928b-ffde07db21b0',
+      uid: 'quU47PyHKEZWJaklZeRpJeMKOGy1',
       topic: 'Configuration',
       title: 'Legacy Usability Associate',
       description: 'Ipsa error suscipit et.',
@@ -67,7 +67,7 @@ export class MockData {
     },
     {
       slug: 'sit-dolorum-soluta',
-      uid: 'a56ac1aa-5b8e-4e85-94da-05dd6e76821c',
+      uid: 'quU47PyHKEZWJaklZeRpJeMKOGy1',
       topic: 'Creative',
       title: 'Dynamic Intranet Specialist',
       description: 'Delectus sint nostrum dolores repellendus.',

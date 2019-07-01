@@ -1,6 +1,8 @@
 <a [routerLink]="['/posts', post?.slug]" class="card bg-dark text-white rounded-0 border-0">
   <img class="card-img rounded-0" [src]="post?.image" [alt]="post?.title">
   <div class="card-img-overlay">
+    <!-- Edit Mode -->
+    <app-edit-mode *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
     <a [routerLink]="['/']" [queryParams]="{query: post?.topic}" [title]="post?.topic" class="text-uppercase text-shadow text-white bg-warning d-inline-block p-2 mb-3">{{post?.topic}}</a>
     <h5 class="card-title text-capitalize">
       <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-white text-shadow">{{post?.title}}</a>

@@ -15,6 +15,14 @@ export const environment = {
     storageBucket: 'ventrips-website.appspot.com',
     messagingSenderId: '556585707956',
     appId: '1:556585707956:web:752f1d8777908fad'
+  },
+  roles: {
+    admins: [
+      '0uYWAhYctIUmaaQF1WBzRUu9J1x2'
+    ],
+    contributors: [
+      'quU47PyHKEZWJaklZeRpJeMKOGy1'
+    ]
   }
 };
 
