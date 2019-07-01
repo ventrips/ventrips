@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { PostsService } from '../../services/firebase/posts/posts.service';
 import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
   styleUrls: ['./edit-mode.component.scss'],
-  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
@@ -16,9 +17,16 @@ export class EditModeComponent implements OnInit {
 
   public modalTitle: string;
   public closeResult: string;
+  public inputTypes = {
+    string: ['slug', 'uid', 'topic', 'title', 'description', 'image'],
+    quill: ['body'],
+    date: ['created', 'modified'],
+    boolean: ['published']
+  };
 
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private postsService: PostsService
   ) { }
 
   ngOnInit() {
@@ -33,11 +41,15 @@ export class EditModeComponent implements OnInit {
 
   isValid() {
     return _.every(this.keys, (key) => {
-      if (_.includes(['created', 'modified'], this.post[key]) && !_.isDate(this.post[key])) {
+      if (_.includes(this.inputTypes.date, this.post[key]) && !_.isDate(this.post[key])) {
         return false;
       }
       return !_.isNil(this.post[key]);
     });
+  }
+
+  save() {
+    // Update Post
   }
 
   open(content) {
