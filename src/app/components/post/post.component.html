@@ -8,6 +8,7 @@
       <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-white text-shadow">{{post?.title}}</a>
     </h5>
     <p class="card-text text-shadow">{{post?.description}}</p>
-    <p class="card-text text-shadow">{{post?.created}}</p>
+    <p class="card-text text-shadow">{{post?.created | date}}</p>
+    <p class="card-text text-shadow">{{post?.modified | date}}</p>
   </div>
 </a>

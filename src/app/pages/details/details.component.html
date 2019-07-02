@@ -9,12 +9,8 @@
         <div>Date Modified: {{post?.modified | date}}</div>
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
-      <div class="col-xs-12 col-md-6 col-xl-4">
+      <div class="col-xs-12 col-md-3 col-xl-2">
         <img [src]="tempAd" alt="Temp Ad" class="img-fluid w-100"/>
-        <!-- <h4 class="my-3">Recent Posts</h4>
-        <section class="mb-3" *ngFor="let post of posts">
-          <app-post [post]="post"></app-post>
-        </section> -->
       </div>
     </div>
     <div class="row" *ngIf="!post">
