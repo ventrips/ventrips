@@ -10,7 +10,7 @@
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
       <div class="col-xs-12 col-md-3 col-xl-2">
-        <img [src]="tempAd" alt="Temp Ad" class="img-fluid w-100"/>
+        <img *ngFor="let tempAd of tempAds" [src]="tempAd" alt="Temp Ad" class="img-fluid w-100 cursor-pointer mb-3"/>
       </div>
     </div>
     <div class="row" *ngIf="!post">
