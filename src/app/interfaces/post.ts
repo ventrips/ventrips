@@ -6,20 +6,20 @@ export interface IPost {
     description: string;
     image: string;
     body: string;
-    created: Date;
-    modified: Date;
+    created: any;
+    modified: any;
     published: boolean;
 }
 
 export class Post implements IPost {
-    slug;
-    uid;
-    topic;
-    title;
-    description;
-    image;
-    body;
+    slug = '';
+    uid = '';
+    topic = '';
+    title = '';
+    description = '';
+    image = '';
+    body = '';
     created;
     modified;
-    published;
+    published = true;
 }

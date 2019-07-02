@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -12,6 +12,9 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+const HOME_KEY = makeStateKey<any>('home');
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -34,17 +37,17 @@ export class HomeComponent implements OnInit {
     }
   ];
   public selectedOrderBy: any;
-
   public orderByDirection: string;
   public orderByType: string;
-
   public searchTerm: any;
   public searchOptions: Array<string>;
   public posts: Array<Post>;
-  public test;
+  public isLoading = true;
   public _ = _;
 
   constructor(
+    private afs: AngularFirestore,
+    private transferState: TransferState,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
     private postsService: PostsService,
@@ -55,24 +58,23 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.seoService.setMetaTags({
+      title: `Ventrips - Dedicated to providing latest news and trends`,
+      description: `Search for articles`
+    });
     this.activatedRoute.queryParams.subscribe(params => {
       this.searchTerm = params.query;
     });
-    this.posts = this.postsService.getPosts();
-    this.searchOptions = _.map(this.posts, (post) => post.title);
-
     this.spinner.show();
-    this.http.get(`https://reqres.in/api/users?delay=1`).toPromise()
-    .then(response => {
-      if (!_.isNil(response)) {
-        this.test = response;
-        this.seoService.setMetaTags({
-          title: `${this.test.data[0].first_name} - Test API`,
-          description: `${this.test.data[0].email}`
-        });
+    this.ssrFirestoreCollection('posts').subscribe(response => {
+      if (!_.isEmpty(response) && !_.isNil(response)) {
+        this.posts = response;
+        this.searchOptions = _.map(this.posts, (post) => post.title);
+        this.isLoading = false;
+        this.spinner.hide();
       }
-      this.spinner.hide();
-    }).catch(error => {
+    }, () => {
+      this.isLoading = false;
       this.spinner.hide();
     });
   }
@@ -88,4 +90,15 @@ export class HomeComponent implements OnInit {
     })
   )
 
+  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
+  ssrFirestoreCollection(path: string) {
+    const exists = this.transferState.get(HOME_KEY, {} as any);
+
+    return this.afs.collection<any>(path).valueChanges().pipe(
+      tap(page => {
+        this.transferState.set(HOME_KEY, page);
+      }),
+      startWith(exists)
+    );
+  }
 }

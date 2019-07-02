@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { PostsService } from '../../services/firebase/posts/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../interfaces/post';
@@ -29,7 +30,8 @@ export class EditModeComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private postsService: PostsService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private afs: AngularFirestore
   ) { }
 
   ngOnInit() {
@@ -48,10 +50,13 @@ export class EditModeComponent implements OnInit {
 
   isValid() {
     return _.every(this.keys, (key) => {
-      if (_.includes(this.inputTypes.date, this.tempPost[key]) && !_.isDate(this.tempPost[key])) {
-        return false;
+      if (_.includes(this.inputTypes.date, key)) {
+        return _.isDate(this.tempPost[key]);
       }
-      return !_.isNil(this.tempPost[key]);
+      if (_.includes(this.inputTypes.boolean, key)) {
+        return true;
+      }
+      return !_.isEmpty(this.tempPost[key]);
     });
   }
 
@@ -68,13 +73,45 @@ export class EditModeComponent implements OnInit {
 
   save(modal: any) {
     this.post = _.assign(this.post, this.tempPost);
-    this.resetTempPost();
-    modal.close();
+    if (this.isNew) {
+      this.afs.collection('posts').doc(this.post.slug).set(this.post)
+      .then(success => {
+        this.toastrService.success('New Post Freated!');
+        this.close(modal);
+      }).catch(error => {
+        this.toastrService.warning('New Post Failed!');
+        this.close(modal);
+      });
+    } else {
+      this.afs.collection('posts').doc(this.post.slug).update(JSON.parse(JSON.stringify(this.post))).
+      then(success => {
+        this.toastrService.success('Post Update Success!');
+        this.close(modal);
+      }).catch(error => {
+        this.toastrService.warning('Post Update Failed!');
+        this.close(modal);
+      });
+    }
+  }
+
+  delete(modal: any) {
+    this.afs.collection('posts').doc(this.post.slug).delete().
+    then(success => {
+      this.toastrService.success('Delete Success!');
+      this.close(modal);
+    }).catch(error => {
+      this.toastrService.warning('Delete Failed!');
+    });
   }
 
   dismiss(modal: any) {
     this.resetTempPost();
     modal.dismiss();
+  }
+
+  close(modal: any) {
+    this.resetTempPost();
+    modal.close();
   }
 
   open(content) {

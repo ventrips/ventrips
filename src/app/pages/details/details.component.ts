@@ -1,14 +1,18 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
-import { filter } from 'rxjs/operators';
+import { DomSanitizer, TransferState, makeStateKey } from '@angular/platform-browser';
+import { filter, startWith, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PostsService } from './../../services/firebase/posts/posts.service';
 import { Post } from './../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as faker from 'faker';
 import * as _ from 'lodash';
+
+const DETAILS_KEY = makeStateKey<any>('details');
 
 @Component({
   selector: 'app-details',
@@ -19,8 +23,13 @@ export class DetailsComponent implements OnInit {
   public tempAd = faker.image.imageUrl();
   public post: Post;
   public posts: Array<Post>;
+  public slug: string;
+  public isLoading = true;
 
   constructor(
+    private afs: AngularFirestore,
+    private transferState: TransferState,
+    private spinner: NgxSpinnerService,
     private seoService: SeoService,
     public authService: AuthService,
     private postsService: PostsService,
@@ -28,45 +37,46 @@ export class DetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.post = _.find(this.posts, {
-          slug: this.activatedRoute.snapshot.params.slug
-        });
-        if (!_.isNil(this.post)) {
-          this.seoService.setMetaTags({
-            title: `${_.capitalize(this.post.slug)}`,
-            description: `${_.capitalize(this.post.slug)} Description`,
-            image: this.post.image
-          });
-        } else {
-          this.seoService.setMetaTags();
-        }
-        if (isPlatformBrowser(this.platformId)) {
-          window.scrollTo(0, 0);
-        }
-      }
-    });
-  }
+  ) {}
 
   ngOnInit() {
-    this.posts = this.postsService.getPosts();
-    this.post = _.find(this.posts, {
-      slug: this.activatedRoute.snapshot.params.slug
+    this.slug = this.activatedRoute.snapshot.params.slug;
+    this.spinner.show();
+    this.ssrFirestoreDoc(`posts/${this.slug}`)
+    .subscribe(response => {
+      if (!_.isEmpty(response) && !_.isNil(response)) {
+        this.post = response;
+        this.seoService.setMetaTags({
+          title: this.post.title,
+          description: this.post.description,
+          image: this.post.image
+        });
+        this.spinner.hide();
+        this.isLoading = false;
+      }
+    }, () => {
+      this.spinner.hide();
+      this.isLoading = false;
     });
-    if (!_.isNil(this.post)) {
-      this.seoService.setMetaTags({
-        title: `${_.capitalize(this.post.slug)}`,
-        description: `${_.capitalize(this.post.slug)} Description`,
-        image: this.post.image
-      });
-    } else {
-      this.seoService.setMetaTags();
-    }
   }
 
   byPassHTML(html: string) {
     return this.domSanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
+  ssrFirestoreDoc(path: string) {
+    const exists = this.transferState.get(DETAILS_KEY, {} as any);
+    return this.afs.doc<any>(path).valueChanges().pipe(
+      tap(page => {
+        this.transferState.set(DETAILS_KEY, page);
+        this.seoService.setMetaTags({
+          title: page.title,
+          description: page.description,
+          image: page.image
+        });
+      }),
+      startWith(exists)
+    );
   }
 }
