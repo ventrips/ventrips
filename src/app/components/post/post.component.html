@@ -5,9 +5,11 @@
     <!-- Edit Mode -->
     <div class="text-uppercase text-shadow text-white bg-warning d-inline-block p-2 mb-3">{{post?.topic}}</div>
     <h5 class="card-title text-capitalize">
-      <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-white text-shadow">{{post?.title}}</a>
+      <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-white text-shadow" 
+        style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; max-height: 2em;">{{post?.title}}</a>
     </h5>
-    <p class="card-text text-shadow">{{post?.description}}</p>
+    <p class="card-text text-shadow"
+      style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;">{{post?.description}}</p>
     <p class="card-text text-shadow">{{post?.created | date}}</p>
     <p class="card-text text-shadow">{{post?.modified | date}}</p>
   </div>

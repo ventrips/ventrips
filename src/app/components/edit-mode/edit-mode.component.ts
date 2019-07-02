@@ -37,8 +37,11 @@ export class EditModeComponent implements OnInit {
   ngOnInit() {
     this.resetTempPost();
 
-    this.modalTitle = (this.isNew) ? `Create` : `Update ${this.tempPost.title}`;
-    this.keys = _.keys(this.tempPost);
+    this.modalTitle = (this.isNew) ? `Create` : `${this.tempPost.title}`;
+    this.keys = _.orderBy(
+      _.keys(this.tempPost),
+      [(key) => _.isEqual(key, 'body')], ['asc']
+    );
   }
 
   resetTempPost() {
@@ -49,7 +52,7 @@ export class EditModeComponent implements OnInit {
   }
 
   isDisabled(key: string) {
-    return !this.isNew && _.includes(['slug'], key);
+    return !this.isNew && _.includes(['slug', 'created'], key);
   }
 
   isValid() {

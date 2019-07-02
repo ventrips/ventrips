@@ -5,8 +5,8 @@
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-        <div *ngFor="let key of keys">
+    <div class="modal-body row">
+        <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-6': !isLast}" *ngFor="let key of keys; last as isLast">
             <h4 class="text-capitalize mb-2">{{key}}</h4>
             <!-- Dynamic Forms -->
             <div class="mb-3">
@@ -41,13 +41,13 @@
                 </ng-container>
                 <!-- Boolean Inputs: ['published'] -->
                 <ng-container *ngIf="_.includes(inputTypes.boolean, key)" >
-                    <div class="form-check">
+                    <div class="form-check d-inline-block mr-3">
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)" checked>
                             Yes
                         </label>
-                        </div>
-                        <div class="form-check">
+                    </div>
+                    <div class="form-check d-inline-block">
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)">
                             No
