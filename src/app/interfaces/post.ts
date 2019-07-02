@@ -1,6 +1,7 @@
 export interface IPost {
     slug: string;
     uid: string;
+    displayName: string;
     topic: string;
     title: string;
     description: string;
@@ -14,6 +15,7 @@ export interface IPost {
 export class Post implements IPost {
     slug = '';
     uid = '';
+    displayName = '';
     topic = '';
     title = '';
     description = '';

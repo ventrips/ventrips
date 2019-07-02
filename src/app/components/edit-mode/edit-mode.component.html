@@ -7,7 +7,7 @@
     </div>
     <div class="modal-body row">
         <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-6': !isLast}" *ngFor="let key of keys; last as isLast">
-            <h4 class="text-capitalize mb-2">{{key}}</h4>
+            <h4 class="text-capitalize mb-2">{{_.startCase(key)}}</h4>
             <!-- Dynamic Forms -->
             <div class="mb-3">
                 <!-- String Inputs: ['slug', 'uid', 'topic', 'title', 'description', 'image'] -->
@@ -41,13 +41,13 @@
                 </ng-container>
                 <!-- Boolean Inputs: ['published'] -->
                 <ng-container *ngIf="_.includes(inputTypes.boolean, key)" >
-                    <div class="form-check d-inline-block mr-3">
+                    <div class="form-check d-inline-block cursor-pointer mr-3">
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)" checked>
                             Yes
                         </label>
                     </div>
-                    <div class="form-check d-inline-block">
+                    <div class="form-check d-inline-block cursor-pointer">
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)">
                             No

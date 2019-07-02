@@ -126,6 +126,8 @@ export class AuthService {
   }
 
   signOut(): void {
-    this.angularFireAuth.auth.signOut().then();
+    this.angularFireAuth.auth.signOut().then(() => {
+      this.user = undefined;
+    });
   }
 }

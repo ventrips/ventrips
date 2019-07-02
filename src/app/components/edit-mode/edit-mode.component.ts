@@ -5,6 +5,7 @@ import { PostsService } from '../../services/firebase/posts/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
+import { AuthService } from '../../services/firebase/auth/auth.service';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
@@ -21,7 +22,7 @@ export class EditModeComponent implements OnInit {
   public modalTitle: string;
   public closeResult: string;
   public inputTypes = {
-    string: ['slug', 'uid', 'topic', 'title', 'description', 'image'],
+    string: ['slug', 'uid', 'displayName', 'topic', 'title', 'description', 'image'],
     quill: ['body'],
     date: ['created', 'modified'],
     boolean: ['published']
@@ -31,6 +32,7 @@ export class EditModeComponent implements OnInit {
     private modalService: NgbModal,
     private postsService: PostsService,
     private toastrService: ToastrService,
+    private authService: AuthService,
     private afs: AngularFirestore
   ) { }
 
@@ -49,10 +51,13 @@ export class EditModeComponent implements OnInit {
     // Converting string dates to date type
     this.tempPost.created = new Date(this.tempPost.created);
     this.tempPost.modified = new Date();
+    // Initializing UID & Full Name
+    this.tempPost.uid = this.authService.getUid();
+    this.tempPost.displayName = this.authService.getDisplayName();
   }
 
   isDisabled(key: string) {
-    return !this.isNew && _.includes(['slug', 'created'], key);
+    return !this.isNew && _.includes(['slug', 'created', 'modified'], key);
   }
 
   isValid() {

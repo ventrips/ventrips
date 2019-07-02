@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     this.ssrFirestoreCollection('posts').subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
-        this.posts = response;
+        // Show published posts only unless admin or author
+        this.posts = _.filter(response, (post) => this.showPost(post));
         this.searchOptions = _.map(this.posts, (post) => post.title);
         this.isLoading = false;
         this.spinner.hide();
@@ -77,6 +78,10 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
       this.spinner.hide();
     });
+  }
+
+  showPost(post: Post): boolean {
+    return post.published || (this.authService.isAdmin() || this.authService.isAuthor(post.uid));
   }
 
   search = (text$: Observable<string>) => text$.pipe(
