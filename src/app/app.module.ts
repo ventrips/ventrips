@@ -69,7 +69,7 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-bottom-left',
       preventDuplicates: true
     }),
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything

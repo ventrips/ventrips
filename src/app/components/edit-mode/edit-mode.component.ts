@@ -44,8 +44,12 @@ export class EditModeComponent implements OnInit {
   resetTempPost() {
     this.tempPost = _.assign(new Post(), this.post);
     // Converting string dates to date type
-    this.tempPost.created = !_.isDate(this.tempPost.created) ? new Date() : new Date(this.tempPost.created);
-    this.tempPost.modified = !_.isDate(this.tempPost.modified) ? new Date() : new Date(this.tempPost.modified);
+    this.tempPost.created = new Date(this.tempPost.created);
+    this.tempPost.modified = new Date();
+  }
+
+  isDisabled(key: string) {
+    return !this.isNew && _.includes(['slug'], key);
   }
 
   isValid() {
@@ -71,47 +75,15 @@ export class EditModeComponent implements OnInit {
     this.toastrService.info(`Copied. Paste where you want`);
   }
 
-  save(modal: any) {
-    this.post = _.assign(this.post, this.tempPost);
-    if (this.isNew) {
-      this.afs.collection('posts').doc(this.post.slug).set(this.post)
-      .then(success => {
-        this.toastrService.success('New Post Freated!');
-        this.close(modal);
-      }).catch(error => {
-        this.toastrService.warning('New Post Failed!');
-        this.close(modal);
-      });
-    } else {
-      this.afs.collection('posts').doc(this.post.slug).update(JSON.parse(JSON.stringify(this.post))).
-      then(success => {
-        this.toastrService.success('Post Update Success!');
-        this.close(modal);
-      }).catch(error => {
-        this.toastrService.warning('Post Update Failed!');
-        this.close(modal);
-      });
-    }
-  }
-
   delete(modal: any) {
     this.afs.collection('posts').doc(this.post.slug).delete().
     then(success => {
       this.toastrService.success('Delete Success!');
-      this.close(modal);
+      modal.dismiss();
     }).catch(error => {
       this.toastrService.warning('Delete Failed!');
+      modal.dismiss();
     });
-  }
-
-  dismiss(modal: any) {
-    this.resetTempPost();
-    modal.dismiss();
-  }
-
-  close(modal: any) {
-    this.resetTempPost();
-    modal.close();
   }
 
   open(content) {
@@ -120,8 +92,22 @@ export class EditModeComponent implements OnInit {
         ariaLabelledBy: 'modal-basic-title',
         windowClass: 'modal-100'
       }
-    ).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+    ).result.then((newPost) => {
+      if (this.isNew) {
+        this.afs.collection('posts').doc(newPost.slug).set(newPost)
+        .then(success => {
+          this.toastrService.success('New Post Freated!');
+        }).catch(error => {
+          this.toastrService.warning('New Post Failed!');
+        });
+      } else {
+        this.afs.collection('posts').doc(newPost.slug).update(JSON.parse(JSON.stringify(newPost))).
+        then(success => {
+          this.toastrService.success('Post Update Success!');
+        }).catch(error => {
+          this.toastrService.warning('Post Update Failed!');
+        });
+      }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

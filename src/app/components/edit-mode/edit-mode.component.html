@@ -1,7 +1,7 @@
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="dismiss(modal)">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(modal)">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -13,7 +13,7 @@
                 <!-- String Inputs: ['slug', 'uid', 'topic', 'title', 'description', 'image'] -->
                 <ng-container *ngIf="_.includes(inputTypes.string, key)" >
                     <div class="input-group custom-input-group mb-3">
-                        <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="tempPost[key]" [required]="true">
+                        <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="tempPost[key]" [required]="true" [disabled]="isDisabled(key)">
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="fa"
@@ -24,13 +24,13 @@
                 </ng-container>
                 <!-- Quill Inputs: ['body'] -->
                 <ng-container *ngIf="_.includes(inputTypes.quill, key)">
-                    <quill-editor [(ngModel)]="tempPost[key]"></quill-editor>
+                    <quill-editor [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)"></quill-editor>
                 </ng-container>
                 <!-- Date Inputs: ['created', 'modified'] -->
                 <ng-container *ngIf="_.includes(inputTypes.date, key)" >
                     <div class="input-group custom-input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd"
-                                name="datePicker" [(ngModel)]="tempPost[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()">
+                                name="datePicker" [(ngModel)]="tempPost[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [disabled]="isDisabled(key)">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="fa"
@@ -43,13 +43,13 @@
                 <ng-container *ngIf="_.includes(inputTypes.boolean, key)" >
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="tempPost[key]" checked>
+                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)" checked>
                             Yes
                         </label>
                         </div>
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="tempPost[key]">
+                            <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)">
                             No
                         </label>
                     </div>
@@ -63,7 +63,7 @@
             Copy JSON
         </button>
         <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
-        type="button" class="btn text-white ml-auto" (click)="save(modal)">
+        type="button" class="btn text-white ml-auto" (click)="modal.close(tempPost)">
           <span *ngIf="isNew">
             <i class="fa fa-plus-circle"></i> Create
           </span>
