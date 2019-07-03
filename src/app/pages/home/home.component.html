@@ -58,9 +58,9 @@
                   </a>
                 </div>
                 <div class="col">
-                  <h2 class="text-capitalize mb-2">
-                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mr-3">{{post?.title}}</a>
-                    <app-edit-mode class="d-inline-block" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+                  <h2 class="text-capitalize d-flex flex-wrap">
+                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3">{{post?.title}}</a>
+                    <app-edit-mode class="mb-2" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
                   </h2>
                   <div class="h5">
                     <div class="mb-2">
