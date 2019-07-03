@@ -54,8 +54,8 @@ export class EditModeComponent implements OnInit {
     this.tempPost.created = this.tempPost.created ? new Date(this.tempPost.created) : new Date();
     this.tempPost.modified = new Date();
     // Initializing UID & Full Name
-    this.tempPost.uid = this.authService.getUid();
-    this.tempPost.displayName = this.authService.getDisplayName();
+    this.tempPost.uid = this.tempPost.uid ? this.tempPost.uid : this.authService.getUid();
+    this.tempPost.displayName = this.tempPost.displayName ? this.tempPost.displayName : this.authService.getDisplayName();
   }
 
   isDisabled(key: string) {

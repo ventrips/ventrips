@@ -53,6 +53,16 @@ export class HomeComponent implements OnInit {
       label: 'Author: Z - A',
       type: 'displayName',
       direction: 'desc'
+    },
+    {
+      label: 'Category: A - Z',
+      type: 'topic',
+      direction: 'asc'
+    },
+    {
+      label: 'Category: Z - A',
+      type: 'topic',
+      direction: 'desc'
     }
   ];
   public selectedOrderBy = this.orderByOptions[0];
