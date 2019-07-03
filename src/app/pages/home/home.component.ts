@@ -70,7 +70,15 @@ export class HomeComponent implements OnInit {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         // Show published posts only unless admin or author
         this.posts = _.filter(response, (post) => this.showPost(post));
-        this.searchOptions = _.map(this.posts, (post) => post.title);
+        // Adding Search Options
+        this.searchOptions = [];
+        _.forEach(this.posts, (post) => {
+          this.searchOptions.push(post.title);
+          this.searchOptions.push(post.topic);
+          this.searchOptions.push(post.description);
+          this.searchOptions.push(post.displayName);
+        });
+        this.searchOptions = _.uniq(this.searchOptions);
         this.isLoading = false;
         this.spinner.hide();
       }

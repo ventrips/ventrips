@@ -1,6 +1,6 @@
 <section class="container-fluid py-4">
   <div *ngIf="!_.isEmpty(data)">
-    <h2>{{data?.title}}</h2>
+    <h1>{{data?.title}}</h1>
     <p>{{data?.description}}</p>
     <img [src]="data?.image" [alt]="data?.title"/>
   </div>
