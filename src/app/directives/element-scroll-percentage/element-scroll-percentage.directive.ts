@@ -69,9 +69,7 @@ export class ElementScrollPercentageDirective implements OnInit, OnDestroy {
           this.scrollPercentageEvent.next(percent);
 
         }
-      )
-      ;
-
+      );
   }
 
 }
