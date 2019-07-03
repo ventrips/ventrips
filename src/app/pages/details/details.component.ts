@@ -56,7 +56,11 @@ export class DetailsComponent implements OnInit {
     }, () => {
       this.spinner.hide();
       this.isLoading = false;
-    });
+      this.seoService.setMetaTags({
+        title: `Sorry! This page does not exist`,
+        description: `Return to home`
+      });
+  });
   }
 
   byPassHTML(html: string) {
