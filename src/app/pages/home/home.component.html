@@ -1,15 +1,17 @@
-<section class="py-4">
-  <div class="container-fluid">
-    <div class="form-group position-relative">
-      <input type="text" id="typeahead-config" class="form-control form-control-lg mb-4" aria-label="Search for posts" placeholder="Search for posts"
-        [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
-      <div class="feedback-icon">
-        <i *ngIf="_.isEmpty(searchTerm)" class="fas fa-search text-muted"></i>
-        <i *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="fas fa-times cursor-pointer"></i>
+<section>
+  <section class="sticky-top bg-white">
+    <div class="container-fluid py-4">
+      <div class="form-group position-relative mb-0">
+        <input type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for posts" placeholder="Search for posts"
+          [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+        <div class="feedback-icon">
+          <i *ngIf="_.isEmpty(searchTerm)" class="fas fa-search text-muted"></i>
+          <i *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="fas fa-times cursor-pointer"></i>
+        </div>
       </div>
     </div>
-  </div>
-  <hr class="my-0">
+    <hr class="my-0">      
+  </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
@@ -51,23 +53,23 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
-            <div class="row my-2 py-2" [ngClass]="{'bg-light': !post.publish }">
+            <div class="row py-2" [ngClass]="{'bg-light': !post.publish }">
                 <div class="col-xs-12 col-md-3 align-self-center post-thumbnail">
                   <a [routerLink]="['/posts', post?.slug]">
                     <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
                   </a>
                 </div>
                 <div class="col">
-                  <h2 class="text-capitalize d-flex flex-wrap">
-                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3">{{post?.title}}</a>
+                  <h2 class="d-flex flex-wrap">
+                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
                     <app-edit-mode class="mb-2" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
                   </h2>
                   <div class="h5">
                     <div class="mb-2">
-                      <a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
+                      <a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                     </div>
-                    <p class="text-secondary mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.topic }" class="text-capitalize text-dark">{{post?.topic}}</a></p>
-                    <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;">
+                    <p class="text-secondary mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.topic }" class="text-capitalize text-dark" [innerHTML]="post?.topic | searchHighlight: searchTerm"></a></p>
+                    <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
                       {{post?.description}}
                     </p>
                     <div>

@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 // Pipes
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
+import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
 
 // Services
 import { PostsService } from '../app/services/firebase/posts/posts.service';
@@ -43,6 +44,7 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
   declarations: [
     OrderByPipe,
     SearchByPipe,
+    SearchHighlightPipe,
     AppComponent,
     HomeComponent,
     ContactComponent,

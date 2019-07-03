@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit {
         _.forEach(this.posts, (post) => {
           this.searchOptions.push(post.title);
           this.searchOptions.push(post.topic);
-          this.searchOptions.push(post.description);
           this.searchOptions.push(post.displayName);
         });
         this.searchOptions = _.uniq(this.searchOptions);
