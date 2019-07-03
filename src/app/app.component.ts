@@ -20,22 +20,19 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any,
     elementScrollPercentage: ElementScrollPercentage
   ) {
+    if (isPlatformServer(this.platformId)) { return; }
     this.elementScrollPercentage = elementScrollPercentage;
   }
 
   // Scroll to top whenever route changes
   onActivate(event) {
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
+    if (isPlatformServer(this.platformId)) { return; }
     window.scrollTo(0, 0);
     this.seoService.setMetaTags();
   }
 
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
+    if (isPlatformServer(this.platformId)) { return; }
     this.elementScrollPercentage.getScrollAsStream().subscribe((percent: number): void => {this.pageScroll = percent; });
   }
 }
