@@ -1,14 +1,16 @@
 <section>
   <section class="sticky-top bg-white">
     <div class="container-fluid py-4">
-      <div class="form-group position-relative mb-0">
+      <div class="input-group">
         <input type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for posts" placeholder="Search for posts"
           [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
-        <div class="feedback-icon">
-          <i *ngIf="_.isEmpty(searchTerm)" class="fas fa-search text-muted"></i>
-          <i *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="fas fa-times cursor-pointer"></i>
+          <div class="input-group-append">
+            <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text">
+              <i class="fas fa-search text-muted"></i>
+            </span>
+            <button *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="btn btn-warning">Clear <i class="fas fa-times"></i></button>
+          </div>
         </div>
-      </div>
     </div>
     <hr class="my-0">      
   </section>
