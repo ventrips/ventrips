@@ -25,6 +25,16 @@ export class HomeComponent implements OnInit {
   public environment = environment;
   public orderByOptions: Array<any> = [
     {
+      label: 'Date: Recent',
+      type: 'modified',
+      direction: 'desc'
+    },
+    {
+      label: 'Date: Oldest',
+      type: 'modified',
+      direction: 'asc'
+    },
+    {
       label: 'Title: A - Z',
       type: 'title',
       direction: 'asc'
@@ -33,9 +43,19 @@ export class HomeComponent implements OnInit {
       label: 'Title: Z - A',
       type: 'title',
       direction: 'desc'
+    },
+    {
+      label: 'Author: A - Z',
+      type: 'displayName',
+      direction: 'asc'
+    },
+    {
+      label: 'Author: Z - A',
+      type: 'displayName',
+      direction: 'desc'
     }
   ];
-  public selectedOrderBy: any;
+  public selectedOrderBy = this.orderByOptions[0];
   public orderByDirection: string;
   public orderByType: string;
   public searchTerm: any;

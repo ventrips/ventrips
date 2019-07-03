@@ -24,13 +24,9 @@
         <div class="ml-auto my-4 align-self-center">
           <div ngbDropdown class="d-inline-block mb-3">
             <button class="btn btn-warning text-white rounded-0" id="order-by-dropdown" ngbDropdownToggle>
-              {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Relevance' }}
+              {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
             </button>
             <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
-              <button class="dropdown-item" [class.cursor-pointer]="selectedOrderBy" [class.active]="!selectedOrderBy" [disabled]="!selectedOrderBy"
-                (click)="selectedOrderBy = undefined">
-                Relevance
-              </button>
               <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="option !== selectedOrderBy" [class.active]="option === selectedOrderBy"
                 [disabled]="option === selectedOrderBy" *ngFor="let option of orderByOptions" (click)="selectedOrderBy = option">
                 {{option.label}}
@@ -69,15 +65,12 @@
                   <div class="h5">
                     <div class="mb-2">
                       <a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                      <p class="text-secondary mb-0 d-inline-block">{{post?.modified | date: 'longDate'}}</p>            
                     </div>
-                    <p class="text-secondary mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.topic }" class="text-uppercase text-dark" [innerHTML]="post?.topic | searchHighlight: searchTerm"></a></p>
+                    <p class="text-secondary d-inline-block mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.topic }" class="text-uppercase text-dark" [innerHTML]="post?.topic | searchHighlight: searchTerm"></a></p>
                     <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
                       {{post?.description}}
                     </p>
-                    <div class="mb-3">
-                      <p class="text-secondary mb-0 d-inline-block mr-3">Published: {{post?.created | date: 'longDate'}}</p>
-                      <p class="text-secondary mb-0 d-inline-block">Edited: {{post?.modified | date: 'longDate'}}</p>            
-                    </div>
                   </div>
                 </div>
               </div>
