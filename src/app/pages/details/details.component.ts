@@ -20,7 +20,6 @@ const DETAILS_KEY = makeStateKey<any>('details');
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  public tempAds = _.map(_.range(0, 6), () => faker.image.image());
   public post: Post;
   public posts: Array<Post>;
   public slug: string;

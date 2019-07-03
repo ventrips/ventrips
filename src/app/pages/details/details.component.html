@@ -1,7 +1,7 @@
-<section class="container-fluid py-4">
+<section>
   <ng-container *ngIf="!isLoading">
-    <div class="row" *ngIf="post">
-      <div class="col">
+    <ng-container *ngIf="post">
+      <div class="container my-5">
         <app-edit-mode *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0">
@@ -14,17 +14,18 @@
             <li class="breadcrumb-item active text-uppercase" aria-current="page">{{post?.title}}</li>
           </ol>
         </nav>
-        <h1 class="text-capitalize">{{post?.title}} - {{post?.topic}} / {{post?.slug}}</h1>
-        <div>{{post?.displayName}}</div>
-        <div>UID: {{post?.uid}}</div>
-        <div>Date Created: {{post?.created | date}}</div>
-        <div>Date Modified: {{post?.modified | date}}</div>
+        <h1 class="text-capitalize mb-3">{{post?.title}} - {{post?.topic}} / {{post?.slug}}</h1>
+        <p class="h5 mb-2"><a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold">{{post?.displayName}}</a></p>
+        <p class="text-secondary mb-0">Published: {{post?.created | date: 'longDate'}}</p>
+        <p class="text-secondary mb-0">Edited: {{post?.modified | date: 'longDate'}}</p>
+      </div>
+      <figure class="border-top border-bottom">
+        <div class="image-banner" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>
+      </figure>
+      <div class="container my-5">
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
-      <!-- <div class="col-xs-12 col-md-3 col-xl-2">
-        <img *ngFor="let tempAd of tempAds" [src]="tempAd" alt="Temp Ad" class="img-fluid w-100 cursor-pointer mb-3"/>
-      </div> -->
-    </div>
+    </ng-container>
     <div class="row" *ngIf="!post">
       <div class="col-lg-12 text-center">
         <h1 class="text-uppercase">Sorry!</h1>

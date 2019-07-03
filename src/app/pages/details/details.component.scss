@@ -1,0 +1,13 @@
+.image-banner {
+    background-position: center;
+    background-size: contain;
+    padding-top: 33.33%;
+    background-repeat: no-repeat;
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .image-banner {
+        padding-top: 66.66%;
+    }
+}
