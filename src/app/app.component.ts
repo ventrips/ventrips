@@ -33,14 +33,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.elementScrollPercentage
-      .getScrollAsStream() // Defaults to Document if no Element supplied.
-      .subscribe(
-        (percent: number): void => {
-
-          this.pageScroll = percent;
-
-        }
-      );
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+    this.elementScrollPercentage.getScrollAsStream().subscribe((percent: number): void => {this.pageScroll = percent; });
   }
 }
