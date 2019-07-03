@@ -2,7 +2,9 @@
   <ng-container *ngIf="!isLoading">
     <ng-container *ngIf="post">
       <div class="container my-5">
-        <app-edit-mode *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+        <div class="mb-3">
+          <app-edit-mode *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+        </div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0">
             <li class="breadcrumb-item">

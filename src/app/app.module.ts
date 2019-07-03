@@ -36,7 +36,6 @@ import { LoginComponent } from './pages/login/login.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { PostComponent } from './components/post/post.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 
@@ -53,7 +52,6 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    PostComponent,
     DetailsComponent,
     EditModeComponent
   ],

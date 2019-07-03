@@ -30,7 +30,9 @@ export class NavbarComponent implements OnInit {
   }
 
   isActive(currentNav: string): boolean {
-    if (_.isEqual(this.router.url, '')) {
+    if (_.isEqual(this.router.url, '') ||
+      (_.isEqual(currentNav, '') &&
+      _.includes(this.router.url, '/?query'))) {
       return true;
     }
 

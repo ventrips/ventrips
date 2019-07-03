@@ -1,61 +1,81 @@
-<section class="container-fluid py-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="form-group position-relative">
-        <input type="text" id="typeahead-config" class="form-control form-control-lg mb-4" aria-label="Search for posts" placeholder="Search for posts"
-          [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
-        <div class="feedback-icon">
-          <i class="fas fa-search"></i>
+<section class="py-4">
+  <div class="container-fluid">
+    <div class="form-group position-relative">
+      <input type="text" id="typeahead-config" class="form-control form-control-lg mb-4" aria-label="Search for posts" placeholder="Search for posts"
+        [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+      <div class="feedback-icon">
+        <i *ngIf="_.isEmpty(searchTerm)" class="fas fa-search text-muted"></i>
+        <i *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="fas fa-times cursor-pointer"></i>
+      </div>
+    </div>
+  </div>
+  <hr class="my-0">
+  <section *ngIf="!isLoading">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap">
+        <div class="my-4">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-warning text-white rounded-0" id="order-by-dropdown" ngbDropdownToggle>
+              {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Relevance' }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+              <button class="dropdown-item" [class.cursor-pointer]="selectedOrderBy" [class.active]="!selectedOrderBy" [disabled]="!selectedOrderBy"
+                (click)="selectedOrderBy = undefined">
+                Relevance
+              </button>
+              <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="option !== selectedOrderBy" [class.active]="option === selectedOrderBy"
+                [disabled]="option === selectedOrderBy" *ngFor="let option of orderByOptions" (click)="selectedOrderBy = option">
+                {{option.label}}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="ml-auto my-4 align-self-center">
+          <p class="h5 text-dark text-capitalize">{{(posts | searchBy: searchTerm).length}} Results</p>
         </div>
       </div>
-      <hr class="my-0">
     </div>
-    <ng-container *ngIf="!isLoading">
-      <div class="col-12">
-        <div class="d-flex flex-wrap">
-          <div class="my-4">
-            <div ngbDropdown class="d-inline-block">
-              <button class="btn btn-warning text-white" id="order-by-dropdown" ngbDropdownToggle>
-                {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Relevance' }}
-              </button>
-              <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
-                <button class="dropdown-item" [class.cursor-pointer]="selectedOrderBy" [class.active]="!selectedOrderBy" [disabled]="!selectedOrderBy"
-                  (click)="selectedOrderBy = undefined">
-                  Relevance
-                </button>
-                <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="option !== selectedOrderBy" [class.active]="option === selectedOrderBy"
-                  [disabled]="option === selectedOrderBy" *ngFor="let option of orderByOptions" (click)="selectedOrderBy = option">
-                  {{option.label}}
-                </button>
+    <!-- No results -->
+    <ng-container *ngIf="_.isEmpty((posts | searchBy: searchTerm))">
+      <div class="container-fluid text-center">
+        <h2 class="text-uppercase">Sorry!</h2>
+        <p class=" text-muted">We couldn't find anything with these search terms.
+          <span (click)="searchTerm = ''" class="text-warning cursor-pointer">Clear and search again</span>!
+        </p>
+      </div>
+    </ng-container>
+    <!-- Has results -->
+    <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
+      <div class="container">
+        <!-- Create New -->
+        <app-edit-mode *ngIf="authService?.isContributor()" [isNew]="true"></app-edit-mode>
+        <div class="row my-2 py-2" [ngClass]="{'bg-light': !post.publish }" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
+            <div class="col-xs-12 col-md-3 align-self-center post-thumbnail">
+              <a [routerLink]="['/posts', post?.slug]">
+                <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
+              </a>
+            </div>
+            <div class="col">
+              <h2 class="text-capitalize mb-2">
+                <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mr-3">{{post?.title}}</a>
+                <app-edit-mode class="d-inline-block" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+              </h2>
+              <div class="h5">
+                <div class="mb-2">
+                  <a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
+                </div>
+                <p class="text-secondary mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.topic }" class="text-capitalize text-dark">{{post?.topic}}</a></p>
+                <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;">
+                  {{post?.description}}
+                </p>
+                <div>
+                  <p class="text-secondary mb-0 d-inline-block mr-3">Published: {{post?.created | date: 'longDate'}}</p>
+                  <p class="text-secondary mb-0 d-inline-block">Edited: {{post?.modified | date: 'longDate'}}</p>            
+                </div>
               </div>
             </div>
           </div>
-          <!-- Create New -->
-          <div class="ml-auto my-4 align-self-center">
-            <app-edit-mode *ngIf="authService?.isContributor()" [isNew]="true"></app-edit-mode>
-          </div>
-        </div>
       </div>
-      <div class="col-12 text-right mb-4">
-        <p class="h5 font-weight-bold text-capitalize">{{(posts | searchBy: searchTerm).length}} Results</p>
-      </div>
-      <!-- No results -->
-      <ng-container *ngIf="_.isEmpty((posts | searchBy: searchTerm))">
-        <div class="col-lg-12 text-center">
-          <h2 class="text-uppercase">Sorry!</h2>
-          <p class=" text-muted">We couldn't find anything with these search terms.
-            <a [routerLink]="['/']" [queryParams]="{query: post?.topic}" title="Clear and search again" class="text-warning">Clear and search again</a>!
-          </p>
-        </div>
-      </ng-container>
-      <!-- Has results -->
-      <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
-        <ng-container *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
-          <div class="col-xs-12 col-md-6 col-xl-4 p-3" [ngClass]="{'bg-dark': !post.publish }">
-            <app-post [post]="post"></app-post>
-          </div>
-        </ng-container>
-      </ng-container>
     </ng-container>
-  </div>
-</section>          
+  </section>
+</section>

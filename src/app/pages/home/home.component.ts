@@ -20,7 +20,6 @@ const HOME_KEY = makeStateKey<any>('home');
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
-
 })
 export class HomeComponent implements OnInit {
   public environment = environment;
