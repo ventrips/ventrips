@@ -13,6 +13,9 @@ import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
 import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
 
+// Directives
+import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
+
 // Services
 import { PostsService } from '../app/services/firebase/posts/posts.service';
 
@@ -55,7 +58,8 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     NavbarComponent,
     FooterComponent,
     DetailsComponent,
-    EditModeComponent
+    EditModeComponent,
+    ElementScrollPercentageDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
