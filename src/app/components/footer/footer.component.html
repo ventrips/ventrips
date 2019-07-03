@@ -1,21 +1,21 @@
-<footer class="bg-white border-top py-3">
+<footer class="bg-dark text-white border-top py-3">
   <section class="container-fluid">
     <section class="d-flex">
       <p class="mt-2 mr-5 mb-0">Follow Us</p>
       <ul class="list-inline mb-0">
         <li class="list-inline-item mt-1 mr-4" *ngFor="let item of socialMedia">
-          <a class="text-dark" [title]="item?.name" [href]="item?.url" target="__blank">
+          <a class="text-white" [title]="item?.name" [href]="item?.url" target="__blank">
             <i class="fab fa-2x {{item?.class}}"></i>
           </a>
         </li>
       </ul>
     </section>
-    <hr>
+    <hr class="border-light">
     <section class="d-flex">
-      <a [routerLink]="['']" class="mt-2 mr-5 mb-0 text-dark text-capitalize text-decoration-none">{{environment?.name}}</a>
+      <a [routerLink]="['']" [title]="environment?.name" class="navbar-brand text-warning text-capitalize mr-5 mb-0">{{environment?.name}}</a>
       <ul class="list-inline">
         <li *ngFor="let item of footerLinks" class="list-inline-item mt-2 mr-4">
-          <a [title]="item?.title" [routerLink]="item?.url" class="text-capitalize">
+          <a [title]="item?.title" [routerLink]="item?.url" class="text-capitalize text-white">
             {{item?.title}}
           </a>
         </li>
