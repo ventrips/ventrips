@@ -2,7 +2,7 @@ import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { SeoService } from './services/seo/seo.service';
 import { AuthService } from './services/firebase/auth/auth.service';
-import { ElementScrollPercentage } from './directives/element-scroll-percentage/element-scroll-percentage.component'
+import { ElementScrollPercentage } from './directives/element-scroll-percentage/element-scroll-percentage.component';
 import * as _ from 'lodash';
 
 @Component({
