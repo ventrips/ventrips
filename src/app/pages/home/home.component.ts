@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   public environment = environment;
   public orderByOptions: Array<any> = [
     {
-      label: 'Date: Recent',
+      label: 'Date: Newest',
       type: 'modified',
       direction: 'desc'
     },
