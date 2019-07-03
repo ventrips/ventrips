@@ -62,7 +62,7 @@
                   </a>
                 </div>
                 <div class="col py-3">
-                  <h2 class="d-flex flex-wrap">
+                  <h2 class="d-sm-flex flex-wrap">
                     <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
                     <app-edit-mode class="mb-2 ml-auto" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
                   </h2>
