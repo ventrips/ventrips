@@ -2,8 +2,8 @@ import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { SeoService } from './services/seo/seo.service';
 import { AuthService } from './services/firebase/auth/auth.service';
+import { ElementScrollPercentage } from './directives/element-scroll-percentage/element-scroll-percentage.component'
 import * as _ from 'lodash';
-import { ElementScrollPercentage } from './components/element-scroll-percentage/element-scroll-percentage.component'
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,7 @@ import { ElementScrollPercentage } from './components/element-scroll-percentage/
 })
 export class AppComponent implements OnInit {
   private elementScrollPercentage: ElementScrollPercentage;
-  public innerScroll: number;
   public pageScroll: number;
-  public user: any;
 
   constructor(
     private seoService: SeoService,
@@ -44,11 +42,5 @@ export class AppComponent implements OnInit {
 
         }
       );
-  }
-
-  public recordInnerScroll(percent: number): void {
-
-    this.innerScroll = percent;
-
   }
 }

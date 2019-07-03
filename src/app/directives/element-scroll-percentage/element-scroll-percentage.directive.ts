@@ -9,7 +9,7 @@ import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Import the application components and services.
-import { ElementScrollPercentage } from './../../components/element-scroll-percentage/element-scroll-percentage.component';
+import { ElementScrollPercentage } from './../element-scroll-percentage/element-scroll-percentage.component';
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
