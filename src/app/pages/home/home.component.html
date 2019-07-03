@@ -1,5 +1,5 @@
 <section>
-  <section class="sticky-top bg-white">
+  <section class="sticky-top bg-white box-shadow">
     <div class="container-fluid py-4">
       <div class="input-group">
         <input type="text" id="typeahead-config" class="form-control form-control-lg rounded-0" aria-label="Search for posts" placeholder="Search for posts"
@@ -23,7 +23,7 @@
         </div>
         <div class="ml-auto my-4 align-self-center">
           <div ngbDropdown class="d-inline-block mb-3">
-            <button class="btn btn-warning text-white rounded-0" id="order-by-dropdown" ngbDropdownToggle>
+            <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
               {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
             </button>
             <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-xs-12 col-md-3 align-self-center post-thumbnail">
                   <a [routerLink]="['/posts', post?.slug]">
-                    <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
+                    <img class="img-fluid rounded-0 box-shadow" [src]="post?.image" [alt]="post?.title">
                   </a>
                 </div>
                 <div class="col py-3">

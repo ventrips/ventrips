@@ -22,7 +22,7 @@
         <p class="text-secondary mb-0">Edited: {{post?.modified | date: 'longDate'}}</p>
       </div>
       <figure>
-        <div class="image-banner" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>
+        <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>
       </figure>
       <div class="container my-5">
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
