@@ -51,7 +51,7 @@
       <!-- Has results -->
       <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
         <ng-container *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
-          <div class="col-xs-12 col-md-6 col-xl-4 p-3" [ngClass]="{'bg-dark': !post.published }">
+          <div class="col-xs-12 col-md-6 col-xl-4 p-3" [ngClass]="{'bg-dark': !post.publish }">
             <app-post [post]="post"></app-post>
           </div>
         </ng-container>

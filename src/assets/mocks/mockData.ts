@@ -3,6 +3,7 @@ export class MockData {
     {
       slug: 'voluptatem-et-quo',
       uid: 'a2bde023-4191-423e-bdec-cc8c875c05c2',
+      displayName: 'Johnson Huynh',
       topic: 'Data',
       title: 'Chief Intranet Manager 21093i210913i209312i09',
       description: 'Laboriosam vitae aut.',
@@ -11,11 +12,12 @@ export class MockData {
       body: `<h2><strong style=\'color: rgb(153, 51, 0);\'>Angular 7 Observables Tutorial With Example</strong></h2><p class=\'ql-align-center\'><br></p><p class=\'ql-align-justify\'>We start Angular Observables by learning an example. So let us install Angular 7 Project using Angular CLI.</p>`,
       created: '2019-07-02T04:33:59.079Z',
       modified: '2019-07-02T04:33:59.079Z',
-      published: true
+      publish: true
     },
     {
       slug: 'aut-voluptatum-accusantium',
       uid: 'quU47PyHKEZWJaklZeRpJeMKOGy1',
+      displayName: 'Johnson Huynh',
       topic: 'Configuration',
       title: 'Legacy Usability Associate',
       description: 'Ipsa error suscipit et.',
@@ -24,11 +26,12 @@ export class MockData {
       body: `Fugiat non fugiat. Sequi blanditiis eaque. Necessitatibus maxime non incidunt eum molestiae. Ipsa doloremque inventore eaque quisquam. Doloribus autem eum eos ab.`,
       created: '2019-01-09T14:12:50.342Z',
       modified: '2019-07-01T02:42:25.920Z',
-      published: true
+      publish: true
     },
     {
       slug: 'et-temporibus-et',
       uid: 'de95b002-86c2-47d4-8fbf-49bfbc0ba044',
+      displayName: 'Johnson Huynh',
       topic: 'Operations',
       title: 'Customer Paradigm Officer',
       description: 'Aspernatur explicabo doloremque iure blanditiis et est rerum.',
@@ -37,11 +40,12 @@ export class MockData {
       body: `Voluptatum et expedita asperiores voluptatem. Optio aut in quis repellat repellat exercitationem harum mollitia. Nobis harum omnis consequatur et.`,
       created: '2019-01-10T04:15:18.454Z',
       modified: '2019-06-30T21:00:17.635Z',
-      published: true
+      publish: true
     },
     {
       slug: 'alias-aut-aut',
       uid: '1d6bcdbf-0252-405b-b93f-87c3203ec9ea',
+      displayName: 'Johnson Huynh',
       topic: 'Security',
       title: 'Senior Integration Designer',
       description: 'Vero cupiditate adipisci soluta repudiandae asperiores impedit laudantium delectus repudiandae.',
@@ -50,11 +54,12 @@ export class MockData {
       body: `Quia ex delectus ut illum. Magni molestiae officiis reiciendis iure eum repellat consequuntur. Odit architecto ut occaecati incidunt itaque.`,
       created: '2018-09-13T22:58:49.358Z',
       modified: '2019-06-30T10:29:38.701Z',
-      published: true
+      publish: true
     },
     {
       slug: 'assumenda-quidem-sed',
       uid: '78a47db8-9b60-4d00-99fa-21bbd685ac28',
+      displayName: 'Johnson Huynh',
       topic: 'Response',
       title: 'Senior Communications Architect',
       description: 'Cum voluptas quisquam odio assumenda quisquam.',
@@ -63,11 +68,12 @@ export class MockData {
       body: `Repellendus consequatur aspernatur animi nostrum est voluptatem. Et aliquam similique quod sunt maiores inventore. Architecto aspernatur est aliquid rem. Est eum minus aut culpa.`,
       created: '2019-01-10T01:40:09.984Z',
       modified: '2019-07-01T03:05:31.830Z',
-      published: true
+      publish: true
     },
     {
       slug: 'sit-dolorum-soluta',
       uid: 'quU47PyHKEZWJaklZeRpJeMKOGy1',
+      displayName: 'Johnson Huynh',
       topic: 'Creative',
       title: 'Dynamic Intranet Specialist',
       description: 'Delectus sint nostrum dolores repellendus.',
@@ -76,7 +82,7 @@ export class MockData {
       body: `Eos eveniet qui. Qui reprehenderit quae qui similique. Veritatis illo debitis quam rerum maiores non ipsum. Dicta suscipit in eum et laudantium nulla repellendus ipsam quo. Rerum tenetur perferendis pariatur est accusamus repellat suscipit quisquam provident. Sit vero eum suscipit eaque ea tenetur.`,
       created: '2019-03-16T03:09:11.482Z',
       modified: '2019-06-30T22:13:28.988Z',
-      published: true
+      publish: true
     }
   ];
 }

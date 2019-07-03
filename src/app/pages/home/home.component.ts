@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
   }
 
   showPost(post: Post): boolean {
-    return post.published || (this.authService.isAdmin() || this.authService.isAuthor(post.uid));
+    return post.publish || (this.authService.isAdmin() || this.authService.isAuthor(post.uid));
   }
 
   search = (text$: Observable<string>) => text$.pipe(

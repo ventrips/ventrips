@@ -25,7 +25,7 @@ export class EditModeComponent implements OnInit {
     string: ['slug', 'uid', 'displayName', 'topic', 'title', 'description', 'image'],
     quill: ['body'],
     date: ['created', 'modified'],
-    boolean: ['published']
+    boolean: ['publish']
   };
 
   constructor(

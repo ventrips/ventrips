@@ -9,7 +9,7 @@ export interface IPost {
     body: string;
     created: any;
     modified: any;
-    published: boolean;
+    publish: boolean;
 }
 
 export class Post implements IPost {
@@ -23,5 +23,5 @@ export class Post implements IPost {
     body = '';
     created;
     modified;
-    published = true;
+    publish = true;
 }

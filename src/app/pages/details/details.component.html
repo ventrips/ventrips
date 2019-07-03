@@ -19,7 +19,7 @@
         <p class="text-secondary mb-0">Published: {{post?.created | date: 'longDate'}}</p>
         <p class="text-secondary mb-0">Edited: {{post?.modified | date: 'longDate'}}</p>
       </div>
-      <figure class="border-top border-bottom">
+      <figure>
         <div class="image-banner" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>
       </figure>
       <div class="container my-5">
