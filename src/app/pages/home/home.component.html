@@ -54,8 +54,8 @@
     <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)">
-            <div class="row py-2" [ngClass]="{'bg-light': !post.publish }">
+          <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
+            <div class="row">
                 <div class="col-xs-12 col-md-3 align-self-center post-thumbnail">
                   <a [routerLink]="['/posts', post?.slug]">
                     <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
@@ -64,7 +64,7 @@
                 <div class="col">
                   <h2 class="d-flex flex-wrap">
                     <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-                    <app-edit-mode class="mb-2" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+                    <app-edit-mode class="mb-2 ml-auto" *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
                   </h2>
                   <div class="h5">
                     <div class="mb-2">
@@ -74,7 +74,7 @@
                     <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
                       {{post?.description}}
                     </p>
-                    <div>
+                    <div class="mb-3">
                       <p class="text-secondary mb-0 d-inline-block mr-3">Published: {{post?.created | date: 'longDate'}}</p>
                       <p class="text-secondary mb-0 d-inline-block">Edited: {{post?.modified | date: 'longDate'}}</p>            
                     </div>
