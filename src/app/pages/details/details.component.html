@@ -14,7 +14,7 @@
             <li class="breadcrumb-item active text-uppercase" aria-current="page">{{post?.title}}</li>
           </ol>
         </nav>
-        <h1 class="text-capitalize mb-3">{{post?.title}} - {{post?.topic}} / {{post?.slug}}</h1>
+        <h1 class="text-capitalize mb-3">{{post?.title}}</h1>
         <p class="h5 mb-2"><a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold">{{post?.displayName}}</a></p>
         <p class="text-secondary mb-0">Published: {{post?.created | date: 'longDate'}}</p>
         <p class="text-secondary mb-0">Edited: {{post?.modified | date: 'longDate'}}</p>
