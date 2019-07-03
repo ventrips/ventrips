@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
 import { AuthService } from '../../services/firebase/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
@@ -15,7 +16,7 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
   @Input() isNew = false;
-  public tempPost: Post;
+  public tempPost: any;
   public _ = _;
   public keys: Array<string>;
 
@@ -33,7 +34,8 @@ export class EditModeComponent implements OnInit {
     private postsService: PostsService,
     private toastrService: ToastrService,
     private authService: AuthService,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -49,7 +51,7 @@ export class EditModeComponent implements OnInit {
   resetTempPost() {
     this.tempPost = _.assign(new Post(), this.post);
     // Converting string dates to date type
-    this.tempPost.created = new Date(this.tempPost.created);
+    this.tempPost.created = this.tempPost.created ? new Date(this.tempPost.created) : new Date();
     this.tempPost.modified = new Date();
     // Initializing UID & Full Name
     this.tempPost.uid = this.authService.getUid();
@@ -100,11 +102,11 @@ export class EditModeComponent implements OnInit {
         ariaLabelledBy: 'modal-basic-title',
         windowClass: 'modal-100'
       }
-    ).result.then((newPost) => {
+    ).result.then((newPost: Post) => {
       if (this.isNew) {
-        this.afs.collection('posts').doc(newPost.slug).set(newPost)
+        this.afs.collection('posts').doc(newPost.slug).set(JSON.parse(JSON.stringify(newPost)))
         .then(success => {
-          this.toastrService.success('New Post Freated!');
+          this.toastrService.success('New Post Created!');
         }).catch(error => {
           this.toastrService.warning('New Post Failed!');
         });
@@ -118,6 +120,7 @@ export class EditModeComponent implements OnInit {
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.router.navigate(['']);
     });
   }
 
