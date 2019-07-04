@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
 // Pipes
@@ -17,6 +17,7 @@ import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.p
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
 
 // Services
+import { NgbDateFirestoreAdapter } from './services/firebase/ngb-date-firestore-adapter/ngb-date-firestore-adapter.service';
 import { PostsService } from '../app/services/firebase/posts/posts.service';
 
 // Libraries
@@ -85,7 +86,7 @@ import { StripeCheckOutComponent } from './components/stripe-check-out/stripe-ch
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
-  providers: [],
+  // providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
