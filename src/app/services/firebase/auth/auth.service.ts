@@ -1,7 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from './../../../../environments/environment';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { User } from './../../../interfaces/user'
 @Injectable({
   providedIn: 'root'
 })
@@ -26,15 +28,32 @@ export class AuthService {
   ) {
     if (isPlatformBrowser) {
       this.roles = this.environment.roles;
-      this.angularFireAuth.authState.subscribe((user) => {
+      this.angularFireAuth.authState.pipe(
+        switchMap((user: User) => {
+          if (user) {
+            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          } else {
+            return of(null);
+          }
+       }))
+       .subscribe((user) => {
         if (!_.isNil(user)) {
-          this.user = user;
-          this.toastrService.info(`Welcome, ${this.user.displayName}`);
-        } else {
-          this.user = undefined;
-        }
-      });
+            this.user = user;
+            this.toastrService.info(`Welcome, ${this.user['displayName']}`);
+          } else {
+            this.user = undefined;
+          }
+        });
     }
+  }
+
+  public updateUserData(user: User) {
+    return this.afs.doc(`users/${user.uid}`).set({
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      email: user.email
+    }, { merge: true});
   }
 
   signInWithGoogle() {
@@ -44,8 +63,9 @@ export class AuthService {
       provider.addScope('email');
       this.angularFireAuth.auth
       .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
+      .then(response => {
+        this.updateUserData(response.user);
+        resolve(response.user);
       });
     });
   }
@@ -57,8 +77,9 @@ export class AuthService {
       provider.addScope('email');
       this.angularFireAuth.auth
       .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
+      .then(response => {
+        this.updateUserData(response.user);
+        resolve(response.user);
       });
     });
   }
@@ -68,15 +89,15 @@ export class AuthService {
   }
 
   getUid(): string {
-    return this.user.uid;
+    return this.user['uid'];
   }
 
   getDisplayName(): string {
-    return this.user.displayName;
+    return this.user['displayName'];
   }
 
   getPhotoURL(): string {
-    return this.user.photoURL;
+    return this.user['photoURL'];
   }
 
   getAdmins(): Array<string> {
@@ -87,34 +108,22 @@ export class AuthService {
     return this.roles.contributors;
   }
 
-  getAdminIds(): Observable<any[]> {
-    return this.afs.collection('/admins').snapshotChanges()
-    .pipe(map(actions => actions.map((obj: any) => {
-        return obj.payload.doc.id;
-    })));
-  }
-
-  getContributorIds(): Observable<any[]> {
-    return this.afs.collection('/contributors').snapshotChanges()
-    .pipe(map(actions => actions.map((obj: any) => {
-        return obj.payload.doc.id;
-    })));
-  }
-
   isUser(): boolean {
     return !_.isNil(this.user);
   }
 
   isAdmin(): boolean {
-    return this.isUser() && !_.isNil(this.roles.admins) && _.includes(this.roles.admins, this.user.uid);
+    // _.includes(this.roles.admins, this.user['uid'])
+    return this.isUser() && _.isEqual(this.user['role'], 'admin');
   }
 
   isContributor(): boolean {
     if (this.isAdmin()) {
       return true;
     }
+    // _.includes(this.roles.contributors, this.user['uid'])
+    return this.isUser() && _.isEqual(this.user['role'], 'contributor');
 
-    return this.isUser() && !_.isNil(this.roles.contributors) && _.includes(this.roles.contributors, this.user.uid);
   }
 
   isAuthor(uid: string): boolean {
@@ -122,7 +131,7 @@ export class AuthService {
       return true;
     }
 
-    return this.isContributor() && _.isEqual(this.user.uid, uid);
+    return this.isContributor() && _.isEqual(this.user['uid'], uid);
   }
 
   signOut(): void {

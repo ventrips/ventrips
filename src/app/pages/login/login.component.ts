@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
 
 
   signInWithGoogle() {
-    this.authService.signInWithGoogle().then(response => {
-      if (!_.isNil(response)) {
-        this.user = response.user;
+    this.authService.signInWithGoogle().then(user => {
+      if (!_.isNil(user)) {
+        this.user = user;
         this.router.navigate(['']);
       } else {
         this.user = undefined;
@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithFacebook() {
-    this.authService.signInWithFacebook().then(response => {
-      if (!_.isNil(response)) {
-        this.user = response.user;
+    this.authService.signInWithFacebook().then(user => {
+      if (!_.isNil(user)) {
+        this.user = user;
         this.router.navigate(['']);
       } else {
         this.user = undefined;
