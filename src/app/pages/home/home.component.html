@@ -1,8 +1,8 @@
 <section>
-  <section class="sticky-top bg-white box-shadow">
-    <div class="container-fluid py-4">
+  <section class="sticky-top bg-white box-shadow mb-5">
+    <div class="container-fluid py-3">
       <div class="input-group">
-        <input type="text" id="typeahead-config" class="form-control form-control-lg rounded-0" aria-label="Search for posts" placeholder="Search for posts"
+        <input type="text" id="typeahead-config" class="form-control form-control rounded-0" aria-label="Search for posts" placeholder="Search for posts"
           [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
           <div class="input-group-append">
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text rounded-0 bg-warning">
@@ -12,7 +12,6 @@
           </div>
         </div>
     </div>
-    <hr class="my-0">      
   </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">
