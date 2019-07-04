@@ -2,8 +2,8 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 const db = admin.firestore();
-import * as Stripe from 'stripe';
-const stripe = new Stripe(functions.config().stripe.secret);
+// import * as Stripe from 'stripe';
+// const stripe = new Stripe(functions.config().stripe.secret);
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -15,19 +15,22 @@ const stripe = new Stripe(functions.config().stripe.secret);
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
 
-export const createStripeCustomer = functions.auth
-  .user()
-  .onCreate(async (userRecord, context) => {
-    const firebaseUID = userRecord.uid;
-
-    const customer = await stripe.customers.create({
-      metadata: { firebaseUID }
+export const createStripeCustomer = functions.firestore
+.document('users/{uid}')
+.onCreate(async snap => {
+    const userRef = db.doc(`users/${snap.data()!.uid}`);
+    const userDoc = await userRef.get();
+    const user = userDoc.data();
+    // const customer = await stripe.customers.create({
+    //     metadata: { firebaseUID: user!.uid }
+    // });
+    const customer = {
+        id: '123'
+    };
+    return db.doc(`users/${user!.uid}`).update({
+        stripeId: customer.id
     });
-
-    return db.doc(`users/${firebaseUID}`).update({
-      stripeId: customer.id
-    });
-  });
+});
 
 // export const startSubscription = functions.https.onCall(
 //     async (data, context) => {
