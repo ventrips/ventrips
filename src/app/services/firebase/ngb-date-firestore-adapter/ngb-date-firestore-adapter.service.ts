@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 /**
  * NgbDateAdapter implementation that allows using Firebase Firestore TimeStamp as a user date model.
  * https://firebase.google.com/docs/reference/js/firebase.firestore.Timestamp

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PostsService } from '../../services/firebase/posts/posts.service';
 import { ToastrService } from 'ngx-toastr';
@@ -37,7 +37,7 @@ export class EditModeComponent implements OnInit {
     private authService: AuthService,
     private afs: AngularFirestore,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.resetTempPost();
