@@ -23,7 +23,7 @@ export class SearchHighlightPipe implements PipeTransform {
       return originalText;
     }
 
-    const replacedText = originalText.replace(filteredText, `<span class="bg-warning p-1">${matchedText[0]}</span>`);
+    const replacedText = originalText.replace(filteredText, `<span class="text-shadow bg-warning p-1">${matchedText[0]}</span>`);
 
     return this.sanitizer.bypassSecurityTrustHtml(replacedText);
   }
