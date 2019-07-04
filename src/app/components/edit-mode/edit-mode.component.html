@@ -27,14 +27,14 @@
                     <quill-editor [(ngModel)]="tempPost[key]" [disabled]="isDisabled(key)"></quill-editor>
                 </ng-container>
                 <!-- Date Inputs: ['created', 'modified'] -->
-                <ng-container *ngIf="_.includes(inputTypes.date, key)" >
+                <ng-container *ngIf="_.includes(inputTypes.date, key)">
                     <div class="input-group custom-input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd"
                                 name="datePicker" [(ngModel)]="tempPost[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [disabled]="isDisabled(key)">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="fa"
-                                [ngClass]="{ 'fa-check text-success': _.isDate(tempPost[key]), 'fa-asterisk text-danger': !_.isDate(tempPost[key]) }"></i>
+                                [ngClass]="{ 'fa-check text-success': _.isDate(tempPost[key].toDate()), 'fa-asterisk text-danger': !_.isDate(tempPost[key].toDate()) }"></i>
                             </div>            
                         </div>
                     </div>

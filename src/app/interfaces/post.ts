@@ -1,3 +1,4 @@
+import { firestore } from 'firebase';
 export interface IPost {
     slug: string;
     uid: string;
@@ -7,8 +8,8 @@ export interface IPost {
     description: string;
     image: string;
     body: string;
-    created: any;
-    modified: any;
+    created: firestore.Timestamp;
+    modified: firestore.Timestamp;
     publish: boolean;
 }
 

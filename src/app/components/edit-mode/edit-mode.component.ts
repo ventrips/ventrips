@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { firestore } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PostsService } from '../../services/firebase/posts/posts.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
   styleUrls: ['./edit-mode.component.scss'],
-  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
+  providers: []
 })
 export class EditModeComponent implements OnInit {
   @Input() post: Post;
@@ -51,8 +52,8 @@ export class EditModeComponent implements OnInit {
   resetTempPost() {
     this.tempPost = _.assign(new Post(), this.post);
     // Converting string dates to date type
-    this.tempPost.created = this.tempPost.created ? new Date(this.tempPost.created) : new Date();
-    this.tempPost.modified = new Date();
+    this.tempPost.created = this.tempPost.created ? this.tempPost.created : firestore.Timestamp.fromDate(new Date());
+    this.tempPost.modified = firestore.Timestamp.fromDate(new Date())
     // Initializing UID & Full Name
     this.tempPost.uid = this.tempPost.uid ? this.tempPost.uid : this.authService.getUid();
     this.tempPost.displayName = this.tempPost.displayName ? this.tempPost.displayName : this.authService.getDisplayName();
@@ -65,7 +66,7 @@ export class EditModeComponent implements OnInit {
   isValid() {
     return _.every(this.keys, (key) => {
       if (_.includes(this.inputTypes.date, key)) {
-        return _.isDate(this.tempPost[key]);
+        return _.isDate((this.tempPost[key].toDate()));
       }
       if (_.includes(this.inputTypes.boolean, key)) {
         return true;
@@ -104,14 +105,14 @@ export class EditModeComponent implements OnInit {
       }
     ).result.then((newPost: Post) => {
       if (this.isNew) {
-        this.afs.collection('posts').doc(newPost.slug).set(JSON.parse(JSON.stringify(newPost)))
+        this.afs.collection('posts').doc(newPost.slug).set(_.assign({}, newPost))
         .then(success => {
           this.toastrService.success('New Post Created!');
         }).catch(error => {
           this.toastrService.warning('New Post Failed!');
         });
       } else {
-        this.afs.collection('posts').doc(newPost.slug).update(JSON.parse(JSON.stringify(newPost))).
+        this.afs.collection('posts').doc(newPost.slug).update(_.assign({}, newPost)).
         then(success => {
           this.toastrService.success('Post Update Success!');
         }).catch(error => {

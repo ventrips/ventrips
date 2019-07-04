@@ -86,7 +86,7 @@ import { StripeCheckOutComponent } from './components/stripe-check-out/stripe-ch
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
-  // providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
