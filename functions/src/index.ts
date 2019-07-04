@@ -18,17 +18,12 @@ export const angularUniversalFunction = functions.https.onRequest(universal);
 export const createStripeCustomer = functions.firestore
 .document('users/{uid}')
 .onCreate(async snap => {
-    const userRef = db.doc(`users/${snap.data()!.uid}`);
-    const userDoc = await userRef.get();
-    const user = userDoc.data();
     // const customer = await stripe.customers.create({
     //     metadata: { firebaseUID: user!.uid }
     // });
-    const customer = {
-        id: '123'
-    };
-    return db.doc(`users/${user!.uid}`).update({
-        stripeId: customer.id
+    return db.doc(`users/${snap.data()!.uid}`).update({
+        stripeId: '123',
+        role: 'member' // Create member role
     });
 });
 
