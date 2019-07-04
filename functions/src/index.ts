@@ -15,19 +15,19 @@ const stripe = new Stripe(functions.config().stripe.secret);
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
 
-export const createStripeCustomer = functions.auth.user()
-    .onCreate(async (userRecord, context) => {
-        const firebaseUID = userRecord.uid;
-        const customer = await stripe.customers.create(
-            {
-                metadata: { firebaseUID }
-            }
-        );
+export const createStripeCustomer = functions.auth
+  .user()
+  .onCreate(async (userRecord, context) => {
+    const firebaseUID = userRecord.uid;
 
-        return db.doc(`users/${firebaseUID}`).update({
-            stripeId: customer.id
-        })
+    const customer = await stripe.customers.create({
+      metadata: { firebaseUID }
     });
+
+    return db.doc(`users/${firebaseUID}`).update({
+      stripeId: customer.id
+    });
+  });
 
 // export const startSubscription = functions.https.onCall(
 //     async (data, context) => {
