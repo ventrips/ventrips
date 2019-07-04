@@ -20,7 +20,7 @@
           <!-- Create New -->
           <app-edit-mode *ngIf="authService?.isContributor()" [isNew]="true"></app-edit-mode>
         </div>
-        <div class="ml-auto my-4 align-self-center">
+        <div class="ml-auto my-4 align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
           <div ngbDropdown class="d-inline-block mb-5">
             <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
               {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
