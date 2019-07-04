@@ -10,8 +10,6 @@ import * as _ from 'lodash';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public user: any;
-
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -26,27 +24,17 @@ export class LoginComponent implements OnInit {
 
   signInWithGoogle() {
     this.authService.signInWithGoogle().then(user => {
-      if (!_.isNil(user)) {
-        this.user = user;
-        this.router.navigate(['']);
-      } else {
-        this.user = undefined;
-      }
+      this.router.navigate(['']);
     }).catch(error => {
-      this.user = undefined;
+      this.toastrService.warning('An error occured signing in');
     });
   }
 
   signInWithFacebook() {
     this.authService.signInWithFacebook().then(user => {
-      if (!_.isNil(user)) {
-        this.user = user;
-        this.router.navigate(['']);
-      } else {
-        this.user = undefined;
-      }
+      this.router.navigate(['']);
     }).catch(error => {
-      this.user = undefined;
+      this.toastrService.warning('An error occured signing in');
     });
   }
 }

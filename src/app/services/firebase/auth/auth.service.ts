@@ -80,6 +80,8 @@ export class AuthService {
       .then(response => {
         this.updateUserData(response.user);
         resolve(response.user);
+      }).catch(error => {
+        
       });
     });
   }
