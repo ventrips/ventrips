@@ -43,6 +43,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
+import { StripeCheckOutComponent } from './components/stripe-check-out/stripe-check-out.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
     FooterComponent,
     DetailsComponent,
     EditModeComponent,
-    ElementScrollPercentageDirective
+    ElementScrollPercentageDirective,
+    StripeCheckOutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),

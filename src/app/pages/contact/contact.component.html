@@ -4,4 +4,5 @@
     <p>{{data?.description}}</p>
     <img [src]="data?.image" [alt]="data?.title"/>
   </div>
+  <app-stripe-check-out [amount]="10" [description]="'Hello World'"></app-stripe-check-out>
 </section>
