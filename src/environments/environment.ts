@@ -16,6 +16,9 @@ export const environment = {
     messagingSenderId: '556585707956',
     appId: '1:556585707956:web:752f1d8777908fad'
   },
+  stripe: {
+    secret: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
+  },
   roles: {
     admins: [
       '0uYWAhYctIUmaaQF1WBzRUu9J1x2'

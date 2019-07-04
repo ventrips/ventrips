@@ -1,4 +1,9 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+admin.initializeApp();
+const db = admin.firestore();
+import * as Stripe from 'stripe';
+const stripe = new Stripe(functions.config().stripe.secret);
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -9,3 +14,47 @@ import * as functions from 'firebase-functions';
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
+
+export const createStripeCustomer = functions.auth.user()
+    .onCreate(async (userRecord, context) => {
+        const firebaseUID = userRecord.uid;
+        const customer = await stripe.customers.create(
+            {
+                metadata: { firebaseUID }
+            }
+        );
+
+        return db.doc(`users/${firebaseUID}`).update({
+            stripeId: customer.id
+        })
+    });
+
+// export const startSubscription = functions.https.onCall(
+//     async (data, context) => {
+//         const userId = context.auth.uid;
+//         const userDoc = await db.doc(`users/${userId}`).get();
+//         const user = userDoc.data();
+
+//         // Attach the card to the user
+//         const source = await stripe.customers.createSource(user.stripeId, {
+//             source: data.source
+//         });
+
+//         if (!source) {
+//             throw new Error(`Stripe failed to attach card`);
+//         }
+
+//         // Subscribe the user to the plan
+//         const sub = await stripe.subscriptions.create({
+//             customer: user.stripeId,
+//             items: [ { plan: 'donation' }]
+//         })
+
+//         // Update user document
+//         return db.doc(`users/${userId}`).update({
+//             status: sub.status,
+//             subscriptionId: sub.id,
+//             itemId: sub.items.data[0].id
+//         })
+//     }
+// )

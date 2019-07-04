@@ -25,13 +25,13 @@ export class StripeCheckOutComponent implements OnInit {
 
   ngOnInit() {
    this.handler = StripeCheckout.configure({
-    key: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym',
-    image: 'some-image',
+    key: this.environment.stripe.secret,
+    image: 'https://ventrips.com/pj-cruise-min.982eb894ebb4b5c7a705.jpg',
     locale: 'auto',
     source: async (source) => {
       this.isLoading = true;
       const user = await this.authService.getUser();
-      const fun = this.angularFireFunctions.httpsCallable('stripeCreateCharge');
+      const fun = this.angularFireFunctions.httpsCallable('stripeCheckOut');
       this.confirmation = await fun({ source: source.id, uid: user.uid, amount: this.amount }).toPromise();
       this.isLoading = false;
     }

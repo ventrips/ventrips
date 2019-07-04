@@ -1,17 +1,23 @@
 export interface IUser {
     uid: string;
-    firstName: string;
-    lastName: string;
+    displayName: string;
     email: string;
-    dateJoined: Date;
     role: string; // “admin”, “editor”, “contributor”, or “member”
+    // Stripe customer ID assigned by auth function
+    stripeId?: string;
+    // Assigned when subscription is started
+    subscriptionId?: string;
+    status?: string;
+    item?: string;
 }
 
 export class User implements IUser {
     uid;
-    firstName;
-    lastName;
+    displayName;
     email;
-    dateJoined;
     role;
+    stripeId?;
+    subscriptionId?
+    status?;
+    item?;
 }
