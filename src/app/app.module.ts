@@ -23,6 +23,7 @@ import { PostsService } from '../app/services/firebase/posts/posts.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
@@ -77,9 +78,10 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
       preventDuplicates: true
     }),
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
+    AngularFireFunctionsModule, // imports firebase/functions only needed for functions features
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
   providers: [],
   bootstrap: [AppComponent]
