@@ -23,11 +23,53 @@ export const createStripeCustomer = functions.firestore
         metadata: { firebaseUID: snap.data()!.uid }
     });
     return db.doc(`users/${snap.data()!.uid}`).update({
-        stripeId: customer.id,
+        stripeId: customer.id || undefined,
         joined: admin.firestore.FieldValue.serverTimestamp(),
         role: 'member' // Create member role
     });
 });
+
+export const stripeCheckOutCharge = functions.https.onCall(
+    async (data, context) => {
+        // data is the data passed to the call by the client
+
+        // authentication is done this way
+        if (!context.auth) return { status: 'error', code: 401, title: 'Authentication error',  message: 'Not signed in'};
+
+        if (!data.source) {
+            return { status: 'error', code: 500, title: 'Server error',  message: 'Failed to attach source ID to card'}
+        }
+
+        // context has useful info such as:
+        const userId = context.auth.uid; // the uid of the authenticated user
+        // const email = context.auth.token.email // email of the authenticated user
+        const userDoc = await db.doc(`users/${userId}`).get();
+        const user = userDoc.data() || {};
+
+        let stripeId = user.stripeId || undefined;
+        // Create new stripe Id if doesn't exist for any reason
+        if (!stripeId) {
+            const customer = await stripe.customers.create({
+                metadata: { firebaseUID: userId }
+            });
+            stripeId = customer.id;
+        }
+    
+        const charge = await stripe.charges.create({
+            customer: stripeId,
+            source: data.source,
+            amount: data.amount,
+            description: data.description,
+            currency: 'usd'
+        })
+
+        // Update user document
+        return db.doc(`users/${userId}`).update({
+            status: charge,
+            stripeId: stripeId
+        })
+    }
+)
 
 // export const startSubscription = functions.https.onCall(
 //     async (data, context) => {

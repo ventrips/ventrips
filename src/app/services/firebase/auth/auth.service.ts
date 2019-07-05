@@ -102,6 +102,10 @@ export class AuthService {
     return this.user['photoURL'];
   }
 
+  getEmail(): string {
+    return this.user['email'];
+  }
+
   getAdmins(): Array<string> {
     return this.roles.admins;
   }

@@ -31,8 +31,8 @@ export class StripeCheckOutComponent implements OnInit {
     source: async (source) => {
       this.isLoading = true;
       const user = await this.authService.getUser();
-      const fun = this.angularFireFunctions.httpsCallable('stripeCheckOut');
-      this.confirmation = await fun({ source: source.id, uid: user.uid, amount: this.amount }).toPromise();
+      const fun = this.angularFireFunctions.httpsCallable('stripeCheckOutCharge');
+      this.confirmation = await fun({ source: source.id, amount: this.amount, description: this.description }).toPromise();
       this.isLoading = false;
     }
    });
@@ -40,12 +40,11 @@ export class StripeCheckOutComponent implements OnInit {
 
   // Open the checkout handler
   async checkOut(e) {
-    const user = await this.authService.getUser();
     this.handler.open({
       name: _.startCase(this.environment.name),
       description: this.description,
       amount: this.amount,
-      email: user.email
+      email: this.authService.getEmail()
     });
     e.preventDefault();
   }
