@@ -39,7 +39,7 @@ export class AuthService {
        .subscribe((user) => {
         if (!_.isNil(user)) {
             this.user = user;
-            this.toastrService.info(`Welcome, ${this.user['displayName']}`);
+            this.toastrService.info(`Welcome, ${this.getDisplayName()}`);
           } else {
             this.user = undefined;
           }
@@ -49,10 +49,10 @@ export class AuthService {
 
   public updateUserData(user: User) {
     return this.afs.doc(`users/${user.uid}`).set({
-      uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      email: user.email
+      uid: this.getUid(),
+      displayName: this.getDisplayName(),
+      photoURL: this.getPhotoURL(),
+      email: this.getEmail()
     }, { merge: true});
   }
 
@@ -64,8 +64,9 @@ export class AuthService {
       this.angularFireAuth.auth
       .signInWithPopup(provider)
       .then(response => {
-        this.updateUserData(response.user);
-        resolve(response.user);
+        const user = _.get(response, 'user');
+        this.updateUserData(user);
+        resolve(user);
       });
     });
   }
@@ -78,8 +79,9 @@ export class AuthService {
       this.angularFireAuth.auth
       .signInWithPopup(provider)
       .then(response => {
-        this.updateUserData(response.user);
-        resolve(response.user);
+        const user = _.get(response, 'user')
+        this.updateUserData(user);
+        resolve(user);
       }).catch(error => {
         
       });
@@ -91,19 +93,23 @@ export class AuthService {
   }
 
   getUid(): string {
-    return this.user['uid'];
+    return _.get(this.user, 'uid');
   }
 
   getDisplayName(): string {
-    return this.user['displayName'];
+    return _.get(this.user, 'displayName');
   }
 
   getPhotoURL(): string {
-    return this.user['photoURL'];
+    return _.get(this.user, 'photoURL');
   }
 
   getEmail(): string {
-    return this.user['email'];
+    return _.get(this.user, 'email');
+  }
+
+  getRole(): string {
+    return _.get(this.user, 'role');
   }
 
   getAdmins(): Array<string> {
@@ -120,7 +126,7 @@ export class AuthService {
 
   isAdmin(): boolean {
     // _.includes(this.roles.admins, this.user['uid'])
-    return this.isUser() && _.isEqual(this.user['role'], 'admin');
+    return this.isUser() && _.isEqual(this.getRole(), 'admin');
   }
 
   isContributor(): boolean {
@@ -128,7 +134,7 @@ export class AuthService {
       return true;
     }
     // _.includes(this.roles.contributors, this.user['uid'])
-    return this.isUser() && _.isEqual(this.user['role'], 'contributor');
+    return this.isUser() && _.isEqual(this.getRole(), 'contributor');
 
   }
 
@@ -137,7 +143,7 @@ export class AuthService {
       return true;
     }
 
-    return this.isContributor() && _.isEqual(this.user['uid'], uid);
+    return this.isContributor() && _.isEqual(this.getUid(), uid);
   }
 
   signOut(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../../environments/environment';
 import * as _ from 'lodash';
 
 declare var StripeCheckout: any;
