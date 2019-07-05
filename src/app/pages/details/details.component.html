@@ -18,8 +18,7 @@
         </nav>
         <h1 class="text-capitalize mb-3">{{post?.title}}</h1>
         <p class="h5 mb-2"><a [routerLink]="['']" [queryParams]="{query: post?.displayName}" class="text-dark font-weight-bold">{{post?.displayName}}</a></p>
-        <p class="text-secondary mb-0">Published: {{post?.created.toDate() | date: 'longDate'}}</p>
-        <p class="text-secondary mb-0">Edited: {{post?.modified.toDate() | date: 'longDate'}}</p>
+        <p class="text-secondary mb-0">{{post?.modified.toDate() | timeAgo}}</p>
       </div>
       <figure>
         <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>

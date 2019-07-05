@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
 import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
+import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
 
 // Directives
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
@@ -51,6 +52,7 @@ import { StripeCheckOutComponent } from './components/stripe-check-out/stripe-ch
     OrderByPipe,
     SearchByPipe,
     SearchHighlightPipe,
+    TimeAgoPipe,
     AppComponent,
     HomeComponent,
     ContactComponent,
