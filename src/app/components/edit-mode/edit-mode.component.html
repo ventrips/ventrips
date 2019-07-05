@@ -63,7 +63,7 @@
             Copy JSON
         </button>
         <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
-        type="button" class="btn text-white ml-auto" (click)="modal.close(tempPost)">
+        type="button" class="btn ml-auto" (click)="modal.close(tempPost)">
           <span *ngIf="isNew">
             <i class="fa fa-plus-circle"></i> Create
           </span>
@@ -73,7 +73,7 @@
         </button>    
     </div>
 </ng-template>
-<button class="btn btn-warning text-white btn-md rounded-0 d-block" (click)="open(content)">
+<button class="btn btn-warning btn-md rounded-0 d-block" (click)="open(content)">
     <span *ngIf="isNew">
         <i class="fa fa-plus-circle"></i> Create
     </span>
