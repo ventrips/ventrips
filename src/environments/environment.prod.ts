@@ -13,7 +13,7 @@ export const environment = {
     appId: '1:556585707956:web:752f1d8777908fad'
   },
   stripe: {
-    secret: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
+    publishable: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
   },
   roles: {
     admins: [

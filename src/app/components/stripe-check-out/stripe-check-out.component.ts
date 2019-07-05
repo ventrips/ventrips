@@ -25,7 +25,7 @@ export class StripeCheckOutComponent implements OnInit {
 
   ngOnInit() {
    this.handler = StripeCheckout.configure({
-    key: this.environment.stripe.secret,
+    key: this.environment.stripe.publishable,
     image: 'https://ventrips.com/pj-cruise-min.982eb894ebb4b5c7a705.jpg',
     locale: 'auto',
     source: async (source) => {

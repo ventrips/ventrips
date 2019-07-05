@@ -3,8 +3,8 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 const db = admin.firestore();
-// import * as Stripe from 'stripe';
-// const stripe = new Stripe(functions.config().stripe.secret);
+import * as Stripe from 'stripe';
+const stripe = new Stripe(functions.config().stripe.secret);
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -19,11 +19,11 @@ export const angularUniversalFunction = functions.https.onRequest(universal);
 export const createStripeCustomer = functions.firestore
 .document('users/{uid}')
 .onCreate(async snap => {
-    // const customer = await stripe.customers.create({
-    //     metadata: { firebaseUID: user!.uid }
-    // });
+    const customer = await stripe.customers.create({
+        metadata: { firebaseUID: snap.data()!.uid }
+    });
     return db.doc(`users/${snap.data()!.uid}`).update({
-        stripeId: '123',
+        stripeId: customer.id,
         joined: admin.firestore.FieldValue.serverTimestamp(),
         role: 'member' // Create member role
     });
