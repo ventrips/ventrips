@@ -46,6 +46,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
+import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/st
     DetailsComponent,
     EditModeComponent,
     ElementScrollPercentageDirective,
-    StripeCheckOutComponent
+    StripeCheckOutComponent,
+    StripeElementsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
