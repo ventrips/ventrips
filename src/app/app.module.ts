@@ -44,6 +44,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
@@ -64,6 +65,7 @@ import { StripeElementsComponent } from './components/stripe/stripe-elements/str
     NavbarComponent,
     FooterComponent,
     DetailsComponent,
+    ProfileComponent,
     EditModeComponent,
     ElementScrollPercentageDirective,
     StripeCheckOutComponent,

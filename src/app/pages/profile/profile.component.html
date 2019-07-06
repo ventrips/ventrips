@@ -1,0 +1,28 @@
+<section>
+    <ng-container *ngIf="!isLoading">
+        <ng-container *ngIf="profile">
+            <div class="container my-5">
+                <h1>{{profile?.displayName}}</h1>
+                <img class="rounded-circle avatar mr-3" [src]="profile?.photoURL" alt="Avatar">
+                <p>Join Date: {{profile?.joined?.toDate() | date: 'longDate'}} ({{profile?.joined?.toDate() | timeAgo}})</p>
+                <div *ngIf="authService?.canEdit(user)">
+                    <p>
+                        Admin: {{user?.roles?.admin}}
+                    </p>
+                    <p>
+                        Editor: {{user?.roles?.editor}}
+                    </p>
+                    <p>
+                        Subscriber: {{user?.roles?.subscriber}}
+                    </p>                                
+                </div>
+                <!-- <app-stripe-check-out [amount]="'100'" [description]="'Donation'"></app-stripe-check-out> -->
+                <!-- <app-stripe-elements [amount]="'100'" [description]="'Donation'"></app-stripe-elements>   -->
+            </div>
+        </ng-container>
+        <div *ngIf="!profile" class="text-center my-5">
+        <h1 class="text-uppercase">Sorry!</h1>
+        <p class="text-muted">This page does not exist. Return to <a class="text-warning" [routerLink]="['/']">Home</a></p>
+        </div>
+    </ng-container>
+</section>
