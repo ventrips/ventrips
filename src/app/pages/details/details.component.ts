@@ -12,13 +12,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
+import { fadeInUpOnEnterAnimation, hueRotateAnimation } from 'angular-animations';
 
 const DETAILS_KEY = makeStateKey<any>('details');
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+  animations: [
+    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' }),
+    hueRotateAnimation({ anchor: 'enter', duration: 1000, delay: 100 })
+  ]
 })
 export class DetailsComponent implements OnInit {
   public post: Post;
