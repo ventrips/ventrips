@@ -6,7 +6,7 @@
         </button>
     </div>
     <div class="modal-body row">
-        <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-6': !isLast}" *ngFor="let key of keys; last as isLast">
+        <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-xs-12 col-md-6': !isLast}" *ngFor="let key of keys; last as isLast">
             <h4 class="text-capitalize mb-2">{{_.startCase(key)}}</h4>
             <!-- Dynamic Forms -->
             <div class="mb-3">

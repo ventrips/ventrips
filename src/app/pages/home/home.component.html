@@ -8,7 +8,9 @@
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text rounded-0 bg-warning">
               <i class="fas fa-search text-dark"></i>
             </span>
-            <button *ngIf="!_.isEmpty(searchTerm)" (click)="searchTerm = ''" class="btn btn-warning rounded-0">Clear <i class="fas fa-times"></i></button>
+            <a [routerLink]="['']" class="btn text-dark btn-warning rounded-0" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning rounded-0">
+              Clear <i class="fas fa-times"></i>
+            </a>
           </div>
         </div>
     </div>
@@ -41,7 +43,7 @@
       <div class="container-fluid text-center">
         <h2 class="text-uppercase">Sorry!</h2>
         <p class=" text-muted">We couldn't find anything with these search terms.
-          <span (click)="searchTerm = ''" class="text-warning cursor-pointer">Clear and search again</span>!
+          <a [routerLink]="['']" class="text-warning cursor-pointer">Clear and search again</a>
         </p>
       </div>
     </ng-container>
