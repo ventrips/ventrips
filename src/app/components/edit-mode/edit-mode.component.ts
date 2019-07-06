@@ -95,6 +95,9 @@ export class EditModeComponent implements OnInit {
   }
 
   delete(modal: any) {
+    if (!this.authService.canEdit(this.user, _.get(this.post, ['uid']))) {
+      return;
+    }
     this.afs.collection('posts').doc(this.post.slug).delete().
     then(success => {
       this.toastrService.success('Delete Success!');

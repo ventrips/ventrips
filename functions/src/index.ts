@@ -24,7 +24,8 @@ export const createStripeCustomer = functions.firestore
         metadata: { firebaseUID: snap.data()!.uid }
     });
     return db.doc(`users/${snap.data()!.uid}`).update({
-        stripeId: _.get(customer, ['id'])
+        stripeId: _.get(customer, ['id']),
+        joined: admin.firestore.FieldValue.serverTimestamp()
     });
 });
 
