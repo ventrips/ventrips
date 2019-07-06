@@ -57,7 +57,7 @@ export class EditModeComponent implements OnInit {
     this.tempPost = _.assign(new Post(), this.post);
     // Converting string dates to date type
     this.tempPost.created = _.get(this.tempPost, ['created']) || firestore.Timestamp.fromDate(new Date());
-    this.tempPost.modified = firestore.Timestamp.fromDate(new Date())
+    this.tempPost.modified = _.get(this.tempPost, ['modified']) || firestore.Timestamp.fromDate(new Date());
     // Initializing UID & Full Name
     this.tempPost.uid = _.get(this.tempPost, ['uid']) || _.get(this.user, ['uid']);
     this.tempPost.displayName = _.get(this.tempPost, ['displayName']) ||  _.get(this.user, ['displayName']);
@@ -104,7 +104,6 @@ export class EditModeComponent implements OnInit {
       modal.dismiss();
     }).catch(error => {
       this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
-      modal.dismiss();
     });
   }
 
@@ -115,6 +114,7 @@ export class EditModeComponent implements OnInit {
         windowClass: 'modal-100'
       }
     ).result.then((newPost: Post) => {
+      newPost.modified = firestore.Timestamp.fromDate(new Date())  
       if (this.isNew) {
         this.afs.collection('posts').doc(newPost.slug).set(_.assign({}, newPost))
         .then(success => {
