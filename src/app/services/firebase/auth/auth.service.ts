@@ -1,154 +1,127 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
-import { environment } from './../../../../environments/environment';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { User } from './../../../interfaces/user'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public environment = environment;
-  public roles: any;
-  public user: any;
+  public user$: Observable<any>;
 
   constructor(
     private router: Router,
     private afs: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
     private toastrService: ToastrService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any,
   ) {
     if (isPlatformBrowser) {
-      this.roles = this.environment.roles;
-      this.angularFireAuth.authState.pipe(
-        switchMap((user: User) => {
+      //// Get auth data, then get firestore user document || null
+      this.user$ = this.angularFireAuth.authState.pipe(switchMap(user => {
           if (user) {
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
           } else {
             return of(null);
           }
-       }))
-       .subscribe((user) => {
-        if (!_.isNil(user)) {
-            this.user = user;
-            this.toastrService.info(`Welcome, ${this.getDisplayName()}`);
-          } else {
-            this.user = undefined;
-          }
-        });
+        })
+      )
     }
   }
 
-  public updateUserData(user: User) {
-    return this.afs.doc(`users/${user.uid}`).set({
-      uid: this.getUid(),
-      displayName: this.getDisplayName(),
-      photoURL: this.getPhotoURL(),
-      email: this.getEmail()
-    }, { merge: true});
-  }
-
+  ///// Login/Signup //////
   signInWithGoogle() {
-    return new Promise<any>((resolve, reject) => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('profile');
-      provider.addScope('email');
-      this.angularFireAuth.auth
-      .signInWithPopup(provider)
-      .then(response => {
-        const user = _.get(response, 'user');
-        this.updateUserData(user);
-        resolve(user);
-      });
-    });
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    return this.oAuthLogin(provider);
   }
 
   signInWithFacebook() {
-    return new Promise<any>((resolve, reject) => {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      provider.addScope('public_profile');
-      provider.addScope('email');
-      this.angularFireAuth.auth
-      .signInWithPopup(provider)
-      .then(response => {
-        const user = _.get(response, 'user')
-        this.updateUserData(user);
-        resolve(user);
-      }).catch(error => {
-        
+    const provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('public_profile');
+    provider.addScope('email');
+    return this.oAuthLogin(provider);
+  }
+
+  private oAuthLogin(provider) {
+    return this.angularFireAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.updateUserData(credential.user);
+        this.ngZone.run(() => {
+          this.router.navigate(['']);
+        });
+      }).catch((error) => {
+        if (_.isEqual(_.get(error, ['code']), 'auth/cancelled-popup-request')) {
+          return;
+        }
+        this.toastrService.warning(_.get(error, ['message'], _.get(error, ['code'])));
       });
-    });
   }
 
-  getUser(): any {
-    return this.user;
-  }
-
-  getUid(): string {
-    return _.get(this.user, 'uid');
-  }
-
-  getDisplayName(): string {
-    return _.get(this.user, 'displayName');
-  }
-
-  getPhotoURL(): string {
-    return _.get(this.user, 'photoURL');
-  }
-
-  getEmail(): string {
-    return _.get(this.user, 'email');
-  }
-
-  getRole(): string {
-    return _.get(this.user, 'role');
-  }
-
-  getAdmins(): Array<string> {
-    return this.roles.admins;
-  }
-
-  getContributors(): Array<string> {
-    return this.roles.contributors;
-  }
-
-  isUser(): boolean {
-    return !_.isNil(this.user);
-  }
-
-  isAdmin(): boolean {
-    // _.includes(this.roles.admins, this.user['uid'])
-    return this.isUser() && _.isEqual(this.getRole(), 'admin');
-  }
-
-  isContributor(): boolean {
-    if (this.isAdmin()) {
-      return true;
+  public updateUserData(user: User) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    // Sets user data to firestore on login
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      roles: {
+        subscriber: true
+      }
     }
-    // _.includes(this.roles.contributors, this.user['uid'])
-    return this.isUser() && _.isEqual(this.getRole(), 'contributor');
-
-  }
-
-  isAuthor(uid: string): boolean {
-    if (this.isAdmin()) {
-      return true;
-    }
-
-    return this.isContributor() && _.isEqual(this.getUid(), uid);
+    return userRef.set(data, { merge: true })
   }
 
   signOut(): void {
-    this.angularFireAuth.auth.signOut().then(() => {
-      this.user = undefined;
-    });
+    this.angularFireAuth.auth.signOut();
+  }
+
+  ///// Role-based Authorization //////
+
+  canRead(user: User): boolean {
+    const allowed = ['admin', 'editor', 'subscriber']
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canEdit(user: User, postUid?: string): boolean {
+    // If it is a post, check if the post's UID is the author of post or admin
+    if (!_.isNil(postUid)) {
+      return (_.get(user, ['roles', 'editor']) && _.isEqual(user.uid, postUid)) || _.get(user, ['roles', 'admin']);
+    } else {
+      const allowed = ['admin', 'editor']
+      return this.checkAuthorization(user, allowed);
+    }
+  }
+
+  canDelete(user: User): boolean {
+    const allowed = ['admin']
+    return this.checkAuthorization(user, allowed)
+  }
+
+  // determines if user has matching role
+  private checkAuthorization(user: User, allowedRoles: string[]): boolean {
+    // user is not authenticated
+    if (!user) return false
+
+    // user has permission
+    for (const role of allowedRoles) {
+      if ( user.roles[role] ) {
+        return true
+      }
+    }
+
+    // user has no permissions
+    return false
   }
 }

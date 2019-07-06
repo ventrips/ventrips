@@ -13,6 +13,7 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../../interfaces/user';
 
 const HOME_KEY = makeStateKey<any>('home');
 @Component({
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit {
   public posts: Array<Post>;
   public isLoading = true;
   public _ = _;
+  public user: User;
 
   constructor(
     private afs: AngularFirestore,
@@ -87,6 +89,8 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => this.user = user);
+
     this.seoService.setMetaTags({
       title: `Ventrips - Dedicated to providing latest news and trends`,
       description: `Search for articles`
@@ -97,8 +101,7 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     this.ssrFirestoreCollection('posts').subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
-        // Show published posts only unless admin or author
-        this.posts = _.filter(response, (post) => this.showPost(post));
+        this.posts = response;
         // Adding Search Options
         this.searchOptions = [];
         _.forEach(this.posts, (post) => {
@@ -114,10 +117,6 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
       this.spinner.hide();
     });
-  }
-
-  showPost(post: Post): boolean {
-    return post.publish || (this.authService.isAdmin() || this.authService.isAuthor(post.uid));
   }
 
   search = (text$: Observable<string>) => text$.pipe(

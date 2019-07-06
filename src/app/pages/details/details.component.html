@@ -3,7 +3,7 @@
     <ng-container *ngIf="post">
       <div class="container my-5">
         <div class="mb-3">
-          <app-edit-mode *ngIf="authService?.isAuthor(post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+          <app-edit-mode *ngIf="authService?.canEdit(user)" [post]="post" [isNew]="false"></app-edit-mode>
         </div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0">

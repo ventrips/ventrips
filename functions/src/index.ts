@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as _ from 'lodash';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -23,9 +24,7 @@ export const createStripeCustomer = functions.firestore
         metadata: { firebaseUID: snap.data()!.uid }
     });
     return db.doc(`users/${snap.data()!.uid}`).update({
-        stripeId: customer.id || undefined,
-        joined: admin.firestore.FieldValue.serverTimestamp(),
-        role: 'member' // Create member role
+        stripeId: _.get(customer, ['id'])
     });
 });
 
@@ -41,25 +40,25 @@ export const stripeCheckOutCharge = functions.https.onCall(
         }
 
         // context has useful info such as:
-        const userId = context.auth.uid; // the uid of the authenticated user
+        const userId = _.get(context, ['auth', 'uid']); // the uid of the authenticated user
         // const email = context.auth.token.email // email of the authenticated user
         const userDoc = await db.doc(`users/${userId}`).get();
         const user = userDoc.data() || {};
 
-        let stripeId = user.stripeId || undefined;
+        let stripeId = _.get(user, ['stripeId']);
         // Create new stripe Id if doesn't exist for any reason
         if (!stripeId) {
             const customer = await stripe.customers.create({
                 metadata: { firebaseUID: userId }
             });
-            stripeId = customer.id;
+            stripeId = _.get(customer, ['id']);
         }
     
         const charge = await stripe.charges.create({
             customer: stripeId,
-            source: data.source,
-            amount: data.amount,
-            description: data.description,
+            source: _.get(data, ['source']),
+            amount: _.get(data, ['amount']),
+            description: _.get(data, ['description']),
             currency: 'usd'
         })
 

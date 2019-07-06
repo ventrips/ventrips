@@ -3,6 +3,7 @@ import { AuthService } from './../../../services/firebase/auth/auth.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { environment } from './../../../../environments/environment';
 import * as _ from 'lodash';
+import { User } from '../../../interfaces/user';
 
 declare var Stripe: stripe.StripeStatic;
 
@@ -13,7 +14,7 @@ declare var Stripe: stripe.StripeStatic;
 })
 export class StripeElementsComponent implements OnInit {
 
-  constructor(private auth: AuthService, private functions: AngularFireFunctions) {}
+  constructor(private authService: AuthService, private functions: AngularFireFunctions) {}
 
   @Input() amount: number;
   @Input() description: string;
@@ -26,9 +27,11 @@ export class StripeElementsComponent implements OnInit {
   loading = false;
   confirmation;
   environment = environment;
-
+  public user: User;
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => this.user = user);
+
     this.stripe = Stripe(this.environment.stripe.publishable);
     const elements = this.stripe.elements();
     this.card = elements.create('card');
@@ -51,7 +54,6 @@ export class StripeElementsComponent implements OnInit {
     } else {
       // Send the token to your server.
       this.loading = true;
-      const user = await this.auth.getUser();
       const fun = this.functions.httpsCallable('stripeCheckOutCharge');
       this.confirmation = await fun({ source: source.id, amount: this.amount, description: this.description }).toPromise();
       this.loading = false;

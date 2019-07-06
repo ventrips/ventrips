@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { environment } from './../../../../environments/environment';
 import * as _ from 'lodash';
+import { User } from '../../../interfaces/user';
 
 declare var StripeCheckout: any;
 
@@ -18,19 +19,19 @@ export class StripeCheckOutComponent implements OnInit {
   confirmation: any;
   isLoading = false;
   environment = environment;
+  public user: User;
 
-  constructor(private authService: AuthService, private angularFireFunctions: AngularFireFunctions) {
-
-  }
+  constructor(private authService: AuthService, private angularFireFunctions: AngularFireFunctions) {}
 
   ngOnInit() {
-   this.handler = StripeCheckout.configure({
+    this.authService.user$.subscribe(user => this.user = user);
+
+    this.handler = StripeCheckout.configure({
     key: this.environment.stripe.publishable,
     image: 'https://ventrips.com/pj-cruise-min.982eb894ebb4b5c7a705.jpg',
     locale: 'auto',
     source: async (source) => {
       this.isLoading = true;
-      const user = await this.authService.getUser();
       const fun = this.angularFireFunctions.httpsCallable('stripeCheckOutCharge');
       this.confirmation = await fun({ source: source.id, amount: this.amount, description: this.description }).toPromise();
       this.isLoading = false;
@@ -44,7 +45,7 @@ export class StripeCheckOutComponent implements OnInit {
       name: _.startCase(this.environment.name),
       description: this.description,
       amount: this.amount,
-      email: this.authService.getEmail()
+      email: _.get(this.user, 'email')
     });
     e.preventDefault();
   }

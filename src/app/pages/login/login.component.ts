@@ -21,20 +21,11 @@ export class LoginComponent implements OnInit {
     this.seoService.setMetaTags();
   }
 
-
   signInWithGoogle() {
-    this.authService.signInWithGoogle().then(user => {
-      this.router.navigate(['']);
-    }).catch(error => {
-      this.toastrService.warning('An error occured signing in');
-    });
+    this.authService.signInWithGoogle();
   }
 
   signInWithFacebook() {
-    this.authService.signInWithFacebook().then(user => {
-      this.router.navigate(['']);
-    }).catch(error => {
-      this.toastrService.warning('An error occured signing in');
-    });
+    this.authService.signInWithFacebook();
   }
 }

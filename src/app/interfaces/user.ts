@@ -1,28 +1,24 @@
 import { firestore } from 'firebase/app';
+import { Roles } from './roles';
 export interface IUser {
-    uid: string;
-    displayName: string;
-    photoURL: string;
-    email: string;
+    uid?: string;
+    displayName?: string;
+    photoURL?: string;
+    email?: string;
     joined?: firestore.Timestamp,
-    role?: string; // “admin”, “editor”, “contributor”, or “member”
+    roles?: Roles; // admin, editor, subscriber
     // Stripe customer ID assigned by auth function
     stripeId?: string;
-    // Assigned when subscription is started
-    subscriptionId?: string;
     status?: string;
-    item?: string;
 }
 
 export class User implements IUser {
-    uid;
-    displayName;
-    photoURL;
-    email;
+    uid?;
+    displayName?;
+    photoURL?;
+    email?;
     joined?;
-    role?;
+    roles?;
     stripeId?;
-    subscriptionId?
     status?;
-    item?;
 }

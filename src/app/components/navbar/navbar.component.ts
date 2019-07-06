@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from './../../../environments/environment';
 import * as _ from 'lodash';
+import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
       url: `contact`
     }
   ];
+  public user: User;
 
   constructor(
     private router: Router,
@@ -27,6 +29,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => this.user = user);
   }
 
   isActive(currentNav: string): boolean {

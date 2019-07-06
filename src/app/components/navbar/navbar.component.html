@@ -16,19 +16,19 @@
           <span *ngIf="isActive(item?.url)" class="sr-only">(current)</span>
         </a>      
       </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.collapse.show" *ngIf="!authService?.getUser()">
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.collapse.show" *ngIf="!user">
         <a [routerLink]="['/login']" [ngClass]="{'active': isActive('/login')}" class="nav-link" title="Log In" >
           Log In
         </a>
       </li>
-      <li class="nav-item dropdown cursor-pointer" *ngIf="authService?.getUser()">
+      <li class="nav-item dropdown cursor-pointer" *ngIf="user">
         <a class="nav-link dropdown-toggle" title="User Dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           [ngClass]="{'active': isActive('/admin')}">
-          <img class="rounded-circle avatar mr-3" [src]="authService?.getPhotoURL()" alt="Avatar">
-          <span>{{authService?.getDisplayName()}}</span>
+          <img class="rounded-circle avatar mr-3" [src]="user?.photoURL" alt="Avatar">
+          <span>{{user?.displayName}}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-toggle="collapse" data-target=".navbar-collapse.collapse.show">
-          <ng-container *ngIf="authService?.isAdmin()">
+          <ng-container *ngIf="user?.roles?.admin">
             <a class="dropdown-item" title="Admin" [routerLink]="['/admin']" [ngClass]="{'active': isActive('/admin')}">
               Admin
             </a>

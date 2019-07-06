@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as faker from 'faker';
 import * as _ from 'lodash';
+import { User } from '../../interfaces/user';
 
 const DETAILS_KEY = makeStateKey<any>('details');
 
@@ -24,6 +25,7 @@ export class DetailsComponent implements OnInit {
   public posts: Array<Post>;
   public slug: string;
   public isLoading = true;
+  public user: User;
 
   constructor(
     private afs: AngularFirestore,
@@ -39,6 +41,8 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => this.user = user);
+
     this.slug = this.activatedRoute.snapshot.params.slug;
     this.spinner.show();
     this.ssrFirestoreDoc(`posts/${this.slug}`)

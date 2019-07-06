@@ -8,6 +8,7 @@ import { Post } from '../../interfaces/post';
 import * as _ from 'lodash';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
@@ -29,6 +30,7 @@ export class EditModeComponent implements OnInit {
     date: ['created', 'modified'],
     boolean: ['publish']
   };
+  public user: User;
 
   constructor(
     private modalService: NgbModal,
@@ -40,26 +42,32 @@ export class EditModeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.resetTempPost();
-
-    this.modalTitle = (this.isNew) ? `Create` : `${this.tempPost.title}`;
-    this.keys = _.orderBy(
-      _.keys(this.tempPost),
-      [(key) => _.isEqual(key, 'body')], ['asc']
-    );
+    this.authService.user$.subscribe(user => {
+      this.user = user
+      this.resetTempPost();
+      this.modalTitle = (this.isNew) ? `Create` : `${this.tempPost.title}`;
+      this.keys = _.orderBy(
+        _.keys(this.tempPost),
+        [(key) => _.isEqual(key, 'body')], ['asc']
+      );
+    });
   }
 
   resetTempPost() {
     this.tempPost = _.assign(new Post(), this.post);
     // Converting string dates to date type
-    this.tempPost.created = this.tempPost.created ? this.tempPost.created : firestore.Timestamp.fromDate(new Date());
+    this.tempPost.created = _.get(this.tempPost, ['created']) || firestore.Timestamp.fromDate(new Date());
     this.tempPost.modified = firestore.Timestamp.fromDate(new Date())
     // Initializing UID & Full Name
-    this.tempPost.uid = this.tempPost.uid ? this.tempPost.uid : this.authService.getUid();
-    this.tempPost.displayName = this.tempPost.displayName ? this.tempPost.displayName : this.authService.getDisplayName();
+    this.tempPost.uid = _.get(this.tempPost, ['uid']) || _.get(this.user, ['uid']);
+    this.tempPost.displayName = _.get(this.tempPost, ['displayName']) ||  _.get(this.user, ['displayName']);
   }
 
   isDisabled(key: string) {
+    if (_.get(this.user, ['roles', 'admin']) && !_.isEqual(key, 'slug')) {
+      return false;
+    }
+
     return !this.isNew && _.includes(['slug', 'created', 'modified'], key);
   }
 
