@@ -54,7 +54,7 @@ export class StripeElementsComponent implements OnInit {
     } else {
       // Send the token to your server.
       this.loading = true;
-      const fun = this.functions.httpsCallable('stripeCheckOutCharge');
+      const fun = this.functions.httpsCallable('createStripeCheckOutCharge');
       this.confirmation = await fun({ source: source.id, amount: this.amount, description: this.description }).toPromise();
       this.loading = false;
 

@@ -32,7 +32,7 @@ export class StripeCheckOutComponent implements OnInit {
     locale: 'auto',
     source: async (source) => {
       this.isLoading = true;
-      const fun = this.angularFireFunctions.httpsCallable('stripeCheckOutCharge');
+      const fun = this.angularFireFunctions.httpsCallable('createStripeCheckOutCharge');
       this.confirmation = await fun({ source: source.id, amount: this.amount, description: this.description }).toPromise();
       this.isLoading = false;
     }

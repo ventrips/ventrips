@@ -29,7 +29,7 @@ export const createStripeCustomer = functions.firestore
     });
 });
 
-export const stripeCheckOutCharge = functions.https.onCall(
+export const createStripeCheckOutCharge = functions.https.onCall(
     async (data, context) => {
         // data is the data passed to the call by the client
 
