@@ -130,10 +130,7 @@ export class EditModeComponent implements OnInit {
           this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
         });
       }
-    }, (reason) => {
-      this.toastrService.warning(this.getDismissReason(reason), `Modal Dismissed`);
-      this.router.navigate(['']);
-    });
+    }, (reason) => {});
   }
 
   private getDismissReason(reason: any): string {
