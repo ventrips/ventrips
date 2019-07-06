@@ -100,10 +100,10 @@ export class EditModeComponent implements OnInit {
     }
     this.afs.collection('posts').doc(this.post.slug).delete().
     then(success => {
-      this.toastrService.success('Delete Success!');
+      this.toastrService.success(`${this.post.title} has been deleted.`, 'Delete Success!');
       modal.dismiss();
     }).catch(error => {
-      this.toastrService.warning('Delete Failed!');
+      this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
       modal.dismiss();
     });
   }
@@ -118,20 +118,20 @@ export class EditModeComponent implements OnInit {
       if (this.isNew) {
         this.afs.collection('posts').doc(newPost.slug).set(_.assign({}, newPost))
         .then(success => {
-          this.toastrService.success('New Post Created!');
+          this.toastrService.success(`${newPost.title} has been created.`, 'Create Success!');
         }).catch(error => {
-          this.toastrService.warning('New Post Failed!');
+          this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
         });
       } else {
         this.afs.collection('posts').doc(newPost.slug).update(_.assign({}, newPost)).
         then(success => {
-          this.toastrService.success('Post Update Success!');
+          this.toastrService.success(`${newPost.title} has been updated.`, 'Update Success!');
         }).catch(error => {
-          this.toastrService.warning('Post Update Failed!');
+          this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
         });
       }
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.toastrService.warning(this.getDismissReason(reason), `Modal Dismissed`);
       this.router.navigate(['']);
     });
   }
