@@ -11,14 +11,13 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router
-  ) {
-    this.setMetaTags();
-  }
+  ) {}
 
   setMetaTags(config?: any) {
     // Default Metatags if not set
+    const baseUrl = _.split(this.router.url, '/')[1];
     config = {
-      title: `${!_.isEmpty(_.startCase(this.router.url)) ? _.startCase(this.router.url) : environment.name}`,
+      title: `${!_.isEmpty(_.startCase(baseUrl)) ? _.capitalize(baseUrl) : environment.name}`,
       description: environment.description,
       image: `${environment.url}/assets/img/horse-shoe-bend-min.jpg`,
       url: `${environment.url}${!_.isEmpty(_.startCase(this.router.url)) ? this.router.url : ''}`,

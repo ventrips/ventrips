@@ -48,6 +48,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
+import { KeysPipe } from './pipes/keys/keys.pipe';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { StripeElementsComponent } from './components/stripe/stripe-elements/str
     EditModeComponent,
     ElementScrollPercentageDirective,
     StripeCheckOutComponent,
-    StripeElementsComponent
+    StripeElementsComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),

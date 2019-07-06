@@ -10,6 +10,7 @@ import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { User } from './../../../interfaces/user'
+import { firestore } from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
@@ -78,7 +79,8 @@ export class AuthService {
       photoURL: user.photoURL,
       roles: {
         subscriber: true
-      }
+      },
+      lastActive: firestore.Timestamp.fromDate(new Date())
     }
     return userRef.set(data, { merge: true })
   }

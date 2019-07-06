@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   public profile: User;
   public isLoading = true;
   public user: User;
+  public _ = _;
 
   constructor(
     private afs: AngularFirestore,
@@ -46,11 +47,6 @@ export class ProfileComponent implements OnInit {
       .subscribe(response => {
         if (!_.isEmpty(response) && !_.isNil(response)) {
           this.profile = response;
-          this.seoService.setMetaTags({
-            title: `${_.get(this.profile, ['displayName'])} - Profile`,
-            description: `${_.get(this.profile, ['displayName'])}`,
-            image: _.get(this.profile, ['photoURL'])
-          });
           this.spinner.hide();
           this.isLoading = false;
         }
@@ -72,11 +68,11 @@ export class ProfileComponent implements OnInit {
       tap(page => {
         this.transferState.set(DETAILS_KEY, page);
         this.seoService.setMetaTags({
-          title: page.title,
-          description: page.description,
-          image: page.image
+          title: `${_.get(page, ['displayName'])} - Profile`,
+          description: `${_.get(page, ['displayName'])}`,
+          image: _.get(page, ['photoURL'])
         });
-      }),
+    }),
       startWith(exists)
     );
   }

@@ -63,7 +63,9 @@
                   </h2>
                   <div class="h5">
                     <div class="mb-2">
-                      <img class="rounded-circle profile-picture mr-3" [src]="post?.photoURL" alt="Profile Picture">
+                      <a [routerLink]="['/profile', post?.uid]" class="mr-3">
+                        <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                      </a>
                       <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                       <p class="text-secondary mb-0 d-inline-block">{{post?.modified?.toDate() | timeAgo}}</p>
                     </div>
