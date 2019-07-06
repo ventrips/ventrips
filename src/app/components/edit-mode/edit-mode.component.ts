@@ -25,7 +25,7 @@ export class EditModeComponent implements OnInit {
   public modalTitle: string;
   public closeResult: string;
   public inputTypes = {
-    string: ['slug', 'uid', 'displayName', 'topic', 'title', 'description', 'image'],
+    string: ['slug', 'uid', 'displayName', 'photoURL', 'topic', 'title', 'description', 'image'],
     quill: ['body'],
     date: ['created', 'modified'],
     boolean: ['publish']
@@ -58,12 +58,17 @@ export class EditModeComponent implements OnInit {
     // Converting string dates to date type
     this.tempPost.created = _.get(this.tempPost, ['created']) || firestore.Timestamp.fromDate(new Date());
     this.tempPost.modified = _.get(this.tempPost, ['modified']) || firestore.Timestamp.fromDate(new Date());
-    // Initializing UID & Full Name
+    // Initializing UID, Full Name, Photo URL
     this.tempPost.uid = _.get(this.tempPost, ['uid']) || _.get(this.user, ['uid']);
     this.tempPost.displayName = _.get(this.tempPost, ['displayName']) ||  _.get(this.user, ['displayName']);
+    this.tempPost.photoURL = _.get(this.tempPost, ['photoURL']) ||  _.get(this.user, ['photoURL']);
   }
 
   isDisabled(key: string) {
+    if (_.isEqual('photoURL', key)) {
+      return true;
+    }
+
     if (_.get(this.user, ['roles', 'admin']) && !_.isEqual(key, 'slug')) {
       return false;
     }

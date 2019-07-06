@@ -3,6 +3,7 @@ export interface IPost {
     slug: string;
     uid: string;
     displayName: string;
+    photoURL: string;
     topic: string;
     title: string;
     description: string;
@@ -17,6 +18,7 @@ export class Post implements IPost {
     slug = '';
     uid = '';
     displayName = '';
+    photoURL = '';
     topic = '';
     title = '';
     description = '';

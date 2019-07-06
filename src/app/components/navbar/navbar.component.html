@@ -24,7 +24,7 @@
       <li class="nav-item dropdown cursor-pointer" *ngIf="user">
         <a class="nav-link dropdown-toggle" title="User Dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           [ngClass]="{'active': isActive('/admin')}">
-          <img class="rounded-circle avatar mr-3" [src]="user?.photoURL" alt="Avatar">
+          <img class="rounded-circle profile-picture mr-3" [src]="user?.photoURL" alt="Profile Picture">
           <span>{{user?.displayName}}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-toggle="collapse" data-target=".navbar-collapse.collapse.show">
