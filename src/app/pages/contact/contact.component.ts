@@ -47,14 +47,11 @@ export class ContactComponent implements OnInit {
         this.data = response;
         this.seoService.setMetaTags({
           title: this.data.title,
-          description: this.data.body
+          description: this.data.description
         });
-        this.spinner.hide();
-        this.isLoading = false;
-      } else {
-        this.spinner.hide();
-        this.isLoading = false;  
       }
+      this.spinner.hide();
+      this.isLoading = false;  
     }, () => {
         this.spinner.hide();
         this.isLoading = false;
