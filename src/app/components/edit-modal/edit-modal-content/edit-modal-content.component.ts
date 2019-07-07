@@ -3,6 +3,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { EditModalConfirmComponent } from '../edit-modal-confirm/edit-modal-confirm.component';
+import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 
 @Component({
@@ -23,7 +24,8 @@ export class EditModalContentComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
-    public authService: AuthService
+    public authService: AuthService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -39,7 +41,6 @@ export class EditModalContentComponent implements OnInit {
         ),
         [(key) => _.includes(_.get(this.inputsConfig, ['quill']), key)], ['asc']
       );
-      console.log(this.keys);
     });
   }
 
@@ -79,5 +80,16 @@ export class EditModalContentComponent implements OnInit {
         this.activeModal.close({ reason: 'delete', data: this.data });
       }
     }, (reason?) => {});
+  }
+
+  copyToClipboard(record) {
+    const content = JSON.stringify(record, null, 4);
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', content);
+      e.preventDefault();
+      document.removeEventListener('copy', () => {});
+    });
+    document.execCommand('copy');
+    this.toastrService.info(`Copied. Paste where you want`);
   }
 }

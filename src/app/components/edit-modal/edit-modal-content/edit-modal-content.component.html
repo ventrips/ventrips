@@ -55,6 +55,9 @@
 </div>
 <div class="modal-footer">
     <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'posts')" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
+    <button class="btn btn-primary" (click)="copyToClipboard(data)">
+        Copy JSON
+    </button>
     <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
     type="button" class="btn ml-auto" (click)="activeModal.close({ reason: isNew ? 'create' : 'update', data: data})">
       <span *ngIf="isNew">
