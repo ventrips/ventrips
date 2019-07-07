@@ -1,0 +1,8 @@
+<button class="btn btn-warning btn-md rounded-0 d-block" (click)="open()">
+    <span *ngIf="isNew">
+        <i class="fa fa-plus-circle"></i> Create
+    </span>
+    <span *ngIf="!isNew">
+        <i class="fa fa-pen" ></i> Edit
+    </span>
+</button>

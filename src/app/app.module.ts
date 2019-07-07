@@ -49,6 +49,9 @@ import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
 import { KeysPipe } from './pipes/keys/keys.pipe';
+import { EditModalComponent } from './components/edit-modal/edit-modal.component';
+import { EditModalContentComponent } from './components/edit-modal/edit-modal-content/edit-modal-content.component';
+import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,10 @@ import { KeysPipe } from './pipes/keys/keys.pipe';
     ElementScrollPercentageDirective,
     StripeCheckOutComponent,
     StripeElementsComponent,
-    KeysPipe
+    KeysPipe,
+    EditModalComponent,
+    EditModalContentComponent,
+    EditModalConfirmComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
@@ -96,6 +102,10 @@ import { KeysPipe } from './pipes/keys/keys.pipe';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
+  entryComponents: [
+    EditModalContentComponent,
+    EditModalConfirmComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
