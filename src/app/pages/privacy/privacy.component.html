@@ -1,22 +1,28 @@
-<section class="container-fluid py-3">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="section-heading text-uppercase">Privacy Policy</h1>
-      <p class="text-muted">
-        Similar to many websites, {{environment?.name}} collects non-sensitive information such as the browser type, language preference, referring site, and the date and time of each visitor request using <a href="https://marketingplatform.google.com/about/analytics/" target="_blank">Google Analytics</a>.
-        {{environment?.name}}' purpose in collecting non-sensitive information is to better understand how visitors use its website and how to improve their user experience. {{environment?.name}} may sometimes change its <a [routerLink]="['/privacy']">Privacy Policy</a> from time to time to conform to modern regulations.
-      </p>
-      <h1 class="section-heading text-uppercase">Advertisements</h1>
-      <p class="text-muted">
-        Advertisements displaying on any pages of <a [title]="environment?.url" [href]="environment?.url">{{environment.name}}.com</a> may be provided by its partners.
-        {{environment?.name}}' partners may set cookies to allow advertisement networks to deliver targeted advertisements that they believe will be of most interest to users.
-      </p>
-      <h1 class="section-heading text-uppercase">Affiliate Disclaimer</h1>
-      <p class="text-muted">
-        {{environment?.name}} operates <a title="{{environment?.url}}" [href]="environment?.url">{{environment.name}}.com</a> and is a participant in the <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Services LLC Associates Program</a>.
-        This is an affiliate advertising program that allows sites like this to earn comission fees by advertising and linking products to <a href="https://www.amazon.com/" target="_blank">Amazon.com</a>.
-      </p>
-    </div>
-  </div>
-</section>
-    
+<div class="container-fluid my-3">
+  <app-edit-modal *ngIf="authService?.canEdit(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [string]="['title', 'description']"
+    [quill]="['body']" [date]="[]" [boolean]="[]" [disabled]="[]">
+  </app-edit-modal>
+</div>
+<ng-container *ngIf="!isLoading">
+  <section class="my-5">
+    <ng-container *ngIf="data">
+      <div class="container mb-3">
+        <h1 *ngIf="data?.title">{{data?.title}}</h1>
+      </div>
+      <figure class="mb-3" *ngIf="data?.image">
+        <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
+      </figure>
+      <div class="container mb-3" *ngIf="data?.body">
+        <quill-view-html [content]="data?.body" theme="snow"></quill-view-html>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!data">
+      <div *ngIf="!data" class="text-center my-5">
+        <h1 class="text-uppercase">Sorry!</h1>
+        <p class="text-muted">This page does not exist. Return to
+          <a class="text-warning" [routerLink]="['/']">Home</a>
+        </p>
+      </div>
+    </ng-container>      
+  </section>
+</ng-container>
