@@ -6,10 +6,62 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="modal-body">
-    <pre>{{data | json}}</pre>
+<div class="modal-body row">
+    <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-xs-12 col-md-6': !isLast}" *ngFor="let key of keys; last as isLast">
+        <h4 class="text-capitalize mb-2">{{_.startCase(key)}}</h4>
+        <div class="mb-3">
+            <ng-container *ngIf="_.includes(string, key)" >
+                <div class="input-group custom-input-group mb-3">
+                    <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa"
+                            [ngClass]="{ 'fa-check text-success': !_.isEmpty(data[key]), 'fa-asterisk text-danger': _.isEmpty(data[key]) }"></i>
+                        </span>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_.includes(quill, key)">
+                <quill-editor [(ngModel)]="data[key]" [disabled]="isDisabled(key)"></quill-editor>
+            </ng-container>
+            <ng-container *ngIf="_.includes(date, key)">
+                <div class="input-group custom-input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                            name="datePicker" [(ngModel)]="data[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [disabled]="isDisabled(key)">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <i class="fa"
+                            [ngClass]="{ 'fa-check text-success': _.isDate(data[key].toDate()), 'fa-asterisk text-danger': !_.isDate(data[key].toDate()) }"></i>
+                        </div>            
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_.includes(boolean, key)" >
+                <div class="form-check d-inline-block cursor-pointer mr-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="data[key]" [disabled]="isDisabled(key)" checked>
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check d-inline-block cursor-pointer">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="data[key]" [disabled]="isDisabled(key)">
+                        No
+                    </label>
+                </div>
+            </ng-container>    
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
-    <button *ngIf="!isNew && authService.canEdit(data, data?.uid)" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
-    <button type="button" class="btn btn-outline-dark ml-auto" (click)="activeModal.close('Close click')">Close</button>
+    <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'posts')" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
+    <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
+    type="button" class="btn ml-auto" (click)="activeModal.close({ reason: isNew ? 'create' : 'update', data: data})">
+      <span *ngIf="isNew">
+        <i class="fa fa-plus-circle"></i> Create
+      </span>
+      <span *ngIf="!isNew">
+        <i class="fa fa-save"></i> Update
+      </span>
+    </button>
 </div>

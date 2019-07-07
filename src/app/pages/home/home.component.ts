@@ -79,6 +79,7 @@ export class HomeComponent implements OnInit {
   public isLoading = true;
   public _ = _;
   public user: User;
+  public newPost = _.assign({}, new Post());
 
   constructor(
     private afs: AngularFirestore,

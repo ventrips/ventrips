@@ -20,7 +20,17 @@
       <div class="d-flex flex-wrap">
         <div class="my-4">
           <!-- Create New -->
-          <app-edit-mode *ngIf="authService?.canEdit(user)" [isNew]="true"></app-edit-mode>
+          <app-edit-modal *ngIf="authService?.canEdit(user)"
+            [collection]="'posts'"
+            [id]="post?.slug"
+            [data]="newPost"
+            [isNew]="true"
+            [string]="['slug', 'topic', 'title', 'description', 'image']"
+            [quill]="['body']"
+            [date]="[]"
+            [boolean]="['publish']"
+            [disabled]="['slug']">
+          </app-edit-modal>
         </div>
         <div class="ml-auto my-4 align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
           <div ngbDropdown class="d-inline-block mb-5">
@@ -61,7 +71,17 @@
                 <div class="col py-3">
                   <h2 class="d-sm-flex flex-wrap">
                     <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-                    <app-edit-mode class="mb-2 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)" [post]="post" [isNew]="false"></app-edit-mode>
+                    <app-edit-modal class="mb-2 ml-auto" *ngIf="authService?.canEdit(user)"
+                      [collection]="'posts'"
+                      [id]="post?.slug"
+                      [data]="post"
+                      [isNew]="false"
+                      [string]="['slug', 'topic', 'title', 'description', 'image']"
+                      [quill]="['body']"
+                      [date]="[]"
+                      [boolean]="['publish']"
+                      [disabled]="['slug']">
+                    </app-edit-modal>        
                   </h2>
                   <div class="h5">
                     <div class="mb-3">

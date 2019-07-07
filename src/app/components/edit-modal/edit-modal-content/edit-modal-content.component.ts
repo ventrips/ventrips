@@ -11,8 +11,18 @@ import * as _ from 'lodash';
   styleUrls: ['./edit-modal-content.component.scss']
 })
 export class EditModalContentComponent implements OnInit {
+  @Input() collection: string;
+  @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
+  @Input() string = [];
+  @Input() quill = [];
+  @Input() date = [];
+  @Input() boolean = [];
+  @Input() disabled = [];
+  public _ = _;
+  public keys = [];
+  public user;
 
   constructor(
     private modalService: NgbModal,
@@ -21,18 +31,48 @@ export class EditModalContentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => {
+      this.user = user
+      // this.keys = _.keys(this.data);
+      this.keys = _.concat(this.string, this.quill, this.date, this.boolean);
+      this.keys = _.orderBy(
+        _.concat(this.string, this.quill, this.date, this.boolean),
+        [(key) => _.includes(this.quill, key)], ['asc']
+      );
+    });
+  }
+
+  isDisabled(key: string) {
+    if (_.get(this.user, ['roles', 'admin']) && !_.isEqual(key, 'slug')) {
+      return false;
+    }
+
+    return !this.isNew && _.includes(this.disabled, key);
+  }
+
+  isValid() {
+    return _.every(this.keys, (key) => {
+      if (_.includes(this.date, key)) {
+        return _.isDate(_.get(this.data, [key]).toDate());
+      }
+      if (_.includes(this.boolean, key)) {
+        return true;
+      }
+      return !_.isEmpty(this.data[key]);
+    });
   }
 
   delete() {
+    if (!this.authService.canEdit(this.user, _.get(this.data, ['uid']))) {
+      return;
+    }
     const modalRef = this.modalService.open(EditModalConfirmComponent);
     modalRef.componentInstance.title = `Delete`;
     modalRef.componentInstance.body = `Are you sure you want to delete?`;
-    modalRef.result.then((result?) => {
-      if (_.isEqual(result, 'delete')) {
-        this.activeModal.close(result);
+    modalRef.result.then((reason?) => {
+      if (_.isEqual(reason, 'delete')) {
+        this.activeModal.close({ reason: 'delete', data: this.data });
       }
-    }, (reason?) => {
-
-    });
+    }, (reason?) => {});
   }
 }

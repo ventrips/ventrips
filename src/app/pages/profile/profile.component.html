@@ -2,6 +2,17 @@
     <ng-container *ngIf="!isLoading">
         <ng-container *ngIf="profile">
             <div class="container my-5">
+                <app-edit-modal *ngIf="authService?.canEdit(user)"
+                    [collection]="'users'"
+                    [id]="profile?.uid"
+                    [data]="profile"
+                    [isNew]="false"
+                    [string]="[]"
+                    [quill]="['bio']"
+                    [date]="[]"
+                    [boolean]="[]"
+                    [disabled]="[]">
+                </app-edit-modal>
                 <div class="d-flex flex-wrap align-items-center mb-3">
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">        
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
@@ -20,8 +31,8 @@
                 <hr/>
                 <!-- Profile -->
                 <section>
-                    <p *ngIf="profile?.profile?.bio" [innerHTML]="profile?.profile?.bio"></p>
-                    <p class="text-center font-weight-light text-muted" *ngIf="!profile?.profile?.bio">{{profile?.displayName}} has no profile information</p>
+                    <p *ngIf="profile?.bio" [innerHTML]="profile?.bio"></p>
+                    <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
                 </section>
             </div>
         </ng-container>

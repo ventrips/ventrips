@@ -3,7 +3,17 @@
     <ng-container *ngIf="post">
       <div class="container my-5">
         <div class="mb-3">
-          <app-edit-mode *ngIf="authService?.canEdit(user)" [post]="post" [isNew]="false"></app-edit-mode>
+            <app-edit-modal *ngIf="authService?.canEdit(user)"
+              [collection]="'posts'"
+              [id]="post?.slug"
+              [data]="post"
+              [isNew]="false"
+              [string]="['slug', 'topic', 'title', 'description', 'image']"
+              [quill]="['body']"
+              [date]="[]"
+              [boolean]="['publish']"
+              [disabled]="['slug']">
+            </app-edit-modal>
         </div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0">
