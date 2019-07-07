@@ -8,7 +8,7 @@ service cloud.firestore {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }
       allow read, create;
-      allow update, delete: if getRole('admin') == true || getRole('editor') == true;
+      allow update: if getRole('admin') == true || getRole('editor') == true;
     }
 		match /posts/{document} {
       function getRole(role) {

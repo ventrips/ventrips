@@ -66,10 +66,11 @@ export class EditModalComponent implements OnInit {
       if (_.isEqual(this.collection, 'posts')) {
         result.data.modified = firestore.Timestamp.fromDate(new Date());
       }
-      if (_.isEqual(result.reason, 'delete')) {
+      if (_.isEqual(result.reason, 'delete') && _.isEqual(this.collection, 'posts')) {
         this.afs.collection(this.collection).doc(this.id).delete().
         then(success => {
           this.toastrService.success(`Item has been deleted.`, 'Delete Success!');
+          this.router.navigate(['']);
         }).catch(error => {
           this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
         });
