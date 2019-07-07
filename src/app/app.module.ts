@@ -85,7 +85,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
-    QuillModule,
+    QuillModule.forRoot(),
     NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
