@@ -4,8 +4,8 @@ import * as _ from 'lodash';
 
 admin.initializeApp();
 const db = admin.firestore();
-import * as Stripe from 'stripe';
-const stripe = new Stripe(functions.config().stripe.secret);
+// import * as Stripe from 'stripe';
+// const stripe = new Stripe(functions.config().stripe.secret);
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -20,56 +20,56 @@ export const angularUniversalFunction = functions.https.onRequest(universal);
 export const createStripeCustomer = functions.firestore
 .document('users/{uid}')
 .onCreate(async snap => {
-    const customer = await stripe.customers.create({
-        metadata: { firebaseUID: snap.data()!.uid }
-    });
+    // const customer = await stripe.customers.create({
+    //     metadata: { firebaseUID: snap.data()!.uid }
+    // });
     return db.doc(`users/${snap.data()!.uid}`).update({
-        stripeId: _.get(customer, ['id']),
+        // stripeId: _.get(customer, ['id']),
         joined: admin.firestore.FieldValue.serverTimestamp()
     });
 });
 
-export const createStripeCheckOutCharge = functions.https.onCall(
-    async (data, context) => {
-        // data is the data passed to the call by the client
+// export const createStripeCheckOutCharge = functions.https.onCall(
+//     async (data, context) => {
+//         // data is the data passed to the call by the client
 
-        // authentication is done this way
-        if (!context.auth) return { status: 'error', code: 401, title: 'Authentication error',  message: 'Not signed in'};
+//         // authentication is done this way
+//         if (!context.auth) return { status: 'error', code: 401, title: 'Authentication error',  message: 'Not signed in'};
 
-        if (!data.source) {
-            return { status: 'error', code: 500, title: 'Server error',  message: 'Failed to attach source ID to card'}
-        }
+//         if (!data.source) {
+//             return { status: 'error', code: 500, title: 'Server error',  message: 'Failed to attach source ID to card'}
+//         }
 
-        // context has useful info such as:
-        const userId = _.get(context, ['auth', 'uid']); // the uid of the authenticated user
-        // const email = context.auth.token.email // email of the authenticated user
-        const userDoc = await db.doc(`users/${userId}`).get();
-        const user = userDoc.data() || {};
+//         // context has useful info such as:
+//         const userId = _.get(context, ['auth', 'uid']); // the uid of the authenticated user
+//         // const email = context.auth.token.email // email of the authenticated user
+//         const userDoc = await db.doc(`users/${userId}`).get();
+//         const user = userDoc.data() || {};
 
-        let stripeId = _.get(user, ['stripeId']);
-        // Create new stripe Id if doesn't exist for any reason
-        if (!stripeId) {
-            const customer = await stripe.customers.create({
-                metadata: { firebaseUID: userId }
-            });
-            stripeId = _.get(customer, ['id']);
-        }
+//         let stripeId = _.get(user, ['stripeId']);
+//         // Create new stripe Id if doesn't exist for any reason
+//         if (!stripeId) {
+//             const customer = await stripe.customers.create({
+//                 metadata: { firebaseUID: userId }
+//             });
+//             stripeId = _.get(customer, ['id']);
+//         }
     
-        const charge = await stripe.charges.create({
-            customer: stripeId,
-            source: _.get(data, ['source']),
-            amount: _.get(data, ['amount']),
-            description: _.get(data, ['description']),
-            currency: 'usd'
-        })
+//         const charge = await stripe.charges.create({
+//             customer: stripeId,
+//             source: _.get(data, ['source']),
+//             amount: _.get(data, ['amount']),
+//             description: _.get(data, ['description']),
+//             currency: 'usd'
+//         })
 
-        // Update user document
-        return db.doc(`users/${userId}`).update({
-            status: charge,
-            stripeId: stripeId
-        })
-    }
-)
+//         // Update user document
+//         return db.doc(`users/${userId}`).update({
+//             status: charge,
+//             stripeId: stripeId
+//         })
+//     }
+// )
 
 // export const startSubscription = functions.https.onCall(
 //     async (data, context) => {
