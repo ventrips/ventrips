@@ -1,20 +1,20 @@
+<div class="container-fluid my-3">
+  <app-edit-modal *ngIf="authService?.canEdit(user)"
+    [collection]="'posts'"
+    [id]="post?.slug"
+    [data]="post"
+    [isNew]="false"
+    [string]="['slug', 'topic', 'title', 'description', 'image']"
+    [quill]="['body']"
+    [date]="[]"
+    [boolean]="['publish']"
+    [disabled]="['slug']">
+  </app-edit-modal>
+</div>
 <section [@enter]>
   <ng-container *ngIf="!isLoading">
     <ng-container *ngIf="post">
       <div class="container my-5">
-        <div class="mb-3">
-            <app-edit-modal *ngIf="authService?.canEdit(user)"
-              [collection]="'posts'"
-              [id]="post?.slug"
-              [data]="post"
-              [isNew]="false"
-              [string]="['slug', 'topic', 'title', 'description', 'image']"
-              [quill]="['body']"
-              [date]="[]"
-              [boolean]="['publish']"
-              [disabled]="['slug']">
-            </app-edit-modal>
-        </div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white p-0">
             <li class="breadcrumb-item">

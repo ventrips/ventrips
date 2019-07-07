@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { firestore } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
@@ -51,7 +51,12 @@ export class EditModalComponent implements OnInit {
   }
 
   open() {
-    const modalRef = this.modalService.open(EditModalContentComponent);
+    const modalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
+      windowClass: 'modal-100'
+    }
+    const modalRef = this.modalService.open(EditModalContentComponent, modalOptions);
     modalRef.componentInstance.collection = this.collection;
     modalRef.componentInstance.id = this.id;
     modalRef.componentInstance.data = _.assign({}, this.data);

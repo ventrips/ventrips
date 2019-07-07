@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { EditModalConfirmComponent } from '../edit-modal-confirm/edit-modal-confirm.component';
@@ -66,7 +66,11 @@ export class EditModalContentComponent implements OnInit {
     if (!this.authService.canEdit(this.user, _.get(this.data, ['uid']))) {
       return;
     }
-    const modalRef = this.modalService.open(EditModalConfirmComponent);
+    const modalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false
+    }
+    const modalRef = this.modalService.open(EditModalConfirmComponent, modalOptions);
     modalRef.componentInstance.title = `Delete`;
     modalRef.componentInstance.body = `Are you sure you want to delete?`;
     modalRef.result.then((reason?) => {
