@@ -15,11 +15,7 @@ export class EditModalContentComponent implements OnInit {
   @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
-  @Input() string = [];
-  @Input() quill = [];
-  @Input() date = [];
-  @Input() boolean = [];
-  @Input() disabled = [];
+  @Input() inputsConfig = {};
   public _ = _;
   public keys = [];
   public user;
@@ -34,11 +30,16 @@ export class EditModalContentComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.user = user
       // this.keys = _.keys(this.data);
-      this.keys = _.concat(this.string, this.quill, this.date, this.boolean);
       this.keys = _.orderBy(
-        _.concat(this.string, this.quill, this.date, this.boolean),
-        [(key) => _.includes(this.quill, key)], ['asc']
+        _.concat(
+          _.get(this.inputsConfig, ['string']),
+          _.get(this.inputsConfig, ['quill']),
+          _.get(this.inputsConfig, ['date']),
+          _.get(this.inputsConfig, ['boolean'])
+        ),
+        [(key) => _.includes(_.get(this.inputsConfig, ['quill']), key)], ['asc']
       );
+      console.log(this.keys);
     });
   }
 
@@ -47,15 +48,15 @@ export class EditModalContentComponent implements OnInit {
       return false;
     }
 
-    return !this.isNew && _.includes(this.disabled, key);
+    return !this.isNew && _.includes(_.get(this.inputsConfig, ['disabled']), key);
   }
 
   isValid() {
     return _.every(this.keys, (key) => {
-      if (_.includes(this.date, key)) {
+      if (_.includes(_.get(this.inputsConfig, ['date']), key)) {
         return _.isDate(_.get(this.data, [key]).toDate());
       }
-      if (_.includes(this.boolean, key)) {
+      if (_.includes(_.get(this.inputsConfig, ['boolean']), key)) {
         return true;
       }
       return !_.isEmpty(this.data[key]);

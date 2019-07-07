@@ -27,6 +27,13 @@ const HOME_KEY = makeStateKey<any>('home');
   ]
 })
 export class HomeComponent implements OnInit {
+  public inputsConfig = {
+    string: ['slug', 'topic', 'title', 'description', 'image'],
+    quill: ['body'],
+    date: [],
+    boolean: ['publish'],
+    disabled: ['slug']
+  };
   public environment = environment;
   public orderByOptions: Array<any> = [
     {

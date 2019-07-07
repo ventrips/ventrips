@@ -18,11 +18,7 @@ export class EditModalComponent implements OnInit {
   @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
-  @Input() string = [];
-  @Input() quill = [];
-  @Input() date = [];
-  @Input() boolean = [];
-  @Input() disabled = [];
+  @Input() inputsConfig = {};
   public user;
 
   constructor(
@@ -61,11 +57,10 @@ export class EditModalComponent implements OnInit {
     modalRef.componentInstance.id = this.id;
     modalRef.componentInstance.data = _.assign({}, this.data);
     modalRef.componentInstance.isNew = this.isNew; 
-    modalRef.componentInstance.string = this.string;
-    modalRef.componentInstance.quill = this.quill;
-    modalRef.componentInstance.date = this.date;
-    modalRef.componentInstance.boolean = this.boolean;
-    modalRef.componentInstance.disabled = this.disabled;
+    modalRef.componentInstance.inputsConfig = this.inputsConfig;
+  
+  
+  
   
     modalRef.result.then((result?) => {
       if (_.isEqual(this.collection, 'posts')) {

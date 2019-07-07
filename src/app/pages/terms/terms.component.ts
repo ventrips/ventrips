@@ -20,6 +20,13 @@ const PAGE_KEY = makeStateKey<any>(ID);
   styleUrls: ['./terms.component.scss']
 })
 export class TermsComponent implements OnInit {
+  public inputsConfig = {
+    string: ['title', 'description'],
+    quill: ['body'],
+    date: [],
+    boolean: [],
+    disabled: []
+  };
   public _ = _;
   public environment = environment;
   public isLoading = true;

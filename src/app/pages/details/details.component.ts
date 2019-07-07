@@ -26,6 +26,13 @@ const DETAILS_KEY = makeStateKey<any>('details');
   ]
 })
 export class DetailsComponent implements OnInit {
+  public inputsConfig = {
+    string: ['slug', 'topic', 'title', 'description', 'image'],
+    quill: ['body'],
+    date: [],
+    boolean: ['publish'],
+    disabled: ['slug']
+  };
   public post: Post;
   public posts: Array<Post>;
   public slug: string;

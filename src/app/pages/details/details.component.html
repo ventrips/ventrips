@@ -4,11 +4,7 @@
     [id]="post?.slug"
     [data]="post"
     [isNew]="false"
-    [string]="['slug', 'topic', 'title', 'description', 'image']"
-    [quill]="['body']"
-    [date]="[]"
-    [boolean]="['publish']"
-    [disabled]="['slug']">
+    [inputsConfig]="inputsConfig">
   </app-edit-modal>
 </div>
 <section [@enter]>

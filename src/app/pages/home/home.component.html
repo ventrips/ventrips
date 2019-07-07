@@ -25,11 +25,7 @@
             [id]="post?.slug"
             [data]="newPost"
             [isNew]="true"
-            [string]="['slug', 'topic', 'title', 'description', 'image']"
-            [quill]="['body']"
-            [date]="[]"
-            [boolean]="['publish']"
-            [disabled]="['slug']">
+            [inputsConfig]="inputsConfig">
           </app-edit-modal>
         </div>
         <div class="ml-auto my-4 align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
@@ -76,12 +72,8 @@
                       [id]="post?.slug"
                       [data]="post"
                       [isNew]="false"
-                      [string]="['slug', 'topic', 'title', 'description', 'image']"
-                      [quill]="['body']"
-                      [date]="[]"
-                      [boolean]="['publish']"
-                      [disabled]="['slug']">
-                    </app-edit-modal>        
+                      [inputsConfig]="inputsConfig">
+                    </app-edit-modal>
                   </h2>
                   <div class="h5">
                     <div class="mb-3">

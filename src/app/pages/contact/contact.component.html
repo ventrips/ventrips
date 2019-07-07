@@ -1,7 +1,5 @@
 <div class="container-fluid my-3">
-  <app-edit-modal *ngIf="authService?.canEdit(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [string]="['title', 'description']"
-    [quill]="['body']" [date]="[]" [boolean]="[]" [disabled]="[]">
-  </app-edit-modal>
+  <app-edit-modal *ngIf="authService?.canEdit(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-modal>
 </div>
 <ng-container *ngIf="!isLoading">
   <section class="my-5">

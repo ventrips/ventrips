@@ -1,18 +1,16 @@
+<div class="container-fluid my-3">
+    <app-edit-modal *ngIf="authService?.canEdit(user)"
+        [collection]="'users'"
+        [id]="profile?.uid"
+        [data]="profile"
+        [isNew]="false"
+        [inputsConfig]="inputsConfig">
+    </app-edit-modal>
+</div>
 <section>
     <ng-container *ngIf="!isLoading">
         <ng-container *ngIf="profile">
             <div class="container my-5">
-                <app-edit-modal *ngIf="authService?.canEdit(user)"
-                    [collection]="'users'"
-                    [id]="profile?.uid"
-                    [data]="profile"
-                    [isNew]="false"
-                    [string]="[]"
-                    [quill]="['bio']"
-                    [date]="[]"
-                    [boolean]="[]"
-                    [disabled]="[]">
-                </app-edit-modal>
                 <div class="d-flex flex-wrap align-items-center mb-3">
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">        
                     <h1 class="mb-0">{{profile?.displayName}}</h1>

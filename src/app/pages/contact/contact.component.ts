@@ -20,6 +20,13 @@ const PAGE_KEY = makeStateKey<any>(ID);
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  public inputsConfig = {
+    string: ['title', 'description'],
+    quill: ['body'],
+    date: [],
+    boolean: [],
+    disabled: []
+  };
   public _ = _;
   public environment = environment;
   public isLoading = true;

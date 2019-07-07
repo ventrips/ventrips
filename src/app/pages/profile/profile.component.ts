@@ -14,13 +14,19 @@ import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 
 const DETAILS_KEY = makeStateKey<any>('profile');
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  public inputsConfig = {
+    string: [],
+    quill: ['bio'],
+    date: [],
+    boolean: [],
+    disabled: []
+  };
   public uid: string;
   public profile: User;
   public isLoading = true;
