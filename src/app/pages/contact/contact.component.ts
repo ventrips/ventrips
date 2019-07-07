@@ -6,11 +6,14 @@ import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SeoService } from '../../services/seo/seo.service';
+import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
+import { User } from '../../interfaces/user';
 import * as _ from 'lodash';
 
-const CONTACT_KEY = makeStateKey<any>('contact');
-
+const ID = 'contact';
+const COLLECTION = 'pages';
+const PAGE_KEY = makeStateKey<any>(ID);
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -19,31 +22,53 @@ const CONTACT_KEY = makeStateKey<any>('contact');
 export class ContactComponent implements OnInit {
   public _ = _;
   public environment = environment;
+  public isLoading = true;
   public data: any;
+  public collection = COLLECTION;
+  public id = ID;
+  public user: User;
 
   constructor(
     private afs: AngularFirestore,
     private seoService: SeoService,
     private router: ActivatedRoute,
     private transferState: TransferState,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
-    const id = `contact`;
+    this.authService.user$.subscribe(user => this.user = user);
+
     this.spinner.show();
-    this.ssrFirestoreDoc(`pages/${id}`).subscribe(response => {
-      this.data = response;
+    this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
+    .subscribe(response => {
+      if (!_.isEmpty(response) && !_.isNil(response)) {
+        this.data = response;
+        this.seoService.setMetaTags({
+          title: this.data.title,
+          description: this.data.body
+        });
+      }
       this.spinner.hide();
-    });
+      this.isLoading = false;
+    }, () => {
+        this.spinner.hide();
+        this.isLoading = false;
+        this.seoService.setMetaTags({
+          title: `Sorry! This page does not exist`,
+          description: `Return to home`
+        });
+    })
   }
+  
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(CONTACT_KEY, {} as any);
+    const exists = this.transferState.get(PAGE_KEY, {} as any);
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(CONTACT_KEY, page);
+        this.transferState.set(PAGE_KEY, page);
         this.seoService.setMetaTags({
           title: page.title,
           description: page.description,
@@ -53,4 +78,5 @@ export class ContactComponent implements OnInit {
       startWith(exists)
     );
   }
+
 }

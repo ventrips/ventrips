@@ -11,7 +11,9 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router
-  ) {}
+  ) {
+    this.setMetaTags();
+  }
 
   setMetaTags(config?: any) {
     // Default Metatags if not set
