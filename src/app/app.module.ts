@@ -13,6 +13,7 @@ import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
 import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
 import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
+import { KeysPipe } from './pipes/keys/keys.pipe';
 
 // Directives
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
@@ -45,10 +46,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
-import { KeysPipe } from './pipes/keys/keys.pipe';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
 import { EditModalContentComponent } from './components/edit-modal/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
@@ -70,7 +69,6 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
     FooterComponent,
     DetailsComponent,
     ProfileComponent,
-    EditModeComponent,
     ElementScrollPercentageDirective,
     StripeCheckOutComponent,
     StripeElementsComponent,
