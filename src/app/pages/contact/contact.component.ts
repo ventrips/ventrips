@@ -45,9 +45,9 @@ export class ContactComponent implements OnInit {
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;
+        this.spinner.hide();
+        this.isLoading = false;
       }
-      this.spinner.hide();
-      this.isLoading = false;  
     }, () => {
         this.spinner.hide();
         this.isLoading = false;
@@ -61,11 +61,14 @@ export class ContactComponent implements OnInit {
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
         this.transferState.set(PAGE_KEY, page);
-        this.seoService.setMetaTags({
-          title: page.title,
-          description: page.description,
-          image: page.image
-        });
+        const metaTags = {};
+        const title = _.get(page, ['title']);
+        const description = _.get(page, ['description']);
+        const image = _.get(page, ['image']);
+        if (!_.isEmpty(title)) { metaTags['title'] = title; }
+        if (!_.isEmpty(description)) { metaTags['description'] = description; }
+        if (!_.isEmpty(image)) { metaTags['image'] = image; }
+        this.seoService.setMetaTags(metaTags);
       }),
       startWith(exists)
     );
