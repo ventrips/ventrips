@@ -49,9 +49,12 @@ export class AboutComponent implements OnInit {
           title: this.data.title,
           description: this.data.body
         });
+        this.spinner.hide();
+        this.isLoading = false;
+      } else {
+        this.spinner.hide();
+        this.isLoading = false;  
       }
-      this.spinner.hide();
-      this.isLoading = false;
     }, () => {
         this.spinner.hide();
         this.isLoading = false;
