@@ -54,22 +54,13 @@ export class DetailsComponent implements OnInit {
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
-        this.seoService.setMetaTags({
-          title: this.post.title,
-          description: this.post.description,
-          image: this.post.image
-        });
         this.spinner.hide();
         this.isLoading = false;
       }
     }, () => {
       this.spinner.hide();
       this.isLoading = false;
-      this.seoService.setMetaTags({
-        title: `Sorry! This page does not exist`,
-        description: `Return to home`
-      });
-  });
+    });
   }
 
   byPassHTML(html: string) {

@@ -95,7 +95,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
       preventDuplicates: true
     }),
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
-    AngularFirestoreModule.enablePersistence(), // enables caching of firebase data
+    // AngularFirestoreModule.enablePersistence(), // enables caching of firebase data
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireFunctionsModule, // imports firebase/functions only needed for functions features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features

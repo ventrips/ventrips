@@ -45,20 +45,12 @@ export class ContactComponent implements OnInit {
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;
-        this.seoService.setMetaTags({
-          title: this.data.title,
-          description: this.data.description
-        });
       }
       this.spinner.hide();
       this.isLoading = false;  
     }, () => {
         this.spinner.hide();
         this.isLoading = false;
-        this.seoService.setMetaTags({
-          title: `Sorry! This page does not exist`,
-          description: `Return to home`
-        });
     })
   }
   

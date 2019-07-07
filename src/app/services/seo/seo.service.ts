@@ -11,9 +11,7 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router
-  ) {
-    this.setMetaTags();
-  }
+  ) {}
 
   setMetaTags(config?: any) {
     // Default Metatags if not set
@@ -27,6 +25,7 @@ export class SeoService {
     };
 
     config.title = `${config.title} - ${_.startCase(environment.name)}`;
+    console.log(config.description);
 
     // Set HTML Document Title
     this.title.setTitle(config.title);

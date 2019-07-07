@@ -95,11 +95,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
-
-    this.seoService.setMetaTags({
-      title: `Ventrips - Dedicated to providing latest news and trends`,
-      description: `Search for articles`
-    });
     this.activatedRoute.queryParams.subscribe(params => {
       this.searchTerm = params.query;
     });
@@ -142,6 +137,10 @@ export class HomeComponent implements OnInit {
     return this.afs.collection<any>(path).valueChanges().pipe(
       tap(page => {
         this.transferState.set(HOME_KEY, page);
+        this.seoService.setMetaTags({
+          title: `Ventrips - Dedicated to providing latest news and trends`,
+          description: `Search for articles`
+        });
       }),
       startWith(exists)
     );

@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   onActivate(event) {
     if (isPlatformServer(this.platformId)) { return; }
     window.scrollTo(0, 0);
-    this.seoService.setMetaTags();
   }
 
   ngOnInit() {
