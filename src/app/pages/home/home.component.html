@@ -1,5 +1,5 @@
 <section>
-  <section class="sticky-top bg-white box-shadow mb-5">
+  <section class="sticky-top bg-white box-shadow mb-4">
     <div class="container-fluid border-bottom py-3">
       <div class="input-group">
         <input type="text" id="typeahead-config" class="form-control form-control rounded-0" aria-label="Search for posts" placeholder="Search for posts"
@@ -18,7 +18,7 @@
   <section *ngIf="!isLoading">
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
-        <div class="my-4">
+        <div class="my-3">
           <!-- Create New -->
           <app-edit-modal *ngIf="authService?.canEdit(user)"
             [collection]="'posts'"
@@ -28,8 +28,8 @@
             [inputsConfig]="inputsConfig">
           </app-edit-modal>
         </div>
-        <div class="ml-auto my-4 align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
-          <div ngbDropdown class="d-inline-block mb-5">
+        <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
+          <div ngbDropdown class="d-inline-block">
             <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
               {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
             </button>
@@ -40,7 +40,7 @@
               </button>
             </div>
           </div>
-          <p class="h5 text-dark text-capitalize text-right">{{(posts | searchBy: searchTerm).length}} Results</p>
+          <p class="h5 my-3 text-dark text-capitalize text-right">{{(posts | searchBy: searchTerm).length}} Results</p>
         </div>
       </div>
     </div>
