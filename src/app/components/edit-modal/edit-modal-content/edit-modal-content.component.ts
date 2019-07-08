@@ -169,7 +169,7 @@ export class EditModalContentComponent implements OnInit {
    */
   saveToServer(file: File, inputKey?: string) {
     // The storage path
-    const path = `${this.collection}/${this.id}/${Date.now()}-${file.name}`;
+    const path = `${this.collection}/${this.id}/${file.name}`;
 
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
