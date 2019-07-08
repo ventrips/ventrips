@@ -169,13 +169,16 @@ export class EditModalContentComponent implements OnInit {
    */
   saveToServer(file: File, inputKey?: string) {
     // The storage path
-    const path = `files/${Date.now()}_${file.name}`;
+    const path = `${this.collection}/${this.id}/${file.name}-${Date.now()}`;
 
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
 
+    // Totally optional metadata
+    const customMetadata = { cacheControl: "public, max-age=31536000" };
+
     // The main task
-    this.task = this.afStorage.upload(path, file);
+    this.task = this.afStorage.upload(path, file, { customMetadata });
 
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
