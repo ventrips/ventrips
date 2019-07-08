@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'posts/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
-      { path: 'contact', component: ContactComponent, canActivate: [SubscriberGuard] },
+      { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PrivacyComponent },
       { path: 'terms', component: TermsComponent },
       { path: 'about', component: AboutComponent },
