@@ -25,6 +25,11 @@ export const createStripeCustomer = functions.firestore
     // });
     return db.doc(`users/${snap.data()!.uid}`).update({
         // stripeId: _.get(customer, ['id']),
+        roles: {
+            admin: false,
+            editor: false,
+            subscriber: false,
+        },
         joined: admin.firestore.FieldValue.serverTimestamp()
     });
 });

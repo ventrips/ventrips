@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 /* Guards */
 import { AdminGuard } from './guards/admin/admin.guard';
 import { EditorGuard } from './guards/editor/editor.guard';
+import { SubscriberGuard } from './guards/subscriber/subscriber.guard';
 
 /* Pages */
 import { HomeComponent } from './pages/home/home.component';
@@ -22,7 +23,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'posts/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
-      { path: 'contact', component: ContactComponent },
+      { path: 'contact', component: ContactComponent, canActivate: [SubscriberGuard] },
       { path: 'privacy', component: PrivacyComponent },
       { path: 'terms', component: TermsComponent },
       { path: 'about', component: AboutComponent },

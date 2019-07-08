@@ -10,6 +10,7 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
 import * as _ from 'lodash';
+import { InputsConfig } from '../../interfaces/inputs-config';
 
 const ID = 'contact';
 const COLLECTION = 'pages';
@@ -20,7 +21,7 @@ const PAGE_KEY = makeStateKey<any>(ID);
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  public inputsConfig = {
+  public inputsConfig: InputsConfig = {
     string: ['title', 'description'],
     url: [],
     quill: ['body'],

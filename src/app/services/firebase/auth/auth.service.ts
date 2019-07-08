@@ -77,9 +77,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      roles: {
-        subscriber: true
-      },
+      roles: {},
       lastActive: firestore.Timestamp.fromDate(new Date())
     }
     return userRef.set(data, { merge: true })
