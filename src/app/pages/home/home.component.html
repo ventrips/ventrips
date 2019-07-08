@@ -56,14 +56,14 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | filterBy: 'publish':true:user | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-xs-12 col-md-3 text-center align-self-center post-thumbnail" [@enter]>
                   <a [routerLink]="['/posts', post?.slug]">
                     <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
                   </a>
                 </div>
-                <div class="col py-3">
-                  <h2 class="d-sm-flex flex-wrap">
+                <div class="col pb-3">
+                  <h1 class="h3 d-sm-flex flex-wrap">
                     <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
                     <app-edit-modal class="mb-2 ml-auto" *ngIf="authService?.canEdit(user)"
                       [collection]="'posts'"
@@ -72,20 +72,22 @@
                       [isNew]="false"
                       [inputsConfig]="inputsConfig">
                     </app-edit-modal>
-                  </h2>
-                  <div class="h5">
-                    <div class="mb-3">
-                      <a [routerLink]="['/profile', post?.uid]" class="mr-3">
-                        <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                  </h1>
+                  <section class="h5">
+                      <div class="mb-2">
+                        <a [routerLink]="['/profile', post?.uid]" class="mr-3">
+                          <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                        </a>
+                        <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                        <p class="text-secondary mb-2 d-inline-block">{{post?.modified?.toDate() | timeAgo}}</p>    
+                      </div>
+                      <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
+                          {{post?.description}}
+                      </p>
+                      <a [routerLink]="['']" [queryParams]="{ query: post?.category }" class="mb-2">
+                        <h2 class="badge badge-dark text-uppercase rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
                       </a>
-                      <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                      <p class="text-secondary mb-0 d-inline-block">{{post?.modified?.toDate() | timeAgo}}</p>
-                    </div>
-                    <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
-                        {{post?.description}}
-                    </p>
-                    <p class="text-secondary d-inline-block mb-2">Category: <a [routerLink]="['']" [queryParams]="{ query: post?.category }" class="text-uppercase text-dark" [innerHTML]="post?.category | searchHighlight: searchTerm"></a></p>
-                  </div>
+                  </section>
                 </div>
               </div>
           </div>          
