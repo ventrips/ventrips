@@ -29,7 +29,7 @@
                 <hr/>
                 <!-- Profile -->
                 <section>
-                    <p *ngIf="profile?.bio" [innerHTML]="profile?.bio | sanitizeHtml"></p>
+                    <p *ngIf="profile?.bio" [innerHTML]="profile?.bio"></p>
                     <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
                 </section>
             </div>
