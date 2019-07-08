@@ -17,7 +17,8 @@ import { User } from '../../interfaces/user';
 import { flipInXOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
-const HOME_KEY = makeStateKey<any>('home');
+const COLLECTION = 'posts';
+const PAGE_KEY = makeStateKey<any>('home');
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -89,6 +90,7 @@ export class HomeComponent implements OnInit {
   public _ = _;
   public user: User;
   public newPost = _.assign({}, new Post());
+  public collection = COLLECTION;
 
   constructor(
     private afs: AngularFirestore,
@@ -108,7 +110,7 @@ export class HomeComponent implements OnInit {
       this.searchTerm = params.query;
     });
     this.spinner.show();
-    this.ssrFirestoreCollection('posts').subscribe(response => {
+    this.ssrFirestoreCollection(this.collection).subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = response;
         // Adding Search Options
@@ -141,11 +143,11 @@ export class HomeComponent implements OnInit {
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreCollection(path: string) {
-    const exists = this.transferState.get(HOME_KEY, {} as any);
+    const exists = this.transferState.get(PAGE_KEY, {} as any);
 
     return this.afs.collection<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(HOME_KEY, page);
+        this.transferState.set(PAGE_KEY, page);
         this.seoService.setMetaTags({
           title: `Ventrips - Dedicated to providing latest news and trends`,
           description: `Search for articles`

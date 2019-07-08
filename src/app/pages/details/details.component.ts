@@ -15,7 +15,8 @@ import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation, hueRotateAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
-const DETAILS_KEY = makeStateKey<any>('details');
+const COLLECTION = 'posts';
+const PAGE_KEY = makeStateKey<any>('details');
 
 @Component({
   selector: 'app-details',
@@ -40,6 +41,8 @@ export class DetailsComponent implements OnInit {
   public slug: string;
   public isLoading = true;
   public user: User;
+  public collection = COLLECTION;
+  public id;
 
   constructor(
     private afs: AngularFirestore,
@@ -57,9 +60,9 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
 
-    this.slug = this.activatedRoute.snapshot.params.slug;
+    this.id = this.activatedRoute.snapshot.params.slug;
     this.spinner.show();
-    this.ssrFirestoreDoc(`posts/${this.slug}`)
+    this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
@@ -78,10 +81,10 @@ export class DetailsComponent implements OnInit {
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(DETAILS_KEY, {} as any);
+    const exists = this.transferState.get(PAGE_KEY, {} as any);
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(DETAILS_KEY, page);
+        this.transferState.set(PAGE_KEY, page);
         this.seoService.setMetaTags({
           title: page.title,
           description: page.description,
