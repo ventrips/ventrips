@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { DomSanitizer, TransferState, makeStateKey } from '@angular/platform-browser';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { filter, startWith, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PostsService } from './../../services/firebase/posts/posts.service';
@@ -53,7 +53,6 @@ export class DetailsComponent implements OnInit {
     private postsService: PostsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -73,10 +72,6 @@ export class DetailsComponent implements OnInit {
       this.spinner.hide();
       this.isLoading = false;
     });
-  }
-
-  byPassHTML(html: string) {
-    return this.domSanitizer.bypassSecurityTrustHtml(html);
   }
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser

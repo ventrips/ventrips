@@ -42,7 +42,7 @@
                 <div class="input-group custom-input-group">
                     <input class="form-control" placeholder="yyyy-mm-dd"
                             name="datePicker" [(ngModel)]="data[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [disabled]="isDisabled(key)">
-                    <div class="input-group-append">
+                    <div class="input-group-append" *ngIf="data[key]">
                         <div class="input-group-text">
                             <i class="fa"
                             [ngClass]="{ 'fa-check text-success': _.isDate(data[key].toDate()), 'fa-asterisk text-danger': !_.isDate(data[key].toDate()) }"></i>

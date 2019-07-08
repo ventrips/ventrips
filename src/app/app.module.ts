@@ -9,6 +9,7 @@ import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
 // Pipes
+import { SanitizeHtmlPipe } from './pipes/sanitize-html/sanitize-html.pipe';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
@@ -55,6 +56,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
 
 @NgModule({
   declarations: [
+    SanitizeHtmlPipe,
     OrderByPipe,
     FilterByPipe,
     SearchByPipe,

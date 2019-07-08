@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { DomSanitizer, TransferState, makeStateKey } from '@angular/platform-browser';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { filter, startWith, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PostsService } from './../../services/firebase/posts/posts.service';
@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private domSanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
