@@ -15,8 +15,8 @@
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">        
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
                 </div>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined?.toDate() | date: 'longDate'}} ({{profile?.joined?.toDate() | timeAgo}})</p>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive?.toDate() | date: 'longDate'}} ({{profile?.lastActive?.toDate() | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined.toDate() | date: 'longDate'}} ({{profile?.joined | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive.toDate() | date: 'longDate'}} ({{profile?.lastActive | timeAgo}})</p>
                 <!-- Role -->
                 <div class="mb-3" *ngIf="authService?.canEdit(user)">
                     <div *ngFor="let key of user?.roles | keys">

@@ -28,8 +28,8 @@
             <img class="rounded-circle profile-picture" [src]="post?.photoURL" alt="Profile Picture">
           </a>
           <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm | sanitizeHtml"></a>
-          <p class="text-secondary my-3 d-inline-block" *ngIf="post?.modified">
-            Last Modified: {{post?.modified?.toDate() | date: 'longDate'}} ({{post?.modified?.toDate() | timeAgo}})
+          <p class="text-secondary my-3 d-inline-block">
+            Last Modified: {{post?.modified.toDate() | date: 'longDate'}} ({{post?.modified | timeAgo}})
           </p>
         </div>
       </div>
