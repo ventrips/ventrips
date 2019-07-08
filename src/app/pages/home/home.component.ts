@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
 import { flipInXOnEnterAnimation } from 'angular-animations';
+import { InputsConfig } from '../../interfaces/inputs-config';
 
 const HOME_KEY = makeStateKey<any>('home');
 @Component({
@@ -27,7 +28,7 @@ const HOME_KEY = makeStateKey<any>('home');
   ]
 })
 export class HomeComponent implements OnInit {
-  public inputsConfig = {
+  public inputsConfig: InputsConfig = {
     string: ['slug', 'topic', 'title', 'description'],
     url: ['image'],
     quill: ['body'],

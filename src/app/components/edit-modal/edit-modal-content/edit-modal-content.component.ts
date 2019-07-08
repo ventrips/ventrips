@@ -9,6 +9,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { InputsConfig } from '../../../interfaces/inputs-config';
 
 @Component({
   selector: 'app-edit-modal-content',
@@ -20,7 +21,7 @@ export class EditModalContentComponent implements OnInit {
   @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
-  @Input() inputsConfig = {};
+  @Input() inputsConfig: InputsConfig;
   public _ = _;
   public keys = [];
   public user;

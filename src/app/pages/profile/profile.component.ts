@@ -12,6 +12,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
+import { InputsConfig } from '../../interfaces/inputs-config';
 
 const DETAILS_KEY = makeStateKey<any>('profile');
 @Component({
@@ -20,7 +21,7 @@ const DETAILS_KEY = makeStateKey<any>('profile');
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  public inputsConfig = {
+  public inputsConfig: InputsConfig = {
     string: [],
     url: [],
     quill: ['bio'],

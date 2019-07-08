@@ -13,6 +13,7 @@ import * as faker from 'faker';
 import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation, hueRotateAnimation } from 'angular-animations';
+import { InputsConfig } from '../../interfaces/inputs-config';
 
 const DETAILS_KEY = makeStateKey<any>('details');
 
@@ -26,7 +27,7 @@ const DETAILS_KEY = makeStateKey<any>('details');
   ]
 })
 export class DetailsComponent implements OnInit {
-  public inputsConfig = {
+  public inputsConfig: InputsConfig = {
     string: ['slug', 'topic', 'title', 'description'],
     url: ['image'],
     quill: ['body'],
