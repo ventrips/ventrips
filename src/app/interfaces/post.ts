@@ -4,7 +4,8 @@ export interface IPost {
     uid: string;
     displayName: string;
     photoURL: string;
-    topic: string;
+    category?: string;
+    tags?: Array<string>;
     title: string;
     description: string;
     image: string;
@@ -19,7 +20,8 @@ export class Post implements IPost {
     uid = '';
     displayName = '';
     photoURL = '';
-    topic = '';
+    category;
+    tags;
     title = '';
     description = '';
     image = '';

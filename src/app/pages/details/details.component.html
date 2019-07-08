@@ -17,7 +17,7 @@
               <a [routerLink]="['']" class="text-uppercase text-dark">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a [routerLink]="['']" [queryParams]="{query: post?.topic}" class="text-uppercase text-dark">{{post?.topic}}</a>
+              <a [routerLink]="['']" [queryParams]="{query: post?.category}" class="text-uppercase text-dark">{{post?.category}}</a>
             </li>
             <li class="breadcrumb-item active text-uppercase" aria-current="page">{{post?.title}}</li>
           </ol>

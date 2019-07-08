@@ -29,7 +29,7 @@ const HOME_KEY = makeStateKey<any>('home');
 })
 export class HomeComponent implements OnInit {
   public inputsConfig: InputsConfig = {
-    string: ['slug', 'topic', 'title', 'description'],
+    string: ['slug', 'category', 'title', 'description'],
     url: ['image'],
     quill: ['body'],
     date: [],
@@ -70,12 +70,12 @@ export class HomeComponent implements OnInit {
     },
     {
       label: 'Category: A - Z',
-      type: 'topic',
+      type: 'category',
       direction: 'asc'
     },
     {
       label: 'Category: Z - A',
-      type: 'topic',
+      type: 'category',
       direction: 'desc'
     }
   ];
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
         this.searchOptions = [];
         _.forEach(this.posts, (post) => {
           this.searchOptions.push(post.title);
-          this.searchOptions.push(post.topic);
+          this.searchOptions.push(post.category);
           this.searchOptions.push(post.displayName);
         });
         this.searchOptions = _.uniq(this.searchOptions);
