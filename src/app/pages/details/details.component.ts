@@ -27,7 +27,8 @@ const DETAILS_KEY = makeStateKey<any>('details');
 })
 export class DetailsComponent implements OnInit {
   public inputsConfig = {
-    string: ['slug', 'topic', 'title', 'description', 'image'],
+    string: ['slug', 'topic', 'title', 'description'],
+    url: ['image'],
     quill: ['body'],
     date: [],
     boolean: ['publish'],

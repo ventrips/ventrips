@@ -22,6 +22,7 @@ const PAGE_KEY = makeStateKey<any>(ID);
 export class PrivacyComponent implements OnInit {
   public inputsConfig = {
     string: ['title', 'description'],
+    url: [],
     quill: ['body'],
     date: [],
     boolean: [],

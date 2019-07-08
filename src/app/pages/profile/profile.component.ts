@@ -22,6 +22,7 @@ const DETAILS_KEY = makeStateKey<any>('profile');
 export class ProfileComponent implements OnInit {
   public inputsConfig = {
     string: [],
+    url: [],
     quill: ['bio'],
     date: [],
     boolean: [],

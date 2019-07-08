@@ -21,6 +21,20 @@
                     </div>
                 </div>
             </ng-container>
+            <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
+                <div class="input-group custom-input-group mb-3">
+                    <input type="url" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
+                    <div class="input-group-append">
+                        <button (click)="selectLocalImage(key)" class="btn btn-outline-secondary" type="button">
+                            <i class="fa fa-file"></i>
+                        </button>
+                        <span class="input-group-text">
+                            <i class="fa"
+                            [ngClass]="{ 'fa-check text-success': isValidUrl(data[key]), 'fa-asterisk text-danger': !isValidUrl(data[key]) }"></i>
+                        </span>
+                    </div>
+                </div>
+            </ng-container>    
             <ng-container *ngIf="_.includes(inputsConfig?.quill, key)">
                 <quill-editor (onEditorCreated)="getEditorInstance($event, key)" [(ngModel)]="data[key]" [disabled]="isDisabled(key)"></quill-editor>
             </ng-container>

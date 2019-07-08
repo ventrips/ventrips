@@ -25,8 +25,8 @@ export class EditModalContentComponent implements OnInit {
   public keys = [];
   public user;
 
-  public quillEditorRef;
   public quillKey;
+  public quillEditorRef;
   public task: AngularFireUploadTask;
   public percentage: Observable<number>;
   public snapshot: Observable<any>;
@@ -48,6 +48,7 @@ export class EditModalContentComponent implements OnInit {
       this.keys = _.orderBy(
         _.concat(
           _.get(this.inputsConfig, ['string']),
+          _.get(this.inputsConfig, ['url']),
           _.get(this.inputsConfig, ['quill']),
           _.get(this.inputsConfig, ['date']),
           _.get(this.inputsConfig, ['boolean'])
@@ -65,8 +66,21 @@ export class EditModalContentComponent implements OnInit {
     return !this.isNew && _.includes(_.get(this.inputsConfig, ['disabled']), key);
   }
 
+  isValidUrl(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
   isValid() {
     return _.every(this.keys, (key) => {
+      if (_.includes(_.get(this.inputsConfig, ['url']), key)) {
+        return this.isValidUrl(_.get(this.data, [key]));
+      }
       if (_.includes(_.get(this.inputsConfig, ['date']), key)) {
         return _.isDate(_.get(this.data, [key]).toDate());
       }
@@ -122,7 +136,7 @@ export class EditModalContentComponent implements OnInit {
    * Step1. select local image
    *
    */
-  selectLocalImage() {
+  selectLocalImage(inputKey?: string) {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.click();
@@ -143,7 +157,7 @@ export class EditModalContentComponent implements OnInit {
         return;
       }
 
-      this.saveToServer(file);
+      this.saveToServer(file, inputKey);
     };
   }
 
@@ -152,7 +166,7 @@ export class EditModalContentComponent implements OnInit {
    *
    * @param {File} file
    */
-  saveToServer(file: File) {
+  saveToServer(file: File, inputKey?: string) {
     // The storage path
     const path = `files/${Date.now()}_${file.name}`;
 
@@ -170,7 +184,11 @@ export class EditModalContentComponent implements OnInit {
       // The file's download URL
       finalize(async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
-        this.insertToEditor(this.downloadURL);
+        if (!_.isNil(inputKey)) {
+          this.data[inputKey] = _.cloneDeep(this.downloadURL);
+        } else{
+          this.insertToEditor(this.downloadURL);
+        }
         // this.afs.collection('files').add( { downloadURL: this.downloadURL, path });
       }),
     );
@@ -187,7 +205,7 @@ export class EditModalContentComponent implements OnInit {
     const range = this.quillEditorRef.getSelection();
     this.quillEditorRef.insertEmbed(range.index, 'image', `${url}`);
     const newValue = (this.quillEditorRef.container).querySelector('.ql-editor').innerHTML;
-    this.data[this.quillKey] = newValue;
+    this.data[this.quillKey] = _.cloneDeep(newValue);
     // Reset
     this.quillKey = undefined;
     this.quillEditorRef = undefined;
