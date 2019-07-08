@@ -20,8 +20,8 @@
       <div class="d-flex flex-wrap">
         <!-- Create New -->
         <app-edit-modal *ngIf="authService?.canEdit(user)"
-          [collection]="'posts'"
-          [id]="post?.slug"
+          [collection]="collection"
+          [id]=""
           [data]="newPost"
           [isNew]="true"
           [inputsConfig]="inputsConfig">
@@ -64,8 +64,8 @@
                 </div>
                 <div class="col pb-3">
                   <h1 class="h3 d-flex flex-column">
-                    <app-edit-modal class="my-2" *ngIf="authService?.canEdit(user)"
-                      [collection]="'posts'"
+                    <app-edit-modal class="my-2" *ngIf="authService?.canEdit(user, post?.uid)"
+                      [collection]="collection"
                       [id]="post?.slug"
                       [data]="post"
                       [isNew]="false"

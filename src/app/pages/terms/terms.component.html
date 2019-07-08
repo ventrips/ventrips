@@ -1,5 +1,5 @@
 <div class="container-fluid my-3">
-  <app-edit-modal *ngIf="authService?.canEdit(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig">
+  <app-edit-modal *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig">
   </app-edit-modal>
 </div>
 <ng-container *ngIf="!isLoading">

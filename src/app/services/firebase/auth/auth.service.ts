@@ -98,9 +98,14 @@ export class AuthService {
     if (!_.isNil(postUid)) {
       return (_.get(user, ['roles', 'editor']) && _.isEqual(user.uid, postUid)) || _.get(user, ['roles', 'admin']);
     } else {
-      const allowed = ['admin', 'editor']
+      const allowed = ['admin', 'editor'];
       return this.checkAuthorization(user, allowed);
     }
+  }
+
+  isAdmin(user: User) {
+    const allowed = ['admin'];
+    return this.checkAuthorization(user, allowed);
   }
 
   canDelete(user: User): boolean {

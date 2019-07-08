@@ -1,7 +1,7 @@
 <div class="container-fluid my-3">
-  <app-edit-modal *ngIf="authService?.canEdit(user)"
-    [collection]="'posts'"
-    [id]="post?.slug"
+  <app-edit-modal *ngIf="authService?.canEdit(user, post?.uid)"
+    [collection]="collection"
+    [id]="id"
     [data]="post"
     [isNew]="false"
     [inputsConfig]="inputsConfig">
