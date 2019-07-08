@@ -26,7 +26,7 @@
           [isNew]="true"
           [inputsConfig]="inputsConfig">
         </app-edit-modal>
-        <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
+        <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
               {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
@@ -40,10 +40,10 @@
           </div>
         </div>
       </div>
-      <p class="h5 my-3 text-dark text-capitalize text-right">{{(posts | searchBy: searchTerm).length}} Results</p>
+      <p class="h5 my-3 text-dark text-capitalize text-right">{{(posts | filterBy:'publish':true:user | searchBy: searchTerm).length}} Results</p>
     </div>
     <!-- No results -->
-    <ng-container *ngIf="_.isEmpty((posts | searchBy: searchTerm))">
+    <ng-container *ngIf="_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
       <div class="container-fluid text-center">
         <h2 class="text-uppercase">Sorry!</h2>
         <p class=" text-muted">We couldn't find anything with these search terms.
@@ -52,10 +52,10 @@
       </div>
     </ng-container>
     <!-- Has results -->
-    <ng-container *ngIf="!_.isEmpty((posts | searchBy: searchTerm))">
+    <ng-container *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
+          <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | filterBy: 'publish':true:user | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
             <div class="row">
                 <div class="col-xs-12 col-md-3 text-center align-self-center post-thumbnail" [@enter]>
                   <a [routerLink]="['/posts', post?.slug]">
