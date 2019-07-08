@@ -7,14 +7,17 @@ import * as _ from 'lodash';
   name: 'filterBy'
 })
 export class FilterByPipe implements PipeTransform {
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) {}
 
-  }
-
-  transform(items: any[], field: string, value: string, user: User): any[] {
+  transform(items: any[], field: string, value: string, user?: User): any[] {
     if (!items) return [];
     return items.filter(item => {
-      return this.authService.canEdit(user, _.get(item, [field])) || _.isEqual(item[field], value);
+      if (!_.isEmpty(user) && !_.isNil(user)) {
+        if (this.authService.canEdit(user, _.get(item, [field]))) {
+          return true;
+        }
+      }
+      return _.isEqual(item[field], value);
     });
   }
 }
