@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-/* Pages */
+/* Guards */
+import { AdminGuard } from './guards/admin/admin.guard';
+import { EditorGuard } from './guards/editor/editor.guard';
 
+/* Pages */
 import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
