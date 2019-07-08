@@ -14,7 +14,8 @@ import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
-const DETAILS_KEY = makeStateKey<any>('profile');
+const COLLECTION = 'users';
+const PAGE_KEY = makeStateKey<any>('profile');
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     boolean: [],
     disabled: []
   };
-  public uid: string;
+  public collection = COLLECTION;
+  public id;
   public profile: User;
   public isLoading = true;
   public user: User;
@@ -48,9 +50,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
-    this.uid = this.activatedRoute.snapshot.params.uid;
+    this.id = this.activatedRoute.snapshot.params.uid;
     this.spinner.show();
-    this.ssrFirestoreDoc(`users/${this.uid}`)
+    this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
       .subscribe(response => {
         if (!_.isEmpty(response) && !_.isNil(response)) {
           this.profile = response;
@@ -70,10 +72,10 @@ export class ProfileComponent implements OnInit {
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(DETAILS_KEY, {} as any);
+    const exists = this.transferState.get(PAGE_KEY, {} as any);
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(DETAILS_KEY, page);
+        this.transferState.set(PAGE_KEY, page);
         this.seoService.setMetaTags({
           title: `${_.get(page, ['displayName'])} - Profile`,
           description: `${_.get(page, ['displayName'])}`,

@@ -15,11 +15,11 @@
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">        
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
                 </div>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeStampDate:'longDate' | timeAgo}})</p>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeStampDate:'longDate' | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeAgo}})</p>
                 <!-- Role -->
-                <div class="mb-3" *ngIf="authService?.canEdit(user)">
-                    <div *ngFor="let key of user?.roles | keys">
+                <div class="mb-3" *ngIf="authService?.canEdit(user, profile?.uid)">
+                    <div *ngFor="let key of profile?.roles | keys">
                         <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
                         <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
                     </div>
