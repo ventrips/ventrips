@@ -174,14 +174,13 @@ export class EditModalContentComponent implements OnInit {
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
 
-    // Totally optional metadata
-    const customMetadata = {
-      contentType: 'image',
-      cacheControl: "public, max-age=31536000"
+    var metadata = {
+      contentType: "image",
+      cacheControl: "public, max-age=31536000, no-transform",
     };
 
     // The main task
-    this.task = this.afStorage.upload(path, file, { customMetadata });
+    this.task = this.afStorage.upload(path, file, metadata);
 
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
