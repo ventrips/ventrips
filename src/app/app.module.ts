@@ -14,6 +14,7 @@ import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
 import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
+import { TimeStampDatePipe } from './pipes/time-stamp-date/time-stamp-date.pipe';
 import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
 import { KeysPipe } from './pipes/keys/keys.pipe';
 
@@ -61,6 +62,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
     FilterByPipe,
     SearchByPipe,
     SearchHighlightPipe,
+    TimeStampDatePipe,
     TimeAgoPipe,
     AppComponent,
     HomeComponent,

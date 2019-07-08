@@ -1,17 +1,12 @@
 import { Pipe, PipeTransform, NgZone, ChangeDetectorRef, OnDestroy } from "@angular/core";
 @Pipe({
-	name:'timeAgo',
+	name: 'timeAgo',
 	pure: false
 })
 export class TimeAgoPipe implements PipeTransform, OnDestroy {
 	private timer: number;
 	constructor(private changeDetectorRef: ChangeDetectorRef, private ngZone: NgZone) {}
 	transform(value: any) {
-		try {
-			value = value.toDate();
-		} catch(e) {
-			return '';
-		}
 		this.removeTimer();
 		let d = new Date(value);
 		let now = new Date();

@@ -79,7 +79,7 @@
                           <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
                         </a>
                         <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                        <p class="text-secondary mb-2 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>    
+                        <p class="text-secondary mb-2 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeStampDate:'longDate' | timeAgo}}</p>
                       </div>
                       <p class="mb-2" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 3em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
                           {{post?.description}}

@@ -15,8 +15,8 @@
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">        
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
                 </div>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined.toDate() | date: 'longDate'}} ({{profile?.joined | timeAgo}})</p>
-                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive.toDate() | date: 'longDate'}} ({{profile?.lastActive | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.joined">Joined:</span> {{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeStampDate:'longDate' | timeAgo}})</p>
+                <p class="mb-0"><span class="font-weight-bold" *ngIf="profile?.lastActive">Last Active:</span> {{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeStampDate:'longDate' | timeAgo}})</p>
                 <!-- Role -->
                 <div class="mb-3" *ngIf="authService?.canEdit(user)">
                     <div *ngFor="let key of user?.roles | keys">
@@ -29,7 +29,7 @@
                 <hr/>
                 <!-- Profile -->
                 <section>
-                    <p *ngIf="profile?.bio" [innerHTML]="profile?.bio"></p>
+                    <quill-view-html *ngIf="profile?.bio" [content]="profile?.bio" theme="snow"></quill-view-html>
                     <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
                 </section>
             </div>
