@@ -63,15 +63,15 @@
                   </a>
                 </div>
                 <div class="col pb-3">
-                  <h1 class="h3 d-sm-flex flex-wrap">
-                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm | sanitizeHtml"></a>
-                    <app-edit-modal class="mb-2 ml-auto" *ngIf="authService?.canEdit(user)"
+                  <h1 class="h3 d-flex flex-column">
+                    <app-edit-modal class="my-2" *ngIf="authService?.canEdit(user)"
                       [collection]="'posts'"
                       [id]="post?.slug"
                       [data]="post"
                       [isNew]="false"
                       [inputsConfig]="inputsConfig">
                     </app-edit-modal>
+                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm | sanitizeHtml"></a>
                   </h1>
                   <section class="h5">
                       <div class="mb-2">
