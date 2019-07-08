@@ -55,7 +55,10 @@ quill-view-html .ql-container {
 }
 
 quill-editor .ql-container {
-    max-height: 90%;
+    height: 100%;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: stretch;
 }
 
 /* Custom ng-bootstrap */
