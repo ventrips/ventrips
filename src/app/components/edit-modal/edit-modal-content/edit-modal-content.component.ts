@@ -10,7 +10,7 @@ import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { InputsConfig } from '../../../interfaces/inputs-config';
-
+import Compressor from 'compressorjs';
 @Component({
   selector: 'app-edit-modal-content',
   templateUrl: './edit-modal-content.component.html',
@@ -37,7 +37,7 @@ export class EditModalContentComponent implements OnInit {
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     public authService: AuthService,
-    private toastrService: ToastrService,
+    public toastrService: ToastrService,
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
   ) {}
@@ -146,19 +146,33 @@ export class EditModalContentComponent implements OnInit {
     input.onchange = () => {
       // The File object
       const file = input.files[0];
-
+       
       // Client-side validation example
-      if (!_.isEqual(file.type.split('/')[0], 'image')) { 
+      if (!_.isEqual(file.type.split('/')[0], 'image') || !file) { 
         this.toastrService.warning(`Unsupported file type: ${file.type.split('/')[0]}`, `Only images are allowed`);
         return;
       }
 
-      if (file.size > 1000000) {
-        this.toastrService.warning('Image needs to be less than 1MB', `Image size is too large`);
-        return;
-      }
-
-      this.saveToServer(file, inputKey);
+      const compressorPromise = new Promise((resolve, reject) => {
+        new Compressor(file, {
+          quality: 0.5,
+          success(compressed) {
+            if (compressed.size > 1000000) {
+              return Promise.reject(new Error(`Compressed Image size: ${compressed.size} is still larger than 1 MB. Raw: ${file.size}`));
+            }
+            resolve(compressed);
+          },
+          error(err) {
+            return Promise.reject(err);
+          },
+        });
+      });
+      compressorPromise.then((compressed: any) => {
+          this.toastrService.success(`Compressed: ${compressed.size} | Raw: ${file.size}`, `Image compression successful!`);
+          this.saveToServer(compressed, inputKey);
+      }).catch((error) => {
+        this.toastrService.warning(error, 'Error Compressing Image');
+      });  
     };
   }
 
