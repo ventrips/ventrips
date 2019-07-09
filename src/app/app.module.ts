@@ -56,6 +56,7 @@ import { StripeElementsComponent } from './components/stripe/stripe-elements/str
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
 import { EditModalContentComponent } from './components/edit-modal/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireFunctionsModule, // imports firebase/functions only needed for functions features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFirestoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), // imports firebase/firestore, only needed for database features
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   entryComponents: [
