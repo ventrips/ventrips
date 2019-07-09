@@ -26,6 +26,8 @@ import { NgbDateFirestoreAdapter } from './services/firebase/ngb-date-firestore-
 import { PostsService } from '../app/services/firebase/posts/posts.service';
 
 // Libraries
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -85,11 +87,12 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
+    AppRoutingModule,
+    Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     NgxSpinnerModule,
     QuillModule.forRoot(),
     NgbModule,

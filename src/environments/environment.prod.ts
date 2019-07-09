@@ -12,6 +12,7 @@ export const environment = {
     messagingSenderId: '556585707956',
     appId: '1:556585707956:web:752f1d8777908fad'
   },
+  googleAnalyticsKey: 'UA-124647836-1',
   stripe: {
     publishable: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
   },
