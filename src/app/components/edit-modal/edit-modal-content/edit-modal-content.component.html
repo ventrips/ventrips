@@ -29,7 +29,7 @@
                             <i class="fa fa-file"></i>
                         </button>
                         <span class="input-group-text">
-                            <img class="rounded-0 input-group-text valid-image" *ngIf="isValidUrl(data[key])" [src]="_.get(data, [key])">
+                            <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(data[key])" [src]="_.get(data, [key])">
                             <i class="fa fa-asterisk text-danger" *ngIf="!isValidUrl(data[key])"></i>
                         </span>
                     </div>
@@ -51,7 +51,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.boolean, key)" >
-                <div class="form-check d-inline-block cursor-pointer mr-3">
+                <div class="form-check d-inline-block cursor-pointer my-1 mr-3">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="data[key]" [disabled]="isDisabled(key)" checked>
                         Yes
