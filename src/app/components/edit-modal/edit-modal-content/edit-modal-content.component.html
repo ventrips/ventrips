@@ -51,14 +51,14 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.boolean, key)" >
-                <div class="form-check d-inline-block cursor-pointer my-1 mr-3">
-                    <label class="form-check-label">
+                <div class="form-check d-inline-block my-1 mr-3">
+                    <label class="form-check-label cursor-pointer">
                         <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="true" [(ngModel)]="data[key]" [disabled]="isDisabled(key)" checked>
                         Yes
                     </label>
                 </div>
-                <div class="form-check d-inline-block cursor-pointer">
-                    <label class="form-check-label">
+                <div class="form-check d-inline-block">
+                    <label class="form-check-label cursor-pointer">
                         <input class="form-check-input" type="radio" name="yesNoRadio" id="yesNoRadio" [value]="false" [(ngModel)]="data[key]" [disabled]="isDisabled(key)">
                         No
                     </label>

@@ -3,6 +3,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { EditModalConfirmComponent } from '../edit-modal-confirm/edit-modal-confirm.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
@@ -37,6 +38,7 @@ export class EditModalContentComponent implements OnInit {
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     public authService: AuthService,
+    private spinner: NgxSpinnerService,
     public toastrService: ToastrService,
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -152,27 +154,38 @@ export class EditModalContentComponent implements OnInit {
         this.toastrService.warning(`Unsupported file type: ${file.type.split('/')[0]}`, `Only images are allowed`);
         return;
       }
-
+      this.spinner.show();
+      const oneMB = 1000000
       const compressorPromise = new Promise((resolve, reject) => {
         new Compressor(file, {
           quality: 0.5,
           success(compressed) {
-            if (compressed.size > 1000000) {
-              return Promise.reject(new Error(`Compressed Image size: ${compressed.size} is still larger than 1 MB. Raw: ${file.size}`));
+            if (compressed.size > oneMB) {
+              reject({
+                title: 'Image is larger than 1 MB',
+                body: `Compressed: ${_.round(compressed.size / oneMB, 2)} | Raw: ${_.round(file.size / oneMB, 2)}`
+              });
             }
             resolve(compressed);
           },
-          error(err) {
-            return Promise.reject(err);
+          error(error) {
+            return reject({
+              title: 'Error Compressing Image',
+              body: error
+            });
           },
         });
       });
       compressorPromise.then((compressed: any) => {
-          this.toastrService.success(`Compressed: ${compressed.size} | Raw: ${file.size}`, `Image compression successful!`);
+          this.toastrService.success(
+            `Compressed: ${_.round(compressed.size / oneMB, 2)} | Raw: ${_.round(file.size / oneMB, 2)}`,
+            `Image compression successful!`
+          );
           this.saveToServer(compressed, inputKey);
       }).catch((error) => {
-        this.toastrService.warning(error, 'Error Compressing Image');
-      });  
+        this.toastrService.warning(error.body, error.title);
+        this.spinner.hide();
+      });
     };
   }
 
@@ -212,7 +225,11 @@ export class EditModalContentComponent implements OnInit {
         // this.afs.collection('files').add( { downloadURL: this.downloadURL, path });
       }),
     );
-    this.snapshot.subscribe();
+    this.snapshot.subscribe(() => {
+      this.spinner.hide();
+    }, () => {
+      this.spinner.hide();
+    });
   }
 
   /**

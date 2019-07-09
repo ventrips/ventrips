@@ -59,9 +59,6 @@ export class EditModalComponent implements OnInit {
     modalRef.componentInstance.isNew = this.isNew; 
     modalRef.componentInstance.inputsConfig = this.inputsConfig;
   
-  
-  
-  
     modalRef.result.then((result?) => {
       if (_.isEqual(this.collection, 'posts')) {
         result.data.modified = firestore.Timestamp.fromDate(new Date());
