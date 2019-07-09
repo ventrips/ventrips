@@ -159,6 +159,7 @@ export class EditModalContentComponent implements OnInit {
       const compressorPromise = new Promise((resolve, reject) => {
         new Compressor(file, {
           quality: 0.5,
+          maxWidth: 1500,
           success(compressed) {
             if (compressed.size > oneMB) {
               reject({
