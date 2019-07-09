@@ -13,7 +13,7 @@ export class FilterByPipe implements PipeTransform {
     if (!items) return [];
     return items.filter(item => {
       if (!_.isEmpty(user) && !_.isNil(user)) {
-        if (this.authService.canEdit(user, _.get(item, [field]))) {
+        if (this.authService.canEdit(user, _.get(item, ['uid']))) {
           return true;
         }
       }
