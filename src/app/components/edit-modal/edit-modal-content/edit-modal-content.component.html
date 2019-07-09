@@ -26,7 +26,7 @@
                     <input type="url" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
                     <div class="input-group-append">        
                         <button (click)="selectLocalImage(key)" class="btn btn-outline-secondary" type="button" [disabled]="isDisabled(key)">
-                            <i class="fa fa-file"></i>
+                            <i class="fa fa-image"></i>
                         </button>
                         <span class="input-group-text">
                             <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(data[key])" [src]="_.get(data, [key])">
