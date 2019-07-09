@@ -12,10 +12,12 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { InputsConfig } from '../../../interfaces/inputs-config';
 import Compressor from 'compressorjs';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-edit-modal-content',
   templateUrl: './edit-modal-content.component.html',
-  styleUrls: ['./edit-modal-content.component.scss']
+  styleUrls: ['./edit-modal-content.component.scss'],
+  providers: [ DatePipe ]
 })
 export class EditModalContentComponent implements OnInit {
   @Input() collection: string;
@@ -41,7 +43,8 @@ export class EditModalContentComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public toastrService: ToastrService,
     private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -164,7 +167,7 @@ export class EditModalContentComponent implements OnInit {
             if (compressed.size > oneMB) {
               reject({
                 title: 'Image is larger than 1 MB',
-                body: `Compressed: ${_.round(compressed.size / oneMB, 2)} | Raw: ${_.round(file.size / oneMB, 2)}`
+                body: `Compressed: ${_.round(compressed.size / oneMB, 2)} MB | Raw: ${_.round(file.size / oneMB, 2)} MB`
               });
             }
             resolve(compressed);
@@ -179,7 +182,7 @@ export class EditModalContentComponent implements OnInit {
       });
       compressorPromise.then((compressed: any) => {
           this.toastrService.success(
-            `Compressed: ${_.round(compressed.size / oneMB, 2)} | Raw: ${_.round(file.size / oneMB, 2)}`,
+            `Compressed: ${_.round(compressed.size / oneMB, 2)} MB | Raw: ${_.round(file.size / oneMB, 2)} MB`,
             `Image compression successful!`
           );
           this.saveToServer(compressed, inputKey);
@@ -197,7 +200,7 @@ export class EditModalContentComponent implements OnInit {
    */
   saveToServer(file: File, inputKey?: string) {
     // The storage path
-    const path = `${this.collection}/${this.id}/${file.name}`;
+    const path = `images/${this.datePipe.transform(new Date(),"yyyy-MM-dd")}-${this.collection}-${file.name}`;
 
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
