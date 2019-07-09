@@ -227,7 +227,7 @@ export class EditModalContentComponent implements OnInit {
         } else{
           this.insertToEditor(this.downloadURL);
         }
-        // this.afs.collection('files').add( { downloadURL: this.downloadURL, path });
+        // this.afs.collection('images').add( { downloadURL: this.downloadURL, path });
       }),
     );
     this.snapshot.subscribe(() => {
