@@ -1,8 +1,8 @@
 {
-  "name": "ventrips",
-  "short_name": "ventrips",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Ventrips",
+  "short_name": "Ventrips",
+  "theme_color": "#ffffff",
+  "background_color": "#fed136",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
