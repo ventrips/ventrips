@@ -7,12 +7,14 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
+          "/assets/favicon.ico",
           "/index.html",
           "/*.css",
           "/*.js"
         ],
-        "urls":[]
+        "urls":[
+          "https://firebasestorage.googleapis.com/v0/b/*"
+        ]
       }
     }, {
       "name": "assets",
