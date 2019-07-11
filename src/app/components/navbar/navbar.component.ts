@@ -4,6 +4,9 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from './../../../environments/environment';
 import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -25,7 +28,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private modalService: NgbModal,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -42,4 +47,12 @@ export class NavbarComponent implements OnInit {
     return _.isEqual(this.router.url, `/${currentNav}`);
   }
 
+  login() {
+    const modalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false
+    }
+    const modalRef = this.modalService.open(LoginModalComponent, modalOptions);
+    modalRef.result.then();
+  }
 }

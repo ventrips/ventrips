@@ -41,7 +41,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 // Pages
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
 import { PageComponent } from './pages/page/page.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -57,6 +56,7 @@ import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-co
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,6 @@ import { ContactFormComponent } from './components/forms/contact-form/contact-fo
     TimeAgoPipe,
     AppComponent,
     HomeComponent,
-    LoginComponent,
     PageComponent,
     DetailsComponent,
     ProfileComponent,
@@ -83,7 +82,8 @@ import { ContactFormComponent } from './components/forms/contact-form/contact-fo
     EditModalContentComponent,
     EditModalConfirmComponent,
     ContactComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    LoginModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
@@ -113,7 +113,8 @@ import { ContactFormComponent } from './components/forms/contact-form/contact-fo
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   entryComponents: [
     EditModalContentComponent,
-    EditModalConfirmComponent
+    EditModalConfirmComponent,
+    LoginModalComponent
   ],
   bootstrap: [AppComponent]
 })

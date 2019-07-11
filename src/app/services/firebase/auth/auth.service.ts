@@ -57,9 +57,6 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
-        });
         this.toastrService.info(`Welcome ${_.get(credential, ['user', 'displayName'])}`);
       }).catch((error) => {
         if (_.isEqual(_.get(error, ['code']), 'auth/cancelled-popup-request')) {

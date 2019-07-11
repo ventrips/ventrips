@@ -10,7 +10,6 @@ import { SubscriberGuard } from './guards/subscriber/subscriber.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { LoginComponent } from './pages/login/login.component';
 import { PageComponent } from './pages/page/page.component';
 import { ContactComponent } from './pages/contact/contact.component';
 
@@ -24,8 +23,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PageComponent },
       { path: 'terms', component: PageComponent },
-      { path: 'about', component: PageComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'about', component: PageComponent }
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }

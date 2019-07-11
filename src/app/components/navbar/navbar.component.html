@@ -9,17 +9,17 @@
         <a [routerLink]="['']" [ngClass]="{'active': isActive('')}" class="nav-link" title="Home" >
           Home
         </a>
-      </li>    
+      </li>
       <li *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" class="nav-item">
         <a [routerLink]="['', item?.url]" [title]="item?.title" class="nav-link">
           {{item?.title}}
           <span *ngIf="isActive(item?.url)" class="sr-only">(current)</span>
-        </a>      
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.collapse.show" *ngIf="!user">
-        <a [routerLink]="['/login']" [ngClass]="{'active': isActive('login')}" class="nav-link" title="Log In" >
-          Log In
         </a>
+      </li>
+      <li class="nav-item" *ngIf="!user">
+        <div class="nav-link cursor-pointer" title="Log In" (click)="login()">
+          <span>Log In</span>
+        </div>
       </li>
       <li class="nav-item dropdown cursor-pointer" *ngIf="user">
         <a class="nav-link dropdown-toggle" title="User Dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
