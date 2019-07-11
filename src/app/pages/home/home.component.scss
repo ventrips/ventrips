@@ -3,6 +3,10 @@
     .post-thumbnail {
         padding-left: 0;
         padding-right: 0;
-        margin-bottom: .5rem;
+        padding-bottom: 2em;
     }
 }
+
+.post-description {
+    min-height: 5em;
+} 

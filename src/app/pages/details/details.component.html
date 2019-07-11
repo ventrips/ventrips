@@ -21,7 +21,6 @@
             </li>
           </ol>
         </nav>
-        <h1 class="text-capitalize mb-4">{{post?.title}}</h1>
         <div class="h5 my-4">
           <a [routerLink]="['/profile', post?.uid]" class="mr-3">
             <img class="rounded-circle profile-picture" [src]="post?.photoURL" alt="Profile Picture">
@@ -33,6 +32,7 @@
           <p class="text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
             Last Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
           </p>
+          <h1 class="text-capitalize mb-4">{{post?.title}}</h1>
           <p class="my-3" *ngIf="post?.description">
             {{post?.description}}
           </p>

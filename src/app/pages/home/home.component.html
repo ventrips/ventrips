@@ -68,32 +68,34 @@
         <div class="row">
           <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | filterBy: 'publish':true:user | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
             <div class="row py-3">
-                <div class="col-xs-12 col-md-3 text-center align-self-center post-thumbnail my-2">
+                <div class="col-xs-12 col-md-3 text-center align-self-center post-thumbnail">
                   <a [routerLink]="['/posts', post?.slug]">
                     <img class="img-fluid rounded-0" [src]="post?.image" [alt]="post?.title">
                   </a>
                 </div>
-                <div class="col pb-3">
-                  <h1 class="h3 mb-3 d-flex flex-column">
-                    <app-edit-modal class="my-3" *ngIf="authService?.canEdit(user, post?.uid)"
+                <div class="col py-2">
+                  <div class="mb-3 d-flex align-items-center">
+                    <div>
+                      <a [routerLink]="['/profile', post?.uid]" class="d-inline-block mr-3">
+                        <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                      </a>
+                      <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                      <p class="text-secondary mb-2 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>                          
+                    </div>
+                    <app-edit-modal class="ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
                       [collection]="collection"
                       [id]="post?.slug"
                       [data]="post"
                       [isNew]="false"
                       [inputsConfig]="inputsConfig">
                     </app-edit-modal>
-                    <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-                  </h1>
+                  </div>
                   <section class="h5">
-                      <div class="mb-3">
-                        <a [routerLink]="['/profile', post?.uid]" class="mr-3">
-                          <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
-                        </a>
-                        <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                        <p class="text-secondary mb-2 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
-                      </div>
-                      <p class="mb-3" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; max-height: 5em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
-                          {{post?.description}}
+                      <h1 class="h3 mb-3">
+                        <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
+                      </h1>      
+                      <p class="post-description mb-3" [innerHTML]="post?.description | searchHighlight: searchTerm">
+                        {{post?.description}}
                       </p>
                       <a [routerLink]="['']" [queryParams]="{ q: post?.category }" class="mb-2">
                         <h2 class="badge badge-dark text-uppercase p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
