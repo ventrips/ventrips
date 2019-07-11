@@ -16,13 +16,5 @@ export const environment = {
   facebookAppId: '512336042564323',
   stripe: {
     publishable: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
-  },
-  roles: {
-    admins: [
-      '0uYWAhYctIUmaaQF1WBzRUu9J1x2'
-    ],
-    contributors: [
-      'quU47PyHKEZWJaklZeRpJeMKOGy1'
-    ]
   }
 };
