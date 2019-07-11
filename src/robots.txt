@@ -2,4 +2,4 @@ User-Agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api
-Sitemap: http://ventrips-website.firebaseapp.com/sitemap.xml
+Sitemap: http://ventrips.com/sitemap.xml
