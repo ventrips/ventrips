@@ -92,6 +92,9 @@ export class AuthService {
   }
 
   canEdit(user: User, postUid?: string): boolean {
+    // user is not authenticated
+    if (!user) return false
+
     // If it is a post, check if the post's UID is the author of post or admin
     if (!_.isNil(postUid)) {
       return (_.get(user, ['roles', 'editor']) && _.isEqual(user.uid, postUid)) || _.get(user, ['roles', 'admin']);
@@ -118,7 +121,7 @@ export class AuthService {
 
     // user has permission
     for (const role of allowedRoles) {
-      if ( user.roles[role] ) {
+      if (user.roles[role] ) {
         return true
       }
     }
