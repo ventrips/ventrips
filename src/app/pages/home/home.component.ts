@@ -139,15 +139,18 @@ export class HomeComponent implements OnInit {
     distinctUntilChanged(),
     map(term => {
       const queryParams = _.isEmpty(term) ? {} : { queryParams: { q: term } };
-      if (isPlatformBrowser(this.platformId)) {
-        window.scrollTo(0, 0);
-      }
+      this.scrollToTop();
       this.router.navigate( [], queryParams);
       return term.length < 1 ? []
       : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);
     })
   )
 
+  scrollToTop() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0);
+    }
+  }
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreCollection(path: string) {
     const exists = this.transferState.get(PAGE_KEY, {} as any);
