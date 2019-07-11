@@ -10,9 +10,9 @@
     <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-xs-12 col-md-6': !isLast}" *ngFor="let key of keys; last as isLast">
         <h4 class="text-capitalize mb-2">{{_.startCase(key)}}</h4>
         <div class="mb-3">
-            <ng-container *ngIf="_.includes(inputsConfig?.string, key)" >
-                <div class="input-group custom-input-group mb-3">
-                    <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
+            <ng-container *ngIf="_.includes(inputsConfig?.string, key)">
+                <div class="input-group custom-input-group">
+                    <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)" [maxlength]="maxStringInputLength">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa"
@@ -20,6 +20,7 @@
                         </span>
                     </div>
                 </div>
+                <span class="d-block text-right mb-3 small">{{maxStringInputLength - _.get(data, [key]).length}} characters remaining</span>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
                 <div class="input-group custom-input-group mb-3">
@@ -63,7 +64,7 @@
                         No
                     </label>
                 </div>
-            </ng-container>    
+            </ng-container>
         </div>
     </div>
 </div>

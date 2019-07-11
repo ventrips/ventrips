@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
-import { flipInXOnEnterAnimation } from 'angular-animations';
+import { fadeInDownOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
 const COLLECTION = 'posts';
@@ -25,7 +25,7 @@ const PAGE_KEY = makeStateKey<any>('home');
   styleUrls: ['./home.component.scss'],
   providers: [ NgbTypeaheadConfig ], // add NgbTypeaheadConfig to the component providers
   animations: [
-    flipInXOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100}),
+    fadeInDownOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100}),
   ]
 })
 export class HomeComponent implements OnInit {

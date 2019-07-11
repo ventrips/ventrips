@@ -28,7 +28,7 @@ export class EditModalContentComponent implements OnInit {
   public _ = _;
   public keys = [];
   public user;
-
+  public maxStringInputLength = 160;
   public quillKey;
   public quillEditorRef;
   public task: AngularFireUploadTask;

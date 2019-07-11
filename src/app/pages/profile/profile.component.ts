@@ -9,8 +9,8 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as faker from 'faker';
 import * as _ from 'lodash';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
@@ -19,7 +19,10 @@ const PAGE_KEY = makeStateKey<any>('profile');
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations: [
+    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
+  ]
 })
 export class ProfileComponent implements OnInit {
   public inputsConfig: InputsConfig = {
