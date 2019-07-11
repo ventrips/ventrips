@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   name: 'Ventrips',
   description: 'A place where you can get all of the latest news and trends',
-  url: 'https://ventrips.com',
+  url: 'https://www.ventrips.com',
   firebase: {
     apiKey: 'AIzaSyDAb0y87YBB3GH6Qddod_PDiUqjFxpC1gQ',
     authDomain: 'ventrips.com',
