@@ -41,17 +41,14 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 // Pages
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { PrivacyComponent } from './pages/privacy/privacy.component';
-import { TermsComponent } from './pages/terms/terms.component';
-import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PageComponent } from './pages/page/page.component';
+import { DetailsComponent } from './pages/details/details.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { DetailsComponent } from './pages/details/details.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
@@ -70,15 +67,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     TimeAgoPipe,
     AppComponent,
     HomeComponent,
-    ContactComponent,
-    PrivacyComponent,
-    TermsComponent,
-    AboutComponent,
     LoginComponent,
-    NavbarComponent,
-    FooterComponent,
+    PageComponent,
     DetailsComponent,
     ProfileComponent,
+    NavbarComponent,
+    FooterComponent,
     ElementScrollPercentageDirective,
     StripeCheckOutComponent,
     StripeElementsComponent,

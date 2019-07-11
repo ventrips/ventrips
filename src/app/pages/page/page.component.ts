@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { map, tap, startWith } from 'rxjs/operators';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -9,18 +9,19 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import * as _ from 'lodash';
 import { InputsConfig } from '../../interfaces/inputs-config';
 
-const ID = 'privacy';
-const COLLECTION = 'pages';
-const PAGE_KEY = makeStateKey<any>(ID);
 @Component({
-  selector: 'app-privacy',
-  templateUrl: './privacy.component.html',
-  styleUrls: ['./privacy.component.scss']
+  selector: 'app-page',
+  templateUrl: './page.component.html',
+  styleUrls: ['./page.component.scss'],
+  animations: [
+    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
+  ]
 })
-export class PrivacyComponent implements OnInit {
+export class PageComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['title', 'description'],
     url: [],
@@ -33,20 +34,25 @@ export class PrivacyComponent implements OnInit {
   public environment = environment;
   public isLoading = true;
   public data: any;
-  public collection = COLLECTION;
-  public id = ID;
+
+  public PAGE_KEY: any;
+  public collection = 'pages';
+  public id: string;
   public user: User;
+  public url: string;
 
   constructor(
     private afs: AngularFirestore,
     private seoService: SeoService,
-    private router: ActivatedRoute,
+    private router: Router,
     private transferState: TransferState,
     private spinner: NgxSpinnerService,
     public authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.url = this.router.url;
+    this.id = _.split(this.url, '/')[1];
     this.authService.user$.subscribe(user => this.user = user);
 
     this.spinner.show();
@@ -62,14 +68,13 @@ export class PrivacyComponent implements OnInit {
         this.isLoading = false;
     })
   }
-  
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
   ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
+    const exists = this.transferState.get(this.PAGE_KEY, {} as any);
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(PAGE_KEY, page);
+        this.transferState.set(this.PAGE_KEY, page);
         const metaTags = {};
         const title = _.get(page, ['title']);
         const description = _.get(page, ['description']);

@@ -10,7 +10,7 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation, hueRotateAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
@@ -23,8 +23,7 @@ const PAGE_KEY = makeStateKey<any>('details');
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
   animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' }),
-    hueRotateAnimation({ anchor: 'enter', duration: 1000, delay: 100 })
+    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
   ]
 })
 export class DetailsComponent implements OnInit {
