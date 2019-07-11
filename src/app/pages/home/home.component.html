@@ -35,6 +35,7 @@
           [id]=""
           [data]="newPost"
           [isNew]="true"
+          [posts]="posts"
           [inputsConfig]="inputsConfig">
         </app-edit-modal>
         <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">

@@ -24,6 +24,7 @@ export class EditModalContentComponent implements OnInit {
   @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
+  @Input() posts: Array<any> = [];
   @Input() inputsConfig: InputsConfig;
   public _ = _;
   public keys = [];
@@ -72,20 +73,31 @@ export class EditModalContentComponent implements OnInit {
     return !this.isNew && _.includes(_.get(this.inputsConfig, ['disabled']), key);
   }
 
-  isValidUrl(str) {
+  isValidString(key) {
+    if (_.isEqual(key, 'slug')) {
+      const existingSlugs = _.map(this.posts, (post) => _.get(post, ['slug']));
+      return !_.includes(existingSlugs, this.data[key]) && !_.isEmpty(_.get(this.data, [key]));
+    }
+    return !_.isEmpty(_.get(this.data, [key]));
+  }
+
+  isValidUrl(key) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
       '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-    return !!pattern.test(str);
+    return !!pattern.test(_.get(this.data, [key]));
   }
 
   isValid() {
     return _.every(this.keys, (key) => {
+      if (_.includes(_.get(this.inputsConfig, ['string']), key)) {
+        return this.isValidString(key);
+      }
       if (_.includes(_.get(this.inputsConfig, ['url']), key)) {
-        return this.isValidUrl(_.get(this.data, [key]));
+        return this.isValidUrl(key);
       }
       if (_.includes(_.get(this.inputsConfig, ['date']), key)) {
         return _.isDate(_.get(this.data, [key]).toDate());
@@ -151,9 +163,9 @@ export class EditModalContentComponent implements OnInit {
     input.onchange = () => {
       // The File object
       const file = input.files[0];
-       
+
       // Client-side validation example
-      if (!_.isEqual(file.type.split('/')[0], 'image') || !file) { 
+      if (!_.isEqual(file.type.split('/')[0], 'image') || !file) {
         this.toastrService.warning(`Unsupported file type: ${file.type.split('/')[0]}`, `Only images are allowed`);
         return;
       }

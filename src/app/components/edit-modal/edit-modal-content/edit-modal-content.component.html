@@ -16,7 +16,7 @@
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa"
-                            [ngClass]="{ 'fa-check text-success': !_.isEmpty(data[key]), 'fa-asterisk text-danger': _.isEmpty(data[key]) }"></i>
+                            [ngClass]="{ 'fa-check text-success': isValidString(key), 'fa-asterisk text-danger': !isValidString(key) }"></i>
                         </span>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                             <i class="fa fa-image"></i>
                         </button>
                         <span class="input-group-text">
-                            <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(data[key])" [src]="_.get(data, [key])">
-                            <i class="fa fa-asterisk text-danger" *ngIf="!isValidUrl(data[key])"></i>
+                            <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(key)" [src]="_.get(data, [key])">
+                            <i class="fa fa-asterisk text-danger" *ngIf="!isValidUrl(key)"></i>
                         </span>
                     </div>
                 </div>

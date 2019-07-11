@@ -18,6 +18,7 @@ export class EditModalComponent implements OnInit {
   @Input() id: string;
   @Input() data: any;
   @Input() isNew = false;
+  @Input() posts: Array<any> = [];
   @Input() inputsConfig = {};
   public user;
 
@@ -28,7 +29,7 @@ export class EditModalComponent implements OnInit {
     private afs: AngularFirestore,
     private router: Router
   ) {
-    
+
   }
 
   ngOnInit() {
@@ -56,9 +57,10 @@ export class EditModalComponent implements OnInit {
     modalRef.componentInstance.collection = this.collection;
     modalRef.componentInstance.id = this.id;
     modalRef.componentInstance.data = _.assign({}, this.data);
-    modalRef.componentInstance.isNew = this.isNew; 
+    modalRef.componentInstance.isNew = this.isNew;
+    modalRef.componentInstance.posts = this.posts;
     modalRef.componentInstance.inputsConfig = this.inputsConfig;
-  
+
     modalRef.result.then((result?) => {
       if (_.isEqual(this.collection, 'posts')) {
         result.data.modified = firestore.Timestamp.fromDate(new Date());
