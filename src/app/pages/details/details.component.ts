@@ -9,11 +9,11 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as faker from 'faker';
-import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation, hueRotateAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
+import { environment } from '../../../environments/environment';
+import * as _ from 'lodash';
 
 const COLLECTION = 'posts';
 const PAGE_KEY = makeStateKey<any>('details');
@@ -42,7 +42,9 @@ export class DetailsComponent implements OnInit {
   public isLoading = true;
   public user: User;
   public collection = COLLECTION;
-  public id;
+  public id: string;
+  public url: string;
+  public environment = environment;
 
   constructor(
     private afs: AngularFirestore,
@@ -57,6 +59,7 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
 
     this.id = this.activatedRoute.snapshot.params.slug;

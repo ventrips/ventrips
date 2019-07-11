@@ -15,6 +15,17 @@
         </div>
     </div>
   </section>
+  <section class="container-fluid mb-3 d-flex flex-wrap align-items-center">
+    <span class="h5 my-2 mr-3">Share:</span>
+    <share-buttons
+      [theme]="'default'"
+      [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
+      [exclude]="[]"
+      [showText]="false"
+      [showCount]="false"
+      url="{{environment.url}}{{url}}">
+    </share-buttons>  
+  </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
@@ -84,10 +95,18 @@
                       <p class="mb-3" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; max-height: 5em;"  [innerHTML]="post?.description | searchHighlight: searchTerm">
                           {{post?.description}}
                       </p>
-                      <a [routerLink]="['']" [queryParams]="{ query: post?.category }" class="mb-2">
+                      <a [routerLink]="['']" [queryParams]="{ q: post?.category }" class="mb-2">
                         <h2 class="badge badge-dark text-uppercase p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
                       </a>
-                  </section>
+                      <share-buttons
+                        [theme]="'default'"
+                        [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
+                        [exclude]="[]"
+                        [showText]="false"
+                        [showCount]="false"
+                        url="{{environment.url}}/posts/{{post?.slug}}">
+                      </share-buttons>            
+                    </section>
                 </div>
               </div>
           </div>          

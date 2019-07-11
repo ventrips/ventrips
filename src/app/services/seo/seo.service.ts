@@ -19,7 +19,7 @@ export class SeoService {
     config = {
       title: `${!_.isEmpty(_.startCase(baseUrl)) ? _.capitalize(baseUrl) : environment.name}`,
       description: environment.description,
-      image: `${environment.url}/assets/img/horse-shoe-bend-min.jpg`,
+      image: `${environment.url}/assets/icons/favicon-32x32.png`,
       url: `${environment.url}${!_.isEmpty(_.startCase(this.router.url)) ? this.router.url : ''}`,
       ...config
     };
@@ -46,5 +46,6 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:description', content: config.description });
     this.meta.updateTag({ property: 'og:image', content: config.image });
     this.meta.updateTag({ property: 'og:url', content: config.url });
+    this.meta.updateTag({ property: 'fb:app_id', content: environment.facebookAppId });
   }
 }

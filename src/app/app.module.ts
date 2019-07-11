@@ -2,7 +2,7 @@ import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-bro
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -93,7 +94,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserTransferStateModule,
     TransferHttpCacheModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule,       // (Required) For share counts
+    HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
+    ShareButtonsModule,
     NgxSpinnerModule,
     QuillModule.forRoot(),
     NgbModule,

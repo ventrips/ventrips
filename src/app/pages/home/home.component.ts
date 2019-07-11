@@ -91,6 +91,7 @@ export class HomeComponent implements OnInit {
   public user: User;
   public newPost = _.assign({}, new Post());
   public collection = COLLECTION;
+  public url: string;
 
   constructor(
     private afs: AngularFirestore,
@@ -107,7 +108,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
     this.activatedRoute.queryParams.subscribe(params => {
-      this.searchTerm = params.query;
+      this.searchTerm = params.q;
+      this.url = this.router.url;
     });
     this.spinner.show();
     this.ssrFirestoreCollection(this.collection).subscribe(response => {
@@ -134,7 +136,7 @@ export class HomeComponent implements OnInit {
     debounceTime(0),
     distinctUntilChanged(),
     map(term => {
-      const queryParams = _.isEmpty(term) ? {} : { queryParams: { query: term } };
+      const queryParams = _.isEmpty(term) ? {} : { queryParams: { q: term } };
       this.router.navigate( [], queryParams);
       return term.length < 1 ? []
       : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);

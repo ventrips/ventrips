@@ -1,3 +1,4 @@
+import './assets/js/ng-share-icons';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
