@@ -19,7 +19,7 @@ export class SeoService {
     config = {
       title: `${!_.isEmpty(_.startCase(baseUrl)) ? _.capitalize(baseUrl) : environment.name}`,
       description: environment.description,
-      image: `${environment.url}/assets/icons/favicon-32x32.png`,
+      image: `${environment.url}/assets/icons/apple-touch-icon.png`,
       url: `${environment.url}${!_.isEmpty(_.startCase(this.router.url)) ? this.router.url : ''}`,
       ...config
     };
