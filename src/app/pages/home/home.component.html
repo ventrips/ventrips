@@ -1,4 +1,4 @@
-<section>
+<section [@enter]>
   <section class="sticky-top bg-white box-shadow mb-4">
     <div class="container-fluid border-bottom py-3">
       <div class="input-group">
@@ -24,7 +24,7 @@
       [showText]="false"
       [showCount]="false"
       url="{{environment.url}}{{url}}">
-    </share-buttons>  
+    </share-buttons>
   </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">
@@ -80,7 +80,7 @@
                         <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
                       </a>
                       <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                      <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>                          
+                      <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
                     </div>
                     <app-edit-modal class="my-3 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
                       [collection]="collection"
@@ -93,7 +93,7 @@
                   <section class="h5">
                       <h1 class="h3 mb-3">
                         <a [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-                      </h1>      
+                      </h1>
                       <p class="post-description mb-3" [innerHTML]="post?.description | searchHighlight: searchTerm">
                         {{post?.description}}
                       </p>
@@ -107,11 +107,11 @@
                         [showText]="false"
                         [showCount]="false"
                         url="{{environment.url}}/posts/{{post?.slug}}">
-                      </share-buttons>            
+                      </share-buttons>
                     </section>
                 </div>
               </div>
-          </div>          
+          </div>
         </div>
       </div>
     </ng-container>
