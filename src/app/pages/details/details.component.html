@@ -27,11 +27,11 @@
                 <img class="rounded-circle profile-picture" [src]="post?.photoURL" alt="Profile Picture">
               </a>
               <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
-              <p class="text-secondary my-4 d-lg-inline-block mr-3" *ngIf="post?.created">
+              <p class="small text-secondary my-4 d-lg-inline-block mr-3" *ngIf="post?.created">
                 Published: {{post?.created | timeStampDate:'longDate'}}
               </p>
-              <p class="text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
-                Last Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
+              <p class="small text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
+                Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
               </p>
           </div>
           <h1 class="text-capitalize mb-4">{{post?.title}}</h1>

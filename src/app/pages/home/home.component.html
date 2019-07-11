@@ -74,15 +74,15 @@
                   </a>
                 </div>
                 <div class="col py-2">
-                  <div class="mb-3 d-flex align-items-center">
+                  <div class="mb-3 d-flex flex-wrap-reverse align-items-center">
                     <div class="h5 mb-0">
-                      <a [routerLink]="['/profile', post?.uid]" class="d-inline-block mr-3">
+                      <a [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
                         <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
                       </a>
-                      <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                      <p class="text-secondary mb-2 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>                          
+                      <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                      <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>                          
                     </div>
-                    <app-edit-modal class="ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
+                    <app-edit-modal class="my-3 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
                       [collection]="collection"
                       [id]="post?.slug"
                       [data]="post"

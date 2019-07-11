@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
@@ -102,7 +103,8 @@ export class HomeComponent implements OnInit {
     private seoService: SeoService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
   ngOnInit() {
@@ -137,6 +139,9 @@ export class HomeComponent implements OnInit {
     distinctUntilChanged(),
     map(term => {
       const queryParams = _.isEmpty(term) ? {} : { queryParams: { q: term } };
+      if (isPlatformBrowser(this.platformId)) {
+        window.scrollTo(0, 0);
+      }
       this.router.navigate( [], queryParams);
       return term.length < 1 ? []
       : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);
