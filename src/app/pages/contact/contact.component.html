@@ -1,0 +1,33 @@
+<div class="container-fluid my-3">
+    <app-edit-modal *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-modal>
+</div>
+<ng-container *ngIf="!isLoading">
+    <section class="mt-5" [@enter]>
+        <ng-container *ngIf="data">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div class="container mb-3">
+                        <h1>{{data?.title}}</h1>
+                        <p class="text-secondary">{{data?.description}}</p>
+                    </div>
+                </div>
+                 <div class="col-12">
+                    <div class="container mb-5">
+                        <app-contact-form></app-contact-form>
+                    </div>
+                </div>
+           </div>
+           <figure *ngIf="data?.image" class="mb-0">
+                <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
+            </figure>
+        </ng-container>
+        <ng-container *ngIf="!data">
+            <div *ngIf="!data" class="text-center my-5">
+                <h1 class="text-uppercase">Sorry!</h1>
+                <p class="text-muted">This page does not exist. Return to
+                    <a class="text-warning" [routerLink]="['/']">Home</a>
+                </p>
+            </div>
+        </ng-container>
+    </section>
+</ng-container>

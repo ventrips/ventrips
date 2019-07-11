@@ -12,6 +12,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PageComponent } from './pages/page/page.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'posts/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
-      { path: 'contact', component: PageComponent },
+      { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PageComponent },
       { path: 'terms', component: PageComponent },
       { path: 'about', component: PageComponent },

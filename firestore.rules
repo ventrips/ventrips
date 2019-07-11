@@ -1,11 +1,18 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /files/{document=**} {
+    match /images/{document=**} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }
 			allow read;
       allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+		}
+    match /forms/{document=**} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+			allow read, create;
+      allow update, delete: if getRole('admin') == true || getRole('editor') == true;
 		}
 		match /pages/{document=**} {
       function getRole(role) {

@@ -55,6 +55,8 @@ import { EditModalComponent } from './components/edit-modal/edit-modal.component
 import { EditModalContentComponent } from './components/edit-modal/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     KeysPipe,
     EditModalComponent,
     EditModalContentComponent,
-    EditModalConfirmComponent
+    EditModalConfirmComponent,
+    ContactComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),

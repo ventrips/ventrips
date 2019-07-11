@@ -7,7 +7,7 @@
     </button>
 </div>
 <div class="modal-body row">
-    <div class="mb-3" [ngClass]="{'col-12': isLast, 'col-xs-12 col-md-6': !isLast}" *ngFor="let key of keys; last as isLast">
+    <div class="mb-3" [ngClass]="{'col-12': _.includes(_.get(inputsConfig, ['quill']), key), 'col-xs-12 col-md-6': !_.includes(_.get(inputsConfig, ['quill']), key)}" *ngFor="let key of keys">
         <h4 class="text-capitalize mb-2">{{_.startCase(key)}}</h4>
         <div class="mb-3">
             <ng-container *ngIf="_.includes(inputsConfig?.string, key)">
@@ -25,7 +25,7 @@
             <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
                 <div class="input-group custom-input-group mb-3">
                     <input type="url" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
-                    <div class="input-group-append">        
+                    <div class="input-group-append">
                         <button (click)="selectLocalImage(key)" class="btn btn-outline-secondary" type="button" [disabled]="isDisabled(key)">
                             <i class="fa fa-image"></i>
                         </button>
@@ -35,7 +35,7 @@
                         </span>
                     </div>
                 </div>
-            </ng-container>    
+            </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.quill, key)">
                 <quill-editor (onEditorCreated)="getEditorInstance($event, key)" [(ngModel)]="data[key]" [disabled]="isDisabled(key)"></quill-editor>
             </ng-container>
@@ -47,7 +47,7 @@
                         <div class="input-group-text">
                             <i class="fa"
                             [ngClass]="{ 'fa-check text-success': _.isDate(data[key].toDate()), 'fa-asterisk text-danger': !_.isDate(data[key].toDate()) }"></i>
-                        </div>            
+                        </div>
                     </div>
                 </div>
             </ng-container>
