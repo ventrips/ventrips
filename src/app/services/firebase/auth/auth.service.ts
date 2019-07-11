@@ -60,6 +60,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['']);
         });
+        this.toastrService.info(`Welcome ${_.get(credential, ['user', 'displayName'])}`);
       }).catch((error) => {
         if (_.isEqual(_.get(error, ['code']), 'auth/cancelled-popup-request')) {
           return;
