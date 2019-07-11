@@ -20,7 +20,7 @@
                         </span>
                     </div>
                 </div>
-                <span class="d-block text-right mb-3 small">{{maxStringInputLength - _.get(data, [key]).length}} characters remaining</span>
+                <span class="d-block text-right mb-3 small">{{maxStringInputLength - _.get(data, [key], []).length}} characters remaining</span>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
                 <div class="input-group custom-input-group mb-3">
