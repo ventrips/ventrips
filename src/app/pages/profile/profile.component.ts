@@ -65,10 +65,6 @@ export class ProfileComponent implements OnInit {
       }, () => {
         this.spinner.hide();
         this.isLoading = false;
-        this.seoService.setMetaTags({
-          title: `Sorry! This page does not exist`,
-          description: `Return to home`
-        });
       }
     );
   }

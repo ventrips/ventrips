@@ -14,13 +14,6 @@
                 <quill-view-html [content]="data?.body" theme="snow"></quill-view-html>
             </div>
         </ng-container>
-        <ng-container *ngIf="!data">
-            <div *ngIf="!data" class="text-center my-5">
-                <h1 class="text-uppercase">Sorry!</h1>
-                <p class="text-muted">This page does not exist. Return to
-                    <a class="text-warning" [routerLink]="['/']">Home</a>
-                </p>
-            </div>
-        </ng-container>
+        <app-error-not-found *ngIf="!data"></app-error-not-found>
     </section>
 </ng-container>

@@ -57,6 +57,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
     EditModalConfirmComponent,
     ContactComponent,
     ContactFormComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
