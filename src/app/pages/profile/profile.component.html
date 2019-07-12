@@ -32,6 +32,17 @@
                         <!-- <app-stripe-elements [amount]="'100'" [description]="'Donation'"></app-stripe-elements> -->
                     </div>
                 </ng-container>
+                <section class="d-flex flex-wrap align-items-center">
+                    <span class="h5 my-2 mr-3">Share:</span>
+                    <share-buttons
+                        [theme]="'default'"
+                        [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
+                        [exclude]="[]"
+                        [showText]="false"
+                        [showCount]="false"
+                        url="{{environment.url}}{{url}}">
+                    </share-buttons>
+                </section>
                 <hr class="my-5">
                 <section>
                     <quill-view-html *ngIf="profile?.bio" [content]="profile?.bio" theme="snow"></quill-view-html>

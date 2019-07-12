@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
+import { environment } from '../../../environments/environment';
 
 const COLLECTION = 'users';
 const PAGE_KEY = makeStateKey<any>('profile');
@@ -39,6 +40,8 @@ export class ProfileComponent implements OnInit {
   public isLoading = true;
   public user: User;
   public _ = _;
+  public environment = environment;
+  public url: string;
 
   constructor(
     private afs: AngularFirestore,
@@ -52,6 +55,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
     // If profile component initiates and doesn't have uid in params, direct to johnson huynh's uid
     this.id = !_.isNil(this.activatedRoute.snapshot.params.uid) ?
