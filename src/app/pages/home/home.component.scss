@@ -5,8 +5,11 @@
         padding-right: 0;
         padding-bottom: 2em;
     }
+    .post-description {
+        min-height: unset !important;
+    }
 }
 
 .post-description {
     min-height: 5em;
-} 
+}
