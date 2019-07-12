@@ -158,7 +158,9 @@ export class HomeComponent implements OnInit {
     return this.afs.collection<any>(path).valueChanges().pipe(
       tap(page => {
         this.transferState.set(PAGE_KEY, page);
-        this.seoService.setMetaTags();
+        this.seoService.setMetaTags({
+          title: 'Home'
+        });
       }),
       startWith(exists)
     );
