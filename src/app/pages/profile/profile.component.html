@@ -15,24 +15,24 @@
                     <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
                 </div>
-                <p class="mb-0">
-                    <span class="font-weight-bold mr-1" *ngIf="profile?.joined">Joined:</span>
-                    <span class="text-secondary">{{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeAgo}})</span></p>
-                <p class="mb-0">
-                    <span class="font-weight-bold mr-1" *ngIf="profile?.lastActive">Last Active:</span>
-                    <span class="text-secondary">{{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeAgo}})</span>
-                </p>
-                <!-- Role -->
-                <div class="mb-3" *ngIf="authService?.canEdit(user, profile?.uid)">
-                    <div *ngFor="let key of profile?.roles | keys">
-                        <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
-                        <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
+                <ng-container *ngIf="authService?.canEdit(user, profile?.uid)">
+                    <p class="mb-0">
+                        <span class="font-weight-bold mr-1" *ngIf="profile?.joined">Joined:</span>
+                        <span class="text-secondary">{{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeAgo}})</span></p>
+                    <p class="mb-0">
+                        <span class="font-weight-bold mr-1" *ngIf="profile?.lastActive">Last Active:</span>
+                        <span class="text-secondary">{{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeAgo}})</span>
+                    </p>
+                    <div class="mb-3">
+                        <div *ngFor="let key of profile?.roles | keys">
+                            <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
+                            <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
+                        </div>
+                        <!-- <app-stripe-check-out [amount]="'100'" [description]="'Donation'"></app-stripe-check-out> -->
+                        <!-- <app-stripe-elements [amount]="'100'" [description]="'Donation'"></app-stripe-elements> -->
                     </div>
-                    <!-- <app-stripe-check-out [amount]="'100'" [description]="'Donation'"></app-stripe-check-out> -->
-                    <!-- <app-stripe-elements [amount]="'100'" [description]="'Donation'"></app-stripe-elements> -->
-                </div>
-                <hr/>
-                <!-- Profile -->
+                </ng-container>
+                <hr class="my-5">
                 <section>
                     <quill-view-html *ngIf="profile?.bio" [content]="profile?.bio" theme="snow"></quill-view-html>
                     <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
