@@ -24,7 +24,9 @@ export class SeoService {
       ...config
     };
 
-    config.title = `${config.title} - ${_.startCase(environment.name)}`;
+    if (!_.isEqual(_.toLower(config.title), _.toLower(environment.name))) {
+      config.title = `${config.title} - ${_.startCase(environment.name)}`;
+    }
 
     // Set HTML Document Title
     this.title.setTitle(config.title);
