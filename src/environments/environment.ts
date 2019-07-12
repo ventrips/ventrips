@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   name: 'Ventrips',
-  description: 'A place where you can get all of the latest news and trends',
+  description: `Ventrips provides you with a one-stop trip to read and discover all of the latest news and trends relating to travel, videography, technology, finance, and lifestyle.
+  Don't miss out on the opportunity to learn from enthusiasts and experts on these topics!`,
   url: 'https://www.ventrips.com',
   firebase: {
     apiKey: 'AIzaSyDAb0y87YBB3GH6Qddod_PDiUqjFxpC1gQ',

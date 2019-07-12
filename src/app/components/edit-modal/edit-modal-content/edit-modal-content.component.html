@@ -12,7 +12,7 @@
         <div class="mb-3">
             <ng-container *ngIf="_.includes(inputsConfig?.string, key)">
                 <div class="input-group custom-input-group">
-                    <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)" [maxlength]="maxStringInputLength">
+                    <input type="input" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa"
@@ -20,7 +20,7 @@
                         </span>
                     </div>
                 </div>
-                <span class="d-block text-right mb-3 small">{{maxStringInputLength - _.get(data, [key], []).length}} characters remaining</span>
+                <span class="d-block text-right mb-3 small">{{_.get(data, [key], []).length}} characters</span>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
                 <div class="input-group custom-input-group mb-3">
