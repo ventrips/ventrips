@@ -53,7 +53,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
-    this.id = this.activatedRoute.snapshot.params.uid;
+    // If profile component initiates and doesn't have uid in params, direct to johnson huynh's uid
+    this.id = !_.isNil(this.activatedRoute.snapshot.params.uid) ?
+      this.activatedRoute.snapshot.params.uid : `quU47PyHKEZWJaklZeRpJeMKOGy1`;
     this.spinner.show();
     this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
       .subscribe(response => {

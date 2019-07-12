@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'posts/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
+      { path: 'johnson-huynh', component: ProfileComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PageComponent },
       { path: 'terms', component: PageComponent },
