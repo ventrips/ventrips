@@ -49,7 +49,7 @@
         </share-buttons>
       </div>
       <figure>
-        <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}"></div>
+        <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}" alt="Image Banner"></div>
       </figure>
       <div class="container my-5">
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
