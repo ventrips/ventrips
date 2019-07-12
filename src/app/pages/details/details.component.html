@@ -39,14 +39,16 @@
             {{post?.description}}
           </p>
         </div>
-        <share-buttons
-          [theme]="'default'"
-          [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
-          [exclude]="[]"
-          [showText]="true"
-          [showCount]="false"
-          url="{{environment.url}}{{url}}">
-        </share-buttons>
+        <section class="mb-3 d-flex flex-wrap align-items-center">
+          <share-buttons
+            [theme]="'default'"
+            [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
+            [exclude]="[]"
+            [showText]="false"
+            [showCount]="false"
+            url="{{environment.url}}{{url}}">
+          </share-buttons>
+        </section>
       </div>
       <figure>
         <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}" alt="Image Banner"></div>
