@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -53,6 +53,6 @@ export class NavbarComponent implements OnInit {
       keyboard: false
     }
     const modalRef = this.modalService.open(LoginModalComponent, modalOptions);
-    modalRef.result.then();
+    modalRef.result.then((result?) => {}, (reason?) => {});
   }
 }

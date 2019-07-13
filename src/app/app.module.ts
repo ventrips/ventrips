@@ -50,13 +50,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
 import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
-import { EditModalComponent } from './components/edit-modal/edit-modal.component';
-import { EditModalContentComponent } from './components/edit-modal/edit-modal-content/edit-modal-content.component';
-import { EditModalConfirmComponent } from './components/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
+import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
+import { EditModalContentComponent } from './components/modals/edit-modal/edit-modal-content/edit-modal-content.component';
+import { EditModalConfirmComponent } from './components/modals/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
+import { PaymentModalComponent } from './components/modals/payment-modal/payment-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
 
 @NgModule({
@@ -82,10 +83,11 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     EditModalComponent,
     EditModalContentComponent,
     EditModalConfirmComponent,
+    LoginModalComponent,
+    PaymentModalComponent,
     ContactComponent,
     ContactFormComponent,
-    LoginModalComponent,
-    ErrorNotFoundComponent
+    ErrorNotFoundComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
@@ -116,7 +118,8 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
   entryComponents: [
     EditModalContentComponent,
     EditModalConfirmComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    PaymentModalComponent
   ],
   bootstrap: [AppComponent]
 })

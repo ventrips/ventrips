@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../../services/firebase/auth/auth.service';
 import { EditModalConfirmComponent } from '../edit-modal-confirm/edit-modal-confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { InputsConfig } from '../../../interfaces/inputs-config';
+import { InputsConfig } from '../../../../interfaces/inputs-config';
 import Compressor from 'compressorjs';
 import { DatePipe } from '@angular/common';
 @Component({

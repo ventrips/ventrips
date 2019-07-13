@@ -4,7 +4,7 @@ import { firestore } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../services/firebase/auth/auth.service';
 import { Router } from '@angular/router';
 import { EditModalContentComponent } from './edit-modal-content/edit-modal-content.component';
 
