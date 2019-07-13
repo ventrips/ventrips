@@ -2,7 +2,7 @@
 	left: 0px;
 	height: 7px;
 	right: 0px;
-	top: 0px;
+	bottom: 0px;
 	z-index: 2;
 
 	&__indicator {
@@ -21,17 +21,5 @@
 
 	&--absolute {
 		position: absolute;
-	}
-}
-
-.inner {
-	position: relative;
-	width: 50%;
-
-	&__content {
-		border: 1px solid #333333;
-		height: 300px;
-		overflow: auto;
-		padding: 10px 40px 10px 40px;
 	}
 }
