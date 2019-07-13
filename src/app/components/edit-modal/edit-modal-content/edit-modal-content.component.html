@@ -37,7 +37,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.quill, key)">
-                <quill-editor (onEditorCreated)="getEditorInstance($event, key)" [(ngModel)]="data[key]" [disabled]="isDisabled(key)"></quill-editor>
+                <quill-editor [modules]="customQuillEditor" (onEditorCreated)="getEditorInstance($event, key)" [(ngModel)]="data[key]" [disabled]="isDisabled(key)"></quill-editor>
             </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.date, key)">
                 <div class="input-group custom-input-group">

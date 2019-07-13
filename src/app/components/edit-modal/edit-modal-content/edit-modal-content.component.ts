@@ -35,6 +35,8 @@ export class EditModalContentComponent implements OnInit {
   public percentage: Observable<number>;
   public snapshot: Observable<any>;
   public downloadURL: string;
+  public customQuillEditor = {};
+
 
   constructor(
     private modalService: NgbModal,
