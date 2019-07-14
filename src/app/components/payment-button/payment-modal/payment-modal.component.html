@@ -14,5 +14,5 @@
             <span class="d-block text-right mt-3">{{_.get(environment, ['name'])}}</span>
         </p>
     </ng-container>
-    <ngx-paypal *ngIf="isValidAmount()" [config]="payPalConfig"></ngx-paypal>
+    <ngx-paypal [class.d-none]="!isValidAmount()" [config]="payPalConfig"></ngx-paypal>
 </div>
