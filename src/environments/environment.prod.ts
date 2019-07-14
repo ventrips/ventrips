@@ -17,5 +17,8 @@ export const environment = {
   facebookAppId: '512336042564323',
   stripe: {
     publishable: 'pk_test_IWmofXjm7bppd1LPP6djGq1Q00g1LfqTym'
+  },
+  paypal: {
+    sandboxClientId: 'AQdvMeYPhKyWkWWLA7OvVVQFyTlYIIR6izy3VkrtzvDNoE_oEHva-Qrm0sxB9Ty6SeL-tkCNegcMqEf7'
   }
 };

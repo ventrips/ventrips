@@ -59,6 +59,7 @@
     "fs-extra": "^8.1.0",
     "jquery": "^3.4.1",
     "lodash": "^4.17.14",
+    "ngx-paypal": "^5.0.0",
     "ngx-quill": "^6.3.1",
     "ngx-spinner": "^7.1.4",
     "ngx-toastr": "^10.0.4",

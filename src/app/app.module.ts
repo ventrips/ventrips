@@ -36,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Pages
@@ -100,6 +101,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     ShareButtonsModule,
     NgxSpinnerModule,
+    NgxPayPalModule,
     QuillModule.forRoot(),
     NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
