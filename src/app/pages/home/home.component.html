@@ -30,14 +30,14 @@
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
         <!-- Create New -->
-        <app-edit-modal *ngIf="authService?.canEdit(user)"
+        <app-edit-button *ngIf="authService?.canEdit(user)"
           [collection]="collection"
           [id]=""
           [data]="newPost"
           [isNew]="true"
           [posts]="posts"
           [inputsConfig]="inputsConfig">
-        </app-edit-modal>
+        </app-edit-button>
         <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
@@ -83,13 +83,13 @@
                       <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                       <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
                     </div>
-                    <app-edit-modal class="my-3 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
+                    <app-edit-button class="my-3 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
                       [collection]="collection"
                       [id]="post?.slug"
                       [data]="post"
                       [isNew]="false"
                       [inputsConfig]="inputsConfig">
-                    </app-edit-modal>
+                    </app-edit-button>
                   </div>
                   <section class="h5">
                       <h1 class="h3 mb-3">

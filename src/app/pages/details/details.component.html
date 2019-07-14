@@ -1,11 +1,11 @@
 <div class="container-fluid my-3">
-  <app-edit-modal *ngIf="authService?.canEdit(user, post?.uid)"
+  <app-edit-button *ngIf="authService?.canEdit(user, post?.uid)"
     [collection]="collection"
     [id]="id"
     [data]="post"
     [isNew]="false"
     [inputsConfig]="inputsConfig">
-  </app-edit-modal>
+  </app-edit-button>
 </div>
 <section [@enter]>
   <ng-container *ngIf="!isLoading">

@@ -49,9 +49,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
-import { EditModalContentComponent } from './components/modals/edit-modal/edit-modal-content/edit-modal-content.component';
-import { EditModalConfirmComponent } from './components/modals/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
+import { EditButtonComponent } from './components/edit-button/edit-button.component';
+import { EditModalContentComponent } from './components/edit-button/edit-modal-content/edit-modal-content.component';
+import { EditModalConfirmComponent } from './components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 import { PaymentModalComponent } from './components/modals/payment-modal/payment-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -77,7 +77,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     FooterComponent,
     ElementScrollPercentageDirective,
     KeysPipe,
-    EditModalComponent,
+    EditButtonComponent,
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
