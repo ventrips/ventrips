@@ -90,6 +90,7 @@
                       <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                       <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
                     </div>
+                    <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button>
                   </div>
                   <section class="h5">
                       <h1 class="h3 mb-3">

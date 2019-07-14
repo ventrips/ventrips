@@ -4,6 +4,9 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { environment } from '../../../../environments/environment';
 import * as _ from 'lodash';
 import { AuthService } from '../../../services/firebase/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-payment-modal',
   templateUrl: './payment-modal.component.html',
@@ -22,7 +25,9 @@ export class PaymentModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public authService: AuthService
+    public authService: AuthService,
+    private toastrService: ToastrService,
+    private afs: AngularFirestore
   ) {}
 
   ngOnInit(): void {
@@ -83,23 +88,34 @@ export class PaymentModalComponent implements OnInit {
             layout: 'vertical'
         },
         onApprove: (data, actions) => {
-            console.log('onApprove - transaction was approved, but not authorized', data, actions);
+            this.toastrService.success('Transaction was approved');
             actions.order.get().then(details => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
+                this.afs.collection('payments').add(details)
+                .then(success => {
+                    if (!_.isNil(this.user)) {
+                        this.afs.collection('users').doc(this.user.uid).collection('payments').doc(success.id).set(details)
+                        .then(success => {})
+                        .catch(error => {
+                            this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+                        });
+                    }
+                    this.toastrService.success('Transaction was completed');
+                })
+                .catch(error => {
+                  this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+                });
             });
-
         },
         onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+            this.toastrService.success('Transaction was authorized');
         },
         onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
+            this.toastrService.info('Transaction was cancelled');
         },
         onError: err => {
-            console.log('OnError', err);
+            this.toastrService.warning(err);
         },
         onClick: (data, actions) => {
-            console.log('onClick', data, actions);
         },
     };
   }}

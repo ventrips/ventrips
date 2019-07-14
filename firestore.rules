@@ -7,7 +7,21 @@ service cloud.firestore {
 			allow read;
       allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
 		}
-    match /forms/{document=**} {
+    match /payments/{document=**} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+			allow read, create;
+      allow update, delete: if getRole('admin') == true || getRole('editor') == true;
+		}
+		match /users/{document}/payments/{payment=**} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+			allow read, create;
+      allow update, delete: if getRole('admin') == true || getRole('editor') == true;
+    }
+		match /forms/{document=**} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }
