@@ -82,9 +82,9 @@ export class ProfileComponent implements OnInit {
       tap(page => {
         this.transferState.set(PAGE_KEY, page);
         const metaTags = {};
-        const title = _.get(page, ['title'], 'Profile');
+        const title = _.get(page, ['displayName'], 'Profile');
         const description = _.get(page, ['description']);
-        const image = _.get(page, ['image']);
+        const image = _.get(page, ['photoURL']);
         if (!_.isEmpty(title)) { metaTags['title'] = title; }
         if (!_.isEmpty(description)) { metaTags['description'] = description; }
         if (!_.isEmpty(image)) { metaTags['image'] = image; }
