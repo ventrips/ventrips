@@ -75,6 +75,13 @@
                   </a>
                 </div>
                 <div class="col py-2">
+                  <app-edit-button *ngIf="authService?.canEdit(user, post?.uid)"
+                    [collection]="collection"
+                    [id]="post?.slug"
+                    [data]="post"
+                    [isNew]="false"
+                    [inputsConfig]="inputsConfig">
+                  </app-edit-button>
                   <div class="mb-3 d-flex flex-wrap-reverse align-items-center">
                     <div class="h5 mb-0">
                       <a [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
@@ -83,13 +90,6 @@
                       <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                       <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
                     </div>
-                    <app-edit-button class="my-3 ml-auto" *ngIf="authService?.canEdit(user, post?.uid)"
-                      [collection]="collection"
-                      [id]="post?.slug"
-                      [data]="post"
-                      [isNew]="false"
-                      [inputsConfig]="inputsConfig">
-                    </app-edit-button>
                   </div>
                   <section class="h5">
                       <h1 class="h3 mb-3">

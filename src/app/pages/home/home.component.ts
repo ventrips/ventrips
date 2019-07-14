@@ -32,6 +32,7 @@ const PAGE_KEY = makeStateKey<any>('home');
 export class HomeComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['slug', 'category', 'title', 'description'],
+    number: ['amount'],
     url: ['image'],
     quill: ['body'],
     date: [],

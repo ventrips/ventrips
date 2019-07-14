@@ -28,6 +28,7 @@ const PAGE_KEY = makeStateKey<any>('details');
 export class ContactComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['title', 'description'],
+    number: [],
     url: [],
     quill: [],
     date: [],

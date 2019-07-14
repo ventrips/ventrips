@@ -28,6 +28,7 @@ const PAGE_KEY = makeStateKey<any>('profile');
 export class ProfileComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: [],
+    number: [],
     url: [],
     quill: ['bio'],
     date: [],

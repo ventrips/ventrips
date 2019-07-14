@@ -29,6 +29,7 @@ const PAGE_KEY = makeStateKey<any>('details');
 export class DetailsComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['slug', 'category', 'title', 'description'],
+    number: [],
     url: ['image'],
     quill: ['body'],
     date: [],

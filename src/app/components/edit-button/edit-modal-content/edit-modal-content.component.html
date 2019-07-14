@@ -22,6 +22,18 @@
                 </div>
                 <span class="d-block text-right mb-3 small">{{_.get(data, [key], []).length}} characters</span>
             </ng-container>
+            <ng-container *ngIf="_.includes(inputsConfig?.number, key)">
+                <div class="input-group custom-input-group">
+                    <input type="number" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa"
+                            [ngClass]="{ 'fa-check text-success': _.isNumber(data[key]), 'fa-asterisk text-danger': !_.isNumber(data[key]) }"></i>
+                        </span>
+                    </div>
+                </div>
+                <span class="d-block text-right mb-3 small">{{_.get(data, [key], []).length}} characters</span>
+            </ng-container>
             <ng-container *ngIf="_.includes(inputsConfig?.url, key)" >
                 <div class="input-group custom-input-group mb-3">
                     <input type="url" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">

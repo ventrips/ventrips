@@ -56,6 +56,7 @@ export class EditModalContentComponent implements OnInit {
       this.keys = _.orderBy(
         _.concat(
           _.get(this.inputsConfig, ['string']),
+          _.get(this.inputsConfig, ['number']),
           _.get(this.inputsConfig, ['url']),
           _.get(this.inputsConfig, ['quill']),
           _.get(this.inputsConfig, ['date']),
@@ -96,6 +97,9 @@ export class EditModalContentComponent implements OnInit {
     return _.every(this.keys, (key) => {
       if (_.includes(_.get(this.inputsConfig, ['string']), key)) {
         return this.isValidString(key);
+      }
+      if (_.includes(_.get(this.inputsConfig, ['number']), key)) {
+        return _.isNumber(_.get(this.data, [key]));
       }
       if (_.includes(_.get(this.inputsConfig, ['url']), key)) {
         return this.isValidUrl(key);

@@ -1,6 +1,7 @@
 import { firestore } from 'firebase/app';
 export interface IInputsConfig {
     string: Array<any>;
+    number: Array<any>;
     url: Array<any>;
     quill: Array<any>;
     date: Array<any>;
@@ -10,6 +11,7 @@ export interface IInputsConfig {
 
 export class InputsConfig implements IInputsConfig {
     string = [];
+    number = [];
     url = [];
     quill = [];
     date = [];

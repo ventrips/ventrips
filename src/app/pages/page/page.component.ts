@@ -24,6 +24,7 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 export class PageComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['title', 'description'],
+    number: [],
     url: [],
     quill: ['body'],
     date: [],
