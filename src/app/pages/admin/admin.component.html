@@ -1,16 +1,18 @@
-<ng-container *ngIf="!isLoading">
+<ng-container>
     <section class="mt-5" [@enter]>
+        <div class="container mb-3">
+            <h1 class="mb-3">Admin</h1>
+        </div>
         <!-- Payments -->
         <ng-container *ngIf="payments">
             <div class="container mb-3">
-                <h1 class="mb-3">Admin</h1>
                 <h2 class="mb-3">Payments</h2>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Email Address</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Merchant ID</th>
                                 <th scope="col">Transaction ID</th>
                                 <th scope="col">Description</th>
@@ -35,6 +37,35 @@
                 </div>
             </div>
         </ng-container>
+        <!-- FORMS -->
+        <ng-container *ngIf="payments">
+            <div class="container mb-3">
+                <h2 class="mb-3">Forms</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">UID</th>
+                                <th scope="col">Display Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let form of forms; let index = index">
+                                <th scope="row">{{index + 1}}</th>
+                                <td>{{_.get(form, ['uid'])}}</td>
+                                <td>{{_.get(form, ['displayName'])}}</td>
+                                <td>{{_.get(form, ['email'])}}</td>
+                                <td>{{_.get(form, ['message'])}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+
         <app-error-not-found *ngIf="!payments"></app-error-not-found>
     </section>
 </ng-container>

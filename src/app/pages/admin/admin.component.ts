@@ -15,6 +15,8 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 
 const PAYMENTS_COLLECTION = 'payments';
 const PAYMENTS_KEY = makeStateKey<any>(PAYMENTS_COLLECTION);
+const FORMS_COLLECTION = 'forms';
+const FORMS_KEY = makeStateKey<any>(FORMS_COLLECTION);
 
 @Component({
   selector: 'app-admin',
@@ -29,6 +31,7 @@ export class AdminComponent implements OnInit {
   public environment = environment;
   public isLoading = true;
   public payments: any;
+  public forms: any;
   public user: User;
   public url: string;
 
@@ -45,26 +48,26 @@ export class AdminComponent implements OnInit {
     this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
 
-    this.spinner.show();
-    this.ssrFirestoreCollection(PAYMENTS_COLLECTION)
+    this.ssrFirestoreCollection(PAYMENTS_COLLECTION, PAYMENTS_KEY)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.payments = response;
-        this.spinner.hide();
-        this.isLoading = false;
       }
-    }, () => {
-        this.spinner.hide();
-        this.isLoading = false;
-    })
+    }, () => {})
+    this.ssrFirestoreCollection(FORMS_COLLECTION, FORMS_KEY)
+    .subscribe(response => {
+      if (!_.isEmpty(response) && !_.isNil(response)) {
+        this.forms = response;
+      }
+    }, () => {});
   }
 
   // Use Server-Side Rendered Data when it exists rather than fetching again on browser
-  ssrFirestoreCollection(path: string) {
-    const exists = this.transferState.get(PAYMENTS_KEY, {} as any);
+  ssrFirestoreCollection(path: string, PAGE_KEY: any) {
+    const exists = this.transferState.get(PAGE_KEY, {} as any);
     return this.afs.collection<any>(path).valueChanges().pipe(
       tap(page => {
-        this.transferState.set(PAYMENTS_KEY, page);
+        this.transferState.set(PAGE_KEY, page);
       }),
       startWith(exists)
     );
