@@ -49,6 +49,7 @@
             [showCount]="false"
             url="{{environment.url}}{{url}}">
           </share-buttons>
+          <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
         </section>
       </div>
       <figure>
