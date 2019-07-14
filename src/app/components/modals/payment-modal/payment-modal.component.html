@@ -5,6 +5,9 @@
     </button>
 </div>
 <div class="modal-body">
-    <input *ngIf="isDonation()" type="number" class="form-control mb-3" placeholder="Add Donation Amount (USD)" [(ngModel)]="amount" [required]="true" min="1">
+    <ng-container *ngIf="isDonation()">
+        <input type="number" class="form-control mb-3" placeholder="Add Donation Amount (USD)" [(ngModel)]="amount" [required]="true" min="1">
+        <p class="text-secondary">If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting and bandwidth bill. There is no minimum donation, any sum is appreciated. Thank you for your support!</p>
+    </ng-container>
     <ngx-paypal *ngIf="isValidAmount()" [config]="payPalConfig"></ngx-paypal>
 </div>

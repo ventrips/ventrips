@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./payment-modal.component.scss']
 })
 export class PaymentModalComponent implements OnInit {
-  @Input() amount: number = 10;
+  @Input() amount: number;
   @Input() category: string = 'DONATION';
   public currency = 'USD';
 
