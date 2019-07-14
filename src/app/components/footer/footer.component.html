@@ -14,7 +14,7 @@
     <section class="d-flex">
       <a [routerLink]="['']" [title]="environment?.name" class="navbar-brand text-warning text-capitalize mr-5 mb-0">{{environment?.name}}</a>
       <ul class="list-inline">
-        <li *ngFor="let item of footerLinks" class="list-inline-item mt-2 mr-4">
+        <li *ngFor="let item of footerLinks" class="list-inline-item my-2 mr-4">
           <a [title]="item?.title" [routerLink]="item?.url" class="text-capitalize text-white">
             {{item?.title}}
           </a>
