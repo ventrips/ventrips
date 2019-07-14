@@ -88,7 +88,9 @@ export class ProfileComponent implements OnInit {
             image: _.get(page, ['photoURL'])
           });
         } else {
-          this.seoService.setMetaTags();
+          this.seoService.setMetaTags({
+            title: 'Profile'
+          });
         }
     }),
       startWith(exists)
