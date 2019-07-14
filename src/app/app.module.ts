@@ -49,8 +49,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { StripeCheckOutComponent } from './components/stripe/stripe-check-out/stripe-check-out.component';
-import { StripeElementsComponent } from './components/stripe/stripe-elements/stripe-elements.component';
 import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
 import { EditModalContentComponent } from './components/modals/edit-modal/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/modals/edit-modal/edit-modal-confirm/edit-modal-confirm.component';
@@ -78,8 +76,6 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     NavbarComponent,
     FooterComponent,
     ElementScrollPercentageDirective,
-    StripeCheckOutComponent,
-    StripeElementsComponent,
     KeysPipe,
     EditModalComponent,
     EditModalContentComponent,
@@ -88,7 +84,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     PaymentModalComponent,
     ContactComponent,
     ContactFormComponent,
-    ErrorNotFoundComponent,
+    ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
@@ -114,7 +110,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireFunctionsModule, // imports firebase/functions only needed for functions features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFirestoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), // imports firebase/firestore, only needed for database features
+    AngularFirestoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) // imports firebase/firestore, only needed for database features
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   entryComponents: [

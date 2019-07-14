@@ -17,7 +17,7 @@ const db = admin.firestore();
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
 
-export const createStripeCustomer = functions.firestore
+export const createUserRoles = functions.firestore
 .document('users/{uid}')
 .onCreate(async snap => {
     // const customer = await stripe.customers.create({
@@ -59,7 +59,7 @@ export const createStripeCustomer = functions.firestore
 //             });
 //             stripeId = _.get(customer, ['id']);
 //         }
-    
+
 //         const charge = await stripe.charges.create({
 //             customer: stripeId,
 //             source: _.get(data, ['source']),

@@ -49,7 +49,7 @@ export class PaymentModalComponent implements OnInit {
   private initConfig(): void {
     this.payPalConfig = {
         currency: _.toUpper(this.currency),
-        clientId: this.environment.paypal.sandboxClientId,
+        clientId: this.environment.paypal.clientId,
         createOrderOnClient: (data) => < ICreateOrderRequest > {
             intent: 'CAPTURE',
             purchase_units: [{

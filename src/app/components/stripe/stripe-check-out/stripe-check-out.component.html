@@ -1,9 +1,0 @@
-<button (click)="checkOut($event)">
-    Buy for ${{ amount / 100 }}.00
-</button>
-
-<hr>
-
-<div *ngIf="isLoading">Loading...</div>
-<pre *ngIf="confirmation">{{ confirmation | json}}</pre>
-<pre>{{ confirmation | json}}</pre>
