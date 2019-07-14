@@ -3,7 +3,6 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { filter, startWith, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { PostsService } from './../../services/firebase/posts/posts.service';
 import { Post } from './../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
@@ -52,7 +51,6 @@ export class DetailsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private seoService: SeoService,
     public authService: AuthService,
-    private postsService: PostsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: any

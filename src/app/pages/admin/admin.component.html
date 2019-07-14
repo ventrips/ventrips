@@ -1,0 +1,40 @@
+<ng-container *ngIf="!isLoading">
+    <section class="mt-5" [@enter]>
+        <!-- Payments -->
+        <ng-container *ngIf="payments">
+            <div class="container mb-3">
+                <h1 class="mb-3">Admin</h1>
+                <h2 class="mb-3">Payments</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Merchant ID</th>
+                                <th scope="col">Transaction ID</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let payment of payments; let index = index">
+                                <th scope="row">{{index + 1}}</th>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payee', 'email_address'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payee', 'merchant_id'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payments', 'captures', 0, 'id'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'description'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payments', 'captures', 0, 'amount', 'value'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payments', 'captures', 0, 'amount', 'currency_code'])}}</td>
+                                <td>{{_.get(payment, ['purchase_units', 0, 'payments', 'captures', 0, 'status'])}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+        <app-error-not-found *ngIf="!payments"></app-error-not-found>
+    </section>
+</ng-container>

@@ -90,24 +90,24 @@ export class PaymentModalComponent implements OnInit {
         onApprove: (data, actions) => {
             this.toastrService.success('Transaction was approved');
             actions.order.get().then(details => {
-                this.afs.collection('payments').add(details)
-                .then(success => {
-                    if (!_.isNil(this.user)) {
-                        this.afs.collection('users').doc(this.user.uid).collection('payments').doc(success.id).set(details)
-                        .then(success => {})
-                        .catch(error => {
-                            this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
-                        });
-                    }
-                    this.toastrService.success('Transaction was completed');
-                })
-                .catch(error => {
-                  this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
-                });
+                this.toastrService.success('Transaction was authorized');
             });
         },
         onClientAuthorization: (data) => {
-            this.toastrService.success('Transaction was authorized');
+            this.afs.collection('payments').add(data)
+            .then(success => {
+                if (!_.isNil(this.user)) {
+                    this.afs.collection('users').doc(this.user.uid).collection('payments').doc(success.id).set(data)
+                    .then(success => {})
+                    .catch(error => {
+                        this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+                    });
+                }
+                this.toastrService.success('Transaction completed!');
+            })
+            .catch(error => {
+              this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+            });
         },
         onCancel: (data, actions) => {
             this.toastrService.info('Transaction was cancelled');

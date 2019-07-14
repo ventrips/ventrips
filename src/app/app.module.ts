@@ -23,7 +23,6 @@ import { ElementScrollPercentageDirective } from './directives/element-scroll-pe
 
 // Services
 import { NgbDateFirestoreAdapter } from './services/firebase/ngb-date-firestore-adapter/ngb-date-firestore-adapter.service';
-import { PostsService } from '../app/services/firebase/posts/posts.service';
 
 // Libraries
 import { Angulartics2Module } from 'angulartics2';
@@ -59,6 +58,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +86,8 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     PaymentModalComponent,
     ContactComponent,
     ContactFormComponent,
-    ErrorNotFoundComponent
+    ErrorNotFoundComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),

@@ -12,6 +12,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PageComponent } from './pages/page/page.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'privacy', component: PageComponent },
       { path: 'terms', component: PageComponent },
-      { path: 'about', component: PageComponent }
+      { path: 'about', component: PageComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [ AdminGuard ] }
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }

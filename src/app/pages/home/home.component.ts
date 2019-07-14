@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { PostsService } from '../../services/firebase/posts/posts.service';
 import { Post } from '../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
@@ -100,7 +99,6 @@ export class HomeComponent implements OnInit {
     private transferState: TransferState,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private postsService: PostsService,
     private seoService: SeoService,
     public authService: AuthService,
     private activatedRoute: ActivatedRoute,

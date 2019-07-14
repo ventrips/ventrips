@@ -11,7 +11,8 @@ import { take, map, tap } from 'rxjs/operators';
 export class SubscriberGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   canActivate(
@@ -24,10 +25,10 @@ export class SubscriberGuard implements CanActivate {
       tap(isSubscriber => {
         if (!isSubscriber) {
           this.toastrService.warning(`Access denied - Subscribers only`);
-
+          this.router.navigate([]);
         }
       })
     );
 
-  }  
+  }
 }
