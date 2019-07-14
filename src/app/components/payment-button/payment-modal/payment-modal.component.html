@@ -7,7 +7,12 @@
 <div class="modal-body">
     <ng-container *ngIf="isDonation()">
         <input type="number" class="form-control mb-3" placeholder="Add Donation Amount (USD)" [(ngModel)]="amount" [required]="true" min="1">
-        <p class="text-secondary">If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting and bandwidth bill. There is no minimum donation, any sum is appreciated. Thank you for your support!</p>
+        <p class="text-secondary">
+            <span *ngIf="user?.displayName">Hey {{_.first(_.split(_.get(user, ['displayName'], ''), ' '))}}!</span>
+            If you use this site regularly and would like to help keep <a [routerLink]="['']" target="_blank">{{_.get(environment, ['url'])}}</a> on the Internet, please consider donating a small sum to help pay for the hosting, storage, &amp; bandwidth costs. Any amount is greatly appreciated.
+            <span class="d-block text-right mt-3">Thank you so much for your support!</span>
+            <span class="d-block text-right mt-3">{{_.get(environment, ['name'])}}</span>
+        </p>
     </ng-container>
     <ngx-paypal *ngIf="isValidAmount()" [config]="payPalConfig"></ngx-paypal>
 </div>

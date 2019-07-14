@@ -18,6 +18,7 @@ export class PaymentModalComponent implements OnInit {
 
   public environment = environment;
   public user;
+  public _ = _;
 
   constructor(
     public activeModal: NgbActiveModal,
