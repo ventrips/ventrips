@@ -1,0 +1,4 @@
+<button class="btn btn-warning" [ngClass]="{'btn-sm': isDonation(), 'btn-md': !isDonation()}" (click)="openPayment()">
+    <span *ngIf="isDonation()">Donate</span>
+    <span *ngIf="!isDonation()">{{amount | currency}}</span>
+</button>

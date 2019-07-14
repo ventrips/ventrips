@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from './../../../environments/environment';
-import { PaymentModalComponent } from '../modals/payment-modal/payment-modal.component';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 
 @Component({
@@ -50,20 +47,8 @@ export class FooterComponent implements OnInit {
     }
   ];
 
-  constructor(
-    private modalService: NgbModal
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  donate() {
-    const modalOptions: NgbModalOptions = {
-      backdrop: 'static',
-      keyboard: false
-    }
-    const modalRef = this.modalService.open(PaymentModalComponent, modalOptions);
-    modalRef.result.then((result?) => {}, (reason?) => {});
-  }
+  ngOnInit() {}
 
 }

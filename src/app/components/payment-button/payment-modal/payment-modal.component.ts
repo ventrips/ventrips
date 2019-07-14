@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/firebase/auth/auth.service';
 })
 export class PaymentModalComponent implements OnInit {
   @Input() amount: number;
-  @Input() category: string = 'DONATION';
+  @Input() category: string = 'Donation';
   public currency = 'USD';
 
   public payPalConfig ? : IPayPalConfig;
@@ -32,7 +32,7 @@ export class PaymentModalComponent implements OnInit {
   }
 
   public isDonation() {
-    return _.isEqual(_.toUpper(this.category), 'DONATION');
+    return _.isEqual(_.toLower(this.category), 'donation');
   }
 
   public isValidAmount() {
@@ -64,7 +64,7 @@ export class PaymentModalComponent implements OnInit {
                     }
                 },
                 items: [{
-                    name: `${this.environment.name} - ${this.category}`,
+                    name: `${_.capitalize(this.environment.name)} - ${_.capitalize(this.category)}`,
                     quantity: '1',
                     category: 'DIGITAL_GOODS',
                     unit_amount: {

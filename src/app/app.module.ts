@@ -53,7 +53,8 @@ import { EditButtonComponent } from './components/edit-button/edit-button.compon
 import { EditModalContentComponent } from './components/edit-button/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
-import { PaymentModalComponent } from './components/modals/payment-modal/payment-modal.component';
+import { PaymentButtonComponent } from './components/payment-button/payment-button.component';
+import { PaymentModalComponent } from './components/payment-button/payment-modal/payment-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
@@ -81,6 +82,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
+    PaymentButtonComponent,
     PaymentModalComponent,
     ContactComponent,
     ContactFormComponent,
