@@ -66,7 +66,7 @@ export class DetailsComponent implements OnInit {
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
-        this.spinner.hide();
+        // this.spinner.hide();
         this.isLoading = false;
       }
     }, () => {
