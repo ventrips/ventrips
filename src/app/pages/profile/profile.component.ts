@@ -26,7 +26,7 @@ const PAGE_KEY = makeStateKey<any>('profile');
 })
 export class ProfileComponent implements OnInit {
   public inputsConfig: InputsConfig = {
-    string: [],
+    string: ['description'],
     number: [],
     url: [],
     quill: ['bio'],
@@ -81,11 +81,15 @@ export class ProfileComponent implements OnInit {
     return this.afs.doc<any>(path).valueChanges().pipe(
       tap(page => {
         this.transferState.set(PAGE_KEY, page);
-        this.seoService.setMetaTags({
-          title: `${_.get(page, ['displayName'])} - Profile`,
-          description: `${_.get(page, ['displayName'])}`,
-          image: _.get(page, ['photoURL'])
-        });
+        if (!_.isNil(page)) {
+          this.seoService.setMetaTags({
+            title: `${_.get(page, ['displayName'])}`,
+            description: `${_.get(page, ['description'])}`,
+            image: _.get(page, ['photoURL'])
+          });
+        } else {
+          this.seoService.setMetaTags();
+        }
     }),
       startWith(exists)
     );
