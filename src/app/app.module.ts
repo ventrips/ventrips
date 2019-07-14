@@ -37,6 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { AdsenseModule } from 'ng2-adsense';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -99,6 +100,9 @@ import { AdminComponent } from './pages/admin/admin.component';
     HttpClientModule,       // (Required) For share counts
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     ShareButtonsModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-4642980268605791'
+    }),
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),

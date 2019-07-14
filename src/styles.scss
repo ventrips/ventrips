@@ -4,6 +4,7 @@
 main {
     position: relative;
     min-height: 100vh;
+    overflow: hidden; // Prevent inner body scroll
 }
 
 ::selection {
