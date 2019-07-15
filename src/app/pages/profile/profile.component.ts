@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
         if (!_.isEmpty(description)) { metaTags['description'] = description; }
         if (!_.isEmpty(image)) { metaTags['image'] = image; }
         this.seoService.setMetaTags(metaTags);
-    }),
+      }),
       startWith(exists)
     );
   }
