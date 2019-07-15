@@ -110,7 +110,6 @@ export class PaymentModalComponent implements OnInit {
             });
         },
         onCancel: (data, actions) => {
-            this.toastrService.info('Transaction was cancelled');
         },
         onError: err => {
             this.toastrService.warning(err);
