@@ -10,8 +10,8 @@
         <p class="text-secondary">
             <span *ngIf="user?.displayName">Hey {{_.first(_.split(_.get(user, ['displayName'], ''), ' '))}}!</span>
             If you use this site regularly and would like to help keep <a [routerLink]="['']" target="_blank">{{_.get(environment, ['url'])}}</a> on the Internet, please consider donating a small sum to help pay for the hosting, storage, &amp; bandwidth costs. Any amount is greatly appreciated.
-            <span class="d-block text-right mt-3">Thank you so much for your support!</span>
-            <span class="d-block text-right mt-3">{{_.get(environment, ['name'])}}</span>
+            <span class="d-block text-right my-3">Thank you so much for your support!</span>
+            <span class="d-block text-right mb-5">{{_.get(environment, ['name'])}}</span>
         </p>
     </ng-container>
     <ngx-paypal [class.d-none]="!isValidAmount()" [config]="payPalConfig"></ngx-paypal>
