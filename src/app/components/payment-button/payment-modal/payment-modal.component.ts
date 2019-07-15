@@ -70,7 +70,7 @@ export class PaymentModalComponent implements OnInit {
                     }
                 },
                 items: [{
-                    name: `${_.capitalize(this.environment.name)} - ${_.capitalize(this.category)}`,
+                    name: `${_.capitalize(this.category)}`,
                     quantity: '1',
                     category: 'DIGITAL_GOODS',
                     unit_amount: {
