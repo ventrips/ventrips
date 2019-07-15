@@ -33,8 +33,6 @@
                             <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
                             <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
                         </div>
-                        <!-- <app-stripe-check-out [amount]="'100'" [description]="'Donation'"></app-stripe-check-out> -->
-                        <!-- <app-stripe-elements [amount]="'100'" [description]="'Donation'"></app-stripe-elements> -->
                     </div>
                 </ng-container>
                 <section class="d-flex flex-wrap align-items-center">

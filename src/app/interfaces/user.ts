@@ -9,9 +9,6 @@ export interface IUser {
     roles?: Roles; // admin, editor, subscriber
     bio?: string;
     lastActive?: firestore.Timestamp;
-    // Stripe customer ID assigned by auth function
-    stripeId?: string;
-    status?: string;
 }
 
 export class User implements IUser {
@@ -23,6 +20,4 @@ export class User implements IUser {
     roles?;
     bio?;
     lastActive?;
-    stripeId?;
-    status?;
 }
