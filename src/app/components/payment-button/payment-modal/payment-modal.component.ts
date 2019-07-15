@@ -88,26 +88,28 @@ export class PaymentModalComponent implements OnInit {
             layout: 'vertical'
         },
         onApprove: (data, actions) => {
-            this.toastrService.success('Transaction was approved');
-            actions.order.get().then(details => {
-                this.toastrService.success('Transaction was authorized');
-            });
+            actions.order.get().then(details => {});
         },
         onClientAuthorization: (data) => {
-            this.afs.collection('payments').add(data)
-            .then(success => {
-                if (!_.isNil(this.user)) {
-                    this.afs.collection('users').doc(this.user.uid).collection('payments').doc(success.id).set(data)
-                    .then(success => {})
-                    .catch(error => {
-                        this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
-                    });
-                }
-                this.toastrService.success('Transaction completed!');
-            })
-            .catch(error => {
-              this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
-            });
+            if (!_.isNil(this.user)) {
+                this.afs.collection('users').doc(this.user.uid).collection('payments').add(data)
+                .then(success => {
+                    this.toastrService.success('Transaction completed!');
+                    this.activeModal.close();
+                })
+                .catch(error => {
+                    this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+                });
+            } else {
+                this.afs.collection('payments').add(data)
+                .then(success => {
+                    this.toastrService.success('Transaction completed!');
+                    this.activeModal.close();
+                })
+                .catch(error => {
+                  this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+                });
+            }
         },
         onCancel: (data, actions) => {
         },
