@@ -13,8 +13,10 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
   ]
 })
 export class PostComponent implements OnInit {
+  @Input() searchTerm;
   @Input() post;
 
+  public user;
   public environment = environment;
 
   constructor(
@@ -23,6 +25,7 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => this.user = user);
   }
 
   scrollToTop() {
