@@ -24,7 +24,7 @@ export class RelatedPostsComponent implements OnInit {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.ssrService.ssrFirestoreCollectionGroup(this.path, `related-posts-${this.stateKey}`)
+    this.ssrService.ssrFirestoreCollection(this.path, `home`) // Use homepage cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = _.filter(response, (item) => _.isEqual(this.category, item.category) && !_.isEqual(this.stateKey, item.slug));

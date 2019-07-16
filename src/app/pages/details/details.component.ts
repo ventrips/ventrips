@@ -56,7 +56,6 @@ export class DetailsComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
     this.slug = this.activatedRoute.snapshot.params.slug;
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      console.log(Event);
       this.slug = this.activatedRoute.snapshot.params.slug;
       this.init();
     });

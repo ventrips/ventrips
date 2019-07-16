@@ -1,10 +1,10 @@
 <ng-container *ngIf="!_.isEmpty(posts)">
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container mt-5 pt-5">
+        <div class="row no-gutters">
             <div class="col-12">
                 <h2 class="mb-3">Related Posts</h2>
             </div>
-            <div class="col-xs-12 col-xl-6" *ngFor="let post of posts" [ngClass]="{'bg-light': !post.publish }">
+            <div class="col-xs-12" *ngFor="let post of posts" [ngClass]="{'bg-light': !post.publish }">
                 <app-post [post]="post"></app-post>
             </div>
         </div>
