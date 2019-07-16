@@ -10,8 +10,9 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
-import * as _ from 'lodash';
 import { SsrService } from '../../services/firebase/ssr/ssr.service';
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -34,9 +35,9 @@ export class ProfileComponent implements OnInit {
   public profile: User;
   public isLoading = true;
   public user: User;
-  public _ = _;
   public environment = environment;
   public url: string;
+  public _ = _;
 
   constructor(
     private router: Router,
