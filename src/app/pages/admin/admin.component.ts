@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
 
-    this.ssrService.ssrFirestoreCollectionGroup(`payments`, `payments`, false)
+    this.ssrService.ssrFirestoreCollectionGroup(`payments`, `payments-group`, false)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.payments = response;
