@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
-import { filter, startWith, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Post } from './../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
@@ -44,7 +42,6 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
-    private transferState: TransferState,
     private spinner: NgxSpinnerService,
     private seoService: SeoService,
     private ssrService: SsrService,
