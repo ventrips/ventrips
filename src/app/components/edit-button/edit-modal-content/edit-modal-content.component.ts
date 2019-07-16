@@ -67,11 +67,10 @@ export class EditModalContentComponent implements OnInit {
     });
   }
 
-  transformText(key, $event) {
+  transformString(key, $event) {
     switch (key) {
       case 'slug':
         return _.toLower(_.replace($event, new RegExp(/[^a-zA-Z0-9]/g), '-'));
-      case 'title':
       case 'category':
         return _.startCase($event);
       default:
