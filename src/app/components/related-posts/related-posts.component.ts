@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { tap, startWith } from 'rxjs/operators';
+import { tap, startWith, filter } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-related-posts',
@@ -18,12 +19,20 @@ export class RelatedPostsComponent implements OnInit {
   public _ = _;
 
   constructor(
+    private router: Router,
     private afs: AngularFirestore,
     private transferState: TransferState,
     private ssrService: SsrService
   ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnInit() {
+    this.init();
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      this.init();
+    });
+  }
+
+  init() {
     this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
@@ -33,6 +42,4 @@ export class RelatedPostsComponent implements OnInit {
 
     });
   }
-
-  ngOnInit() {}
 }
