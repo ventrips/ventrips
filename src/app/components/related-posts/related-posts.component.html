@@ -1,1 +1,12 @@
-<pre>{{data | json}}</pre>
+<ng-container *ngIf="!_.isEmpty(posts)">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-3">Related Posts</h2>
+            </div>
+            <div class="col-xs-12 col-xl-6" *ngFor="let post of posts" [ngClass]="{'bg-light': !post.publish }">
+                <app-post [post]="post"></app-post>
+            </div>
+        </div>
+    </div>
+</ng-container>

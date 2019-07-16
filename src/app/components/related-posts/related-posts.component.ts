@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { startWith } from 'rxjs/internal/operators/startWith';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { tap, startWith } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
@@ -10,22 +11,28 @@ import * as _ from 'lodash';
   styleUrls: ['./related-posts.component.scss']
 })
 export class RelatedPostsComponent implements OnInit {
+  @Input() category: string;
   @Input() path: string;
   @Input() stateKey: string;
-  public data;
+  public posts;
+  public _ = _;
 
   constructor(
+    private afs: AngularFirestore,
+    private transferState: TransferState,
     private ssrService: SsrService
   ) { }
 
-  ngOnInit() {
-    this.ssrService.ssrFirestoreCollectionGroup(this.path, this.stateKey, false)
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ssrService.ssrFirestoreCollectionGroup(this.path, `related-posts-${this.stateKey}`)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
-        this.data = response;
+        this.posts = _.filter(response, (item) => _.isEqual(this.category, item.category) && !_.isEqual(this.stateKey, item.slug));
       }
     }, () => {
 
     });
   }
+
+  ngOnInit() {}
 }

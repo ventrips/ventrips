@@ -1,5 +1,5 @@
 <div class="container-fluid my-3">
-  <app-edit-button *ngIf="authService?.canEdit(user, post?.uid)"
+  <app-edit-button *ngIf="post && authService?.canEdit(user, post?.uid)"
     [collection]="collection"
     [id]="id"
     [data]="post"
@@ -59,7 +59,7 @@
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
     </ng-container>
-    <!-- <app-related-posts *ngIf="post" [path]="'posts'" [stateKey]="'related-posts'"></app-related-posts> -->
+    <app-related-posts *ngIf="post" [category]="post?.category" [path]="collection" [stateKey]="post?.slug"></app-related-posts>
     <app-error-not-found *ngIf="!post"></app-error-not-found>
   </ng-container>
 </section>

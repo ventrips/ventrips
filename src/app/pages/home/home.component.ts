@@ -7,12 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from '../../interfaces/post';
-import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
@@ -20,10 +18,7 @@ import * as _ from 'lodash';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [ NgbTypeaheadConfig ], // add NgbTypeaheadConfig to the component providers
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100}),
-  ]
+  providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
 })
 export class HomeComponent implements OnInit {
   public inputsConfig: InputsConfig = {
@@ -97,7 +92,6 @@ export class HomeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private seoService: SeoService,
     private ssrService: SsrService,
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any

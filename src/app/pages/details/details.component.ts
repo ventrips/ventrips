@@ -12,6 +12,7 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import { filter } from 'rxjs/internal/operators/filter';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -54,7 +55,16 @@ export class DetailsComponent implements OnInit {
     this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
     this.slug = this.activatedRoute.snapshot.params.slug;
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      console.log(Event);
+      this.slug = this.activatedRoute.snapshot.params.slug;
+      this.init();
+    });
+    this.init();
+  }
 
+  init() {
+    this.isLoading = true;
     this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
     .subscribe(response => {
