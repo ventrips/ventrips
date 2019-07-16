@@ -52,10 +52,11 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
+    this.url = this.router.url;
     this.slug = this.activatedRoute.snapshot.params.slug;
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      this.url = this.router.url;
       this.slug = this.activatedRoute.snapshot.params.slug;
       this.init();
     });
