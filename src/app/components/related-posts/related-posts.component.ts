@@ -35,7 +35,9 @@ export class RelatedPostsComponent implements OnInit {
     this.destroyRelatedPosts = this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
-        this.relatedPosts = _.filter(response, (item) => _.isEqual(this.post.category, item.category) && !_.isEqual(this.post.slug, item.slug));
+        this.relatedPosts = _.filter(response, (item) =>
+          _.isEqual(_.toLower(this.post.category), _.toLower(item.category)) &&
+          !_.isEqual(_.toLower(this.post.slug), _.toLower(item.slug)));
       }
     }, () => {
 

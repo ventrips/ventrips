@@ -67,6 +67,18 @@ export class EditModalContentComponent implements OnInit {
     });
   }
 
+  transformText(key, $event) {
+    switch (key) {
+      case 'slug':
+        return _.toLower(_.replace($event, new RegExp(/[^a-zA-Z0-9]/g), '-'));
+      case 'title':
+      case 'category':
+        return _.startCase($event);
+      default:
+        return _.capitalize($event);
+    }
+  }
+
   isDisabled(key: string) {
     if (_.get(this.user, ['roles', 'admin']) && !_.isEqual(key, 'slug')) {
       return false;
