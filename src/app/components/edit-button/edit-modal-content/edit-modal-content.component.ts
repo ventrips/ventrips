@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../services/firestore/auth/auth.service';
 import { EditModalConfirmComponent } from '../edit-modal-confirm/edit-modal-confirm.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';

@@ -3,14 +3,14 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Post } from './../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
-import { SsrService } from '../../services/firebase/ssr/ssr.service';
+import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-details',

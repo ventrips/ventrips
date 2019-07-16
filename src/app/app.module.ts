@@ -22,7 +22,7 @@ import { KeysPipe } from './pipes/keys/keys.pipe';
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
 
 // Services
-import { NgbDateFirestoreAdapter } from './services/firebase/ngb-date-firestore-adapter/ngb-date-firestore-adapter.service';
+import { NgbDateFirestoreAdapter } from './services/firestore/ngb-date-firestore-adapter/ngb-date-firestore-adapter.service';
 
 // Libraries
 import { Angulartics2Module } from 'angulartics2';

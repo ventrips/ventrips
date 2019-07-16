@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
 import * as _ from 'lodash';
 

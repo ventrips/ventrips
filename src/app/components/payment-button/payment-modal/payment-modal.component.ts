@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { environment } from '../../../../environments/environment';
-import * as _ from 'lodash';
-import { AuthService } from '../../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../services/firestore/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-payment-modal',

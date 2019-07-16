@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { PaymentModalComponent } from '../payment-button/payment-modal/payment-modal.component';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({

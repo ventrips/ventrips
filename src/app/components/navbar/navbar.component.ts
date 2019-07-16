@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from './../../../environments/environment';
-import * as _ from 'lodash';
 import { User } from '../../interfaces/user';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

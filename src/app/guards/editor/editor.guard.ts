@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { take, map, tap } from 'rxjs/operators';
 

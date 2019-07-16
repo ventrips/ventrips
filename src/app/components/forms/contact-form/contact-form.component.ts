@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from './../../../interfaces/contact';
 import * as _ from 'lodash';
-import { AuthService } from '../../../services/firebase/auth/auth.service';
+import { AuthService } from '../../../services/firestore/auth/auth.service';
 import { User } from '../../../interfaces/user';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';

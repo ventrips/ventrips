@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SeoService } from '../../services/seo/seo.service';
-import { AuthService } from '../../services/firebase/auth/auth.service';
+import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
-import { SsrService } from '../../services/firebase/ssr/ssr.service';
+import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 
 @Component({
