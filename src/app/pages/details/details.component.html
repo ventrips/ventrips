@@ -59,6 +59,7 @@
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
     </ng-container>
+    <!-- <app-related-posts *ngIf="post" [path]="'posts'" [stateKey]="'related-posts'"></app-related-posts> -->
     <app-error-not-found *ngIf="!post"></app-error-not-found>
   </ng-container>
 </section>

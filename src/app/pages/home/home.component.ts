@@ -4,7 +4,6 @@ import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from '../../interfaces/post';
@@ -16,9 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
-
-const COLLECTION = 'posts';
-const PAGE_KEY = makeStateKey<any>('home');
+import { SsrService } from '../../services/firebase/ssr/ssr.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -91,18 +88,17 @@ export class HomeComponent implements OnInit {
   public _ = _;
   public user: User;
   public newPost = _.assign({}, new Post());
-  public collection = COLLECTION;
   public url: string;
 
   constructor(
     private afs: AngularFirestore,
-    private transferState: TransferState,
     private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private seoService: SeoService,
-    public authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private spinner: NgxSpinnerService,
+    private seoService: SeoService,
+    private ssrService: SsrService,
+    public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -113,7 +109,7 @@ export class HomeComponent implements OnInit {
       this.url = this.router.url;
     });
     this.spinner.show();
-    this.ssrFirestoreCollection(this.collection).subscribe(response => {
+    this.ssrService.ssrFirestoreCollection(`posts`, `home`, true).subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = response;
         // Adding Search Options
@@ -149,19 +145,5 @@ export class HomeComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);
     }
-  }
-  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
-  ssrFirestoreCollection(path: string) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
-
-    return this.afs.collection<any>(path).valueChanges().pipe(
-      tap(page => {
-        this.transferState.set(PAGE_KEY, page);
-        this.seoService.setMetaTags({
-          title: 'Home'
-        });
-      }),
-      startWith(exists)
-    );
   }
 }

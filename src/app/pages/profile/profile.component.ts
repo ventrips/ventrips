@@ -8,14 +8,12 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firebase/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as _ from 'lodash';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
-
-const COLLECTION = 'users';
-const PAGE_KEY = makeStateKey<any>('profile');
+import * as _ from 'lodash';
+import { SsrService } from '../../services/firebase/ssr/ssr.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -34,7 +32,6 @@ export class ProfileComponent implements OnInit {
     boolean: [],
     disabled: []
   };
-  public collection = COLLECTION;
   public id;
   public profile: User;
   public isLoading = true;
@@ -44,13 +41,14 @@ export class ProfileComponent implements OnInit {
   public url: string;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
     private transferState: TransferState,
     private spinner: NgxSpinnerService,
     private seoService: SeoService,
+    private ssrService: SsrService,
     public authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
@@ -61,7 +59,7 @@ export class ProfileComponent implements OnInit {
     this.id = !_.isNil(this.activatedRoute.snapshot.params.uid) ?
       this.activatedRoute.snapshot.params.uid : `quU47PyHKEZWJaklZeRpJeMKOGy1`;
     this.spinner.show();
-    this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
+    this.ssrService.ssrFirestoreDoc(`users/${this.id}`, `users-${this.id}`, true)
       .subscribe(response => {
         if (!_.isEmpty(response) && !_.isNil(response)) {
           this.profile = response;
@@ -72,25 +70,6 @@ export class ProfileComponent implements OnInit {
         this.spinner.hide();
         this.isLoading = false;
       }
-    );
-  }
-
-  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
-  ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
-    return this.afs.doc<any>(path).valueChanges().pipe(
-      tap(page => {
-        this.transferState.set(PAGE_KEY, page);
-        const metaTags = {};
-        const title = _.get(page, ['displayName'], 'Profile');
-        const description = _.get(page, ['description']);
-        const image = _.get(page, ['photoURL']);
-        if (!_.isEmpty(title)) { metaTags['title'] = title; }
-        if (!_.isEmpty(description)) { metaTags['description'] = description; }
-        if (!_.isEmpty(image)) { metaTags['image'] = image; }
-        this.seoService.setMetaTags(metaTags);
-      }),
-      startWith(exists)
     );
   }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { map, tap, startWith } from 'rxjs/operators';
-import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SeoService } from '../../services/seo/seo.service';
@@ -12,11 +10,7 @@ import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import * as _ from 'lodash';
 import { InputsConfig } from '../../interfaces/inputs-config';
-
-const ID = 'contact';
-const COLLECTION = 'pages';
-const PAGE_KEY = makeStateKey<any>('details');
-
+import { SsrService } from '../../services/firebase/ssr/ssr.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -39,9 +33,6 @@ export class ContactComponent implements OnInit {
   public environment = environment;
   public isLoading = true;
   public data: any;
-
-  public collection = COLLECTION;
-  public id = ID;
   public user: User;
   public url: string;
 
@@ -49,8 +40,8 @@ export class ContactComponent implements OnInit {
     private afs: AngularFirestore,
     private seoService: SeoService,
     private router: Router,
-    private transferState: TransferState,
     private spinner: NgxSpinnerService,
+    private ssrService: SsrService,
     public authService: AuthService
   ) {
   }
@@ -60,7 +51,7 @@ export class ContactComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
 
     this.spinner.show();
-    this.ssrFirestoreDoc(`${this.collection}/${this.id}`)
+    this.ssrService.ssrFirestoreDoc(`pages/contact`, `pages-contact`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;
@@ -72,24 +63,4 @@ export class ContactComponent implements OnInit {
         this.isLoading = false;
     })
   }
-
-  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
-  ssrFirestoreDoc(path: string) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
-    return this.afs.doc<any>(path).valueChanges().pipe(
-      tap(page => {
-        this.transferState.set(PAGE_KEY, page);
-        const metaTags = {};
-        const title = _.get(page, ['title']);
-        const description = _.get(page, ['description']);
-        const image = _.get(page, ['image']);
-        if (!_.isEmpty(title)) { metaTags['title'] = title; }
-        if (!_.isEmpty(description)) { metaTags['description'] = description; }
-        if (!_.isEmpty(image)) { metaTags['image'] = image; }
-        this.seoService.setMetaTags(metaTags);
-      }),
-      startWith(exists)
-    );
-  }
-
 }

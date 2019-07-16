@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { map, tap, startWith } from 'rxjs/operators';
-import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SeoService } from '../../services/seo/seo.service';
@@ -10,14 +8,9 @@ import { AuthService } from '../../services/firebase/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import * as _ from 'lodash';
 import { InputsConfig } from '../../interfaces/inputs-config';
-
-const PAYMENTS_COLLECTION = 'payments';
-const PAYMENTS_KEY = makeStateKey<any>(PAYMENTS_COLLECTION);
-const FORMS_COLLECTION = 'forms';
-const FORMS_KEY = makeStateKey<any>(FORMS_COLLECTION);
-
+import { SsrService } from '../../services/firebase/ssr/ssr.service';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -39,8 +32,8 @@ export class AdminComponent implements OnInit {
     private afs: AngularFirestore,
     private seoService: SeoService,
     private router: Router,
-    private transferState: TransferState,
     private spinner: NgxSpinnerService,
+    private ssrService: SsrService,
     public authService: AuthService
   ) {}
 
@@ -48,40 +41,18 @@ export class AdminComponent implements OnInit {
     this.url = this.router.url;
     this.authService.user$.subscribe(user => this.user = user);
 
-    this.ssrFirestoreCollectionGroup(PAYMENTS_COLLECTION, PAYMENTS_KEY)
+    this.ssrService.ssrFirestoreCollectionGroup(`payments`, `payments`, false)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.payments = response;
       }
     }, () => {})
 
-    this.ssrFirestoreCollection(FORMS_COLLECTION, FORMS_KEY)
+    this.ssrService.ssrFirestoreCollection(`forms`, `forms`, false)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.forms = response;
       }
     }, () => {});
   }
-
-  // Use Server-Side Rendered Data when it exists rather than fetching again on browser
-  ssrFirestoreCollection(path: string, PAGE_KEY: any) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
-    return this.afs.collection<any>(path).valueChanges().pipe(
-      tap(page => {
-        this.transferState.set(PAGE_KEY, page);
-      }),
-      startWith(exists)
-    );
-  }
-
-  ssrFirestoreCollectionGroup(path: string, PAGE_KEY: any) {
-    const exists = this.transferState.get(PAGE_KEY, {} as any);
-    return this.afs.collectionGroup<any>(path).valueChanges().pipe(
-      tap(page => {
-        this.transferState.set(PAGE_KEY, page);
-      }),
-      startWith(exists)
-    );
-  }
-
 }

@@ -60,6 +60,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     ContactComponent,
     ContactFormComponent,
     ErrorNotFoundComponent,
-    AdminComponent
+    AdminComponent,
+    RelatedPostsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
