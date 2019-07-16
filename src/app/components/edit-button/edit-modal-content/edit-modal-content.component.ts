@@ -74,7 +74,7 @@ export class EditModalContentComponent implements OnInit {
       case 'category':
         return _.startCase($event);
       default:
-        return _.capitalize($event);
+        return $event;
     }
   }
 
