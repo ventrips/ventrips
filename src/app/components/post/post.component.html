@@ -5,40 +5,40 @@
         </a>
     </div>
     <div class="col py-2">
-        <app-edit-button *ngIf="post && authService?.canEdit(user, post?.uid)"
-            [collection]="collection"
-            [id]="post?.slug"
+        <app-edit-button *ngIf="!hideEdit && post && authService?.canEdit(user, post?.uid)"
             [data]="post"
+            [collection]="collection"
+            [id]="id"
             [isNew]="false"
             [inputsConfig]="inputsConfig">
         </app-edit-button>
         <div class="mb-3 d-flex flex-wrap-reverse align-items-center">
-        <div class="h5 mb-0">
-            <a [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
-            <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
-            </a>
-            <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-            <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
-        </div>
-        <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
+            <div class="h5 mb-0">
+                <a [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
+                <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                </a>
+                <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.modified">{{post?.modified | timeAgo}}</p>
+            </div>
+            <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
         </div>
         <section class="h5">
             <h1 class="h3 mb-3">
                 <a (click)="scrollToTop()" [routerLink]="['/posts', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
             </h1>
             <p class="post-description mb-3" [innerHTML]="post?.description | searchHighlight: searchTerm">
-            {{post?.description}}
+                {{post?.description}}
             </p>
             <a (click)="scrollToTop()" [routerLink]="['']" [queryParams]="{ q: post?.category }" class="mb-2">
-            <h2 class="badge badge-dark text-uppercase p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
+                <h2 class="badge badge-dark text-uppercase p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
             </a>
             <share-buttons
-            [theme]="'default'"
-            [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
-            [exclude]="[]"
-            [showText]="false"
-            [showCount]="false"
-            url="{{environment.url}}/posts/{{post?.slug}}">
+                [theme]="'default'"
+                [include]="['twitter', 'facebook', 'messenger', 'linkedin', 'copy']"
+                [exclude]="[]"
+                [showText]="false"
+                [showCount]="false"
+                url="{{environment.url}}/posts/{{post?.slug}}">
             </share-buttons>
         </section>
     </div>

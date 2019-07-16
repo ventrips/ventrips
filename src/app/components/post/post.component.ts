@@ -15,6 +15,11 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
 export class PostComponent implements OnInit {
   @Input() searchTerm;
   @Input() post;
+  @Input() collection;
+  @Input() id;
+  @Input() isNew;
+  @Input() inputsConfig;
+  @Input() hideEdit = false;
 
   public user;
   public environment = environment;

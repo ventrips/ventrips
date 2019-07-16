@@ -1,12 +1,18 @@
-<ng-container *ngIf="!_.isEmpty(posts)">
+<ng-container *ngIf="!_.isEmpty(relatedPosts)">
     <hr>
     <div class="container mt-5">
         <div class="row no-gutters">
             <div class="col-12">
                 <h2 class="mb-3">Related Posts</h2>
             </div>
-            <div class="col-xs-12" *ngFor="let post of posts" [ngClass]="{'bg-light': !post.publish }">
-                <app-post [post]="post"></app-post>
+            <div class="col-xs-12" *ngFor="let relatedPost of relatedPosts" [ngClass]="{'bg-light': !relatedPost.publish }">
+                <app-post
+                    [hideEdit]="true"
+                    [post]="relatedPost"
+                    [collection]="collection"
+                    [id]="relatedPost?.slug"
+                    [inputsConfig]="inputsConfig">
+                </app-post>
             </div>
         </div>
     </div>

@@ -11,10 +11,10 @@ import * as _ from 'lodash';
   styleUrls: ['./related-posts.component.scss']
 })
 export class RelatedPostsComponent implements OnInit {
-  @Input() category: string;
-  @Input() path: string;
-  @Input() stateKey: string;
-  public posts;
+  @Input() post;
+  @Input() collection: string;
+  @Input() inputsConfig: string;
+  public relatedPosts;
   public _ = _;
 
   constructor(
@@ -24,10 +24,10 @@ export class RelatedPostsComponent implements OnInit {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.ssrService.ssrFirestoreCollection(this.path, `home`) // Use homepage cache if already exists
+    this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
-        this.posts = _.filter(response, (item) => _.isEqual(this.category, item.category) && !_.isEqual(this.stateKey, item.slug));
+        this.relatedPosts = _.filter(response, (item) => _.isEqual(this.post.category, item.category) && !_.isEqual(this.post.slug, item.slug));
       }
     }, () => {
 

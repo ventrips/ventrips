@@ -4,7 +4,7 @@
       <div class="container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
         <app-edit-button
           [collection]="collection"
-          [id]="id"
+          [id]="post?.slug"
           [data]="post"
           [isNew]="false"
           [inputsConfig]="inputsConfig">
@@ -72,7 +72,11 @@
           </ol>
         </nav>
       </div>
-      <app-related-posts [category]="post?.category" [path]="collection" [stateKey]="post?.slug"></app-related-posts>
+      <app-related-posts
+        [post]="post"
+        [collection]="collection"
+        [inputsConfig]="inputsConfig">
+      </app-related-posts>
     </ng-container>
     <app-error-not-found *ngIf="!post"></app-error-not-found>
   </ng-container>
