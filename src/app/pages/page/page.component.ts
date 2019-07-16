@@ -37,6 +37,7 @@ export class PageComponent implements OnInit {
   public id: string;
   public user: User;
   public url: string;
+  public collection: string = 'pages';
 
   constructor(
     private afs: AngularFirestore,
@@ -53,7 +54,7 @@ export class PageComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
 
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`pages/${this.id}`, `pages-${this.id}`, true)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;

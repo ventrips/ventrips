@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
   public user: User;
   public environment = environment;
   public url: string;
+  public collection: string = 'users';
   public _ = _;
 
   constructor(
@@ -57,7 +58,7 @@ export class ProfileComponent implements OnInit {
     this.id = !_.isNil(this.activatedRoute.snapshot.params.uid) ?
       this.activatedRoute.snapshot.params.uid : `quU47PyHKEZWJaklZeRpJeMKOGy1`;
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`users/${this.id}`, `users-${this.id}`, true)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, true)
       .subscribe(response => {
         if (!_.isEmpty(response) && !_.isNil(response)) {
           this.profile = response;

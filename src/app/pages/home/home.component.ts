@@ -89,6 +89,7 @@ export class HomeComponent implements OnInit {
   public user: User;
   public newPost = _.assign({}, new Post());
   public url: string;
+  public collection: string = 'posts';
 
   constructor(
     private afs: AngularFirestore,
@@ -109,7 +110,7 @@ export class HomeComponent implements OnInit {
       this.url = this.router.url;
     });
     this.spinner.show();
-    this.ssrService.ssrFirestoreCollection(`posts`, `home`, true).subscribe(response => {
+    this.ssrService.ssrFirestoreCollection(this.collection, `home`, true).subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = response;
         // Adding Search Options

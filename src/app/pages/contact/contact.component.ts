@@ -35,6 +35,7 @@ export class ContactComponent implements OnInit {
   public data: any;
   public user: User;
   public url: string;
+  public collection: string = 'pages';
 
   constructor(
     private afs: AngularFirestore,
@@ -51,7 +52,7 @@ export class ContactComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
 
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`pages/contact`, `pages-contact`, true)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/contact`, `${this.collection}-contact`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;

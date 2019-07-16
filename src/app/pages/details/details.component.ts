@@ -37,6 +37,7 @@ export class DetailsComponent implements OnInit {
   public slug: string;
   public url: string;
   public environment = environment;
+  public collection: string = 'posts';
 
   constructor(
     private afs: AngularFirestore,
@@ -55,7 +56,7 @@ export class DetailsComponent implements OnInit {
     this.slug = this.activatedRoute.snapshot.params.slug;
 
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`posts/${this.slug}`, `posts-${this.slug}`, true)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
