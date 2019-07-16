@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="col py-2">
-        <app-edit-button *ngIf="!hideEdit && post && authService?.canEdit(user, post?.uid)"
+        <app-edit-button *ngIf="post && authService?.canEdit(user, post?.uid)"
             [data]="post"
             [collection]="collection"
             [id]="id"

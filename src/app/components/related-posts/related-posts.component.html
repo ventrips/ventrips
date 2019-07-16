@@ -7,7 +7,6 @@
             </div>
             <div class="col-xs-12" *ngFor="let relatedPost of relatedPosts" [ngClass]="{'bg-light': !relatedPost.publish }">
                 <app-post
-                    [hideEdit]="true"
                     [post]="relatedPost"
                     [collection]="collection"
                     [id]="relatedPost?.slug"
