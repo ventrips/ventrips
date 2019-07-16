@@ -18,6 +18,7 @@ export class SsrService {
   ) { }
 
   setSeo(page: any, stateKey: string, setSeo: boolean = false): void {
+    console.log(page, stateKey, setSeo);
     if (_.isEqual(setSeo, true) && !_.isNil(page) && !_.isEmpty(page)) {
       const metaTags = {};
       // Default

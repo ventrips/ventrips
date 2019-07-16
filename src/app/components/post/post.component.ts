@@ -13,6 +13,7 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
   ]
 })
 export class PostComponent implements OnInit {
+  @Input() showEditButton = true;
   @Input() searchTerm;
   @Input() post;
   @Input() collection;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Post } from './../../interfaces/post';
@@ -21,7 +21,7 @@ import { filter } from 'rxjs/internal/operators/filter';
     fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
   ]
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   public inputsConfig: InputsConfig = {
     string: ['slug', 'category', 'title', 'description'],
     number: [],
@@ -39,6 +39,8 @@ export class DetailsComponent implements OnInit {
   public url: string;
   public environment = environment;
   public collection: string = 'posts';
+  private destroyUser;
+  private destroyPost;
 
   constructor(
     private afs: AngularFirestore,
@@ -49,24 +51,29 @@ export class DetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {}
+  ) {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+  }
 
   ngOnInit() {
-    this.authService.user$.subscribe(user => this.user = user);
+    this.destroyUser = this.authService.user$.subscribe(user => this.user = user);
     this.url = this.router.url;
     this.slug = this.activatedRoute.snapshot.params.slug;
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      this.url = this.router.url;
-      this.slug = this.activatedRoute.snapshot.params.slug;
-      this.init();
-    });
     this.init();
+  }
+
+  ngOnDestroy() {
+    this.destroyUser.unsubscribe();
+    this.destroyPost.unsubscribe();
   }
 
   init() {
     this.isLoading = true;
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
+    this.destroyPost = this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
