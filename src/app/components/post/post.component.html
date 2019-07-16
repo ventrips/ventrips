@@ -8,7 +8,7 @@
         <app-edit-button *ngIf="showEditButton && post && authService?.canEdit(user, post?.uid)"
             [data]="post"
             [collection]="collection"
-            [id]="id"
+            [id]="post?.slug"
             [isNew]="false"
             [inputsConfig]="inputsConfig">
         </app-edit-button>
