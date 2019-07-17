@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Post } from './../../interfaces/post';
 import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
@@ -12,7 +12,6 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
-import { filter } from 'rxjs/internal/operators/filter';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -21,7 +20,7 @@ import { filter } from 'rxjs/internal/operators/filter';
     fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
   ]
 })
-export class DetailsComponent implements OnInit, OnDestroy {
+export class DetailsComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['slug', 'category', 'title', 'description'],
     number: [],
@@ -39,7 +38,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public url: string;
   public environment = environment;
   public collection: string = 'posts';
-  private destroyUser;
   private destroyPost;
 
   constructor(
@@ -53,27 +51,25 @@ export class DetailsComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+    // this.router.routeReuseStrategy.shouldReuseRoute = function() {
+    //   return false;
+    // };
   }
 
   ngOnInit() {
-    this.destroyUser = this.authService.user$.subscribe(user => this.user = user);
-    this.url = this.router.url;
-    this.slug = this.activatedRoute.snapshot.params.slug;
-    this.init();
-  }
-
-  ngOnDestroy() {
-    this.destroyUser.unsubscribe();
-    this.destroyPost.unsubscribe();
+    this.authService.user$.subscribe(user => this.user = user);
+    this.activatedRoute.params
+    .subscribe(params => {
+      this.url = this.router.url;
+      this.slug = params.slug;
+      this.init();
+    });
   }
 
   init() {
     this.isLoading = true;
     this.spinner.show();
-    this.destroyPost = this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;

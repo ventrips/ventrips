@@ -17,22 +17,22 @@ export class RelatedPostsComponent implements OnInit {
   @Input() inputsConfig: string;
   public relatedPosts;
   public _ = _;
-  private destroyRelatedPosts;
 
   constructor(
     private router: Router,
     private afs: AngularFirestore,
     private transferState: TransferState,
     private ssrService: SsrService
-  ) {
-    // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+  ) {}
+
+  ngOnChanges(changes: any): void {
+    this.init();
   }
 
-  ngOnInit() {
-    this.destroyRelatedPosts = this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
+  ngOnInit() {}
+
+  init() {
+    this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.relatedPosts = _.filter(response, (item) =>
@@ -42,9 +42,5 @@ export class RelatedPostsComponent implements OnInit {
     }, () => {
 
     });
-  }
-
-  ngOnDestroy() {
-    this.destroyRelatedPosts.unsubscribe();
   }
 }
