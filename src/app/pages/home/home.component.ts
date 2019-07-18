@@ -34,12 +34,12 @@ export class HomeComponent implements OnInit {
   public orderByOptions: Array<any> = [
     {
       label: 'Date: Newest',
-      type: 'modified',
+      type: 'created',
       direction: 'desc'
     },
     {
       label: 'Date: Oldest',
-      type: 'modified',
+      type: 'created',
       direction: 'asc'
     },
     {
