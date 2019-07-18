@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     number: [],
     url: ['image'],
     quill: ['body'],
-    date: [],
+    date: ['created'],
     boolean: ['publish'],
     disabled: ['slug']
   };
