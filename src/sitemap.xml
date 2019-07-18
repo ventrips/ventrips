@@ -3,12 +3,14 @@
     <url><loc>https://www.ventrips.com/</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/about</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/contact</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/posts/las-vegas-weekend-road-trip</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/profile/quU47PyHKEZWJaklZeRpJeMKOGy1</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/johnson-huynh</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/?q=Travel</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/posts/matt-komo-camera-gear</loc><priority>0.5</priority></url>
-    <url><loc>https://www.ventrips.com/posts/sam-kolder-camera-gear</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/privacy</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/terms</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/johnson-huynh</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/?q=Travel</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/?q=Business</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/profile/quU47PyHKEZWJaklZeRpJeMKOGy1</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/posts/matt-komo-camera-gear</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/posts/sam-kolder-camera-gear</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/posts/las-vegas-weekend-road-trip</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/posts/google-adsense-and-progressive-web-apps</loc><priority>0.5</priority></url>
 </urlset>
