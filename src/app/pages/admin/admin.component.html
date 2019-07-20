@@ -3,6 +3,15 @@
         <div class="container mb-3">
             <h1 class="mb-3">Admin</h1>
         </div>
+        <!-- Push Notification -->
+        <div class="container mb-3">
+            <app-edit-button *ngIf="authService?.isAdmin(user)"
+                [collection]="collection"
+                [isNew]="true"
+                [createText]="'Create Push Notification'"
+                [inputsConfig]="inputsConfig">
+            </app-edit-button>
+        </div>
         <!-- Payments -->
         <ng-container *ngIf="payments">
             <div class="container mb-3">

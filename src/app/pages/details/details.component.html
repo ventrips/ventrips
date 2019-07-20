@@ -9,11 +9,6 @@
           [isNew]="false"
           [inputsConfig]="inputsConfig">
         </app-edit-button>
-        <div *ngIf="authService?.isAdmin(user)" class="ml-auto">
-          <button class="btn btn-warning rounded-0" (click)="sendPostPushNotification(post); isPushed = true" [ngClass]="{'active': isPushed && !_.isNil(isPushed)}" [disabled]="isPushed && !_.isNil(isPushed)">
-            <i class="fa fa-bell"></i> Send Push Notification
-          </button>
-        </div>
       </div>
       <div class="container my-5">
         <nav aria-label="breadcrumb">

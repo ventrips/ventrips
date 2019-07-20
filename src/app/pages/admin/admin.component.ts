@@ -27,6 +27,16 @@ export class AdminComponent implements OnInit {
   public forms: any;
   public user: User;
   public url: string;
+  public collection: string = 'notifications';
+  public inputsConfig: InputsConfig = {
+    string: ['slug', 'title', 'body'],
+    number: [],
+    url: ['icon', 'link'],
+    quill: [],
+    date: [],
+    boolean: [],
+    disabled: []
+  };
 
   constructor(
     private afs: AngularFirestore,

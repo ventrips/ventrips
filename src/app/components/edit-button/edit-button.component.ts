@@ -20,6 +20,8 @@ export class EditButtonComponent implements OnInit {
   @Input() isNew = false;
   @Input() posts: Array<any> = [];
   @Input() inputsConfig = {};
+  @Input() createText: string = 'Create';
+  @Input() editText: string = 'Edit';
   public user;
 
   constructor(
@@ -74,7 +76,7 @@ export class EditButtonComponent implements OnInit {
           this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
         });
       } else if (_.isEqual(result.reason, 'create')) {
-        this.afs.collection('posts').doc(result.data.slug).set(_.assign({}, result.data))
+        this.afs.collection(this.collection).doc(result.data.slug).set(_.assign({}, result.data))
         .then(success => {
           this.toastrService.success(`Item has been created.`, 'Create Success!');
         }).catch(error => {
