@@ -1,11 +1,10 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /images/{document=**} {
+		match /notifications/{document=**} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }
-			allow read;
-      allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+      allow read, create, update, delete: if getRole('admin') == true;
 		}
     match /payments/{document=**} {
       function getRole(role) {

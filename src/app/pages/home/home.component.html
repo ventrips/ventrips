@@ -16,15 +16,28 @@
     </div>
   </section>
   <section class="container-fluid mb-3 d-flex flex-wrap align-items-center">
-    <span class="h5 my-2 mr-3">Share</span>
-    <share-buttons
-      [theme]="'default'"
-      [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
-      [exclude]="[]"
-      [showText]="false"
-      [showCount]="false"
-      url="{{environment.url}}{{url}}">
-    </share-buttons>
+    <div class="d-flex flex-wrap align-items-center my-2">
+      <span class="h5 my-2 mr-3">Share</span>
+      <share-buttons
+        [theme]="'default'"
+        [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+        [exclude]="[]"
+        [showText]="false"
+        [showCount]="false"
+        url="{{environment.url}}{{url}}">
+      </share-buttons>
+    </div>
+    <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
+      <span class="h5 my-2 mr-3">Subscribe</span>
+      <div class="btn-group">
+        <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" class="btn btn-warning rounded-0" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
+          <i class="fa fa-bell"></i>
+        </button>
+        <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" class="btn btn-warning rounded-0" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
+          <i class="fa fa-bell-slash"></i>
+        </button>
+      </div>
+    </div>
   </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">

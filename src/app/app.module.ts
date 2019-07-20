@@ -32,6 +32,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
@@ -122,6 +123,7 @@ import { PostComponent } from './components/post/post.component';
     AngularFireFunctionsModule, // imports firebase/functions only needed for functions features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireMessagingModule, // For firebase cloud messaging push up notification
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })

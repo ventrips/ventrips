@@ -1,7 +1,7 @@
 <section [@enter]>
   <ng-container *ngIf="!isLoading">
     <ng-container *ngIf="post" class="mt-5">
-      <div class="container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
+      <div class="d-flex container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
         <app-edit-button
           [collection]="collection"
           [id]="post?.slug"
@@ -9,6 +9,11 @@
           [isNew]="false"
           [inputsConfig]="inputsConfig">
         </app-edit-button>
+        <div *ngIf="authService?.isAdmin(user)" class="ml-auto">
+          <button class="btn btn-warning rounded-0" (click)="sendPostPushNotification(post); isPushed = true" [ngClass]="{'active': isPushed && !_.isNil(isPushed)}" [disabled]="isPushed && !_.isNil(isPushed)">
+            <i class="fa fa-bell"></i> Send Push Notification
+          </button>
+        </div>
       </div>
       <div class="container my-5">
         <nav aria-label="breadcrumb">

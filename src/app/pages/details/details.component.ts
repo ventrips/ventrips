@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Post } from './../../interfaces/post';
@@ -12,6 +12,8 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import { FcmService } from '../../services/fcm/fcm.service';
+import { Fcm } from '../../interfaces/fcm';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -38,7 +40,8 @@ export class DetailsComponent implements OnInit {
   public url: string;
   public environment = environment;
   public collection: string = 'posts';
-  private destroyPost;
+  public fcm: Fcm;
+  public _ = _;
 
   constructor(
     private afs: AngularFirestore,
@@ -48,13 +51,9 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
+    public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {
-    // override the route reuse strategy
-    // this.router.routeReuseStrategy.shouldReuseRoute = function() {
-    //   return false;
-    // };
-  }
+  ) {}
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
@@ -80,5 +79,15 @@ export class DetailsComponent implements OnInit {
       this.spinner.hide();
       this.isLoading = false;
     });
+  }
+
+  sendPostPushNotification(post: Post) {
+    if (isPlatformServer(this.platformId)) { return; }
+    this.fcmService.sendPushNotification({
+      title: post.title,
+      body: post.description,
+      icon: post.image,
+      link: `${environment.url}/posts/${post.slug}`,
+    })
   }
 }

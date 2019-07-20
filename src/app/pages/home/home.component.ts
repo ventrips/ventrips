@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import { FcmService } from '../../services/fcm/fcm.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -85,6 +86,7 @@ export class HomeComponent implements OnInit {
   public newPost = _.assign({}, new Post());
   public url: string;
   public collection: string = 'posts';
+  public token: string;
 
   constructor(
     private afs: AngularFirestore,
@@ -94,6 +96,7 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
     public authService: AuthService,
+    public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -122,6 +125,8 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
       this.spinner.hide();
     });
+    if (isPlatformServer(this.platformId)) { return; }
+    this.fcmService.getPermission().subscribe();
   }
 
   search = (text$: Observable<string>) => text$.pipe(

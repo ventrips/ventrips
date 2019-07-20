@@ -19,11 +19,11 @@ export const angularUniversalFunction = functions.https.onRequest(universal);
 
 export const createUserRoles = functions.firestore
 .document('users/{uid}')
-.onCreate(async snap => {
+.onCreate(async snapshot => {
     // const customer = await stripe.customers.create({
-    //     metadata: { firebaseUID: snap.data()!.uid }
+    //     metadata: { firebaseUID: snapshot.data()!.uid }
     // });
-    return db.doc(`users/${snap.data()!.uid}`).update({
+    return db.doc(`users/${snapshot.data()!.uid}`).update({
         // stripeId: _.get(customer, ['id']),
         roles: {
             admin: false,
@@ -32,6 +32,52 @@ export const createUserRoles = functions.firestore
         },
         joined: admin.firestore.FieldValue.serverTimestamp()
     });
+});
+
+export const subscribeToTopic = functions.https.onCall(
+    async (data, context) => {
+        await admin.messaging().subscribeToTopic(data.token, _.capitalize(data.topic));
+
+      return `Subscribed to ${_.capitalize(data.topic)}`;
+    }
+);
+
+export const unsubscribeFromTopic = functions.https.onCall(
+    async (data, context) => {
+        await admin.messaging().unsubscribeFromTopic(data.token, _.capitalize(data.topic));
+
+        return `Unsubscribed from ${_.capitalize(data.topic)}`;
+    }
+);
+
+export const sendPushNotification = functions.firestore
+.document('notifications/{notificationId}')
+.onCreate(async (snapshot, context) => {
+    const fcm = snapshot.data();
+
+    const notification: admin.messaging.Notification = {
+        title: _.get(fcm, ['title'], 'We made some new updates'),
+        body: _.get(fcm, ['body'], 'Come check it out!')
+    };
+
+    const payload: admin.messaging.Message = {
+        notification,
+        webpush: {
+          notification: {
+            vibrate: [200, 100, 200],
+            icon: _.get(fcm, ['icon'], 'https://www.ventrips.com/favicon.ico'),
+            actions: [
+                {
+                    action: _.get(fcm, ['link'], 'https://www.ventrips.com/'),
+                    title: 'Open Link'
+                }
+            ]
+          }
+        },
+        topic: _.capitalize('Ventrips')
+    };
+
+    return admin.messaging().send(payload);
 });
 
 // export const createStripeCheckOutCharge = functions.https.onCall(

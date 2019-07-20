@@ -5,6 +5,7 @@ import { SeoService } from './services/seo/seo.service';
 import { AuthService } from './services/firestore/auth/auth.service';
 import { ElementScrollPercentage } from './directives/element-scroll-percentage/element-scroll-percentage.component';
 import * as _ from 'lodash';
+import { FcmService } from './services/fcm/fcm.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,12 @@ import * as _ from 'lodash';
 export class AppComponent implements OnInit {
   private elementScrollPercentage: ElementScrollPercentage;
   public pageScroll: number;
+  public token;
 
   constructor(
     private seoService: SeoService,
     private authService: AuthService,
+    public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any,
     elementScrollPercentage: ElementScrollPercentage,
     angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
@@ -36,5 +39,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformServer(this.platformId)) { return; }
     this.elementScrollPercentage.getScrollAsStream().subscribe((percent: number): void => {this.pageScroll = percent; });
+    this.fcmService.showMessages().subscribe();
   }
 }
