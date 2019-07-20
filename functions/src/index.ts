@@ -66,12 +66,7 @@ export const sendPushNotification = functions.firestore
           notification: {
             vibrate: [200, 100, 200],
             icon: _.get(fcm, ['icon'], 'https://www.ventrips.com/favicon.ico'),
-            actions: [
-                {
-                    action: _.get(fcm, ['link'], 'https://www.ventrips.com/'),
-                    title: 'Open Link'
-                }
-            ]
+            click_action: _.get(fcm, ['link'], 'https://www.ventrips.com/')
           }
         },
         topic: _.capitalize('Ventrips')
