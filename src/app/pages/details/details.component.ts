@@ -51,6 +51,7 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
+    public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -78,5 +79,15 @@ export class DetailsComponent implements OnInit {
       this.spinner.hide();
       this.isLoading = false;
     });
+  }
+
+  sendPostPushNotification(post: Post) {
+    if (isPlatformServer(this.platformId)) { return; }
+    this.fcmService.sendPushNotification({
+      title: post.title,
+      body: post.description,
+      icon: post.image,
+      link: `${environment.url}/posts/${post.slug}`,
+    })
   }
 }
