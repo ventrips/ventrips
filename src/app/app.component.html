@@ -3,7 +3,14 @@
     <router-outlet (activate)="onActivate($event)"></router-outlet>
     <section class="container-fluid my-3 text-center">
         <!-- NG-ADSENSE -->
-        <ng-adsense></ng-adsense>
+        <ng-adsense
+            [adClient]="'ca-pub-4642980268605791'"
+            [pageLevelAds]="true"
+            [adSlot]="7259870550"
+            [display]="'inline-block'"
+            [width]="320"
+            [height]="108">
+        </ng-adsense>
         <!-- AMP AUTO ADS -->
         <amp-auto-ads type="adsense" data-ad-client="ca-pub-4642980268605791"></amp-auto-ads>
     </section>

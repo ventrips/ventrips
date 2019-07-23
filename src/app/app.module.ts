@@ -105,10 +105,7 @@ import { PostComponent } from './components/post/post.component';
     HttpClientModule,       // (Required) For share counts
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     ShareButtonsModule,
-    AdsenseModule.forRoot({
-      adClient: 'ca-pub-4642980268605791',
-      pageLevelAds: true
-    }),
+    AdsenseModule.forRoot(),
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),
