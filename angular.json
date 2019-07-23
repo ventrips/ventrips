@@ -28,6 +28,7 @@
               "src/assets",
               "src/robots.txt",
               "src/sitemap.xml",
+              "src/ads.txt",
               "src/googlef83ed21bb34faab0.html",
               "src/firebase-messaging-sw.js",
               "src/manifest.webmanifest"
@@ -105,6 +106,7 @@
               "src/assets",
               "src/robots.txt",
               "src/sitemap.xml",
+              "src/ads.txt",
               "src/googlef83ed21bb34faab0.html",
               "src/firebase-messaging-sw.js",
               "src/manifest.webmanifest"
