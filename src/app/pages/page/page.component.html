@@ -1,3 +1,12 @@
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center my-3">
+    <ng-adsense
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]=2801999023
+        [adFormat]="'auto'">
+    </ng-adsense>
+</section>
 <div class="container-fluid my-3">
     <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
@@ -17,3 +26,12 @@
         <app-error-not-found *ngIf="!data"></app-error-not-found>
     </section>
 </ng-container>
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center my-3">
+    <ng-adsense
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]=2801999023
+        [adFormat]="'auto'">
+    </ng-adsense>
+</section>

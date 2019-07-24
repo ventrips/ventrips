@@ -39,6 +39,15 @@
       </div>
     </div>
   </section>
+  <!-- Horizontal Display Ad-->
+  <section class="container-fluid text-center my-3">
+    <ng-adsense
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]=2801999023
+        [adFormat]="'auto'">
+    </ng-adsense>
+  </section>
   <section *ngIf="!isLoading">
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
@@ -94,4 +103,13 @@
       </div>
     </ng-container>
   </section>
+</section>
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center my-3">
+  <ng-adsense
+    [display]="'block'"
+    [adClient]="'ca-pub-4642980268605791'"
+    [adSlot]=2801999023
+    [adFormat]="'auto'">
+  </ng-adsense>
 </section>
