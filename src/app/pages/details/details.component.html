@@ -74,7 +74,7 @@
       <div class="container my-5">
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
-      <div class="container my-5">
+      <div class="container my-5" *ngIf="environment.production">
         <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
       </div>
       <app-related-posts
