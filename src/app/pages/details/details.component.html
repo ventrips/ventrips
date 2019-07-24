@@ -86,14 +86,14 @@
           </ol>
         </nav>
       </div>
-      <!-- In-Article Ad -->
-      <section class="container text-center">
+      <section class="container text-center my-3">
+        <!-- In-feed Ad -->
         <ng-adsense
-          [display]="'inline-block'"
-          [adClient]="'ca-pub-4642980268605791'"
-          [adSlot]="3910286314"
-          [adLayout]="'in-article'"
-          [adFormat]="'fluid'">
+            [display]="'block'"
+            [adClient]="'ca-pub-4642980268605791'"
+            [adSlot]="3969463233"
+            [adFormat]="'fluid'"
+            [adLayoutKey]="'+5l+pg-2c-ha+144'">
         </ng-adsense>
       </section>
       <app-related-posts
@@ -105,12 +105,13 @@
     <app-error-not-found *ngIf="!post"></app-error-not-found>
   </ng-container>
 </section>
-<!-- Horizontal Display Ad-->
-<section class="container text-center my-3">
+<!-- In-Article Ad -->
+<section class="container text-center">
   <ng-adsense
     [display]="'block'"
     [adClient]="'ca-pub-4642980268605791'"
-    [adSlot]=2801999023
-    [adFormat]="'auto'">
+    [adSlot]="3910286314"
+    [adLayout]="'in-article'"
+    [adFormat]="'fluid'">
   </ng-adsense>
 </section>
