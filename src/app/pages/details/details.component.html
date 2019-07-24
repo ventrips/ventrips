@@ -86,16 +86,9 @@
           </ol>
         </nav>
       </div>
-      <section class="container text-center my-3">
-        <!-- In-feed Ad -->
-        <ng-adsense
-            [display]="'block'"
-            [adClient]="'ca-pub-4642980268605791'"
-            [adSlot]="3969463233"
-            [adFormat]="'fluid'"
-            [adLayoutKey]="'+5l+pg-2c-ha+144'">
-        </ng-adsense>
-      </section>
+      <div class="container my-5">
+        <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
+      </div>
       <app-related-posts
         [post]="post"
         [collection]="collection"
@@ -105,13 +98,13 @@
     <app-error-not-found *ngIf="!post"></app-error-not-found>
   </ng-container>
 </section>
-<!-- In-Article Ad -->
-<section class="container text-center">
+<section class="container text-center my-3">
+  <!-- In-feed Ad -->
   <ng-adsense
-    [display]="'block'"
-    [adClient]="'ca-pub-4642980268605791'"
-    [adSlot]="3910286314"
-    [adLayout]="'in-article'"
-    [adFormat]="'fluid'">
+      [display]="'block'"
+      [adClient]="'ca-pub-4642980268605791'"
+      [adSlot]="3969463233"
+      [adFormat]="'fluid'"
+      [adLayoutKey]="'+5l+pg-2c-ha+144'">
   </ng-adsense>
 </section>

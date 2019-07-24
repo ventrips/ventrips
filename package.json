@@ -58,6 +58,7 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "ng2-adsense": "^6.0.0",
+    "ngx-disqus": "^2.4.3",
     "ngx-paypal": "^5.0.0",
     "ngx-quill": "^6.3.1",
     "ngx-spinner": "^8.0.3",

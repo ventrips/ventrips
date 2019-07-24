@@ -36,6 +36,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { DisqusModule } from "ngx-disqus";
 import { NgxPayPalModule } from 'ngx-paypal';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { AdsenseModule } from 'ng2-adsense';
@@ -109,6 +110,7 @@ import { PostComponent } from './components/post/post.component';
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),
+    DisqusModule.forRoot('ventrips'),
     NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
