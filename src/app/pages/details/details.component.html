@@ -75,6 +75,16 @@
       <div class="container my-5">
         <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
       </div>
+      <section class="container text-center mt-5">
+        <!-- In-article Ad -->
+        <ng-adsense
+          [display]="'block'"
+          [adClient]="'ca-pub-4642980268605791'"
+          [adSlot]="552883735"
+          [adLayout]="'in-article'"
+          [adFormat]="'fluid'">
+        </ng-adsense>
+      </section>
       <div class="container my-5" *ngIf="environment.production">
         <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
       </div>
