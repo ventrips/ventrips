@@ -23,3 +23,20 @@
 		position: absolute;
 	}
 }
+
+.top-scroll {
+    position: fixed;
+    bottom: 3em;
+    right: 3em;
+	text-decoration: none;
+	cursor: pointer;
+    color: #ffc107;
+	background-color: rgba(52, 58, 64, 0.8);
+    font-size: 9px;
+    padding: 1em;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+	display: inline;
+	z-index: 999999;
+}
