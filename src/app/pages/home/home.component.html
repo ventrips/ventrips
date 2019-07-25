@@ -8,7 +8,7 @@
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text rounded-0 bg-warning">
               <i class="fas fa-search text-dark"></i>
             </span>
-            <a [routerLink]="['']" class="btn text-dark btn-warning rounded-0" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning rounded-0">
+            <a [routerLink]="['']" class="btn text-dark btn-warning rounded-0" title="Clear" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning rounded-0">
               Clear <i class="fas fa-times"></i>
             </a>
           </div>
@@ -30,10 +30,10 @@
     <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
       <span class="h5 my-2 mr-3">Subscribe</span>
       <div class="btn-group">
-        <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" class="btn btn-warning rounded-0" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
+        <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" title="Subscribe" class="btn btn-warning rounded-0" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
           <i class="fa fa-bell"></i>
         </button>
-        <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" class="btn btn-warning rounded-0" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
+        <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" title="Unsubscribe" class="btn btn-warning rounded-0" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
           <i class="fa fa-bell-slash"></i>
         </button>
       </div>
@@ -63,7 +63,7 @@
         </app-edit-button>
         <div class="ml-auto align-self-center" *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-warning rounded-0" id="order-by-dropdown" ngbDropdownToggle>
+            <button class="btn btn-warning rounded-0" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
               {{ selectedOrderBy?.label ? selectedOrderBy?.label : 'Sort By' }}
             </button>
             <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
