@@ -39,22 +39,22 @@
       </div>
       <div class="container mb-4">
         <div class="h5 my-4">
+          <h1 class="mb-4">{{post?.title}}</h1>
+          <p class="my-3" *ngIf="post?.description">
+            {{post?.description}}
+          </p>
           <div>
               <a [routerLink]="['/profile', post?.uid]" class="mr-3">
                 <img class="rounded-circle profile-picture" [src]="post?.photoURL" alt="Profile Picture">
               </a>
               <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
-              <p class="small text-secondary my-4 d-lg-inline-block mr-3" *ngIf="post?.created">
+              <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="post?.created">
                 Published: {{post?.created | timeStampDate:'longDate'}}
               </p>
               <p class="small text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
                 Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
               </p>
           </div>
-          <h1 class="mb-4">{{post?.title}}</h1>
-          <p class="my-3" *ngIf="post?.description">
-            {{post?.description}}
-          </p>
         </div>
         <section class="mb-3 d-flex flex-wrap align-items-center">
           <span class="h5 my-2 mr-3">Share</span>

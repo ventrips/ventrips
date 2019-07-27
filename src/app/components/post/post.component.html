@@ -12,18 +12,8 @@
             [isNew]="false"
             [inputsConfig]="inputsConfig">
         </app-edit-button>
-        <div class="mb-3 d-flex flex-wrap-reverse align-items-center">
-            <div class="h5 mb-0">
-                <a (click)="scrollToTop()" [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
-                    <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
-                </a>
-                <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
-                <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.created">{{post?.created | timeAgo}}</p>
-            </div>
-            <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
-        </div>
         <section class="h5">
-            <h1 class="h3 mb-3">
+            <h1 class="h3 my-3">
                 <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
             </h1>
             <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" class="text-dark text-decoration-none post-description d-block mb-3">
@@ -34,6 +24,16 @@
             <a (click)="scrollToTop()" [routerLink]="['']" [queryParams]="{ q: post?.category }" class="mb-2">
                 <h2 class="badge badge-dark p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
             </a>
+            <div class="d-flex flex-wrap-reverse align-items-center">
+                <div class="h5 mb-0">
+                    <a (click)="scrollToTop()" [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
+                        <img *ngIf="post?.photoURL" class="rounded-circle profile-picture" [src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                    </a>
+                    <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
+                    <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.created">{{post?.created | timeAgo}}</p>
+                </div>
+                <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
+            </div>
             <share-buttons
                 [theme]="'default'"
                 [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
