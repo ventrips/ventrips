@@ -39,7 +39,7 @@ export class DetailsComponent implements OnInit {
   public slug: string;
   public url: string;
   public environment = environment;
-  public collection: string = 'posts';
+  public collection: string = 'blog';
   public fcm: Fcm;
   public _ = _;
 
@@ -87,7 +87,7 @@ export class DetailsComponent implements OnInit {
       title: post.title,
       body: post.description,
       icon: post.image,
-      link: `${environment.url}/posts/${post.slug}`,
+      link: `${environment.url}/blog/${post.slug}`,
     })
   }
 }

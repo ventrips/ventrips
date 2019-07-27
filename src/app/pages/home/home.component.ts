@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   public user: User;
   public newPost = _.assign({}, new Post());
   public url: string;
-  public collection: string = 'posts';
+  public collection: string = 'blog';
   public token: string;
 
   constructor(

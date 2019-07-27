@@ -81,7 +81,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'posts')" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
+    <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'blog')" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
     <button class="btn btn-primary" (click)="copyToClipboard(data)">
         Copy JSON
     </button>

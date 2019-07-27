@@ -41,7 +41,7 @@ service cloud.firestore {
       allow read, create, update;
       allow delete: if getRole('admin') == true;
     }
-		match /posts/{document} {
+		match /blog/{document} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }

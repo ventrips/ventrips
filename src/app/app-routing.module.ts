@@ -19,7 +19,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: HomeComponent },
-      { path: 'posts/:slug', component: DetailsComponent },
+      { path: 'blog/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
       { path: 'johnson-huynh', component: ProfileComponent },
       { path: 'contact', component: ContactComponent },

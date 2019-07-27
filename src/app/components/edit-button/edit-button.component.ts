@@ -37,7 +37,7 @@ export class EditButtonComponent implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(user => {
       this.user = user
-      if (_.isEqual(this.collection, 'posts')) {
+      if (_.isEqual(this.collection, 'blog')) {
         // Converting string dates to date type
         this.data.created = _.get(this.data, ['created']) || firestore.Timestamp.fromDate(new Date());
         this.data.modified = _.get(this.data, ['modified']) || firestore.Timestamp.fromDate(new Date());
@@ -64,10 +64,10 @@ export class EditButtonComponent implements OnInit {
     modalRef.componentInstance.inputsConfig = this.inputsConfig;
 
     modalRef.result.then((result?) => {
-      if (_.isEqual(this.collection, 'posts')) {
+      if (_.isEqual(this.collection, 'blog')) {
         result.data.modified = firestore.Timestamp.fromDate(new Date());
       }
-      if (_.isEqual(result.reason, 'delete') && _.isEqual(this.collection, 'posts')) {
+      if (_.isEqual(result.reason, 'delete') && _.isEqual(this.collection, 'blog')) {
         this.afs.collection(this.collection).doc(this.id).delete().
         then(success => {
           this.toastrService.success(`Item has been deleted.`, 'Delete Success!');
