@@ -53,7 +53,9 @@ export class DetailsComponent implements OnInit {
     private ssrService: SsrService,
     public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
@@ -61,6 +63,11 @@ export class DetailsComponent implements OnInit {
     .subscribe(params => {
       this.url = this.router.url;
       this.slug = params.slug;
+      // TODO: Temporary Until Google Removes /posts
+      if (_.startsWith(this.url, '/posts')) {
+        this.router.navigate(['/blog', this.slug]);
+        return;
+      }
       this.init();
     });
   }
