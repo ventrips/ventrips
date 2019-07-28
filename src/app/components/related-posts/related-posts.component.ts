@@ -38,7 +38,7 @@ export class RelatedPostsComponent implements OnInit {
         this.relatedPosts = _.filter(response, (item) =>
           _.isEqual(_.toLower(this.post.category), _.toLower(item.category)) &&
           !_.isEqual(_.toLower(this.post.slug), _.toLower(item.slug)) &&
-          this.post.published);
+          this.post.publish);
       }
     }, () => {
 
