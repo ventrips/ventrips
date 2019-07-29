@@ -32,8 +32,10 @@
       if (location.host === 'ventrips-website.firebaseapp.com') {
         location.href = 'https://www.ventrips.com' + location.pathname + location.search;
       } else {
-        const redirectPathName = location.pathname.replace('posts', 'blog');
-        location.href = 'https://www.ventrips.com' + redirectPathName;
+        if (location.pathname.startsWith('/posts')) {
+          const redirectPathName = location.pathname.replace('/posts', '/blog');
+          location.href = 'https://www.ventrips.com' + redirectPathName;
+        }
       }
     </script>
   </head>
