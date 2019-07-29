@@ -13,16 +13,16 @@
             [inputsConfig]="inputsConfig">
         </app-edit-button>
         <section class="h5">
-            <h3 class="my-3">
+            <h2 class="h3 my-3">
                 <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-            </h3>
+            </h2>
             <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" class="text-dark text-decoration-none post-description d-block mb-3">
                 <span [innerHTML]="post?.description | searchHighlight: searchTerm"></span>
                 <span>...</span>
                 <span class="ml-1 text-secondary cursor-pointer">more</span
             ></a>
             <a (click)="scrollToTop()" [routerLink]="['']" [queryParams]="{ q: post?.category }" class="mb-2">
-                <h2 class="badge badge-dark p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h2>
+                <h3 class="badge badge-dark p-2 rounded-0" [innerHTML]="post?.category | searchHighlight: searchTerm"></h3>
             </a>
             <div class="d-flex flex-wrap-reverse align-items-center">
                 <div class="h5 mb-0">
