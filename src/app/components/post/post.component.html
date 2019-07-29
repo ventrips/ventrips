@@ -13,9 +13,9 @@
             [inputsConfig]="inputsConfig">
         </app-edit-button>
         <section class="h5">
-            <h1 class="h3 my-3">
+            <h3 class="my-3">
                 <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" [title]="post?.title" class="text-dark mb-2 mr-3" [innerHTML]="post?.title | searchHighlight: searchTerm"></a>
-            </h1>
+            </h3>
             <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]" class="text-dark text-decoration-none post-description d-block mb-3">
                 <span [innerHTML]="post?.description | searchHighlight: searchTerm"></span>
                 <span>...</span>
