@@ -38,6 +38,7 @@ export class SsrService {
       if (!_.isEmpty(description)) { metaTags['description'] = description; }
       if (!_.isEmpty(image)) { metaTags['image'] = image; }
       this.seoService.setMetaTags(metaTags);
+      this.seoService.createLinkForCanonicalURL();
     }
   }
 

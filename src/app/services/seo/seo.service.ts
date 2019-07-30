@@ -1,17 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 import { environment } from './../../../environments/environment';
 import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
 export class SeoService {
+  private environment = environment;
+  private link: HTMLLinkElement;
+
   constructor(
     private title: Title,
     private meta: Meta,
-    private router: Router
+    private router: Router,
+    @Inject(DOCUMENT) private document
   ) {}
+
+  createLinkForCanonicalURL() {
+    if (_.isNil(this.link)) {
+      this.link = this.document.createElement('link');
+      this.link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(this.link);
+    }
+    this.link.setAttribute('href', this.environment.url + this.router.url);
+  }
 
   setMetaTags(config?: any) {
     // Default Metatags if not set
