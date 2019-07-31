@@ -22,7 +22,7 @@
         <ng-container *ngIf="profile">
             <div class="container my-5" [@enter]>
                 <div class="d-flex flex-wrap align-items-center mb-3">
-                    <img class="rounded-circle profile-picture mr-3" [src]="profile?.photoURL" alt="Profile Picture">
+                    <img class="rounded-circle profile-picture mr-3" src="../assets/icons/apple-touch-icon.png" [attr.data-src]="post?.photoURL" alt="Profile Picture">
                     <h1 class="mb-0">{{profile?.displayName}}</h1>
                 </div>
                 <ng-container *ngIf="authService?.canEdit(user, profile?.uid)">

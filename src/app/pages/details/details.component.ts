@@ -14,6 +14,8 @@ import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 import { FcmService } from '../../services/fcm/fcm.service';
 import { Fcm } from '../../interfaces/fcm';
+import LazyLoad from "vanilla-lazyload";
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -70,6 +72,12 @@ export class DetailsComponent implements OnInit {
       }
       this.init();
     });
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+    // Lazy Load Images
+    var myLazyLoad = new LazyLoad();
+    myLazyLoad.update();
   }
 
   init() {

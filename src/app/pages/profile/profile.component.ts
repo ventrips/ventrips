@@ -12,6 +12,7 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import LazyLoad from "vanilla-lazyload";
 
 @Component({
   selector: 'app-profile',
@@ -70,5 +71,11 @@ export class ProfileComponent implements OnInit {
         this.isLoading = false;
       }
     );
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+    // Lazy Load Images
+    var myLazyLoad = new LazyLoad();
+    myLazyLoad.update();
   }
 }

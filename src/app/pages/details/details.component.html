@@ -45,7 +45,7 @@
           </p>
           <div>
               <a [routerLink]="['/profile', post?.uid]" class="mr-3">
-                <img class="rounded-circle profile-picture" [src]="post?.photoURL" alt="Profile Picture">
+                <img class="rounded-circle profile-picture" src="../assets/icons/apple-touch-icon.png" [attr.data-src]="post?.photoURL" alt="Profile Picture">
               </a>
               <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
               <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="post?.created">

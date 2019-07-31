@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { AuthService } from '../../services/firestore/auth/auth.service';
+import LazyLoad from "vanilla-lazyload";
 
 @Component({
   selector: 'app-post',
@@ -26,10 +27,16 @@ export class PostComponent implements OnInit {
   constructor(
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+    // Lazy Load Images
+    var myLazyLoad = new LazyLoad();
+    myLazyLoad.update();
   }
 
   scrollToTop() {
