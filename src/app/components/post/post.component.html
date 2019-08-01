@@ -1,7 +1,7 @@
 <div class="row py-3" [@enter]>
     <div class="col-xs-12 col-md-3 text-center align-self-center post-thumbnail">
         <a (click)="scrollToTop()" [routerLink]="['/blog', post?.slug]">
-            <img class="img-fluid rounded-0" src="../assets/icons/apple-touch-icon.png" [attr.data-src]="post?.image" [alt]="post?.title">
+            <img class="img-fluid rounded-0" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.image" [alt]="post?.title">
         </a>
     </div>
     <div class="col py-2">
@@ -27,7 +27,7 @@
             <div class="d-flex flex-wrap-reverse align-items-center">
                 <div class="h5 mb-0">
                     <a (click)="scrollToTop()" [routerLink]="['/profile', post?.uid]" class="d-inline-block my-3 mr-3">
-                        <img class="rounded-circle profile-picture" src="../assets/icons/apple-touch-icon.png" [attr.data-src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+                        <img class="rounded-circle profile-picture" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
                     </a>
                     <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold my-3 mr-3" [innerHTML]="post?.displayName | searchHighlight: searchTerm"></a>
                     <p class="small text-secondary my-3 d-inline-block" *ngIf="post?.created">{{post?.created | timeAgo}}</p>
