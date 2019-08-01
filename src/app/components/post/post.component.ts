@@ -35,8 +35,8 @@ export class PostComponent implements OnInit {
       return;
     }
     // Lazy Load Images
-    // var myLazyLoad = new LazyLoad();
-    // myLazyLoad.update();
+    var myLazyLoad = new LazyLoad();
+    myLazyLoad.update();
   }
 
   scrollToTop() {
