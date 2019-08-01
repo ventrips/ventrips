@@ -8,7 +8,7 @@
     [adFormat]="'auto'">
   </ng-adsense>
 </section>
-<section [@enter]>
+<section>
   <ng-container *ngIf="!isLoading">
     <ng-container *ngIf="post" class="mt-5">
       <div class="d-flex container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
@@ -73,7 +73,7 @@
         <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}" alt="Image Banner"></div>
       </figure>
       <div class="container my-5">
-        <quill-view-html [content]="post?.body" theme="snow"></quill-view-html>
+        <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
       </div>
       <section class="container text-center">
         <!-- In-article Ad -->

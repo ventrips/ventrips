@@ -6,21 +6,18 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 import LazyLoad from "vanilla-lazyload";
+import { QuillService } from '../../services/quill/quill.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
-  ]
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   public inputsConfig: InputsConfig = {
@@ -49,6 +46,7 @@ export class ProfileComponent implements OnInit {
     private seoService: SeoService,
     private ssrService: SsrService,
     public authService: AuthService,
+    public quillService: QuillService,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 

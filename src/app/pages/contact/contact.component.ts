@@ -7,17 +7,13 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import * as _ from 'lodash';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
-  ]
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
   public inputsConfig: InputsConfig = {

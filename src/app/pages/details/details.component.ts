@@ -7,7 +7,6 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
@@ -15,14 +14,12 @@ import * as _ from 'lodash';
 import { FcmService } from '../../services/fcm/fcm.service';
 import { Fcm } from '../../interfaces/fcm';
 import LazyLoad from "vanilla-lazyload";
+import { QuillService } from '../../services/quill/quill.service';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
-  ]
+  styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
   public inputsConfig: InputsConfig = {
@@ -54,6 +51,7 @@ export class DetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
     public fcmService: FcmService,
+    public quillService: QuillService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
 

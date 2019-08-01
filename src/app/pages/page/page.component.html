@@ -12,7 +12,7 @@
     <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
 <ng-container *ngIf="!isLoading">
-    <section class="my-5" [@enter]>
+    <section class="my-5">
         <ng-container *ngIf="data">
             <div class="container mb-3">
                 <h1 *ngIf="data?.title">{{data?.title}}</h1>
@@ -21,7 +21,7 @@
                 <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
             </figure>
             <div class="container mb-3" *ngIf="data?.body">
-                <quill-view-html [content]="data?.body" theme="snow"></quill-view-html>
+                <quill-view-html [content]="quillService.format(data?.body)" theme="snow"></quill-view-html>
             </div>
         </ng-container>
         <app-error-not-found *ngIf="!data"></app-error-not-found>

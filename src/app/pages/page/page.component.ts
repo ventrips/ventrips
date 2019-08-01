@@ -7,18 +7,15 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import { QuillService } from '../../services/quill/quill.service';
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
-  ]
+  styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
   public inputsConfig: InputsConfig = {
@@ -45,7 +42,8 @@ export class PageComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
-    public authService: AuthService
+    public authService: AuthService,
+    public quillService: QuillService
   ) {}
 
   ngOnInit() {

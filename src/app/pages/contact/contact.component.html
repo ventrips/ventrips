@@ -12,7 +12,7 @@
     <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
 <ng-container *ngIf="!isLoading">
-    <section class="mt-5" [@enter]>
+    <section class="mt-5">
         <ng-container *ngIf="data">
             <div class="row no-gutters">
                 <div class="col-12">

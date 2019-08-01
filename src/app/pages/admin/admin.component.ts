@@ -7,17 +7,13 @@ import { SeoService } from '../../services/seo/seo.service';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../interfaces/user';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100, translate: '30px' })
-  ]
+  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
   public _ = _;

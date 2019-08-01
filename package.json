@@ -8,8 +8,6 @@
     "build": "ng build",
     "build:install": "npm run build:ssr",
     "deploy": "npm run build:ssr && node movedist.js && cd functions && firebase deploy --only functions,hosting",
-    "deploy:hosting": "npm run build:ssr && node movedist.js && cd functions && firebase deploy --only hosting",
-    "deploy:functions": "cd functions && firebase deploy --only functions",
     "deploy:all": "npm run build:ssr && node movedist.js && cd functions && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",

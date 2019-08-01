@@ -1,17 +1,13 @@
 import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../../../environments/environment';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import LazyLoad from "vanilla-lazyload";
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
-  animations: [
-    fadeInUpOnEnterAnimation({ anchor: 'enter', duration: 1000, delay: 100})
-  ]
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
   @Input() showEditButton = false;
