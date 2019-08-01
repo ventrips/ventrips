@@ -72,6 +72,9 @@ export class DetailsComponent implements OnInit {
       }
       this.init();
     });
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     // Lazy Load Images
     var myLazyLoad = new LazyLoad();
     myLazyLoad.update();
