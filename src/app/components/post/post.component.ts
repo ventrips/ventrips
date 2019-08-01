@@ -31,9 +31,6 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
     // Lazy Load Images
     var myLazyLoad = new LazyLoad();
     myLazyLoad.update();

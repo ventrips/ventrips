@@ -71,9 +71,6 @@ export class ProfileComponent implements OnInit {
         this.isLoading = false;
       }
     );
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
     // Lazy Load Images
     var myLazyLoad = new LazyLoad();
     myLazyLoad.update();
