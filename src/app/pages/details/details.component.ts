@@ -92,13 +92,13 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  sendPostPushNotification(post: Post) {
-    if (isPlatformServer(this.platformId)) { return; }
-    // this.fcmService.sendPushNotification({
-    //   title: post.title,
-    //   body: post.description,
-    //   icon: post.image,
-    //   link: `${environment.url}/blog/${post.slug}`,
-    // })
-  }
+  // sendPostPushNotification(post: Post) {
+  //   if (isPlatformServer(this.platformId)) { return; }
+  //   this.fcmService.sendPushNotification({
+  //     title: post.title,
+  //     body: post.description,
+  //     icon: post.image,
+  //     link: `${environment.url}/blog/${post.slug}`,
+  //   })
+  // }
 }
