@@ -138,20 +138,11 @@ quill-view-html .ql-container {
     padding: 0;
 }
 
-.image-banner {
-    background-position: center;
-    background-size: cover;
-    padding-top: 33.33%;
-    background-repeat: no-repeat;
-}
-
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) {
-    .image-banner {
-        padding-top: 100%;
-    }
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
     figure.container {
         padding-left: 0;
         padding-right: 0;
+        max-width: unset;
     }
 }

@@ -69,8 +69,8 @@
           <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
         </section>
       </div>
-      <figure>
-        <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + post?.image + ')'}" alt="Image Banner"></div>
+      <figure class="text-center container">
+        <img class="w-100 img-fluid box-shadow" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.image" alt="Image Banner">
       </figure>
       <div class="container my-5">
         <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
