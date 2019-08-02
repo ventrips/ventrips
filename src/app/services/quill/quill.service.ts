@@ -17,6 +17,7 @@ export class QuillService {
     let copy = _.cloneDeep(body);
     copy = copy.replace(new RegExp(`<img src=`,`g`), `<img alt="Quill Image" src="../assets/img/image-placeholder.jpg" data-src=`);
     copy = copy.replace(new RegExp(`<iframe`,`g`), `<iframe title="Quill IFrame"`);
+    copy = copy.replace(new RegExp(`target="_blank" `,`g`), `target="_blank" rel="noopener noreferrer"`);
     return copy;
   }
 
