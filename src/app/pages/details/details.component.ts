@@ -11,8 +11,7 @@ import { InputsConfig } from '../../interfaces/inputs-config';
 import { environment } from '../../../environments/environment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
-import { FcmService } from '../../services/fcm/fcm.service';
-import { Fcm } from '../../interfaces/fcm';
+// import { FcmService } from '../../services/fcm/fcm.service';
 import LazyLoad from "vanilla-lazyload";
 import { QuillService } from '../../services/quill/quill.service';
 
@@ -39,7 +38,6 @@ export class DetailsComponent implements OnInit {
   public url: string;
   public environment = environment;
   public collection: string = 'blog';
-  public fcm: Fcm;
   public _ = _;
 
   constructor(
@@ -50,7 +48,7 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
-    public fcmService: FcmService,
+    // public fcmService: FcmService,
     public quillService: QuillService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -96,11 +94,11 @@ export class DetailsComponent implements OnInit {
 
   sendPostPushNotification(post: Post) {
     if (isPlatformServer(this.platformId)) { return; }
-    this.fcmService.sendPushNotification({
-      title: post.title,
-      body: post.description,
-      icon: post.image,
-      link: `${environment.url}/blog/${post.slug}`,
-    })
+    // this.fcmService.sendPushNotification({
+    //   title: post.title,
+    //   body: post.description,
+    //   icon: post.image,
+    //   link: `${environment.url}/blog/${post.slug}`,
+    // })
   }
 }

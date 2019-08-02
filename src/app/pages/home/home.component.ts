@@ -14,7 +14,7 @@ import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
-import { FcmService } from '../../services/fcm/fcm.service';
+// import { FcmService } from '../../services/fcm/fcm.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
     public authService: AuthService,
-    public fcmService: FcmService,
+    // public fcmService: FcmService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -125,8 +125,8 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
       this.spinner.hide();
     });
-    if (isPlatformServer(this.platformId)) { return; }
-    this.fcmService.getPermission().subscribe();
+    // if (isPlatformServer(this.platformId)) { return; }
+    // this.fcmService.getPermission().subscribe();
   }
 
   search = (text$: Observable<string>) => text$.pipe(

@@ -27,7 +27,7 @@
         url="{{environment.url}}{{url}}">
       </share-buttons>
     </div>
-    <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
+    <!-- <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
       <span class="h5 my-2 mr-3">Subscribe</span>
       <div class="btn-group">
         <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" title="Subscribe" class="btn btn-warning rounded-0" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
@@ -37,7 +37,7 @@
           <i class="fa fa-bell-slash"></i>
         </button>
       </div>
-    </div>
+    </div> -->
   </section>
   <!-- Horizontal Display Ad-->
   <section class="container-fluid text-center my-5">
