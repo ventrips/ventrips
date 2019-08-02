@@ -9,92 +9,89 @@
   </ng-adsense>
 </section>
 <section>
-  <ng-container *ngIf="!isLoading">
-    <ng-container *ngIf="post" class="mt-5">
-      <div class="d-flex container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
-        <app-edit-button
-          [collection]="collection"
-          [id]="post?.slug"
-          [data]="post"
-          [isNew]="false"
-          [inputsConfig]="inputsConfig">
-        </app-edit-button>
-        <!-- <div *ngIf="authService?.isAdmin(user)" class="ml-auto">
-          <button class="btn btn-warning rounded-0" (click)="sendPostPushNotification(post); isPushed = true" [ngClass]="{'active': isPushed && !_.isNil(isPushed)}" [disabled]="isPushed && !_.isNil(isPushed)">
-            <i class="fa fa-bell"></i> Send Push Notification
-          </button>
-        </div> -->
-      </div>
-      <div class="container my-5">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb h4 bg-white mb-0 p-0">
-            <li class="breadcrumb-item">
-              <a [routerLink]="['']" class="badge badge-warning text-capitalize py-2 pr-2 rounded-0">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a [routerLink]="['']" [queryParams]="{q: post?.category}" class="badge badge-dark text-capitalize py-2 pr-2 rounded-0">{{post?.category}}</a>
-            </li>
-          </ol>
-        </nav>
-      </div>
-      <div class="container mb-4">
-        <div class="h5 my-4">
-          <h1 class="mb-4">{{post?.title}}</h1>
-          <p class="my-3" *ngIf="post?.description">
-            {{post?.description}}
-          </p>
-          <div>
-              <a [routerLink]="['/profile', post?.uid]" class="mr-3">
-                <img class="rounded-circle profile-picture" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.photoURL" alt="Profile Picture">
-              </a>
-              <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
-              <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="post?.created">
-                Published: {{post?.created | timeStampDate:'longDate'}}
-              </p>
-              <p class="small text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
-                Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
-              </p>
-          </div>
-        </div>
-        <section class="mb-3 d-flex flex-wrap align-items-center">
-          <span class="h5 my-2 mr-3">Share</span>
-          <share-buttons
-            [theme]="'default'"
-            [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
-            [exclude]="[]"
-            [showText]="false"
-            [showCount]="false"
-            url="{{environment.url}}{{url}}">
-          </share-buttons>
-          <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
-        </section>
-      </div>
-      <figure class="text-center container">
-        <img class="w-100 img-fluid box-shadow" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.image" alt="Image Banner">
-      </figure>
-      <div class="container my-5">
-        <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
-      </div>
-      <section class="container text-center">
-        <!-- In-article Ad -->
-        <ng-adsense
-          [display]="'block'"
-          [adClient]="'ca-pub-4642980268605791'"
-          [adSlot]="5528837351"
-          [adLayout]="'in-article'"
-          [adFormat]="'fluid'">
-        </ng-adsense>
-      </section>
-      <div class="container my-5" *ngIf="environment.production">
-        <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
-      </div>
-      <app-related-posts
-        [post]="post"
+  <ng-container class="mt-5">
+    <div class="d-flex container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
+      <app-edit-button
         [collection]="collection"
+        [id]="post?.slug"
+        [data]="post"
+        [isNew]="false"
         [inputsConfig]="inputsConfig">
-      </app-related-posts>
-    </ng-container>
-    <app-error-not-found *ngIf="!post"></app-error-not-found>
+      </app-edit-button>
+      <!-- <div *ngIf="authService?.isAdmin(user)" class="ml-auto">
+        <button class="btn btn-warning rounded-0" (click)="sendPostPushNotification(post); isPushed = true" [ngClass]="{'active': isPushed && !_.isNil(isPushed)}" [disabled]="isPushed && !_.isNil(isPushed)">
+          <i class="fa fa-bell"></i> Send Push Notification
+        </button>
+      </div> -->
+    </div>
+    <div class="container my-5" [hidden]="!post?.category">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb h4 bg-white mb-0 p-0">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['']" class="badge badge-warning text-capitalize py-2 pr-2 rounded-0">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="['']" [queryParams]="{q: post?.category}" class="badge badge-dark text-capitalize py-2 pr-2 rounded-0">{{post?.category}}</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="container mb-4">
+      <div class="h5 my-4">
+        <h1 class="mb-4">{{post?.title}}</h1>
+        <p class="my-3">
+          {{post?.description}}
+        </p>
+        <div>
+            <a [hidden]="!post?.uid" [routerLink]="['/profile', post?.uid]" class="mr-3">
+              <img class="rounded-circle profile-picture" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.photoURL" alt="{{post?.displayName}} Profile Picture">
+            </a>
+            <a [routerLink]="['/profile', post?.uid]" class="text-dark font-weight-bold mr-3">{{post?.displayName}}</a>
+            <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="post?.created">
+              Published: {{post?.created | timeStampDate:'longDate'}}
+            </p>
+            <p class="small text-secondary my-3 d-lg-inline-block" *ngIf="post?.modified">
+              Modified: {{post?.modified | timeStampDate:'longDate'}} ({{post?.modified | timeAgo}})
+            </p>
+        </div>
+      </div>
+      <section class="mb-3 d-flex flex-wrap align-items-center">
+        <span class="h5 my-2 mr-3">Share</span>
+        <share-buttons
+          [theme]="'default'"
+          [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+          [exclude]="[]"
+          [showText]="false"
+          [showCount]="false"
+          url="{{environment.url}}{{url}}">
+        </share-buttons>
+        <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
+      </section>
+    </div>
+    <figure class="text-center container" [hidden]="!post?.image">
+      <img class="w-100 img-fluid box-shadow" [src]="post?.image" alt="Image Banner">
+    </figure>
+    <div class="container my-5">
+      <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
+    </div>
+    <section class="container text-center">
+      <!-- In-article Ad -->
+      <ng-adsense
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]="5528837351"
+        [adLayout]="'in-article'"
+        [adFormat]="'fluid'">
+      </ng-adsense>
+    </section>
+    <div class="container my-5" *ngIf="environment.production">
+      <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
+    </div>
+    <app-related-posts
+      [post]="post"
+      [collection]="collection"
+      [inputsConfig]="inputsConfig">
+    </app-related-posts>
   </ng-container>
 </section>
 <section class="container text-center mt-5">

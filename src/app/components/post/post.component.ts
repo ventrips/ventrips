@@ -27,12 +27,12 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
-    if (isPlatformServer(this.platformId)) {
-      return;
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        var myLazyLoad = new LazyLoad();
+        myLazyLoad.update();
+      }, 0);
     }
-    // Lazy Load Images
-    var myLazyLoad = new LazyLoad();
-    myLazyLoad.update();
   }
 
   scrollToTop() {

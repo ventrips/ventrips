@@ -27,7 +27,6 @@ export class ContactComponent implements OnInit {
   };
   public _ = _;
   public environment = environment;
-  public isLoading = true;
   public data: any;
   public user: User;
   public url: string;
@@ -53,11 +52,9 @@ export class ContactComponent implements OnInit {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;
         this.spinner.hide();
-        this.isLoading = false;
       }
     }, () => {
         this.spinner.hide();
-        this.isLoading = false;
-    })
+    });
   }
 }

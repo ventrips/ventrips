@@ -30,9 +30,8 @@ export class DetailsComponent implements OnInit {
     boolean: ['publish'],
     disabled: ['slug']
   };
-  public post: Post;
+  public post = new Post();
   public posts: Array<Post>;
-  public isLoading = true;
   public user: User;
   public slug: string;
   public url: string;
@@ -61,34 +60,26 @@ export class DetailsComponent implements OnInit {
     .subscribe(params => {
       this.url = this.router.url;
       this.slug = params.slug;
-      // TODO: Temporary Until Google Removes /posts
-      if (_.startsWith(this.url, '/posts')) {
-        this.router.navigate(['/blog', this.slug]);
-        return;
-      }
       this.init();
     });
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
-    // Lazy Load Images
-    var myLazyLoad = new LazyLoad();
-    myLazyLoad.update();
   }
 
   init() {
-    this.isLoading = true;
     this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.slug}`, `${this.collection}-${this.slug}`, true)
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.post = response;
         this.spinner.hide();
-        this.isLoading = false;
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            var myLazyLoad = new LazyLoad();
+            myLazyLoad.update();
+          }, 0);
+        }
       }
     }, () => {
       this.spinner.hide();
-      this.isLoading = false;
     });
   }
 

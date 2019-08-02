@@ -18,53 +18,48 @@
     </app-edit-button>
 </div>
 <section>
-    <ng-container *ngIf="!isLoading">
-        <ng-container *ngIf="profile">
-            <div class="container my-5">
-                <div class="d-flex flex-wrap align-items-center mb-3">
-                    <img class="rounded-circle profile-picture mr-3" src="../assets/img/image-placeholder.jpg" [attr.data-src]="post?.photoURL" alt="Profile Picture">
-                    <h1 class="mb-0">{{profile?.displayName}}</h1>
+    <div class="container my-5">
+        <div class="d-flex flex-wrap align-items-center mb-3">
+            <img class="rounded-circle profile-picture mr-3" src="../assets/img/image-placeholder.jpg" [attr.data-src]="profile?.photoURL" alt="{{profile?.displayName}} Profile Picture">
+            <h1 class="mb-0">{{profile?.displayName}}</h1>
+        </div>
+        <ng-container *ngIf="authService?.canEdit(user, profile?.uid)">
+            <p class="mb-0">
+                <span class="font-weight-bold mr-1" *ngIf="profile?.uid">UID:</span>
+                <span class="text-secondary">{{profile?.uid}}</span>
+            </p>
+            <p class="mb-0">
+                <span class="font-weight-bold mr-1" *ngIf="profile?.joined">Joined:</span>
+                <span class="text-secondary">{{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeAgo}})</span>
+            </p>
+            <p class="mb-0">
+                <span class="font-weight-bold mr-1" *ngIf="profile?.lastActive">Last Active:</span>
+                <span class="text-secondary">{{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeAgo}})</span>
+            </p>
+            <div class="mb-3">
+                <div *ngFor="let key of profile?.roles | keys">
+                    <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
+                    <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
                 </div>
-                <ng-container *ngIf="authService?.canEdit(user, profile?.uid)">
-                    <p class="mb-0">
-                        <span class="font-weight-bold mr-1" *ngIf="profile?.uid">UID:</span>
-                        <span class="text-secondary">{{profile?.uid}}</span>
-                    </p>
-                    <p class="mb-0">
-                        <span class="font-weight-bold mr-1" *ngIf="profile?.joined">Joined:</span>
-                        <span class="text-secondary">{{profile?.joined | timeStampDate:'longDate'}} ({{profile?.joined | timeAgo}})</span>
-                    </p>
-                    <p class="mb-0">
-                        <span class="font-weight-bold mr-1" *ngIf="profile?.lastActive">Last Active:</span>
-                        <span class="text-secondary">{{profile?.lastActive | timeStampDate:'longDate'}} ({{profile?.lastActive | timeAgo}})</span>
-                    </p>
-                    <div class="mb-3">
-                        <div *ngFor="let key of profile?.roles | keys">
-                            <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
-                            <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
-                        </div>
-                    </div>
-                </ng-container>
-                <section class="d-flex flex-wrap align-items-center">
-                    <span class="h5 my-2 mr-3">Share</span>
-                    <share-buttons
-                        [theme]="'default'"
-                        [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
-                        [exclude]="[]"
-                        [showText]="false"
-                        [showCount]="false"
-                        url="{{environment.url}}{{url}}">
-                    </share-buttons>
-                </section>
-                <hr class="my-5">
-                <section>
-                    <quill-view-html [content]="quillService.format(profile?.bio)" theme="snow"></quill-view-html>
-                    <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
-                </section>
             </div>
         </ng-container>
-        <app-error-not-found *ngIf="!profile"></app-error-not-found>
-    </ng-container>
+        <section class="d-flex flex-wrap align-items-center">
+            <span class="h5 my-2 mr-3">Share</span>
+            <share-buttons
+                [theme]="'default'"
+                [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+                [exclude]="[]"
+                [showText]="false"
+                [showCount]="false"
+                url="{{environment.url}}{{url}}">
+            </share-buttons>
+        </section>
+        <hr class="my-5">
+        <section>
+            <quill-view-html [content]="quillService.format(profile?.bio)" theme="snow"></quill-view-html>
+            <p *ngIf="!profile?.bio" class="text-center font-weight-light text-muted">{{profile?.displayName}} has no profile information</p>
+        </section>
+    </div>
 </section>
 <!-- Horizontal Display Ad-->
 <section class="container-fluid text-center mt-5">

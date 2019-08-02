@@ -11,26 +11,24 @@
 <div class="container-fluid my-3">
     <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
-<ng-container *ngIf="!isLoading">
-    <section class="mt-5">
-        <ng-container *ngIf="data">
-            <div class="row no-gutters">
+<section class="mt-5">
+    <ng-container *ngIf="data">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <div class="container mb-3">
+                    <h1>{{data?.title}}</h1>
+                    <p class="text-secondary">{{data?.description}}</p>
+                </div>
+            </div>
                 <div class="col-12">
-                    <div class="container mb-3">
-                        <h1>{{data?.title}}</h1>
-                        <p class="text-secondary">{{data?.description}}</p>
-                    </div>
+                <div class="container mb-5">
+                    <app-contact-form></app-contact-form>
                 </div>
-                 <div class="col-12">
-                    <div class="container mb-5">
-                        <app-contact-form></app-contact-form>
-                    </div>
-                </div>
-           </div>
-           <figure *ngIf="data?.image" class="mb-0">
-                <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
-            </figure>
-        </ng-container>
-        <app-error-not-found *ngIf="!data"></app-error-not-found>
-    </section>
-</ng-container>
+            </div>
+        </div>
+        <figure *ngIf="data?.image" class="mb-0">
+            <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
+        </figure>
+    </ng-container>
+    <app-error-not-found *ngIf="!data"></app-error-not-found>
+</section>

@@ -14,6 +14,7 @@ import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import LazyLoad from "vanilla-lazyload";
 // import { FcmService } from '../../services/fcm/fcm.service';
 @Component({
   selector: 'app-home',
@@ -120,6 +121,12 @@ export class HomeComponent implements OnInit {
         this.searchOptions = _.uniq(this.searchOptions);
         this.isLoading = false;
         this.spinner.hide();
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            var myLazyLoad = new LazyLoad();
+            myLazyLoad.update();
+          }, 0);
+        }
       }
     }, () => {
       this.isLoading = false;

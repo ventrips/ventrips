@@ -11,22 +11,14 @@
 <div class="container-fluid my-3">
     <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
-<ng-container *ngIf="!isLoading">
-    <section class="my-5">
-        <ng-container *ngIf="data">
-            <div class="container mb-3">
-                <h1 *ngIf="data?.title">{{data?.title}}</h1>
-            </div>
-            <figure class="mb-3" *ngIf="data?.image">
-                <div class="image-banner box-shadow" [ngStyle]="{'background-image': 'url(' + data?.image + ')'}"></div>
-            </figure>
-            <div class="container mb-3" *ngIf="data?.body">
-                <quill-view-html [content]="quillService.format(data?.body)" theme="snow"></quill-view-html>
-            </div>
-        </ng-container>
-        <app-error-not-found *ngIf="!data"></app-error-not-found>
-    </section>
-</ng-container>
+<section class="my-5">
+    <div class="container mb-3">
+        <h1>{{data?.title}}</h1>
+    </div>
+    <div class="container mb-3">
+        <quill-view-html [content]="quillService.format(data?.body)" theme="snow"></quill-view-html>
+    </div>
+</section>
 <!-- Horizontal Display Ad-->
 <section class="container-fluid text-center mt-5">
     <ng-adsense

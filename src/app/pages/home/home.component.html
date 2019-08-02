@@ -49,7 +49,7 @@
         [adFormat]="'auto'">
     </ng-adsense>
   </section>
-  <section *ngIf="!isLoading">
+  <section>
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
         <!-- Create New -->
@@ -78,10 +78,10 @@
       <p class="h5 my-3 text-dark text-capitalize text-right">{{(posts | filterBy:'publish':true:user | searchBy: searchTerm).length}} Results</p>
     </div>
     <!-- No results -->
-    <ng-container *ngIf="_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
+    <ng-container *ngIf="!isLoading && _.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
       <div class="container-fluid text-center">
         <h2 class="text-uppercase">Sorry!</h2>
-        <p class=" text-muted">We couldn't find anything with these search terms.
+        <p class="text-muted">We couldn't find anything with these search terms.
           <a [routerLink]="['']" class="text-warning cursor-pointer">Clear and search again</a>
         </p>
       </div>

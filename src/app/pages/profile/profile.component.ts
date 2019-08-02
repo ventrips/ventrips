@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
   };
   public id;
   public profile: User;
-  public isLoading = true;
   public user: User;
   public environment = environment;
   public url: string;
@@ -62,18 +61,16 @@ export class ProfileComponent implements OnInit {
         if (!_.isEmpty(response) && !_.isNil(response)) {
           this.profile = response;
           this.spinner.hide();
-          this.isLoading = false;
+          if (isPlatformBrowser(this.platformId)) {
+            setTimeout(() => {
+              var myLazyLoad = new LazyLoad();
+              myLazyLoad.update();
+            }, 0);
+          }
         }
       }, () => {
         this.spinner.hide();
-        this.isLoading = false;
       }
     );
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
-    // Lazy Load Images
-    var myLazyLoad = new LazyLoad();
-    myLazyLoad.update();
   }
 }

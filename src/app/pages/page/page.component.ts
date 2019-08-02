@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,6 +11,7 @@ import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
+import LazyLoad from "vanilla-lazyload";
 import { QuillService } from '../../services/quill/quill.service';
 
 @Component({
@@ -29,7 +31,6 @@ export class PageComponent implements OnInit {
   };
   public _ = _;
   public environment = environment;
-  public isLoading = true;
   public data: any;
   public id: string;
   public user: User;
@@ -43,7 +44,8 @@ export class PageComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
     public authService: AuthService,
-    public quillService: QuillService
+    public quillService: QuillService,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
   ngOnInit() {
@@ -57,11 +59,15 @@ export class PageComponent implements OnInit {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.data = response;
         this.spinner.hide();
-        this.isLoading = false;
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            var myLazyLoad = new LazyLoad();
+            myLazyLoad.update();
+          }, 0);
+        }
       }
     }, () => {
         this.spinner.hide();
-        this.isLoading = false;
     })
   }
 }
