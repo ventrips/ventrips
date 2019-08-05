@@ -69,7 +69,7 @@
       </section>
     </div>
     <figure class="text-center container" [hidden]="!post?.image">
-      <img class="w-100 img-fluid box-shadow" [src]="post?.image" alt="Image Banner">
+      <img class="w-100 img-fluid box-shadow" src="../assets/img/image-placeholder.jpg" [attr.src]="post?.image" alt="Image Banner">
     </figure>
     <div class="container my-5">
       <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
