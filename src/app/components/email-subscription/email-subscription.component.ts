@@ -32,7 +32,7 @@ export class EmailSubscriptionComponent implements OnInit {
       this.email = undefined;
       this.emailSubmitted = true;
     }).catch(error => {
-      this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
+      this.toastrService.warning(`${this.email} could already be subscribed`, _.get(error, ['code']));
     });
   }
 
