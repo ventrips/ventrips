@@ -29,6 +29,7 @@ export class EmailSubscriptionComponent implements OnInit {
     this.afs.collection(this.collection).doc(this.email).set({ email: this.email })
     .then(success => {
       this.toastrService.success(`You will get notified for new updates!`, `Subscribed to Newsletter`)
+      this.email = undefined;
       this.emailSubmitted = true;
     }).catch(error => {
       this.toastrService.warning(_.get(error, ['message']), _.get(error, ['code']));
