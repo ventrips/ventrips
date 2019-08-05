@@ -1,0 +1,9 @@
+<ng-container *ngIf="!emailSubmitted">
+    <section class="email-subscription container rounded p-3 text-dark bg-light">
+        <h4 class="text-center mb-3">Subscribe to Newsletter</h4>
+        <p class="text-center mb-3">Only a few emails per month</p>
+        <input [(ngModel)]="email" [required]="true" type="email" class="form-control mb-3" placeholder="Enter your Email to get notified!">
+        <button class="btn btn-block btn-warning mb-3" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
+    </section>
+    <hr class="border-light">
+</ng-container>

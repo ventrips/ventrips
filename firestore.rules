@@ -1,5 +1,12 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /emails/{document=**} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+      allow read, create;
+      allow update, delete: if getRole('admin') == true || getRole('editor') == true;
+    }
 		match /notifications/{document=**} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]

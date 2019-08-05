@@ -64,6 +64,7 @@ import { ErrorNotFoundComponent } from './components/errors/error-not-found/erro
 import { AdminComponent } from './pages/admin/admin.component';
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
 import { PostComponent } from './components/post/post.component';
+import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { PostComponent } from './components/post/post.component';
     ErrorNotFoundComponent,
     AdminComponent,
     RelatedPostsComponent,
-    PostComponent
+    PostComponent,
+    EmailSubscriptionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
