@@ -2,7 +2,7 @@
   <section class="sticky-top bg-white box-shadow mb-4">
     <div class="container-fluid border-bottom py-3">
       <div class="input-group">
-        <input type="text" id="typeahead-config" class="form-control form-control rounded-0" aria-label="Search for blogs" placeholder="Search for blogs"
+        <input #searchBar type="text" id="typeahead-config" class="form-control form-control rounded-0" aria-label="Search for blogs" placeholder="Search for blogs"
           [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
           <div class="input-group-append">
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text rounded-0 bg-warning">

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
   public url: string;
   public collection: string = 'blog';
   public token: string;
+  @ViewChild('searchBar', {static: false}) searchInputText: ElementRef; // Remove aria-multiline to improve SEO
 
   constructor(
     private afs: AngularFirestore,
@@ -98,8 +99,15 @@ export class HomeComponent implements OnInit {
     private ssrService: SsrService,
     public authService: AuthService,
     // public fcmService: FcmService,
+    private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
+
+  ngAfterViewInit(): void {  // Remove aria-multiline to improve SEO
+    if (this.searchInputText !== undefined ) {
+        this.renderer.removeAttribute(this.searchInputText.nativeElement, 'aria-multiline');
+    }
+  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
