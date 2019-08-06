@@ -45,6 +45,9 @@ export class SeoService {
     // Set title
     this.title.setTitle(config.title);
 
+    // Keywords
+    this.meta.updateTag({ name: 'keywords', content: _.join(_.compact(_.union(_.split(_.replace(_.toLower(`${config.title} ${config.description}`), new RegExp(/[^a-zA-Z0-9]/g), ' '), ' '))), ', ')});
+
     // Google
     this.meta.updateTag({ name: 'Description', content: config.description });
 
