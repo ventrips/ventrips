@@ -2,7 +2,7 @@
     <section class="email-subscription container rounded p-3 text-dark bg-light">
         <h4 class="text-center mb-3">Subscribe to Newsletter</h4>
         <p class="text-center mb-3">You will receive only a few emails per month</p>
-        <input [(ngModel)]="email" [required]="true" type="email" class="form-control mb-3" placeholder="Enter your Email to get notified!">
+        <input [(ngModel)]="email" [required]="true" type="email" class="form-control mb-3" aria-label="Enter your email address to get notified!" placeholder="Enter your email address to get notified!">
         <button class="btn btn-block btn-warning mb-3" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
     </section>
     <hr class="border-light">
