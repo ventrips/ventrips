@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, ElementRef, Renderer2, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, Subject, merge } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -100,6 +100,7 @@ export class HomeComponent implements OnInit {
     public authService: AuthService,
     // public fcmService: FcmService,
     private renderer: Renderer2,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -130,10 +131,12 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
         this.spinner.hide();
         if (isPlatformBrowser(this.platformId)) {
-          setTimeout(() => {
-            var myLazyLoad = new LazyLoad();
-            myLazyLoad.update();
-          }, 0);
+          this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+              var myLazyLoad = new LazyLoad();
+              myLazyLoad.update();
+            }, 0);
+          });
         }
       }
     }, () => {

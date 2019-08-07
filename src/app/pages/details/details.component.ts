@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Post } from './../../interfaces/post';
@@ -49,6 +49,7 @@ export class DetailsComponent implements OnInit {
     private ssrService: SsrService,
     // public fcmService: FcmService,
     public quillService: QuillService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
 
@@ -72,10 +73,12 @@ export class DetailsComponent implements OnInit {
         this.post = response;
         this.spinner.hide();
         if (isPlatformBrowser(this.platformId)) {
-          setTimeout(() => {
-            var myLazyLoad = new LazyLoad();
-            myLazyLoad.update();
-          }, 0);
+          this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+              var myLazyLoad = new LazyLoad();
+              myLazyLoad.update();
+            }, 0);
+          });
         }
       }
     }, () => {

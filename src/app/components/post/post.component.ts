@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Input, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/firestore/auth/auth.service';
@@ -22,16 +22,19 @@ export class PostComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
     if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        var myLazyLoad = new LazyLoad();
-        myLazyLoad.update();
-      }, 0);
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          var myLazyLoad = new LazyLoad();
+          myLazyLoad.update();
+        }, 0);
+      });
     }
   }
 

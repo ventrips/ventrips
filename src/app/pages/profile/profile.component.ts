@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Post } from './../../interfaces/post';
@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
     private ssrService: SsrService,
     public authService: AuthService,
     public quillService: QuillService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
@@ -62,10 +63,12 @@ export class ProfileComponent implements OnInit {
           this.profile = response;
           this.spinner.hide();
           if (isPlatformBrowser(this.platformId)) {
-            setTimeout(() => {
-              var myLazyLoad = new LazyLoad();
-              myLazyLoad.update();
-            }, 0);
+            this.ngZone.runOutsideAngular(() => {
+              setTimeout(() => {
+                var myLazyLoad = new LazyLoad();
+                myLazyLoad.update();
+              }, 0);
+            });
           }
         }
       }, () => {

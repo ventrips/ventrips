@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -45,6 +45,7 @@ export class PageComponent implements OnInit {
     private ssrService: SsrService,
     public authService: AuthService,
     public quillService: QuillService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -60,10 +61,12 @@ export class PageComponent implements OnInit {
         this.data = response;
         this.spinner.hide();
         if (isPlatformBrowser(this.platformId)) {
-          setTimeout(() => {
-            var myLazyLoad = new LazyLoad();
-            myLazyLoad.update();
-          }, 0);
+          this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+              var myLazyLoad = new LazyLoad();
+              myLazyLoad.update();
+            }, 0);
+          });
         }
       }
     }, () => {
