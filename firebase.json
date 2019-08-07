@@ -35,7 +35,7 @@
       "source": "**/*.@(jpg|jpeg|gif|png)",
       "headers": [ {
         "key": "Cache-Control",
-        "value": "max-age=7200"
+        "value": "max-age=31557600"
       } ]
     }, {
       "source": "404.html",
