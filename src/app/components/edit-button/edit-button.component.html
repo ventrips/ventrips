@@ -1,8 +1,3 @@
 <button class="btn btn-warning btn-md rounded-0 d-block" (click)="open()">
-    <span *ngIf="isNew">
-        <fa-icon [icon]="['fas', 'plus-circle']" class="text-dark"></fa-icon> {{createText}}
-    </span>
-    <span *ngIf="!isNew">
-        <fa-icon [icon]="['fas', 'pen']" class="text-dark"></fa-icon> {{editText}}
-    </span>
+    <fa-icon [icon]="['fas', isNew ? 'plus-circle' : 'pen']" class="text-dark"></fa-icon> {{isNew ? createText : 'Edit'}}
 </button>

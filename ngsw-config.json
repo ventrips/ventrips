@@ -24,6 +24,14 @@
         "files": [
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ],
+        "urls": [
+          "https://csi.gstatic.com/**",
+          "https://d.agkn.com/**",
+          "https://tpc.googlesyndication.com/**",
+          "https://cm.g.doubleclick.net/**",
+          "https://c.disquscdn.com/**",
+          "https://fonts.gstatic.com/**"
         ]
       }
     }
