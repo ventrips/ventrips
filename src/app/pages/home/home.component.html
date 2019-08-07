@@ -6,10 +6,10 @@
           [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
           <div class="input-group-append">
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text rounded-0 bg-warning">
-              <i class="fas fa-search text-dark"></i>
+              <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
             </span>
             <a [routerLink]="['']" class="btn text-dark btn-warning rounded-0" title="Clear" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning rounded-0">
-              Clear <i class="fas fa-times"></i>
+              Clear <fa-icon [icon]="['fas', 'times']" class="text-dark"></fa-icon>
             </a>
           </div>
         </div>
@@ -31,10 +31,10 @@
       <span class="h5 my-2 mr-3">Subscribe</span>
       <div class="btn-group">
         <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" title="Subscribe" class="btn btn-warning rounded-0" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
-          <i class="fa fa-bell"></i>
+          <fa-icon [icon]="['fas', 'bell']"></fa-icon>
         </button>
         <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" title="Unsubscribe" class="btn btn-warning rounded-0" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
-          <i class="fa fa-bell-slash"></i>
+          <fa-icon [icon]="['fas', 'bell-slash']"></fa-icon>
         </button>
       </div>
     </div> -->

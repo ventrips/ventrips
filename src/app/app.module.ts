@@ -40,6 +40,7 @@ import { DisqusModule } from "ngx-disqus";
 import { NgxPayPalModule } from 'ngx-paypal';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { AdsenseModule } from 'ng2-adsense';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -119,6 +120,7 @@ import { EmailSubscriptionComponent } from './components/email-subscription/emai
       positionClass: 'toast-bottom-left',
       preventDuplicates: true
     }),
+    FontAwesomeModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule.enablePersistence(), // enables caching of firebase data
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

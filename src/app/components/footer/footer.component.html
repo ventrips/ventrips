@@ -2,11 +2,11 @@
   <section class="container-fluid">
     <app-email-subscription></app-email-subscription>
     <section class="d-flex">
-      <p class="mt-2 mr-5 mb-0">Follow Us</p>
+      <p class="my-3 mr-5 mb-0">Follow Us</p>
       <ul class="list-inline mb-0">
         <li class="list-inline-item mt-1 mr-4" *ngFor="let item of socialMedia">
           <a class="text-white" [title]="item?.name" [href]="item?.url" target="__blank" rel="noopener noreferrer">
-            <i class="fab fa-2x {{item?.class}}"></i>
+            <fa-icon [icon]="[item?.prefix, item?.icon]" class="fa-2x"></fa-icon>
           </a>
         </li>
       </ul>

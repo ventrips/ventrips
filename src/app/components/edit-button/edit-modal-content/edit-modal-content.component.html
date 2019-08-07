@@ -15,8 +15,8 @@
                     <input type="input" class="form-control" placeholder="Add {{key}}" [ngModel]="data[key]"  (ngModelChange)="data[key] = transformString(key, $event)" [required]="true" [disabled]="isDisabled(key)">
                     <div class="input-group-append">
                         <span class="input-group-text">
-                            <i class="fa"
-                            [ngClass]="{ 'fa-check text-success': isValidString(key), 'fa-asterisk text-danger': !isValidString(key) }"></i>
+                            <fa-icon [icon]="['fas', 'check']" class="text-success" *ngIf="isValidString(key)"></fa-icon>
+                            <fa-icon [icon]="['fas', 'asterisk']" class="text-danger" *ngIf="!isValidString(key)"></fa-icon>
                         </span>
                     </div>
                 </div>
@@ -27,8 +27,8 @@
                     <input type="number" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
                     <div class="input-group-append">
                         <span class="input-group-text">
-                            <i class="fa"
-                            [ngClass]="{ 'fa-check text-success': _.isNumber(data[key]), 'fa-asterisk text-danger': !_.isNumber(data[key]) }"></i>
+                            <fa-icon [icon]="['fas', 'check']" class="text-success" *ngIf="_.isNumber(data[key])"></fa-icon>
+                            <fa-icon [icon]="['fas', 'asterisk']" class="text-danger" *ngIf="!_.isNumber(data[key])"></fa-icon>
                         </span>
                     </div>
                 </div>
@@ -39,11 +39,11 @@
                     <input type="url" class="form-control" placeholder="Add {{key}}" [(ngModel)]="data[key]" [required]="true" [disabled]="isDisabled(key)">
                     <div class="input-group-append">
                         <button (click)="selectLocalImage(key)" class="btn btn-outline-secondary" type="button" [disabled]="isDisabled(key)">
-                            <i class="fa fa-image"></i>
+                            <fa-icon [icon]="['fas', 'image']" class="text-dark"></fa-icon>
                         </button>
                         <span class="input-group-text">
                             <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(key)" [src]="_.get(data, [key])">
-                            <i class="fa fa-asterisk text-danger" *ngIf="!isValidUrl(key)"></i>
+                            <fa-icon [icon]="['fas', 'asterisk']" class="text-danger" *ngIf="!isValidUrl(key)"></fa-icon>
                         </span>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                             name="datePicker" [(ngModel)]="data[key]" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [disabled]="isDisabled(key)">
                     <div class="input-group-append" *ngIf="data[key]">
                         <div class="input-group-text">
-                            <i class="fa"
-                            [ngClass]="{ 'fa-check text-success': _.isDate(data[key].toDate()), 'fa-asterisk text-danger': !_.isDate(data[key].toDate()) }"></i>
+                            <fa-icon [icon]="['fas', 'check']" class="text-success" *ngIf="_.isDate(data[key].toDate())"></fa-icon>
+                            <fa-icon [icon]="['fas', 'asterisk']" class="text-danger" *ngIf="!_.isDate(data[key].toDate())"></fa-icon>
                         </div>
                     </div>
                 </div>
@@ -81,17 +81,17 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'blog')" type="button" class="btn btn-danger" (click)="delete()"><i class="fa fa-trash-alt"></i> Delete</button>
+    <button *ngIf="!isNew && authService.canEdit(user, data?.uid) && _.isEqual(collection, 'blog')" type="button" class="btn btn-danger" (click)="delete()"><fa-icon [icon]="['fas', 'trash-alt']"></fa-icon> Delete</button>
     <button class="btn btn-primary" (click)="copyToClipboard(data)">
         Copy JSON
     </button>
     <button [ngClass]="{ 'btn-warning': isValid(), 'btn-secondary': !isValid() }" [disabled]="!isValid()"
     type="button" class="btn ml-auto" (click)="activeModal.close({ reason: isNew ? 'create' : 'update', data: data})">
       <span *ngIf="isNew">
-        <i class="fa fa-plus-circle"></i> Create
+        <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon> Create
       </span>
       <span *ngIf="!isNew">
-        <i class="fa fa-save"></i> Update
+        <fa-icon [icon]="['fas', 'save']"></fa-icon> Save
       </span>
     </button>
 </div>

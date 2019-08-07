@@ -36,7 +36,6 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/quill/dist/quill.snow.css",
               "./node_modules/@ngx-share/button/themes/default/default-theme.css"
@@ -115,7 +114,6 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/quill/dist/quill.snow.css",
               "./node_modules/@ngx-share/button/themes/default/default-theme.css"

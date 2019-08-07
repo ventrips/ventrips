@@ -12,24 +12,22 @@ export class FooterComponent implements OnInit {
 
   public socialMedia = [
     {
-      name: 'Email',
-      class: 'fa fa-envelope',
-      url: `mailto:${_.startCase(environment.name)}@gmail.com?Subject=Hey ${_.startCase(environment.name)}`
-    },
-    {
       name: 'Facebook',
-      class: 'fab fa-facebook-square',
+      prefix: 'fab',
+      icon: 'facebook-f',
       url: `https://www.facebook.com/JaMzTeR`
     },
     {
-      name: 'Instagram',
-      class: 'fab fa-instagram',
-      url: `https://www.instagram.com/jamztuh`
+      name: 'LinkedIn',
+      prefix: 'fab',
+      icon: 'linkedin-in',
+      url: `https://www.linkedin.com/in/johnsonhuynh`
     },
     {
-      name: 'LinkedIn',
-      class: 'fab fa-linkedin',
-      url: `https://www.linkedin.com/in/johnsonhuynh`
+      name: 'Email',
+      prefix: 'fas',
+      icon: 'envelope',
+      url: `mailto:${_.startCase(environment.name)}@gmail.com?Subject=Hey ${_.startCase(environment.name)}`
     }
   ];
   public footerLinks = [
