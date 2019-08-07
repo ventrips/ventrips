@@ -8,8 +8,8 @@
         [adFormat]="'auto'">
     </ng-adsense>
 </section>
-<div class="container-fluid my-3">
-    <app-edit-button *ngIf="authService?.canEdit(user, profile?.uid)"
+<div class="container-fluid my-3" *ngIf="authService?.canEdit(user, profile?.uid)">
+    <app-edit-button
         [collection]="collection"
         [id]="profile?.uid"
         [data]="profile"

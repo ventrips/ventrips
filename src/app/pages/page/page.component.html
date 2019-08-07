@@ -8,8 +8,8 @@
         [adFormat]="'auto'">
     </ng-adsense>
 </section>
-<div class="container-fluid my-3">
-    <app-edit-button *ngIf="authService?.isAdmin(user)" [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
+<div class="container-fluid my-3" *ngIf="authService?.isAdmin(user)">
+    <app-edit-button [collection]="collection" [id]="id" [data]="data" [isNew]="false" [inputsConfig]="inputsConfig"></app-edit-button>
 </div>
 <section class="my-5">
     <div class="container mb-3">
