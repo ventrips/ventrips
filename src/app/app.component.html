@@ -2,6 +2,7 @@
 <main>
     <router-outlet (activate)="onActivate($event)"></router-outlet>
 </main>
+<app-email-subscription></app-email-subscription>
 <app-footer></app-footer>
 <div class="scroll-progress scroll-progress--fixed">
     <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
