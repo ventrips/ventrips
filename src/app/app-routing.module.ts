@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)},
       { path: 'blog/:slug', component: DetailsComponent },
       { path: 'profile/:uid', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},
       { path: 'johnson-huynh', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},

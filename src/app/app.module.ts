@@ -7,13 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
-// Pipes
-import { SanitizeHtmlPipe } from './pipes/sanitize-html/sanitize-html.pipe';
-import { OrderByPipe } from './pipes/order-by/order-by.pipe';
-import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
-import { SearchByPipe } from './pipes/search-by/search-by.pipe';
-import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
-
 // Directives
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
 
@@ -37,7 +30,6 @@ import { NgxPayPalModule } from 'ngx-paypal';
 
 // Pages
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 
 // Components
@@ -52,20 +44,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
-import { PostComponent } from './components/post/post.component';
 import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
 
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    SanitizeHtmlPipe,
-    OrderByPipe,
-    FilterByPipe,
-    SearchByPipe,
-    SearchHighlightPipe,
     AppComponent,
-    HomeComponent,
     DetailsComponent,
     NavbarComponent,
     FooterComponent,
@@ -78,7 +63,6 @@ import { SharedModule } from './shared/shared.module';
     ErrorNotFoundComponent,
     AdminComponent,
     RelatedPostsComponent,
-    PostComponent,
     EmailSubscriptionComponent
   ],
   imports: [
