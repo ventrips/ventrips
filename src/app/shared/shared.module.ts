@@ -13,11 +13,7 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { PostComponent } from '../components/post/post.component';
 import { EditButtonComponent } from './../components/edit-button/edit-button.component';
-import { EditModalContentComponent } from './../components/edit-button/edit-modal-content/edit-modal-content.component';
-import { EditModalConfirmComponent } from './../components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
-import { LoginModalComponent } from './../components/modals/login-modal/login-modal.component';
 import { PaymentButtonComponent } from './../components/payment-button/payment-button.component';
-import { PaymentModalComponent } from './../components/payment-button/payment-modal/payment-modal.component';
 import { ErrorNotFoundComponent } from './../components/errors/error-not-found/error-not-found.component';
 import { EmailSubscriptionComponent } from './../components/email-subscription/email-subscription.component';
 
