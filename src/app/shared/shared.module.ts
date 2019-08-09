@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Components
 import { EditButtonComponent } from './../components/edit-button/edit-button.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,15 @@ import { EditButtonComponent } from './../components/edit-button/edit-button.com
     CommonModule,
     FormsModule,
     FontAwesomeModule,
-    AdsenseModule.forRoot()
+    AdsenseModule.forRoot(),
+    QuillModule.forRoot()
   ],
   exports: [
     CommonModule,
     FormsModule,
     FontAwesomeModule,
     AdsenseModule,
+    QuillModule,
     EditButtonComponent
   ]
 })

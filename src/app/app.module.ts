@@ -42,7 +42,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 // Pages
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { PageComponent } from './pages/page/page.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
@@ -74,7 +73,6 @@ import { SharedModule } from './shared/shared.module';
     TimeAgoPipe,
     AppComponent,
     HomeComponent,
-    PageComponent,
     DetailsComponent,
     ProfileComponent,
     NavbarComponent,
