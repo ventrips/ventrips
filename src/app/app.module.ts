@@ -25,12 +25,10 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
-import { DisqusModule } from "ngx-disqus";
 import { NgxPayPalModule } from 'ngx-paypal';
 
 // Pages
 import { AppComponent } from './app.component';
-import { DetailsComponent } from './pages/details/details.component';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -51,7 +49,6 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DetailsComponent,
     NavbarComponent,
     FooterComponent,
     ElementScrollPercentageDirective,
@@ -77,7 +74,6 @@ import { SharedModule } from './shared/shared.module';
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),
-    DisqusModule.forRoot('ventrips'),
     NgbModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({

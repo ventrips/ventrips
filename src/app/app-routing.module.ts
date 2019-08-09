@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)},
-      { path: 'blog/:slug', component: DetailsComponent },
+      { path: 'blog/:slug', loadChildren: () => import('./pages/details/details.module').then(mod => mod.DetailsModule)},
       { path: 'profile/:uid', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},
       { path: 'johnson-huynh', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},
       { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(mod => mod.ContactModule)},
