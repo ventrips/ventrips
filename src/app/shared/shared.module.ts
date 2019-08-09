@@ -20,6 +20,8 @@ import { TimeAgoPipe } from '../pipes/time-ago/time-ago.pipe';
 import { KeysPipe } from '../pipes/keys/keys.pipe';
 import { SearchHighlightPipe } from '../pipes/search-highlight/search-highlight.pipe';
 
+import { DisqusModule } from 'ngx-disqus';
+
 @NgModule({
   declarations: [
     PostComponent,
@@ -38,6 +40,7 @@ import { SearchHighlightPipe } from '../pipes/search-highlight/search-highlight.
     FontAwesomeModule,
     AdsenseModule.forRoot(),
     QuillModule.forRoot(),
+    DisqusModule.forRoot('ventrips'),
     ShareButtonsModule
   ],
   exports: [
@@ -48,6 +51,7 @@ import { SearchHighlightPipe } from '../pipes/search-highlight/search-highlight.
     FontAwesomeModule,
     AdsenseModule,
     QuillModule,
+    DisqusModule,
     ShareButtonsModule,
     PostComponent,
     EditButtonComponent,

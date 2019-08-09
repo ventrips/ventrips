@@ -6,8 +6,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { DetailsComponent } from './details.component';
 import { RelatedPostsComponent } from '../../components/related-posts/related-posts.component';
 
-import { DisqusModule } from "ngx-disqus";
-
 
 @NgModule({
   declarations: [
@@ -17,8 +15,7 @@ import { DisqusModule } from "ngx-disqus";
   imports: [
     CommonModule,
     DetailsRoutingModule,
-    SharedModule,
-    DisqusModule.forRoot('ventrips')
+    SharedModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
