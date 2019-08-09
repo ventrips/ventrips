@@ -4,7 +4,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
@@ -39,8 +38,6 @@ import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from "ngx-disqus";
 import { NgxPayPalModule } from 'ngx-paypal';
 import { ShareButtonsModule } from '@ngx-share/buttons';
-import { AdsenseModule } from 'ng2-adsense';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -52,20 +49,19 @@ import { ProfileComponent } from './pages/profile/profile.component';
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { EditButtonComponent } from './components/edit-button/edit-button.component';
 import { EditModalContentComponent } from './components/edit-button/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 import { PaymentButtonComponent } from './components/payment-button/payment-button.component';
 import { PaymentModalComponent } from './components/payment-button/payment-modal/payment-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ContactComponent } from './pages/contact/contact.component';
-import { ContactFormComponent } from './components/forms/contact-form/contact-form.component';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
 import { PostComponent } from './components/post/post.component';
 import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
+
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -85,14 +81,11 @@ import { EmailSubscriptionComponent } from './components/email-subscription/emai
     FooterComponent,
     ElementScrollPercentageDirective,
     KeysPipe,
-    EditButtonComponent,
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
     PaymentButtonComponent,
     PaymentModalComponent,
-    ContactComponent,
-    ContactFormComponent,
     ErrorNotFoundComponent,
     AdminComponent,
     RelatedPostsComponent,
@@ -100,16 +93,15 @@ import { EmailSubscriptionComponent } from './components/email-subscription/emai
     EmailSubscriptionComponent
   ],
   imports: [
+    SharedModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
     AppRoutingModule,
     Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
-    FormsModule,
     HttpClientModule,       // (Required) For share counts
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     ShareButtonsModule,
-    AdsenseModule.forRoot(),
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),
@@ -120,7 +112,6 @@ import { EmailSubscriptionComponent } from './components/email-subscription/emai
       positionClass: 'toast-bottom-left',
       preventDuplicates: true
     }),
-    FontAwesomeModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule.enablePersistence(), // enables caching of firebase data
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

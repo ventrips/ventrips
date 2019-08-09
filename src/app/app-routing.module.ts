@@ -11,7 +11,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PageComponent } from './pages/page/page.component';
-import { ContactComponent } from './pages/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
@@ -22,7 +21,7 @@ const routes: Routes = [
       { path: 'blog/:slug', component: DetailsComponent },
       { path: 'profile/:uid', component: ProfileComponent },
       { path: 'johnson-huynh', component: ProfileComponent },
-      { path: 'contact', component: ContactComponent },
+      { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(mod => mod.ContactModule)},
       { path: 'privacy', component: PageComponent },
       { path: 'terms', component: PageComponent },
       { path: 'about', component: PageComponent },
