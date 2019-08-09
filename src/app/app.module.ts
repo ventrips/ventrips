@@ -32,6 +32,9 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { AppComponent } from './app.component';
 
 // Modals
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
 import { EditModalContentComponent } from './components/edit-button/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
@@ -44,6 +47,9 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+    FooterComponent,
+    EmailSubscriptionComponent,
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
@@ -63,6 +69,7 @@ import { SharedModule } from './shared/shared.module';
     NgxPayPalModule,
     QuillModule.forRoot(),
     NgbModule,
+    FontAwesomeModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left',
