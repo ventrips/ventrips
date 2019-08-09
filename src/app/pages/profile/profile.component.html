@@ -39,7 +39,7 @@
             <div class="mb-3">
                 <div *ngFor="let key of profile?.roles | keys">
                     <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
-                    <span class="fas" [ngClass]="{ 'fa-toggle-on text-warning':  _.get(user, ['roles', key]), 'fa-toggle-off text-muted':  !_.get(user, ['roles', key]) }" ></span>
+                    <fa-icon [icon]="['fas', _.get(user, ['roles', key]) ? 'toggle-on' : 'toggle-off']" [ngClass]="{ 'text-warning':  _.get(user, ['roles', key]), 'text-muted':  !_.get(user, ['roles', key]) }"></fa-icon>
                 </div>
             </div>
         </ng-container>
