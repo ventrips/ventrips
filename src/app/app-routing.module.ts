@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: 'privacy', loadChildren: () => import('./pages/page/page.module').then(mod => mod.PageModule)},
       { path: 'terms', loadChildren: () => import('./pages/page/page.module').then(mod => mod.PageModule)},
       { path: 'about', loadChildren: () => import('./pages/page/page.module').then(mod => mod.PageModule)},
-      { path: 'admin', component: AdminComponent, canActivate: [ AdminGuard ] }
+      { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(mod => mod.AdminModule)}
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
