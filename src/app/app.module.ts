@@ -57,9 +57,9 @@ import { SharedModule } from './shared/shared.module';
     ElementScrollPercentageDirective
   ],
   imports: [
-    SharedModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
     AppRoutingModule,
+    SharedModule.forRoot(),
     Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
