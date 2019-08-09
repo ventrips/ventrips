@@ -42,7 +42,7 @@
                             <fa-icon [icon]="['fas', 'image']" class="text-dark"></fa-icon>
                         </button>
                         <span class="input-group-text">
-                            <img class="rounded-0 padding-0 valid-image" *ngIf="isValidUrl(key)" [src]="_.get(data, [key])">
+                            <img class="padding-0 valid-image" *ngIf="isValidUrl(key)" [src]="_.get(data, [key])">
                             <fa-icon [icon]="['fas', 'asterisk']" class="text-danger" *ngIf="!isValidUrl(key)"></fa-icon>
                         </span>
                     </div>
