@@ -13,9 +13,6 @@ import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
 import { SearchByPipe } from './pipes/search-by/search-by.pipe';
 import { SearchHighlightPipe } from './pipes/search-highlight/search-highlight.pipe';
-import { TimeStampDatePipe } from './pipes/time-stamp-date/time-stamp-date.pipe';
-import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
-import { KeysPipe } from './pipes/keys/keys.pipe';
 
 // Directives
 import { ElementScrollPercentageDirective } from './directives/element-scroll-percentage/element-scroll-percentage.directive';
@@ -37,13 +34,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from "ngx-disqus";
 import { NgxPayPalModule } from 'ngx-paypal';
-import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Pages
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -69,16 +64,12 @@ import { SharedModule } from './shared/shared.module';
     FilterByPipe,
     SearchByPipe,
     SearchHighlightPipe,
-    TimeStampDatePipe,
-    TimeAgoPipe,
     AppComponent,
     HomeComponent,
     DetailsComponent,
-    ProfileComponent,
     NavbarComponent,
     FooterComponent,
     ElementScrollPercentageDirective,
-    KeysPipe,
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
@@ -99,7 +90,6 @@ import { SharedModule } from './shared/shared.module';
     TransferHttpCacheModule,
     HttpClientModule,       // (Required) For share counts
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
-    ShareButtonsModule,
     NgxSpinnerModule,
     NgxPayPalModule,
     QuillModule.forRoot(),
