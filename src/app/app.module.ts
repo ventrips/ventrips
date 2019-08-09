@@ -58,8 +58,8 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
-    AppRoutingModule,
     SharedModule.forRoot(),
+    AppRoutingModule,
     Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
