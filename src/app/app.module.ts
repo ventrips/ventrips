@@ -40,7 +40,6 @@ import { PaymentButtonComponent } from './components/payment-button/payment-butt
 import { PaymentModalComponent } from './components/payment-button/payment-modal/payment-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
-import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
 import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
 
 import { SharedModule } from './shared/shared.module';
@@ -57,7 +56,6 @@ import { SharedModule } from './shared/shared.module';
     PaymentButtonComponent,
     PaymentModalComponent,
     ErrorNotFoundComponent,
-    RelatedPostsComponent,
     EmailSubscriptionComponent
   ],
   imports: [
