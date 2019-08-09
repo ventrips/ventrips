@@ -25,38 +25,30 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPayPalModule } from 'ngx-paypal';
 
 // Pages
 import { AppComponent } from './app.component';
 
-// Components
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
+// Modals
 import { EditModalContentComponent } from './components/edit-button/edit-modal-content/edit-modal-content.component';
 import { EditModalConfirmComponent } from './components/edit-button/edit-modal-confirm/edit-modal-confirm.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
-import { PaymentButtonComponent } from './components/payment-button/payment-button.component';
 import { PaymentModalComponent } from './components/payment-button/payment-modal/payment-modal.component';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ErrorNotFoundComponent } from './components/errors/error-not-found/error-not-found.component';
-import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
 
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    ElementScrollPercentageDirective,
     EditModalContentComponent,
     EditModalConfirmComponent,
     LoginModalComponent,
-    PaymentButtonComponent,
     PaymentModalComponent,
-    ErrorNotFoundComponent,
-    EmailSubscriptionComponent
+    ElementScrollPercentageDirective
   ],
   imports: [
     SharedModule.forRoot(),
