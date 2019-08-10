@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 import * as puppeteer from 'puppeteer';
-var Sentiment = require('sentiment');
+const Sentiment = require('sentiment');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -24,15 +24,12 @@ export const render = functions.https.onRequest(async (request, response) => {
     const requestURL = request.query.requestURL;
 
     // Visit the page a get content
-    const page = await browser.newPage();
-    page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
-
+    const page = await browser.newPage()
     await page.goto(requestURL, { waitUntil: 'networkidle0' })
 
     const sections = await page.$$('.Box-row');
-    let responseBody = [];
-    for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
+    const responseBody = [];
+    for (const section of sections) {
         const url = await section.$eval(
             'h1 a',
             (item: any) => item.getAttribute('href'),
