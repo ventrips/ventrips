@@ -6,10 +6,12 @@
           [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
           <div class="input-group-append">
             <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text bg-warning">
-              <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+              <ng-container *ngIf="isPlatformBrowser()">
+                <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+              </ng-container>
             </span>
             <a [routerLink]="['']" class="btn text-dark btn-warning" title="Clear" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning">
-              Clear <fa-icon [icon]="['fas', 'times']" class="text-dark"></fa-icon>
+              Clear <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'times']" class="text-dark"></fa-icon></ng-container>
             </a>
           </div>
         </div>

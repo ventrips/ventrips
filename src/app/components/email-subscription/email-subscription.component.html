@@ -1,6 +1,8 @@
 <ng-container *ngIf="!emailSubmitted">
     <section class="email-subscription container mt-5 p-5 text-dark text-center bg-light box-shadow">
-        <fa-icon [icon]="['fas', 'newspaper']" class="fa-3x"></fa-icon>
+        <ng-container *ngIf="isPlatformBrowser()">
+            <fa-icon [icon]="['fas', 'newspaper']" class="fa-3x"></fa-icon>
+        </ng-container>
         <h1 class="text-center mb-3">
             Subscribe to Newsletter
         </h1>

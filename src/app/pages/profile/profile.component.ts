@@ -76,4 +76,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }

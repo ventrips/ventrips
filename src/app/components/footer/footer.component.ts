@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from './../../../environments/environment';
 import * as _ from 'lodash';
 
@@ -45,8 +46,13 @@ export class FooterComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
 
   ngOnInit() {}
 
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }

@@ -164,4 +164,8 @@ export class HomeComponent implements OnInit {
       window.scrollTo(0, 0);
     }
   }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }

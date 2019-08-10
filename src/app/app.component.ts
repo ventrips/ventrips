@@ -45,4 +45,8 @@ export class AppComponent implements OnInit {
     this.elementScrollPercentage.getScrollAsStream().subscribe((percent: number): void => {this.pageScroll = percent; });
     // this.fcmService.showMessages().subscribe();
   }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }

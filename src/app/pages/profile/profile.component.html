@@ -39,7 +39,9 @@
             <div class="mb-3">
                 <div *ngFor="let key of profile?.roles | keys">
                     <span class="font-weight-bold mr-1">{{_.capitalize(key)}}:</span>
-                    <fa-icon [icon]="['fas', _.get(user, ['roles', key]) ? 'toggle-on' : 'toggle-off']" [ngClass]="{ 'text-warning':  _.get(user, ['roles', key]), 'text-muted':  !_.get(user, ['roles', key]) }"></fa-icon>
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon [icon]="['fas', _.get(user, ['roles', key]) ? 'toggle-on' : 'toggle-off']" [ngClass]="{ 'text-warning':  _.get(user, ['roles', key]), 'text-muted':  !_.get(user, ['roles', key]) }"></fa-icon>
+                    </ng-container>
                 </div>
             </div>
         </ng-container>

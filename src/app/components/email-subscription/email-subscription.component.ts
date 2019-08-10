@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as _ from 'lodash';
@@ -16,7 +17,8 @@ export class EmailSubscriptionComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
   ngOnInit() {
@@ -39,5 +41,9 @@ export class EmailSubscriptionComponent implements OnInit {
   validateEmail() {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(this.email).toLowerCase());
+  }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
   }
 }
