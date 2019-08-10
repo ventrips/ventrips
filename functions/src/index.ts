@@ -55,7 +55,7 @@ export const render = functions.https.onRequest(async (request, response) => {
         };
         responseBody.push(obj);
     }
-    response.status(200).send(JSON.stringify(responseBody, null, 4));
+    response.status(200).send(responseBody);
     // const content = await page.content();
     // const content = await page.evaluate(el => el.innerHTML, await page.$('p'));
     // Send the response
