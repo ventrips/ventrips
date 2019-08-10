@@ -18,7 +18,10 @@ const db = admin.firestore();
 
 export const render = functions.https.onRequest(async (request, response) => {
     // Launch a browser
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
 
     // Pass a URL via a query param
     const requestURL = request.query.requestURL;
@@ -52,7 +55,7 @@ export const render = functions.https.onRequest(async (request, response) => {
         };
         responseBody.push(obj);
     }
-    response.status(200).send(JSON.stringify(responseBody, null, 4));
+    response.status(200).send(responseBody);
     // const content = await page.content();
     // const content = await page.evaluate(el => el.innerHTML, await page.$('p'));
     // Send the response
