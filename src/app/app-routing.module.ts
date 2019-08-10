@@ -15,20 +15,15 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      { path: '', component: HomeComponent },
-      { path: 'blog/:slug', component: DetailsComponent },
-      { path: 'profile/:uid', component: ProfileComponent },
-      { path: 'johnson-huynh', component: ProfileComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: 'privacy', component: PageComponent },
-      { path: 'terms', component: PageComponent },
-      { path: 'about', component: PageComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [ AdminGuard ] }
-    ]
-  },
+  { path: '', component: HomeComponent },
+  { path: 'blog/:slug', component: DetailsComponent },
+  { path: 'profile/:uid', component: ProfileComponent },
+  { path: 'johnson-huynh', component: ProfileComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'privacy', component: PageComponent },
+  { path: 'terms', component: PageComponent },
+  { path: 'about', component: PageComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [ AdminGuard ] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
