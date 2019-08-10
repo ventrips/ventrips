@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Contact } from './../../../interfaces/contact';
 import * as _ from 'lodash';
 import { AuthService } from '../../../services/firestore/auth/auth.service';
@@ -20,7 +21,8 @@ export class ContactFormComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     public authService: AuthService,
-    public toastrService: ToastrService
+    public toastrService: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
   ngOnInit() {
@@ -47,6 +49,10 @@ export class ContactFormComponent implements OnInit {
       _.get(this.user, ['email'], '') || '',
       ''
     );
+  }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
   }
 
 }

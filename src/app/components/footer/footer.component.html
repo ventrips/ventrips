@@ -5,7 +5,9 @@
       <ul class="list-inline mb-0">
         <li class="list-inline-item mt-1 mr-4" *ngFor="let item of socialMedia">
           <a class="text-white" [title]="item?.name" [href]="item?.url" target="__blank" rel="noopener noreferrer">
-            <fa-icon [icon]="[item?.prefix, item?.icon]" class="fa-2x"></fa-icon>
+            <ng-container *ngIf="isPlatformBrowser()">
+              <fa-icon [icon]="[item?.prefix, item?.icon]" class="fa-2x"></fa-icon>
+            </ng-container>
           </a>
         </li>
       </ul>

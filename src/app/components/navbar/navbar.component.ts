@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { environment } from './../../../environments/environment';
@@ -30,7 +31,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private modalService: NgbModal,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
   ngOnInit() {
@@ -54,5 +56,9 @@ export class NavbarComponent implements OnInit {
     }
     const modalRef = this.modalService.open(LoginModalComponent, modalOptions);
     modalRef.result.then((result?) => {}, (reason?) => {});
+  }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
   }
 }

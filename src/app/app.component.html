@@ -15,6 +15,8 @@
     <p class="text-warning">Loading...</p>
 </ngx-spinner>
 <span (click)="scrollTopTop()" class="top-scroll">
-    <fa-icon [icon]="['fas', 'chevron-circle-up']" class="fa-3x"></fa-icon>
+    <ng-container *ngIf="isPlatformBrowser()">
+        <fa-icon [icon]="['fas', 'chevron-circle-up']" class="fa-3x"></fa-icon>
+    </ng-container>
 </span>
 <ng-adsense [adClient]="'ca-pub-4642980268605791'" [pageLevelAds]="true"></ng-adsense>
