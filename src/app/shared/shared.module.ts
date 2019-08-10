@@ -4,8 +4,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdsenseModule } from 'ng2-adsense';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { QuillModule } from 'ngx-quill';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Components
@@ -37,9 +35,7 @@ import { DisqusModule } from 'ngx-disqus';
     CommonModule,
     FormsModule,
     RouterModule,
-    FontAwesomeModule,
     AdsenseModule.forRoot(),
-    QuillModule.forRoot(),
     DisqusModule.forRoot('ventrips'),
     ShareButtonsModule
   ],
@@ -48,9 +44,7 @@ import { DisqusModule } from 'ngx-disqus';
     FormsModule,
     RouterModule,
     NgbModule,
-    FontAwesomeModule,
     AdsenseModule,
-    QuillModule,
     DisqusModule,
     ShareButtonsModule,
     PostComponent,

@@ -24,9 +24,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { QuillModule } from 'ngx-quill';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { QuillModule } from 'ngx-quill';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -58,7 +58,6 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
-    SharedModule.forRoot(),
     AppRoutingModule,
     Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
@@ -67,14 +66,15 @@ import { SharedModule } from './shared/shared.module';
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     NgxSpinnerModule,
     NgxPayPalModule,
-    QuillModule.forRoot(),
     NgbModule,
     FontAwesomeModule,
+    QuillModule.forRoot(),
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left',
       preventDuplicates: true
     }),
+    SharedModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule.enablePersistence(), // enables caching of firebase data
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
@@ -85,6 +85,9 @@ import { SharedModule } from './shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
+  ],
+  exports: [
+    FontAwesomeModule
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   entryComponents: [
