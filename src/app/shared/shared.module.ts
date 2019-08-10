@@ -36,6 +36,7 @@ import { DisqusModule } from 'ngx-disqus';
     CommonModule,
     FormsModule,
     RouterModule,
+    NgbModule,
     AdsenseModule.forRoot(),
     QuillModule.forRoot(),
     DisqusModule.forRoot('ventrips'),

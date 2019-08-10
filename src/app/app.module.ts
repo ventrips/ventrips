@@ -2,9 +2,9 @@ import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-bro
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 
 // Directives
@@ -62,10 +62,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserTransferStateModule,
     TransferHttpCacheModule,
     HttpClientModule,       // (Required) For share counts
-    HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
     NgxSpinnerModule,
     NgxPayPalModule,
-    NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
@@ -83,9 +81,6 @@ import { SharedModule } from './shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
-  ],
-  exports: [
-    FontAwesomeModule
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateFirestoreAdapter }],
   entryComponents: [
