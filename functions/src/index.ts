@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 import * as puppeteer from 'puppeteer';
-import * as Sentiment from 'sentiment';
+var Sentiment = require('sentiment');
 
 admin.initializeApp();
 const db = admin.firestore();
