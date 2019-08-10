@@ -61,7 +61,7 @@ import { SharedModule } from './shared/shared.module';
     Angulartics2Module.forRoot(),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
-    HttpClientModule,       // (Required) For share counts
+    HttpClientModule, // (Required) For share counts
     NgxSpinnerModule,
     NgxPayPalModule,
     FontAwesomeModule,
