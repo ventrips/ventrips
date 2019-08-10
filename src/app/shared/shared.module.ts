@@ -18,6 +18,7 @@ import { TimeAgoPipe } from '../pipes/time-ago/time-ago.pipe';
 import { KeysPipe } from '../pipes/keys/keys.pipe';
 import { SearchHighlightPipe } from '../pipes/search-highlight/search-highlight.pipe';
 
+import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from 'ngx-disqus';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { DisqusModule } from 'ngx-disqus';
     FormsModule,
     RouterModule,
     AdsenseModule.forRoot(),
+    QuillModule.forRoot(),
     DisqusModule.forRoot('ventrips'),
     ShareButtonsModule
   ],
@@ -45,6 +47,7 @@ import { DisqusModule } from 'ngx-disqus';
     RouterModule,
     NgbModule,
     AdsenseModule,
+    QuillModule,
     DisqusModule,
     ShareButtonsModule,
     PostComponent,

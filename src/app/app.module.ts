@@ -26,7 +26,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPayPalModule } from 'ngx-paypal';
-import { QuillModule } from 'ngx-quill';
 
 // Pages
 import { AppComponent } from './app.component';
@@ -68,7 +67,6 @@ import { SharedModule } from './shared/shared.module';
     NgxPayPalModule,
     NgbModule,
     FontAwesomeModule,
-    QuillModule.forRoot(),
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left',
