@@ -78,6 +78,14 @@ quill-view-html .ql-container {
     }
 }
 
+quill-editor .ql-toolbar {
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
 /* Custom ng-bootstrap */
 .modal-100 {
     .modal-dialog {
