@@ -1,6 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
+import * as puppeteer from 'puppeteer';
+import * as Sentiment from 'sentiment';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -13,6 +15,54 @@ const db = admin.firestore();
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+
+export const render = functions.https.onRequest(async (request, response) => {
+    // Launch a browser
+    const browser = await puppeteer.launch({ headless: true });
+
+    // Pass a URL via a query param
+    const requestURL = request.query.requestURL;
+
+    // Visit the page a get content
+    const page = await browser.newPage();
+    page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+
+    await page.goto(requestURL, { waitUntil: 'networkidle0' })
+
+    const sections = await page.$$('.Box-row');
+    let responseBody = [];
+    for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const url = await section.$eval(
+            'h1 a',
+            (item: any) => item.getAttribute('href'),
+        );
+        const title = await section.$eval(
+            'h1',
+            (item: any) => item.innerText.trim().replace(/\n/g, ' '),
+        );
+        const description = await section.$eval(
+            'p',
+            (item: any) => item.innerText.trim().replace(/\n/g, ' '),
+        );
+        const newSentiment = new Sentiment()
+        const sentiment = newSentiment.analyze(description);
+        const obj = {
+            url,
+            title,
+            description,
+            sentiment
+        };
+        responseBody.push(obj);
+    }
+    response.status(200).send(JSON.stringify(responseBody, null, 4));
+    // const content = await page.content();
+    // const content = await page.evaluate(el => el.innerHTML, await page.$('p'));
+    // Send the response
+    // var sentiment = new Sentiment();
+    // var result = sentiment.analyze(content);
+    // response.send(result);
+});
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
