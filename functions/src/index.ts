@@ -18,7 +18,10 @@ const db = admin.firestore();
 
 export const render = functions.https.onRequest(async (request, response) => {
     // Launch a browser
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
 
     // Pass a URL via a query param
     const requestURL = request.query.requestURL;
