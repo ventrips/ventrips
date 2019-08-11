@@ -1,1 +1,54 @@
-<pre>{{data | json}}</pre>
+<section>
+    <div class="container my-5">
+        <section class="mb-3">
+            <h1 class="text-center text-uppercase">{{q}}</h1>
+            <h2 class="text-center" [hidden]="!data">
+                Overall Sentiment: {{data?.overallSentiment.score}}
+            </h2>
+        </section>
+        <section [hidden]="!data">
+            <div class="d-flex flex-wrap mb-3">
+                <h3>
+                    Articles
+                </h3>
+                <p class="ml-auto h3 text-right">
+                    <span class="d-block">{{data?.timestamp * 1000 | date: 'medium'}}</span>
+                    <span class="d-block">{{data?.articleCount}} Results</span>
+                </p>
+            </div>
+            <section class="row">
+                <div class="col-6" *ngFor="let article of data?.articles">
+                    <h3 class="text-break text-wrap">
+                        <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
+                            {{article?.title}}
+                        </a>
+                    </h3>
+                    <p>
+                        {{article?.publishedAt | date: 'medium'}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        {{article?.description}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Sentiment: {{article?.sentiment?.score}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Comparative: {{article?.sentiment?.comparative}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Positive: {{article?.sentiment?.positive}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Negative: {{article?.sentiment?.negative}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Words: {{article?.sentiment?.words}}
+                    </p>
+                    <p class="text-break text-wrap">
+                        Tokens: {{article?.sentiment?.tokens}}
+                    </p>
+                </div>
+            </section>
+        </section>
+    </div>
+</section>

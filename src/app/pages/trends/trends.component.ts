@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-trends',
@@ -23,6 +24,7 @@ export class TrendsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
@@ -34,8 +36,10 @@ export class TrendsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       if (_.isNil(this.q)) { return; };
+      this.spinner.show();
       this.getTrends(this.q)
       .subscribe((response) => {
+        this.spinner.hide();
         this.data = response;
         this.toastr.success(`${this.q}`, `Search Success!`)
       }, (error) => {
