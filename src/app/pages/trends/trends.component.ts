@@ -17,8 +17,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
-  private q = 'bitcoin';
-  private data: any;
+  public q = 'bitcoin';
+  public data: any;
   public user: User;
 
   constructor(
