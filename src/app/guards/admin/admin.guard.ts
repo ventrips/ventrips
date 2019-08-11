@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { take, map, tap } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AdminGuard implements CanActivate {
 
     return this.authService.user$.pipe(
       take(1),
-      map(user => user && user.roles.admin ? true : false),
+      map(user => user && _.get(user, ['roles', 'admin']) ? true : false),
       tap(isAdmin => {
         if (!isAdmin) {
           this.toastrService.warning(`Access denied - Admins only`);

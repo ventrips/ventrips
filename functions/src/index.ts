@@ -251,6 +251,12 @@ const db = admin.firestore();
 // });
 
 export const trending = functions.https.onRequest((req, res) => {
+    var allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
+    const origin: any = req.headers.origin;
+    if (_.indexOf(allowedOrigins, origin) > -1) {
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
     // request(`https://gapi.xyz/api/v3/search?q=${req.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, response: any, body: any) {
     //     console.log('error:', error); // Print the error if one occurred
     //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
@@ -279,7 +285,6 @@ export const trending = functions.https.onRequest((req, res) => {
         });
         const overallSentiment = new Sentiment();
         body.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(body, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
-
         res.status(response.statusCode).send(body);
     // });
 

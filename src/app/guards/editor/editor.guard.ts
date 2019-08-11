@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { take, map, tap } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class EditorGuard implements CanActivate {
 
     return this.authService.user$.pipe(
       take(1),
-      map(user => user && user.roles.editor ? true : false || user.roles.admin ? true: false),
+      map(user => user && _.get(user, ['roles', 'editor']) ? true : false || _.get(user, ['roles', 'admin']) ? true: false),
       tap(isEditor => {
         if (!isEditor) {
           this.toastrService.warning(`Access denied - Editors only`);
