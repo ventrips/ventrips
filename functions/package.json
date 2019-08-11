@@ -21,6 +21,7 @@
     "firebase-functions": "^3.0.2",
     "lodash": "^4.17.15",
     "puppeteer": "^1.19.0",
+    "request": "^2.88.0",
     "sentiment": "^5.0.1",
     "stripe": "^7.4.0"
   },
