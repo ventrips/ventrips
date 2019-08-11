@@ -20,6 +20,7 @@ export class TrendsComponent implements OnInit {
   public q: string;
   public data: any;
   public user: User;
+  public _ = _;
 
   constructor(
     private http: HttpClient,
@@ -53,4 +54,7 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }

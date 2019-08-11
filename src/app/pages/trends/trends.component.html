@@ -6,6 +6,19 @@
                 Overall Sentiment: {{data?.overallSentiment.score}}
             </h2>
         </section>
+        <section class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control form-control"
+                    aria-label="Search for company name, ticker symbol, anything"
+                    placeholder="Search for company name, ticker symbol, anything"
+                    [(ngModel)]="q" />
+                <div class="input-group-append">
+                    <a *ngIf="q" [routerLink]="['/trends']" [queryParams]="{q: q}" class="btn btn-warning">
+                        <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon></ng-container>
+                    </a>
+                </div>
+            </div>
+        </section>
         <section [hidden]="!data">
             <div class="d-flex flex-wrap mb-3">
                 <h3>
@@ -50,8 +63,5 @@
                 </div>
             </section>
         </section>
-        <p *ngIf="!q">
-            Results are empty. Please query something!
-        </p>
     </div>
 </section>
