@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
-import * as puppeteer from 'puppeteer';
-import { json } from 'body-parser';
+// import * as puppeteer from 'puppeteer';
+// import { json } from 'body-parser';
 const Sentiment = require('sentiment');
-const request = require('request');
+// const request = require('request');
 const applBody = {
     "timestamp": 1565534741,
     "articleCount": 10,
@@ -260,7 +260,7 @@ export const trending = functions.https.onRequest((req, res) => {
     //     }
     //     body = JSON.parse(body);
         // tempBody
-        let body = '';
+        let body: any = {};
         if (_.isEqual(_.toLower(req.query.q), 'aapl')) {
             body = applBody;
         } else if (_.isEqual(_.toLower(req.query.q), 'bitcoin')) {
@@ -271,14 +271,14 @@ export const trending = functions.https.onRequest((req, res) => {
         const response = {
             statusCode: 200
         }
-        _.forEach(body.articles, (article) => {
+        _.forEach(_.get(body, ['articles']), (article: any) => {
             const newSentiment = new Sentiment();
-            const bagOfWords = _.join(_.compact(_.split(_.replace(_.toLower(`${article.title} ${article.description}`), /[^a-zA-Z0-9]/g, ' '), ' ')), ' ');
+            const bagOfWords = _.join(_.compact(_.split(_.replace(_.toLower(`${_.get(article, ['title'])} ${_.get(article, ['description'])}`), /[^a-zA-Z0-9]/g, ' '), ' ')), ' ');
             const sentiment = newSentiment.analyze(bagOfWords);
             article.sentiment = sentiment;
         });
         const overallSentiment = new Sentiment();
-        body.overallSentiment = overallSentiment.analyze(_.join(_.reduce(body.articles, (list, article) => list.concat(article.sentiment.tokens), []), ' '));
+        body.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(body, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
 
         res.status(response.statusCode).send(body);
     // });
