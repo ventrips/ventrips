@@ -13,6 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PageComponent } from './pages/page/page.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { TrendsComponent } from './pages/trends/trends.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'privacy', component: PageComponent },
   { path: 'terms', component: PageComponent },
   { path: 'about', component: PageComponent },
+  { path: 'trends', component: TrendsComponent,  canActivate: [ SubscriberGuard ] },
   { path: 'admin', component: AdminComponent, canActivate: [ AdminGuard ] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

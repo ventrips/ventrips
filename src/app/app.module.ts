@@ -66,6 +66,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component';
 import { PostComponent } from './components/post/post.component';
 import { EmailSubscriptionComponent } from './components/email-subscription/email-subscription.component';
+import { TrendsComponent } from './pages/trends/trends.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { EmailSubscriptionComponent } from './components/email-subscription/emai
     AdminComponent,
     RelatedPostsComponent,
     PostComponent,
-    EmailSubscriptionComponent
+    EmailSubscriptionComponent,
+    TrendsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ventrips' }),
