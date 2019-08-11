@@ -45,7 +45,7 @@ export class TrendsComponent implements OnInit {
   }
 
   getTrending(q: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/trending?q=${q}`)
+    return this.http.get(`${environment.apiUrl}/trends?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
 
