@@ -34,7 +34,7 @@ export class TrendsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       if (_.isNil(this.q)) { return; };
-      this.getTrending(this.q)
+      this.getTrends(this.q)
       .subscribe((response) => {
         this.data = response;
         this.toastr.success(`${this.q}`, `Search Success!`)
@@ -44,7 +44,7 @@ export class TrendsComponent implements OnInit {
     });
   }
 
-  getTrending(q: string): Observable<any> {
+  getTrends(q: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/trends?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
