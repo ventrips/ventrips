@@ -250,7 +250,7 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-export const trending = functions.https.onRequest((req, res) => {
+export const trends = functions.https.onRequest((req, res) => {
     var allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
     const origin: any = req.headers.origin;
     if (_.indexOf(allowedOrigins, origin) > -1) {
