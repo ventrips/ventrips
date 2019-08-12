@@ -2,18 +2,30 @@
     <div class="container my-5">
         <section class="mb-3">
             <h1 class="text-center text-uppercase">{{q}}</h1>
+        </section>
+        <section class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control form-control"
+                    aria-label="Search for company name, ticker symbol, anything"
+                    placeholder="Search for company name, ticker symbol, anything"
+                    [(ngModel)]="search" />
+                <div class="input-group-append">
+                    <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
+                        <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon></ng-container>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section [hidden]="!data">
             <h2 class="text-center" [hidden]="!data">
                 Overall Sentiment: {{data?.overallSentiment.score}}
             </h2>
-        </section>
-        <section [hidden]="!data">
             <div class="d-flex flex-wrap mb-3">
-                <h3>
-                    Articles
-                </h3>
-                <p class="ml-auto h3 text-right">
-                    <span class="d-block">{{data?.timestamp * 1000 | date: 'medium'}}</span>
-                    <span class="d-block">{{data?.articleCount}} Results</span>
+                <p>
+                    Last Updated: {{data?.timestamp * 1000 | date: 'medium'}}
+                </p>
+                <p class="ml-auto">
+                    {{data?.articleCount || 0}} Results
                 </p>
             </div>
             <section class="row">
@@ -50,8 +62,5 @@
                 </div>
             </section>
         </section>
-        <p *ngIf="!q">
-            Results are empty. Please query something!
-        </p>
     </div>
 </section>
