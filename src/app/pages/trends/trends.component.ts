@@ -17,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
+  public search: string;
   public q: string;
   public data: any;
   public user: User;
@@ -36,6 +37,8 @@ export class TrendsComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
+      this.search = _.cloneDeep(this.q);
+      this.data = undefined;
       if (_.isNil(this.q)) { return; };
       this.spinner.show();
       this.getTrends(this.q)
