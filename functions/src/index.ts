@@ -53,7 +53,7 @@ async function scrapeSeekingAlpha(useMock: boolean = false): Promise<Array<any>>
             );
             const url = await section.$eval(
                 '.sym',
-                (item: any) => item.getAttribute('href'),
+                (item: any) => `https://seekingalpha.com${item.getAttribute('href')}`
             );
             const symbol = await section.$eval(
                 '.sym',
