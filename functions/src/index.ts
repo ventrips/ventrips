@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as _ from 'lodash';
 const Utils = require('./utils');
 const Predict = require('./predict');
 const Trends = require('./trends');
