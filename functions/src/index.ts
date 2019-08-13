@@ -1,11 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import * as _ from 'lodash';
-import * as puppeteer from 'puppeteer';
-import * as moment from 'moment';
-const GoogleTrends = require('google-trends-api');
-const Sentiment = require('sentiment');
-const Request = require('request');
+const Utils = require('./utils');
+const Predict = require('./predict');
+const Trends = require('./trends');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -19,183 +16,18 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-function cors(request: any, response: any): void {
-    const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
-    const origin: any = request.headers.origin;
-    if (_.indexOf(allowedOrigins, origin) > -1) {
-        response.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    return;
-}
-
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
-    cors(request, response);
-    const tickers: Array<any> = await scrapeSeekingAlpha(true);
-    const trends: Array<any> = await getGoogleTrends(tickers, true);
+    Utils.cors(request, response);
+    const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
+    const trends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
     response.send(trends);
 });
 
-// Step 1: Get Tomorrow's Upcoming Stock Earnings
-async function scrapeSeekingAlpha(useMock: boolean = false): Promise<Array<any>> {
-    if (useMock) {
-        const seekingAlphaJSON = require('./../mocks/seeking-alpha.json');
-        return seekingAlphaJSON;
-    }
-
-    const results: Array<any> = [];
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-
-    const page = await browser.newPage();
-    await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'networkidle0' })
-
-    let sections = await page.$$('.earningsTable tbody tr');
-
-    for (const section of sections) {
-        const releaseDate = await section.$eval(
-            '.release-date',
-            (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-        );
-        if (_.isEqual(releaseDate, moment(new Date()).add(1,'days').format('L'))) {
-            const releaseTime = await section.$eval(
-                '.release-time',
-                (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-            );
-            const url = await section.$eval(
-                '.sym',
-                (item: any) => `https://seekingalpha.com${item.getAttribute('href')}`
-            );
-            const symbol = await section.$eval(
-                '.sym',
-                (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-            );
-            const name = await section.$eval(
-                '.ticker-name',
-                (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-            );
-            const obj = {
-                url,
-                symbol,
-                name,
-                releaseDate,
-                releaseTime
-            };
-            results.push(obj);
-        }
-    }
-    return results;
-}
-
-// Step 2: Get Trending Stocks
-async function getGoogleTrends(tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>> {
-    const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
-
-    let results;
-    if (useMock) {
-        results = require('./../mocks/google-trends.json');
-    } else {
-        const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
-        results = JSON.parse(unparsedResults);
-    }
-
-    const timelineData = results.default.timelineData;
-    const data: any = {
-        symbols,
-        timelineData
-    };
-
-    return data;
-}
-
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
-    cors(request, response);
-
-    // Request(`https://gapi.xyz/api/v3/search?q=${req.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, response: any, body: any) {
-    //     console.log('error:', error); // Print the error if one occurred
-    //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    //     console.log('body:', body); // Print the HTML for the Google homepage.
-    //     if (error) {
-    //         res.send(response.statusCode).send(error);
-    //     }
-    //     const data = JSON.parse(body);
-        // * START
-        let data = {};
-        if (_.isEqual(_.toLower(request.query.q), 'aapl')) {
-            data = require('./../mocks/aapl.json');
-            ;
-        } else if (_.isEqual(_.toLower(request.query.q), 'bitcoin')) {
-            data = require('./../mocks/bitcoin.json');
-        }
-        const results = {
-            statusCode: 200
-        }
-        // * END
-        _.forEach(_.get(data, ['articles']), (article: any) => {
-            const newSentiment = new Sentiment();
-            const bagOfWords = _.join(_.compact(_.split(_.replace(_.toLower(`${_.get(article, ['title'])} ${_.get(article, ['description'])}`), /[^a-zA-Z0-9]/g, ' '), ' ')), ' ');
-            const sentiment = newSentiment.analyze(bagOfWords);
-            article.sentiment = sentiment;
-        });
-        const overallSentiment = new Sentiment();
-        data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
-        data.alphavantage = await Request(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo`);
-
-        response.status(results.statusCode).send(data);
-    // });
-
-
-
-    // // Launch a browser
-        // const browser = await puppeteer.launch({
-        //     headless: true,
-        //     args: ['--no-sandbox', '--disable-setuid-sandbox']
-        // });
-
-        // // Pass a topic via a query param
-        // const topic = _.toLower(request.query.topic);
-
-        // // Visit the page a get content
-        // const page = await browser.newPage();
-        // await page.goto(`https://www.cryptonewsz.com//?s=${topic}`, { waitUntil: 'networkidle0' })
-
-        // const sections = await page.$$('.post-item');
-        // const responseBody = {
-        //     overallSentiment: {},
-        //     posts: []
-        // };
-        // for (const section of sections) {
-        //     const url = await section.$eval(
-        //         '.post-title a',
-        //         (item: any) => item.getAttribute('href'),
-        //     );
-        //     const title = await section.$eval(
-        //         '.post-title',
-        //         (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-        //     );
-        //     const newSentiment = new Sentiment();
-        //     const bagOfWords = _.join(_.compact(_.split(_.replace(_.toLower(title), /[^a-zA-Z0-9]/g, ' '), ' ')), ' ');
-        //     const sentiment = newSentiment.analyze(bagOfWords);
-        //     const obj = {
-        //         url,
-        //         title,
-        //         sentiment
-        //     };
-        //     responseBody.posts.push(obj);
-        // }
-        // const overallSentiment = new Sentiment();
-        // responseBody.overallSentiment = overallSentiment.analyze(_.join(_.reduce(responseBody.posts, (list, post) => list.concat(post.sentiment.tokens), []), ' '));
-        // response.status(200).send(responseBody);
-
-        // const content = await page.content();
-        // const content = await page.evaluate(el => el.innerHTML, await page.$('p'));
-        // Send the response
-        // var sentiment = new Sentiment();
-        // var result = sentiment.analyze(content);
-        // response.send(result);
-    }
-);
+    Utils.cors(request, response);
+    const trends = await Trends.trends(request, response, true);
+    response.send(trends);
+});
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
