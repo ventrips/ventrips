@@ -3,8 +3,9 @@ import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 import * as puppeteer from 'puppeteer';
 import * as moment from 'moment';
+const GoogleTrends = require('google-trends-api');
 const Sentiment = require('sentiment');
-const request = require('request');
+const Request = require('request');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -17,10 +18,10 @@ const db = admin.firestore();
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-export const predict = functions.https.onRequest(async (req, res): Promise<any> => {
+export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     const tickers: Array<any> = await scrapeSeekingAlpha(true);
     const trends: Array<any> = await googleTrends(tickers, true);
-    res.send(trends);
+    response.send(trends);
 });
 
 // Step 1: Get Tomorrow's Upcoming Stock Earnings
@@ -81,14 +82,14 @@ async function googleTrends(tickers: Array<any> = [], useMock: boolean = false):
     return tickers;
 }
 
-export const trends = functions.https.onRequest(async (req, res): Promise<any> => {
+export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
     const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
-    const origin: any = req.headers.origin;
+    const origin: any = request.headers.origin;
     if (_.indexOf(allowedOrigins, origin) > -1) {
-         res.setHeader('Access-Control-Allow-Origin', origin);
+        response.setHeader('Access-Control-Allow-Origin', origin);
     }
 
-    // request(`https://gapi.xyz/api/v3/search?q=${req.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, response: any, body: any) {
+    // Request(`https://gapi.xyz/api/v3/search?q=${req.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, response: any, body: any) {
     //     console.log('error:', error); // Print the error if one occurred
     //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     //     console.log('body:', body); // Print the HTML for the Google homepage.
@@ -98,13 +99,13 @@ export const trends = functions.https.onRequest(async (req, res): Promise<any> =
     //     const data = JSON.parse(body);
         // * START
         let data = {};
-        if (_.isEqual(_.toLower(req.query.q), 'aapl')) {
+        if (_.isEqual(_.toLower(request.query.q), 'aapl')) {
             data = require('./../mocks/aapl.json');
             ;
-        } else if (_.isEqual(_.toLower(req.query.q), 'bitcoin')) {
+        } else if (_.isEqual(_.toLower(request.query.q), 'bitcoin')) {
             data = require('./../mocks/bitcoin.json');
         }
-        const response = {
+        const results = {
             statusCode: 200
         }
         // * END
@@ -116,9 +117,9 @@ export const trends = functions.https.onRequest(async (req, res): Promise<any> =
         });
         const overallSentiment = new Sentiment();
         data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
-        data.alphavantage = await request(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo`);
+        data.alphavantage = await Request(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo`);
 
-        res.status(response.statusCode).send(data);
+        response.status(results.statusCode).send(data);
     // });
 
 
