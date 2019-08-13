@@ -17,13 +17,14 @@ const db = admin.firestore();
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-export const predict = functions.https.onRequest(async (req, res) => {
-    const results = await scrapeSeekingAlpha(true);
-    res.send(results);
+export const predict = functions.https.onRequest(async (req, res): Promise<any> => {
+    const tickers: Array<any> = await scrapeSeekingAlpha(true);
+    const trends: Array<any> = await googleTrends(tickers, true);
+    res.send(trends);
 });
 
-// Get Tomorrow's Upcoming Stock Earnings
-async function scrapeSeekingAlpha(useMock: boolean = false) {
+// Step 1: Get Tomorrow's Upcoming Stock Earnings
+async function scrapeSeekingAlpha(useMock: boolean = false): Promise<Array<any>> {
     if (useMock) {
         const seekingAlphaJSON = require('./../mocks/seeking-alpha.json');
         return seekingAlphaJSON;
@@ -75,7 +76,12 @@ async function scrapeSeekingAlpha(useMock: boolean = false) {
     return results;
 }
 
-export const trends = functions.https.onRequest(async (req, res) => {
+// Step 2: Get Trending Stocks
+async function googleTrends(tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>> {
+    return tickers;
+}
+
+export const trends = functions.https.onRequest(async (req, res): Promise<any> => {
     const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
     const origin: any = req.headers.origin;
     if (_.indexOf(allowedOrigins, origin) > -1) {
