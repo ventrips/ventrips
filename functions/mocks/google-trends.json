@@ -1,0 +1,143 @@
+{
+    "default": {
+        "timelineData": [
+            {
+                "time": "1565049600",
+                "formattedTime": "Aug 6, 2019",
+                "formattedAxisTime": "Aug 6",
+                "value": [
+                    84,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "84",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565136000",
+                "formattedTime": "Aug 7, 2019",
+                "formattedAxisTime": "Aug 7",
+                "value": [
+                    81,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "81",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565222400",
+                "formattedTime": "Aug 8, 2019",
+                "formattedAxisTime": "Aug 8",
+                "value": [
+                    82,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "82",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565308800",
+                "formattedTime": "Aug 9, 2019",
+                "formattedAxisTime": "Aug 9",
+                "value": [
+                    88,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "88",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565395200",
+                "formattedTime": "Aug 10, 2019",
+                "formattedAxisTime": "Aug 10",
+                "value": [
+                    100,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    false,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "100",
+                    "0",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            }
+        ],
+        "averages": [
+            87,
+            0,
+            0,
+            0,
+            0
+        ]
+    }
+}

@@ -20,7 +20,7 @@ const db = admin.firestore();
 // });
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     const tickers: Array<any> = await scrapeSeekingAlpha(true);
-    const trends: Array<any> = await googleTrends(tickers, true);
+    const trends: Array<any> = await getGoogleTrends(tickers, true);
     response.send(trends);
 });
 
@@ -78,8 +78,24 @@ async function scrapeSeekingAlpha(useMock: boolean = false): Promise<Array<any>>
 }
 
 // Step 2: Get Trending Stocks
-async function googleTrends(tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>> {
-    return tickers;
+async function getGoogleTrends(tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>> {
+    const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
+
+    let results;
+    if (useMock) {
+        results = require('./../mocks/google-trends.json');
+    } else {
+        const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
+        results = JSON.parse(unparsedResults);
+    }
+
+    const timelineData = results.default.timelineData;
+    const data: any = {
+        symbols,
+        timelineData
+    };
+
+    return data;
 }
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
