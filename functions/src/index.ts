@@ -18,7 +18,18 @@ const db = admin.firestore();
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+
+function cors(request: any, response: any): void {
+    const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
+    const origin: any = request.headers.origin;
+    if (_.indexOf(allowedOrigins, origin) > -1) {
+        response.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    return;
+}
+
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
     const tickers: Array<any> = await scrapeSeekingAlpha(true);
     const trends: Array<any> = await getGoogleTrends(tickers, true);
     response.send(trends);
@@ -99,11 +110,7 @@ async function getGoogleTrends(tickers: Array<any> = [], useMock: boolean = fals
 }
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
-    const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
-    const origin: any = request.headers.origin;
-    if (_.indexOf(allowedOrigins, origin) > -1) {
-        response.setHeader('Access-Control-Allow-Origin', origin);
-    }
+    cors(request, response);
 
     // Request(`https://gapi.xyz/api/v3/search?q=${req.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, response: any, body: any) {
     //     console.log('error:', error); // Print the error if one occurred

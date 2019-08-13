@@ -1,5 +1,8 @@
 <section>
     <div class="container my-5">
+        <section [hidden]="!symbols">
+            <pre>{{symbols | json}}</pre>
+        </section>
         <section class="mb-3">
             <h1 class="text-center text-uppercase">{{q}}</h1>
         </section>
