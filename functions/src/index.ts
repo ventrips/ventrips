@@ -26,8 +26,7 @@ export const predict = functions.https.onRequest(async (request, response): Prom
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    const trends = await Trends.trends(request, response, true);
-    response.send(trends);
+    Trends.trends(request, response, false);
 });
 
 const universal  = require(`${process.cwd()}/dist/server`).app;

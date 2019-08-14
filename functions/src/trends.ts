@@ -2,7 +2,7 @@
 import * as _ from 'lodash';
 const Sentiment = require('sentiment');
 
-exports.trends = async function(request: any, response: any, useMock = false): Promise<any>  {
+exports.trends = function(request: any, response: any, useMock = false) {
     let data = {};
 
     if (useMock) {
@@ -14,11 +14,10 @@ exports.trends = async function(request: any, response: any, useMock = false): P
         return constructData(data);
     }
 
-    // const Request = require('request');
-    // const finalBody = await Request(`https://gapi.xyz/api/v3/search?q=${request.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, res: any, body: any) {
-    //     return constructData(JSON.parse(body));
-    // });
-    // return finalBody;
+    const Request = require('request');
+    Request(`https://gapi.xyz/api/v3/search?q=${request.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, res: any, body: any) {
+        response.send(constructData(JSON.parse(body)));
+    });
 };
 
 function constructData(data: any) {
