@@ -1,5 +1,5 @@
 import * as puppeteer from 'puppeteer';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import * as _ from 'lodash';
 
 exports.cors = function(request: any, response: any): void {
@@ -24,7 +24,7 @@ exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsT
     const sections = await page.$$(sectionsTarget);
 
     for (const section of sections) {
-        const obj = {};
+        const obj:any = {};
         for (const key in keysObj) {
             if (_.isEqual(key, 'url')) {
                 obj[key] = await section.$eval(

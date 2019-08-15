@@ -19,10 +19,10 @@ const db = admin.firestore();
 
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
-    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
+    const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, false);
+    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, false);
     // response.send(googleTrends);
-    response.send(await Utils.puppeteerScrape(
+    const yahooTrends = await Utils.puppeteerScrape(
         'https://finance.yahoo.com/trending-tickers',
         'https://finance.yahoo.com',
         'tr.BdT',
@@ -31,7 +31,12 @@ export const predict = functions.https.onRequest(async (request, response): Prom
             symbol: '.data-col0',
             change: '.data-col5',
         }
-    ));
+    );
+    response.send({
+        tickers,
+        googleTrends,
+        yahooTrends
+    });
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
