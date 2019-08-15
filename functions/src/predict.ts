@@ -76,3 +76,24 @@ exports.getGoogleTrends = async function(request: any, response: any, tickers: A
 
     return data;
 }
+
+// Step 3: Get Trending StockTwits Stocks
+exports.getStockTwitsTrends = function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        const stockTwitsJSON = require('./../mocks/stocktwits-trending.json')
+        return stockTwitsJSON;
+    }
+
+    const Request = require('request');
+    return new Promise((resolve,reject) => {
+        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error, response, body) => {
+          if (response) {
+            return resolve(JSON.parse(body));
+          }
+          if (error) {
+            return reject(error);
+          }
+        });
+    });
+}
+

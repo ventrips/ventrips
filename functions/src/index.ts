@@ -19,24 +19,25 @@ const db = admin.firestore();
 
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, false);
-    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, false);
-    // response.send(googleTrends);
-    const yahooTrends = await Utils.puppeteerScrape(
-        'https://finance.yahoo.com/trending-tickers',
-        'https://finance.yahoo.com',
-        'tr.BdT',
-        {
-            url: '.data-col0 a',
-            name: '.data-col1',
-            symbol: '.data-col0',
-            change: '.data-col5'
-        }
-    );
+    const stockTwitsTrends: Array<any> = await Predict.getStockTwitsTrends(request, response, true);
+    // const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, false);
+    // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, false);
+    // const yahooTrends = await Utils.puppeteerScrape(
+    //     'https://finance.yahoo.com/trending-tickers',
+    //     'https://finance.yahoo.com',
+    //     'tr.BdT',
+    //     {
+    //         url: '.data-col0 a',
+    //         name: '.data-col1',
+    //         symbol: '.data-col0',
+    //         change: '.data-col5'
+    //     }
+    // );
     response.send({
-        tickers,
-        googleTrends,
-        yahooTrends
+        stockTwitsTrends
+        // tickers,
+        // googleTrends,
+        // yahooTrends
     });
 });
 
