@@ -21,6 +21,7 @@ export class TrendsComponent implements OnInit {
   public q: string;
   public data: any;
   public user: User;
+  public symbols: Array<any>;
   public _ = _;
 
   constructor(
@@ -39,6 +40,17 @@ export class TrendsComponent implements OnInit {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
       this.data = undefined;
+
+      this.symbols = undefined;
+      this.spinner.show();
+      this.getPredict(this.q)
+      .subscribe((response) => {
+        this.spinner.hide();
+        this.symbols = response;
+      }, (error) => {
+        this.toastr.error(error);
+      });
+
       if (_.isNil(this.q)) { return; };
       this.spinner.show();
       this.getTrends(this.q)
@@ -54,6 +66,11 @@ export class TrendsComponent implements OnInit {
 
   getTrends(q: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/trends?q=${q}`)
+    .pipe(map((response: Response) => { return response }));
+  };
+
+  getPredict(q: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/predict`)
     .pipe(map((response: Response) => { return response }));
   };
 
