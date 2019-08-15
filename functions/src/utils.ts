@@ -11,7 +11,7 @@ exports.cors = function(request: any, response: any): void {
     return;
 }
 
-exports.puppeteerScrape = async function(url: string, sectionsTarget: string, keysObj: object): Promise<any> {
+exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
     const results: Array<any> = [];
     const browser = await puppeteer.launch({
         headless: true,
@@ -29,8 +29,9 @@ exports.puppeteerScrape = async function(url: string, sectionsTarget: string, ke
             if (_.isEqual(key, 'url')) {
                 obj[key] = await section.$eval(
                     _.get(keysObj, [key]),
-                    (item: any) => `https://seekingalpha.com${item.getAttribute('href')}`
+                    (item: any) => item.getAttribute('href')
                 );
+                obj[key] = `${baseUrl}${obj[key]}`;
             } else {
                 obj[key] = await section.$eval(
                     _.get(keysObj, [key]),

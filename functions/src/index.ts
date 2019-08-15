@@ -21,18 +21,17 @@ export const predict = functions.https.onRequest(async (request, response): Prom
     Utils.cors(request, response);
     const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
     const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
-    response.send(googleTrends);
-    // response.send(await Utils.puppeteerScrape(
-    //     'https://seekingalpha.com/earnings/earnings-calendar',
-    //     '.earningsTable tbody tr',
-    //     {
-    //         url: '.sym',
-    //         releaseTime: '.release-time',
-    //         releaseDate: '.release-date',
-    //         symbol: '.sym',
-    //         name: '.ticker-name'
-    //     }
-    // ));
+    // response.send(googleTrends);
+    response.send(await Utils.puppeteerScrape(
+        'https://finance.yahoo.com/trending-tickers',
+        'https://finance.yahoo.com',
+        'tr.BdT',
+        {
+            url: '.data-col0 a',
+            symbol: '.data-col0',
+            releaseDate: '.data-col5',
+        }
+    ));
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
