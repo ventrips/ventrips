@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 const GoogleTrends = require('google-trends-api');
 
 // Step 1: Get Tomorrow's Upcoming Stock Earnings
-exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock = false): Promise<Array<any>>  {
+exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
     if (useMock) {
         const seekingAlphaJSON = require('./../mocks/seeking-alpha.json');
         return seekingAlphaJSON;
@@ -19,7 +19,7 @@ exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock
     const page = await browser.newPage();
     await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'networkidle0' })
 
-    let sections = await page.$$('.earningsTable tbody tr');
+    const sections = await page.$$('.earningsTable tbody tr');
 
     for (const section of sections) {
         const releaseDate = await section.$eval(

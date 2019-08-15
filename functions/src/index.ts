@@ -20,8 +20,8 @@ const db = admin.firestore();
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
-    const trends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
-    response.send(trends);
+    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
+    response.send(googleTrends);
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
