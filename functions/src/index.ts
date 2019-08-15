@@ -22,6 +22,17 @@ export const predict = functions.https.onRequest(async (request, response): Prom
     const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
     const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
     response.send(googleTrends);
+    // response.send(await Utils.puppeteerScrape(
+    //     'https://seekingalpha.com/earnings/earnings-calendar',
+    //     '.earningsTable tbody tr',
+    //     {
+    //         url: '.sym',
+    //         releaseTime: '.release-time',
+    //         releaseDate: '.release-date',
+    //         symbol: '.sym',
+    //         name: '.ticker-name'
+    //     }
+    // ));
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
