@@ -2,3 +2,4 @@
 /dist
 /functions/dist
 .firebase
+/firebase-debug.log
