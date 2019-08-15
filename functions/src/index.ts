@@ -28,8 +28,9 @@ export const predict = functions.https.onRequest(async (request, response): Prom
         'tr.BdT',
         {
             url: '.data-col0 a',
+            name: '.data-col1',
             symbol: '.data-col0',
-            change: '.data-col5',
+            change: '.data-col5'
         }
     );
     response.send({
