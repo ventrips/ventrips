@@ -29,7 +29,7 @@ export const predict = functions.https.onRequest(async (request, response): Prom
         {
             url: '.data-col0 a',
             symbol: '.data-col0',
-            releaseDate: '.data-col5',
+            change: '.data-col5',
         }
     ));
 });
