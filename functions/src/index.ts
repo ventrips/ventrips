@@ -19,12 +19,12 @@ const db = admin.firestore();
 
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
-    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, true);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
+    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
     const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, true);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
 
     response.send({
         stockTwitsTickers

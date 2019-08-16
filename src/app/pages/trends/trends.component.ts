@@ -21,7 +21,7 @@ export class TrendsComponent implements OnInit {
   public q: string;
   public data: any;
   public user: User;
-  public symbols: Array<any>;
+  public predict: Array<any>;
   public _ = _;
 
   constructor(
@@ -41,12 +41,14 @@ export class TrendsComponent implements OnInit {
       this.search = _.cloneDeep(this.q);
       this.data = undefined;
 
-      this.symbols = undefined;
+      this.predict = undefined;
       this.spinner.show();
       this.getPredict(this.q)
       .subscribe((response) => {
         this.spinner.hide();
-        this.symbols = response;
+        this.predict = response;
+        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
+        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
       }, (error) => {
         this.toastr.error(error);
       });
