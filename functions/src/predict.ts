@@ -88,17 +88,15 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
     return new Promise((resolve,reject) => {
         Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, res: any, body: any) => {
           if (res) {
-
-            return resolve(_.map(JSON.parse(body).symbols, (stock) => {
+            const data = _.map(JSON.parse(body).symbols, (stock) => {
                 stock.source = 'stock-twits';
                 stock.url = 'https://stocktwits.com/symbol/' + stock.symbol
                 return stock;
-            }));
+            });
+            return data;
           }
-          if (error) {
-
-            return reject(error);
-          }
+          reject(error);
+          return error;
         });
     });
 }
