@@ -21,7 +21,7 @@ export class TrendsComponent implements OnInit {
   public q: string;
   public data: any;
   public user: User;
-  public predict: Array<any>;
+  public predict: any;
   public _ = _;
 
   constructor(
