@@ -95,6 +95,7 @@ export class TrendsComponent implements OnInit {
       ' and companies',
       ' & company',
       ' company',
+      ' companies',
       ' and co.',
       ' & co.',
       ' co.',
