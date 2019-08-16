@@ -19,6 +19,10 @@ const db = admin.firestore();
 
 export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
+    // const json = require('./../mocks/predict/predict.json');
+    // response.send(json);
+    // return;
+
     const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
     const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);

@@ -92,22 +92,27 @@ export class TrendsComponent implements OnInit {
     value = _.toLower(value);
     _.forEach([
       'the ',
+      ' and companies',
+      ' & company',
       ' company',
+      ' and co.',
+      ' & co.',
       ' co.',
       ' incorporated',
       ' corporation',
       ' corp',
       ' corp.',
+      ' designs',
       ' limited',
       ', inc',
-      `'s`,
       ' inc.',
+      ' inc',
       ' lp',
       ' l.p.',
       ' ltd',
       '. ',
       ' .',
-      /[`~!@#$%^*()_|+\-=?;:'",<>\{\}\[\]\\\/]/gi
+      /[`~!@#$%^*()_|+\-=?;:",<>\{\}\[\]\\\/]/gi
     ], (target) => {
       value = _.replace(value, target, ' ');
     });
