@@ -17,7 +17,7 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
     });
 
     const page = await browser.newPage();
-    await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'networkidle0' })
+    await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'load', timeout: 0 })
 
     const sections = await page.$$('.earningsTable tbody tr');
 
@@ -135,7 +135,7 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
     const seekingAlphaEarningsNews = await Utils.puppeteerScrape(
         'seeking-alpha',
         'https://seekingalpha.com/earnings/earnings-news',
-        'https://seekingalpha.com/news',
+        'https://seekingalpha.com',
         '.media-body',
         {
             url: '.article-link',

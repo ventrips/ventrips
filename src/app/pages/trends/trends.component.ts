@@ -51,6 +51,7 @@ export class TrendsComponent implements OnInit {
         this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
       }, (error) => {
         this.toastr.error(error);
+        this.spinner.show();
       });
 
       if (_.isNil(this.q)) { return; };

@@ -17,7 +17,7 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
+export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
     const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);

@@ -19,8 +19,7 @@ exports.puppeteerScrape = async function(source: string, url: string, baseUrl: s
     });
 
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' })
-
+    await page.goto(url, { waitUntil: 'load', timeout: 0 })
     const sections = await page.$$(sectionsTarget);
 
     for (const section of sections) {

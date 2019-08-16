@@ -1,13 +1,13 @@
 [
     {
-        "id": 5481,
-        "symbol": "GE",
-        "title": "General Electric Co.",
+        "id": 1546,
+        "symbol": "PSTV",
+        "title": "Plus Therapeutics",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 78928,
+        "watchlist_count": 11979,
         "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/GE"
+        "url": "https://stocktwits.com/symbol/PSTV"
     },
     {
         "id": 2925,
@@ -15,19 +15,39 @@
         "title": "NVIDIA Corporation",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 142499,
+        "watchlist_count": 142604,
         "source": "stock-twits",
         "url": "https://stocktwits.com/symbol/NVDA"
     },
     {
-        "id": 1260,
-        "symbol": "CELG",
-        "title": "Celgene Corporation",
+        "id": 2924,
+        "symbol": "NVAX",
+        "title": "Novavax, Inc.",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 17636,
+        "watchlist_count": 33401,
         "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/CELG"
+        "url": "https://stocktwits.com/symbol/NVAX"
+    },
+    {
+        "id": 5481,
+        "symbol": "GE",
+        "title": "General Electric Co.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 79060,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/GE"
+    },
+    {
+        "id": 14016,
+        "symbol": "QD",
+        "title": "Qudian Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 5361,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/QD"
     },
     {
         "id": 4940,
@@ -35,41 +55,234 @@
         "title": "Deere & Company",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 5328,
+        "watchlist_count": 5363,
         "source": "stock-twits",
         "url": "https://stocktwits.com/symbol/DE"
     },
     {
-        "id": 14643,
-        "symbol": "EVOP",
-        "title": "EVO Payments",
+        "id": 14372,
+        "symbol": "SLDB",
+        "title": "Solid Biosciences",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 262,
+        "watchlist_count": 1961,
         "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/EVOP"
+        "url": "https://stocktwits.com/symbol/SLDB"
     },
     {
-        "id": 4796,
-        "symbol": "TPR",
-        "title": "Tapestry Inc.",
+        "id": 14328,
+        "symbol": "PAGS",
+        "title": "PagSeguro",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1769,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/PAGS"
+    },
+    {
+        "id": 4938,
+        "symbol": "DDS",
+        "title": "Dillard's Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 929,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/DDS"
+    },
+    {
+        "id": 827,
+        "symbol": "AMAT",
+        "title": "Applied Materials Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 16443,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/AMAT"
+    },
+    {
+        "id": 3910,
+        "symbol": "TWMC",
+        "title": "Trans World Entertainment Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 782,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/TWMC"
+    },
+    {
+        "id": 14485,
+        "symbol": "ZS",
+        "title": "Zscaler",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 5596,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/ZS"
+    },
+    {
+        "id": 14489,
+        "symbol": "IQ",
+        "title": "iQIYI",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 30470,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/IQ"
+    },
+    {
+        "id": 3379,
+        "symbol": "BB",
+        "title": "BlackBerry",
         "aliases": [
-            "COH"
+            "RIMM",
+            "BBRY"
         ],
         "is_following": false,
-        "watchlist_count": 3078,
+        "watchlist_count": 33621,
         "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/TPR"
+        "url": "https://stocktwits.com/symbol/BB"
     },
     {
-        "id": 1478,
-        "symbol": "CSIQ",
-        "title": "Canadian Solar Inc.",
+        "id": 12150,
+        "symbol": "WLKP",
+        "title": "Westlake Chemical Partners LP",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 7842,
+        "watchlist_count": 127,
         "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/CSIQ"
+        "url": "https://stocktwits.com/symbol/WLKP"
+    },
+    {
+        "id": 11057,
+        "symbol": "NMFC",
+        "title": "New Mountain Finance Corp",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 187,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/NMFC"
+    },
+    {
+        "id": 14985,
+        "symbol": "RVLV",
+        "title": "REVOLVE GROUP, INC.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2667,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/RVLV"
+    },
+    {
+        "id": 4241,
+        "symbol": "ADS",
+        "title": "Alliance Data Systems Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 734,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/ADS"
+    },
+    {
+        "id": 12802,
+        "symbol": "NVCR",
+        "title": "NovoCure",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 4342,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/NVCR"
+    },
+    {
+        "id": 10577,
+        "symbol": "BB.CA",
+        "title": "BlackBerry",
+        "aliases": [
+            "RIM.CA"
+        ],
+        "is_following": false,
+        "watchlist_count": 1753,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/BB.CA"
+    },
+    {
+        "id": 11190,
+        "symbol": "NASDAQ",
+        "title": "NASDAQ Composite",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 10077,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/NASDAQ"
+    },
+    {
+        "id": 738,
+        "symbol": "ADBE",
+        "title": "Adobe Systems Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 14659,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/ADBE"
+    },
+    {
+        "id": 5112,
+        "symbol": "EDN",
+        "title": "Edenor SA",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 269,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/EDN"
+    },
+    {
+        "id": 13571,
+        "symbol": "APPN",
+        "title": "Appian Corp",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2154,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/APPN"
+    },
+    {
+        "id": 14962,
+        "symbol": "PLAN",
+        "title": "Anaplan, Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1306,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/PLAN"
+    },
+    {
+        "id": 1807,
+        "symbol": "EXEL",
+        "title": "Exelixis, Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 10909,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/EXEL"
+    },
+    {
+        "id": 15269,
+        "symbol": "GO",
+        "title": "Grocery Outlet Holding Corp",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 539,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/GO"
+    },
+    {
+        "id": 6502,
+        "symbol": "NKE",
+        "title": "Nike Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 51509,
+        "source": "stock-twits",
+        "url": "https://stocktwits.com/symbol/NKE"
     },
     {
         "id": 12100,
@@ -79,193 +292,9 @@
             "ALIBABA"
         ],
         "is_following": false,
-        "watchlist_count": 148192,
+        "watchlist_count": 148253,
         "source": "stock-twits",
         "url": "https://stocktwits.com/symbol/BABA"
-    },
-    {
-        "id": 4753,
-        "symbol": "CLC",
-        "title": "CLARCOR Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 400,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/CLC"
-    },
-    {
-        "id": 2833,
-        "symbol": "NEWT",
-        "title": "Newtek Business Services Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 423,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/NEWT"
-    },
-    {
-        "id": 15245,
-        "symbol": "NDX",
-        "title": "Nasdaq-100 Index",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 279,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/NDX"
-    },
-    {
-        "id": 15081,
-        "symbol": "CPRI",
-        "title": "Capri Holdings Ltd",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 473,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/CPRI"
-    },
-    {
-        "id": 7745,
-        "symbol": "WMT",
-        "title": "Walmart Stores Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 45570,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/WMT"
-    },
-    {
-        "id": 2924,
-        "symbol": "NVAX",
-        "title": "Novavax, Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 33365,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/NVAX"
-    },
-    {
-        "id": 14016,
-        "symbol": "QD",
-        "title": "Qudian Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 5300,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/QD"
-    },
-    {
-        "id": 13528,
-        "symbol": "XRP.X",
-        "title": "Ripple",
-        "aliases": [
-            "XRPUSD"
-        ],
-        "is_following": false,
-        "watchlist_count": 59466,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/XRP.X"
-    },
-    {
-        "id": 5080,
-        "symbol": "DVN",
-        "title": "Devon Energy Corporation",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 3366,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/DVN"
-    },
-    {
-        "id": 5891,
-        "symbol": "IRM",
-        "title": "Iron Mountain Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 2465,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/IRM"
-    },
-    {
-        "id": 13439,
-        "symbol": "NTRP",
-        "title": "Neurotrope, Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 1078,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/NTRP"
-    },
-    {
-        "id": 12311,
-        "symbol": "FND",
-        "title": "Floor & Decor Holdings",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 867,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/FND"
-    },
-    {
-        "id": 5615,
-        "symbol": "GVA",
-        "title": "Granite Construction Incorporated",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 310,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/GVA"
-    },
-    {
-        "id": 7697,
-        "symbol": "WAB",
-        "title": "Westinghouse Air Brake Technologies Corporation",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 738,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/WAB"
-    },
-    {
-        "id": 13016,
-        "symbol": "ETH.X",
-        "title": "Ethereum",
-        "aliases": [
-            "ETHUSD"
-        ],
-        "is_following": false,
-        "watchlist_count": 66877,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/ETH.X"
-    },
-    {
-        "id": 5169,
-        "symbol": "EMN",
-        "title": "Eastman Chemical Co.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 507,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/EMN"
-    },
-    {
-        "id": 6024,
-        "symbol": "JQC",
-        "title": "Nuveen Multi-Strategy Income & Growth Fund 2",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 189,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/JQC"
-    },
-    {
-        "id": 14954,
-        "symbol": "SAFE",
-        "title": "Safety Income & Growth Inc",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 56,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/SAFE"
     },
     {
         "id": 3776,
@@ -273,40 +302,221 @@
         "title": "Teva Pharmaceutical Industries Limited",
         "aliases": [],
         "is_following": false,
-        "watchlist_count": 20711,
+        "watchlist_count": 20712,
         "source": "stock-twits",
         "url": "https://stocktwits.com/symbol/TEVA"
+    }
+],
+"seekingAlphaEarningsDate": [],
+"yahooTickers": [
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/GE?p=GE",
+        "company": "General Electric Company",
+        "symbol": "GE",
+        "change": "+6.93%"
     },
     {
-        "id": 7166,
-        "symbol": "SEE",
-        "title": "Sealed Air Corporation",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 305,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/SEE"
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/NVDA?p=NVDA",
+        "company": "NVIDIA Corporation",
+        "symbol": "NVDA",
+        "change": "+6.60%"
     },
     {
-        "id": 827,
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/BYND?p=BYND",
+        "company": "Beyond Meat, Inc.",
+        "symbol": "BYND",
+        "change": "-2.81%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/DE?p=DE",
+        "company": "Deere & Company",
+        "symbol": "DE",
+        "change": "+4.39%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AMAT?p=AMAT",
+        "company": "Applied Materials, Inc.",
         "symbol": "AMAT",
-        "title": "Applied Materials Inc.",
-        "aliases": [],
-        "is_following": false,
-        "watchlist_count": 16434,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/AMAT"
+        "change": "-4.16%"
     },
     {
-        "id": 7698,
-        "symbol": "WBA",
-        "title": "Walgreens Boots Alliance",
-        "aliases": [
-            "WAG"
-        ],
-        "is_following": false,
-        "watchlist_count": 7531,
-        "source": "stock-twits",
-        "url": "https://stocktwits.com/symbol/WBA"
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/PSTV?p=PSTV",
+        "company": "Plus Therapeutics, Inc.",
+        "symbol": "PSTV",
+        "change": "+268.81%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/QD?p=QD",
+        "company": "Qudian Inc.",
+        "symbol": "QD",
+        "change": "-3.22%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/FCEL?p=FCEL",
+        "company": "FuelCell Energy, Inc.",
+        "symbol": "FCEL",
+        "change": "+13.69%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/SDRL?p=SDRL",
+        "company": "Seadrill Limited",
+        "symbol": "SDRL",
+        "change": "+13.40%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/DDS?p=DDS",
+        "company": "Dillard's, Inc.",
+        "symbol": "DDS",
+        "change": "-1.96%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/IZEA?p=IZEA",
+        "company": "IZEA Worldwide, Inc.",
+        "symbol": "IZEA",
+        "change": "+17.87%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/PAGS?p=PAGS",
+        "company": "PagSeguro Digital Ltd.",
+        "symbol": "PAGS",
+        "change": "+11.26%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/KTOV?p=KTOV",
+        "company": "Kitov Pharma Ltd",
+        "symbol": "KTOV",
+        "change": "+10.00%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/SAEX?p=SAEX",
+        "company": "SAExploration Holdings, Inc.",
+        "symbol": "SAEX",
+        "change": "-37.30%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/JKHY?p=JKHY",
+        "company": "Jack Henry & Associates, Inc.",
+        "symbol": "JKHY",
+        "change": "+0.88%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/ALC?p=ALC",
+        "company": "Alcon, Inc.",
+        "symbol": "ALC",
+        "change": "+0.52%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/NBRV?p=NBRV",
+        "company": "Nabriva Therapeutics plc",
+        "symbol": "NBRV",
+        "change": "-0.46%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/TDOC?p=TDOC",
+        "company": "Teladoc Health, Inc.",
+        "symbol": "TDOC",
+        "change": "+5.46%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/NAT?p=NAT",
+        "company": "Nordic American Tankers Limited",
+        "symbol": "NAT",
+        "change": "0.00%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/EVOK?p=EVOK",
+        "company": "Evoke Pharma, Inc.",
+        "symbol": "EVOK",
+        "change": "+1.95%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/FIT?p=FIT",
+        "company": "Fitbit, Inc.",
+        "symbol": "FIT",
+        "change": "+1.04%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/KTOS?p=KTOS",
+        "company": "Kratos Defense & Security Solutions, Inc.",
+        "symbol": "KTOS",
+        "change": "+6.88%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/PCG?p=PCG",
+        "company": "PG&E Corporation",
+        "symbol": "PCG",
+        "change": "+2.50%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AMD?p=AMD",
+        "company": "Advanced Micro Devices, Inc.",
+        "symbol": "AMD",
+        "change": "+3.88%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/TRXC?p=TRXC",
+        "company": "TransEnterix, Inc.",
+        "symbol": "TRXC",
+        "change": "+5.79%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/XBIO?p=XBIO",
+        "company": "Xenetic Biosciences, Inc.",
+        "symbol": "XBIO",
+        "change": "-1.23%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/F?p=F",
+        "company": "Ford Motor Company",
+        "symbol": "F",
+        "change": "-0.23%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/TROV?p=TROV",
+        "company": "TrovaGene, Inc.",
+        "symbol": "TROV",
+        "change": "+9.26%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/SHAK?p=SHAK",
+        "company": "Shake Shack Inc.",
+        "symbol": "SHAK",
+        "change": "+0.54%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/CTL?p=CTL",
+        "company": "CenturyLink, Inc.",
+        "symbol": "CTL",
+        "change": "+3.16%"
     }
 ]

@@ -1,14 +1,14 @@
 {
     "stockTwitsTickers": [
         {
-            "id": 5481,
-            "symbol": "GE",
-            "title": "General Electric Co.",
+            "id": 1546,
+            "symbol": "PSTV",
+            "title": "Plus Therapeutics",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 78928,
+            "watchlist_count": 11979,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/GE"
+            "url": "https://stocktwits.com/symbol/PSTV"
         },
         {
             "id": 2925,
@@ -16,19 +16,39 @@
             "title": "NVIDIA Corporation",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 142499,
+            "watchlist_count": 142604,
             "source": "stock-twits",
             "url": "https://stocktwits.com/symbol/NVDA"
         },
         {
-            "id": 1260,
-            "symbol": "CELG",
-            "title": "Celgene Corporation",
+            "id": 2924,
+            "symbol": "NVAX",
+            "title": "Novavax, Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 17636,
+            "watchlist_count": 33401,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/CELG"
+            "url": "https://stocktwits.com/symbol/NVAX"
+        },
+        {
+            "id": 5481,
+            "symbol": "GE",
+            "title": "General Electric Co.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 79060,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/GE"
+        },
+        {
+            "id": 14016,
+            "symbol": "QD",
+            "title": "Qudian Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5361,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/QD"
         },
         {
             "id": 4940,
@@ -36,41 +56,234 @@
             "title": "Deere & Company",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 5328,
+            "watchlist_count": 5363,
             "source": "stock-twits",
             "url": "https://stocktwits.com/symbol/DE"
         },
         {
-            "id": 14643,
-            "symbol": "EVOP",
-            "title": "EVO Payments",
+            "id": 14372,
+            "symbol": "SLDB",
+            "title": "Solid Biosciences",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 262,
+            "watchlist_count": 1961,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/EVOP"
+            "url": "https://stocktwits.com/symbol/SLDB"
         },
         {
-            "id": 4796,
-            "symbol": "TPR",
-            "title": "Tapestry Inc.",
+            "id": 14328,
+            "symbol": "PAGS",
+            "title": "PagSeguro",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 1769,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/PAGS"
+        },
+        {
+            "id": 4938,
+            "symbol": "DDS",
+            "title": "Dillard's Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 929,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/DDS"
+        },
+        {
+            "id": 827,
+            "symbol": "AMAT",
+            "title": "Applied Materials Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 16443,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/AMAT"
+        },
+        {
+            "id": 3910,
+            "symbol": "TWMC",
+            "title": "Trans World Entertainment Corporation",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 782,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/TWMC"
+        },
+        {
+            "id": 14485,
+            "symbol": "ZS",
+            "title": "Zscaler",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5596,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ZS"
+        },
+        {
+            "id": 14489,
+            "symbol": "IQ",
+            "title": "iQIYI",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 30470,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/IQ"
+        },
+        {
+            "id": 3379,
+            "symbol": "BB",
+            "title": "BlackBerry",
             "aliases": [
-                "COH"
+                "RIMM",
+                "BBRY"
             ],
             "is_following": false,
-            "watchlist_count": 3078,
+            "watchlist_count": 33621,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/TPR"
+            "url": "https://stocktwits.com/symbol/BB"
         },
         {
-            "id": 1478,
-            "symbol": "CSIQ",
-            "title": "Canadian Solar Inc.",
+            "id": 12150,
+            "symbol": "WLKP",
+            "title": "Westlake Chemical Partners LP",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 7842,
+            "watchlist_count": 127,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/CSIQ"
+            "url": "https://stocktwits.com/symbol/WLKP"
+        },
+        {
+            "id": 11057,
+            "symbol": "NMFC",
+            "title": "New Mountain Finance Corp",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 187,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NMFC"
+        },
+        {
+            "id": 14985,
+            "symbol": "RVLV",
+            "title": "REVOLVE GROUP, INC.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 2667,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/RVLV"
+        },
+        {
+            "id": 4241,
+            "symbol": "ADS",
+            "title": "Alliance Data Systems Corporation",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 734,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ADS"
+        },
+        {
+            "id": 12802,
+            "symbol": "NVCR",
+            "title": "NovoCure",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 4342,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NVCR"
+        },
+        {
+            "id": 10577,
+            "symbol": "BB.CA",
+            "title": "BlackBerry",
+            "aliases": [
+                "RIM.CA"
+            ],
+            "is_following": false,
+            "watchlist_count": 1753,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/BB.CA"
+        },
+        {
+            "id": 11190,
+            "symbol": "NASDAQ",
+            "title": "NASDAQ Composite",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 10077,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NASDAQ"
+        },
+        {
+            "id": 738,
+            "symbol": "ADBE",
+            "title": "Adobe Systems Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 14659,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ADBE"
+        },
+        {
+            "id": 5112,
+            "symbol": "EDN",
+            "title": "Edenor SA",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 269,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/EDN"
+        },
+        {
+            "id": 13571,
+            "symbol": "APPN",
+            "title": "Appian Corp",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 2154,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/APPN"
+        },
+        {
+            "id": 14962,
+            "symbol": "PLAN",
+            "title": "Anaplan, Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 1306,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/PLAN"
+        },
+        {
+            "id": 1807,
+            "symbol": "EXEL",
+            "title": "Exelixis, Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 10909,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/EXEL"
+        },
+        {
+            "id": 15269,
+            "symbol": "GO",
+            "title": "Grocery Outlet Holding Corp",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 539,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/GO"
+        },
+        {
+            "id": 6502,
+            "symbol": "NKE",
+            "title": "Nike Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 51509,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NKE"
         },
         {
             "id": 12100,
@@ -80,193 +293,9 @@
                 "ALIBABA"
             ],
             "is_following": false,
-            "watchlist_count": 148192,
+            "watchlist_count": 148253,
             "source": "stock-twits",
             "url": "https://stocktwits.com/symbol/BABA"
-        },
-        {
-            "id": 4753,
-            "symbol": "CLC",
-            "title": "CLARCOR Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 400,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/CLC"
-        },
-        {
-            "id": 2833,
-            "symbol": "NEWT",
-            "title": "Newtek Business Services Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 423,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/NEWT"
-        },
-        {
-            "id": 15245,
-            "symbol": "NDX",
-            "title": "Nasdaq-100 Index",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 279,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/NDX"
-        },
-        {
-            "id": 15081,
-            "symbol": "CPRI",
-            "title": "Capri Holdings Ltd",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 473,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/CPRI"
-        },
-        {
-            "id": 7745,
-            "symbol": "WMT",
-            "title": "Walmart Stores Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 45570,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/WMT"
-        },
-        {
-            "id": 2924,
-            "symbol": "NVAX",
-            "title": "Novavax, Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 33365,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/NVAX"
-        },
-        {
-            "id": 14016,
-            "symbol": "QD",
-            "title": "Qudian Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 5300,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/QD"
-        },
-        {
-            "id": 13528,
-            "symbol": "XRP.X",
-            "title": "Ripple",
-            "aliases": [
-                "XRPUSD"
-            ],
-            "is_following": false,
-            "watchlist_count": 59466,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/XRP.X"
-        },
-        {
-            "id": 5080,
-            "symbol": "DVN",
-            "title": "Devon Energy Corporation",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 3366,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/DVN"
-        },
-        {
-            "id": 5891,
-            "symbol": "IRM",
-            "title": "Iron Mountain Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 2465,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/IRM"
-        },
-        {
-            "id": 13439,
-            "symbol": "NTRP",
-            "title": "Neurotrope, Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1078,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/NTRP"
-        },
-        {
-            "id": 12311,
-            "symbol": "FND",
-            "title": "Floor & Decor Holdings",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 867,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FND"
-        },
-        {
-            "id": 5615,
-            "symbol": "GVA",
-            "title": "Granite Construction Incorporated",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 310,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/GVA"
-        },
-        {
-            "id": 7697,
-            "symbol": "WAB",
-            "title": "Westinghouse Air Brake Technologies Corporation",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 738,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/WAB"
-        },
-        {
-            "id": 13016,
-            "symbol": "ETH.X",
-            "title": "Ethereum",
-            "aliases": [
-                "ETHUSD"
-            ],
-            "is_following": false,
-            "watchlist_count": 66877,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/ETH.X"
-        },
-        {
-            "id": 5169,
-            "symbol": "EMN",
-            "title": "Eastman Chemical Co.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 507,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/EMN"
-        },
-        {
-            "id": 6024,
-            "symbol": "JQC",
-            "title": "Nuveen Multi-Strategy Income & Growth Fund 2",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 189,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/JQC"
-        },
-        {
-            "id": 14954,
-            "symbol": "SAFE",
-            "title": "Safety Income & Growth Inc",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 56,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/SAFE"
         },
         {
             "id": 3776,
@@ -274,2102 +303,736 @@
             "title": "Teva Pharmaceutical Industries Limited",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 20711,
+            "watchlist_count": 20712,
             "source": "stock-twits",
             "url": "https://stocktwits.com/symbol/TEVA"
-        },
-        {
-            "id": 7166,
-            "symbol": "SEE",
-            "title": "Sealed Air Corporation",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 305,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/SEE"
-        },
-        {
-            "id": 827,
-            "symbol": "AMAT",
-            "title": "Applied Materials Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 16434,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/AMAT"
-        },
-        {
-            "id": 7698,
-            "symbol": "WBA",
-            "title": "Walgreens Boots Alliance",
-            "aliases": [
-                "WAG"
-            ],
-            "is_following": false,
-            "watchlist_count": 7531,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/WBA"
         }
     ],
-    "seekingAlphaEarningsDate": [
-        {
-            "url": "https://seekingalpha.com/symbol/AAME/earnings",
-            "symbol": "AAME",
-            "company": "Atlantic American Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ACBM/earnings",
-            "symbol": "ACBM",
-            "company": "Acro Biomedical Co., Ltd.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ACLZ/earnings",
-            "symbol": "ACLZ",
-            "company": "Accelerize Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/AEZS/earnings",
-            "symbol": "AEZS",
-            "company": "Aeterna Zentaris Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/AFOM/earnings",
-            "symbol": "AFOM",
-            "company": "All For One Media Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/AGRO/earnings",
-            "symbol": "AGRO",
-            "company": "Adecoagro S.A.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ALPE/earnings",
-            "symbol": "ALPE",
-            "company": "alpha-En Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ASCK/earnings",
-            "symbol": "ASCK",
-            "company": "Auscrete Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ASFI/earnings",
-            "symbol": "ASFI",
-            "company": "Asta Funding, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ATRX/earnings",
-            "symbol": "ATRX",
-            "company": "Adhera Therapeutics, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/AUG/earnings",
-            "symbol": "AUG",
-            "company": "Auryn Resources Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BASA/earnings",
-            "symbol": "BASA",
-            "company": "Basanite Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BCOW/earnings",
-            "symbol": "BCOW",
-            "company": "1895 Bancorp of Wisconsin, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BENH/earnings",
-            "symbol": "BENH",
-            "company": "Bio-En Holdings Corp",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BMBN/earnings",
-            "symbol": "BMBN",
-            "company": "Benchmark Bankshares, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BMIX/earnings",
-            "symbol": "BMIX",
-            "company": "Brazil Minerals, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BOMN/earnings",
-            "symbol": "BOMN",
-            "company": "Boston Omaha Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BRN/earnings",
-            "symbol": "BRN",
-            "company": "Barnwell Industries, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/BTHE/earnings",
-            "symbol": "BTHE",
-            "company": "Boston Therapeutics, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CANB/earnings",
-            "symbol": "CANB",
-            "company": "Canbiola, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CARV/earnings",
-            "symbol": "CARV",
-            "company": "Carver Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CBAI/earnings",
-            "symbol": "CBAI",
-            "company": "CBA Florida, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CBDS/earnings",
-            "symbol": "CBDS",
-            "company": "Cannabis Sativa, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CIZN/earnings",
-            "symbol": "CIZN",
-            "company": "Citizens Holding Company",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CLKA/earnings",
-            "symbol": "CLKA",
-            "company": "Clikia Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CLRO/earnings",
-            "symbol": "CLRO",
-            "company": "ClearOne, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/COSG/earnings",
-            "symbol": "COSG",
-            "company": "Cosmos Group Holdings Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CPKA/earnings",
-            "symbol": "CPKA",
-            "company": "Chase Packaging Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CPWR/earnings",
-            "symbol": "CPWR",
-            "company": "Ocean Thermal Energy Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CREG/earnings",
-            "symbol": "CREG",
-            "company": "China Recycling Energy Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CWSS/earnings",
-            "symbol": "CWSS",
-            "company": "Creative Waste Solutions, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/CXKJ/earnings",
-            "symbol": "CXKJ",
-            "company": "CX Network Group, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DE/earnings",
-            "symbol": "DE",
-            "company": "Deere & Company",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DECN/earnings",
-            "symbol": "DECN",
-            "company": "Decision Diagnostics Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DLCR/earnings",
-            "symbol": "DLCR",
-            "company": "Kibush Capital Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DLOC/earnings",
-            "symbol": "DLOC",
-            "company": "Digital Locations, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DRNE/earnings",
-            "symbol": "DRNE",
-            "company": "Drone Aviation Holding Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/DYNR/earnings",
-            "symbol": "DYNR",
-            "company": "DynaResource, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/EGDW/earnings",
-            "symbol": "EGDW",
-            "company": "Edgewater Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ENDV/earnings",
-            "symbol": "ENDV",
-            "company": "Endonovo Therapeutics, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/EPIX/earnings",
-            "symbol": "EPIX",
-            "company": "ESSA Pharma Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/EQUR/earnings",
-            "symbol": "EQUR",
-            "company": "E-Qure Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ETFM/earnings",
-            "symbol": "ETFM",
-            "company": "2050 Motors, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ETST/earnings",
-            "symbol": "ETST",
-            "company": "Earth Science Tech, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/EVTN/earnings",
-            "symbol": "EVTN",
-            "company": "Enviro Technologies, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FDBL/earnings",
-            "symbol": "FDBL",
-            "company": "Friendable, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FIND/earnings",
-            "symbol": "FIND",
-            "company": "Findex.com, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FSSN/earnings",
-            "symbol": "FSSN",
-            "company": "FISION Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FULO/earnings",
-            "symbol": "FULO",
-            "company": "FullNet Communications, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FUNC/earnings",
-            "symbol": "FUNC",
-            "company": "First United Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/FVRG/earnings",
-            "symbol": "FVRG",
-            "company": "ForeverGreen Worldwide Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GBBT/earnings",
-            "symbol": "GBBT",
-            "company": "Global Boatworks Holdings, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GBCS/earnings",
-            "symbol": "GBCS",
-            "company": "Global Healthcare REIT, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GHHH/earnings",
-            "symbol": "GHHH",
-            "company": "Global House Holdings Ltd.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GIGL/earnings",
-            "symbol": "GIGL",
-            "company": "Giggles N' Hugs, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GLOW/earnings",
-            "symbol": "GLOW",
-            "company": "Glowpoint, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/GLTC/earnings",
-            "symbol": "GLTC",
-            "company": "GelTech Solutions, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HCCC/earnings",
-            "symbol": "HCCC",
-            "company": "H/Cell Energy Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HEMA/earnings",
-            "symbol": "HEMA",
-            "company": "HemaCare Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HGEN/earnings",
-            "symbol": "HGEN",
-            "company": "Humanigen, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HHDS/earnings",
-            "symbol": "HHDS",
-            "company": "Highlands REIT, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HHER/earnings",
-            "symbol": "HHER",
-            "company": "Her Imports",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HLTH/earnings",
-            "symbol": "HLTH",
-            "company": "Nobilis Health Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HLTY/earnings",
-            "symbol": "HLTY",
-            "company": "PreCheck Health Services, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HPJ/earnings",
-            "symbol": "HPJ",
-            "company": "Highpower International, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HUSA/earnings",
-            "symbol": "HUSA",
-            "company": "Houston American Energy Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/HVBC/earnings",
-            "symbol": "HVBC",
-            "company": "HV Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/IAIC/earnings",
-            "symbol": "IAIC",
-            "company": "Information Analysis Incorporated",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/IDSA/earnings",
-            "symbol": "IDSA",
-            "company": "Industrial Services of America, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/IMCI/earnings",
-            "symbol": "IMCI",
-            "company": "Infinite Group, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/IMLE/earnings",
-            "symbol": "IMLE",
-            "company": "TransBiotec, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/JANL/earnings",
-            "symbol": "JANL",
-            "company": "Janel Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/JTBK/earnings",
-            "symbol": "JTBK",
-            "company": "Jetblack Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/KEWL/earnings",
-            "symbol": "KEWL",
-            "company": "Keweenaw Land Association, Limited",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/KOSS/earnings",
-            "symbol": "KOSS",
-            "company": "Koss Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/LFAP/earnings",
-            "symbol": "LFAP",
-            "company": "LGBTQ Loyalty Holdings, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/LTUM/earnings",
-            "symbol": "LTUM",
-            "company": "Lithium Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MAXD/earnings",
-            "symbol": "MAXD",
-            "company": "Max Sound Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MCOA/earnings",
-            "symbol": "MCOA",
-            "company": "Marijuana Company of America, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MDP/earnings",
-            "symbol": "MDP",
-            "company": "Meredith Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MELR/earnings",
-            "symbol": "MELR",
-            "company": "Melrose Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MFST/earnings",
-            "symbol": "MFST",
-            "company": "Medifirst Solutions, Inc",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MGTI/earnings",
-            "symbol": "MGTI",
-            "company": "MGT Capital Investments, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MLSS/earnings",
-            "symbol": "MLSS",
-            "company": "Milestone Scientific Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MOSC/earnings",
-            "symbol": "MOSC",
-            "company": "Mosaic Acquisition Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MRCR/earnings",
-            "symbol": "MRCR",
-            "company": "Moro Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MSRT/earnings",
-            "symbol": "MSRT",
-            "company": "MassRoots, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/MXSG/earnings",
-            "symbol": "MXSG",
-            "company": "Mexus Gold US",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NASB/earnings",
-            "symbol": "NASB",
-            "company": "NASB Financial, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NCRA/earnings",
-            "symbol": "NCRA",
-            "company": "Nocera, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NEIK/earnings",
-            "symbol": "NEIK",
-            "company": "Northstar Electronics, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NMTC/earnings",
-            "symbol": "NMTC",
-            "company": "NeuroOne Medical Technologies Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NRBT/earnings",
-            "symbol": "NRBT",
-            "company": "Novus Robotics Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NUBC/earnings",
-            "symbol": "NUBC",
-            "company": "Northumberland Bancorp",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NUMD/earnings",
-            "symbol": "NUMD",
-            "company": "Nu-Med Plus, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NVFY/earnings",
-            "symbol": "NVFY",
-            "company": "Nova LifeStyle, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/NXNN/earnings",
-            "symbol": "NXNN",
-            "company": "Nexeon MedSystems Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/OMTK/earnings",
-            "symbol": "OMTK",
-            "company": "Omnitek Engineering Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ONCY/earnings",
-            "symbol": "ONCY",
-            "company": "Oncolytics Biotech Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ONDS/earnings",
-            "symbol": "ONDS",
-            "company": "Ondas Holdings Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/OWCP/earnings",
-            "symbol": "OWCP",
-            "company": "OWC Pharmaceutical Research Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PBIP/earnings",
-            "symbol": "PBIP",
-            "company": "Prudential Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PCTL/earnings",
-            "symbol": "PCTL",
-            "company": "PCT Ltd",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PFBI/earnings",
-            "symbol": "PFBI",
-            "company": "Premier Financial Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PFTI/earnings",
-            "symbol": "PFTI",
-            "company": "Puradyn Filter Technologies, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PGAS/earnings",
-            "symbol": "PGAS",
-            "company": "Petrogress, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PIH/earnings",
-            "symbol": "PIH",
-            "company": "1347 Property Insurance Holdings, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PLM/earnings",
-            "symbol": "PLM",
-            "company": "PolyMet Mining Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PPSI/earnings",
-            "symbol": "PPSI",
-            "company": "Pioneer Power Solutions, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/PW/earnings",
-            "symbol": "PW",
-            "company": "Power REIT",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/QNTA/earnings",
-            "symbol": "QNTA",
-            "company": "Quanta, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/QPRC/earnings",
-            "symbol": "QPRC",
-            "company": "Quest Patent Research Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/RBAZ/earnings",
-            "symbol": "RBAZ",
-            "company": "Republic Bank of Arizona",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/RBCN/earnings",
-            "symbol": "RBCN",
-            "company": "Rubicon Technology, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/RDGL/earnings",
-            "symbol": "RDGL",
-            "company": "Vivos Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/RGSE/earnings",
-            "symbol": "RGSE",
-            "company": "Real Goods Solar, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/ROKK/earnings",
-            "symbol": "ROKK",
-            "company": "Rokk3r Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SA/earnings",
-            "symbol": "SA",
-            "company": "Seabridge Gold Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SBNC/earnings",
-            "symbol": "SBNC",
-            "company": "Southern BancShares (N.C.), Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SCRH/earnings",
-            "symbol": "SCRH",
-            "company": "Scores Holding Company, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SDON/earnings",
-            "symbol": "SDON",
-            "company": "Sandston Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SEED/earnings",
-            "symbol": "SEED",
-            "company": "Origin Agritech Limited",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SEII/earnings",
-            "symbol": "SEII",
-            "company": "Sharing Economy International Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SFRX/earnings",
-            "symbol": "SFRX",
-            "company": "Seafarer Exploration Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SIF/earnings",
-            "symbol": "SIF",
-            "company": "SIFCO Industries, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SINT/earnings",
-            "symbol": "SINT",
-            "company": "Sintx Technologies, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SLNM/earnings",
-            "symbol": "SLNM",
-            "company": "Salon Media Group, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SMKC/earnings",
-            "symbol": "SMKC",
-            "company": "Smoke Cartel, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SNYR/earnings",
-            "symbol": "SNYR",
-            "company": "Synergy CHC Corp.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SOFO/earnings",
-            "symbol": "SOFO",
-            "company": "Sonic Foundry, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SPND/earnings",
-            "symbol": "SPND",
-            "company": "Spindletop Oil & Gas Co.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/STRI/earnings",
-            "symbol": "STRI",
-            "company": "STR Holdings, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SUME/earnings",
-            "symbol": "SUME",
-            "company": "Summer Energy Holdings, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SVBI/earnings",
-            "symbol": "SVBI",
-            "company": "Severn Bancorp, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/SXTC/earnings",
-            "symbol": "SXTC",
-            "company": "China SXT Pharmaceuticals, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TAPM/earnings",
-            "symbol": "TAPM",
-            "company": "Tapinator, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TBTC/earnings",
-            "symbol": "TBTC",
-            "company": "Table Trac, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TGLO/earnings",
-            "symbol": "TGLO",
-            "company": "theglobe.com, inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TLRS/earnings",
-            "symbol": "TLRS",
-            "company": "Timberline Resources Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TMED/earnings",
-            "symbol": "TMED",
-            "company": "Trimedyne, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TNRG/earnings",
-            "symbol": "TNRG",
-            "company": "Thunder Energies Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TOTA/earnings",
-            "symbol": "TOTA",
-            "company": "Tottenham Acquisition I Limited",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/TWER/earnings",
-            "symbol": "TWER",
-            "company": "Towerstream Corporation",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/UBAB/earnings",
-            "symbol": "UBAB",
-            "company": "United Bancorporation of Alabama, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/VHC/earnings",
-            "symbol": "VHC",
-            "company": "VirnetX Holding Corp",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/VICA/earnings",
-            "symbol": "VICA",
-            "company": "Rafina Innovations Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/VPRB/earnings",
-            "symbol": "VPRB",
-            "company": "VPR Brands, LP",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/WARM/earnings",
-            "symbol": "WARM",
-            "company": "Cool Technologies, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        },
-        {
-            "url": "https://seekingalpha.com/symbol/WVVI/earnings",
-            "symbol": "WVVI",
-            "company": "Willamette Valley Vineyards, Inc.",
-            "releaseDate": "08/16/2019",
-            "releaseTime": "Estimated",
-            "source": "seeking-alpha"
-        }
-    ],
-    "googleTrends": {
-        "symbols": [
-            "AAME",
-            "ACBM",
-            "ACLZ",
-            "AEZS",
-            "AFOM"
-        ],
-        "timelineData": [
-            {
-                "time": "1565049600",
-                "formattedTime": "Aug 6, 2019",
-                "formattedAxisTime": "Aug 6",
-                "value": [
-                    84,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "hasData": [
-                    true,
-                    true,
-                    true,
-                    true,
-                    true
-                ],
-                "formattedValue": [
-                    "84",
-                    "<1",
-                    "<1",
-                    "<1",
-                    "<1"
-                ]
-            },
-            {
-                "time": "1565136000",
-                "formattedTime": "Aug 7, 2019",
-                "formattedAxisTime": "Aug 7",
-                "value": [
-                    81,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "hasData": [
-                    true,
-                    true,
-                    true,
-                    true,
-                    true
-                ],
-                "formattedValue": [
-                    "81",
-                    "<1",
-                    "<1",
-                    "<1",
-                    "<1"
-                ]
-            },
-            {
-                "time": "1565222400",
-                "formattedTime": "Aug 8, 2019",
-                "formattedAxisTime": "Aug 8",
-                "value": [
-                    82,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "hasData": [
-                    true,
-                    true,
-                    true,
-                    true,
-                    true
-                ],
-                "formattedValue": [
-                    "82",
-                    "<1",
-                    "<1",
-                    "<1",
-                    "<1"
-                ]
-            },
-            {
-                "time": "1565308800",
-                "formattedTime": "Aug 9, 2019",
-                "formattedAxisTime": "Aug 9",
-                "value": [
-                    88,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "hasData": [
-                    true,
-                    true,
-                    true,
-                    true,
-                    true
-                ],
-                "formattedValue": [
-                    "88",
-                    "<1",
-                    "<1",
-                    "<1",
-                    "<1"
-                ]
-            },
-            {
-                "time": "1565395200",
-                "formattedTime": "Aug 10, 2019",
-                "formattedAxisTime": "Aug 10",
-                "value": [
-                    100,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "hasData": [
-                    true,
-                    false,
-                    true,
-                    true,
-                    true
-                ],
-                "formattedValue": [
-                    "100",
-                    "0",
-                    "<1",
-                    "<1",
-                    "<1"
-                ]
-            }
-        ]
-    },
+    "seekingAlphaEarningsDate": [],
     "yahooTickers": [
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/GE?p=GE",
             "company": "General Electric Company",
             "symbol": "GE",
-            "change": "-11.30%"
+            "change": "+6.93%"
         },
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/NVDA?p=NVDA",
             "company": "NVIDIA Corporation",
             "symbol": "NVDA",
-            "change": "-0.87%"
+            "change": "+6.60%"
         },
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/BYND?p=BYND",
             "company": "Beyond Meat, Inc.",
             "symbol": "BYND",
-            "change": "-11.48%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/AMAT?p=AMAT",
-            "company": "Applied Materials, Inc.",
-            "symbol": "AMAT",
-            "change": "+0.96%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/ALC?p=ALC",
-            "company": "Alcon, Inc.",
-            "symbol": "ALC",
-            "change": "+1.17%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/TPR?p=TPR",
-            "company": "Tapestry, Inc.",
-            "symbol": "TPR",
-            "change": "-22.20%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/SINT?p=SINT",
-            "company": "Sintx Technologies, Inc.",
-            "symbol": "SINT",
-            "change": "+23.73%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CELG?p=CELG",
-            "company": "Celgene Corporation",
-            "symbol": "CELG",
-            "change": "+0.45%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/WMT?p=WMT",
-            "company": "Walmart Inc.",
-            "symbol": "WMT",
-            "change": "+6.11%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/BGG?p=BGG",
-            "company": "Briggs & Stratton Corporation",
-            "symbol": "BGG",
-            "change": "-44.50%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/FIT?p=FIT",
-            "company": "Fitbit, Inc.",
-            "symbol": "FIT",
-            "change": "-6.77%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/PAGS?p=PAGS",
-            "company": "PagSeguro Digital Ltd.",
-            "symbol": "PAGS",
-            "change": "+1.57%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/SHAK?p=SHAK",
-            "company": "Shake Shack Inc.",
-            "symbol": "SHAK",
-            "change": "+7.09%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/DVN?p=DVN",
-            "company": "Devon Energy Corporation",
-            "symbol": "DVN",
-            "change": "-1.86%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/FCEL?p=FCEL",
-            "company": "FuelCell Energy, Inc.",
-            "symbol": "FCEL",
-            "change": "+12.54%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/MNK?p=MNK",
-            "company": "Mallinckrodt plc",
-            "symbol": "MNK",
-            "change": "-11.85%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/TDOC?p=TDOC",
-            "company": "Teladoc Health, Inc.",
-            "symbol": "TDOC",
-            "change": "-7.41%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/PCG?p=PCG",
-            "company": "PG&E Corporation",
-            "symbol": "PCG",
-            "change": "-9.67%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CTL?p=CTL",
-            "company": "CenturyLink, Inc.",
-            "symbol": "CTL",
-            "change": "-6.47%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CSIQ?p=CSIQ",
-            "company": "Canadian Solar Inc.",
-            "symbol": "CSIQ",
-            "change": "+12.04%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/%5EKS11?p=%5EKS11",
-            "company": "KOSPI Composite Index",
-            "symbol": "^KS11",
-            "change": "-0.75%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/WM?p=WM",
-            "company": "Waste Management, Inc.",
-            "symbol": "WM",
-            "change": "+1.90%"
+            "change": "-2.81%"
         },
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/DE?p=DE",
             "company": "Deere & Company",
             "symbol": "DE",
-            "change": "+0.38%"
+            "change": "+4.39%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/AVGO?p=AVGO",
-            "company": "Broadcom Inc.",
-            "symbol": "AVGO",
-            "change": "-1.08%"
+            "url": "https://finance.yahoo.com/quote/AMAT?p=AMAT",
+            "company": "Applied Materials, Inc.",
+            "symbol": "AMAT",
+            "change": "-4.16%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CURLF?p=CURLF",
-            "company": "Curaleaf Holdings, Inc.",
-            "symbol": "CURLF",
-            "change": "-7.24%"
+            "url": "https://finance.yahoo.com/quote/PSTV?p=PSTV",
+            "company": "Plus Therapeutics, Inc.",
+            "symbol": "PSTV",
+            "change": "+268.81%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/HUYA?p=HUYA",
-            "company": "HUYA Inc.",
-            "symbol": "HUYA",
-            "change": "+8.37%"
+            "url": "https://finance.yahoo.com/quote/QD?p=QD",
+            "company": "Qudian Inc.",
+            "symbol": "QD",
+            "change": "-3.22%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/QCOM?p=QCOM",
-            "company": "QUALCOMM Incorporated",
-            "symbol": "QCOM",
-            "change": "+0.40%"
+            "url": "https://finance.yahoo.com/quote/FCEL?p=FCEL",
+            "company": "FuelCell Energy, Inc.",
+            "symbol": "FCEL",
+            "change": "+13.69%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/AMT?p=AMT",
-            "company": "American Tower Corporation (REIT)",
-            "symbol": "AMT",
-            "change": "+2.43%"
+            "url": "https://finance.yahoo.com/quote/SDRL?p=SDRL",
+            "company": "Seadrill Limited",
+            "symbol": "SDRL",
+            "change": "+13.40%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/AXSM?p=AXSM",
-            "company": "Axsome Therapeutics, Inc.",
-            "symbol": "AXSM",
-            "change": "-14.13%"
+            "url": "https://finance.yahoo.com/quote/DDS?p=DDS",
+            "company": "Dillard's, Inc.",
+            "symbol": "DDS",
+            "change": "-1.96%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/BB?p=BB",
-            "company": "BlackBerry Limited",
-            "symbol": "BB",
-            "change": "-1.04%"
+            "url": "https://finance.yahoo.com/quote/IZEA?p=IZEA",
+            "company": "IZEA Worldwide, Inc.",
+            "symbol": "IZEA",
+            "change": "+17.87%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/PAGS?p=PAGS",
+            "company": "PagSeguro Digital Ltd.",
+            "symbol": "PAGS",
+            "change": "+11.26%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/KTOV?p=KTOV",
+            "company": "Kitov Pharma Ltd",
+            "symbol": "KTOV",
+            "change": "+10.00%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/SAEX?p=SAEX",
+            "company": "SAExploration Holdings, Inc.",
+            "symbol": "SAEX",
+            "change": "-37.30%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/JKHY?p=JKHY",
+            "company": "Jack Henry & Associates, Inc.",
+            "symbol": "JKHY",
+            "change": "+0.88%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/ALC?p=ALC",
+            "company": "Alcon, Inc.",
+            "symbol": "ALC",
+            "change": "+0.52%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/NBRV?p=NBRV",
+            "company": "Nabriva Therapeutics plc",
+            "symbol": "NBRV",
+            "change": "-0.46%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/TDOC?p=TDOC",
+            "company": "Teladoc Health, Inc.",
+            "symbol": "TDOC",
+            "change": "+5.46%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/NAT?p=NAT",
+            "company": "Nordic American Tankers Limited",
+            "symbol": "NAT",
+            "change": "0.00%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/EVOK?p=EVOK",
+            "company": "Evoke Pharma, Inc.",
+            "symbol": "EVOK",
+            "change": "+1.95%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/FIT?p=FIT",
+            "company": "Fitbit, Inc.",
+            "symbol": "FIT",
+            "change": "+1.04%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/KTOS?p=KTOS",
+            "company": "Kratos Defense & Security Solutions, Inc.",
+            "symbol": "KTOS",
+            "change": "+6.88%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/PCG?p=PCG",
+            "company": "PG&E Corporation",
+            "symbol": "PCG",
+            "change": "+2.50%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/AMD?p=AMD",
+            "company": "Advanced Micro Devices, Inc.",
+            "symbol": "AMD",
+            "change": "+3.88%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/TRXC?p=TRXC",
+            "company": "TransEnterix, Inc.",
+            "symbol": "TRXC",
+            "change": "+5.79%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/XBIO?p=XBIO",
+            "company": "Xenetic Biosciences, Inc.",
+            "symbol": "XBIO",
+            "change": "-1.23%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/F?p=F",
+            "company": "Ford Motor Company",
+            "symbol": "F",
+            "change": "-0.23%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/TROV?p=TROV",
+            "company": "TrovaGene, Inc.",
+            "symbol": "TROV",
+            "change": "+9.26%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/SHAK?p=SHAK",
+            "company": "Shake Shack Inc.",
+            "symbol": "SHAK",
+            "change": "+0.54%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/CTL?p=CTL",
+            "company": "CenturyLink, Inc.",
+            "symbol": "CTL",
+            "change": "+3.16%"
         }
     ],
     "seekingAlphaEarningsNews": [
         {
             "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492466-zto-express-eps-beats-0_02-beats-revenue",
+            "url": "https://seekingalpha.com/news/3492583-plus-therapeutics-114-percent-premarket",
+            "title": "Plus Therapeutics up 114% premarket",
+            "date": "Today, 9:23 AM•SA Editor Douglas W. House",
+            "description": "Ultra-thinly traded nano cap Plus Therapeutics (NASDAQ:PSTV) is up 114% premarket on robust volume after reporting Q2 results after the close yesterday that did not feature anything noteworthy to justify the action.In H2, it plans to initiate a Phase 2 study (assuming the FDA signs off on the protocol) evaluating DocePLUS in small cell lung cancer patients who have progressed after first-line chemo.On the working capital front, at the end of June it had $4.5M in cash and equivalents while operations consumed ($4.8M) in H1."
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492582-nordic-american-tankers-eps-misses-0_01-misses-revenue",
+            "title": "Nordic American Tankers EPS misses by $0.01, misses on revenue",
+            "date": "Today, 9:22 AM•SA Editor Vandana Singh",
+            "description": "Nordic American Tankers (NYSE:NAT): Q2 GAAP EPS of -$0.11 misses by $0.01.Revenue of $30.65M (+13.5% Y/Y) misses by $1.1M.Shares +5.14% PM.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492579-plus-therapeutics-113-percent-premarket-q2-results",
+            "title": "Plus Therapeutics up 113% premarket on Q2 results",
+            "date": "Today, 9:18 AM•Mamta Mayani",
+            "description": "Plus Therapeutics (PSTV) Q2 results: Revenues: $0.3M (-66.7%).Net loss: ($2.3M) (+0.9%); loss/share: ($5.12) (+72.4%); Quick Assets: $4.5M (-15.1%); CF Ops: ($4.8M) (+29.4%).Shares are up 113% premarket.Previously: Plus Therapeutics reports Q2 results (Aug. 16)"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492577-elev8-brands-reports-q1-results",
+            "title": "Elev8 Brands reports Q1 results",
+            "date": "Today, 9:16 AM•SA Editor Vandana Singh",
+            "description": "Elev8 Brands (OTCQB:VATE): Q1 Revenue of $0.37MPress Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492564-newcrest-minings-full-year-profit-pops-record-cadia-production",
+            "title": "Newcrest Mining's full year profit pops on record Cadia production",
+            "date": "Today, 8:58 AM•SA Editor Carl Surran",
+            "description": "Newcrest Mining (OTCPK:NCMGF) reports a 22% Y/Y increase in annual profit to $561M, helped by a weaker Australian dollar and strong gold and copper sales volumes at its flagship Cadia mine in New South Wales.Cadia reported record gold and copper production of 913K oz. and 91K mt respectively, but Newcrest forecasts FY 2020 gold output from Cadia will fall to 760K-840K oz. from 912.7K oz. produced in the latest fiscal year, due to lower grade of ore and maintenance activity at one  of its mills.The cut at Cadia prompts the miner to keep its  overall gold production outlook for FY 2020 largely unchanged at 2.35M-2.5M oz. compared with 2019, while expecting full-year total capex of $680M-$780M, slightly higher than in 2019.Newcrest says FY 2019 revenue rose to $3.7B from $3.5B in FY 2018, EBITDA increased to $1.6B from $1.5B, and all-in sustaining cost was $738/oz.Moody's calls the results strong and credit positive, saying Newcrest \"has one of the lowest cost positions amongst its peer group, enabling it to generate solid earnings and cash flow” even if gold prices retreat from recent highs."
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492556-greentree-hospitality-eps-beats-0_01-beats-revenue",
+            "title": "GreenTree Hospitality EPS beats by $0.01, beats on revenue",
+            "date": "Today, 8:33 AM•Niloofer Shaikh",
+            "description": "GreenTree Hospitality (NYSE:GHG): Q2 Non-GAAP EPADS of $0.18 beats by $0.01; GAAP EPADS of $0.18 in-line.Revenue of $40.05M beats by $0.57M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492550-ntg-clarity-networks-reports-q2-results",
+            "title": "NTG Clarity Networks reports Q2 results",
+            "date": "Today, 8:20 AM•Niloofer Shaikh",
+            "description": "NTG Clarity Networks (OTCPK:NYWKF): Q2 GAAP EPS of -C$0.005.Revenue of C$2.04M (-21.8% Y/Y).Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492548-imac-holdings-reports-q2-results",
+            "title": "IMAC Holdings reports Q2 results",
+            "date": "Today, 8:19 AM•Niloofer Shaikh",
+            "description": "IMAC Holdings (NASDAQ:IMAC): Q2 GAAP EPS of -$0.21.Revenue of $3.76M (+496.8% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492547-alternus-energy-reports-q2-results",
+            "title": "Alternus Energy reports Q2 results",
+            "date": "Today, 8:17 AM•Niloofer Shaikh",
+            "description": "Alternus Energy (OTCPK:ALTN): Q2 GAAP EPS of $0.02.Revenue of $0.93M (-4.1% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492542-franchise-holdings-international-reports-q2-results",
+            "title": "Franchise Holdings International reports Q2 results",
+            "date": "Today, 8:03 AM•SA Editor Gaurav Batavia",
+            "description": "Franchise Holdings International (OTCQB:FNHI): Q2 GAAP EPS of $0.00.Revenue of $0.52M (+271.4% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492537-newcrest-mining-reports-fy-results",
+            "title": "Newcrest Mining reports FY results",
+            "date": "Today, 7:54 AM•SA Editor Gaurav Batavia",
+            "description": "Newcrest Mining (OTCPK:NCMGF): FY net income of $561MRevenue of $3.74B (+5.1% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492533-sifco-reports-q3-results",
+            "title": "SIFCO reports Q3 results",
+            "date": "Today, 7:43 AM•Niloofer Shaikh",
+            "description": "SIFCO (NYSEMKT:SIF): Q3 GAAP EPS of -$1.32.Revenue of $24.87M (-13.3% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492527-auxly-cannabis-reports-q2-results",
+            "title": "Auxly Cannabis reports Q2 results",
+            "date": "Today, 7:33 AM•Niloofer Shaikh•2 Comments",
+            "description": "Auxly Cannabis (OTCQX:CBWTF): Q2 GAAP EPS of -$0.02.Revenue of $2.76MPress Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492521-qudian-plus-3_6-percent-q2-beats-reaffirms-guidance",
+            "title": "Qudian +3.6% after Q2 beats; reaffirms guidance",
+            "date": "Today, 7:23 AM•SA Editor Liz Kiesche•4 Comments",
+            "description": "Qudian (NYSE:QD) gains 3.6% in premarket trading after Q2 non-GAAP net income of 59 cents per ADS, beats the consensus estimate of 52 cents per ADS.Q2 non-GAAP net income of $168.8M increased 57% Y/Y.Q2 revenue of $323.5M, unchanged from a year ago, exceeds the average analyst estimate of $284.8M.Total number of registered users reached 76.0M at June 30, 2019, up 12% Y/Y.Number of outstanding borrowers from loan book business and transaction referral businesses increased to 6.1M at June 30, 2019, up 12% from 5.4M at March 31, 2019.Reaffirms guidance for full-year 2019 non-GAAP net income to exceed RMB 4.5B ($640M).Conference call at 8:00 AM ET.Previously: Qudian EPS beats by $0.07, beats on revenue (Aug. 16)"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492520-deere-minus-3-percent-another-trade-war-guidance-cut",
+            "title": "Deere -3% on another trade war guidance cut",
+            "date": "Today, 7:21 AM•SA Editor Yoel Minkoff•6 Comments",
+            "description": "Net income of $867M in the fiscal third quarter, or $2.71 per share, compared with $$849M, or $2.59 per share a year ago.Worldwide net sales decreased 3% Y/Y to $10B. Segment Sales: Equipment -3%; Agriculture & Turf. -6%; Construction & Forestry +1%.\"Results reflected the high degree of uncertainty that continues to overshadow the agricultural sector,\" CEO Samuel Allen declared. \"Concerns about export-market access, near-term demand for commodities such as soybeans, and overall crop conditions, have caused many farmers to postpone major equipment purchases.\"Lowered outlook again: Net sales are now projected to increase by about 4% (from a prior 5% and 7%) for fiscal 2019, with net income attributable to the company forecast to be about $3.2B (from a previous $3.3B and $3.6B).DE -2.9% premarketFQ3 results"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492512-qudian-eps-beats-0_07-beats-revenue",
+            "title": "Qudian EPS beats by $0.07, beats on revenue",
+            "date": "Today, 7:04 AM•SA Editor Gaurav Batavia•1 Comment",
+            "description": "Qudian (NYSE:QD): Q2 Non-GAAP EPS of $0.59 beats by $0.07; GAAP EPS of $0.58.Revenue of $323.5M (-1% Y/Y) beats by $38.72M.Shares +4.7% PM.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492501-ping-insurance-reports-1h-results",
+            "title": "Ping An Insurance reports 1H results",
+            "date": "Today, 6:36 AM•SA Editor Gaurav Batavia",
+            "description": "Ping An Insurance (OTCPK:PIAIF): 1H GAAP EPS of RMB0.75.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492500-deere-eps-misses-0_13-beats-revenue",
+            "title": "Deere EPS misses by $0.13, beats on revenue",
+            "date": "Today, 6:20 AM•SA Editor Mohit Manghnani",
+            "description": "Deere (NYSE:DE): Q3 Non-GAAP EPS of $2.71 misses by $0.13; GAAP EPS of $2.81 misses by $0.01.Total Revenue of $10.04B (-2.6% Y/Y) beats by $660M. Net sales (equipment operations) of $8.97B (-3% Y/Y).Shares -3% PM.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492499-xinyuan-real-estate-reports-q2-results",
+            "title": "Xinyuan Real Estate reports Q2 results",
+            "date": "Today, 6:02 AM•SA Editor Gaurav Batavia•5 Comments",
+            "description": "Xinyuan Real Estate (NYSE:XIN): Q2 GAAP EPS of $0.19.Revenue of $609.4M (+71.3% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492491-aurora-mobile-beats-revenue",
+            "title": "Aurora Mobile beats on revenue",
+            "date": "Today, 5:39 AM•Mamta Mayani",
+            "description": "Aurora Mobile (NASDAQ:JG): Q2 GAAP EPS of -$0.03.Revenue of $42.42M beats by $0.2M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492489-capital-art-reports-q2-results",
+            "title": "Capital Art reports Q2 results",
+            "date": "Today, 5:36 AM•Niloofer Shaikh",
+            "description": "Capital Art (OTCQB:GBPT): Q2 GAAP EPS of -$0.41.Revenue of $1.61M (+705.0% Y/Y).10-Q"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492488-solgold-plc-reports-q4-results",
+            "title": "SolGold plc reports Q4 results",
+            "date": "Today, 5:32 AM•Niloofer Shaikh",
+            "description": "SolGold plc (OTCPK:SLGGF): Q4 GAAP EPS of -$0.002.Press release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492482-nexus-reit-reports-q2-results",
+            "title": "Nexus REIT reports Q2 results",
+            "date": "Today, 3:30 AM•Mamta Mayani",
+            "description": "Nexus REIT (OTC:EFRTF): Q2 FFO of $0.05Revenue of $15M (+14.3% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492481-opus-group-ab-publ-reports-q2-results",
+            "title": "Opus Group AB (publ) reports Q2 results",
+            "date": "Today, 3:21 AM•Mamta Mayani",
+            "description": "Opus Group AB (publ) (OTC:OPPXF): Q2 net income of SEK19MRevenue of SEK708M (+8.8% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492480-itafos-eps-misses-0_10-beats-revenue",
+            "title": "Itafos EPS misses by $0.10, beats on revenue",
+            "date": "Today, 3:20 AM•Mamta Mayani",
+            "description": "Itafos (OTCPK:MBCFF): Q2 GAAP EPS of -$0.15 misses by $0.10.Revenue of $103.07M (+53.4% Y/Y) beats by $24.63M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492479-costar-technologies-reports-q2-results",
+            "title": "Costar Technologies reports Q2 results",
+            "date": "Today, 3:19 AM•Mamta Mayani",
+            "description": "Costar Technologies (OTCPK:CSTI): Q2 Non-GAAP EPS of $0.60; GAAP EPS of $0.35.Revenue of $0.02MPress Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492478-conrad-reports-q2-results",
+            "title": "Conrad reports Q2 results",
+            "date": "Today, 3:13 AM•Mamta Mayani•1 Comment",
+            "description": "Conrad (OTCPK:CNRD): Q2 GAAP EPS of -$0.44.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492477-plus-therapeutics-reports-q2-results",
+            "title": "Plus Therapeutics reports Q2 results",
+            "date": "Today, 3:10 AM•Mamta Mayani•1 Comment",
+            "description": "Plus Therapeutics (NASDAQ:PSTV): Q2 GAAP EPS of -$5.12.Revenue of $0.3M (-66.7% Y/Y)Press Release10Q"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/3492466-zto-express-eps-beats-0_02-beats-revenue",
             "title": "ZTO Express EPS beats by $0.02, beats on revenue",
-            "date": "Today, 6:05 PM•Akanksha Bakshi•3 Comments",
+            "date": "Yesterday, 6:05 PM•Akanksha Bakshi•4 Comments",
             "description": "ZTO Express (NYSE:ZTO): Q2 GAAP EPS of $0.25 beats by $0.02.Revenue of $790.04M (+29.5% Y/Y) beats by $9.33M.Press Release"
         },
         {
             "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492462-galane-gold-reports-q2-results",
+            "url": "https://seekingalpha.com/news/3492462-galane-gold-reports-q2-results",
             "title": "Galane Gold reports Q2 results",
-            "date": "Today, 5:44 PM•SA Editor Vandana Singh",
+            "date": "Yesterday, 5:44 PM•SA Editor Vandana Singh",
             "description": "Galane Gold (OTCQB:GGGOF): Q2 GAAP EPS of $0.00.Revenue of $11.42M (-13.3% Y/Y)Financial StatementPress Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492461-sundance-energy-australia-misses-revenue",
-            "title": "Sundance Energy Australia misses on revenue",
-            "date": "Today, 5:41 PM•SA Editor Vandana Singh",
-            "description": "Sundance Energy Australia (NASDAQ:SNDE): Q2 net income of $3.8MRevenue of $52.9M (+84.1% Y/Y) misses by $1.11M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492312-deere-q3-2019-earnings-preview",
-            "title": "Deere Q3 2019 Earnings Preview",
-            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
-            "description": "Deere (NYSE:DE) is scheduled to announce Q3 earnings results on Friday, August 16th, before market open.The consensus EPS Estimate is $2.84 (+9.7% Y/Y) and the consensus Revenue Estimate is $9.38B (+1.0% Y/Y).Over the last 2 years, Deere has beaten EPS estimates 38% of the time and has beaten revenue estimates 50% of the time.Over the last 3 months, EPS estimates have seen 0 upward revisions and 18 downward. Revenue estimates have seen 1 upward revision  and 7 downward.Recent earnings Analysis from our contributors:Will Deere Remain In Its Range After Earnings?"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492314-qudian-q2-2019-earnings-preview",
-            "title": "Qudian Q2 2019 Earnings Preview",
-            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
-            "description": "Qudian (NYSE:QD) is scheduled to announce Q2 earnings results on Friday, August 16th, before market open.The consensus EPS Estimate is $0.52 (+52.9% Y/Y) and the consensus Revenue Estimate is $284.78M (-16.0% Y/Y).Over the last 1 year, Qudian has beaten EPS estimates 100% of the time and has beaten revenue estimates 25% of the time.Over the last 3 months, EPS estimates have seen 3 upward revisions and 0 downward. Revenue estimates have seen 0 upward revisions  and 1 downward."
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492241-notable-earnings-friday-s-open",
-            "title": "Notable earnings before Friday’s open",
-            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
-            "description": "DE, QDFor Seeking Alpha's full earnings season calendar, click here."
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492454-pagseguro-eps-misses-r-0_07-beats-revenue",
-            "title": "PagSeguro EPS misses by R$0.07, beats on revenue",
-            "date": "Today, 5:22 PM•SA Editor Pranav Ghumatkar",
-            "description": "PagSeguro (NYSE:PAGS): Q2 GAAP EPS of R$0.9805 misses by R$0.07.Revenue of R$1.39B (+39.0% Y/Y) beats by R$60M.Shares +7.5% AH.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492445-flowr-eps-beats-0_11-misses-revenue",
-            "title": "Flowr EPS beats by $0.11, misses on revenue",
-            "date": "Today, 5:07 PM•SA Editor Pranav Ghumatkar•1 Comment",
-            "description": "Flowr (OTCPK:FLWPF): Q2 GAAP EPS of $0.08 beats by $0.11.Revenue of $2.18M misses by $4.22M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492442-international-isotopes-reports-q2-results",
-            "title": "International Isotopes reports Q2 results",
-            "date": "Today, 5:03 PM•SA Editor Vandana Singh",
-            "description": "International Isotopes (OTCQB:INIS): Q2 GAAP EPS of $0.00.Revenue of $2.14M (-10.5% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492435-americas-car-mart-eps-beats-0_48-misses-revenue",
-            "title": "America's Car-Mart EPS beats by $0.48, misses on revenue",
-            "date": "Today, 5:00 PM•Akanksha Bakshi",
-            "description": "America's Car-Mart (NASDAQ:CRMT): Q1 GAAP EPS of $2.21 beats by $0.48.Revenue of $171.88M (+4.8% Y/Y) misses by $3.46M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492434-dillards-minus-13_4-percent-sales-miss-q2",
-            "title": "Dillard's -13.4% after sales miss in Q2",
-            "date": "Today, 4:57 PM•Jason Aycock•3 Comments",
-            "description": "Dillard's (NYSE:DDS) has slipped 13.4% after hours after its sales fell short of low estimates in Q2 earnings.That would mark its lowest price point since spring 2017.    Net sales fell to $1.43B, and total merchandise sales dropped 2% to $1.38B. Comparable-store sales also dropped 2%.    Above-trend performances came in juniors and children's apparel, men's apparel/accessories and home/furniture, the company says; weakness was in ladies' apparel and ladies' accessories and lingerie.    Retail gross margin dropped 319 basis points. Inventory was unchanged on a percentage basis Y/Y.    Net loss swelled to $40.7M vs. a year-ago loss of $2.9M, even including a pretax gain of $4.9M on sale of a store property.    Press release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492432-accuray-soft-2020-guidance-pressures-shares-5-percent-hours",
-            "title": "Accuray soft 2020 guidance pressures shares, down 5% after hours",
-            "date": "Today, 4:55 PM•SA Editor Douglas W. House",
-            "description": "Accuray (NASDAQ:ARAY) fiscal Q4 results:Revenue: $117.4 (+3%); product sales: $60.6M (+11%).Net loss: ($1.4M); loss/share: ($0.02).Non-GAAP EBITDA: $8.9M (+14%).Fiscal 2020 guidance: Revenue: $410M - 420M (-1% at midpoint); non-GAAP EBITDA: $19M - 24M (-9% at midpoint) citing the impact of Chinese tariffs.Shares down 5% after hours.Previously: Accuray EPS misses by $0.04, beats on revenue (Aug. 15)"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492428-adecoagro-misses-revenue",
-            "title": "Adecoagro misses on revenue",
-            "date": "Today, 4:47 PM•Akanksha Bakshi",
-            "description": "Adecoagro (NYSE:AGRO): Q2 Net income of $23.26M.Revenue of $209.86M (+1.7% Y/Y) misses by $42.04M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492423-altura-energy-reports-q2-results",
-            "title": "Altura Energy reports Q2 results",
-            "date": "Today, 4:39 PM•SA Editor Vandana Singh",
-            "description": "Altura Energy (OTC:ATUUF): Q2 GAAP EPS of C$0.01.Revenue of C$6.53M (+45.4% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492415-rise-education-eps-beats-0_01-beats-revenue",
-            "title": "RISE Education EPS beats by $0.01, beats on revenue",
-            "date": "Today, 4:33 PM•Akanksha Bakshi",
-            "description": "RISE Education (NASDAQ:REDU): Q2 Non-GAAP EPS of $0.14 beats by $0.01; GAAP EPS of $0.05 misses by $0.07.Revenue of $53.47M (+22.3% Y/Y) beats by $0.43M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492413-dillards-eps-1_59",
-            "title": "Dillard's EPS of -$1.59",
-            "date": "Today, 4:32 PM•SA Editor Jignesh Mehta•1 Comment",
-            "description": "Dillard's (NYSE:DDS): Q2 EPS of -$1.59 may not be comparable to consensus of -$0.77.Revenue of $1.46B (-2.7% Y/Y) misses by $20M.Shares -6%.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492407-cordy-oilfield-services-reports-q2-results",
-            "title": "Cordy Oilfield Services reports Q2 results",
-            "date": "Today, 4:25 PM•SA Editor Pranav Ghumatkar",
-            "description": "Cordy Oilfield Services (OTC:CKKFF): Q2 Net income of $0.09M.Revenue of $3.64M (+9.6% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492406-viavi-plus-3_2-percent-q4-growth",
-            "title": "Viavi +3.2% after Q4 growth",
-            "date": "Today, 4:24 PM•Jason Aycock•1 Comment",
-            "description": "Viavi Solutions (NASDAQ:VIAV) is up 3.2% after hours following its fiscal Q4 earnings beat on top and bottom lines alongside double-digit gains in revenue.    \"5G Wireless, Fiber and 3D Sensing were strong contributors to our overall fiscal 2019 revenue and non-GAAP operating margin performance,\" says CEO Oleg Khaykin.    For Q4, net revenue was $289.7M (up 11%, and up 9.2% sequentially). Operating margin was 17.6%, up 460 basis points.    And non-GAAP EPS from continuing operations rose 42% to $0.17.    Revenue by segment: Network Enablement, $197.3M (up 10.2%); Service Enablement, $24.1M (down 15.4%); Optical Security and Performance Products, $68.3M (up 28.4%).    At quarter's end, liquidity was $526.5M. Cash from operations was $28.5M for the quarter.    For fiscal Q1, it's forecasting net revenue of $273M-$293M (vs. consensus for $282.3M), and EPS of $0.14-$0.16 (in line with expectations for $0.15).    Conference call to come at 4:30 p.m. ET.    Press release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492405-flame-seal-products-reports-q2-results",
-            "title": "Flame Seal Products reports Q2 results",
-            "date": "Today, 4:23 PM•SA Editor Vandana Singh",
-            "description": "Flame Seal Products (OTCPK:FLMP): Q2 net loss of $0.068MRevenue of $0.58M (~-1% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492404-aspen-insurance-holdings-reports-1h-results",
-            "title": "Aspen Insurance Holdings reports 1H results",
-            "date": "Today, 4:22 PM•SA Editor Pranav Ghumatkar",
-            "description": "Aspen Insurance Holdings (NYSE:AHL): 1H Retained loss of $51.3M.Net written premiums of $1.21B (+8.0% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492403-north-european-oil-royalty-trust-reports-q3-results",
-            "title": "North European Oil Royalty Trust reports Q3 results",
-            "date": "Today, 4:21 PM•SA Editor Vandana Singh",
-            "description": "North European Oil Royalty Trust (NYSE:NRT): Q3 net income of $2.02MTotal royalty income of $2.15MPress Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492402-nvidia-eps-beats-0_09-beats-revenue",
-            "title": "Nvidia EPS beats by $0.09, beats on revenue",
-            "date": "Today, 4:21 PM•SA Editor Jignesh Mehta•55 Comments",
-            "description": "Nvidia (NASDAQ:NVDA): Q2 Non-GAAP EPS of $1.24 beats by $0.09; GAAP EPS of $0.90 beats by $0.07.Revenue of $2.58B (-17.3% Y/Y) beats by $30M.Shares +4%.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492397-globant-eps-beats-0_01-revenue-line",
-            "title": "Globant EPS beats by $0.01, revenue in-line",
-            "date": "Today, 4:19 PM•SA Editor Vandana Singh•2 Comments",
-            "description": "Globant (NYSE:GLOB): Q2 Non-GAAP EPS of $0.53 beats by $0.01; GAAP EPS of $0.36 misses by $0.05.Revenue of $157.5M (+23.2% Y/Y) in-line.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492396-voxeljet-ag-reports-q2-results",
-            "title": "Voxeljet AG reports Q2 results",
-            "date": "Today, 4:18 PM•SA Editor Jignesh Mehta•2 Comments",
-            "description": "Voxeljet AG (NYSE:VJET): Q2 GAAP EPS of -€0.79.Revenue of €5.05M (-4.0% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492387-broadvision-reports-q2-results",
-            "title": "BroadVision reports Q2 results",
-            "date": "Today, 4:14 PM•SA Editor Vandana Singh",
-            "description": "BroadVision (NASDAQ:BVSN): Q2 GAAP EPS of -$0.06.Revenue of $0.93M (-25.0% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492385-applied-materials-plus-3-percent-beats-line-guide",
-            "title": "Applied Materials +3% on beats, in-line guide",
-            "date": "Today, 4:14 PM•SA Editor Brandy Betz•2 Comments",
-            "description": "Applied Materials (NASDAQ:AMAT) gains 3.2% after Q3 beats with revenue down 14% Y/Y. In-line Q4 guidance expects revenue of $3.535-3.835 (consensus: $3.66B) and EPS of $0.72-0.80 (consensus: $0.76).Revenue breakdown: Semi Systems, $2.27B (consensus: $2.17B); Applied Global Services, $931M (consensus: $998.9M); Display and Adjacent Markets, $339M (consensus: $349M).Gross margin was 44% compared to the 43.7% consensus. Operating margin was 23% compared to 22.5%.Earnings call starts at 4:30 PM ET with a webcast here.Press release."
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492384-sinovac-biotech-reports-q2-results",
-            "title": "Sinovac Biotech reports Q2 results",
-            "date": "Today, 4:09 PM•Akanksha Bakshi",
-            "description": "Sinovac Biotech (NASDAQ:SVA): Q2 Non-GAAP EPS of $0.12; GAAP EPS of $0.11.Revenue of $64.05M (-14.8% Y/Y)Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492382-accuray-eps-misses-0_04-beats-revenue",
-            "title": "Accuray EPS misses by $0.04, beats on revenue",
-            "date": "Today, 4:06 PM•SA Editor Pranav Ghumatkar•3 Comments",
-            "description": "Accuray (NASDAQ:ARAY): Q4 GAAP EPS of -$0.02 misses by $0.04.Revenue of $117.42M (+3.2% Y/Y) beats by $1.05M.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492378-applied-materials-eps-beats-0_04-beats-revenue",
-            "title": "Applied Materials EPS beats by $0.04, beats on revenue",
-            "date": "Today, 4:04 PM•SA Editor Jignesh Mehta•2 Comments",
-            "description": "Applied Materials (NASDAQ:AMAT): Q3 Non-GAAP EPS of $0.74 beats by $0.04; GAAP EPS of $0.61 misses by $0.09.Revenue of $3.56B (-14.4% Y/Y) beats by $30M.Shares +0.93%.Press Release"
-        },
-        {
-            "source": "seeking-alpha",
-            "url": "https://seekingalpha.com/news/news/3492377-viavi-solutions-eps-beats-0_02-beats-revenue",
-            "title": "Viavi Solutions EPS beats by $0.02, beats on revenue",
-            "date": "Today, 4:02 PM•SA Editor Jignesh Mehta",
-            "description": "Viavi Solutions (NASDAQ:VIAV): Q4 Non-GAAP EPS of $0.17 beats by $0.02; GAAP EPS of $0.05 misses by $0.01.Revenue of $289.7M (+11.1% Y/Y) beats by $10.52M.Press Release"
         }
     ],
     "businessInsiderNews": [
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/interestrates/malaysia-s-growth-accelerates-in-q2-1028451434",
-            "title": "Malaysia's Growth Accelerates In Q2",
-            "date": "RTTNews  17m"
+            "url": "https://markets.businessinsider.com/news/stocks/apple-iphone-11-leak-claims-to-reveal-september-release-date-2019-8-1028452933",
+            "title": "The date of Apple's big iPhone 11 announcement may have just leaked (AAPL)",
+            "date": "Business Insider  4m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/tyson-foods-recalls-39-078-pounds-of-weaver-brand-frozen-chicken-patty-product-1028451433",
-            "title": "Tyson Foods Recalls 39,078 Pounds Of Weaver Brand Frozen Chicken Patty Product",
-            "date": "RTTNews  19m"
+            "url": "https://markets.businessinsider.com/news/stocks/placeme-acquires-bedly-s-boston-portfolio-to-become-the-largest-co-living-company-in-boston-1028452937",
+            "title": "PlaceMe Acquires Bedly's Boston Portfolio To Become The Largest Co-living Company In Boston",
+            "date": "PR Newswire  6m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/crypto-com-lists-tezos-xtz-1028451423",
-            "title": "Crypto.com Lists Tezos XTZ",
-            "date": "PR Newswire  22m"
+            "url": "https://markets.businessinsider.com/news/stocks/top-tips-that-will-help-drivers-save-money-on-car-insurance-1028452934",
+            "title": "Top Tips That Will Help Drivers Save Money On Car Insurance",
+            "date": "PR Newswire  6m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/crypto-com-lists-tezos-xtz-1028451409",
-            "title": "Crypto.com Lists Tezos XTZ",
-            "date": "PR Newswire  28m"
+            "url": "https://markets.businessinsider.com/news/stocks/fanwide-the-sports-fan-club-network-adds-former-adidas-executive-lawrence-norman-as-an-advisor-1028452938",
+            "title": "FanWide, the Sports Fan Club Network,\u202fadds\u202fFormer adidas Executive Lawrence Norman as an Advisor",
+            "date": "PR Newswire  9m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/amtrak-offers-50-off-national-travel-with-september-sale-1028451401",
-            "title": "Amtrak Offers 50% Off National Travel with September Sale",
+            "url": "https://markets.businessinsider.com/news/stocks/iiroc-trade-resumption-je-1028452936",
+            "title": "IIROC Trade Resumption - JE",
+            "date": "PR Newswire  9m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/iiroc-trade-resumption-je-1028452939",
+            "title": "IIROC Trade Resumption - JE",
+            "date": "PR Newswire  9m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/central-puerto-adjusted-ebitda-for-2q2019-including-full-brigadier-l-pez-plant-operations-supplemental-information-to-second-quarter-2019-press-release-1028452928",
+            "title": "Central Puerto: Adjusted EBITDA for 2Q2019 Including Full Brigadier López Plant Operations - Supplemental Information to Second Quarter 2019 Press Release",
+            "date": "Businesswire  11m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/afar-media-launches-afar-advisor-for-luxury-travel-advisors-1028452935",
+            "title": "AFAR Media Launches AFAR Advisor for Luxury Travel Advisors",
+            "date": "PR Newswire  11m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/iiroc-trading-halt-je-1028452900",
+            "title": "IIROC Trading Halt - JE",
+            "date": "PR Newswire  13m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/iiroc-trading-halt-je-1028452902",
+            "title": "IIROC Trading Halt - JE",
+            "date": "PR Newswire  13m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/copart-expands-atlanta-east-georgia-location-1028452905",
+            "title": "Copart Expands Atlanta East, Georgia Location",
+            "date": "PR Newswire  13m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/investigation-report-november-2018-possible-bottom-contact-of-the-bulk-carrier-maccoa-near-kahnawake-quebec-1028452921",
+            "title": "Investigation report: November 2018 possible bottom contact of the bulk carrier Maccoa near Kahnawake, Quebec",
+            "date": "PR Newswire  13m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/investigation-report-november-2018-possible-bottom-contact-of-the-bulk-carrier-maccoa-near-kahnawake-quebec-1028452929",
+            "title": "Investigation report: November 2018 possible bottom contact of the bulk carrier Maccoa near Kahnawake, Quebec",
+            "date": "PR Newswire  13m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/mcdonalds-taco-bell-burger-king-most-popular-items-history-2019-8-1028452884",
+            "title": "These are the fast-food items people were obsessed with the year you were born",
+            "date": "Business Insider  14m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/form-8-3-chelverton-uk-dividend-trust-plc-accesso-technology-group-plc-1028452896",
+            "title": "Form 8.3 - Chelverton UK Dividend Trust plc: Accesso Technology Group Plc",
+            "date": "EQS Group  14m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/discover-and-verve-mark-launch-of-verve-global-card-with-first-transaction-event-1028452886",
+            "title": "Discover and Verve Mark Launch of Verve Global Card With First Transaction Event",
+            "date": "Businesswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/arm-hammer-to-give-away-100-000-to-deserving-coaches-nationwide-1028452895",
+            "title": "ARM & HAMMER to Give Away $100,000 to Deserving Coaches Nationwide",
+            "date": "GlobeNewswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/the-dvi-group-named-on-inc-magazine-s-annual-list-of-america-s-fastest-growing-private-companies-the-inc-5000-1028452903",
+            "title": "The DVI Group Named on Inc. Magazine's Annual List of America's Fastest-Growing Private Companies--the Inc. 5000",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/growfit-analytics-announces-general-availability-of-its-canna-tech-data-analytics-solutions-for-cannabis-growers-1028452904",
+            "title": "GrowFit Analytics Announces General Availability of Its Canna-tech Data Analytics Solutions for Cannabis Growers",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/dom-tom-becomes-a-6-time-inc-5000-honoree-1028452907",
+            "title": "Dom & Tom Becomes A 6-Time Inc. 5000 Honoree",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/thrive-internet-marketing-agency-named-to-inc-5000-list-of-fastest-growing-companies-in-america-for-third-consecutive-year-1028452909",
+            "title": "Thrive Internet Marketing Agency Named to Inc. 5000 List of Fastest-Growing Companies in America for Third Consecutive Year",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/v3gate-appears-on-the-inc-5000-for-the-4th-time-ranking-no-752-with-three-year-revenue-growth-of-581-percent-1028452908",
+            "title": "V3Gate Appears on the Inc. 5000 for the 4th Time, Ranking No. 752 With Three-Year Revenue Growth of 581 Percent",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/tightening-credit-management-third-party-collections-augment-bank-card-issuers-strategies-to-control-loss-1028452911",
+            "title": "Tightening Credit Management: Third Party Collections Augment Bank Card Issuers' Strategies to Control Loss",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/norvergence-s-environmental-research-got-published-on-4-renowned-websites-1028452913",
+            "title": "Norvergence's Environmental Research Got Published on 4 Renowned Websites",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/uscf-announces-fee-reduction-on-their-exchange-traded-funds-tickers-sdci-buy-buyn-1028452915",
+            "title": "USCF Announces Fee Reduction On Their Exchange Traded Funds (Tickers: SDCI, BUY, BUYN)",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/calibre-systems-inc-strengthens-growth-team-adds-sylvester-cotton-as-vice-president-1028452912",
+            "title": "CALIBRE Systems, Inc. Strengthens Growth Team, adds Sylvester Cotton as Vice President",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/cheval-m-a-inc-cheval-capital-inc-complete-500th-hosting-cloud-internet-services-transaction-1028452917",
+            "title": "Cheval M&A, Inc. & Cheval Capital, Inc. complete 500th Hosting, Cloud & Internet Services Transaction",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/community-invited-to-journey-to-wellness-community-health-fair-1028452918",
+            "title": "Community Invited to Journey to Wellness Community Health Fair",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/live-celebrates-25-years-of-throwing-copper-with-sonically-charged-limited-edition-vinyl-release-1028452919",
+            "title": "+LIVE+ Celebrates 25 Years Of Throwing Copper With Sonically-Charged Limited Edition Vinyl Release",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/europe-data-centre-trends-tracker-report-2019-2nd-edition-1028452920",
+            "title": "Europe Data Centre Trends Tracker Report 2019, 2nd Edition",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/fiftyfifty-teams-with-beijing-hey-pal-on-global-brewing-collaboration-1028452923",
+            "title": "FiftyFifty teams with Beijing Hey Pal on Global Brewing Collaboration",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/bronstein-gewirtz-grossman-llc-announces-investigation-of-farfetch-ltd-ftch-1028452922",
+            "title": "Bronstein, Gewirtz & Grossman, LLC Announces Investigation of Farfetch Ltd. (FTCH)",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/high-school-football-scores-from-scorestream-coming-to-amazon-alexa-1028452927",
+            "title": "High School Football Scores from ScoreStream Coming to Amazon Alexa",
+            "date": "PR Newswire  16m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/canada-lands-company-appoints-neil-jones-as-executive-vice-president-attractions-1028452879",
+            "title": "Canada Lands Company appoints Neil Jones as Executive Vice President, Attractions",
+            "date": "PR Newswire  21m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/therabis-debuts-new-product-at-largest-pet-industry-trade-show-in-north-america-1028452876",
+            "title": "Therabis debuts new product at largest pet industry trade show in North America",
+            "date": "PR Newswire  23m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/sysco-sygma-kc-workers-choose-teamsters-local-955-1028452880",
+            "title": "Sysco Sygma-KC Workers Choose Teamsters Local 955",
+            "date": "PR Newswire  23m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/the-government-of-canada-supports-community-action-to-protect-and-conserve-freshwater-resources-1028452883",
+            "title": "The Government of Canada supports community action to protect and conserve freshwater resources",
+            "date": "PR Newswire  27m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/the-government-of-canada-supports-community-action-to-protect-and-conserve-freshwater-resources-1028452882",
+            "title": "The Government of Canada supports community action to protect and conserve freshwater resources",
+            "date": "PR Newswire  27m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/fda-approves-treatment-for-patients-with-rare-bone-marrow-disorder-1028452860",
+            "title": "FDA approves treatment for patients with rare bone marrow disorder",
+            "date": "PR Newswire  30m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/allstate-car-insurance-affordable-perks-2019-8-1028452854",
+            "title": "I comparison shop for car insurance every 6 months, but I like Allstate so much I haven't switched insurers for 3 years",
+            "date": "Business Insider  31m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/new-zealand-contact-center-applications-market-forecast-to-2024-mainstream-focus-on-resource-optimization-and-customer-insights-will-boost-growth-1028452859",
+            "title": "New Zealand Contact Center Applications Market Forecast to 2024: Mainstream Focus on Resource Optimization and Customer Insights will Boost Growth",
+            "date": "PR Newswire  31m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/registration-is-open-for-the-2019-international-code-council-annual-conference-code-hearings-and-expo-1028452894",
+            "title": "Registration is open for the 2019 International Code Council Annual Conference, Code Hearings and Expo",
+            "date": "GlobeNewswire  31m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/youtuber-finds-gun-changes-gaming-channel-videos-2019-8-1028452841",
+            "title": "When a gaming YouTuber found a gun while scuba diving, he decided to completely change his type of videos. Now he has 8.7 million subscribers.",
+            "date": "Business Insider  36m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/mini-retirement-advice-savings-tips-to-stay-on-track-2019-8-1028452840",
+            "title": "How to tell you're on track for a mini-retirement, according to 2 people who have taken a break from their careers to travel",
+            "date": "Business Insider  37m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/bonds/duncan-funding-2015-1-plc-moody-s-upgrades-nine-ratings-in-seven-uk-prime-rmbs-transactions-1028452865",
+            "title": "Duncan Funding 2015-1 plc -- Moody's upgrades nine ratings in seven UK prime RMBS transactions",
+            "date": "Moodys  37m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/dgap-pvr-zooplus-ag-release-according-to-article-40-section-1-of-the-wphg-the-german-securities-trading-act-with-the-objective-of-europe-wide-distribution-1028452842",
+            "title": "DGAP-PVR: zooplus AG: Release according to Article 40, Section 1 of the WpHG [the German Securities Trading Act] with the objective of Europe-wide distribution",
+            "date": "EQS Group  37m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/dtp-vaccine-associated-with-increased-rate-of-total-mortality-in-low-income-countries-says-peter-gøtzsche-in-new-expert-report-1028452847",
+            "title": "DTP Vaccine Associated with Increased Rate of Total Mortality in Low-Income Countries Says Peter Gøtzsche in New Expert Report",
             "date": "PR Newswire  39m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/nrd-llc-providing-static-control-solutions-to-70-000-attendees-and-exhibitors-at-sema-2019-1028451402",
-            "title": "NRD, LLC Providing Static Control Solutions to 70,000 Attendees and Exhibitors at SEMA 2019",
-            "date": "PR Newswire  40m"
+            "url": "https://markets.businessinsider.com/news/stocks/form-8-3-the-vanguard-group-inc-allergan-plc-1028452844",
+            "title": "Form 8.3 - The Vanguard Group, Inc.: Allergan plc",
+            "date": "EQS Group  40m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/saexploration-announces-sec-investigation-establishment-of-special-committee-restatement-of-historical-financial-statements-appointment-of-interim-cfo-1028451403",
-            "title": "SAExploration Announces SEC Investigation; Establishment of Special Committee; Restatement of Historical Financial Statements; Appointment of Interim CFO",
-            "date": "PR Newswire  41m"
+            "url": "https://markets.businessinsider.com/news/stocks/dgap-pvr-zooplus-ag-correction-of-a-release-from-09-03-2018-according-to-article-40-section-1-of-the-wphg-the-german-securities-trading-act-with-the-objective-of-europe-wide-distribution-1028452824",
+            "title": "DGAP-PVR: zooplus AG: Correction of a release from 09/03/2018 according to Article 40, Section 1 of the WpHG [the German Securities Trading Act] with the objective of Europe-wide distribution",
+            "date": "EQS Group  42m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/interestrates/european-economics-preview-eurozone-foreign-trade-data-due-1028451392",
-            "title": "European Economics Preview: Eurozone Foreign Trade Data Due",
-            "date": "RTTNews  54m"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/asian-markets-mostly-lower-1028451358",
-            "title": "Asian Markets Mostly Lower",
-            "date": "RTTNews  1h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/interestrates/rbnz-chief-low-domestic-inflation-expectations-reason-for-low-rate-1028451356",
-            "title": "RBNZ Chief: Low Domestic Inflation Expectations Reason For Low Rate",
-            "date": "RTTNews  1h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/construction-resources-further-promotes-industry-development-1028451340",
-            "title": "Construction Resources Further Promotes Industry Development",
-            "date": "PR Newswire  2h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/fsis-recall-release-084-2019-foreign-material-1028451342",
-            "title": "FSIS Recall Release 084-2019 Foreign Material",
-            "date": "GlobeNewswire  2h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/niccolo-chengdu-s-simon-wang-honoured-by-wharf-hotels-with-president-s-appreciation-award-1028451339",
-            "title": "Niccolo Chengdu's Simon Wang honoured by Wharf Hotels with President's Appreciation Award",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/defacement-of-war-of-1812-memorials-highlights-need-for-professional-security-says-spear-security-inc-1028451335",
-            "title": "Defacement of War of 1812 Memorials Highlights Need for Professional Security, says Spear Security Inc.",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/high-end-limousine-service-is-the-ground-travel-choice-for-travelers-who-want-to-treat-themselves-says-kls-worldwide-chauffeured-services-1028451337",
-            "title": "High-End Limousine Service is the Ground Travel Choice for Travelers Who Want to Treat Themselves, says KLS Worldwide Chauffeured Services",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/modern-dentistry-not-traditional-cures-offers-the-best-treatment-for-dental-ailments-says-santa-clarita-valley-dental-care-1028451334",
-            "title": "Modern Dentistry, Not Traditional Cures, Offers the Best Treatment for Dental Ailments, Says Santa Clarita Valley Dental Care",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/niccolo-chengdu-s-simon-wang-honoured-by-wharf-hotels-with-president-s-appreciation-award-1028451338",
-            "title": "Niccolo Chengdu's Simon Wang honoured by Wharf Hotels with President's Appreciation Award",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/japanese-market-pares-losses-1028451333",
-            "title": "Japanese Market Pares Losses",
-            "date": "RTTNews  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/donor-concierge-launches-private-client-services-for-discerning-ivf-patients-1028451332",
-            "title": "Donor Concierge launches Private Client services for discerning IVF patients",
-            "date": "PR Newswire  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/hong-kong-bourse-may-add-to-its-winnings-1028451331",
-            "title": "Hong Kong Bourse May Add To Its Winnings",
-            "date": "RTTNews  3h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/see-shareholder-alert-research-firm-accuses-sealed-air-corporation-see-of-abusing-non-gaap-measures-1028451330",
-            "title": "SEE Shareholder Alert: Research Firm Accuses Sealed Air Corporation (SEE) Of Abusing Non-GAAP Measures",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/australian-market-little-changed-1028451325",
-            "title": "Australian Market Little Changed",
-            "date": "RTTNews  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/china-stock-market-may-extend-winning-streak-1028451324",
-            "title": "China Stock Market May Extend Winning Streak",
-            "date": "RTTNews  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/miami-injury-attorneys-gary-d-fox-david-w-bianchi-stephen-f-cain-included-in-2020-edition-of-the-best-lawyers-in-america-1028451328",
-            "title": "Miami Injury Attorneys Gary D. Fox, David W. Bianchi & Stephen F. Cain Included in 2020 Edition of The Best Lawyers in America©",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/helix-linear-launches-new-telescoping-rail-product-line-1028451323",
-            "title": "Helix Linear Launches New Telescoping Rail Product Line",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/weyerhaeuser-company-declares-dividend-on-common-shares-1028451321",
-            "title": "Weyerhaeuser Company declares dividend on common shares",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/mylab-box-announces-safe-is-sexy-checklist-for-back-to-school-1028451318",
-            "title": "myLAB Box Announces Safe is Sexy Checklist for Back to School",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/bragar-eagel-squire-p-c-is-investigating-fartech-limited-nyse-ftch-on-behalf-of-stockholders-and-encourages-fartech-investors-to-contact-the-firm-1028451319",
-            "title": "Bragar Eagel & Squire, P.C. is Investigating Fartech Limited (NYSE: FTCH) on Behalf of Stockholders and Encourages Fartech Investors to Contact the Firm",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/bragar-eagel-squire-p-c-is-investigating-nektar-therapeutics-inc-nasdaq-nktr-on-behalf-of-stockholders-and-encourages-nektar-investors-to-contact-the-firm-1028451316",
-            "title": "Bragar Eagel & Squire, P.C. is Investigating Nektar Therapeutics, Inc. (NASDAQ: NKTR) on Behalf of Stockholders and Encourages Nektar Investors to Contact the Firm",
-            "date": "PR Newswire  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/tech-shares-may-weigh-on-taiwan-stock-market-1028451315",
-            "title": "Tech Shares May Weigh On Taiwan Stock Market",
-            "date": "RTTNews  4h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-tasly-remains-china-s-2019-national-tech-innovation-demonstration-enterprise-1028451314",
-            "title": "Xinhua Silk Road: Tasly remains China's 2019 National Tech Innovation Demonstration Enterprise",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/witt-o-brien-s-helps-houston-small-and-minority-owned-businesses-become-disaster-resilient-post-hurricane-harvey-1028451302",
-            "title": "WITT O’BRIEN’S HELPS HOUSTON SMALL AND MINORITY-OWNED BUSINESSES BECOME DISASTER RESILIENT POST-HURRICANE HARVEY",
-            "date": "GlobeNewswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/singapore-bourse-may-bounce-higher-on-friday-1028451301",
-            "title": "Singapore Bourse May Bounce Higher On Friday",
-            "date": "RTTNews  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/model-citizenship-by-investment-programme-funds-new-international-airport-in-transformed-dominica-1028451306",
-            "title": "Model Citizenship by Investment Programme Funds New International Airport in Transformed Dominica",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/cathay-general-bancorp-declares-0-31-per-share-dividend-1028451308",
-            "title": "Cathay General Bancorp Declares $0.31 Per Share Dividend",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/eleven-attorneys-from-kane-russell-coleman-logan-listed-in-2020-edition-of-the-best-lawyers-in-america-1028451304",
-            "title": "Eleven Attorneys from Kane Russell Coleman Logan Listed in 2020 Edition of \"The Best Lawyers in America\"",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/model-citizenship-by-investment-programme-funds-new-international-airport-in-transformed-dominica-1028451312",
-            "title": "Model Citizenship by Investment Programme Funds New International Airport in Transformed Dominica",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/yu-kiroro-luxury-ski-in-ski-out-condominium-in-hokkaido-launches-in-taiwan-1028451311",
-            "title": "YU KIRORO - Luxury Ski-in Ski-out Condominium in Hokkaido Launches in Taiwan",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/redzone-completes-broadband-network-site-expansions-in-windham-and-new-sharon-maine-providing-new-wireless-broadband-access-to-over-4-000-rural-homes-businesses-1028451305",
-            "title": "Redzone Completes Broadband Network Site Expansions in Windham and New Sharon, Maine - Providing New Wireless Broadband Access to Over 4,000 Rural Homes & Businesses",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/model-citizenship-by-investment-programme-funds-new-international-airport-in-transformed-dominica-1028451309",
-            "title": "Model Citizenship by Investment Programme Funds New International Airport in Transformed Dominica",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/yu-kiroro-luxury-ski-in-ski-out-condominium-in-hokkaido-japan-1028451307",
-            "title": "YU KIRORO - Luxury Ski-In Ski-Out Condominium In Hokkaido, Japan",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-tasly-remains-china-s-2019-national-tech-innovation-demonstration-enterprise-1028451299",
-            "title": "Xinhua Silk Road: Tasly remains China's 2019 National Tech Innovation Demonstration Enterprise",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-tasly-remains-china-s-2019-national-tech-innovation-demonstration-enterprise-1028451300",
-            "title": "Xinhua Silk Road: Tasly remains China's 2019 National Tech Innovation Demonstration Enterprise",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/bonds/piedmont-unified-school-district-ca-moody-s-assigns-aa2-to-piedmont-usd-ca-s-go-bonds-election-of-2016-series-2019-assigns-negative-outlook-1028451310",
-            "title": "Piedmont Unified School District, CA -- Moody's assigns Aa2 to Piedmont USD, CA's GO bonds, Election of 2016, Series 2019; assigns negative outlook",
-            "date": "Moodys  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/pipeline-equipment-inc-is-the-largest-oklahoma-manufacturer-on-the-2019-inc-5000-list-of-america-s-fastest-growing-private-companies-1028451297",
-            "title": "Pipeline Equipment, Inc. is the Largest Oklahoma Manufacturer on the 2019 Inc. 5000 List of America's Fastest-Growing Private Companies",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/mild-rebound-predicted-for-malaysia-stock-market-1028451294",
-            "title": "Mild Rebound Predicted For Malaysia Stock Market",
-            "date": "RTTNews  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/rosen-a-globally-recognized-law-firm-reminds-curaleaf-holdings-inc-investors-of-important-october-4th-deadline-in-securities-class-action-1028451296",
-            "title": "ROSEN, A GLOBALLY RECOGNIZED LAW FIRM, Reminds Curaleaf Holdings, Inc. Investors of Important October 4th Deadline in Securities Class Action",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/speedcast-and-australian-space-agency-to-collaborate-on-growth-and-transformation-of-australian-space-industry-1028451293",
-            "title": "Speedcast and Australian Space Agency to Collaborate on Growth and Transformation of Australian Space Industry",
-            "date": "PR Newswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/plus-therapeutics-reports-q2-2019-financial-and-business-results-1028451295",
-            "title": "Plus Therapeutics Reports Q2 2019 Financial and Business Results",
-            "date": "GlobeNewswire  5h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/bonds/inver-grove-heights-i-s-d-199-mn-moody-s-assigns-a1-to-inver-grove-heights-isd-199-mn-s-cops-1028451292",
-            "title": "Inver Grove Heights I.S.D. 199, MN -- Moody's assigns A1 to Inver Grove Heights ISD 199, MN's COPs",
-            "date": "Moodys  5h"
+            "url": "https://markets.businessinsider.com/news/stocks/ford-ferrari-aston-martin-30-most-expensive-at-monterey-2019-8-1028452819",
+            "title": "See the super-rare 30 most-expensive cars up for auction at Monterey including vintage Ferraris, Porsches, and Aston Martins",
+            "date": "Business Insider  42m"
         }
     ]
 }
