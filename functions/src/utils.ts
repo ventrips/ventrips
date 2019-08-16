@@ -11,7 +11,7 @@ exports.cors = function(request: any, response: any): void {
     return;
 }
 
-exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
+exports.puppeteerScrape = async function(source: string, url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
     const results: Array<any> = [];
     const browser = await puppeteer.launch({
         headless: true,
@@ -24,7 +24,9 @@ exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsT
     const sections = await page.$$(sectionsTarget);
 
     for (const section of sections) {
-        const obj:any = {};
+        const obj:any = {
+            source
+        };
         for (const key in keysObj) {
             if (_.isEqual(key, 'url')) {
                 obj[key] = await section.$eval(

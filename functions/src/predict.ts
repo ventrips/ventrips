@@ -1,12 +1,13 @@
 import * as puppeteer from 'puppeteer';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+const Utils = require('./utils');
 const GoogleTrends = require('google-trends-api');
 
 // Step 1: Get Tomorrow's Upcoming Stock Earnings
 exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
     if (useMock) {
-        const seekingAlphaJSON = require('./../mocks/seeking-alpha.json');
+        const seekingAlphaJSON = require('./../mocks/predict/seeking-alpha.json');
         return seekingAlphaJSON;
     }
 
@@ -39,14 +40,14 @@ exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock
                 '.sym',
                 (item: any) => item.innerText.trim().replace(/\n/g, ' '),
             );
-            const name = await section.$eval(
+            const company = await section.$eval(
                 '.ticker-name',
                 (item: any) => item.innerText.trim().replace(/\n/g, ' '),
             );
             const obj = {
                 url,
                 symbol,
-                name,
+                company,
                 releaseDate,
                 releaseTime
             };
@@ -62,7 +63,7 @@ exports.getGoogleTrends = async function(request: any, response: any, tickers: A
 
     let results;
     if (useMock) {
-        results = require('./../mocks/google-trends.json');
+        results = require('./../mocks/predict/google-trends.json');
     } else {
         const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
         results = JSON.parse(unparsedResults);
@@ -80,15 +81,15 @@ exports.getGoogleTrends = async function(request: any, response: any, tickers: A
 // Step 3: Get Trending StockTwits Stocks
 exports.getStockTwitsTrends = function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        const stockTwitsJSON = require('./../mocks/stocktwits-trending.json')
-        return stockTwitsJSON;
+        const json = require('./../mocks/predict/stocktwits-trending.json');
+        return json;
     }
 
     const Request = require('request');
     return new Promise((resolve,reject) => {
-        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error, response, body) => {
+        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, response: any, body: any) => {
           if (response) {
-            return resolve(JSON.parse(body));
+            return resolve(JSON.parse(body).symbols);
           }
           if (error) {
             return reject(error);
@@ -97,3 +98,67 @@ exports.getStockTwitsTrends = function(request: any, response: any, useMock: boo
     });
 }
 
+exports.getYahooTrends = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        const json = require('./../mocks/predict/yahoo-trends.json');
+        return json;
+    }
+
+    const yahooTrends = await Utils.puppeteerScrape(
+        'yahoo',
+        'https://finance.yahoo.com/trending-tickers',
+        'https://finance.yahoo.com',
+        'tr.BdT',
+        {
+            url: '.data-col0 a',
+            company: '.data-col1',
+            symbol: '.data-col0',
+            change: '.data-col5'
+        }
+    );
+
+    return yahooTrends;
+}
+
+exports.getSeekingAlphaEarningsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        const json = require('./../mocks/predict/seeking-alpha-news.json');
+        return json;
+    }
+
+    const seekingAlphaEarningsNews = await Utils.puppeteerScrape(
+        'seeking-alpha',
+        'https://seekingalpha.com/earnings/earnings-news',
+        'https://seekingalpha.com/news',
+        '.media-body',
+        {
+            url: '.article-link',
+            title: '.article-link',
+            date: '.article-desc',
+            description: '.item-summary',
+        }
+    );
+
+    return seekingAlphaEarningsNews;
+}
+
+exports.getBusinessInsiderNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        const json = require('./../mocks/predict/business-insider-news.json');
+        return json;
+    }
+
+    const businessInsiderNews = await Utils.puppeteerScrape(
+        'business-insider',
+        'https://markets.businessinsider.com/stocks/news',
+        'https://markets.businessinsider.com',
+        '.further-news-container',
+        {
+            url: '.news-link',
+            title: '.news-link',
+            date: '.source-and-publishdate'
+        }
+    );
+
+    return businessInsiderNews;
+}
