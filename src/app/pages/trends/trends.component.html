@@ -8,7 +8,14 @@
                     <h1>Stock Twits</h1>
                     <ol>
                         <li *ngFor="let item of predict?.stockTwitsTickers">
-                            <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}} ({{item?.symbol}}) Watchlist: {{item.watchlist_count}}</a>
+                            <span>
+                                <a [href]="item?.url" [title]="item?.title" target="__blank">
+                                    {{item?.title}}
+                                    ({{item?.symbol}})
+                                </a>
+                                Watching: {{item.watchlist_count}}
+                                <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
+                            </span>
                         </li>
                     </ol>
                 </div>
@@ -16,7 +23,9 @@
                     <h1>Yahoo Trending</h1>
                     <ol>
                         <li *ngFor="let item of predict?.yahooTickers">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}}) Change: {{item?.change}}</a>
+                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}})</a>
+                            Change: {{item?.change}}
+                            <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
                         </li>
                     </ol>
                 </div>

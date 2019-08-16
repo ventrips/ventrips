@@ -77,6 +77,43 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
+  getGoogleTrends(item: any) {
+    let list = [];
+    list.push(this.removeCommonTexts(_.get(item, ['title'])));
+    list.push(this.removeCommonTexts(_.get(item, ['company'])));
+    list.push(_.get(item, ['symbol']));
+    list.push(`${_.get(item, ['symbol'])} stock`);
+    list = _.compact(list);
+
+    return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
+  }
+
+  removeCommonTexts(value: string) {
+    value = _.toLower(value);
+    _.forEach([
+      'the ',
+      ' company',
+      ' co.',
+      ' incorporated',
+      ' corporation',
+      ' corp',
+      ' corp.',
+      ' limited',
+      ', inc',
+      `'s`,
+      ' inc.',
+      ' lp',
+      ' l.p.',
+      ' ltd',
+      '. ',
+      ' .',
+      /[`~!@#$%^*()_|+\-=?;:'",<>\{\}\[\]\\\/]/gi
+    ], (target) => {
+      value = _.replace(value, target, ' ');
+    });
+    return _.trim(_.replace(value, /[&]/gi, '%26'));
+  }
+
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
   }
