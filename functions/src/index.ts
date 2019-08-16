@@ -19,9 +19,21 @@ const db = admin.firestore();
 
 export const predict = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    const tickers: Array<any> = await Predict.scrapeSeekingAlpha(request, response, true);
-    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, tickers, true);
-    response.send(googleTrends);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
+    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
+    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+
+    response.send({
+        stockTwitsTickers
+        ,seekingAlphaEarningsDate
+        ,googleTrends
+        ,yahooTickers
+        ,seekingAlphaEarningsNews
+        ,businessInsiderNews
+    });
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {

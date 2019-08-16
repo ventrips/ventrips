@@ -1,0 +1,212 @@
+[
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/GE?p=GE",
+        "company": "General Electric Company",
+        "symbol": "GE",
+        "change": "-11.30%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/NVDA?p=NVDA",
+        "company": "NVIDIA Corporation",
+        "symbol": "NVDA",
+        "change": "-0.87%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/BYND?p=BYND",
+        "company": "Beyond Meat, Inc.",
+        "symbol": "BYND",
+        "change": "-11.48%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AMAT?p=AMAT",
+        "company": "Applied Materials, Inc.",
+        "symbol": "AMAT",
+        "change": "+0.96%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/ALC?p=ALC",
+        "company": "Alcon, Inc.",
+        "symbol": "ALC",
+        "change": "+1.17%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/TPR?p=TPR",
+        "company": "Tapestry, Inc.",
+        "symbol": "TPR",
+        "change": "-22.20%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/SINT?p=SINT",
+        "company": "Sintx Technologies, Inc.",
+        "symbol": "SINT",
+        "change": "+23.73%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/CELG?p=CELG",
+        "company": "Celgene Corporation",
+        "symbol": "CELG",
+        "change": "+0.45%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/WMT?p=WMT",
+        "company": "Walmart Inc.",
+        "symbol": "WMT",
+        "change": "+6.11%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/BGG?p=BGG",
+        "company": "Briggs & Stratton Corporation",
+        "symbol": "BGG",
+        "change": "-44.50%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/FIT?p=FIT",
+        "company": "Fitbit, Inc.",
+        "symbol": "FIT",
+        "change": "-6.77%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/PAGS?p=PAGS",
+        "company": "PagSeguro Digital Ltd.",
+        "symbol": "PAGS",
+        "change": "+1.57%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/SHAK?p=SHAK",
+        "company": "Shake Shack Inc.",
+        "symbol": "SHAK",
+        "change": "+7.09%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/DVN?p=DVN",
+        "company": "Devon Energy Corporation",
+        "symbol": "DVN",
+        "change": "-1.86%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/FCEL?p=FCEL",
+        "company": "FuelCell Energy, Inc.",
+        "symbol": "FCEL",
+        "change": "+12.54%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/MNK?p=MNK",
+        "company": "Mallinckrodt plc",
+        "symbol": "MNK",
+        "change": "-11.85%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/TDOC?p=TDOC",
+        "company": "Teladoc Health, Inc.",
+        "symbol": "TDOC",
+        "change": "-7.41%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/PCG?p=PCG",
+        "company": "PG&E Corporation",
+        "symbol": "PCG",
+        "change": "-9.67%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/CTL?p=CTL",
+        "company": "CenturyLink, Inc.",
+        "symbol": "CTL",
+        "change": "-6.47%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/CSIQ?p=CSIQ",
+        "company": "Canadian Solar Inc.",
+        "symbol": "CSIQ",
+        "change": "+12.04%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/%5EKS11?p=%5EKS11",
+        "company": "KOSPI Composite Index",
+        "symbol": "^KS11",
+        "change": "-0.75%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/WM?p=WM",
+        "company": "Waste Management, Inc.",
+        "symbol": "WM",
+        "change": "+1.90%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/DE?p=DE",
+        "company": "Deere & Company",
+        "symbol": "DE",
+        "change": "+0.38%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AVGO?p=AVGO",
+        "company": "Broadcom Inc.",
+        "symbol": "AVGO",
+        "change": "-1.08%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/CURLF?p=CURLF",
+        "company": "Curaleaf Holdings, Inc.",
+        "symbol": "CURLF",
+        "change": "-7.24%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/HUYA?p=HUYA",
+        "company": "HUYA Inc.",
+        "symbol": "HUYA",
+        "change": "+8.37%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/QCOM?p=QCOM",
+        "company": "QUALCOMM Incorporated",
+        "symbol": "QCOM",
+        "change": "+0.40%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AMT?p=AMT",
+        "company": "American Tower Corporation (REIT)",
+        "symbol": "AMT",
+        "change": "+2.43%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/AXSM?p=AXSM",
+        "company": "Axsome Therapeutics, Inc.",
+        "symbol": "AXSM",
+        "change": "-14.13%"
+    },
+    {
+        "source": "yahoo",
+        "url": "https://finance.yahoo.com/quote/BB?p=BB",
+        "company": "BlackBerry Limited",
+        "symbol": "BB",
+        "change": "-1.04%"
+    }
+]

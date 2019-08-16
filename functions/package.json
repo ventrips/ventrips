@@ -7,7 +7,9 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "npm run build && firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "functions:emulator": "firebase emulators:start --only functions",
+    "functions:tsc": "tsc --watch"
   },
   "engines": {
     "node": "8"
