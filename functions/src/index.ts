@@ -21,7 +21,7 @@ export const predict = functions.https.onRequest(async (request, response): Prom
     Utils.cors(request, response);
     const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
     const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, true);
-    const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, false);
+    // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, false);
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
     const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, true);
     const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
@@ -29,7 +29,7 @@ export const predict = functions.https.onRequest(async (request, response): Prom
     response.send({
         stockTwitsTickers
         ,seekingAlphaEarningsDate
-        ,googleTrends
+        // ,googleTrends
         ,yahooTickers
         ,seekingAlphaEarningsNews
         ,businessInsiderNews
