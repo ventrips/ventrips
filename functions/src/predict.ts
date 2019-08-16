@@ -86,8 +86,9 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
 
     const Request = require('request');
     return new Promise((resolve,reject) => {
-        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, response: any, body: any) => {
-          if (response) {
+        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, res: any, body: any) => {
+          if (res) {
+
             return resolve(_.map(JSON.parse(body).symbols, (stock) => {
                 stock.source = 'stock-twits';
                 stock.url = 'https://stocktwits.com/symbol/' + stock.symbol
@@ -95,6 +96,7 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
             }));
           }
           if (error) {
+
             return reject(error);
           }
         });
