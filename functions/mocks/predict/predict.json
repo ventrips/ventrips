@@ -1,13 +1,14 @@
 {
-    "stockTwitsTrends": [
+    "stockTwitsTickers": [
         {
             "id": 5481,
             "symbol": "GE",
             "title": "General Electric Co.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 78915,
-            "source": "stock-twits"
+            "watchlist_count": 78928,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/GE"
         },
         {
             "id": 2925,
@@ -16,7 +17,8 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 142499,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NVDA"
         },
         {
             "id": 1260,
@@ -25,7 +27,50 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 17636,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/CELG"
+        },
+        {
+            "id": 4940,
+            "symbol": "DE",
+            "title": "Deere & Company",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5328,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/DE"
+        },
+        {
+            "id": 14643,
+            "symbol": "EVOP",
+            "title": "EVO Payments",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 262,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/EVOP"
+        },
+        {
+            "id": 4796,
+            "symbol": "TPR",
+            "title": "Tapestry Inc.",
+            "aliases": [
+                "COH"
+            ],
+            "is_following": false,
+            "watchlist_count": 3078,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/TPR"
+        },
+        {
+            "id": 1478,
+            "symbol": "CSIQ",
+            "title": "Canadian Solar Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 7842,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/CSIQ"
         },
         {
             "id": 12100,
@@ -35,8 +80,79 @@
                 "ALIBABA"
             ],
             "is_following": false,
-            "watchlist_count": 148188,
-            "source": "stock-twits"
+            "watchlist_count": 148192,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/BABA"
+        },
+        {
+            "id": 4753,
+            "symbol": "CLC",
+            "title": "CLARCOR Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 400,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/CLC"
+        },
+        {
+            "id": 2833,
+            "symbol": "NEWT",
+            "title": "Newtek Business Services Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 423,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NEWT"
+        },
+        {
+            "id": 15245,
+            "symbol": "NDX",
+            "title": "Nasdaq-100 Index",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 279,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NDX"
+        },
+        {
+            "id": 15081,
+            "symbol": "CPRI",
+            "title": "Capri Holdings Ltd",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 473,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/CPRI"
+        },
+        {
+            "id": 7745,
+            "symbol": "WMT",
+            "title": "Walmart Stores Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 45570,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/WMT"
+        },
+        {
+            "id": 2924,
+            "symbol": "NVAX",
+            "title": "Novavax, Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 33365,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NVAX"
+        },
+        {
+            "id": 14016,
+            "symbol": "QD",
+            "title": "Qudian Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5300,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/QD"
         },
         {
             "id": 13528,
@@ -47,117 +163,8 @@
             ],
             "is_following": false,
             "watchlist_count": 59466,
-            "source": "stock-twits"
-        },
-        {
-            "id": 4940,
-            "symbol": "DE",
-            "title": "Deere & Company",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 5328,
-            "source": "stock-twits"
-        },
-        {
-            "id": 14643,
-            "symbol": "EVOP",
-            "title": "EVO Payments",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 261,
-            "source": "stock-twits"
-        },
-        {
-            "id": 1478,
-            "symbol": "CSIQ",
-            "title": "Canadian Solar Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 7842,
-            "source": "stock-twits"
-        },
-        {
-            "id": 4796,
-            "symbol": "TPR",
-            "title": "Tapestry Inc.",
-            "aliases": [
-                "COH"
-            ],
-            "is_following": false,
-            "watchlist_count": 3074,
-            "source": "stock-twits"
-        },
-        {
-            "id": 2833,
-            "symbol": "NEWT",
-            "title": "Newtek Business Services Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 422,
-            "source": "stock-twits"
-        },
-        {
-            "id": 7745,
-            "symbol": "WMT",
-            "title": "Walmart Stores Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 45568,
-            "source": "stock-twits"
-        },
-        {
-            "id": 15245,
-            "symbol": "NDX",
-            "title": "Nasdaq-100 Index",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 279,
-            "source": "stock-twits"
-        },
-        {
-            "id": 827,
-            "symbol": "AMAT",
-            "title": "Applied Materials Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 16434,
-            "source": "stock-twits"
-        },
-        {
-            "id": 3230,
-            "symbol": "PRSC",
-            "title": "Providence Service Corp.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 63,
-            "source": "stock-twits"
-        },
-        {
-            "id": 11818,
-            "symbol": "OTEL",
-            "title": "Otelco Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 96,
-            "source": "stock-twits"
-        },
-        {
-            "id": 4907,
-            "symbol": "DB",
-            "title": "Deutsche Bank AG",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 9006,
-            "source": "stock-twits"
-        },
-        {
-            "id": 15081,
-            "symbol": "CPRI",
-            "title": "Capri Holdings Ltd",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 473,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/XRP.X"
         },
         {
             "id": 5080,
@@ -166,34 +173,18 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 3366,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/DVN"
         },
         {
-            "id": 11220,
-            "symbol": "RM",
-            "title": "Regional Management",
+            "id": 5891,
+            "symbol": "IRM",
+            "title": "Iron Mountain Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 50,
-            "source": "stock-twits"
-        },
-        {
-            "id": 2924,
-            "symbol": "NVAX",
-            "title": "Novavax, Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 33365,
-            "source": "stock-twits"
-        },
-        {
-            "id": 4753,
-            "symbol": "CLC",
-            "title": "CLARCOR Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 400,
-            "source": "stock-twits"
+            "watchlist_count": 2465,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/IRM"
         },
         {
             "id": 13439,
@@ -202,43 +193,8 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 1078,
-            "source": "stock-twits"
-        },
-        {
-            "id": 11653,
-            "symbol": "KPTI",
-            "title": "Karyopharm Therapeutics",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 4709,
-            "source": "stock-twits"
-        },
-        {
-            "id": 6024,
-            "symbol": "JQC",
-            "title": "Nuveen Multi-Strategy Income & Growth Fund 2",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 189,
-            "source": "stock-twits"
-        },
-        {
-            "id": 14954,
-            "symbol": "SAFE",
-            "title": "Safety Income & Growth Inc",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 56,
-            "source": "stock-twits"
-        },
-        {
-            "id": 7785,
-            "symbol": "WY",
-            "title": "Weyerhaeuser Co.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1080,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/NTRP"
         },
         {
             "id": 12311,
@@ -247,16 +203,8 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 867,
-            "source": "stock-twits"
-        },
-        {
-            "id": 7697,
-            "symbol": "WAB",
-            "title": "Westinghouse Air Brake Technologies Corporation",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 738,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/FND"
         },
         {
             "id": 5615,
@@ -265,16 +213,102 @@
             "aliases": [],
             "is_following": false,
             "watchlist_count": 310,
-            "source": "stock-twits"
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/GVA"
         },
         {
-            "id": 15154,
-            "symbol": "PD",
-            "title": "PagerDuty, Inc.",
+            "id": 7697,
+            "symbol": "WAB",
+            "title": "Westinghouse Air Brake Technologies Corporation",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 1293,
-            "source": "stock-twits"
+            "watchlist_count": 738,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/WAB"
+        },
+        {
+            "id": 13016,
+            "symbol": "ETH.X",
+            "title": "Ethereum",
+            "aliases": [
+                "ETHUSD"
+            ],
+            "is_following": false,
+            "watchlist_count": 66877,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ETH.X"
+        },
+        {
+            "id": 5169,
+            "symbol": "EMN",
+            "title": "Eastman Chemical Co.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 507,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/EMN"
+        },
+        {
+            "id": 6024,
+            "symbol": "JQC",
+            "title": "Nuveen Multi-Strategy Income & Growth Fund 2",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 189,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/JQC"
+        },
+        {
+            "id": 14954,
+            "symbol": "SAFE",
+            "title": "Safety Income & Growth Inc",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 56,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/SAFE"
+        },
+        {
+            "id": 3776,
+            "symbol": "TEVA",
+            "title": "Teva Pharmaceutical Industries Limited",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 20711,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/TEVA"
+        },
+        {
+            "id": 7166,
+            "symbol": "SEE",
+            "title": "Sealed Air Corporation",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 305,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/SEE"
+        },
+        {
+            "id": 827,
+            "symbol": "AMAT",
+            "title": "Applied Materials Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 16434,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/AMAT"
+        },
+        {
+            "id": 7698,
+            "symbol": "WBA",
+            "title": "Walgreens Boots Alliance",
+            "aliases": [
+                "WAG"
+            ],
+            "is_following": false,
+            "watchlist_count": 7531,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/WBA"
         }
     ],
     "seekingAlphaEarningsDate": [
@@ -1471,7 +1505,148 @@
             "source": "seeking-alpha"
         }
     ],
-    "yahooTrends": [
+    "googleTrends": {
+        "symbols": [
+            "AAME",
+            "ACBM",
+            "ACLZ",
+            "AEZS",
+            "AFOM"
+        ],
+        "timelineData": [
+            {
+                "time": "1565049600",
+                "formattedTime": "Aug 6, 2019",
+                "formattedAxisTime": "Aug 6",
+                "value": [
+                    84,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "84",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565136000",
+                "formattedTime": "Aug 7, 2019",
+                "formattedAxisTime": "Aug 7",
+                "value": [
+                    81,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "81",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565222400",
+                "formattedTime": "Aug 8, 2019",
+                "formattedAxisTime": "Aug 8",
+                "value": [
+                    82,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "82",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565308800",
+                "formattedTime": "Aug 9, 2019",
+                "formattedAxisTime": "Aug 9",
+                "value": [
+                    88,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "88",
+                    "<1",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            },
+            {
+                "time": "1565395200",
+                "formattedTime": "Aug 10, 2019",
+                "formattedAxisTime": "Aug 10",
+                "value": [
+                    100,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "hasData": [
+                    true,
+                    false,
+                    true,
+                    true,
+                    true
+                ],
+                "formattedValue": [
+                    "100",
+                    "0",
+                    "<1",
+                    "<1",
+                    "<1"
+                ]
+            }
+        ]
+    },
+    "yahooTickers": [
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/GE?p=GE",
@@ -1683,7 +1858,218 @@
             "change": "-1.04%"
         }
     ],
-    "seekingAlphaEarningsNews": [],
+    "seekingAlphaEarningsNews": [
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492466-zto-express-eps-beats-0_02-beats-revenue",
+            "title": "ZTO Express EPS beats by $0.02, beats on revenue",
+            "date": "Today, 6:05 PM•Akanksha Bakshi•3 Comments",
+            "description": "ZTO Express (NYSE:ZTO): Q2 GAAP EPS of $0.25 beats by $0.02.Revenue of $790.04M (+29.5% Y/Y) beats by $9.33M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492462-galane-gold-reports-q2-results",
+            "title": "Galane Gold reports Q2 results",
+            "date": "Today, 5:44 PM•SA Editor Vandana Singh",
+            "description": "Galane Gold (OTCQB:GGGOF): Q2 GAAP EPS of $0.00.Revenue of $11.42M (-13.3% Y/Y)Financial StatementPress Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492461-sundance-energy-australia-misses-revenue",
+            "title": "Sundance Energy Australia misses on revenue",
+            "date": "Today, 5:41 PM•SA Editor Vandana Singh",
+            "description": "Sundance Energy Australia (NASDAQ:SNDE): Q2 net income of $3.8MRevenue of $52.9M (+84.1% Y/Y) misses by $1.11M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492312-deere-q3-2019-earnings-preview",
+            "title": "Deere Q3 2019 Earnings Preview",
+            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
+            "description": "Deere (NYSE:DE) is scheduled to announce Q3 earnings results on Friday, August 16th, before market open.The consensus EPS Estimate is $2.84 (+9.7% Y/Y) and the consensus Revenue Estimate is $9.38B (+1.0% Y/Y).Over the last 2 years, Deere has beaten EPS estimates 38% of the time and has beaten revenue estimates 50% of the time.Over the last 3 months, EPS estimates have seen 0 upward revisions and 18 downward. Revenue estimates have seen 1 upward revision  and 7 downward.Recent earnings Analysis from our contributors:Will Deere Remain In Its Range After Earnings?"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492314-qudian-q2-2019-earnings-preview",
+            "title": "Qudian Q2 2019 Earnings Preview",
+            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
+            "description": "Qudian (NYSE:QD) is scheduled to announce Q2 earnings results on Friday, August 16th, before market open.The consensus EPS Estimate is $0.52 (+52.9% Y/Y) and the consensus Revenue Estimate is $284.78M (-16.0% Y/Y).Over the last 1 year, Qudian has beaten EPS estimates 100% of the time and has beaten revenue estimates 25% of the time.Over the last 3 months, EPS estimates have seen 3 upward revisions and 0 downward. Revenue estimates have seen 0 upward revisions  and 1 downward."
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492241-notable-earnings-friday-s-open",
+            "title": "Notable earnings before Friday’s open",
+            "date": "Today, 5:30 PM•SA Editor Jignesh Mehta",
+            "description": "DE, QDFor Seeking Alpha's full earnings season calendar, click here."
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492454-pagseguro-eps-misses-r-0_07-beats-revenue",
+            "title": "PagSeguro EPS misses by R$0.07, beats on revenue",
+            "date": "Today, 5:22 PM•SA Editor Pranav Ghumatkar",
+            "description": "PagSeguro (NYSE:PAGS): Q2 GAAP EPS of R$0.9805 misses by R$0.07.Revenue of R$1.39B (+39.0% Y/Y) beats by R$60M.Shares +7.5% AH.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492445-flowr-eps-beats-0_11-misses-revenue",
+            "title": "Flowr EPS beats by $0.11, misses on revenue",
+            "date": "Today, 5:07 PM•SA Editor Pranav Ghumatkar•1 Comment",
+            "description": "Flowr (OTCPK:FLWPF): Q2 GAAP EPS of $0.08 beats by $0.11.Revenue of $2.18M misses by $4.22M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492442-international-isotopes-reports-q2-results",
+            "title": "International Isotopes reports Q2 results",
+            "date": "Today, 5:03 PM•SA Editor Vandana Singh",
+            "description": "International Isotopes (OTCQB:INIS): Q2 GAAP EPS of $0.00.Revenue of $2.14M (-10.5% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492435-americas-car-mart-eps-beats-0_48-misses-revenue",
+            "title": "America's Car-Mart EPS beats by $0.48, misses on revenue",
+            "date": "Today, 5:00 PM•Akanksha Bakshi",
+            "description": "America's Car-Mart (NASDAQ:CRMT): Q1 GAAP EPS of $2.21 beats by $0.48.Revenue of $171.88M (+4.8% Y/Y) misses by $3.46M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492434-dillards-minus-13_4-percent-sales-miss-q2",
+            "title": "Dillard's -13.4% after sales miss in Q2",
+            "date": "Today, 4:57 PM•Jason Aycock•3 Comments",
+            "description": "Dillard's (NYSE:DDS) has slipped 13.4% after hours after its sales fell short of low estimates in Q2 earnings.That would mark its lowest price point since spring 2017.    Net sales fell to $1.43B, and total merchandise sales dropped 2% to $1.38B. Comparable-store sales also dropped 2%.    Above-trend performances came in juniors and children's apparel, men's apparel/accessories and home/furniture, the company says; weakness was in ladies' apparel and ladies' accessories and lingerie.    Retail gross margin dropped 319 basis points. Inventory was unchanged on a percentage basis Y/Y.    Net loss swelled to $40.7M vs. a year-ago loss of $2.9M, even including a pretax gain of $4.9M on sale of a store property.    Press release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492432-accuray-soft-2020-guidance-pressures-shares-5-percent-hours",
+            "title": "Accuray soft 2020 guidance pressures shares, down 5% after hours",
+            "date": "Today, 4:55 PM•SA Editor Douglas W. House",
+            "description": "Accuray (NASDAQ:ARAY) fiscal Q4 results:Revenue: $117.4 (+3%); product sales: $60.6M (+11%).Net loss: ($1.4M); loss/share: ($0.02).Non-GAAP EBITDA: $8.9M (+14%).Fiscal 2020 guidance: Revenue: $410M - 420M (-1% at midpoint); non-GAAP EBITDA: $19M - 24M (-9% at midpoint) citing the impact of Chinese tariffs.Shares down 5% after hours.Previously: Accuray EPS misses by $0.04, beats on revenue (Aug. 15)"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492428-adecoagro-misses-revenue",
+            "title": "Adecoagro misses on revenue",
+            "date": "Today, 4:47 PM•Akanksha Bakshi",
+            "description": "Adecoagro (NYSE:AGRO): Q2 Net income of $23.26M.Revenue of $209.86M (+1.7% Y/Y) misses by $42.04M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492423-altura-energy-reports-q2-results",
+            "title": "Altura Energy reports Q2 results",
+            "date": "Today, 4:39 PM•SA Editor Vandana Singh",
+            "description": "Altura Energy (OTC:ATUUF): Q2 GAAP EPS of C$0.01.Revenue of C$6.53M (+45.4% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492415-rise-education-eps-beats-0_01-beats-revenue",
+            "title": "RISE Education EPS beats by $0.01, beats on revenue",
+            "date": "Today, 4:33 PM•Akanksha Bakshi",
+            "description": "RISE Education (NASDAQ:REDU): Q2 Non-GAAP EPS of $0.14 beats by $0.01; GAAP EPS of $0.05 misses by $0.07.Revenue of $53.47M (+22.3% Y/Y) beats by $0.43M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492413-dillards-eps-1_59",
+            "title": "Dillard's EPS of -$1.59",
+            "date": "Today, 4:32 PM•SA Editor Jignesh Mehta•1 Comment",
+            "description": "Dillard's (NYSE:DDS): Q2 EPS of -$1.59 may not be comparable to consensus of -$0.77.Revenue of $1.46B (-2.7% Y/Y) misses by $20M.Shares -6%.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492407-cordy-oilfield-services-reports-q2-results",
+            "title": "Cordy Oilfield Services reports Q2 results",
+            "date": "Today, 4:25 PM•SA Editor Pranav Ghumatkar",
+            "description": "Cordy Oilfield Services (OTC:CKKFF): Q2 Net income of $0.09M.Revenue of $3.64M (+9.6% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492406-viavi-plus-3_2-percent-q4-growth",
+            "title": "Viavi +3.2% after Q4 growth",
+            "date": "Today, 4:24 PM•Jason Aycock•1 Comment",
+            "description": "Viavi Solutions (NASDAQ:VIAV) is up 3.2% after hours following its fiscal Q4 earnings beat on top and bottom lines alongside double-digit gains in revenue.    \"5G Wireless, Fiber and 3D Sensing were strong contributors to our overall fiscal 2019 revenue and non-GAAP operating margin performance,\" says CEO Oleg Khaykin.    For Q4, net revenue was $289.7M (up 11%, and up 9.2% sequentially). Operating margin was 17.6%, up 460 basis points.    And non-GAAP EPS from continuing operations rose 42% to $0.17.    Revenue by segment: Network Enablement, $197.3M (up 10.2%); Service Enablement, $24.1M (down 15.4%); Optical Security and Performance Products, $68.3M (up 28.4%).    At quarter's end, liquidity was $526.5M. Cash from operations was $28.5M for the quarter.    For fiscal Q1, it's forecasting net revenue of $273M-$293M (vs. consensus for $282.3M), and EPS of $0.14-$0.16 (in line with expectations for $0.15).    Conference call to come at 4:30 p.m. ET.    Press release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492405-flame-seal-products-reports-q2-results",
+            "title": "Flame Seal Products reports Q2 results",
+            "date": "Today, 4:23 PM•SA Editor Vandana Singh",
+            "description": "Flame Seal Products (OTCPK:FLMP): Q2 net loss of $0.068MRevenue of $0.58M (~-1% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492404-aspen-insurance-holdings-reports-1h-results",
+            "title": "Aspen Insurance Holdings reports 1H results",
+            "date": "Today, 4:22 PM•SA Editor Pranav Ghumatkar",
+            "description": "Aspen Insurance Holdings (NYSE:AHL): 1H Retained loss of $51.3M.Net written premiums of $1.21B (+8.0% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492403-north-european-oil-royalty-trust-reports-q3-results",
+            "title": "North European Oil Royalty Trust reports Q3 results",
+            "date": "Today, 4:21 PM•SA Editor Vandana Singh",
+            "description": "North European Oil Royalty Trust (NYSE:NRT): Q3 net income of $2.02MTotal royalty income of $2.15MPress Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492402-nvidia-eps-beats-0_09-beats-revenue",
+            "title": "Nvidia EPS beats by $0.09, beats on revenue",
+            "date": "Today, 4:21 PM•SA Editor Jignesh Mehta•55 Comments",
+            "description": "Nvidia (NASDAQ:NVDA): Q2 Non-GAAP EPS of $1.24 beats by $0.09; GAAP EPS of $0.90 beats by $0.07.Revenue of $2.58B (-17.3% Y/Y) beats by $30M.Shares +4%.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492397-globant-eps-beats-0_01-revenue-line",
+            "title": "Globant EPS beats by $0.01, revenue in-line",
+            "date": "Today, 4:19 PM•SA Editor Vandana Singh•2 Comments",
+            "description": "Globant (NYSE:GLOB): Q2 Non-GAAP EPS of $0.53 beats by $0.01; GAAP EPS of $0.36 misses by $0.05.Revenue of $157.5M (+23.2% Y/Y) in-line.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492396-voxeljet-ag-reports-q2-results",
+            "title": "Voxeljet AG reports Q2 results",
+            "date": "Today, 4:18 PM•SA Editor Jignesh Mehta•2 Comments",
+            "description": "Voxeljet AG (NYSE:VJET): Q2 GAAP EPS of -€0.79.Revenue of €5.05M (-4.0% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492387-broadvision-reports-q2-results",
+            "title": "BroadVision reports Q2 results",
+            "date": "Today, 4:14 PM•SA Editor Vandana Singh",
+            "description": "BroadVision (NASDAQ:BVSN): Q2 GAAP EPS of -$0.06.Revenue of $0.93M (-25.0% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492385-applied-materials-plus-3-percent-beats-line-guide",
+            "title": "Applied Materials +3% on beats, in-line guide",
+            "date": "Today, 4:14 PM•SA Editor Brandy Betz•2 Comments",
+            "description": "Applied Materials (NASDAQ:AMAT) gains 3.2% after Q3 beats with revenue down 14% Y/Y. In-line Q4 guidance expects revenue of $3.535-3.835 (consensus: $3.66B) and EPS of $0.72-0.80 (consensus: $0.76).Revenue breakdown: Semi Systems, $2.27B (consensus: $2.17B); Applied Global Services, $931M (consensus: $998.9M); Display and Adjacent Markets, $339M (consensus: $349M).Gross margin was 44% compared to the 43.7% consensus. Operating margin was 23% compared to 22.5%.Earnings call starts at 4:30 PM ET with a webcast here.Press release."
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492384-sinovac-biotech-reports-q2-results",
+            "title": "Sinovac Biotech reports Q2 results",
+            "date": "Today, 4:09 PM•Akanksha Bakshi",
+            "description": "Sinovac Biotech (NASDAQ:SVA): Q2 Non-GAAP EPS of $0.12; GAAP EPS of $0.11.Revenue of $64.05M (-14.8% Y/Y)Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492382-accuray-eps-misses-0_04-beats-revenue",
+            "title": "Accuray EPS misses by $0.04, beats on revenue",
+            "date": "Today, 4:06 PM•SA Editor Pranav Ghumatkar•3 Comments",
+            "description": "Accuray (NASDAQ:ARAY): Q4 GAAP EPS of -$0.02 misses by $0.04.Revenue of $117.42M (+3.2% Y/Y) beats by $1.05M.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492378-applied-materials-eps-beats-0_04-beats-revenue",
+            "title": "Applied Materials EPS beats by $0.04, beats on revenue",
+            "date": "Today, 4:04 PM•SA Editor Jignesh Mehta•2 Comments",
+            "description": "Applied Materials (NASDAQ:AMAT): Q3 Non-GAAP EPS of $0.74 beats by $0.04; GAAP EPS of $0.61 misses by $0.09.Revenue of $3.56B (-14.4% Y/Y) beats by $30M.Shares +0.93%.Press Release"
+        },
+        {
+            "source": "seeking-alpha",
+            "url": "https://seekingalpha.com/news/news/3492377-viavi-solutions-eps-beats-0_02-beats-revenue",
+            "title": "Viavi Solutions EPS beats by $0.02, beats on revenue",
+            "date": "Today, 4:02 PM•SA Editor Jignesh Mehta",
+            "description": "Viavi Solutions (NASDAQ:VIAV): Q4 Non-GAAP EPS of $0.17 beats by $0.02; GAAP EPS of $0.05 misses by $0.01.Revenue of $289.7M (+11.1% Y/Y) beats by $10.52M.Press Release"
+        }
+    ],
     "businessInsiderNews": [
         {
             "source": "business-insider",

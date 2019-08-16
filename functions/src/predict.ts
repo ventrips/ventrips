@@ -90,6 +90,7 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
           if (response) {
             return resolve(_.map(JSON.parse(body).symbols, (stock) => {
                 stock.source = 'stock-twits';
+                stock.url = 'https://stocktwits.com/symbol/' + stock.symbol
                 return stock;
             }));
           }
