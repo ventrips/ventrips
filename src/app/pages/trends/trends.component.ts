@@ -79,10 +79,16 @@ export class TrendsComponent implements OnInit {
 
   getGoogleTrends(item: any) {
     let list = [];
-    list.push(this.removeCommonTexts(_.get(item, ['title'])));
-    list.push(this.removeCommonTexts(_.get(item, ['company'])));
     list.push(_.get(item, ['symbol']));
     list.push(`${_.get(item, ['symbol'])} stock`);
+    if (_.get(item, ['company'])) {
+      list.push(this.removeCommonTexts(_.get(item, ['company'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
+    } else {
+      list.push(this.removeCommonTexts(_.get(item, ['title'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
+    }
+    list.push(`${_.get(item, ['symbol'])} news`);
     list = _.compact(list);
 
     return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
