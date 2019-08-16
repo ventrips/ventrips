@@ -5,7 +5,7 @@ const Utils = require('./utils');
 const GoogleTrends = require('google-trends-api');
 
 // Step 1: Get Tomorrow's Upcoming Stock Earnings
-exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
+exports.getSeekingAlphaEarningsDate = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
     if (useMock) {
         const seekingAlphaJSON = require('./../mocks/predict/seeking-alpha.json');
         return seekingAlphaJSON;
@@ -49,7 +49,8 @@ exports.scrapeSeekingAlpha = async function(request: any, response: any, useMock
                 symbol,
                 company,
                 releaseDate,
-                releaseTime
+                releaseTime,
+                source: 'seeking-alpha'
             };
             results.push(obj);
         }
@@ -89,7 +90,10 @@ exports.getStockTwitsTrends = function(request: any, response: any, useMock: boo
     return new Promise((resolve,reject) => {
         Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, response: any, body: any) => {
           if (response) {
-            return resolve(JSON.parse(body).symbols);
+            return resolve(_.map(JSON.parse(body).symbols, (stock) => {
+                stock.source = 'stock-twits';
+                return stock;
+            }));
           }
           if (error) {
             return reject(error);
