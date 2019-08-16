@@ -1,0 +1,278 @@
+[
+    {
+        "id": 5481,
+        "symbol": "GE",
+        "title": "General Electric Co.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 78915,
+        "source": "stock-twits"
+    },
+    {
+        "id": 2925,
+        "symbol": "NVDA",
+        "title": "NVIDIA Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 142499,
+        "source": "stock-twits"
+    },
+    {
+        "id": 1260,
+        "symbol": "CELG",
+        "title": "Celgene Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 17636,
+        "source": "stock-twits"
+    },
+    {
+        "id": 12100,
+        "symbol": "BABA",
+        "title": "Alibaba",
+        "aliases": [
+            "ALIBABA"
+        ],
+        "is_following": false,
+        "watchlist_count": 148188,
+        "source": "stock-twits"
+    },
+    {
+        "id": 13528,
+        "symbol": "XRP.X",
+        "title": "Ripple",
+        "aliases": [
+            "XRPUSD"
+        ],
+        "is_following": false,
+        "watchlist_count": 59466,
+        "source": "stock-twits"
+    },
+    {
+        "id": 4940,
+        "symbol": "DE",
+        "title": "Deere & Company",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 5328,
+        "source": "stock-twits"
+    },
+    {
+        "id": 14643,
+        "symbol": "EVOP",
+        "title": "EVO Payments",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 261,
+        "source": "stock-twits"
+    },
+    {
+        "id": 1478,
+        "symbol": "CSIQ",
+        "title": "Canadian Solar Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 7842,
+        "source": "stock-twits"
+    },
+    {
+        "id": 4796,
+        "symbol": "TPR",
+        "title": "Tapestry Inc.",
+        "aliases": [
+            "COH"
+        ],
+        "is_following": false,
+        "watchlist_count": 3074,
+        "source": "stock-twits"
+    },
+    {
+        "id": 2833,
+        "symbol": "NEWT",
+        "title": "Newtek Business Services Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 422,
+        "source": "stock-twits"
+    },
+    {
+        "id": 7745,
+        "symbol": "WMT",
+        "title": "Walmart Stores Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 45568,
+        "source": "stock-twits"
+    },
+    {
+        "id": 15245,
+        "symbol": "NDX",
+        "title": "Nasdaq-100 Index",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 279,
+        "source": "stock-twits"
+    },
+    {
+        "id": 827,
+        "symbol": "AMAT",
+        "title": "Applied Materials Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 16434,
+        "source": "stock-twits"
+    },
+    {
+        "id": 3230,
+        "symbol": "PRSC",
+        "title": "Providence Service Corp.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 63,
+        "source": "stock-twits"
+    },
+    {
+        "id": 11818,
+        "symbol": "OTEL",
+        "title": "Otelco Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 96,
+        "source": "stock-twits"
+    },
+    {
+        "id": 4907,
+        "symbol": "DB",
+        "title": "Deutsche Bank AG",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 9006,
+        "source": "stock-twits"
+    },
+    {
+        "id": 15081,
+        "symbol": "CPRI",
+        "title": "Capri Holdings Ltd",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 473,
+        "source": "stock-twits"
+    },
+    {
+        "id": 5080,
+        "symbol": "DVN",
+        "title": "Devon Energy Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 3366,
+        "source": "stock-twits"
+    },
+    {
+        "id": 11220,
+        "symbol": "RM",
+        "title": "Regional Management",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 50,
+        "source": "stock-twits"
+    },
+    {
+        "id": 2924,
+        "symbol": "NVAX",
+        "title": "Novavax, Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 33365,
+        "source": "stock-twits"
+    },
+    {
+        "id": 4753,
+        "symbol": "CLC",
+        "title": "CLARCOR Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 400,
+        "source": "stock-twits"
+    },
+    {
+        "id": 13439,
+        "symbol": "NTRP",
+        "title": "Neurotrope, Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1078,
+        "source": "stock-twits"
+    },
+    {
+        "id": 11653,
+        "symbol": "KPTI",
+        "title": "Karyopharm Therapeutics",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 4709,
+        "source": "stock-twits"
+    },
+    {
+        "id": 6024,
+        "symbol": "JQC",
+        "title": "Nuveen Multi-Strategy Income & Growth Fund 2",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 189,
+        "source": "stock-twits"
+    },
+    {
+        "id": 14954,
+        "symbol": "SAFE",
+        "title": "Safety Income & Growth Inc",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 56,
+        "source": "stock-twits"
+    },
+    {
+        "id": 7785,
+        "symbol": "WY",
+        "title": "Weyerhaeuser Co.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1080,
+        "source": "stock-twits"
+    },
+    {
+        "id": 12311,
+        "symbol": "FND",
+        "title": "Floor & Decor Holdings",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 867,
+        "source": "stock-twits"
+    },
+    {
+        "id": 7697,
+        "symbol": "WAB",
+        "title": "Westinghouse Air Brake Technologies Corporation",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 738,
+        "source": "stock-twits"
+    },
+    {
+        "id": 5615,
+        "symbol": "GVA",
+        "title": "Granite Construction Incorporated",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 310,
+        "source": "stock-twits"
+    },
+    {
+        "id": 15154,
+        "symbol": "PD",
+        "title": "PagerDuty, Inc.",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1293,
+        "source": "stock-twits"
+    }
+]

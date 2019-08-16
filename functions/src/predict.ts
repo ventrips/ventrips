@@ -7,8 +7,7 @@ const GoogleTrends = require('google-trends-api');
 // Step 1: Get Tomorrow's Upcoming Stock Earnings
 exports.getSeekingAlphaEarningsDate = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
     if (useMock) {
-        const seekingAlphaJSON = require('./../mocks/predict/seeking-alpha.json');
-        return seekingAlphaJSON;
+        return require('./../mocks/predict/seeking-alpha-earnings-date.json');
     }
 
     const results: Array<any> = [];
@@ -80,10 +79,9 @@ exports.getGoogleTrends = async function(request: any, response: any, tickers: A
 }
 
 // Step 3: Get Trending StockTwits Stocks
-exports.getStockTwitsTrends = function(request: any, response: any, useMock: boolean = false): Promise<any> {
+exports.getStockTwitsTickers = function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        const json = require('./../mocks/predict/stocktwits-trending.json');
-        return json;
+        return require('./../mocks/predict/stock-twits-tickers.json');
     }
 
     const Request = require('request');
@@ -102,10 +100,9 @@ exports.getStockTwitsTrends = function(request: any, response: any, useMock: boo
     });
 }
 
-exports.getYahooTrends = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+exports.getYahooTickers = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        const json = require('./../mocks/predict/yahoo-trends.json');
-        return json;
+        return require('./../mocks/predict/yahoo-tickers.json');
     }
 
     const yahooTrends = await Utils.puppeteerScrape(
@@ -126,8 +123,7 @@ exports.getYahooTrends = async function(request: any, response: any, useMock: bo
 
 exports.getSeekingAlphaEarningsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        const json = require('./../mocks/predict/seeking-alpha-news.json');
-        return json;
+        return require('./../mocks/predict/seeking-alpha-earnings-news.json');
     }
 
     const seekingAlphaEarningsNews = await Utils.puppeteerScrape(
@@ -148,8 +144,7 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
 
 exports.getBusinessInsiderNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        const json = require('./../mocks/predict/business-insider-news.json');
-        return json;
+        return require('./../mocks/predict/business-insider-news.json');
     }
 
     const businessInsiderNews = await Utils.puppeteerScrape(
