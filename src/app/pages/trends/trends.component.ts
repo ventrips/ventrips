@@ -116,6 +116,8 @@ export class TrendsComponent implements OnInit {
       ' inc',
       ' lp',
       ' l.p.',
+      ' plc',
+      ' p.l.c',
       ' ltd',
       '. ',
       ' .',
