@@ -25,18 +25,20 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
 
     const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
     const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
-    // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
     const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
     const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
+    // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     response.send({
         stockTwitsTickers
         ,seekingAlphaEarningsDate
-        // ,googleTrends
         ,yahooTickers
         ,seekingAlphaEarningsNews
         ,businessInsiderNews
+        ,barronsNews
+        // ,googleTrends
     });
 });
 

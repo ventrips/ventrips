@@ -26,7 +26,7 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
             '.release-date',
             (item: any) => item.innerText.trim().replace(/\n/g, ' '),
         );
-        if (moment(releaseDate).isSameOrAfter(moment(new Date()).format())) {
+        if (moment(releaseDate).isSameOrAfter(moment(new Date()))) {
             const releaseTime = await section.$eval(
                 '.release-time',
                 (item: any) => item.innerText.trim().replace(/\n/g, ' '),
@@ -166,4 +166,24 @@ exports.getBusinessInsiderNews = async function(request: any, response: any, use
     );
 
     return businessInsiderNews;
+}
+
+exports.getBarronsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/barrons-news.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'barrons',
+        'https://www.barrons.com',
+        '',
+        '.BarronsTheme--scroll-bar--3vISrLk6 > .BarronsTheme--story--3Z0LVZ5M',
+        {
+            url: 'a',
+            title: 'h3',
+            date: 'p'
+        }
+    );
+
+    return barronsNews;
 }
