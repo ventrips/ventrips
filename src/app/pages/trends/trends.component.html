@@ -9,11 +9,11 @@
                     <ol>
                         <li *ngFor="let item of predict?.stockTwitsTickers">
                             <span>
-                                <a [href]="item?.url" [title]="item?.title" target="__blank">
+                                <a [href]="item?.url" [title]="item?.title" target="__blank" class="mr-2">
                                     {{item?.title}}
-                                    ({{item?.symbol}})
                                 </a>
-                                Watching: {{item.watchlist_count}}
+                                <span class="mr-2">({{item?.symbol}})</span>
+                                <span class="mr-2">Watching: {{item.watchlist_count}}</span>
                                 <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
                             </span>
                         </li>
@@ -23,8 +23,9 @@
                     <h1>Yahoo Trending</h1>
                     <ol>
                         <li *ngFor="let item of predict?.yahooTickers">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}})</a>
-                            Change: {{item?.change}}
+                            <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
+                            <span class="mr-2">({{item?.symbol}})</span>
+                            <span class="mr-2">Change: {{item?.change}}</span>
                             <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
                         </li>
                     </ol>
@@ -58,7 +59,9 @@
                     <h3>Seeking Alpha Earnings Date</h3>
                     <ol>
                         <li *ngFor="let item of predict?.seekingAlphaEarningsDate">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}})</a>
+                            <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
+                            <span class="mr-2">({{item?.symbol}})</span>
+                            <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
                             <p>{{item?.releaseDate}}</p>
                             <p>{{item?.releaseTime}}</p>
                         </li>
