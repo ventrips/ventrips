@@ -51,6 +51,7 @@ export class TrendsComponent implements OnInit {
         this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
       }, (error) => {
         this.toastr.error(error);
+        this.spinner.show();
       });
 
       if (_.isNil(this.q)) { return; };
@@ -75,6 +76,57 @@ export class TrendsComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/predict`)
     .pipe(map((response: Response) => { return response }));
   };
+
+  getGoogleTrends(item: any) {
+    let list = [];
+    list.push(_.get(item, ['symbol']));
+    list.push(`${_.get(item, ['symbol'])} stock`);
+    if (_.get(item, ['company'])) {
+      list.push(this.removeCommonTexts(_.get(item, ['company'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
+    } else {
+      list.push(this.removeCommonTexts(_.get(item, ['title'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
+    }
+    list.push(`${_.get(item, ['symbol'])} news`);
+    list = _.compact(list);
+
+    return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
+  }
+
+  removeCommonTexts(value: string) {
+    value = _.toLower(value);
+    _.forEach([
+      'the ',
+      ' and companies',
+      ' & company',
+      ' company',
+      ' companies',
+      ' and co.',
+      ' & co.',
+      ' co.',
+      ' incorporated',
+      ' corporation',
+      ' corp',
+      ' corp.',
+      ' designs',
+      ' limited',
+      ', inc',
+      ' inc.',
+      ' inc',
+      ' lp',
+      ' l.p.',
+      ' plc',
+      ' p.l.c',
+      ' ltd',
+      '. ',
+      ' .',
+      /[`~!@#$%^*()_|+\-=?;:",<>\{\}\[\]\\\/]/gi
+    ], (target) => {
+      value = _.replace(value, target, ' ');
+    });
+    return _.trim(_.replace(value, /[&]/gi, '%26'));
+  }
 
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);

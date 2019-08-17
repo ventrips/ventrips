@@ -19,8 +19,7 @@ exports.puppeteerScrape = async function(source: string, url: string, baseUrl: s
     });
 
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' })
-
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 0 })
     const sections = await page.$$(sectionsTarget);
 
     for (const section of sections) {
@@ -29,16 +28,24 @@ exports.puppeteerScrape = async function(source: string, url: string, baseUrl: s
         };
         for (const key in keysObj) {
             if (_.isEqual(key, 'url')) {
-                obj[key] = await section.$eval(
-                    _.get(keysObj, [key]),
-                    (item: any) => item.getAttribute('href')
-                );
-                obj[key] = `${baseUrl}${obj[key]}`;
+                try {
+                    obj[key] = await section.$eval(
+                        _.get(keysObj, [key]),
+                        (item: any) => item.getAttribute('href')
+                    );
+                    obj[key] = `${baseUrl}${obj[key]}`;
+                } catch {
+
+                }
             } else {
-                obj[key] = await section.$eval(
-                    _.get(keysObj, [key]),
-                    (item: any) => item.innerText.trim().replace(/\n/g, ' '),
-                );
+                try {
+                    obj[key] = await section.$eval(
+                        _.get(keysObj, [key]),
+                        (item: any) => item.innerText.trim().replace(/\n/g, ' '),
+                    );
+                } catch {
+
+                }
             }
         }
         results.push(obj);

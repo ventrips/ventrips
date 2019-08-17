@@ -1,59 +1,81 @@
 <section>
-    <div class="container my-5">
+    <div class="container-fluid my-5">
         <section [hidden]="!predict">
-            <!-- <pre>{{predict | json}}</pre> -->
-            <h1>Trending</h1>
             <div class="row">
-                <div class="col">
-                    <h1>Stock Twits</h1>
-                    <ol>
-                        <li *ngFor="let item of predict?.stockTwitsTickers">
-                            <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}} ({{item?.symbol}}) Watchlist: {{item.watchlist_count}}</a>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col">
-                    <h1>Yahoo Trending</h1>
-                    <ol>
-                        <li *ngFor="let item of predict?.yahooTickers">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}}) Change: {{item?.change}}</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <h2>Articles</h2>
-            <div class="row">
-                <div class="col">
-                <h3>Seeking Alpha Earnings News</h3>
-                    <ol>
-                        <li *ngFor="let item of predict?.seekingAlphaEarningsNews">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.title}}</a>
-                            <p>{{item?.date}}</p>
-                            <p>{{item?.description}}</p>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col">
-                    <h3>Business Insider News</h3>
-                    <ol>
-                        <li *ngFor="let item of predict?.businessInsiderNews">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.title}}</a>
-                            <p>{{item?.date}}</p>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <h2>Earnings Date</h2>
-            <div class="row">
-                <div class="col">
-                    <h3>Seeking Alpha Earnings Date</h3>
+                <div class="col-3">
+                    <h3>Seeking Alpha Upcoming</h3>
                     <ol>
                         <li *ngFor="let item of predict?.seekingAlphaEarningsDate">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.company}} ({{item?.symbol}})</a>
+                            <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
+                            <span class="mr-2">({{item?.symbol}})</span>
+                            <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
                             <p>{{item?.releaseDate}}</p>
                             <p>{{item?.releaseTime}}</p>
                         </li>
                     </ol>
+                </div>
+                <div class="col">
+                    <!-- <pre>{{predict | json}}</pre> -->
+                    <h1>Trending</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1>Stock Twits</h1>
+                            <ol>
+                                <li *ngFor="let item of predict?.stockTwitsTickers">
+                                    <span>
+                                        <a [href]="item?.url" [title]="item?.title" target="__blank" class="mr-2">
+                                            {{item?.title}}
+                                        </a>
+                                        <span class="mr-2">({{item?.symbol}})</span>
+                                        <span class="mr-2">Watching: {{item.watchlist_count}}</span>
+                                        <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <h1>Yahoo Trending</h1>
+                            <ol>
+                                <li *ngFor="let item of predict?.yahooTickers">
+                                    <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
+                                    <span class="mr-2">({{item?.symbol}})</span>
+                                    <span class="mr-2">Change: {{item?.change}}</span>
+                                    <a [href]="getGoogleTrends(item)" title="Google Trends" target="__blank">Trends</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <h2>Articles</h2>
+                    <div class="row">
+                        <div class="col">
+                            <h3>Seeking Alpha Earnings News</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.seekingAlphaEarningsNews">
+                                    <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                    <p>{{item?.description}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <h3>Business Insider News</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.businessInsiderNews">
+                                    <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <h3>Barrons News</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.barronsNews">
+                                    <a [href]="item?.url" [title]="item?.company" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -62,13 +84,13 @@
         </section>
         <section class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control form-control"
-                    aria-label="Search for company name, ticker symbol, anything"
-                    placeholder="Search for company name, ticker symbol, anything"
+                <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
                     [(ngModel)]="search" />
                 <div class="input-group-append">
                     <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
-                        <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon></ng-container>
+                        <ng-container *ngIf="isPlatformBrowser()">
+                            <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                        </ng-container>
                     </button>
                 </div>
             </div>

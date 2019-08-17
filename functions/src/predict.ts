@@ -17,7 +17,7 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
     });
 
     const page = await browser.newPage();
-    await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'networkidle0' })
+    await page.goto(`https://seekingalpha.com/earnings/earnings-calendar`, { waitUntil: 'load', timeout: 0 })
 
     const sections = await page.$$('.earningsTable tbody tr');
 
@@ -26,7 +26,7 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
             '.release-date',
             (item: any) => item.innerText.trim().replace(/\n/g, ' '),
         );
-        if (_.isEqual(releaseDate, moment(new Date()).add(1,'days').format('L'))) {
+        if (moment(releaseDate).isSameOrAfter(moment(new Date()))) {
             const releaseTime = await section.$eval(
                 '.release-time',
                 (item: any) => item.innerText.trim().replace(/\n/g, ' '),
@@ -135,7 +135,7 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
     const seekingAlphaEarningsNews = await Utils.puppeteerScrape(
         'seeking-alpha',
         'https://seekingalpha.com/earnings/earnings-news',
-        'https://seekingalpha.com/news',
+        'https://seekingalpha.com',
         '.media-body',
         {
             url: '.article-link',
@@ -166,4 +166,24 @@ exports.getBusinessInsiderNews = async function(request: any, response: any, use
     );
 
     return businessInsiderNews;
+}
+
+exports.getBarronsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/barrons-news.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'barrons',
+        'https://www.barrons.com',
+        '',
+        '.BarronsTheme--scroll-bar--3vISrLk6 > .BarronsTheme--story--3Z0LVZ5M',
+        {
+            url: 'a',
+            title: 'h3',
+            date: 'p'
+        }
+    );
+
+    return barronsNews;
 }
