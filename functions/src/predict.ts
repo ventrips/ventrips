@@ -26,7 +26,7 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
             '.release-date',
             (item: any) => item.innerText.trim().replace(/\n/g, ' '),
         );
-        if (_.isEqual(releaseDate, moment(new Date()).add(1,'days').format('L'))) {
+        if (moment(releaseDate).isSameOrAfter(moment(new Date()).format())) {
             const releaseTime = await section.$eval(
                 '.release-time',
                 (item: any) => item.innerText.trim().replace(/\n/g, ' '),
