@@ -187,3 +187,44 @@ exports.getBarronsNews = async function(request: any, response: any, useMock: bo
 
     return barronsNews;
 }
+
+exports.getHackerNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/hacker-news.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'hacker-news',
+        'https://news.ycombinator.com/',
+        '',
+        '.itemlist > tbody > .athing',
+        {
+            url: 'a.storylink',
+            title: 'a.storylink',
+            date: '.age'
+        }
+    );
+
+    return barronsNews;
+}
+
+exports.getRedditInvesting = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/reddit-investing.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'reddit',
+        'https://www.reddit.com/r/investing/rising',
+        'https://www.reddit.com',
+        '.Post',
+        {
+            url: 'a.SQnoC3ObvgnGjWt90zD9Z',
+            title: 'a.SQnoC3ObvgnGjWt90zD9Z h3',
+            description: '.STit0dLageRsa2yR4te_b',
+            date: '._3jOxDPIQ0KaOWpzvSQo-1s'
+        }
+    );
+
+    return barronsNews;
+}

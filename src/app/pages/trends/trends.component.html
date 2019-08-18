@@ -2,9 +2,9 @@
     <div class="container-fluid my-5">
         <section [hidden]="!predict">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <h3>Seeking Alpha Upcoming</h3>
-                    <ol>
+                    <ol class="list-unstyled">
                         <li *ngFor="let item of predict?.seekingAlphaEarningsDate">
                             <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
@@ -73,6 +73,28 @@
                             <h3>Barrons News</h3>
                             <ol>
                                 <li *ngFor="let item of predict?.barronsNews">
+                                    <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <h2>Forums</h2>
+                    <div class="row">
+                        <div class="col">
+                            <h3>Reddit Investing</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.redditInvesting">
+                                    <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                    <p>{{item?.description}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
+                            <h3>Hacker News</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.hackerNews">
                                     <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
                                     <p>{{item?.date}}</p>
                                 </li>
