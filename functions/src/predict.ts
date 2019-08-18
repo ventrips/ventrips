@@ -136,12 +136,12 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
         'seeking-alpha',
         'https://seekingalpha.com/earnings/earnings-news',
         'https://seekingalpha.com',
-        '.media-body',
+        '#analysis-list-container > .media > .media-body',
         {
-            url: '.article-link',
-            title: '.article-link',
-            date: '.article-desc',
-            description: '.item-summary',
+            url: 'h4 a.article-link',
+            title: 'h4',
+            date: 'div.article-desc',
+            description: 'div.item-summary',
         }
     );
 
