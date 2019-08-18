@@ -23,12 +23,12 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     // response.send(json);
     // return;
 
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
-    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
-    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
+    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, true);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, true);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, true);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     response.send({

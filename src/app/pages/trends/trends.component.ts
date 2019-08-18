@@ -10,6 +10,7 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-trends',
@@ -77,19 +78,24 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
-  getGoogleTrends(item: any) {
+  getGoogleTrends(item: any, timeRange: string = 'hourly') {
     let list = [];
-    list.push(_.get(item, ['symbol']));
+    list.push(`${_.get(item, ['symbol'])} stock price`);
     list.push(`${_.get(item, ['symbol'])} stock`);
+    list.push(`${_.get(item, ['symbol'])} price`);
     if (_.get(item, ['company'])) {
-      list.push(this.removeCommonTexts(_.get(item, ['company'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} stock`);
       list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
     } else {
-      list.push(this.removeCommonTexts(_.get(item, ['title'])));
+      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} stock`);
       list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
     }
-    list.push(`${_.get(item, ['symbol'])} news`);
     list = _.compact(list);
+
+    if (_.isEqual(_.toLower(timeRange), 'yearly')) {
+      return `https://trends.google.com/trends/explore?date=${moment().startOf('year').format('YYYY-MM-DD')}`
+      + ' ' + `${moment().endOf('year').endOf('year').format('YYYY-MM-DD')}&geo=US&q=${list}`;
+    }
 
     return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
   }
