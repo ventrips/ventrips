@@ -78,6 +78,10 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
+  getGoogleSearch(query: string) {
+    return `https://www.google.com/search?q=${query}`;
+  }
+
   getGoogleTrends(item: any, timeRange: string = 'hourly') {
     let list = [];
     list.push(`${_.get(item, ['symbol'])} stock price`);
