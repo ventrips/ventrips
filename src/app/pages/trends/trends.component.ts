@@ -36,24 +36,29 @@ export class TrendsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.predict = undefined;
+    this.spinner.show();
+    this.getPredict(this.q)
+    .subscribe((response) => {
+      this.spinner.hide();
+      this.predict = response;
+      this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
+      this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+      this.initTrends();
+    }, (error) => {
+      this.toastr.error(error);
+      this.spinner.show();
+      this.initTrends();
+    });
+
     this.authService.user$.subscribe(user => this.user = user);
+  }
+
+  initTrends(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
       this.data = undefined;
-
-      this.predict = undefined;
-      this.spinner.show();
-      this.getPredict(this.q)
-      .subscribe((response) => {
-        this.spinner.hide();
-        this.predict = response;
-        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
-        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
-      }, (error) => {
-        this.toastr.error(error);
-        this.spinner.show();
-      });
 
       if (_.isNil(this.q)) { return; };
       this.spinner.show();
