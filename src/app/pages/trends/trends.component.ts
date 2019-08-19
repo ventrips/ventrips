@@ -89,16 +89,17 @@ export class TrendsComponent implements OnInit {
 
   getGoogleTrends(item: any, timeRange: string = 'hourly') {
     let list = [];
-    list.push(`${_.get(item, ['symbol'])} stock price`);
-    list.push(`${_.get(item, ['symbol'])} stock`);
-    list.push(`${_.get(item, ['symbol'])} price`);
+    const symbol = _.toLower(_.get(item, ['symbol']));
+    list.push(`buy ${symbol}`);
+    list.push(`sell ${symbol}`);
+    list.push(`${symbol} stock`);
+    list.push(`${symbol} price`);
     if (_.get(item, ['company'])) {
-      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} stock`);
       list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
     } else {
-      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} stock`);
       list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
     }
+
     list = _.compact(list);
 
     if (_.isEqual(_.toLower(timeRange), 'yearly')) {
