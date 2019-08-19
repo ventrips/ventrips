@@ -1,308 +1,312 @@
 {
     "stockTwitsTickers": [
         {
-            "id": 1824,
-            "symbol": "FALC",
-            "title": "Falconstor Software Inc.",
+            "id": 1546,
+            "symbol": "PSTV",
+            "title": "Plus Therapeutics",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 3391,
+            "watchlist_count": 13241,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FALC"
+            "url": "https://stocktwits.com/symbol/PSTV"
         },
         {
-            "id": 4681,
-            "symbol": "CCL",
-            "title": "Carnival Corporation",
+            "id": 2924,
+            "symbol": "NVAX",
+            "title": "Novavax, Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 2640,
+            "watchlist_count": 33530,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/CCL"
+            "url": "https://stocktwits.com/symbol/NVAX"
         },
         {
-            "id": 3963,
-            "symbol": "URBN",
-            "title": "Urban Outfitters Inc.",
+            "id": 2302,
+            "symbol": "INMD",
+            "title": "InMode",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 3230,
+            "watchlist_count": 328,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/URBN"
+            "url": "https://stocktwits.com/symbol/INMD"
         },
         {
-            "id": 7691,
-            "symbol": "VWO",
-            "title": "Vanguard MSCI Emerging Markets ETF",
+            "id": 11963,
+            "symbol": "WB",
+            "title": "WEIBO",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 2929,
+            "watchlist_count": 10464,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/VWO"
+            "url": "https://stocktwits.com/symbol/WB"
         },
         {
-            "id": 11231,
-            "symbol": "DSLV",
-            "title": "VelocityShares 3x Inverse Silver ETN",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1561,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/DSLV"
-        },
-        {
-            "id": 7413,
-            "symbol": "TJX",
-            "title": "The TJX Companies, Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 3515,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/TJX"
-        },
-        {
-            "id": 14819,
-            "symbol": "EVRG",
-            "title": "Evergy Inc",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 50,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/EVRG"
-        },
-        {
-            "id": 5429,
-            "symbol": "FXE",
-            "title": "CurrencyShares Euro Trust",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1043,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FXE"
-        },
-        {
-            "id": 1827,
-            "symbol": "FAST",
-            "title": "Fastenal Co.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1611,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FAST"
-        },
-        {
-            "id": 7543,
-            "symbol": "UCO",
-            "title": "ProShares Ultra DJ-UBS Crude Oil",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 6242,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/UCO"
-        },
-        {
-            "id": 3089,
-            "symbol": "PDCO",
-            "title": "Patterson Companies Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 402,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/PDCO"
-        },
-        {
-            "id": 13089,
-            "symbol": "FTV",
-            "title": "Fortive Corp",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 317,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FTV"
-        },
-        {
-            "id": 12143,
-            "symbol": "ENLV",
-            "title": "ENLIVEX THERAPEUTICS ",
+            "id": 12100,
+            "symbol": "BABA",
+            "title": "Alibaba",
             "aliases": [
-                "ORPN"
+                "ALIBABA"
             ],
             "is_following": false,
-            "watchlist_count": 3632,
+            "watchlist_count": 148441,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/ENLV"
+            "url": "https://stocktwits.com/symbol/BABA"
         },
         {
-            "id": 5275,
-            "symbol": "EXR",
-            "title": "Extra Space Storage Inc.",
+            "id": 15376,
+            "symbol": "MTC",
+            "title": "MMTec Inc",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 468,
+            "watchlist_count": 501,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/EXR"
+            "url": "https://stocktwits.com/symbol/MTC"
         },
         {
-            "id": 5382,
-            "symbol": "FOR",
-            "title": "Forestar Group Inc.",
+            "id": 5152,
+            "symbol": "EL",
+            "title": "Estee Lauder Companies Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 62,
+            "watchlist_count": 1912,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FOR"
+            "url": "https://stocktwits.com/symbol/EL"
         },
         {
-            "id": 4303,
-            "symbol": "AJG",
-            "title": "Arthur J Gallagher & Co.",
+            "id": 823,
+            "symbol": "ALXN",
+            "title": "Alexion Pharmaceuticals, Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 170,
+            "watchlist_count": 4193,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/AJG"
+            "url": "https://stocktwits.com/symbol/ALXN"
         },
         {
-            "id": 13231,
-            "symbol": "ENVA",
-            "title": "Enova International Inc",
+            "id": 1073,
+            "symbol": "BIDU",
+            "title": "Baidu, Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 252,
+            "watchlist_count": 34813,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/ENVA"
+            "url": "https://stocktwits.com/symbol/BIDU"
         },
         {
-            "id": 4442,
-            "symbol": "BAM",
-            "title": "Brookfield Asset Management Inc.",
+            "id": 12017,
+            "symbol": "JD",
+            "title": "JD.com",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 1059,
+            "watchlist_count": 32824,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/BAM"
+            "url": "https://stocktwits.com/symbol/JD"
         },
         {
-            "id": 5269,
-            "symbol": "EXC",
-            "title": "Exelon Corp.",
+            "id": 14950,
+            "symbol": "PAYS",
+            "title": "3Pea International Inc",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 1282,
+            "watchlist_count": 1629,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/EXC"
+            "url": "https://stocktwits.com/symbol/PAYS"
         },
         {
-            "id": 7302,
-            "symbol": "STT",
-            "title": "State Street Corp.",
+            "id": 14489,
+            "symbol": "IQ",
+            "title": "iQIYI",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 697,
+            "watchlist_count": 30516,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/STT"
+            "url": "https://stocktwits.com/symbol/IQ"
         },
         {
-            "id": 5576,
-            "symbol": "GPS",
-            "title": "Gap Inc.",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 3704,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/GPS"
-        },
-        {
-            "id": 13686,
-            "symbol": "DOGE.X",
-            "title": "Dogecoin",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 11017,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/DOGE.X"
-        },
-        {
-            "id": 11511,
-            "symbol": "NDLS",
-            "title": "Noodles & Company",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 1256,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/NDLS"
-        },
-        {
-            "id": 5396,
-            "symbol": "FRT",
-            "title": "Federal Realty Investment Trust",
-            "aliases": [],
-            "is_following": false,
-            "watchlist_count": 307,
-            "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/FRT"
-        },
-        {
-            "id": 699,
-            "symbol": "ABIO",
-            "title": "ARCA biopharma, Inc.",
+            "id": 6209,
+            "symbol": "LB",
+            "title": "L Brands, Inc. ",
             "aliases": [
-                "NUVO"
+                "LTD"
             ],
             "is_following": false,
-            "watchlist_count": 10524,
+            "watchlist_count": 4707,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/ABIO"
+            "url": "https://stocktwits.com/symbol/LB"
         },
         {
-            "id": 9520,
-            "symbol": "QADA",
-            "title": "QAD Inc.",
+            "id": 4753,
+            "symbol": "CLC",
+            "title": "CLARCOR Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 119,
+            "watchlist_count": 449,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/QADA"
+            "url": "https://stocktwits.com/symbol/CLC"
         },
         {
-            "id": 5224,
-            "symbol": "ETH",
-            "title": "Ethan Allen Interiors Inc.",
+            "id": 7656,
+            "symbol": "VNO",
+            "title": "Vornado Realty Trust",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 277,
+            "watchlist_count": 235,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/ETH"
+            "url": "https://stocktwits.com/symbol/VNO"
         },
         {
-            "id": 5025,
-            "symbol": "DOV",
-            "title": "Dover Corp.",
+            "id": 4518,
+            "symbol": "BIG",
+            "title": "Big Lots Inc.",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 644,
+            "watchlist_count": 1559,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/DOV"
+            "url": "https://stocktwits.com/symbol/BIG"
         },
         {
-            "id": 3486,
-            "symbol": "SNBR",
-            "title": "Sleep Number Corp",
-            "aliases": [],
+            "id": 8051,
+            "symbol": "YINN",
+            "title": "Direxion Daily China Bull 3X Shares",
+            "aliases": [
+                "CZM"
+            ],
             "is_following": false,
-            "watchlist_count": 612,
+            "watchlist_count": 4366,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/SNBR"
+            "url": "https://stocktwits.com/symbol/YINN"
         },
         {
-            "id": 3146,
-            "symbol": "PLAB",
-            "title": "Photronics Inc.",
+            "id": 4438,
+            "symbol": "BAC",
+            "title": "Bank of America Corporation",
             "aliases": [],
             "is_following": false,
-            "watchlist_count": 660,
+            "watchlist_count": 75485,
             "source": "stock-twits",
-            "url": "https://stocktwits.com/symbol/PLAB"
+            "url": "https://stocktwits.com/symbol/BAC"
+        },
+        {
+            "id": 3413,
+            "symbol": "ROST",
+            "title": "Ross Stores Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 2462,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ROST"
+        },
+        {
+            "id": 3539,
+            "symbol": "SINA",
+            "title": "Sina Corp.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5841,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/SINA"
+        },
+        {
+            "id": 13272,
+            "symbol": "UWT",
+            "title": " VelocitySharesTM 3x Long Crude Oil ETN",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 11967,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/UWT"
+        },
+        {
+            "id": 5356,
+            "symbol": "FL",
+            "title": "Foot Locker, Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 5156,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/FL"
+        },
+        {
+            "id": 11253,
+            "symbol": "SVXY",
+            "title": "Short VIX Short-Term Futures ETF",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 11319,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/SVXY"
+        },
+        {
+            "id": 13799,
+            "symbol": "XTZ.X",
+            "title": "Tezos",
+            "aliases": [
+                "TEZ.X"
+            ],
+            "is_following": false,
+            "watchlist_count": 491,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/XTZ.X"
+        },
+        {
+            "id": 5974,
+            "symbol": "JEC",
+            "title": "Jacobs Engineering Group Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 620,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/JEC"
+        },
+        {
+            "id": 12756,
+            "symbol": "AIMT",
+            "title": "Aimmune Therapeutics",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 2167,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/AIMT"
+        },
+        {
+            "id": 7795,
+            "symbol": "XEL",
+            "title": "Xcel Energy Inc.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 494,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/XEL"
+        },
+        {
+            "id": 1504,
+            "symbol": "CTSH",
+            "title": "Cognizant Technology Solutions Corp.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 3151,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/CTSH"
+        },
+        {
+            "id": 7332,
+            "symbol": "SYK",
+            "title": "Stryker Corp.",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 1887,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/SYK"
+        },
+        {
+            "id": 13011,
+            "symbol": "ADVM",
+            "title": "Adverum Biotechnologies, Inc",
+            "aliases": [],
+            "is_following": false,
+            "watchlist_count": 2581,
+            "source": "stock-twits",
+            "url": "https://stocktwits.com/symbol/ADVM"
         }
     ],
     "seekingAlphaEarningsDate": [
@@ -4574,38 +4578,178 @@
     "yahooTickers": [
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/COP?p=COP",
-            "company": "ConocoPhillips",
-            "symbol": "COP",
-            "change": "+1.10%"
+            "url": "https://finance.yahoo.com/quote/PSTV?p=PSTV",
+            "company": "Plus Therapeutics, Inc.",
+            "symbol": "PSTV",
+            "change": "+272.16%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/XRP-USD?p=XRP-USD",
-            "company": "Ripple USD",
-            "symbol": "XRP-USD",
-            "change": "+6.40%"
+            "url": "https://finance.yahoo.com/quote/%5EHSI?p=%5EHSI",
+            "company": "HANG SENG INDEX",
+            "symbol": "^HSI",
+            "change": "+1.87%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/%5EN225?p=%5EN225",
+            "company": "Nikkei 225",
+            "symbol": "^N225",
+            "change": "+0.65%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/CL%3DF?p=CL%3DF",
+            "company": "Crude Oil",
+            "symbol": "CL=F",
+            "change": "+0.91%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/ES%3DF?p=ES%3DF",
+            "company": "E-Mini S&P 500 Sep 19",
+            "symbol": "ES=F",
+            "change": "+0.50%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/PANW?p=PANW",
+            "company": "Palo Alto Networks, Inc.",
+            "symbol": "PANW",
+            "change": "-7.15%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/EXEL?p=EXEL",
+            "company": "Exelixis, Inc.",
+            "symbol": "EXEL",
+            "change": "+8.93%"
         },
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/BTC-USD?p=BTC-USD",
             "company": "Bitcoin USD",
             "symbol": "BTC-USD",
-            "change": "+2.10%"
+            "change": "+0.59%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/OKE?p=OKE",
-            "company": "ONEOK, Inc.",
-            "symbol": "OKE",
-            "change": "+1.99%"
+            "url": "https://finance.yahoo.com/quote/NBRV?p=NBRV",
+            "company": "Nabriva Therapeutics plc",
+            "symbol": "NBRV",
+            "change": "+5.56%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/WORK?p=WORK",
-            "company": "Slack Technologies, Inc.",
-            "symbol": "WORK",
-            "change": "-0.53%"
+            "url": "https://finance.yahoo.com/quote/BIDU?p=BIDU",
+            "company": "Baidu, Inc.",
+            "symbol": "BIDU",
+            "change": "+2.49%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/YM%3DF?p=YM%3DF",
+            "company": "Mini Dow Jones Indus.-$5 Sep 19",
+            "symbol": "YM=F",
+            "change": "+0.49%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/NQ%3DF?p=NQ%3DF",
+            "company": "Nasdaq 100 Sep 19",
+            "symbol": "NQ=F",
+            "change": "+0.61%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/0700.HK?p=0700.HK",
+            "company": "Tencent Holdings Limited",
+            "symbol": "0700.HK",
+            "change": "+1.78%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/GC%3DF?p=GC%3DF",
+            "company": "Gold",
+            "symbol": "GC=F",
+            "change": "-0.29%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/000001.SS?p=000001.SS",
+            "company": "SSE Composite Index",
+            "symbol": "000001.SS",
+            "change": "+1.47%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/XRP-USD?p=XRP-USD",
+            "company": "Ripple USD",
+            "symbol": "XRP-USD",
+            "change": "+1.02%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/IQ?p=IQ",
+            "company": "iQIYI, Inc.",
+            "symbol": "IQ",
+            "change": "+0.65%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/%5EJKSE?p=%5EJKSE",
+            "company": "Jakarta Composite Index",
+            "symbol": "^JKSE",
+            "change": "+0.08%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/%5ETWII?p=%5ETWII",
+            "company": "TSEC weighted index",
+            "symbol": "^TWII",
+            "change": "+0.78%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/CRM?p=CRM",
+            "company": "salesforce.com, inc.",
+            "symbol": "CRM",
+            "change": "+1.24%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/AUDUSD%3DX?p=AUDUSD%3DX",
+            "company": "AUD/USD",
+            "symbol": "AUDUSD=X",
+            "change": "+0.0068%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/MMNFF?p=MMNFF",
+            "company": "MedMen Enterprises Inc.",
+            "symbol": "MMNFF",
+            "change": "+3.21%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/HD?p=HD",
+            "company": "The Home Depot, Inc.",
+            "symbol": "HD",
+            "change": "+0.92%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/SI%3DF?p=SI%3DF",
+            "company": "Silver",
+            "symbol": "SI=F",
+            "change": "-0.71%"
+        },
+        {
+            "source": "yahoo",
+            "url": "https://finance.yahoo.com/quote/WB?p=WB",
+            "company": "Weibo Corporation",
+            "symbol": "WB",
+            "change": "+4.86%"
         },
         {
             "source": "yahoo",
@@ -4616,421 +4760,367 @@
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/GC%3DF?p=GC%3DF",
-            "company": "Gold",
-            "symbol": "GC=F",
-            "change": "-0.72%"
+            "url": "https://finance.yahoo.com/quote/ARWR?p=ARWR",
+            "company": "Arrowhead Pharmaceuticals, Inc.",
+            "symbol": "ARWR",
+            "change": "+6.89%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/GILD?p=GILD",
-            "company": "Gilead Sciences, Inc.",
-            "symbol": "GILD",
-            "change": "+0.43%"
+            "url": "https://finance.yahoo.com/quote/0005.HK?p=0005.HK",
+            "company": "HSBC Holdings plc",
+            "symbol": "0005.HK",
+            "change": "+2.57%"
         },
         {
             "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/ACB?p=ACB",
-            "company": "Aurora Cannabis Inc.",
-            "symbol": "ACB",
-            "change": "+5.64%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/SLS?p=SLS",
-            "company": "SELLAS Life Sciences Group, Inc.",
-            "symbol": "SLS",
-            "change": "+1.21%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/AMRN?p=AMRN",
-            "company": "Amarin Corporation plc",
-            "symbol": "AMRN",
-            "change": "+4.92%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CL%3DF?p=CL%3DF",
-            "company": "Crude Oil",
-            "symbol": "CL=F",
-            "change": "+0.86%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/GERN?p=GERN",
-            "company": "Geron Corporation",
-            "symbol": "GERN",
-            "change": "+1.44%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/MRK?p=MRK",
-            "company": "Merck & Co., Inc.",
-            "symbol": "MRK",
-            "change": "+1.92%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/CRON?p=CRON",
-            "company": "Cronos Group Inc.",
-            "symbol": "CRON",
-            "change": "-0.49%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/SIRI?p=SIRI",
-            "company": "Sirius XM Holdings Inc.",
-            "symbol": "SIRI",
-            "change": "+1.84%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/NKE?p=NKE",
-            "company": "NIKE, Inc.",
-            "symbol": "NKE",
-            "change": "+0.97%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/JD?p=JD",
-            "company": "JD.com, Inc.",
-            "symbol": "JD",
-            "change": "+3.75%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/APHA?p=APHA",
-            "company": "Aphria Inc.",
-            "symbol": "APHA",
-            "change": "+3.69%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/FB?p=FB",
-            "company": "Facebook, Inc.",
-            "symbol": "FB",
-            "change": "+0.61%"
+            "url": "https://finance.yahoo.com/quote/ENPH?p=ENPH",
+            "company": "Enphase Energy, Inc.",
+            "symbol": "ENPH",
+            "change": "+7.56%"
         },
         {
             "source": "yahoo",
             "url": "https://finance.yahoo.com/quote/EURUSD%3DX?p=EURUSD%3DX",
             "company": "EUR/USD",
             "symbol": "EURUSD=X",
-            "change": "-0.0000%"
-        },
-        {
-            "source": "yahoo",
-            "url": "https://finance.yahoo.com/quote/PINS?p=PINS",
-            "company": "Pinterest, Inc.",
-            "symbol": "PINS",
-            "change": "+0.66%"
+            "change": "-0.0222%"
         }
     ],
     "seekingAlphaEarningsNews": [],
     "businessInsiderNews": [
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/dgap-adhoc-vapiano-se-ceo-cornelius-everke-resigning-from-office-1028454255",
-            "title": "DGAP-Adhoc: VAPIANO SE: CEO Cornelius Everke resigning from office",
-            "date": "EQS Group  25m"
+            "url": "https://markets.businessinsider.com/news/stocks/grand-city-properties-s-a-announces-h1-2019-results-1028454512",
+            "title": "Grand City Properties S.A.announces H1 2019 results",
+            "date": "EQS Group  5m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/good-boys-movie-has-surprise-box-office-win-despite-r-rating-2019-8-1028454247",
-            "title": "R-rated comedy 'Good Boys' comes out of nowhere to win the weekend box office (CMCSA)",
-            "date": "Business Insider  41m"
+            "url": "https://markets.businessinsider.com/news/stocks/dgap-news-grand-city-properties-s-a-announces-h1-2019-results-1028454513",
+            "title": "DGAP-News: Grand City Properties S.A.announces H1 2019 results",
+            "date": "EQS Group  6m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/the-pathfinder-network-exhibits-at-american-parole-and-probation-association-training-institute-1028454248",
-            "title": "The Pathfinder Network Exhibits at American Parole and Probation Association Training Institute",
-            "date": "PR Newswire  41m"
+            "url": "https://markets.businessinsider.com/news/stocks/southeast-asia-startup-reddoorz-raises-us-115m-1028454511",
+            "title": "Southeast Asia startup RedDoorz raises US$115M",
+            "date": "PR Newswire  12m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/home-decor-instagram-influencers-houses-2019-8-1028454236",
-            "title": "Houses are the new Instagram influencers — so it's a shame most millennials in the US will likely be renters for years",
-            "date": "Business Insider  56m"
+            "url": "https://markets.businessinsider.com/news/interestrates/european-economics-preview-eurozone-inflation-data-due-1028454505",
+            "title": "European Economics Preview: Eurozone Inflation Data Due",
+            "date": "RTTNews  24m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/trump-tariffs-on-french-wine-2019-8-1028454227",
-            "title": "Trump talked about putting a massive tariff on French wine at a Hamptons fundraiser, according to report",
-            "date": "Business Insider  1h"
+            "url": "https://markets.businessinsider.com/news/stocks/media-members-tee-off-at-forest-city-classic-golf-course-1028454507",
+            "title": "Media Members Tee Off At Forest City Classic Golf Course",
+            "date": "PR Newswire  27m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/bootleg-alcohol-counterfeit-supply-chains-2019-8-1028454225",
-            "title": "Bootleg alcohol is an insidious international threat, and one expert says it's especially dangerous when it's slipped into a legitimate supply chain",
-            "date": "Business Insider  1h"
+            "url": "https://markets.businessinsider.com/news/bonds/non-nrsro-trust-beneficial-interest-201603-1-moody-s-upgrades-ratings-of-trust-beneficial-interest-201603-1-and-201603-2-backed-by-residential-mortgages-1028454506",
+            "title": "[non-NRSRO] Trust Beneficial Interest (201603-1) -- Moody's upgrades ratings of Trust Beneficial Interest 201603-1 and 201603-2 backed by residential mortgages",
+            "date": "Moodys  33m"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/how-to-select-the-best-car-insurance-company-new-guide-1028454224",
-            "title": "How To Select The Best Car Insurance Company - New Guide",
+            "url": "https://markets.businessinsider.com/news/stocks/cspc-pharmaceutical-announces-2019-interim-results-1028454500",
+            "title": "CSPC Pharmaceutical Announces 2019 Interim Results",
+            "date": "PR Newswire  38m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/sensex-nifty-modestly-higher-in-early-trade-1028454493",
+            "title": "Sensex, Nifty Modestly Higher In Early Trade",
+            "date": "RTTNews  41m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-north-china-s-alxa-league-to-hold-autocross-festival-in-oct-1028454485",
+            "title": "Xinhua Silk Road: North China's Alxa League to hold autocross festival in Oct.",
+            "date": "PR Newswire  45m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/interestrates/thai-gdp-grows-at-slowest-pace-in-5-years-1028454481",
+            "title": "Thai GDP Grows At Slowest Pace In 5 Years",
+            "date": "RTTNews  47m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-north-china-s-alxa-league-to-hold-autocross-festival-in-oct-1028454477",
+            "title": "Xinhua Silk Road: North China's Alxa League to hold autocross festival in Oct.",
+            "date": "PR Newswire  50m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/for-the-2nd-time-excelhealth-inc-dba-ireliev-appears-on-the-inc-5000-ranking-no-742-with-three-year-revenue-growth-of-587-percent-1028454478",
+            "title": "For the 2nd Time, ExcelHealth Inc. dba iReliev Appears on the Inc. 5000, Ranking No. 742 With Three-Year Revenue Growth of 587 Percent",
+            "date": "PR Newswire  53m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/advanced-frequency-switching-with-rf-microwave-signal-generators-1028454462",
+            "title": "Advanced Frequency Switching with RF / Microwave Signal Generators",
+            "date": "PR Newswire  58m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/dr-spiro-khoury-joins-physician-partners-of-america-richardson-tx-1028454467",
+            "title": "Dr. Spiro Khoury Joins Physician Partners of America- Richardson, TX",
+            "date": "PR Newswire  58m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/tuniu-to-report-second-quarter-2019-financial-results-on-august-28-2019-1028454464",
+            "title": "Tuniu to Report Second Quarter 2019 Financial Results on August 28, 2019",
+            "date": "PR Newswire  58m"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/beijing-s-green-belt-road-forum-draws-global-lenders-1028454449",
+            "title": "Beijing's Green Belt & Road Forum Draws Global Lenders",
+            "date": "PR Newswire  1h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/2019-taiwan-braised-pork-rice-festival-a-feast-of-taiwan-s-pork-delicacies-1028454438",
+            "title": "2019 Taiwan Braised Pork Rice Festival - A Feast of Taiwan's Pork Delicacies",
+            "date": "PR Newswire  1h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-north-china-s-alxa-league-to-hold-autocross-festival-in-oct-1028454440",
+            "title": "Xinhua Silk Road: North China's Alxa League to hold autocross festival in Oct.",
+            "date": "PR Newswire  1h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/xinhua-silk-road-north-china-s-alxa-league-to-hold-autocross-festival-in-oct-1028454439",
+            "title": "Xinhua Silk Road: North China's Alxa League to hold autocross festival in Oct.",
+            "date": "PR Newswire  1h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/interestrates/uk-house-sales-increase-notably-in-august-rightmove-1028454412",
+            "title": "UK House Sales Increase Notably In August: Rightmove",
+            "date": "RTTNews  1h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/bonds/china-int-l-capital-corp-hong-kong-ltd-moody-s-assigns-first-time-baa1-p-2-ratings-to-cicc-hk-outlook-stable-1028454414",
+            "title": "China Int'l Capital Corp (Hong Kong) Ltd -- Moody's assigns first-time Baa1/P-2 ratings to CICC HK; outlook stable",
+            "date": "Moodys  2h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/asian-markets-rise-on-stimulus-hopes-1028454408",
+            "title": "Asian Markets Rise On Stimulus Hopes",
+            "date": "RTTNews  2h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/food-recall-warning-rosemount-brand-cooked-diced-chicken-meat-recalled-due-to-listeria-monocytogenes-1028454410",
+            "title": "Food Recall Warning - Rosemount brand cooked diced chicken meat recalled due to Listeria monocytogenes",
             "date": "PR Newswire  2h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/netflix-great-hack-david-carroll-interview-data-rights-cambridge-analytica-2019-8-1028454219",
-            "title": "We talked to the professor who fought Cambridge Analytica to get his data back in Netflix's 'The Great Hack' about why privacy rights in the US are lagging behind the rest of the world",
-            "date": "Business Insider  2h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/signature-bank-named-to-inc-magazine-s-list-of-america-s-fastest-growing-private-companies-the-inc-5000-1028454220",
-            "title": "Signature Bank Named to Inc. Magazine's List of America's Fastest-Growing Private Companies--the Inc. 5000",
+            "url": "https://markets.businessinsider.com/news/stocks/beijing-s-green-belt-road-forum-draws-global-lenders-1028454406",
+            "title": "Beijing's Green Belt & Road Forum Draws Global Lenders",
             "date": "PR Newswire  2h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/mcdonalds-to-go-restaurant-takeout-london-2019-8-1028454217",
-            "title": "McDonald's just launched its first new type of restaurant since the drive-thru — here's what it's like to eat there",
-            "date": "Business Insider  2h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/technology-giant-trackimo-unveils-latest-gps-tracking-security-integration-for-businesses-and-fleet-management-1028454218",
-            "title": "Technology giant Trackimo unveils latest GPS tracking security integration for businesses and fleet management",
+            "url": "https://markets.businessinsider.com/news/stocks/beijing-s-green-belt-road-forum-draws-global-lenders-1028454407",
+            "title": "Beijing's Green Belt & Road Forum Draws Global Lenders",
             "date": "PR Newswire  2h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/top-business-stories-this-week-wework-google-cloud-ancestry-dna-2019-8-1028454203",
-            "title": "WeWeek, how Google Cloud pays its salespeople, and Ancestry DNA's ambitions",
-            "date": "Business Insider  2h"
+            "url": "https://markets.businessinsider.com/news/stocks/sensex-nifty-seen-up-on-firm-global-cues-1028454404",
+            "title": "Sensex, Nifty Seen Up On Firm Global Cues",
+            "date": "RTTNews  2h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/important-reasons-why-online-car-insurance-quotes-are-so-useful-to-drivers-1028454194",
-            "title": "Important Reasons Why Online Car Insurance Quotes Are So Useful To Drivers",
+            "url": "https://markets.businessinsider.com/news/bonds/moody-s-indonesian-textile-companies-not-immune-to-us-china-trade-tensions-1028454398",
+            "title": "Moody's - Indonesian textile companies not immune to US-China trade tensions",
+            "date": "Moodys  3h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/bonds/moody-s-robust-economic-growth-underpins-stable-outlook-for-vietnam-banking-system-1028454397",
+            "title": "Moody's - Robust economic growth underpins stable outlook for Vietnam banking system",
+            "date": "Moodys  3h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/higher-open-called-for-indonesia-stock-market-1028454391",
+            "title": "Higher Open Called For Indonesia Stock Market",
+            "date": "RTTNews  3h"
+        },
+        {
+            "source": "business-insider",
+            "url": "https://markets.businessinsider.com/news/stocks/prime-minister-trudeau-to-address-unifor-constitutional-convention-1028454395",
+            "title": "Prime Minister Trudeau to address Unifor Constitutional Convention",
             "date": "PR Newswire  3h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/amazon-sells-cheap-infrared-saunas-for-your-home-2019-8-1028454140",
-            "title": "Infrared saunas have become so popular that Amazon is selling these bizarre-looking foldable spas that people can take with them anywhere (AMZN)",
-            "date": "Business Insider  3h"
+            "url": "https://markets.businessinsider.com/news/stocks/prime-minister-trudeau-to-address-unifor-constitutional-convention-1028454393",
+            "title": "Prime Minister Trudeau to address Unifor Constitutional Convention",
+            "date": "PR Newswire  3h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/tech-companies-in-financial-services-1028454073",
-            "title": "TECH COMPANIES IN FINANCIAL SERVICES: How Apple, Amazon, and Google are taking financial services by storm (AMZN, AAPL, GOOGL)",
-            "date": "Business Insider  4h"
+            "url": "https://markets.businessinsider.com/news/stocks/blue-planet-s-latest-acquisition-marks-entry-into-industrial-waste-processing-1028454394",
+            "title": "Blue Planet's latest acquisition marks entry into industrial waste processing",
+            "date": "PR Newswire  3h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/former-googler-leaves-bay-area-buys-land-austin-texas-2019-8-1028454071",
-            "title": "This former Googler says he's so tired of the astronomical housing prices in San Francisco that he bought land in Austin, Texas instead (GOOG, GOOGL)",
-            "date": "Business Insider  4h"
+            "url": "https://markets.businessinsider.com/news/stocks/japanese-market-rises-1028454390",
+            "title": "Japanese Market Rises",
+            "date": "RTTNews  3h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/kt-corp-unveils-global-epidemic-prevention-platform-in-ghana-1028454047",
-            "title": "KT Corp. Unveils Global Epidemic Prevention Platform in Ghana",
-            "date": "PR Newswire  7h"
+            "url": "https://markets.businessinsider.com/news/stocks/australian-market-advances-1028454388",
+            "title": "Australian Market Advances",
+            "date": "RTTNews  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/laurence-fishburne-hosts-an-upcoming-behind-the-scenes-episode-on-organic-and-sustainably-produced-foods-1028454033",
-            "title": "Laurence Fishburne Hosts an Upcoming \"Behind The Scenes\" Episode on Organic and Sustainably Produced Foods",
-            "date": "PR Newswire  9h"
+            "url": "https://markets.businessinsider.com/news/stocks/hong-kong-bourse-tipped-to-find-continued-support-1028454387",
+            "title": "Hong Kong Bourse Tipped To Find Continued Support",
+            "date": "RTTNews  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/toyota-is-having-a-nationwide-clearance-event-for-its-vehicles-1028454026",
-            "title": "Toyota Is Having a Nationwide Clearance Event For Its Vehicles",
-            "date": "PR Newswire  11h"
+            "url": "https://markets.businessinsider.com/news/stocks/win-streak-may-continue-for-china-stock-market-1028454377",
+            "title": "Win Streak May Continue For China Stock Market",
+            "date": "RTTNews  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/local-alexander-toyota-dealership-is-participating-in-a-national-event-1028454023",
-            "title": "Local Alexander Toyota Dealership is Participating in a National Event",
-            "date": "PR Newswire  11h"
+            "url": "https://markets.businessinsider.com/news/stocks/ttm-technologies-inc-announces-executive-transition-1028454376",
+            "title": "TTM Technologies, Inc. Announces Executive Transition",
+            "date": "GlobeNewswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/customers-can-stay-informed-with-a-local-dealership-via-its-communication-services-1028454027",
-            "title": "Customers Can Stay Informed With a Local Dealership Via Its Communication Services",
-            "date": "PR Newswire  11h"
+            "url": "https://markets.businessinsider.com/news/stocks/bloombergnef-awards-sungrow-a-100-bankability-rating-1028454383",
+            "title": "BloombergNEF Awards Sungrow a 100% Bankability Rating",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/carville-s-auto-mart-offers-an-astounding-inventory-of-vehicles-1028454024",
-            "title": "Carville's Auto Mart Offers an Astounding Inventory of Vehicles",
-            "date": "PR Newswire  11h"
+            "url": "https://markets.businessinsider.com/news/stocks/q-cells-malaysia-factory-awarded-best-csr-company-award-from-the-embassy-of-the-republic-of-korea-in-malaysia-1028454382",
+            "title": "Q CELLS Malaysia Factory awarded 'Best CSR Company Award' from the Embassy of the Republic of Korea in Malaysia",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/manhattan-beach-toyota-welcomes-the-2020-toyota-prius-prime-1028454025",
-            "title": "Manhattan Beach Toyota welcomes the 2020 Toyota Prius Prime",
-            "date": "PR Newswire  11h"
+            "url": "https://markets.businessinsider.com/news/stocks/tier-iv-raises-9-million-from-quanta-computer-to-develop-autoware-integrated-ecus-1028454380",
+            "title": "Tier IV Raises $9 Million from Quanta Computer: To Develop Autoware-integrated ECUs",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/ohio-s-scott-woodrome-wins-bendix-grand-champion-honors-at-national-truck-driving-championships-1028453922",
-            "title": "Ohio's Scott Woodrome Wins Bendix Grand Champion Honors at National Truck Driving Championships",
-            "date": "PR Newswire  15h"
+            "url": "https://markets.businessinsider.com/news/stocks/tier-iv-raises-9-million-from-quanta-computer-to-develop-autoware-integrated-ecus-1028454384",
+            "title": "Tier IV Raises $9 Million from Quanta Computer: To Develop Autoware-integrated ECUs",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/20-million-porsche-for-auction-carmaker-says-its-not-porsche-2019-8-1028453919",
-            "title": "A rare vintage car some call the 'world’s first Porsche' could go for $20 million at auction — but the carmaker wishes it wasn’t being sold at all",
-            "date": "Business Insider  19h"
+            "url": "https://markets.businessinsider.com/news/stocks/bloombergnef-awards-sungrow-a-100-bankability-rating-1028454381",
+            "title": "BloombergNEF Awards Sungrow a 100% Bankability Rating",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/amazon-tests-new-top-brand-label-to-boost-apparel-sales-2019-8-1028453917",
-            "title": "Amazon is testing shouting out 'Top Brands' for shoppers as it aims to sell more clothing",
-            "date": "Business Insider  21h"
+            "url": "https://markets.businessinsider.com/news/stocks/bloombergnef-awards-sungrow-a-100-bankability-rating-1028454385",
+            "title": "BloombergNEF Awards Sungrow a 100% Bankability Rating",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/find-out-which-car-insurance-discounts-can-help-drivers-save-the-most-money-1028453915",
-            "title": "Find Out Which Car Insurance Discounts Can Help Drivers Save The Most Money",
-            "date": "PR Newswire  22h"
+            "url": "https://markets.businessinsider.com/news/stocks/bloombergnef-awards-sungrow-a-100-bankability-rating-1028454378",
+            "title": "BloombergNEF Awards Sungrow a 100% Bankability Rating",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/travelers-bracing-for-back-loaded-hurricane-season-1028453913",
-            "title": "Travelers Bracing For 'Back-Loaded' Hurricane Season",
-            "date": "PR Newswire  23h"
+            "url": "https://markets.businessinsider.com/news/stocks/bloombergnef-awards-sungrow-a-100-bankability-rating-1028454379",
+            "title": "BloombergNEF Awards Sungrow a 100% Bankability Rating",
+            "date": "PR Newswire  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/prime-minister-to-attend-g7-summit-in-france-1028453911",
-            "title": "Prime Minister to attend G7 Summit in France",
-            "date": "PR Newswire  23h"
+            "url": "https://markets.businessinsider.com/news/bonds/moody-s-housing-affordability-improves-in-new-zealand-a-credit-positive-for-covered-bonds-1028454375",
+            "title": "Moody's - Housing affordability improves in New Zealand, a credit positive for covered bonds",
+            "date": "Moodys  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/prime-minister-to-attend-g7-summit-in-france-1028453912",
-            "title": "Prime Minister to attend G7 Summit in France",
-            "date": "PR Newswire  23h"
+            "url": "https://markets.businessinsider.com/news/stocks/taiwan-stock-market-may-add-to-its-winnings-on-monday-1028454373",
+            "title": "Taiwan Stock Market May Add To Its Winnings On Monday",
+            "date": "RTTNews  4h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/what-is-life-insurance-details-types-explained-1028453909",
-            "title": "Life insurance is one of the best tools for protecting your family's future — and the younger you are, the cheaper it is",
-            "date": "Business Insider  23h"
+            "url": "https://markets.businessinsider.com/news/stocks/speedcast-wins-acomms-innovation-award-for-sigma-gateway-secure-connectivity-platform-1028454372",
+            "title": "Speedcast Wins ACOMMS Innovation Award for SIGMA Gateway Secure Connectivity Platform",
+            "date": "PR Newswire  5h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/amazon-sellers-organizing-anti-trust-doj-ftc-2019-8-1028453907",
-            "title": "'Amazon is not their friend': Amazon sellers are organizing against the retail giant as the FTC and DOJ continues their anti-trust probe (AMZN)",
-            "date": "Business Insider  24h"
+            "url": "https://markets.businessinsider.com/news/interestrates/japan-has-y249-6-billion-trade-deficit-in-july-1028454364",
+            "title": "Japan Has Y249.6 Billion Trade Deficit In July",
+            "date": "RTTNews  5h"
         },
         {
             "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/inc-magazine-recognizes-foster-crown-llc-as-a-top-5000-fastest-growing-company-in-the-u-s-1028453908",
-            "title": "Inc Magazine Recognizes Foster Crown, LLC as a Top 5000 Fastest Growing Company in the U.S.",
-            "date": "PR Newswire  24h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/the-us-plans-to-send-nuclear-reactors-to-space-1028454009",
-            "title": "The U.S. Plans To Send Nuclear Reactors To Space",
-            "date": "Oil Price  24h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/allstadt-s-corner-important-to-john-brown-s-raid-donated-to-harpers-ferry-national-historical-park-1028453906",
-            "title": "Allstadt's Corner, important to John Brown's Raid, donated to Harpers Ferry National Historical Park",
-            "date": "PR Newswire  24h"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/usw-members-ratify-contract-with-bf-goodrich-1028453905",
-            "title": "USW Members Ratify Contract with BF Goodrich",
-            "date": "PR Newswire  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/facebook-contractor-accenture-forced-counselors-to-disclose-sessions-2019-8-1028453904",
-            "title": "Facebook content moderation firm asked on-site therapists to disclose counseling details with employees, according to report",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/nasa-china-why-no-joint-human-mars-mission-2019-7-1028453903",
-            "title": "'We want our country to do it first': A NASA executive says a US-China Mars mission is not in the cards",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/united-states-racial-wealth-gap-cost-economy-2019-8-1028453902",
-            "title": "The racial wealth gap in the US keeps getting bigger — and it could cost the economy as much as $1.5 trillion by 2028",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/macys-jcpenney-wont-be-saved-by-thredup-partnership-2019-8-1028453901",
-            "title": "Retail experts reveal why 'stodgy, suffering' Macy's and JCPenney won't be saved by partnerships with buzzy startup ThredUp",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/network-builders-it-named-to-the-inc-5000-list-of-fastest-growing-private-companies-1028453898",
-            "title": "Network Builders IT Named to the Inc. 5000 List of Fastest-Growing Private Companies",
-            "date": "PR Newswire  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/fully-accountable-inc-5000-press-release-1028453899",
-            "title": "Fully Accountable Inc 5000 Press Release",
-            "date": "PR Newswire  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/iraq-moves-to-upgrade-oil-export-capacity-1028454010",
-            "title": "Iraq Moves To Upgrade Oil Export Capacity",
-            "date": "Oil Price  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/natty-light-pbr-four-loko-take-on-white-claw-2019-8-1028453896",
-            "title": "White Claw won over the \"bros.\" Now, Natty Light, PBR, and Four Loko want to win them back with even boozier hard seltzer.",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/jeffrey-epstein-nyc-mansion-decorations-interior-photos-2019-8-1028453895",
-            "title": "10 of the most bizarre details people have reported finding in Jeffrey Epstein's NYC mansion, from a painting of Bill Clinton in a dress to prosthetic breasts mounted on a bathroom wall",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/axiom-ceo-elena-donio-how-to-succeed-as-a-woman-2019-8-1028453894",
-            "title": "The CEO of a company that calls itself 'the future of law' says she still can't escape sexism at work — but she's on a mission to prove mentorship can break the glass ceiling",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/tvs-motor-singapore-invests-us-3-2-million-in-predictronics-corporation-an-ai-driven-predictive-maintenance-analytics-solutions-provider-1028453891",
-            "title": "TVS Motor Singapore Invests US$ 3.2 Million in Predictronics Corporation, an AI Driven Predictive Maintenance Analytics Solutions Provider",
-            "date": "PR Newswire  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/2019-national-truck-driving-championships-finalists-announced-1028453892",
-            "title": "2019 National Truck Driving Championships Finalists Announced",
-            "date": "PR Newswire  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/apple-iphone-11-pre-launch-impressions-from-business-insider-readers-2019-8-1028453890",
-            "title": "Here's what Business Insider readers have to say about the iPhone 11, Apple's next smartphone expected to arrive in September",
-            "date": "Business Insider  1d"
-        },
-        {
-            "source": "business-insider",
-            "url": "https://markets.businessinsider.com/news/stocks/cbs-viacom-merger-what-means-employees-streaming-deal-making-2019-8-1028453889",
-            "title": "What the CBS-Viacom merger means for employees, the future of TV, and the next round of deal-making (CBS, VIAB)",
-            "date": "Business Insider  1d"
+            "url": "https://markets.businessinsider.com/news/stocks/speedcast-wins-acomms-innovation-award-for-sigma-gateway-secure-connectivity-platform-1028454366",
+            "title": "Speedcast Wins ACOMMS Innovation Award for SIGMA Gateway Secure Connectivity Platform",
+            "date": "PR Newswire  5h"
         }
     ],
     "barronsNews": [
+        {
+            "source": "barrons",
+            "url": "https://www.marketwatch.com/story/a-bull-market-through-2020-its-a-certainty-says-white-house-trade-adviser-2019-08-18?mod=hp_LATEST",
+            "title": "White House trade adviser says it’s a ‘certainty’ bull market lasts through 2020",
+            "date": "3:51 AM ET"
+        },
+        {
+            "source": "barrons",
+            "url": "https://www.marketwatch.com/story/asian-markets-rise-as-investors-keep-wary-eye-on-recession-risks-2019-08-18?mod=hp_LATEST",
+            "title": "Asian markets rise as investors keep wary eye on recession risks",
+            "date": "2:55 AM ET"
+        },
+        {
+            "source": "barrons",
+            "url": "https://www.fnlondon.com/articles/pensionbees-romi-savova-try-and-do-business-despite-the-government-20190819?mod=hp_LATEST",
+            "title": "PensionBee’s Romi Savova: ‘Try and do business despite the government’",
+            "date": "11:01 PM ET"
+        },
+        {
+            "source": "barrons",
+            "url": "https://www.fnlondon.com/articles/banking-and-investment-bodies-begin-talks-to-cut-stock-market-trading-hours-20190819?mod=hp_LATEST",
+            "title": "Banking and investment bodies begin talks to cut stock market trading hours",
+            "date": "11:01 PM ET"
+        },
+        {
+            "source": "barrons",
+            "url": "https://www.barrons.com/articles/home-depot-l-brands-analog-devices-and-more-stocks-for-investors-to-watch-51566154801?mod=hp_LATEST",
+            "title": "Home Depot, L Brands, Analog Devices and More Stocks to Watch",
+            "date": "7:00 PM ET"
+        },
         {
             "source": "barrons",
             "url": "https://www.marketwatch.com/story/rising-defaults-in-high-yield-bonds-puts-this-year-on-track-for-post-2008-crisis-record-warns-goldman-sachs-2019-08-17?mod=hp_LATEST",
@@ -5300,103 +5390,108 @@
             "url": "https://www.barrons.com/articles/ge-insurance-reserves-fraud-claim-goldman-sachs-51565976134?mod=hp_LATEST",
             "title": "GE’s Insurance Reserves Were at the Heart of a Fraud Claim. Here’s What Goldman Sachs Has to Say.",
             "date": "5:32 PM ET"
-        },
-        {
-            "source": "barrons",
-            "url": "https://www.barrons.com/articles/dow-jones-industrial-average-gains-as-bond-yields-stop-falling-51565974769?mod=hp_LATEST",
-            "title": "Dow Gains 279 Points Because Treasury Yields Stopped Falling",
-            "date": "4:59 PM ET"
-        },
-        {
-            "source": "barrons",
-            "url": "https://www.barrons.com/articles/stocks-dividend-here-consider-buying-51565973979?mod=hp_LATEST",
-            "title": "Some Stocks Are About to Go Ex-Dividend. Here Are Some to Consider Buying.",
-            "date": "4:48 PM ET"
-        },
-        {
-            "source": "barrons",
-            "url": "https://www.barrons.com/articles/buy-kratos-stock-because-drones-are-the-future-goldman-says-51565972512?mod=hp_LATEST",
-            "title": "Buy Kratos Stock Because Drones Are the Future, Goldman Says",
-            "date": "4:21 PM ET"
-        },
-        {
-            "source": "barrons",
-            "url": "https://www.marketwatch.com/story/junk-bonds-are-getting-worse-and-investors-are-starting-to-take-notice-2019-08-15?mod=hp_LATEST",
-            "title": "Junk bonds are getting worse, and investors are starting to take notice",
-            "date": "4:17 PM ET"
-        },
-        {
-            "source": "barrons",
-            "url": "https://www.barrons.com/articles/weeks-best-jpmorgan-and-jeffrey-epstein-51565972118?mod=hp_LATEST",
-            "title": "Week’s Best: JPMorgan and Jeffrey Epstein",
-            "date": "4:15 PM ET"
         }
     ],
     "hackerNews": [
         {
             "source": "hacker-news",
-            "url": "https://www.wsj.com/articles/californias-biggest-cities-confront-a-defecation-crisis-11565994160?mod=rsswn",
-            "title": "California’s Biggest Cities Confront a ‘Defecation Crisis’"
+            "url": "https://www.csc.gov.sg/articles/how-to-build-good-software",
+            "title": "How to Build Good Software"
         },
         {
             "source": "hacker-news",
-            "url": "https://heise.de/-4496138",
-            "title": "Kaspersky AV injected unique ID allowing sites to track users in incognito mode"
+            "url": "http://pindancing.blogspot.com/2010/12/answer-to-will-you-mentor-me-is.html",
+            "title": "The answer to “Will you mentor me?” is no (2010)"
         },
         {
             "source": "hacker-news",
-            "url": "https://parallel.co.uk/netherlands/#13.8/52.365/4.9/0/40",
-            "title": "Netherlands building ages"
+            "url": "https://nurpax.github.io/posts/2019-08-18-dirty-tricks-6502-programmers-use.html",
+            "title": "Dirty tricks 6502 programmers use"
         },
         {
             "source": "hacker-news",
-            "url": "https://ngoldbaum.github.io/posts/python-vs-rust-nn/",
-            "title": "Python vs. Rust for Neural Networks"
+            "url": "https://www.nytimes.com/2019/08/17/opinion/sunday/childhood-suicide-depression-anxiety.html",
+            "title": "We Have Ruined Childhood"
         },
         {
             "source": "hacker-news",
-            "url": "https://wjmn.github.io/posts/j-can-look-like-apl.html",
-            "title": "J can look like APL or English"
+            "url": "https://medium.com/@tokata/how-google-play-terminated-a-developer-for-no-reason-e4d760e9f472",
+            "title": "Open letter from an Android developer to the Google Play team"
         },
         {
             "source": "hacker-news",
-            "url": "https://www.the-tls.co.uk/articles/public/umberto-eco-texts-sign-systems-risks-interpretation/",
-            "title": "Umberto Eco: Texts, sign systems and the risks of over-interpretation"
+            "url": "https://www.engadget.com/2019/08/18/twitter-china-ads-attack-hong-kong-protesters",
+            "title": "Twitter is displaying China-made ads attacking Hong Kong protesters"
         },
         {
             "source": "hacker-news",
-            "url": "https://news.microsoft.com/stories/people/adlam.html?ocid=lock",
-            "title": "Two brothers invented an alphabet for their native language, Fulfulde"
+            "url": "https://library.sciencemadness.org/library/books/ignition.pdf",
+            "title": "Ignition: An Informal History of Liquid Rocket Propellants (1972) [pdf]"
         },
         {
             "source": "hacker-news",
-            "url": "https://www.sqlite.org/fasterthanfs.html",
-            "title": "35% Faster Than The Filesystem"
+            "url": "https://mathoverflow.net/questions/338607/why-doesnt-mathematics-collapse-down-even-though-humans-quite-often-make-mista",
+            "title": "Why doesn't mathematics collapse, though humans often make mistakes in proofs?"
         },
         {
             "source": "hacker-news",
-            "url": "https://medium.com/@alexallain/what-ive-learned-interviewing-500-people-the-interviewer-skills-ladder-for-high-growth-software-37778d2aae85",
-            "title": "The interviewer skills ladder for high growth companies"
+            "url": "https://arp242.net/yaml-config.html",
+            "title": "YAML: Probably not so great after all"
         },
         {
             "source": "hacker-news",
-            "url": "http://codetapper.com/amiga/random-rants/hidden-messages-in-amiga-games/",
-            "title": "Hidden messages in Amiga games (2017)"
+            "url": "https://www.spectator.co.uk/2019/03/richard-sorge-the-soviet-unions-master-spy/",
+            "title": "Richard Sorge: The Soviet Union’s Master Spy"
         },
         {
             "source": "hacker-news",
-            "url": "http://www.berkkapicioglu.com/wp-content/uploads/2018/11/chess2vec_nips_2018_short.pdf",
-            "title": "Chess2vec: Learning Vector Representations for Chess (2018) [pdf]"
+            "url": "https://www.nytimes.com/2019/08/16/style/modern-love-man-who-is-nice-to-animals.html",
+            "title": "She Wanted a Man with a Good Job Who Is Nice to Animals"
         },
         {
             "source": "hacker-news",
-            "url": "https://www.theparisreview.org/blog/2019/08/15/three-letters-from-switzerland/",
-            "title": "Three Letters from Switzerland"
+            "url": "https://golden.com/blog/using-the-golden-research-engine-to-query-the-y-combinator-s19-batch/",
+            "title": "Using the Golden Research Engine to Query the Y Combinator S19 Batch"
         },
         {
             "source": "hacker-news",
-            "url": "https://paulrhayes.com/plastic-free-july/",
-            "title": "Plastic Free July"
+            "url": "https://www.nature.com/articles/d41586-018-06170-1",
+            "title": "The quest to conquer Earth’s space junk problem (2018)"
+        },
+        {
+            "source": "hacker-news",
+            "url": "https://techxplore.com/news/2019-08-wall-street-secrets-cloud-infrastructure.html",
+            "title": "Using Wall Street secrets to reduce the cost of cloud infrastructure"
+        },
+        {
+            "source": "hacker-news",
+            "url": "https://www.reuters.com/article/us-scooters-ninebot/chinas-ninebot-unveils-scooters-that-drive-themselves-to-charging-stations-idUSKCN1V60LJ",
+            "title": "Segway-Ninebot unveils scooters that drive themselves to charging stations"
+        },
+        {
+            "source": "hacker-news",
+            "url": "http://okbjgm.weebly.com/uploads/3/1/5/0/31506003/11_laws_of_showrunning_nice_version.pdf",
+            "title": "Laws of Showrunning (2016) [pdf]"
+        },
+        {
+            "source": "hacker-news",
+            "url": "https://www.space.com/27424-volcanoes-on-moon-dinosaur-age.html",
+            "title": "Volcanoes on the Moon May Have Erupted During the Dinosaur Age (2014)"
+        },
+        {
+            "source": "hacker-news",
+            "url": "http://steen.free.fr/interslavic/introduction.html",
+            "title": "Interslavic Language"
+        },
+        {
+            "source": "hacker-news",
+            "url": "https://www.zverovich.net/2016/05/13/giving-up-on-julia.html",
+            "title": "Giving up on Julia (2016)"
+        },
+        {
+            "source": "hacker-news",
+            "url": "https://hackaday.com/2014/05/23/homemade-liquid-nitrogen/",
+            "title": "Homemade Liquid Nitrogen with the Joule-Thompson Effect"
         },
         {
             "source": "hacker-news",
@@ -5405,141 +5500,198 @@
         },
         {
             "source": "hacker-news",
-            "url": "https://tgceec.tumblr.com/post/74534916370/results-of-the-grand-c-error-explosion/",
-            "title": "The Grand C++ Error Explosion Competition"
+            "url": "https://beautifulracket.com/appendix/thoughts-on-racket2.html",
+            "title": "Thoughts on Racket2"
         },
         {
             "source": "hacker-news",
-            "url": "https://thenextweb.com/privacy/2019/08/16/apple-will-soon-treat-online-web-tracking-the-same-as-a-security-vulnerability/",
-            "title": "Apple will soon treat online web tracking the same as a security vulnerability"
+            "url": "https://smalldata.tech/blog/2019/08/16/getting-started-with-lisp-in-2019",
+            "title": "Getting Started with Lisp in 2019"
         },
         {
             "source": "hacker-news",
-            "url": "https://yangshun.github.io/tech-interview-handbook/",
-            "title": "Tech Interview Handbook"
+            "url": "http://www.aosabook.org/en/index.html",
+            "title": "The Architecture of Open Source Applications"
         },
         {
             "source": "hacker-news",
-            "url": "https://arxiv.org/abs/1903.00374",
-            "title": "Model-Based Reinforcement Learning for Atari"
+            "url": "https://www.bbc.com/news/uk-england-devon-27185893",
+            "title": "The D-Day rehearsal that cost 800 lives"
         },
         {
             "source": "hacker-news",
-            "url": "https://www.theguardian.com/business/2019/aug/18/where-did-all-the-cod-go-fish-chips-north-sea-sustainable-stocks",
-            "title": "Where did all the cod go? Fishing crisis in the North Sea"
+            "url": "https://elliott.computer/exploring-the-vastness-of-a-website/",
+            "title": "Exploring the Vastness of a Website"
         },
         {
             "source": "hacker-news",
-            "url": "https://startyourownisp.com/",
-            "title": "Start Your Own ISP"
+            "url": "https://www.npr.org/2019/08/17/752042032/marium-the-dugong-that-charmed-thailand-dies-after-ingesting-plastic",
+            "title": "Marium, the Dugong Who Charmed Thailand, Dies After Ingesting Plastic"
         },
         {
             "source": "hacker-news",
-            "url": "https://www.silasreinagel.com/blog/2019/08/12/how-slack-harms-projects/",
-            "title": "How Slack Harms Projects"
+            "url": "https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ProblemSolving.md",
+            "title": "Problem Solving and Clojure 1.9 (2018)"
         },
         {
             "source": "hacker-news",
-            "url": "https://fair.org/home/media-just-cant-stop-presenting-horrifying-stories-as-uplifting-perseverance-porn/",
-            "title": "Media Can’t Stop Presenting Horrifying Stories as ‘Uplifting’ Perseverance Porn"
+            "url": "https://eandt.theiet.org/content/articles/2019/08/smart-plastic-incineration-posited-as-viable-solution-to-global-recycling-crisis/",
+            "title": "Smart plastic incineration posited as solution to global recycling crisis"
         },
         {
             "source": "hacker-news",
-            "url": "https://arstechnica.com/science/2019/08/wind-power-prices-now-lower-than-the-cost-of-natural-gas/",
-            "title": "In the US, it's cheaper to build and operate wind farms than buy fossil fuels"
-        },
-        {
-            "source": "hacker-news",
-            "url": "https://github.com/ruffle-rs/ruffle",
-            "title": "Ruffle – An Adobe Flash Player Written in Rust Compiled to WebAssembly"
-        },
-        {
-            "source": "hacker-news",
-            "url": "http://user.it.uu.se/~arnea/ps/gb.pdf",
-            "title": "General Balanced Trees (1999) [pdf]"
-        },
-        {
-            "source": "hacker-news",
-            "url": "https://putanumonit.com/2019/07/26/cephaloponderings/",
-            "title": "Cephaloponderings"
-        },
-        {
-            "source": "hacker-news",
-            "url": "https://www.tsmc.com/english/newsEvents/blog_article_20190814.htm",
-            "title": "Moore’s Law is not Dead"
-        },
-        {
-            "source": "hacker-news",
-            "url": "https://www.quantamagazine.org/physicists-aim-to-classify-all-possible-phases-of-matter-20180103/",
-            "title": "Physicists Aim to Classify All Possible Phases of Matter"
-        },
-        {
-            "source": "hacker-news",
-            "url": "item?id=20729252",
-            "title": "Ask HN: What book to read to get a footing in CS theory?"
-        },
-        {
-            "source": "hacker-news",
-            "url": "https://www.theparisreview.org/blog/2019/08/09/david-foster-wallaces-pen-pal/",
-            "title": "David Foster Wallace’s Pen Pal"
+            "url": "https://apps.apple.com/us/app/die-with-me/id1317265106",
+            "title": "Die With Me – A chat app you can only use when you have less than 5% battery"
         }
     ],
     "redditInvesting": [
         {
             "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/cs259b/climate_change_investing_idea/",
-            "title": "Climate change investing idea",
-            "description": "Have been reading about how a lot of cities/countries are building seawalls around places like Manhattan, Venice, as well as the Netherlands to combat rising water levels.  I think this could be a good macro trend to ride but I’m not aware of any public companies that exist for this so I was wondering if there were any good ways to play this or if this is going to be more of a VC/PE play at this point that would be out of reach to a retail investor?  Economist article on the subject: Climate change is a remorseless threat to the world’s coasts from The Economist https://www.economist.com/briefing/2019/08/17/climate-change-is-a-remorseless-threat-to-the-worlds-coasts",
-            "date": "48 minutes ago"
+            "url": "https://www.reddit.com/r/investing/comments/csbhty/its_interesting_how_apple_does_every_possible/",
+            "title": "It’s interesting how Apple does every possible trick with tax heavens to avoid US taxes, but still gets public to worry about tariffs on thousand dollar phones",
+            "description": "Tramp talked to Cook this morning",
+            "date": "1 hour ago"
         },
         {
             "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/cs1pnd/thoughts_on_mylo_investing_app/",
-            "title": "Thoughts on Mylo investing app",
-            "description": "Anybody here use Mylo? What’s your thoughts and opinions ! Good and bad I’d love to hear it all.",
+            "url": "https://www.reddit.com/r/investing/comments/csbj6m/i_am_thinking_about_buying_a_100k_condo_and/",
+            "title": "I am thinking about buying a $ 100k condo and renting it out for profit... is this a good idea?",
+            "description": "I live in Alberta, Canada, where minimum wage is $15. Currently I’m making about 1400 a month, with few bills to pay like phone and car insurance (I live with my parents). I saved $11k and plan on saving $20k before I buy a condo so I can put a down payment. This down payment plus paying for 20 years would end up being $400/month for mortgage. I could easily rent it for $1000 maybe more. Should I do this? Please ask if you need any more info  Edit: I would get a condo where all expenses are paid, and all I have to pay is mortgage",
             "date": "1 hour ago"
+        },
+        {
+            "source": "reddit",
+            "url": "https://www.reddit.com/r/investing/comments/cs6pwh/recession_fears_recession_reality/",
+            "title": "Recession fears, recession reality",
+            "description": "I've been an investor through two of the past recessions. I can't say if another one is looming, near, or not close at all. My ability to predict the market is as bad as anyone's.  However, hearing all the fear and hype, and seeing the Great Flight to bonds and commodities and other instruments, it causes me to reflect on what I see happening now, vs. what I remember from the past.  So, when real recessions were underway here's what I remember:  People were not universally warning me to avoid stocks. If anything, bubble hype was so great that I was told I \"couldn't lose\" by investing in tech, or real estate, or whatever else was fashionable at the time. I remember one friend actually becoming angry when I suggested that real estate was as susceptible to market uncertainty as anything else.  My company stopped giving out bonuses and raises, for years. People were laid off during successive waves of \"restructuring\". Recruiters called less often. Jobs were harder to find. Many of my friends had difficulty finding new work, or were out of jobs for months. There was a feeling of things \"drying up\".  During the last recession, Europe became rather expensive to visit (1.47 EUR/USD in Dec 2008). In general, purchasing power felt like it was... less, though this could have just been psychological.  In short, the recession environment made life feel like it was becoming more difficult. Whereas in the current climate, borrowing is still easy, interest rates are low, recruiters are calling, companies pay competitively, my friends are taking trips and vacations and spending their money. The only place I notice \"recession\" cropping up is in the news, over and over.  I'm hopeful it stays there, but it makes me wonder how much of this is just fear levels reaching a fever pitch. Which could, I imagine, provoke the very thing everyone is afraid of, if the market depreciates assets too severely and everyone begins to panic.",
+            "date": "8 hours ago"
         },
         {
             "source": "reddit",
             "url": "https://www.reddit.com/r/investing/comments/crxgal/warren_buffett_comments_on_ges_accounting_and/",
             "title": "Warren Buffett comments on GE's accounting and debt, and explains why Berkshire Hathaway sold all its GE stock",
-            "description": "YouTube video of Buffett talking about GE's problems:  https://youtu.be/TM9ztFadLLs?t=4m10s  The Markopolos report is essentially quantifying these problems and showing that they are far more serious than previously believed  Read the report here:  http://fm.cnbc.com/applications/cnbc.com/resources/editorialfiles/2019/8/15/2019_08_15_GE_Whistleblower_Report.pdf  Be careful, everyone",
-            "date": "10 hours ago"
+            "description": "YouTube video of Buffett talking about GE's problems:  https://youtu.be/TM9ztFadLLs?t=4m10s  The Markopolos report is essentially quantifying these problems and showing that they are far more serious than previously believed  Read the report here (it's a slide deck, easy to understand):  http://fm.cnbc.com/applications/cnbc.com/resources/editorialfiles/2019/8/15/2019_08_15_GE_Whistleblower_Report.pdf  Be careful, everyone",
+            "date": "23 hours ago"
         },
         {
             "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/crtutr/i_found_the_most_insane_shit_while_thrifting_today/",
-            "title": "I found the most insane shit while thrifting today",
-            "description": "My wife is a big thrifter, so of course I have to tag along. While looking around, I found the most batshit crazy stuff in the World: The Gann System. More specifically, a CD-Rom for the \"Natural Squares Calculator.\" I'm a pretty big Finance Nerd, and I enjoy debunking Woo, so of course I bought it. This was NOT covered in college, and after watching one of the videos, I know why. This basically astrology. According to Wiki, this Gann guy actually used Astrology in conjunction with Bible Codes to make it. They made of their own little Compass device to read the market and everything.  Has anyone heard of this stuff?",
-            "date": "15 hours ago"
+            "url": "https://www.reddit.com/r/investing/comments/cs8b1a/trump_says_apples_cook_concerned_about_losing/",
+            "title": "Trump Says Apple’s Cook Concerned About Losing Edge to Samsung With Tariffs",
+            "description": "Apple’s CEO “made a very compelling argument,” according to Trump.  https://www.bloomberg.com/news/articles/2019-08-18/trump-says-apple-s-cook-concerned-about-losing-edge-to-samsung?utm_content=business&utm_medium=social&cmpid=socialflow-facebook-business&utm_campaign=socialflow-organic&utm_source=facebook",
+            "date": "6 hours ago"
+        },
+        {
+            "source": "reddit",
+            "url": "https://www.reddit.com/r/investing/comments/cs7xaj/fzrox_vs_itot_dividend/",
+            "title": "FZROX vs. ITOT Dividend",
+            "description": "Can someone explain why FZROX is still a better investment than ITOT (due to lower expense ratio), even though the dividend yield for FZROX is 0.29%, while the yield for ITOT is 1.59%? I feel like I'm missing something here.",
+            "date": "6 hours ago"
+        },
+        {
+            "source": "reddit",
+            "url": "https://www.reddit.com/r/investing/comments/cs7w96/structured_capital_protection_etf_44_minimum/",
+            "title": "Structured Capital Protection ETF (44% minimum return if positive at maturity)",
+            "description": "What are your opinions on an ETF which offers:  -100% downside protection at maturity if the index (s&p500) does not end down more than 40% on the maturity date -it tracks the s&p500 over 3.5 years -44% minimum return should the index return positive at maturity & 100% of upside should the index growth be above 44% -year 1 fees: 1.25%, y2 fees= 0.75%, y3 fees=0.75% -there is daily liquidity on the jse (south africas stock market) with 1% bid to mid spread  The fund is called the Investec S&P500 Digital Plus",
+            "date": "6 hours ago"
         },
         {
             "source": "reddit",
             "url": "https://www.reddit.com/r/investing/comments/crzvim/what_do_etf_providers_do_with_dividend_money/",
             "title": "What do ETF providers do with dividend money between payouts?",
             "description": "So, most ETFs (at least stock ETFs) pay dividends quarterly. But in between payouts, they accumulate cash from stocks that pay monthly and any stocks whose timing doesn't match with the ETF (like, almost all of them). What do they do with that cash?  I'm assuming that they put it in a money market fund -- am I correct? If so, is the earned interest passed on to the ETF holder?",
-            "date": "4 hours ago"
+            "date": "17 hours ago"
+        }
+    ],
+    "fourChan": [
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/904256/welcome-to-biz-business-finance",
+            "title": "This board is for the discussion of topics related to business, economics, financial markets, securities, currencies (including cryptocurrencies), commodities, etc -- as well as topics relating to starting and running a business.  Discussions of government policy must be strictly limited to economic policies (fiscal and monetary). Discussions of a political nature should be posted on >>>/pol/. Global Rule 3 is also obviously in effect.  Note: /biz/ is NOT a place for ADVERTISING or SOLICITING. Do NOT use it to promote your business, ventures, or anything you may have an interest in. Anything that looks remotely like advertising or soliciting will be removed. Begging/asking (including tipping) for cyptocurrencies or asking for money/capital is also strictly forbidden. Want to advertise? Buy a banner /biz/ targeted banner ad: https://www.4chan.org/advertise?selfserve",
+            "date": "09/24/15(Thu)13:11:36 No.904256"
         },
         {
-            "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/crymjv/why_do_people_sometimes_dismiss_valid_information/",
-            "title": "Why do people sometimes dismiss valid information when it comes to investing, even though it seems empirically valid?",
-            "description": "Ok, not gonna lie here, the guys at /r/wallstreetbets are mostly clowns. But, that being said, during this week's volatility they had a better idea of the reasons the market was going up or down than most people here or on other subreddits.  Nobody is saying to use them as a guide for investing in the market, but wtf, at least they are starting to understand aspects of the market better than most geniuses who love Buffet and try to get rich after 60 years of investing...  Discuss",
-            "date": "7 hours ago"
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/4884770/no-begging",
+            "title": "Begging or asking for 'free money'/crypto is strictly forbidden. Encouraging beggars, or posting any kind of 'free money' offer is also strictly forbidden.",
+            "date": "12/08/17(Fri)08:35:13 No.4884770"
         },
         {
-            "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/crlhac/i_turn_18_in_a_month_and_i_can_finally_start/",
-            "title": "I turn 18 in a month and I can finally start investing, I have questions but any advice is appreciated",
-            "description": "I've got 200-300 to mess with which I understand isn't a lot but I'm in high school with a summer job and that's 30% of my income.  I looked around and investing this low it seems to be that Robinhood is my best option because of their lack of account fees, please correct me if I'm wrong  Is there anything I should know right off the bat about investing, all I really know is you buy and sell and different stocks rise and fall depending on the state of the company.  At this age how safe should I go about this, I always hear when you're young try risky investments but does that still apply hear",
-            "date": "1 day ago"
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305702/can-dusk-hit-50-cents",
+            "title": "",
+            "date": "08/19/19(Mon)00:33:13 No.15305702"
         },
         {
-            "source": "reddit",
-            "url": "https://www.reddit.com/r/investing/comments/cs0o2c/if_pe_is_a_misleading_valuation_metrics_why_is_it/",
-            "title": "if P/E is a misleading valuation metrics, why is it still used?",
-            "description": "Alternatively what is a good alternative? EV/EBITDA?",
-            "date": "3 hours ago"
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305034/biz-constantly-complains-about-the-monotony-and",
+            "title": ">/biz/ constantly complains about the monotony and soullessness of modern corporate culture >/biz/ constantly complains about how hard it is nowadays to make it due to low/stagnant salaries and high living expenses >/biz/ constantly mocks people that kiss their bosses ass  >/biz/ also somehow loves capitalism in its current state as if they're the boss and not the wagiecuck Explain this please",
+            "date": "08/18/19(Sun)23:08:33 No.15305034"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305733/tfw-its-6am",
+            "title": ">tfw its 6am >tfw i can hear my wagecuck neighbor running out >tfw im in my 2k$ tempur bed high as shit eating cereal >tfw im about to sleep for 11 hours straight Does neeting ever get boring lads? Im going 7 years strong",
+            "date": "08/19/19(Mon)00:38:28 No.15305733"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305737/altcoin-scam-edition",
+            "title": "Altcoin Scam Edition  Which altcoins pulled off the biggest JUST in history?",
+            "date": "08/19/19(Mon)00:39:04 No.15305737"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15302491/reterds-assemble",
+            "title": "https://twitter.com/scottmelker/status/1163195319859011584?s=12  Erd gonna do a matic run. Low sat and low market cap. + CT starts shilling this soon.  Gonna be 40 sats within 2 weeks, cap this!",
+            "date": "08/18/19(Sun)18:15:18 No.15302491"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15304718/when-did-you-realize-wagecucking-and-following",
+            "title": "When did you realize wagecucking and following the law will never make you successful?",
+            "date": "08/18/19(Sun)22:33:20 No.15304718"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15304459/a-lot-of-shilling-for-this-lately",
+            "title": "EOY target and why  >Muh currency crisis Where, when, and why?  >Muh silver has industrial use case Why that target this year?",
+            "date": "08/18/19(Sun)21:56:32 No.15304459"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305875/hey-anon-want-to-throw-some-ball-tomorrow-oh",
+            "title": "Hey anon want to throw some ball tomorrow. Oh looks like you’re busy nevermind.",
+            "date": "08/19/19(Mon)00:56:05 No.15305875"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15302621/head-spinning-breadcrumb",
+            "title": "I've got an epic breadcrumb biz. It's fresh and will be the biggest breadcrumb of 2019 by far. Confirmation will unironically mean $20 LINK.",
+            "date": "08/18/19(Sun)18:33:06 No.15302621"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15301449/fell-for-the-university-meme",
+            "title": "What do I do now",
+            "date": "08/18/19(Sun)16:21:32 No.15301449"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305668/wait-wait-wait-chainlink-is-having-3-full-days-of",
+            "title": "WHAT THE ACTUAL FUCK??? chainlink is having 3 full days of conferences fully dedicated to it and it's starting in a few hours?  WHAT THE FUCK? how come i only hear about this just now? WTF BIZ? why you didn't tell me earlier? bros?  DID I JUST FUCKING SLIDE INTO A NEW TIMELINE???",
+            "date": "08/19/19(Mon)00:29:44 No.15305668"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15302298/student-loan-default",
+            "title": "Holy shit, wtf for ponzi is this? 1.6 trillion in student debt, the collapse is near.",
+            "date": "08/18/19(Sun)17:55:20 No.15302298"
+        },
+        {
+            "source": "4-chan",
+            "url": "http://boards.4channel.org/biz/thread/15305255/you-wanna-stop-being-a-wagecuck",
+            "title": "You wanna stop being a wagecuck?  Get on bitmex right now and short $ETH with the highest leverage that you can WHILE keeping your liquidation level higher than 215$  Target 20$.  You'll thank me later.",
+            "date": "08/18/19(Sun)23:37:13 No.15305255"
         }
     ]
 }

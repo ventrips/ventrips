@@ -236,10 +236,11 @@ exports.get4Chan = async function(request: any, response: any, useMock: boolean 
 
     const fourChan = await Utils.puppeteerScrape(
         '4-chan',
+        'http://boards.4channel.org/biz',
         'http://boards.4channel.org/biz/',
-        '',
         '.thread',
         {
+            url: '.replylink',
             title: '.postMessage',
             date: '.dateTime'
         }
