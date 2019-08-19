@@ -94,11 +94,12 @@ export class TrendsComponent implements OnInit {
     list.push(`sell ${symbol}`);
     list.push(`${symbol} stock`);
     list.push(`${symbol} price`);
-    if (_.get(item, ['company'])) {
-      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
-    } else {
-      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
-    }
+    list.push(`${symbol} news`);
+    // if (_.get(item, ['company'])) {
+    //   list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
+    // } else {
+    //   list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
+    // }
 
     list = _.compact(list);
 
