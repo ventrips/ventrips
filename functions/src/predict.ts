@@ -228,3 +228,22 @@ exports.getRedditInvesting = async function(request: any, response: any, useMock
 
     return barronsNews;
 }
+
+exports.get4Chan = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/four-chan.json');
+    }
+
+    const fourChan = await Utils.puppeteerScrape(
+        '4-chan',
+        'http://boards.4channel.org/biz/',
+        '',
+        '.thread',
+        {
+            title: '.postMessage',
+            date: '.dateTime'
+        }
+    );
+
+    return fourChan;
+}

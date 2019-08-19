@@ -100,6 +100,15 @@
                                 </li>
                             </ol>
                         </div>
+                        <div class="col">
+                            <h3>4 Chan Biz</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.fourChan">
+                                    <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>

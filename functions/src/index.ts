@@ -31,6 +31,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
     const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
     const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
+    const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     response.send({
@@ -42,6 +43,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         ,barronsNews
         ,hackerNews
         ,redditInvesting
+        ,fourChan
         // ,googleTrends
     });
 });
