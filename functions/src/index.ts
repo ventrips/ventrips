@@ -28,6 +28,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
     const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
     const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const reuters: Array<any> = await Predict.getReuters(request, response, false);
     const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
     const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
     const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
@@ -40,6 +41,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         ,yahooTickers
         ,seekingAlphaEarningsNews
         ,businessInsiderNews
+        ,reuters
         ,barronsNews
         ,hackerNews
         ,redditInvesting

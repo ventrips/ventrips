@@ -168,6 +168,26 @@ exports.getBusinessInsiderNews = async function(request: any, response: any, use
     return businessInsiderNews;
 }
 
+exports.getReuters = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/reuters.json');
+    }
+
+    const fourChan = await Utils.puppeteerScrape(
+        'reuters',
+        'https://www.reuters.com/finance',
+        'https://www.reuters.com/finance',
+        '.story',
+        {
+            url: '.story-content a',
+            title: '.story-content a .story-title',
+            date: '.article-time'
+        }
+    );
+
+    return fourChan;
+}
+
 exports.getBarronsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
         return require('./../mocks/predict/barrons-news.json');
@@ -246,5 +266,5 @@ exports.get4Chan = async function(request: any, response: any, useMock: boolean 
         }
     );
 
-    return fourChan;
+    return fourChan.length >= 2 ? _.slice(fourChan, 2) : fourChan;
 }

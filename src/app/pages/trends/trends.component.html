@@ -70,6 +70,15 @@
                             </ol>
                         </div>
                         <div class="col">
+                            <h3>Reuters News</h3>
+                            <ol>
+                                <li *ngFor="let item of predict?.reuters">
+                                    <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <p>{{item?.date}}</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col">
                             <h3>Barrons News</h3>
                             <ol>
                                 <li *ngFor="let item of predict?.barronsNews">
