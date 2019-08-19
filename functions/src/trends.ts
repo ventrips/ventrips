@@ -10,13 +10,13 @@ exports.trends = function(request: any, response: any, useMock: boolean = false)
             data = require('./../mocks/aapl.json');
         } else if (_.isEqual(_.toLower(request.query.q), 'bitcoin')) {
             data = require('./../mocks/bitcoin.json');
-        }
-        return constructData(data);
+        };
+        return response.send(constructData(data));
     }
 
     const Request = require('request');
     Request(`https://gapi.xyz/api/v3/search?q=${request.query.q}&token=9d0d7434d0964972e47f18e1862e821a`, function (error: any, res: any, body: any) {
-        response.send(constructData(JSON.parse(body)));
+        return response.send(constructData(JSON.parse(body)));
     });
 };
 

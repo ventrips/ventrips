@@ -136,12 +136,12 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
         'seeking-alpha',
         'https://seekingalpha.com/earnings/earnings-news',
         'https://seekingalpha.com',
-        '.media-body',
+        '#analysis-list-container > .media > .media-body',
         {
-            url: '.article-link',
-            title: '.article-link',
-            date: '.article-desc',
-            description: '.item-summary',
+            url: 'h4 a.article-link',
+            title: 'h4',
+            date: 'div.article-desc',
+            description: 'div.item-summary',
         }
     );
 
@@ -182,6 +182,47 @@ exports.getBarronsNews = async function(request: any, response: any, useMock: bo
             url: 'a',
             title: 'h3',
             date: 'p'
+        }
+    );
+
+    return barronsNews;
+}
+
+exports.getHackerNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/hacker-news.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'hacker-news',
+        'https://news.ycombinator.com/',
+        '',
+        '.itemlist > tbody > .athing',
+        {
+            url: 'a.storylink',
+            title: 'a.storylink',
+            date: '.age'
+        }
+    );
+
+    return barronsNews;
+}
+
+exports.getRedditInvesting = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/reddit-investing.json');
+    }
+
+    const barronsNews = await Utils.puppeteerScrape(
+        'reddit',
+        'https://www.reddit.com/r/investing/rising',
+        'https://www.reddit.com',
+        '.Post',
+        {
+            url: 'a.SQnoC3ObvgnGjWt90zD9Z',
+            title: 'a.SQnoC3ObvgnGjWt90zD9Z h3',
+            description: '.STit0dLageRsa2yR4te_b',
+            date: '._3jOxDPIQ0KaOWpzvSQo-1s'
         }
     );
 

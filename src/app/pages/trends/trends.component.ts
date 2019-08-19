@@ -10,6 +10,7 @@ import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-trends',
@@ -35,24 +36,29 @@ export class TrendsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.predict = undefined;
+    this.spinner.show();
+    this.getPredict(this.q)
+    .subscribe((response) => {
+      this.spinner.hide();
+      this.predict = response;
+      this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
+      this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+      this.initTrends();
+    }, (error) => {
+      this.toastr.error(error);
+      this.spinner.show();
+      this.initTrends();
+    });
+
     this.authService.user$.subscribe(user => this.user = user);
+  }
+
+  initTrends(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
       this.data = undefined;
-
-      this.predict = undefined;
-      this.spinner.show();
-      this.getPredict(this.q)
-      .subscribe((response) => {
-        this.spinner.hide();
-        this.predict = response;
-        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
-        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
-      }, (error) => {
-        this.toastr.error(error);
-        this.spinner.show();
-      });
 
       if (_.isNil(this.q)) { return; };
       this.spinner.show();
@@ -77,19 +83,29 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
-  getGoogleTrends(item: any) {
+  getGoogleSearch(query: string) {
+    return `https://www.google.com/search?q=${query}`;
+  }
+
+  getGoogleTrends(item: any, timeRange: string = 'hourly') {
     let list = [];
-    list.push(_.get(item, ['symbol']));
-    list.push(`${_.get(item, ['symbol'])} stock`);
+    const symbol = _.toLower(_.get(item, ['symbol']));
+    list.push(`buy ${symbol}`);
+    list.push(`sell ${symbol}`);
+    list.push(`${symbol} stock`);
+    list.push(`${symbol} price`);
     if (_.get(item, ['company'])) {
-      list.push(this.removeCommonTexts(_.get(item, ['company'])));
       list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
     } else {
-      list.push(this.removeCommonTexts(_.get(item, ['title'])));
       list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
     }
-    list.push(`${_.get(item, ['symbol'])} news`);
+
     list = _.compact(list);
+
+    if (_.isEqual(_.toLower(timeRange), 'yearly')) {
+      return `https://trends.google.com/trends/explore?date=${moment().startOf('year').format('YYYY-MM-DD')}`
+      + ' ' + `${moment().endOf('year').endOf('year').format('YYYY-MM-DD')}&geo=US&q=${list}`;
+    }
 
     return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
   }
