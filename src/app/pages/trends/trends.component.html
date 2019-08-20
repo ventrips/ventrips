@@ -5,7 +5,7 @@
                 <div class="col">
                     <h1 class="mb-3">{{_.upperCase(firstKey)}}</h1>
                     <div class="row">
-                        <div [ngClass]="{ 'col-12': _.includes(['earnings'], firstKey), 'col-6': _.includes(['tickers'], firstKey), 'col-4': _.includes(['news', 'forums'], firstKey)} " *ngFor="let secondKey of _.get(predict, [firstKey]) | keys">
+                        <div [ngClass]="{ 'col-12': _.includes(['earnings'], firstKey), 'col-4': _.includes(['tickers'], firstKey), 'col-2': _.includes(['news', 'forums'], firstKey)} " *ngFor="let secondKey of _.get(predict, [firstKey]) | keys">
                             <h2 class="mb-3">{{_.upperCase(secondKey)}}</h2>
                             <div class="row">
                                 <!-- Tickers -->
