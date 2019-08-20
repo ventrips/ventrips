@@ -11,6 +11,7 @@ import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
+import { SsrService } from '../../services/firestore/ssr/ssr.service';
 
 @Component({
   selector: 'app-trends',
@@ -24,12 +25,16 @@ export class TrendsComponent implements OnInit {
   public user: User;
   public predict: any;
   public _ = _;
+  public collection: string = 'trends';
+  public id: string = 'predict';
+  public environment = environment;
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
+    private ssrService: SsrService,
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -38,13 +43,15 @@ export class TrendsComponent implements OnInit {
   ngOnInit() {
     this.predict = undefined;
     this.spinner.show();
-    this.getPredict(this.q)
-    .subscribe((response) => {
-      this.spinner.hide();
-      this.predict = response;
-      this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
-      this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
-      this.initTrends();
+    // If production, use SSR. If local, use Predict API
+    const ssrOrPredictApi: any = !this.environment.production ?
+      this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false) : this.getPredict()
+      ssrOrPredictApi.subscribe(response => {
+        this.spinner.hide();
+        this.predict = response;
+        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
+        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+        this.initTrends();
     }, (error) => {
       this.toastr.error(error);
       this.spinner.show();
@@ -78,8 +85,9 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
-  getPredict(q: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/predict`)
+  // For Local Purposes. Does not use write / read calls because it doesn't set data to firestore DB
+  getPredict(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/predict?production=false`)
     .pipe(map((response: Response) => { return response }));
   };
 
@@ -94,11 +102,12 @@ export class TrendsComponent implements OnInit {
     list.push(`sell ${symbol}`);
     list.push(`${symbol} stock`);
     list.push(`${symbol} price`);
-    if (_.get(item, ['company'])) {
-      list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
-    } else {
-      list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
-    }
+    list.push(`${symbol} news`);
+    // if (_.get(item, ['company'])) {
+    //   list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
+    // } else {
+    //   list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
+    // }
 
     list = _.compact(list);
 

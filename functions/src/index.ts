@@ -28,22 +28,48 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
     const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
     const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const reuters: Array<any> = await Predict.getReuters(request, response, false);
     const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
     const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
     const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
+    const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
-    response.send({
+    // return db.doc(`users/${snapshot.data()!.uid}`).update({
+    //     // stripeId: _.get(customer, ['id']),
+    //     roles: {
+    //         admin: false,
+    //         editor: false,
+    //         subscriber: false,
+    //     },
+    //     joined: admin.firestore.FieldValue.serverTimestamp()
+    // });
+    const final = {
         stockTwitsTickers
         ,seekingAlphaEarningsDate
         ,yahooTickers
         ,seekingAlphaEarningsNews
         ,businessInsiderNews
+        ,reuters
         ,barronsNews
         ,hackerNews
         ,redditInvesting
+        ,fourChan
         // ,googleTrends
-    });
+    };
+
+    const isProduction = request.query.production;
+    // If production, send firestore. If local, send response
+    if (_.isEqual(_.toLower(isProduction), 'false')) {
+        response.send(final);
+    } else {
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/predict?production=true
+        return db.doc(`trends/predict`).set(final).then((res) => {
+            response.send(final);
+        }).then((error) => {
+            response.send(error);
+        });
+    }
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
