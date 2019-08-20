@@ -43,10 +43,8 @@ export class TrendsComponent implements OnInit {
   ngOnInit() {
     this.predict = undefined;
     this.spinner.show();
-    // If production, use SSR. If local, use Predict API
-    const ssrOrPredictApi: any = this.environment.production ?
-      this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false) : this.getPredict()
-      ssrOrPredictApi.subscribe(response => {
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
+    .subscribe(response => {
         this.spinner.hide();
         this.predict = response;
         this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
