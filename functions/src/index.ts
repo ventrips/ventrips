@@ -23,16 +23,16 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     // response.send(json);
     // return;
 
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
-    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, true);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, true);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
-    const reuters: Array<any> = await Predict.getReuters(request, response, true);
-    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, true);
-    const hackerNews: Array<any> = await Predict.getHackerNews(request, response, true);
-    const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, true);
-    const fourChan: Array<any> = await Predict.get4Chan(request, response, true);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
+    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const reuters: Array<any> = await Predict.getReuters(request, response, false);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
+    const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
+    const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
+    const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     // return db.doc(`users/${snapshot.data()!.uid}`).update({

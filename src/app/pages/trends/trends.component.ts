@@ -44,7 +44,7 @@ export class TrendsComponent implements OnInit {
     this.predict = undefined;
     this.spinner.show();
     // If production, use SSR. If local, use Predict API
-    const ssrOrPredictApi: any = this.environment.production ?
+    const ssrOrPredictApi: any = !this.environment.production ?
       this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false) : this.getPredict()
       ssrOrPredictApi.subscribe(response => {
         this.spinner.hide();
@@ -85,8 +85,9 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
+  // For Local Purposes. Does not use write / read calls because it doesn't set data to firestore DB
   getPredict(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/predict?production=${this.environment.production}`)
+    return this.http.get(`${environment.apiUrl}/predict?production=false`)
     .pipe(map((response: Response) => { return response }));
   };
 
