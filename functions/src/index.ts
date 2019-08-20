@@ -45,7 +45,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, useMock);
 
     /* News */
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, useMock);
+    const seekingAlphaNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, useMock);
     const marketWatchNews: Array<any> = await Predict.getMarketWatchNews(request, response, useMock);
     const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, useMock);
     const reutersNews: Array<any> = await Predict.getReutersNews(request, response, useMock);
@@ -69,7 +69,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
             ,yahooTickers
         }
         ,news: {
-            seekingAlphaEarningsNews
+            seekingAlphaNews
             ,marketWatchNews
             ,businessInsiderNews
             ,reutersNews
