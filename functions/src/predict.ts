@@ -231,6 +231,26 @@ exports.getBarronsNews = async function(request: any, response: any, useMock: bo
     return data;
 }
 
+exports.getTheFlyNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/news/the-fly-news.json');
+    }
+    const data = await Utils.puppeteerScrape(
+        'the-fly',
+        'https://thefly.com/news.php',
+        '',
+        '.tr_noticia',
+        {
+            url: 'a.newsTitleLink',
+            title: 'a.newsTitleLink',
+            description: '.contenedorFalso .fpo_overlay_ticker',
+            date: '.fpo_overlay_ticker'
+        }
+    );
+
+    return data;
+}
+
 /* Forums */
 
 exports.getHackerForums = async function(request: any, response: any, useMock: boolean = false): Promise<any> {

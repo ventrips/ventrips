@@ -31,6 +31,7 @@
                                 <ng-container *ngIf="_.isEqual(firstKey, 'news')">
                                     <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
                                         <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
+                                        <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
                                         <p>{{item?.date}}</p>
                                         <p>{{item?.description}}</p>
                                     </div>
