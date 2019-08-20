@@ -58,17 +58,16 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         // ,googleTrends
     };
 
-    const isProduction = request.query.production;
-    // If production, send firestore. If local, send response
-    if (_.isEqual(_.toLower(isProduction), 'false')) {
-        response.send(final);
-    } else {
+    const isProduction = _.get(request, ['query', 'production']);
+    if (_.isEqual(_.toLower(isProduction), 'true')) {
         // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/predict?production=true
         return db.doc(`trends/predict`).set(final).then((res) => {
             response.send(final);
         }).then((error) => {
             response.send(error);
         });
+    } else {
+        response.send(final);
     }
 });
 
