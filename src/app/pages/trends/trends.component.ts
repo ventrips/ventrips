@@ -54,7 +54,7 @@ export class TrendsComponent implements OnInit {
       this.predict = response;
       this.keys = _.map(_.orderBy(
                     _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
-                    [{key:'earnings'}, {key:'tickers'}, {key:'news'}, {key:'forums'}],
+                    [{key:'tickers'}, {key:'news'}, {key:'forums'}, {key:'earnings'}],
                     ['desc', 'desc', 'desc', 'desc']
                   ), (obj) => _.get(obj, ['key']));
       this.predict['tickers']['stockTwitsTickers'] = _.orderBy(this.predict['tickers']['stockTwitsTickers'], 'watchlist_count', 'desc');

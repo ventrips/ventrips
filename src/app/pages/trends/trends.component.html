@@ -3,38 +3,23 @@
         <section *ngIf="!_.isEmpty(predict)">
             <div class="row" *ngFor="let firstKey of keys">
                 <div class="col">
-                    <h1>{{_.upperCase(firstKey)}}</h1>
+                    <h1 class="mb-3">{{_.upperCase(firstKey)}}</h1>
                     <div class="row">
-                        <div [ngClass]="{ 'col': _.isEqual(firstKey, 'earnings'), 'col-4': !_.isEqual(firstKey, 'earnings') } " *ngFor="let secondKey of _.get(predict, [firstKey]) | keys">
-                            <h2>{{_.upperCase(secondKey)}}</h2>
+                        <div [ngClass]="{ 'col-12': _.includes(['earnings'], firstKey), 'col-6': _.includes(['tickers'], firstKey), 'col-4': _.includes(['news', 'forums'], firstKey)} " *ngFor="let secondKey of _.get(predict, [firstKey]) | keys">
+                            <h2 class="mb-3">{{_.upperCase(secondKey)}}</h2>
                             <div class="row">
-                                <!-- Earnings -->
-                                <ng-container *ngIf="_.isEqual(firstKey, 'earnings')">
-                                    <div class="col-2" *ngFor="let item of _.get(predict, [firstKey, secondKey])">
-                                        <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{item?.company}}</a>
-                                        <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                                        <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
-                                        <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
-                                        <p>{{item?.releaseDate}}</p>
-                                        <p>{{item?.releaseTime}}</p>
-                                    </div>
-                                </ng-container>
                                 <!-- Tickers -->
                                 <ng-container *ngIf="_.isEqual(firstKey, 'tickers')">
-                                    <div class="col-6" *ngFor="let item of _.get(predict, [firstKey, secondKey])">
+                                    <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
                                         <ng-container *ngIf="_.isEqual(secondKey, 'stockTwitsTickers')">
-                                            <a [href]="item?.url" [title]="item?.title" target="__blank" class="mr-2">
-                                                {{item?.title}}
-                                            </a>
+                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
                                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
                                             <span class="mr-2">Watching: {{item.watchlist_count}}</span>
                                             <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.title}}" target="__blank" class="mr-2">Hourly</a>
                                             <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.title}}" target="__blank" class="mr-2">Yearly</a>
                                         </ng-container>
                                         <ng-container *ngIf="_.isEqual(secondKey, 'yahooTickers')">
-                                            <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">
-                                                {{item?.company}}
-                                            </a>
+                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.company" target="__blank">{{index + 1}}. {{item?.company}}</a></p>
                                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
                                             <span class="mr-2">Change: {{item?.change}}</span>
                                             <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
@@ -44,18 +29,29 @@
                                 </ng-container>
                                 <!-- News -->
                                 <ng-container *ngIf="_.isEqual(firstKey, 'news')">
-                                    <div class="col-12" *ngFor="let item of _.get(predict, [firstKey, secondKey])">
-                                        <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
+                                        <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
                                         <p>{{item?.date}}</p>
                                         <p>{{item?.description}}</p>
                                     </div>
                                 </ng-container>
                                 <!-- Forums -->
                                 <ng-container *ngIf="_.isEqual(firstKey, 'forums')">
-                                    <div class="col-12" *ngFor="let item of _.get(predict, [firstKey, secondKey])">
-                                        <a [href]="item?.url" [title]="item?.title" target="__blank">{{item?.title}}</a>
+                                    <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
+                                        <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
                                         <p>{{item?.date}}</p>
                                         <p>{{item?.description}}</p>
+                                    </div>
+                                </ng-container>
+                                <!-- Earnings -->
+                                <ng-container *ngIf="_.isEqual(firstKey, 'earnings')">
+                                    <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
+                                        <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.company" target="__blank">{{index + 1}}. {{item?.company}}</a></p>
+                                        <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
+                                        <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
+                                        <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
+                                        <p>{{item?.releaseDate}}</p>
+                                        <p>{{item?.releaseTime}}</p>
                                     </div>
                                 </ng-container>
                             </div>
@@ -94,11 +90,11 @@
             </div>
             <section class="row">
                 <div class="col-xs-12 col-lg-6" *ngFor="let article of data?.articles">
-                    <h3 class="text-break text-wrap">
+                    <p class="text-break text-wrap">
                         <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
                             {{article?.title}}
                         </a>
-                    </h3>
+                    </p>
                     <p>
                         {{article?.publishedAt | date: 'medium'}}
                     </p>
