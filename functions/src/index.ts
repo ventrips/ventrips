@@ -58,6 +58,10 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         // ,googleTrends
     };
 
+    /* Mock Mode */
+    // response.send(final);
+
+    /* Firestore Mode */
     return db.doc(`trends/predict`).set(final).then((res) => {
         response.send(final);
     }).then((error) => {
