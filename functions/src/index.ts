@@ -36,23 +36,23 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     // });
 
     /* Earnings */
-    const seekingAlphaEarnings: Array<any> = await Predict.getSeekingAlphaEarnings(request, response, true);
+    const seekingAlphaEarnings: Array<any> = await Predict.getSeekingAlphaEarnings(request, response, false);
 
     /* Tickers */
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
 
     /* News */
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, true);
-    const marketWatchNews: Array<any> = await Predict.getMarketWatchNews(request, response, true);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
-    const reutersNews: Array<any> = await Predict.getReutersNews(request, response, true);
-    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, true);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, false);
+    const marketWatchNews: Array<any> = await Predict.getMarketWatchNews(request, response, false);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const reutersNews: Array<any> = await Predict.getReutersNews(request, response, false);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
 
     /* Forums */
-    const hackerForums: Array<any> = await Predict.getHackerForums(request, response, true);
-    const redditForums: Array<any> = await Predict.getRedditForums(request, response, true);
-    const fourChanForums: Array<any> = await Predict.get4ChanForums(request, response, true);
+    const hackerForums: Array<any> = await Predict.getHackerForums(request, response, false);
+    const redditForums: Array<any> = await Predict.getRedditForums(request, response, false);
+    const fourChanForums: Array<any> = await Predict.get4ChanForums(request, response, false);
 
     const final = {
         // trends: {
