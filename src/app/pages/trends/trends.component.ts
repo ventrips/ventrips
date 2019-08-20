@@ -11,6 +11,7 @@ import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-trends',
@@ -30,6 +31,7 @@ export class TrendsComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
+    private afs: AngularFirestore,
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -38,8 +40,8 @@ export class TrendsComponent implements OnInit {
   ngOnInit() {
     this.predict = undefined;
     this.spinner.show();
-    this.getPredict(this.q)
-    .subscribe((response) => {
+    // this.getPredict()
+    this.afs.doc<any>(`trends/predict`).valueChanges().subscribe((response) => {
       this.spinner.hide();
       this.predict = response;
       this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');

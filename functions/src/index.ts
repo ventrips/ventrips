@@ -35,7 +35,16 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
-    response.send({
+    // return db.doc(`users/${snapshot.data()!.uid}`).update({
+    //     // stripeId: _.get(customer, ['id']),
+    //     roles: {
+    //         admin: false,
+    //         editor: false,
+    //         subscriber: false,
+    //     },
+    //     joined: admin.firestore.FieldValue.serverTimestamp()
+    // });
+    const final = {
         stockTwitsTickers
         ,seekingAlphaEarningsDate
         ,yahooTickers
@@ -47,6 +56,12 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         ,redditInvesting
         ,fourChan
         // ,googleTrends
+    };
+
+    return db.doc(`trends/predict`).set(final).then((res) => {
+        response.send(final);
+    }).then((error) => {
+        response.send(error);
     });
 });
 
