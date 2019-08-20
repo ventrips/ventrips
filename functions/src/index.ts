@@ -59,14 +59,14 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     };
 
     /* Mock Mode */
-    // response.send(final);
+    response.send(final);
 
     /* Firestore Mode */
-    return db.doc(`trends/predict`).set(final).then((res) => {
-        response.send(final);
-    }).then((error) => {
-        response.send(error);
-    });
+    // return db.doc(`trends/predict`).set(final).then((res) => {
+    //     response.send(final);
+    // }).then((error) => {
+    //     response.send(error);
+    // });
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {

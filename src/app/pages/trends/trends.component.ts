@@ -11,7 +11,7 @@ import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { SsrService } from '../../services/firestore/ssr/ssr.service';
 
 @Component({
   selector: 'app-trends',
@@ -25,13 +25,15 @@ export class TrendsComponent implements OnInit {
   public user: User;
   public predict: any;
   public _ = _;
+  public collection: string = 'trends';
+  public id: string = 'predict';
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
-    private afs: AngularFirestore,
+    private ssrService: SsrService,
     public authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -41,12 +43,13 @@ export class TrendsComponent implements OnInit {
     this.predict = undefined;
     this.spinner.show();
     // this.getPredict()
-    this.afs.doc<any>(`trends/predict`).valueChanges().subscribe((response) => {
-      this.spinner.hide();
-      this.predict = response;
-      this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
-      this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
-      this.initTrends();
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
+    .subscribe(response => {
+        this.spinner.hide();
+        this.predict = response;
+        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
+        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+        this.initTrends();
     }, (error) => {
       this.toastr.error(error);
       this.spinner.show();
