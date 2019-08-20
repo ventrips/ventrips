@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
+import { KeysPipe } from '../../pipes/keys/keys.pipe';
 
 @Component({
   selector: 'app-trends',
@@ -28,6 +29,7 @@ export class TrendsComponent implements OnInit {
   public collection: string = 'trends';
   public id: string = 'predict';
   public environment = environment;
+  public keys: Array<any>;
 
   constructor(
     private http: HttpClient,
@@ -45,11 +47,19 @@ export class TrendsComponent implements OnInit {
     this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
-        this.spinner.hide();
-        this.predict = response;
-        this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
-        this.predict['yahooTickers'] = _.orderBy(this.predict['yahooTickers'], [item => parseInt(item.change)], ['desc']);
-        this.initTrends();
+      if (_.isEmpty(response)) {
+        return;
+      }
+      this.spinner.hide();
+      this.predict = response;
+      this.keys = _.map(_.orderBy(
+                    _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
+                    [{key:'earnings'}, {key:'tickers'}, {key:'news'}, {key:'forums'}],
+                    ['desc', 'desc', 'desc', 'desc']
+                  ), (obj) => _.get(obj, ['key']));
+      this.predict['tickers']['stockTwitsTickers'] = _.orderBy(this.predict['tickers']['stockTwitsTickers'], 'watchlist_count', 'desc');
+      this.predict['tickers']['yahooTickers'] = _.orderBy(this.predict['tickers']['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+      this.initTrends();
     }, (error) => {
       this.toastr.error(error);
       this.spinner.show();
