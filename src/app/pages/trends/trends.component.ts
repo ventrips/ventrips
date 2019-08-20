@@ -27,6 +27,7 @@ export class TrendsComponent implements OnInit {
   public _ = _;
   public collection: string = 'trends';
   public id: string = 'predict';
+  public environment = environment;
 
   constructor(
     private http: HttpClient,
@@ -42,9 +43,10 @@ export class TrendsComponent implements OnInit {
   ngOnInit() {
     this.predict = undefined;
     this.spinner.show();
-    // this.getPredict()
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
-    .subscribe(response => {
+    // If production, use SSR. If local, use Predict API
+    const ssrOrPredictApi: any = this.environment.production ?
+      this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false) : this.getPredict()
+      ssrOrPredictApi.subscribe(response => {
         this.spinner.hide();
         this.predict = response;
         this.predict['stockTwitsTickers'] = _.orderBy(this.predict['stockTwitsTickers'], 'watchlist_count', 'desc');
@@ -83,8 +85,8 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
-  getPredict(q: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/predict`)
+  getPredict(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/predict?production=${this.environment.production}`)
     .pipe(map((response: Response) => { return response }));
   };
 

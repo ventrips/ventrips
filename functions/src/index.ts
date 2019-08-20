@@ -23,16 +23,16 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     // response.send(json);
     // return;
 
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
-    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
-    const reuters: Array<any> = await Predict.getReuters(request, response, false);
-    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
-    const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
-    const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
-    const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, true);
+    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, true);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, true);
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, true);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, true);
+    const reuters: Array<any> = await Predict.getReuters(request, response, true);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, true);
+    const hackerNews: Array<any> = await Predict.getHackerNews(request, response, true);
+    const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, true);
+    const fourChan: Array<any> = await Predict.get4Chan(request, response, true);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     // return db.doc(`users/${snapshot.data()!.uid}`).update({
@@ -58,15 +58,18 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         // ,googleTrends
     };
 
-    /* Mock Mode */
-    response.send(final);
-
-    /* Firestore Mode */
-    // return db.doc(`trends/predict`).set(final).then((res) => {
-    //     response.send(final);
-    // }).then((error) => {
-    //     response.send(error);
-    // });
+    const isProduction = request.query.production;
+    // If production, send firestore. If local, send response
+    if (_.isEqual(_.toLower(isProduction), 'false')) {
+        response.send(final);
+    } else {
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/predict?production=true
+        return db.doc(`trends/predict`).set(final).then((res) => {
+            response.send(final);
+        }).then((error) => {
+            response.send(error);
+        });
+    }
 });
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
