@@ -4,10 +4,31 @@ import * as _ from 'lodash';
 const Utils = require('./utils');
 const GoogleTrends = require('google-trends-api');
 
-// Step 1: Get Tomorrow's Upcoming Stock Earnings
-exports.getSeekingAlphaEarningsDate = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
+exports.getGoogleTrends = async function(request: any, response: any, tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>>  {
+    const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
+
+    let results;
     if (useMock) {
-        return require('./../mocks/predict/seeking-alpha-earnings-date.json');
+        results = require('./../mocks/predict/google-trends.json');
+    } else {
+        const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
+        results = JSON.parse(unparsedResults);
+    }
+
+    const timelineData = results.default.timelineData;
+    const data: any = {
+        symbols,
+        timelineData
+    };
+
+    return data;
+}
+
+/* Earnings */
+
+exports.getSeekingAlphaEarnings = async function(request: any, response: any, useMock: boolean = false): Promise<Array<any>>  {
+    if (useMock) {
+        return require('./../mocks/predict/earnings/seeking-alpha-earnings.json');
     }
 
     const results: Array<any> = [];
@@ -57,31 +78,11 @@ exports.getSeekingAlphaEarningsDate = async function(request: any, response: any
     return results;
 }
 
-// Step 2: Get Trending Stocks
-exports.getGoogleTrends = async function(request: any, response: any, tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>>  {
-    const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
+/* Tickers */
 
-    let results;
-    if (useMock) {
-        results = require('./../mocks/predict/google-trends.json');
-    } else {
-        const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
-        results = JSON.parse(unparsedResults);
-    }
-
-    const timelineData = results.default.timelineData;
-    const data: any = {
-        symbols,
-        timelineData
-    };
-
-    return data;
-}
-
-// Step 3: Get Trending StockTwits Stocks
 exports.getStockTwitsTickers = function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/stock-twits-tickers.json');
+        return require('./../mocks/predict/tickers/stocktwits-tickers.json');
     }
 
     const Request = require('request');
@@ -108,10 +109,10 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
 
 exports.getYahooTickers = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/yahoo-tickers.json');
+        return require('./../mocks/predict/tickers/yahoo-tickers.json');
     }
 
-    const yahooTrends = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'yahoo',
         'https://finance.yahoo.com/trending-tickers',
         'https://finance.yahoo.com',
@@ -124,15 +125,17 @@ exports.getYahooTickers = async function(request: any, response: any, useMock: b
         }
     );
 
-    return yahooTrends;
+    return data;
 }
 
-exports.getSeekingAlphaEarningsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+/* News */
+
+exports.getSeekingAlphaNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/seeking-alpha-earnings-news.json');
+        return require('./../mocks/predict/news/seeking-alpha-news.json');
     }
 
-    const seekingAlphaEarningsNews = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'seeking-alpha',
         'https://seekingalpha.com/earnings/earnings-news',
         'https://seekingalpha.com',
@@ -145,15 +148,35 @@ exports.getSeekingAlphaEarningsNews = async function(request: any, response: any
         }
     );
 
-    return seekingAlphaEarningsNews;
+    return data;
+}
+
+exports.getMarketWatchNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/news/market-watch-news.json');
+    }
+
+    const data = await Utils.puppeteerScrape(
+        'market-watch',
+        'https://www.marketwatch.com/latest-news',
+        '',
+        '.article__content',
+        {
+            url: 'h3 a',
+            title: 'h3',
+            date: '.article__timestamp'
+        }
+    );
+
+    return data;
 }
 
 exports.getBusinessInsiderNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/business-insider-news.json');
+        return require('./../mocks/predict/news/business-insider-news.json');
     }
 
-    const businessInsiderNews = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'business-insider',
         'https://markets.businessinsider.com/stocks/news',
         'https://markets.businessinsider.com',
@@ -165,15 +188,15 @@ exports.getBusinessInsiderNews = async function(request: any, response: any, use
         }
     );
 
-    return businessInsiderNews;
+    return data;
 }
 
-exports.getReuters = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+exports.getReutersNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/reuters.json');
+        return require('./../mocks/predict/news/reuters-news.json');
     }
 
-    const fourChan = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'reuters',
         'https://www.reuters.com/finance',
         'https://www.reuters.com/finance',
@@ -185,15 +208,15 @@ exports.getReuters = async function(request: any, response: any, useMock: boolea
         }
     );
 
-    return fourChan;
+    return data;
 }
 
 exports.getBarronsNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/barrons-news.json');
+        return require('./../mocks/predict/news/barrons-news.json');
     }
 
-    const barronsNews = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'barrons',
         'https://www.barrons.com',
         '',
@@ -205,15 +228,17 @@ exports.getBarronsNews = async function(request: any, response: any, useMock: bo
         }
     );
 
-    return barronsNews;
+    return data;
 }
 
-exports.getHackerNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+/* Forums */
+
+exports.getHackerForums = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/hacker-news.json');
+        return require('./../mocks/predict/forums/hacker-forums.json');
     }
 
-    const barronsNews = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'hacker-news',
         'https://news.ycombinator.com/',
         '',
@@ -225,15 +250,15 @@ exports.getHackerNews = async function(request: any, response: any, useMock: boo
         }
     );
 
-    return barronsNews;
+    return data;
 }
 
-exports.getRedditInvesting = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+exports.getRedditForums = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/reddit-investing.json');
+        return require('./../mocks/predict/forums/reddit-forums.json');
     }
 
-    const barronsNews = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         'reddit',
         'https://www.reddit.com/r/investing/rising',
         'https://www.reddit.com',
@@ -246,15 +271,15 @@ exports.getRedditInvesting = async function(request: any, response: any, useMock
         }
     );
 
-    return barronsNews;
+    return data;
 }
 
-exports.get4Chan = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+exports.get4ChanForums = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
     if (useMock) {
-        return require('./../mocks/predict/four-chan.json');
+        return require('./../mocks/predict/forums/four-chan-forums.json');
     }
 
-    const fourChan = await Utils.puppeteerScrape(
+    const data = await Utils.puppeteerScrape(
         '4-chan',
         'http://boards.4channel.org/biz',
         'http://boards.4channel.org/biz/',
@@ -266,5 +291,5 @@ exports.get4Chan = async function(request: any, response: any, useMock: boolean 
         }
     );
 
-    return fourChan.length >= 2 ? _.slice(fourChan, 2) : fourChan;
+    return data.length >= 2 ? _.slice(data, 2) : data;
 }

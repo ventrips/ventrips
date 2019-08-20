@@ -23,16 +23,6 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     // response.send(json);
     // return;
 
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
-    const seekingAlphaEarningsDate: Array<any> = await Predict.getSeekingAlphaEarningsDate(request, response, false);
-    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
-    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaEarningsNews(request, response, false);
-    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
-    const reuters: Array<any> = await Predict.getReuters(request, response, false);
-    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
-    const hackerNews: Array<any> = await Predict.getHackerNews(request, response, false);
-    const redditInvesting: Array<any> = await Predict.getRedditInvesting(request, response, false);
-    const fourChan: Array<any> = await Predict.get4Chan(request, response, false);
     // const googleTrends: Array<any> = await Predict.getGoogleTrends(request, response, seekingAlphaEarningsDate, true);
 
     // return db.doc(`users/${snapshot.data()!.uid}`).update({
@@ -44,18 +34,49 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     //     },
     //     joined: admin.firestore.FieldValue.serverTimestamp()
     // });
+
+    /* Earnings */
+    const seekingAlphaEarnings: Array<any> = await Predict.getSeekingAlphaEarnings(request, response, false);
+
+    /* Tickers */
+    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, false);
+    const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, false);
+
+    /* News */
+    const seekingAlphaEarningsNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, false);
+    const marketWatchNews: Array<any> = await Predict.getMarketWatchNews(request, response, false);
+    const businessInsiderNews: Array<any> = await Predict.getBusinessInsiderNews(request, response, false);
+    const reutersNews: Array<any> = await Predict.getReutersNews(request, response, false);
+    const barronsNews: Array<any> = await Predict.getBarronsNews(request, response, false);
+
+    /* Forums */
+    const hackerForums: Array<any> = await Predict.getHackerForums(request, response, false);
+    const redditForums: Array<any> = await Predict.getRedditForums(request, response, false);
+    const fourChanForums: Array<any> = await Predict.get4ChanForums(request, response, false);
+
     const final = {
-        stockTwitsTickers
-        ,seekingAlphaEarningsDate
-        ,yahooTickers
-        ,seekingAlphaEarningsNews
-        ,businessInsiderNews
-        ,reuters
-        ,barronsNews
-        ,hackerNews
-        ,redditInvesting
-        ,fourChan
-        // ,googleTrends
+        // trends: {
+        //     googleTrends
+        // }
+        earnings: {
+            seekingAlphaEarnings
+        },
+        tickers: {
+            stockTwitsTickers
+            ,yahooTickers
+        }
+        ,news: {
+            seekingAlphaEarningsNews
+            ,marketWatchNews
+            ,businessInsiderNews
+            ,reutersNews
+            ,barronsNews
+        }
+        ,forums: {
+            hackerForums
+            ,redditForums
+            ,fourChanForums
+        }
     };
 
     const isProduction = _.get(request, ['query', 'production']);
