@@ -48,7 +48,9 @@ exports.puppeteerScrape = async function(source: string, url: string, baseUrl: s
                 }
             }
         }
-        results.push(obj);
+        if (_.keys(obj).length > 1) {
+            results.push(obj);
+        }
     }
     return results;
 }

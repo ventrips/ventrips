@@ -128,6 +128,26 @@ exports.getYahooTickers = async function(request: any, response: any, useMock: b
     return data;
 }
 
+exports.getFinVizTickers = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
+    if (useMock) {
+        return require('./../mocks/predict/tickers/finviz-tickers.json');
+    }
+
+    const data = await Utils.puppeteerScrape(
+        'finviz',
+        'https://finviz.com',
+        'https://finviz.com/quote.ashx?t=',
+        '#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr',
+        {
+            url: 'td a.tab-link',
+            company: 'td a.tab-link',
+            symbol: 'td a.tab-link',
+            signal: 'td .tab-link-nw'
+        }
+    );
+
+    return data;
+}
 /* News */
 
 exports.getSeekingAlphaNews = async function(request: any, response: any, useMock: boolean = false): Promise<any> {

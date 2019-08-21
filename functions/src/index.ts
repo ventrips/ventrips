@@ -43,6 +43,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     /* Tickers */
     const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, useMock);
     const yahooTickers: Array<any> = await Predict.getYahooTickers(request, response, useMock);
+    const finVizTickers: Array<any> = await Predict.getFinVizTickers(request, response, useMock);
 
     /* News */
     const seekingAlphaNews: Array<any> = await Predict.getSeekingAlphaNews(request, response, useMock);
@@ -67,6 +68,7 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
         tickers: {
             stockTwitsTickers
             ,yahooTickers
+            ,finVizTickers
         }
         ,news: {
             seekingAlphaNews
