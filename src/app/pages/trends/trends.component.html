@@ -34,6 +34,7 @@
                                         <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
                                         <p>{{item?.date}}</p>
                                         <p>{{item?.description}}</p>
+                                        <p><span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span></p>
                                     </div>
                                 </ng-container>
                                 <!-- Forums -->
@@ -42,6 +43,7 @@
                                         <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
                                         <p>{{item?.date}}</p>
                                         <p>{{item?.description}}</p>
+                                        <p><span class="font-weight-bold">Sentiment Score:{{item?.sentiment?.score}}</span></p>
                                     </div>
                                 </ng-container>
                                 <!-- Earnings -->

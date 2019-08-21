@@ -11,6 +11,8 @@ import { User } from '../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
+import * as Sentiment from 'sentiment';
+
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import { KeysPipe } from '../../pipes/keys/keys.pipe';
 
@@ -30,6 +32,7 @@ export class TrendsComponent implements OnInit {
   public id: string = 'predict';
   public environment = environment;
   public keys: Array<any>;
+  public wordFrequency: any = {};
 
   constructor(
     private http: HttpClient,
@@ -59,6 +62,8 @@ export class TrendsComponent implements OnInit {
                   ), (obj) => _.get(obj, ['key']));
       this.predict['tickers']['stockTwitsTickers'] = _.orderBy(this.predict['tickers']['stockTwitsTickers'], 'watchlist_count', 'desc');
       this.predict['tickers']['yahooTickers'] = _.orderBy(this.predict['tickers']['yahooTickers'], [item => parseInt(item.change)], ['desc']);
+      this.setSentiment('news');
+      this.setSentiment('forums');
       this.initTrends();
     }, (error) => {
       this.toastr.error(error);
@@ -86,6 +91,21 @@ export class TrendsComponent implements OnInit {
         this.toastr.error(error);
       });
     });
+  }
+
+  setSentiment(type: string): void {
+    const news = _.get(this.predict, [type]);
+    for (let key in news) {
+      const source = _.get(news, [key]);
+      for (let article of source) {
+        const title = _.get(article, ['title']);
+        article['sentiment'] = (new Sentiment()).analyze(title);
+        // for (let word of _.compact(_.split(this.removeCommonTexts(title), ' '))) {
+        //   this.wordFrequency[word] = (this.wordFrequency[word] || 0) + 1
+        // }
+      }
+    }
+    // console.log(this.wordFrequency);
   }
 
   getTrends(q: string): Observable<any> {
@@ -153,6 +173,8 @@ export class TrendsComponent implements OnInit {
       ' p.l.c',
       ' ltd',
       '. ',
+      `'s`,
+      `’s`,
       ' .',
       /[`~!@#$%^*()_|+\-=?;:",<>\{\}\[\]\\\/]/gi
     ], (target) => {

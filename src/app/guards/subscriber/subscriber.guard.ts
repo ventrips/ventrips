@@ -25,7 +25,6 @@ export class SubscriberGuard implements CanActivate {
       map(user => user && _.get(user, ['roles', 'subscriber']) ? true : false || _.get(user, ['roles', 'editor']) ? true : false || _.get(user, ['roles', 'admin']) ? true: false),
       tap(isSubscriber => {
         if (!isSubscriber) {
-          this.toastrService.warning(`Access denied - Subscribers only`);
           this.router.navigate([]);
         }
       })
