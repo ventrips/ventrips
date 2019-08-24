@@ -29,7 +29,8 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "sentiment": "^5.0.1",
-    "stripe": "^7.4.0"
+    "stripe": "^7.4.0",
+    "user-agents": "^1.0.358"
   },
   "devDependencies": {
     "tslint": "^5.12.0",
