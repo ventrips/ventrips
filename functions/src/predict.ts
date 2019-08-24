@@ -123,8 +123,8 @@ exports.getYahooTickers = async function(request: any, response: any, useMock: b
         {
             url: '.data-col0 a',
             company: '.data-col1',
-            symbol: '.data-col0'
-            // ,change: '.data-col5'
+            symbol: '.data-col0',
+            change: '.data-col5'
         }
     );
 
@@ -137,7 +137,7 @@ exports.getFinVizTickers = async function(request: any, response: any, useMock: 
     }
 
     const data = await Utils.puppeteerScrape(
-    );        'finviz',
+        'finviz',
         'https://finviz.com',
         'https://finviz.com/quote.ashx?t=',
         '#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr',
@@ -146,7 +146,7 @@ exports.getFinVizTickers = async function(request: any, response: any, useMock: 
             symbol: 'td a.tab-link',
             signal: 'td .tab-link-nw'
         }
-
+    );
 
     return data;
 }
