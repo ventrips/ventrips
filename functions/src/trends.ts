@@ -72,7 +72,7 @@ exports.trends = function(request: any, response: any, useMock: boolean = false)
         const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
         const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
         const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
-        const allSymbolsOnly = _.union(stockTwitsSymbolsOnly, yahooSymbolsOnly);
+        const allSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
         const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
         const finalTickers = _.map(allSymbolsOnly, (symbol) => {
@@ -80,7 +80,7 @@ exports.trends = function(request: any, response: any, useMock: boolean = false)
             const finViz = _.find(finVizTickers, { symbol: symbol });
             const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
             const yahoo = _.find(yahooTickers, { symbol: symbol });
-            return _.assign({}, yahooFinance, stockTwits, yahoo);
+            return _.assign({}, yahooFinance, finViz, stockTwits, yahoo);
         });
 
         // Earnings
