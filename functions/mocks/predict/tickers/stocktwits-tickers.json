@@ -2,7 +2,7 @@
     {
         "id": 1546,
         "symbol": "PSTV",
-        "title": "Plus Therapeutics",
+        "company": "Plus Therapeutics",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 11979,
@@ -12,7 +12,7 @@
     {
         "id": 2925,
         "symbol": "NVDA",
-        "title": "NVIDIA Corporation",
+        "company": "NVIDIA Corporation",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 142604,
@@ -22,7 +22,7 @@
     {
         "id": 2924,
         "symbol": "NVAX",
-        "title": "Novavax, Inc.",
+        "company": "Novavax, Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 33401,
@@ -32,7 +32,7 @@
     {
         "id": 5481,
         "symbol": "GE",
-        "title": "General Electric Co.",
+        "company": "General Electric Co.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 79060,
@@ -42,7 +42,7 @@
     {
         "id": 14016,
         "symbol": "QD",
-        "title": "Qudian Inc.",
+        "company": "Qudian Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 5361,
@@ -52,7 +52,7 @@
     {
         "id": 4940,
         "symbol": "DE",
-        "title": "Deere & Company",
+        "company": "Deere & Company",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 5363,
@@ -62,7 +62,7 @@
     {
         "id": 14372,
         "symbol": "SLDB",
-        "title": "Solid Biosciences",
+        "company": "Solid Biosciences",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 1961,
@@ -72,7 +72,7 @@
     {
         "id": 14328,
         "symbol": "PAGS",
-        "title": "PagSeguro",
+        "company": "PagSeguro",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 1769,
@@ -82,7 +82,7 @@
     {
         "id": 4938,
         "symbol": "DDS",
-        "title": "Dillard's Inc.",
+        "company": "Dillard's Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 929,
@@ -92,7 +92,7 @@
     {
         "id": 827,
         "symbol": "AMAT",
-        "title": "Applied Materials Inc.",
+        "company": "Applied Materials Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 16443,
@@ -102,7 +102,7 @@
     {
         "id": 3910,
         "symbol": "TWMC",
-        "title": "Trans World Entertainment Corporation",
+        "company": "Trans World Entertainment Corporation",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 782,
@@ -112,7 +112,7 @@
     {
         "id": 14485,
         "symbol": "ZS",
-        "title": "Zscaler",
+        "company": "Zscaler",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 5596,
@@ -122,7 +122,7 @@
     {
         "id": 14489,
         "symbol": "IQ",
-        "title": "iQIYI",
+        "company": "iQIYI",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 30470,
@@ -132,7 +132,7 @@
     {
         "id": 3379,
         "symbol": "BB",
-        "title": "BlackBerry",
+        "company": "BlackBerry",
         "aliases": [
             "RIMM",
             "BBRY"
@@ -145,7 +145,7 @@
     {
         "id": 12150,
         "symbol": "WLKP",
-        "title": "Westlake Chemical Partners LP",
+        "company": "Westlake Chemical Partners LP",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 127,
@@ -155,7 +155,7 @@
     {
         "id": 11057,
         "symbol": "NMFC",
-        "title": "New Mountain Finance Corp",
+        "company": "New Mountain Finance Corp",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 187,
@@ -165,7 +165,7 @@
     {
         "id": 14985,
         "symbol": "RVLV",
-        "title": "REVOLVE GROUP, INC.",
+        "company": "REVOLVE GROUP, INC.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 2667,
@@ -175,7 +175,7 @@
     {
         "id": 4241,
         "symbol": "ADS",
-        "title": "Alliance Data Systems Corporation",
+        "company": "Alliance Data Systems Corporation",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 734,
@@ -185,7 +185,7 @@
     {
         "id": 12802,
         "symbol": "NVCR",
-        "title": "NovoCure",
+        "company": "NovoCure",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 4342,
@@ -195,7 +195,7 @@
     {
         "id": 10577,
         "symbol": "BB.CA",
-        "title": "BlackBerry",
+        "company": "BlackBerry",
         "aliases": [
             "RIM.CA"
         ],
@@ -207,7 +207,7 @@
     {
         "id": 11190,
         "symbol": "NASDAQ",
-        "title": "NASDAQ Composite",
+        "company": "NASDAQ Composite",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 10077,
@@ -217,7 +217,7 @@
     {
         "id": 738,
         "symbol": "ADBE",
-        "title": "Adobe Systems Inc.",
+        "company": "Adobe Systems Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 14659,
@@ -227,7 +227,7 @@
     {
         "id": 5112,
         "symbol": "EDN",
-        "title": "Edenor SA",
+        "company": "Edenor SA",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 269,
@@ -237,7 +237,7 @@
     {
         "id": 13571,
         "symbol": "APPN",
-        "title": "Appian Corp",
+        "company": "Appian Corp",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 2154,
@@ -247,7 +247,7 @@
     {
         "id": 14962,
         "symbol": "PLAN",
-        "title": "Anaplan, Inc.",
+        "company": "Anaplan, Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 1306,
@@ -257,7 +257,7 @@
     {
         "id": 1807,
         "symbol": "EXEL",
-        "title": "Exelixis, Inc.",
+        "company": "Exelixis, Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 10909,
@@ -267,7 +267,7 @@
     {
         "id": 15269,
         "symbol": "GO",
-        "title": "Grocery Outlet Holding Corp",
+        "company": "Grocery Outlet Holding Corp",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 539,
@@ -277,7 +277,7 @@
     {
         "id": 6502,
         "symbol": "NKE",
-        "title": "Nike Inc.",
+        "company": "Nike Inc.",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 51509,
@@ -287,7 +287,7 @@
     {
         "id": 12100,
         "symbol": "BABA",
-        "title": "Alibaba",
+        "company": "Alibaba",
         "aliases": [
             "ALIBABA"
         ],
@@ -299,7 +299,7 @@
     {
         "id": 3776,
         "symbol": "TEVA",
-        "title": "Teva Pharmaceutical Industries Limited",
+        "company": "Teva Pharmaceutical Industries Limited",
         "aliases": [],
         "is_following": false,
         "watchlist_count": 20712,

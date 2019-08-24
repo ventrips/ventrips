@@ -14,7 +14,7 @@ exports.cors = function(request: any, response: any): void {
 exports.yahooFinance = async function(symbols: Array<string>, useMock: boolean = false): Promise<any> {
     return new Promise((resolve, reject) => {
         if (useMock) {
-            resolve(require('./../trends/yahoo-finance.json'));
+            return resolve(require('./../mocks/trends/yahoo-finance.json'));
         }
 
         const Request = require('request');

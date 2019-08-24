@@ -103,6 +103,11 @@ export const searchNews = functions.https.onRequest(async (request, response): P
     Trends.searchNews(request, response, false);
 });
 
+export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
+    Utils.cors(request, response);
+    Trends.trends(request, response, true);
+});
+
 const universal  = require(`${process.cwd()}/dist/server`).app;
 export const angularUniversalFunction = functions.https.onRequest(universal);
 
