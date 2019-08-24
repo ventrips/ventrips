@@ -11,7 +11,23 @@ exports.cors = function(request: any, response: any): void {
     return;
 }
 
-exports.puppeteerScrape = async function(source: string, url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
+exports.yahooFinance = async function(symbols: Array<string>, useMock: boolean = false): Promise<any> {
+    return new Promise((resolve, reject) => {
+        if (useMock) {
+            resolve(require('./../trends/yahoo-finance.json'));
+        }
+
+        const Request = require('request');
+        Request(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${_.toString(symbols)}`, function (error: any, res: any, body: any) {
+            if (_.isEqual(_.get(res, ['statusCode']), 200)) {
+                resolve(_.get(JSON.parse(body), ['quoteResponse', 'result']));
+            }
+            reject(JSON.parse(error));
+        });
+    });
+};
+
+exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
     const results: Array<any> = [];
     const browser = await puppeteer.launch({
         headless: true,
@@ -23,9 +39,7 @@ exports.puppeteerScrape = async function(source: string, url: string, baseUrl: s
     const sections = await page.$$(sectionsTarget);
 
     for (const section of sections) {
-        const obj:any = {
-            source
-        };
+        const obj:any = {};
         for (const key in keysObj) {
             if (_.isEqual(key, 'url')) {
                 try {
