@@ -31,12 +31,12 @@ export class TrendsComponent implements OnInit {
   public collection: string = 'trends';
   public id: string = 'predict';
   public environment = environment;
-  public tickers: any = {
-    symbols: [],
-    companies: []
-  };
 
-  public keys: Array<any>;
+  public tickers: Array<any>= [];
+  public news: Array<any>= [];
+  public earnings: Array<any>= [];
+  public forums: Array<any>= [];
+
   public wordFrequency: any = {};
 
   constructor(
@@ -60,16 +60,20 @@ export class TrendsComponent implements OnInit {
       }
       this.spinner.hide();
       this.predict = response;
-      this.tickers = this.getTickers();
-      this.keys = _.map(_.orderBy(
-                    _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
-                    [{key:'tickers'}, {key:'news'}, {key:'forums'}, {key:'earnings'}],
-                    ['desc', 'desc', 'desc', 'desc']
-                  ), (obj) => _.get(obj, ['key']));
-      this.predict['tickers']['stockTwitsTickers'] = _.orderBy(this.predict['tickers']['stockTwitsTickers'], 'watchlist_count', 'desc');
-      this.predict['tickers']['yahooTickers'] = _.orderBy(this.predict['tickers']['yahooTickers'], [item => parseInt(item.change)], ['desc']);
       this.setSentiment('news');
       this.setSentiment('forums');
+
+      this.tickers = _.get(this.predict, ['tickers']);
+      this.tickers =  _.orderBy(this.tickers, [
+      (item) => item.finVizRank,
+      (item) => item.stockTwitsRank,
+      (item) => item.yahooRank
+    ], ["asc", "asc", "asc"]);
+
+    this.news = _.get(this.predict, ['news']);
+      this.earnings = _.get(this.predict, ['earnings']);
+      this.forums = _.get(this.predict, ['forums']);
+
       this.initSearchNews();
     }, (error) => {
       this.toastr.error(error);
@@ -112,31 +116,6 @@ export class TrendsComponent implements OnInit {
       }
     }
     // console.log(this.wordFrequency);
-  }
-
-  getTickers(): Array<any> {
-    const tickers = _.get(_.cloneDeep(this.predict), ['tickers']);
-    const results = _.values(_.merge(
-      _.keyBy(_.get(tickers, ['stockTwitsTickers']), 'symbol'),
-      _.keyBy(_.get(tickers, ['yahooTickers']), 'symbol'),
-      _.keyBy(_.get(tickers, ['finVizTickers']), 'symbol'),
-    ));
-    const data = _.map(results, (item) => {
-      return item;
-      // const obj = {};
-      // if (_.get(item, ['symbol'])) {
-      //   obj['symbol'] = _.get(item, ['symbol']);
-      // }
-      // if (_.get(item, ['company'])) {
-      //   obj['company'] = _.get(item, ['company']);
-      // }
-      // return obj;
-    });
-    return data;
-  }
-
-  getTickerDetail(symbol: string, key: string): string {
-    return _.get(_.find(this.tickers, ['symbol', symbol]), [key]);
   }
 
   isPositive(change: string): boolean {
