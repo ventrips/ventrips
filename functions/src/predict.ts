@@ -93,6 +93,9 @@ exports.getStockTwitsTickers = function(request: any, response: any, useMock: bo
             const data = _.map(JSON.parse(body).symbols, (stock) => {
                 stock.source = 'stock-twits';
                 stock.url = 'https://stocktwits.com/symbol/' + stock.symbol
+                stock.company = stock.title;
+                delete stock.title;
+
                 return stock;
             });
 
@@ -140,7 +143,6 @@ exports.getFinVizTickers = async function(request: any, response: any, useMock: 
         '#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr',
         {
             url: 'td a.tab-link',
-            company: 'td a.tab-link',
             symbol: 'td a.tab-link',
             signal: 'td .tab-link-nw'
         }

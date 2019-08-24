@@ -31,6 +31,11 @@ export class TrendsComponent implements OnInit {
   public collection: string = 'trends';
   public id: string = 'predict';
   public environment = environment;
+  public tickers: any = {
+    symbols: [],
+    companies: []
+  };
+
   public keys: Array<any>;
   public wordFrequency: any = {};
 
@@ -55,6 +60,7 @@ export class TrendsComponent implements OnInit {
       }
       this.spinner.hide();
       this.predict = response;
+      this.tickers = this.getTickers();
       this.keys = _.map(_.orderBy(
                     _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
                     [{key:'tickers'}, {key:'news'}, {key:'forums'}, {key:'earnings'}],
@@ -106,6 +112,26 @@ export class TrendsComponent implements OnInit {
       }
     }
     // console.log(this.wordFrequency);
+  }
+
+  getTickers(): Array<any> {
+    const tickers = _.get(this.predict, ['tickers']);
+    const results = _.values(_.merge(
+      _.keyBy(_.get(tickers, ['stockTwitsTickers']), 'symbol'),
+      _.keyBy(_.get(tickers, ['yahooTickers']), 'symbol'),
+      _.keyBy(_.get(tickers, ['finVizTickers']), 'symbol'),
+    ));
+    const data = _.map(results, (item) => {
+      const obj = {};
+      if (_.get(item, ['symbol'])) {
+        obj['symbol'] = _.get(item, ['symbol']);
+      }
+      if (_.get(item, ['company'])) {
+        obj['company'] = _.get(item, ['company']);
+      }
+      return obj;
+    });
+    return data;
   }
 
   getTrends(q: string): Observable<any> {

@@ -11,25 +11,13 @@
                                 <!-- Tickers -->
                                 <ng-container *ngIf="_.isEqual(firstKey, 'tickers')">
                                     <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
-                                        <ng-container *ngIf="_.isEqual(secondKey, 'stockTwitsTickers')">
-                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
-                                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                                            <span class="mr-2" *ngIf="item?.watchlist_count">Watching: {{item.watchlist_count}}</span>
-                                            <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.title}}" target="__blank" class="mr-2">Hourly</a>
-                                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.title}}" target="__blank" class="mr-2">Yearly</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="_.isEqual(secondKey, 'yahooTickers')">
+                                        <ng-container>
                                             <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.company" target="__blank">{{index + 1}}. {{item?.company}}</a></p>
                                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
                                             <span class="mr-2" *ngIf="item?.change">Change: {{item?.change}}</span>
-                                            <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
-                                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="_.isEqual(secondKey, 'finVizTickers')">
-                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.company" target="__blank">{{index + 1}}. {{item?.company}}</a></p>
-                                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
+                                            <span class="mr-2" *ngIf="item?.watchlist_count">Watching: {{item.watchlist_count}}</span>
                                             <span class="mr-2" *ngIf="item?.signal">Signal: {{item?.signal}}</span>
-                                            <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
+                                           <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
                                             <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
                                         </ng-container>
                                     </div>
