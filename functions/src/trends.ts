@@ -36,13 +36,16 @@ function constructData(data: any) {
 
 exports.trends = function(request: any, response: any, useMock: boolean = false) {
     Promise.all([
-        getStockTwitsTickers((useMock))
-        ,getYahooTickers((useMock))
+        getStockTwitsTickers(useMock)
+        ,getYahooTickers(useMock)
+        ,getSeekingAlphaEarnings(useMock)
     ])
     .then(async (result: any) => {
+        // Tickers
         const [
             stockTwitsTickers,
-            yahooTickers
+            yahooTickers,
+            seekingAlphaEarnings
         ] = result;
         const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
         const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
@@ -55,8 +58,11 @@ exports.trends = function(request: any, response: any, useMock: boolean = false)
             const yahoo = _.find(yahooTickers, { symbol: symbol });
             return _.assign({}, yahooFinance, yahoo, stockTwits);
         });
+
+        // Earnings
         response.send({
-            tickers: finalTickers
+            tickers: finalTickers,
+            earnings: seekingAlphaEarnings
         });
     }).catch((error: any) => console.log(`Error in promises ${error}`));
 }
@@ -102,6 +108,10 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
         }
         const options = {
             uri: 'https://finance.yahoo.com/trending-tickers',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json:true,
             transform: (body: any) => Cheerio.load(body)
         };
         RequestPromise(options)
@@ -151,4 +161,44 @@ const getYahooFinanceTickers = async function(symbols: Array<string>, useMock: b
     });
 };
 
-/* News */
+/* Earnings */
+
+const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/earnings/seeking-alpha-earnings.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://seekingalpha.com/earnings/earnings-calendar',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json:true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.earningsTable tbody tr').each(function (this: any, index: number) {
+                const obj = {
+                    url: `https://seekingalpha.com${$(this).find('.sym').attr('href')}`,
+                    symbol: $(this).find('.sym').text(),
+                    company: $(this).find('.ticker-name').text(),
+                    releaseDate: $(this).find('.release-date').text(),
+                    releaseTime: $(this).find('.release-time').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
