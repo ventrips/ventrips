@@ -70,17 +70,17 @@ export class TrendsComponent implements OnInit {
       this.predict['tickers']['yahooTickers'] = _.orderBy(this.predict['tickers']['yahooTickers'], [item => parseInt(item.change)], ['desc']);
       this.setSentiment('news');
       this.setSentiment('forums');
-      this.initTrends();
+      this.initSearchNews();
     }, (error) => {
       this.toastr.error(error);
       this.spinner.show();
-      this.initTrends();
+      this.initSearchNews();
     });
 
     this.authService.user$.subscribe(user => this.user = user);
   }
 
-  initTrends(): void {
+  initSearchNews(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
@@ -88,7 +88,7 @@ export class TrendsComponent implements OnInit {
 
       if (_.isNil(this.q)) { return; };
       this.spinner.show();
-      this.getTrends(this.q)
+      this.searchNews(this.q)
       .subscribe((response) => {
         this.spinner.hide();
         this.data = response;
@@ -144,8 +144,9 @@ export class TrendsComponent implements OnInit {
     text = _.replace(text, '%', '');
     return _.toNumber(text) >= 0;
   }
-  getTrends(q: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/trends?q=${q}`)
+
+  searchNews(q: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
 

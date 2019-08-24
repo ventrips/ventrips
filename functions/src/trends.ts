@@ -2,7 +2,7 @@
 import * as _ from 'lodash';
 const Sentiment = require('sentiment');
 
-exports.trends = function(request: any, response: any, useMock: boolean = false) {
+exports.searchNews = function(request: any, response: any, useMock: boolean = false) {
     let data = {};
 
     if (useMock) {

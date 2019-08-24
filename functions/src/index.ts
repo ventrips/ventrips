@@ -98,9 +98,9 @@ export const predict = functions.runWith({ timeoutSeconds: 540, memory: '1GB' })
     }
 });
 
-export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
+export const searchNews = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    Trends.trends(request, response, false);
+    Trends.searchNews(request, response, false);
 });
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
