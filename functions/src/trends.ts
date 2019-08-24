@@ -35,12 +35,6 @@ function constructData(data: any) {
 }
 
 exports.trends = function(request: any, response: any, useMock: boolean = false) {
-    if (useMock) {
-        const data = require('./../mocks/trends/tickers/yahoo-finance-tickers.json');
-        response.send(data);
-        return data;
-    }
-
     Promise.all([
         getStockTwitsTickers((useMock))
         ,getYahooTickers((useMock))
@@ -53,15 +47,17 @@ exports.trends = function(request: any, response: any, useMock: boolean = false)
         const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
         const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
         const allSymbolsOnly = _.union(stockTwitsSymbolsOnly, yahooSymbolsOnly);
-        // Final
+        // Final Tickers
         const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-        const final = _.map(allSymbolsOnly, (symbol) => {
+        const finalTickers = _.map(allSymbolsOnly, (symbol) => {
             const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
             const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
             const yahoo = _.find(yahooTickers, { symbol: symbol });
             return _.assign({}, yahooFinance, yahoo, stockTwits);
         });
-        response.send(final);
+        response.send({
+            tickers: finalTickers
+        });
     }).catch((error: any) => console.log(`Error in promises ${error}`));
 }
 
