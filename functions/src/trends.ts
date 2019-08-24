@@ -111,7 +111,7 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36'
             },
-            json:true,
+            json: true,
             transform: (body: any) => Cheerio.load(body)
         };
         RequestPromise(options)
@@ -175,7 +175,7 @@ const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promis
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36'
             },
-            json:true,
+            json: true,
             transform: (body: any) => Cheerio.load(body)
         };
         RequestPromise(options)
