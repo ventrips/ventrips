@@ -109,7 +109,7 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://finance.yahoo.com/trending-tickers',
             headers: {
-                'User-Agent': 'Request-Promise'
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36'
             },
             json:true,
             transform: (body: any) => Cheerio.load(body)
@@ -173,7 +173,7 @@ const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promis
         const options = {
             uri: 'https://seekingalpha.com/earnings/earnings-calendar',
             headers: {
-                'User-Agent': 'Request-Promise'
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36'
             },
             json:true,
             transform: (body: any) => Cheerio.load(body)
