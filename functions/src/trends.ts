@@ -35,74 +35,75 @@ function constructData(data: any) {
     return data;
 }
 
-exports.trends = function(request: any, response: any, useMock: boolean = false) {
-    Promise.all([
-        /* Tickers */
-        getFinVizTickers(useMock)
-        ,getStockTwitsTickers(useMock)
-        ,getYahooTickers(useMock)
-        /* Earnings */
-        ,getSeekingAlphaEarnings(useMock)
-        /* News */
-        ,getSeekingAlphaNews(useMock)
-        ,getMarketWatchNews(useMock)
-        ,getBusinessInsiderNews(useMock)
-        ,getReutersNews(useMock)
-        ,getBarronsNews(useMock)
-        ,getTheFlyNews(useMock)
-        /* Forums */
-        ,getFourChanForums(useMock)
-        ,getHackerForums(useMock)
-        ,getRedditForums(useMock)
-    ])
-    .then(async (result: any) => {
-        const finVizTickers = result[0];
-        const stockTwitsTickers = result[1];
-        const yahooTickers = result[2];
-        const seekingAlphaEarnings = result[3];
-        const seekingAlphaNews = result[4];
-        const marketWatchNews = result[5];
-        const businessInsiderNews = result[6];
-        const reutersNews = result[7];
-        const barronsNews = result[8];
-        const theFlyNews = result[9];
-        const fourChanForums = result[10];
-        const hackerForums = result[11];
-        const redditForums = result[12];
+exports.trends = async function(request: any, response: any, useMock: boolean = false) {
+    return new Promise((resolve,reject) => {
+        Promise.all([
+            /* Tickers */
+            getFinVizTickers(useMock)
+            ,getStockTwitsTickers(useMock)
+            ,getYahooTickers(useMock)
+            /* Earnings */
+            ,getSeekingAlphaEarnings(useMock)
+            /* News */
+            ,getSeekingAlphaNews(useMock)
+            ,getMarketWatchNews(useMock)
+            ,getBusinessInsiderNews(useMock)
+            ,getReutersNews(useMock)
+            ,getBarronsNews(useMock)
+            ,getTheFlyNews(useMock)
+            /* Forums */
+            ,getFourChanForums(useMock)
+            ,getHackerForums(useMock)
+            ,getRedditForums(useMock)
+        ])
+        .then(async (result: any) => {
+            const finVizTickers = result[0];
+            const stockTwitsTickers = result[1];
+            const yahooTickers = result[2];
+            const seekingAlphaEarnings = result[3];
+            const seekingAlphaNews = result[4];
+            const marketWatchNews = result[5];
+            const businessInsiderNews = result[6];
+            const reutersNews = result[7];
+            const barronsNews = result[8];
+            const theFlyNews = result[9];
+            const fourChanForums = result[10];
+            const hackerForums = result[11];
+            const redditForums = result[12];
 
-        const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
-        const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
-        const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
-        const allSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
+            const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
+            const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
+            const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
+            const allSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
-        const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-        const finalTickers = _.map(allSymbolsOnly, (symbol) => {
-            const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
-            const finViz = _.find(finVizTickers, { symbol: symbol });
-            const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
-            const yahoo = _.find(yahooTickers, { symbol: symbol });
-            return _.assign({}, yahooFinance, finViz, stockTwits, yahoo);
-        });
+            const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
+            const finalTickers = _.map(allSymbolsOnly, (symbol) => {
+                const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
+                const finViz = _.find(finVizTickers, { symbol: symbol });
+                const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
+                const yahoo = _.find(yahooTickers, { symbol: symbol });
+                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo);
+            });
 
-        // Earnings
-        response.send({
-            tickers: finalTickers
-            ,earnings: seekingAlphaEarnings
-            ,news: {
-                seekingAlphaNews
-                ,marketWatchNews
-                ,businessInsiderNews
-                ,reutersNews
-                ,barronsNews
-                ,theFlyNews
-            }
-            ,forums: {
-                fourChanForums
-                ,hackerForums
-                ,redditForums
-            }
-        });
-    }).catch((error: any) => console.log(`Error in promises ${error}`));
+            resolve({
+                tickers: finalTickers
+                ,earnings: seekingAlphaEarnings
+                ,news: {
+                    seekingAlphaNews
+                    ,marketWatchNews
+                    ,businessInsiderNews
+                    ,reutersNews
+                    ,barronsNews
+                    ,theFlyNews
+                }
+                ,forums: {
+                    fourChanForums
+                    ,hackerForums
+                    ,redditForums
+                }
+            });
+        }).catch((error: any) => reject(`Error in promises ${error}`));
+    });
 }
 
 /* Tickers */
@@ -116,7 +117,7 @@ const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://finviz.com',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -186,7 +187,7 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://finance.yahoo.com/trending-tickers',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -250,7 +251,7 @@ const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promis
         const options = {
             uri: 'https://seekingalpha.com/earnings/earnings-calendar',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -293,7 +294,7 @@ const getSeekingAlphaNews = async function(useMock: boolean = false): Promise<an
         const options = {
             uri: 'https://seekingalpha.com/earnings/earnings-news',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -332,7 +333,7 @@ const getMarketWatchNews = async function(useMock: boolean = false): Promise<any
         const options = {
             uri: 'https://www.marketwatch.com/latest-news',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -370,7 +371,7 @@ const getBusinessInsiderNews = async function(useMock: boolean = false): Promise
         const options = {
             uri: 'https://markets.businessinsider.com/stocks/news',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -408,7 +409,7 @@ const getReutersNews = async function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://www.reuters.com/finance',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -446,7 +447,7 @@ const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://www.barrons.com',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -484,7 +485,7 @@ const getTheFlyNews = async function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://thefly.com/news.php',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -524,7 +525,7 @@ const getFourChanForums = async function(useMock: boolean = false): Promise<any>
         const options = {
             uri: 'http://boards.4channel.org/biz',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -562,7 +563,7 @@ const getHackerForums = async function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://news.ycombinator.com',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)
@@ -599,7 +600,7 @@ const getRedditForums = async function(useMock: boolean = false): Promise<any> {
         const options = {
             uri: 'https://www.reddit.com/r/investing/rising',
             headers: {
-                'User-Agent': (new UserAgent()).toString()
+                'User-Agent': 'Request-Promise'
             },
             json: true,
             transform: (body: any) => Cheerio.load(body)

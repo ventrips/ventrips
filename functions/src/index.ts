@@ -105,7 +105,20 @@ export const searchNews = functions.https.onRequest(async (request, response): P
 
 export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    Trends.trends(request, response, _.isEqual(_.toLower(request.query.mock), 'true'));
+    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
+    const isProduction = _.isEqual(_.toLower(_.get(request, ['query', 'production'])), 'true');
+    const final = await Trends.trends(request, response, useMock);
+
+    if (isProduction) {
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
+        return db.doc(`trends/predict`).set(final).then((res) => {
+            response.send(final);
+        }).then((error) => {
+            response.send(error);
+        });
+    } else {
+        response.send(final);
+    }
 });
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
