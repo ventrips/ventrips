@@ -61,7 +61,6 @@ export class TrendsComponent implements OnInit {
       this.spinner.hide();
       this.predict = response;
       this.tickers = this.getTickers();
-      console.log(this.tickers);
       this.keys = _.map(_.orderBy(
                     _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
                     [{key:'tickers'}, {key:'news'}, {key:'forums'}, {key:'earnings'}],
@@ -137,10 +136,14 @@ export class TrendsComponent implements OnInit {
   }
 
   getTickerDetail(symbol: string, key: string): string {
-    console.log(_.get(_.find(this.tickers, ['symbol', symbol]), [key]));
     return _.get(_.find(this.tickers, ['symbol', symbol]), [key]);
   }
 
+  isPositive(change: string): boolean {
+    let text = change;
+    text = _.replace(text, '%', '');
+    return _.toNumber(text) >= 0;
+  }
   getTrends(q: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/trends?q=${q}`)
     .pipe(map((response: Response) => { return response }));
