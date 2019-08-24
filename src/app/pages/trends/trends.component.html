@@ -12,13 +12,13 @@
                                 <ng-container *ngIf="_.isEqual(firstKey, 'tickers')">
                                     <div class="col-12 mb-2" *ngFor="let item of _.get(predict, [firstKey, secondKey]); let index = index">
                                         <ng-container>
-                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.company" target="__blank">{{index + 1}}. {{item?.company}}</a></p>
-                                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                                            <span class="mr-2" *ngIf="item?.change">Change: {{item?.change}}</span>
-                                            <span class="mr-2" *ngIf="item?.watchlist_count">Watching: {{item.watchlist_count}}</span>
-                                            <span class="mr-2" *ngIf="item?.signal">Signal: {{item?.signal}}</span>
-                                           <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
-                                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
+                                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="getTickerDetail(item?.symbol, 'company')" target="__blank">{{index + 1}}. {{getTickerDetail(item?.symbol, 'company')}}</a></p>
+                                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{getTickerDetail(item?.symbol, 'symbol')}} stock" target="__blank" class="mr-2">({{getTickerDetail(item?.symbol, 'symbol')}})</a>
+                                            <span class="mr-2" *ngIf="getTickerDetail(item?.symbol, 'change')">Change: {{getTickerDetail(item?.symbol, 'change')}}</span>
+                                            <span class="mr-2" *ngIf="getTickerDetail(item?.symbol, 'watchlist_count')">Watching: {{getTickerDetail(item?.symbol, 'watchlist_count')}}</span>
+                                            <span class="mr-2" *ngIf="getTickerDetail(item?.symbol, 'signal')">Signal: {{getTickerDetail(item?.symbol, 'signal')}}</span>
+                                           <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{getTickerDetail(item?.symbol, 'company')}}" target="__blank" class="mr-2">Hourly</a>
+                                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{getTickerDetail(item?.symbol, 'company')}}" target="__blank" class="mr-2">Yearly</a>
                                         </ng-container>
                                     </div>
                                 </ng-container>

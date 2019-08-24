@@ -61,6 +61,7 @@ export class TrendsComponent implements OnInit {
       this.spinner.hide();
       this.predict = response;
       this.tickers = this.getTickers();
+      console.log(this.tickers);
       this.keys = _.map(_.orderBy(
                     _.map((new KeysPipe().transform(this.predict)), (value) => { return { key : value } } ),
                     [{key:'tickers'}, {key:'news'}, {key:'forums'}, {key:'earnings'}],
@@ -115,23 +116,29 @@ export class TrendsComponent implements OnInit {
   }
 
   getTickers(): Array<any> {
-    const tickers = _.get(this.predict, ['tickers']);
+    const tickers = _.get(_.cloneDeep(this.predict), ['tickers']);
     const results = _.values(_.merge(
       _.keyBy(_.get(tickers, ['stockTwitsTickers']), 'symbol'),
       _.keyBy(_.get(tickers, ['yahooTickers']), 'symbol'),
       _.keyBy(_.get(tickers, ['finVizTickers']), 'symbol'),
     ));
     const data = _.map(results, (item) => {
-      const obj = {};
-      if (_.get(item, ['symbol'])) {
-        obj['symbol'] = _.get(item, ['symbol']);
-      }
-      if (_.get(item, ['company'])) {
-        obj['company'] = _.get(item, ['company']);
-      }
-      return obj;
+      return item;
+      // const obj = {};
+      // if (_.get(item, ['symbol'])) {
+      //   obj['symbol'] = _.get(item, ['symbol']);
+      // }
+      // if (_.get(item, ['company'])) {
+      //   obj['company'] = _.get(item, ['company']);
+      // }
+      // return obj;
     });
     return data;
+  }
+
+  getTickerDetail(symbol: string, key: string): string {
+    console.log(_.get(_.find(this.tickers, ['symbol', symbol]), [key]));
+    return _.get(_.find(this.tickers, ['symbol', symbol]), [key]);
   }
 
   getTrends(q: string): Observable<any> {
