@@ -1,0 +1,308 @@
+[
+    {
+        "id": 13942,
+        "symbol": "MTH.X",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 508,
+        "rank": 1,
+        "url": "https://stocktwits.com/symbol/MTH.X",
+        "company": "Monetha"
+    },
+    {
+        "id": 6819,
+        "symbol": "PLD",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 630,
+        "rank": 2,
+        "url": "https://stocktwits.com/symbol/PLD",
+        "company": "ProLogis"
+    },
+    {
+        "id": 14629,
+        "symbol": "RVN.X",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 914,
+        "rank": 3,
+        "url": "https://stocktwits.com/symbol/RVN.X",
+        "company": "Ravencoin"
+    },
+    {
+        "id": 1819,
+        "symbol": "EZPW",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 370,
+        "rank": 4,
+        "url": "https://stocktwits.com/symbol/EZPW",
+        "company": "EZCORP Inc."
+    },
+    {
+        "id": 8011,
+        "symbol": "NWBI",
+        "aliases": [
+            "NWSB"
+        ],
+        "is_following": false,
+        "watchlist_count": 93,
+        "rank": 5,
+        "url": "https://stocktwits.com/symbol/NWBI",
+        "company": "Northwest Bancshares, Inc."
+    },
+    {
+        "id": 13799,
+        "symbol": "XTZ.X",
+        "aliases": [
+            "TEZ.X"
+        ],
+        "is_following": false,
+        "watchlist_count": 508,
+        "rank": 6,
+        "url": "https://stocktwits.com/symbol/XTZ.X",
+        "company": "Tezos"
+    },
+    {
+        "id": 4619,
+        "symbol": "BWA",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 641,
+        "rank": 7,
+        "url": "https://stocktwits.com/symbol/BWA",
+        "company": "BorgWarner Inc."
+    },
+    {
+        "id": 12433,
+        "symbol": "ANTM",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2013,
+        "rank": 8,
+        "url": "https://stocktwits.com/symbol/ANTM",
+        "company": "Anthem Inc"
+    },
+    {
+        "id": 4042,
+        "symbol": "VRSN",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 944,
+        "rank": 9,
+        "url": "https://stocktwits.com/symbol/VRSN",
+        "company": "VeriSign Inc."
+    },
+    {
+        "id": 6762,
+        "symbol": "PHM",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1461,
+        "rank": 10,
+        "url": "https://stocktwits.com/symbol/PHM",
+        "company": "PulteGroup, Inc."
+    },
+    {
+        "id": 1849,
+        "symbol": "FCNCA",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 37,
+        "rank": 11,
+        "url": "https://stocktwits.com/symbol/FCNCA",
+        "company": "First Citizens Bancshares Inc."
+    },
+    {
+        "id": 8566,
+        "symbol": "CDXS",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1123,
+        "rank": 12,
+        "url": "https://stocktwits.com/symbol/CDXS",
+        "company": "Codexis, Inc."
+    },
+    {
+        "id": 6630,
+        "symbol": "OHI",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2758,
+        "rank": 13,
+        "url": "https://stocktwits.com/symbol/OHI",
+        "company": "Omega Healthcare Investors Inc."
+    },
+    {
+        "id": 11579,
+        "symbol": "WIX",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 3564,
+        "rank": 14,
+        "url": "https://stocktwits.com/symbol/WIX",
+        "company": "Wix"
+    },
+    {
+        "id": 14054,
+        "symbol": "ADA.X",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 14908,
+        "rank": 15,
+        "url": "https://stocktwits.com/symbol/ADA.X",
+        "company": "Cardano"
+    },
+    {
+        "id": 12078,
+        "symbol": "TERP",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 3301,
+        "rank": 16,
+        "url": "https://stocktwits.com/symbol/TERP",
+        "company": "TerraForm Power"
+    },
+    {
+        "id": 13689,
+        "symbol": "XLM.X",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 17598,
+        "rank": 17,
+        "url": "https://stocktwits.com/symbol/XLM.X",
+        "company": "Stellar Lumens"
+    },
+    {
+        "id": 13671,
+        "symbol": "IOT.X",
+        "aliases": [
+            "MIOTA.X"
+        ],
+        "is_following": false,
+        "watchlist_count": 12615,
+        "rank": 18,
+        "url": "https://stocktwits.com/symbol/IOT.X",
+        "company": "IOTA"
+    },
+    {
+        "id": 7962,
+        "symbol": "DG",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 4162,
+        "rank": 19,
+        "url": "https://stocktwits.com/symbol/DG",
+        "company": "Dollar General Corporation"
+    },
+    {
+        "id": 3244,
+        "symbol": "PSEC",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 4439,
+        "rank": 20,
+        "url": "https://stocktwits.com/symbol/PSEC",
+        "company": "Prospect Capital Corporation"
+    },
+    {
+        "id": 4434,
+        "symbol": "AZO",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 3036,
+        "rank": 21,
+        "url": "https://stocktwits.com/symbol/AZO",
+        "company": "AutoZone Inc."
+    },
+    {
+        "id": 8066,
+        "symbol": "AAN",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 374,
+        "rank": 22,
+        "url": "https://stocktwits.com/symbol/AAN",
+        "company": "Aaron's, Inc."
+    },
+    {
+        "id": 2805,
+        "symbol": "NBTB",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 32,
+        "rank": 23,
+        "url": "https://stocktwits.com/symbol/NBTB",
+        "company": "NBT Bancorp, Inc."
+    },
+    {
+        "id": 3870,
+        "symbol": "TROW",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 833,
+        "rank": 24,
+        "url": "https://stocktwits.com/symbol/TROW",
+        "company": "T. Rowe Price Group, Inc."
+    },
+    {
+        "id": 9430,
+        "symbol": "IPHI",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 764,
+        "rank": 25,
+        "url": "https://stocktwits.com/symbol/IPHI",
+        "company": "Inphi Corporation"
+    },
+    {
+        "id": 7148,
+        "symbol": "SCI",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 448,
+        "rank": 26,
+        "url": "https://stocktwits.com/symbol/SCI",
+        "company": "Service Corp. International"
+    },
+    {
+        "id": 2160,
+        "symbol": "HOMB",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 137,
+        "rank": 27,
+        "url": "https://stocktwits.com/symbol/HOMB",
+        "company": "Home Bancshares, Inc. (Conway, AR)"
+    },
+    {
+        "id": 13029,
+        "symbol": "LN",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2201,
+        "rank": 28,
+        "url": "https://stocktwits.com/symbol/LN",
+        "company": "Line"
+    },
+    {
+        "id": 8034,
+        "symbol": "TWO",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 1163,
+        "rank": 29,
+        "url": "https://stocktwits.com/symbol/TWO",
+        "company": "Two Harbors Investment Corp."
+    },
+    {
+        "id": 2535,
+        "symbol": "LOGI",
+        "aliases": [],
+        "is_following": false,
+        "watchlist_count": 2288,
+        "rank": 30,
+        "url": "https://stocktwits.com/symbol/LOGI",
+        "company": "Logitech International SA"
+    }
+]

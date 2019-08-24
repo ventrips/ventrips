@@ -1,8 +1,8 @@
 // import * as puppeteer from 'puppeteer';
 import * as _ from 'lodash';
 const Sentiment = require('sentiment');
-const Utils = require('./utils');
-const Predict = require('./predict');
+const RequestPromise = require('request-promise');
+const Cheerio = require('cheerio');
 
 exports.searchNews = function(request: any, response: any, useMock: boolean = false) {
     let data = {};
@@ -34,9 +34,125 @@ function constructData(data: any) {
     return data;
 }
 
-exports.trends = async function(request: any, response: any, useMock: boolean = false): Promise<any> {
-    const yahooFinance: Array<any> = await Utils.yahooFinance(['AAPL'], useMock);
-    const stockTwitsTickers: Array<any> = await Predict.getStockTwitsTickers(request, response, useMock);
+exports.trends = function(request: any, response: any, useMock: boolean = false) {
+    if (useMock) {
+        const data = require('./../mocks/trends/tickers/yahoo-finance-tickers.json');
+        response.send(data);
+        return data;
+    }
 
-    response.send(stockTwitsTickers);
+    Promise.all([
+        getStockTwitsTickers((useMock))
+        ,getYahooTickers((useMock))
+    ])
+    .then(async (result: any) => {
+        const [
+            stockTwitsTickers,
+            yahooTickers
+        ] = result;
+        const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
+        const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
+        const allSymbolsOnly = _.union(stockTwitsSymbolsOnly, yahooSymbolsOnly);
+        // Final
+        const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
+        const final = _.map(allSymbolsOnly, (symbol) => {
+            const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
+            const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
+            const yahoo = _.find(yahooTickers, { symbol: symbol });
+            return _.assign({}, yahooFinance, yahoo, stockTwits);
+        });
+        response.send(final);
+    }).catch((error: any) => console.log(`Error in promises ${error}`));
 }
+
+/* Tickers */
+const getStockTwitsTickers = function(useMock: boolean = false): Promise<any> {
+    const Request = require('request');
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/tickers/stock-twits-tickers.json');
+            resolve(data);
+            return data;
+        }
+        Request('https://api.stocktwits.com/api/2/trending/symbols.json', (error: any, res: any, body: any) => {
+          if (res) {
+
+            const data = _.map(JSON.parse(body).symbols, (stock: any, index: number) => {
+                stock.stockTwitsRank = index + 1;
+                stock.stockTwitsUrl = 'https://stocktwits.com/symbol/' + stock.symbol
+                stock.company = stock.title;
+                delete stock.title;
+
+                return stock;
+            });
+
+            resolve(data);
+            return data;
+          }
+          if (error) {
+            reject(error);
+            return error;
+          }
+        });
+    });
+}
+
+const getYahooTickers = function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/tickers/yahoo-tickers.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://finance.yahoo.com/trending-tickers',
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('tr.BdT').each(function (this: any, index: number) {
+                const obj = {
+                    symbol: $(this).find('.data-col0').text(),
+                    company: $(this).find('.data-col1').text(),
+                    yahooRank: index + 1,
+                    yahooUrl: `https://finance.yahoo.com${$(this).find('.data-col0 a').attr('href')}`,
+                    yahooChange: $(this).find('.data-col5').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getYahooFinanceTickers = async function(symbols: Array<string>, useMock: boolean = false): Promise<any> {
+    return new Promise((resolve, reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/tickers/yahoo-finance-tickers.json');
+            resolve(data);
+            return data;
+        }
+
+        const Request = require('request');
+        Request(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${_.toString(symbols)}`, (error: any, res: any, body: any) => {
+            if (_.isEqual(_.get(res, ['statusCode']), 200)) {
+                const data = _.get(JSON.parse(body), ['quoteResponse', 'result'])
+                resolve(data);
+                return data;
+            }
+
+            reject(error);
+            return error;
+        });
+    });
+};
+
+/* News */

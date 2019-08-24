@@ -1,0 +1,182 @@
+[
+    {
+        "url": "https://finance.yahoo.com/quote/%5EDJI?p=%5EDJI",
+        "company": "Dow 30",
+        "symbol": "^DJI",
+        "change": "-2.37%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/BTC-USD?p=BTC-USD",
+        "company": "Bitcoin USD",
+        "symbol": "BTC-USD",
+        "change": "-4.05%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/%5EGSPC?p=%5EGSPC",
+        "company": "S&P 500",
+        "symbol": "^GSPC",
+        "change": "-2.59%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/MMM?p=MMM",
+        "company": "3M Company",
+        "symbol": "MMM",
+        "change": "-3.13%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/KO?p=KO",
+        "company": "The Coca-Cola Company",
+        "symbol": "KO",
+        "change": "-1.38%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/WBA?p=WBA",
+        "company": "Walgreens Boots Alliance, Inc.",
+        "symbol": "WBA",
+        "change": "-3.20%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/%5ERUT?p=%5ERUT",
+        "company": "Russell 2000",
+        "symbol": "^RUT",
+        "change": "-3.09%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/VZ?p=VZ",
+        "company": "Verizon Communications Inc.",
+        "symbol": "VZ",
+        "change": "-1.51%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/PEP?p=PEP",
+        "company": "PepsiCo, Inc.",
+        "symbol": "PEP",
+        "change": "-1.80%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/GC%3DF?p=GC%3DF",
+        "company": "Gold",
+        "symbol": "GC=F",
+        "change": "+1.88%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/DIS?p=DIS",
+        "company": "The Walt Disney Company",
+        "symbol": "DIS",
+        "change": "-3.24%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/VTI?p=VTI",
+        "company": "Vanguard Total Stock Market Index Fund ETF Shares",
+        "symbol": "VTI",
+        "change": "-2.52%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/EGO?p=EGO",
+        "company": "Eldorado Gold Corporation",
+        "symbol": "EGO",
+        "change": "+6.88%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/%5EIXIC?p=%5EIXIC",
+        "company": "Nasdaq",
+        "symbol": "^IXIC",
+        "change": "-3.00%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/EURUSD%3DX?p=EURUSD%3DX",
+        "company": "EUR/USD",
+        "symbol": "EURUSD=X",
+        "change": "-0.0000%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/SBUX?p=SBUX",
+        "company": "Starbucks Corporation",
+        "symbol": "SBUX",
+        "change": "-1.86%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/JNJ?p=JNJ",
+        "company": "Johnson & Johnson",
+        "symbol": "JNJ",
+        "change": "-2.70%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/UPS?p=UPS",
+        "company": "United Parcel Service, Inc.",
+        "symbol": "UPS",
+        "change": "-3.42%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/MRK?p=MRK",
+        "company": "Merck & Co., Inc.",
+        "symbol": "MRK",
+        "change": "-2.05%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/IBM?p=IBM",
+        "company": "International Business Machines Corporation",
+        "symbol": "IBM",
+        "change": "-3.54%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/GERN?p=GERN",
+        "company": "Geron Corporation",
+        "symbol": "GERN",
+        "change": "-5.56%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/NKE?p=NKE",
+        "company": "NIKE, Inc.",
+        "symbol": "NKE",
+        "change": "-3.44%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/VOO?p=VOO",
+        "company": "Vanguard S&P 500 ETF",
+        "symbol": "VOO",
+        "change": "-2.57%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/UTX?p=UTX",
+        "company": "United Technologies Corporation",
+        "symbol": "UTX",
+        "change": "-3.55%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/FDX?p=FDX",
+        "company": "FedEx Corporation",
+        "symbol": "FDX",
+        "change": "-3.88%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/BRK-B?p=BRK-B",
+        "company": "Berkshire Hathaway Inc.",
+        "symbol": "BRK-B",
+        "change": "-1.92%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/ORCL?p=ORCL",
+        "company": "Oracle Corporation",
+        "symbol": "ORCL",
+        "change": "-3.03%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/ACB.TO?p=ACB.TO",
+        "company": "Aurora Cannabis Inc.",
+        "symbol": "ACB.TO",
+        "change": "-2.46%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/MCD?p=MCD",
+        "company": "McDonald's Corporation",
+        "symbol": "MCD",
+        "change": "-2.20%"
+    },
+    {
+        "url": "https://finance.yahoo.com/quote/CVX?p=CVX",
+        "company": "Chevron Corporation",
+        "symbol": "CVX",
+        "change": "-2.17%"
+    }
+]

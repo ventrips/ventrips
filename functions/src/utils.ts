@@ -11,22 +11,6 @@ exports.cors = function(request: any, response: any): void {
     return;
 }
 
-exports.yahooFinance = async function(symbols: Array<string>, useMock: boolean = false): Promise<any> {
-    return new Promise((resolve, reject) => {
-        if (useMock) {
-            return resolve(require('./../mocks/trends/yahoo-finance.json'));
-        }
-
-        const Request = require('request');
-        Request(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${_.toString(symbols)}`, function (error: any, res: any, body: any) {
-            if (_.isEqual(_.get(res, ['statusCode']), 200)) {
-                resolve(_.get(JSON.parse(body), ['quoteResponse', 'result']));
-            }
-            reject(JSON.parse(error));
-        });
-    });
-};
-
 exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
     const results: Array<any> = [];
     const browser = await puppeteer.launch({

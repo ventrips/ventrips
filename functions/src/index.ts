@@ -105,7 +105,7 @@ export const searchNews = functions.https.onRequest(async (request, response): P
 
 export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    Trends.trends(request, response, true);
+    Trends.trends(request, response, _.isEqual(_.toLower(request.query.mock), 'true'));
 });
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
