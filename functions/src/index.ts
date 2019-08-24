@@ -103,7 +103,7 @@ export const searchNews = functions.https.onRequest(async (request, response): P
     Trends.searchNews(request, response, false);
 });
 
-export const trends = functions.https.onRequest(async (request, response): Promise<any> => {
+export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     Trends.trends(request, response, _.isEqual(_.toLower(request.query.mock), 'true'));
 });
