@@ -36,38 +36,114 @@ function constructData(data: any) {
 
 exports.trends = function(request: any, response: any, useMock: boolean = false) {
     Promise.all([
-        getStockTwitsTickers(useMock)
+        /* Tickers */
+        getFinVizTickers(useMock)
+        ,getStockTwitsTickers(useMock)
         ,getYahooTickers(useMock)
+        /* Earnings */
         ,getSeekingAlphaEarnings(useMock)
+        /* News */
+        ,getSeekingAlphaNews(useMock)
+        ,getMarketWatchNews(useMock)
+        ,getBusinessInsiderNews(useMock)
+        ,getReutersNews(useMock)
+        ,getBarronsNews(useMock)
+        ,getTheFlyNews(useMock)
+        /* Forums */
+        ,getFourChanForums(useMock)
+        ,getHackerForums(useMock)
+        ,getRedditForums(useMock)
     ])
     .then(async (result: any) => {
-        // Tickers
-        const [
-            stockTwitsTickers,
-            yahooTickers,
-            seekingAlphaEarnings
-        ] = result;
+        const finVizTickers = result[0];
+        const stockTwitsTickers = result[1];
+        const yahooTickers = result[2];
+        const seekingAlphaEarnings = result[3];
+        const seekingAlphaNews = result[4];
+        const marketWatchNews = result[5];
+        const businessInsiderNews = result[6];
+        const reutersNews = result[7];
+        const barronsNews = result[8];
+        const theFlyNews = result[9];
+        const fourChanForums = result[10];
+        const hackerForums = result[11];
+        const redditForums = result[12];
+
+        const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
         const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
         const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
         const allSymbolsOnly = _.union(stockTwitsSymbolsOnly, yahooSymbolsOnly);
-        // Final Tickers
+
         const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
         const finalTickers = _.map(allSymbolsOnly, (symbol) => {
             const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
+            const finViz = _.find(finVizTickers, { symbol: symbol });
             const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
             const yahoo = _.find(yahooTickers, { symbol: symbol });
-            return _.assign({}, yahooFinance, yahoo, stockTwits);
+            return _.assign({}, yahooFinance, stockTwits, yahoo);
         });
 
         // Earnings
         response.send({
-            tickers: finalTickers,
-            earnings: seekingAlphaEarnings
+            tickers: finalTickers
+            ,earnings: seekingAlphaEarnings
+            ,news: {
+                seekingAlphaNews
+                ,marketWatchNews
+                ,businessInsiderNews
+                ,reutersNews
+                ,barronsNews
+                ,theFlyNews
+            }
+            ,forums: {
+                fourChanForums
+                ,hackerForums
+                ,redditForums
+            }
         });
     }).catch((error: any) => console.log(`Error in promises ${error}`));
 }
 
 /* Tickers */
+const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/tickers/fin-viz-tickers.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://finviz.com',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr').each(function (this: any, index: number) {
+                const obj = {
+                    finVizRank: index + 1,
+                    symbol: $(this).find('td a.tab-link').text(),
+                    finVizUrl: `https://finviz.com/quote.ashx?t=${$(this).find('td a.tab-link').attr('href')}`,
+                    signal: $(this).find('td .tab-link-nw').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
 const getStockTwitsTickers = function(useMock: boolean = false): Promise<any> {
     const Request = require('request');
     return new Promise((resolve,reject) => {
@@ -188,6 +264,354 @@ const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promis
                     company: $(this).find('.ticker-name').text(),
                     releaseDate: $(this).find('.release-date').text(),
                     releaseTime: $(this).find('.release-time').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+/* News */
+
+const getSeekingAlphaNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/seeking-alpha-news.json');
+            resolve(data);
+            return data;
+        }
+
+        const options = {
+            uri: 'https://seekingalpha.com/earnings/earnings-news',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('#analysis-list-container > .media > .media-body').each(function (this: any, index: number) {
+                const obj = {
+                    url: `https://seekingalpha.com${$(this).find('h4 a.article-link').attr('href')}`,
+                    title: $(this).find('h4').text(),
+                    date: $(this).find('div.article-desc').text(),
+                    description: $(this).find('div.item-summary').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getMarketWatchNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/market-watch-news.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://www.marketwatch.com/latest-news',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.article__content').each(function (this: any, index: number) {
+                const obj = {
+                    url: `${$(this).find('h3 a').attr('href')}`,
+                    title: $(this).find('h3').text(),
+                    date: $(this).find('.article__timestamp').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getBusinessInsiderNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/business-insider-news.json');
+            resolve(data);
+                return data;
+        }
+        const options = {
+            uri: 'https://markets.businessinsider.com/stocks/news',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.further-news-container').each(function (this: any, index: number) {
+                const obj = {
+                    url: `https://markets.businessinsider.com${$(this).find('.news-link').attr('href')}`,
+                    title: $(this).find('.news-link').text(),
+                    date: $(this).find('.source-and-publishdate').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getReutersNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/reuters-news.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://www.reuters.com/finance',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.story').each(function (this: any, index: number) {
+                const obj = {
+                    url: `https://www.reuters.com/finance${$(this).find('.story-content a').attr('href')}`,
+                    title: $(this).find('.story-content a .story-title').text(),
+                    date: $(this).find('.article-time').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/barrons-news.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://www.barrons.com',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.BarronsTheme--scroll-bar--3vISrLk6 > .BarronsTheme--story--3Z0LVZ5M').each(function (this: any, index: number) {
+                const obj = {
+                    url: `${$(this).find('a').attr('href')}`,
+                    title: $(this).find('h3').text(),
+                    date: $(this).find('p').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getTheFlyNews = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/news/the-fly-news.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://thefly.com/news.php',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.tr_noticia').each(function (this: any, index: number) {
+                const obj = {
+                    url: `${$(this).find('a.newsTitleLink').attr('href')}`,
+                    title: $(this).find('a.newsTitleLink').text(),
+                    description: $(this).find('.contenedorFalso .fpo_overlay_ticker').text(),
+                    date: $(this).find('.fpo_overlay_ticker').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+/* Forums */
+const getFourChanForums = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/forums/four-chan-forums.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'http://boards.4channel.org/biz',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.thread').each(function (this: any, index: number) {
+                const obj = {
+                    url: `http://boards.4channel.org/biz/${$(this).find('.replylink').attr('href')}`,
+                    title: $(this).find('.postMessage').text(),
+                    date: $(this).find('.dateTime').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getHackerForums = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/forums/hacker-forums.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://news.ycombinator.com',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.itemlist > tbody > .athing').each(function (this: any, index: number) {
+                const obj = {
+                    url: $(this).find('a.storylink').attr('href'),
+                    title: $(this).find('a.storylink').text()
+                }
+                data.push(obj);
+            });
+            // Process html like you would with jQuery...
+            resolve(data);
+            return data;
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
+const getRedditForums = async function(useMock: boolean = false): Promise<any> {
+    return new Promise((resolve,reject) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/forums/reddit-forums.json');
+            resolve(data);
+            return data;
+        }
+        const options = {
+            uri: 'https://www.reddit.com/r/investing/rising',
+            headers: {
+                'User-Agent': 'Request-Promise'
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            const data: Array<any> = [];
+            $('.Post').each(function (this: any, index: number) {
+                const obj = {
+                    url: `https://www.reddit.com${$(this).find('a.SQnoC3ObvgnGjWt90zD9Z').attr('href')}`,
+                    title: $(this).find('a.SQnoC3ObvgnGjWt90zD9Z h3').text(),
+                    description: $(this).find('.STit0dLageRsa2yR4te_b').text(),
+                    date: $(this).find('._3jOxDPIQ0KaOWpzvSQo-1s').text()
                 }
                 data.push(obj);
             });
