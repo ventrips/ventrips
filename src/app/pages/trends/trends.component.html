@@ -1,5 +1,70 @@
 <section>
     <div class="container-fluid my-5">
+        <!-- Search News -->
+        <ng-container *ngIf="authService?.canEdit(user)">
+            <section class="mb-3">
+                <h1 class="text-center text-uppercase">{{q}}</h1>
+            </section>
+            <section class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
+                        [(ngModel)]="search" />
+                    <div class="input-group-append">
+                        <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section [hidden]="!data">
+                <h2 class="text-center" [hidden]="!data">
+                    Overall Sentiment: {{data?.overallSentiment.score}}
+                </h2>
+                <div class="d-flex flex-wrap mb-3">
+                    <p>
+                        Last Updated: {{data?.timestamp * 1000 | date: 'medium'}}
+                    </p>
+                    <p class="ml-auto">
+                        {{data?.articleCount || 0}} Results
+                    </p>
+                </div>
+                <section class="row">
+                    <div class="col-xs-12 col-lg-6" *ngFor="let article of data?.articles">
+                        <p class="text-break text-wrap">
+                            <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
+                                {{article?.title}}
+                            </a>
+                        </p>
+                        <p>
+                            {{article?.publishedAt | date: 'medium'}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            {{article?.description}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Sentiment: {{article?.sentiment?.score}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Comparative: {{article?.sentiment?.comparative}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Positive: {{article?.sentiment?.positive}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Negative: {{article?.sentiment?.negative}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Words: {{article?.sentiment?.words}}
+                        </p>
+                        <p class="text-break text-wrap">
+                            Tokens: {{article?.sentiment?.tokens}}
+                        </p>
+                    </div>
+                </section>
+            </section>
+        </ng-container>
         <div *ngIf="authService?.canEdit(user)" class="text-center">
             <button class="btn btn-warning" (click)="refreshTrends()">
                 <ng-container *ngIf="isPlatformBrowser()">
@@ -168,68 +233,6 @@
                     </ng-container>
                 </div>
             </div>
-        </section>
-        <section class="mb-3">
-            <h1 class="text-center text-uppercase">{{q}}</h1>
-        </section>
-        <section class="mb-3">
-            <div class="input-group">
-                <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
-                    [(ngModel)]="search" />
-                <div class="input-group-append">
-                    <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
-                        <ng-container *ngIf="isPlatformBrowser()">
-                            <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
-                        </ng-container>
-                    </button>
-                </div>
-            </div>
-        </section>
-        <section [hidden]="!data">
-            <h2 class="text-center" [hidden]="!data">
-                Overall Sentiment: {{data?.overallSentiment.score}}
-            </h2>
-            <div class="d-flex flex-wrap mb-3">
-                <p>
-                    Last Updated: {{data?.timestamp * 1000 | date: 'medium'}}
-                </p>
-                <p class="ml-auto">
-                    {{data?.articleCount || 0}} Results
-                </p>
-            </div>
-            <section class="row">
-                <div class="col-xs-12 col-lg-6" *ngFor="let article of data?.articles">
-                    <p class="text-break text-wrap">
-                        <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
-                            {{article?.title}}
-                        </a>
-                    </p>
-                    <p>
-                        {{article?.publishedAt | date: 'medium'}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        {{article?.description}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Sentiment: {{article?.sentiment?.score}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Comparative: {{article?.sentiment?.comparative}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Positive: {{article?.sentiment?.positive}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Negative: {{article?.sentiment?.negative}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Words: {{article?.sentiment?.words}}
-                    </p>
-                    <p class="text-break text-wrap">
-                        Tokens: {{article?.sentiment?.tokens}}
-                    </p>
-                </div>
-            </section>
         </section>
     </div>
 </section>
