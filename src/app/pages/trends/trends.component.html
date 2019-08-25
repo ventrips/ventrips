@@ -1,7 +1,12 @@
 <section>
     <div class="container-fluid my-5">
         <div class="text-center">
-            <button class="btn btn-warning" (click)="refreshTrends()">Refresh</button>
+            <button class="btn btn-warning" (click)="refreshTrends()">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                </ng-container>
+                Refresh
+            </button>
         </div>
         <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="updated">
             Last Updated: {{updated | timeAgo}}
@@ -13,8 +18,7 @@
                 <div class="col-3 mb-2" *ngFor="let item of tickers; let index = index">
                     <ng-container>
                         <div class="mb-2">
-                            <a [href]="item?.url" [title]="item?.company" target="__blank" class="mr-2">{{index + 1}}. {{item?.company}}</a>
-                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
+                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
                             <span class="mr-2" *ngIf="item?.regularMarketChangePercent">
                                 <span class="font-weight-bold h3"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}">
