@@ -20,10 +20,15 @@
                         <div class="mb-2">
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
                         </div>
-                        <div class="mb-2" *ngIf="item?.regularMarketChangePercent">
-                            <span class="font-weight-bold h4"
-                            [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}">
-                                {{item?.regularMarketChangePercent}}
+                        <div class="mb-2">
+                            <span *ngIf="item?.regularMarketChangePercent" class="font-weight-bold h4">
+                                <span class="text-dark mr-2">{{item?.regularMarketPrice}}</span>
+                                <span class="text-secondary">USD</span>
+                            </span>
+                            <span *ngIf="item?.regularMarketChangePercent"
+                                [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}"
+                                class="font-weight-bold h4">
+                                ({{item?.regularMarketChangePercent}}%)
                             </span>
                         </div>
                         <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
@@ -37,16 +42,16 @@
                             </ng-container>
                             ({{item?.watchlist_count}})
                         </div>
-                        <div>
-                            <span *ngIf="item?.finVizRank">
-                                <a [href]="item?.finVizUrl">Finviz (#{{item?.finVizRank}})</a>
-                            </span>
-                            <span *ngIf="item?.yahooRank">
-                                <a [href]="item?.yahooUrl">Yahoo (#{{item?.yahooRank}})</a>
-                            </span>
-                            <span *ngIf="item?.stockTwitsRank">
-                                <a [href]="item?.stockTwitsUrl">Stocktwits (#{{item?.stockTwitsRank}})</a>
-                            </span>
+                        <div class="mb-2">
+                                <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
+                                    Finviz (#{{item?.finVizRank}})
+                                </a>
+                                <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl">
+                                    Yahoo (#{{item?.yahooRank}})
+                                </a>
+                                <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
+                                    Stocktwits (#{{item?.stockTwitsRank}})
+                                </a>
                         </div>
                     </ng-container>
                 </div>
