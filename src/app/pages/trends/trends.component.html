@@ -48,10 +48,10 @@
                         </div>
                         <div class="mb-2">
                             <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
+                                <fa-icon *ngIf="item?.finVizRank || item?.stockTwitsRank || item?.yahooRank" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
                             </ng-container>
                             <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
-                                Finviz (#{{item?.finVizRank}})
+                               Finviz (#{{item?.finVizRank}})
                             </a>
                             <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
                                 Stocktwits (#{{item?.stockTwitsRank}})
@@ -135,10 +135,10 @@
                         </div>
                         <div class="mb-2">
                             <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
+                                <fa-icon *ngIf="item?.finVizRank || item?.stockTwitsRank || item?.yahooRank" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
                             </ng-container>
                             <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
-                                Finviz (#{{item?.finVizRank}})
+                               Finviz (#{{item?.finVizRank}})
                             </a>
                             <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
                                 Stocktwits (#{{item?.stockTwitsRank}})
