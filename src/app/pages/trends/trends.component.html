@@ -30,6 +30,10 @@
                                 class="font-weight-bold h4">
                                 ({{item?.regularMarketChangePercent}}%)
                             </span>
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon *ngIf="isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-up']" class="text-success fa-2x"></fa-icon>
+                                <fa-icon *ngIf="!isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-down']" class="text-danger fa-2x"></fa-icon>
+                            </ng-container>
                         </div>
                         <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
                         <div class="mb-2">
