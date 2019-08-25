@@ -21,7 +21,7 @@
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
                         </div>
                         <div class="mb-2">
-                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.regularMarketChangePercent ? item?.currency : 'CRYPTO'}}</span>
+                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.regularMarketChangePercent ? item?.currency : 'OTHER'}}</span>
                             <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
                                 {{item?.regularMarketPrice | currency:item?.currency}}
                             </span>

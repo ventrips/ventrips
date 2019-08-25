@@ -1,9 +1,34 @@
-// import * as puppeteer from 'puppeteer';
 import * as _ from 'lodash';
+
 const Sentiment = require('sentiment');
 const RequestPromise = require('request-promise');
 const Cheerio = require('cheerio');
 const UserAgent = require('user-agents');
+
+// const Utils = require('./utils');
+// const GoogleTrends = require('google-trends-api');
+// import * as puppeteer from 'puppeteer';
+// import * as moment from 'moment';
+
+// exports.getGoogleTrends = async function(request: any, response: any, tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>>  {
+//     const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
+
+//     let results;
+//     if (useMock) {
+//         results = require('./../mocks/predict/google-trends.json');
+//     } else {
+//         const unparsedResults = await GoogleTrends.interestOverTime({keyword: symbols, startTime: moment(new Date()).subtract(7, 'days').toDate() })
+//         results = JSON.parse(unparsedResults);
+//     }
+
+//     const timelineData = results.default.timelineData;
+//     const data: any = {
+//         symbols,
+//         timelineData
+//     };
+
+//     return data;
+// }
 
 exports.searchNews = function(request: any, response: any, useMock: boolean = false) {
     let data = {};
