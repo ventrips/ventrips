@@ -59,13 +59,13 @@
                             <ng-container *ngIf="isPlatformBrowser()">
                                 <fa-icon *ngIf="item?.finVizRank || item?.stockTwitsRank || item?.yahooRank" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
                             </ng-container>
-                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
+                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl" target="__blank">
                                 Finviz (#{{item?.finVizRank}})
                             </a>
-                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
+                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl" target="__blank">
                                 Stocktwits (#{{item?.stockTwitsRank}})
                             </a>
-                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl">
+                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl" target="__blank">
                                 Yahoo (#{{item?.yahooRank}})
                             </a>
                         </div>
@@ -155,13 +155,13 @@
                             <ng-container *ngIf="isPlatformBrowser()">
                                 <fa-icon *ngIf="item?.finVizRank || item?.stockTwitsRank || item?.yahooRank" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
                             </ng-container>
-                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
+                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl" target="__blank">
                                 Finviz (#{{item?.finVizRank}})
                             </a>
-                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
+                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl" target="__blank">
                                 Stocktwits (#{{item?.stockTwitsRank}})
                             </a>
-                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl">
+                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl" target="__blank">
                                 Yahoo (#{{item?.yahooRank}})
                             </a>
                         </div>
