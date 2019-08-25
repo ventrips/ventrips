@@ -125,7 +125,12 @@ const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
         RequestPromise(options)
         .then(($: any) => {
             const data: Array<any> = [];
-            $('#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr').each(function (this: any, index: number) {
+            let sections = $('#homepage table tbody tr td table tbody tr td table.t-home-table tbody tr');
+            // Remove the first and last 40 undefined selections
+            sections = sections.slice(1, 40);
+            // Remove the 20th undefined selection
+            sections.splice(19, 1);
+            sections.each(function (this: any, index: number) {
                 const obj = {
                     finVizRank: index + 1,
                     symbol: $(this).find('td a.tab-link').text(),
