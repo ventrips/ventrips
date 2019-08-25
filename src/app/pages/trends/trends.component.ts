@@ -81,7 +81,7 @@ export class TrendsComponent implements OnInit {
       this.initSearchNews();
     }, (error) => {
       this.toastr.error(error);
-      this.spinner.show();
+      this.spinner.hide();
       this.initSearchNews();
     });
 
@@ -89,6 +89,9 @@ export class TrendsComponent implements OnInit {
   }
 
   initSearchNews(): void {
+    if (!this.authService.canEdit(this.user)) {
+      return;
+    }
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
@@ -136,6 +139,9 @@ export class TrendsComponent implements OnInit {
   };
 
   refreshTrends(): void {
+    if (!this.authService.canEdit(this.user)) {
+      return;
+    }
     this.spinner.show();
     this.getTrends().subscribe(response => {
       this.spinner.hide();

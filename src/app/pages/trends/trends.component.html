@@ -1,6 +1,6 @@
 <section>
     <div class="container-fluid my-5">
-        <div class="text-center">
+        <div *ngIf="authService?.canEdit(user)" class="text-center">
             <button class="btn btn-warning" (click)="refreshTrends()">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
