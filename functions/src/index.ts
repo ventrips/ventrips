@@ -16,7 +16,7 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '256MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     Trends.searchNews(request, response, false);
 });
