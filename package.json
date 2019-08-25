@@ -9,7 +9,7 @@
     "build:install": "npm run build:ssr",
     "deploy": "npm run build:ssr && node movedist.js && cd functions && firebase deploy --only hosting,functions",
     "deploy:hosting": "npm run build:ssr && node movedist.js && cd functions && firebase deploy --only hosting",
-    "deploy:functions": "npm run build:ssr && node movedist.js && cd functions && firebase deploy --only functions",
+    "deploy:functions": "cd functions && npm run build && firebase deploy --only functions",
     "deploy:all": "npm run build:ssr && node movedist.js && cd functions && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
