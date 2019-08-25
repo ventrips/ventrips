@@ -42,11 +42,14 @@
                         </p>
                         <div class="mb-2" *ngIf="item?.watchlist_count">
                             <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fas', 'eye']" class="mr-2"></fa-icon>
+                                <fa-icon [icon]="['fas', 'eye']" class="text-secondary mr-2"></fa-icon>
                             </ng-container>
-                            ({{item?.watchlist_count}})
+                            <span class="text-secondary">{{item?.watchlist_count}}</span>
                         </div>
                         <div class="mb-2">
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
+                            </ng-container>
                             <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
                                 Finviz (#{{item?.finVizRank}})
                             </a>
@@ -107,11 +110,14 @@
                         </p>
                         <div class="mb-2" *ngIf="item?.watchlist_count">
                             <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fas', 'eye']" class="mr-2"></fa-icon>
+                                <fa-icon [icon]="['fas', 'eye']" class="text-secondary mr-2"></fa-icon>
                             </ng-container>
-                            ({{item?.watchlist_count}})
+                            <span class="text-secondary">{{item?.watchlist_count}}</span>
                         </div>
                         <div class="mb-2">
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
+                            </ng-container>
                             <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
                                 Finviz (#{{item?.finVizRank}})
                             </a>

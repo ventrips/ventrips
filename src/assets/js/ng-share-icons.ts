@@ -13,12 +13,13 @@ import { faPinterestP } from '@fortawesome/free-brands-svg-icons/faPinterestP';
 import { faRedditAlien } from '@fortawesome/free-brands-svg-icons/faRedditAlien';
 import { faTumblr } from '@fortawesome/free-brands-svg-icons/faTumblr';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons/faLinkedinIn';
+import { faHotjar } from '@fortawesome/free-brands-svg-icons/faHotjar';
 
 const icons = [
   faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr, faFacebookMessenger,
   faEnvelope, faCheck, faPrint, faExclamation, faLink, faMinus, faBars, faBell, faBellSlash, faTrashAlt, faChevronCircleUp,
   faPlusCircle, faPen, faImage, faAsterisk, faSave, faPaperPlane, faSearch, faTimes, faNewspaper, faToggleOn, faToggleOff,
-  faSync, faEye
+  faSync, faEye, faHotjar
 ];
 
 library.add(...icons);
