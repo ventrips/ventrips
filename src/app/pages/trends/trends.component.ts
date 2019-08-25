@@ -89,9 +89,6 @@ export class TrendsComponent implements OnInit {
   }
 
   initSearchNews(): void {
-    if (!this.authService.canEdit(this.user)) {
-      return;
-    }
     this.activatedRoute.queryParams.subscribe(params => {
       this.q = params.q;
       this.search = _.cloneDeep(this.q);
