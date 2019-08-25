@@ -18,7 +18,7 @@
                 <div class="col-3 mb-3" *ngFor="let item of tickers; let index = index">
                     <ng-container>
                         <div class="mb-2">
-                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
+                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
                         </div>
                         <div class="mb-2">
                             <span *ngIf="item?.regularMarketChangePercent" class="font-weight-bold h4">
