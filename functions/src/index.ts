@@ -41,7 +41,7 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
 });
 
 const universal  = require(`${process.cwd()}/dist/server`).app;
-export const angularUniversalFunction = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(universal);
+export const angularUniversalFunction = functions.runWith({ timeoutSeconds: 540, memory: '2GB' }).https.onRequest(universal);
 
 export const createUserRoles = functions.firestore
 .document('users/{uid}')
