@@ -1,5 +1,8 @@
 <section>
     <div class="container-fluid my-5">
+        <div class="text-center">
+            <button class="btn btn-warning" (click)="refreshTrends()">Refresh</button>
+        </div>
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Tickers')}}</h2>

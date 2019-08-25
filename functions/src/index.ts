@@ -106,18 +106,18 @@ export const searchNews = functions.https.onRequest(async (request, response): P
 export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
-    const isProduction = _.isEqual(_.toLower(_.get(request, ['query', 'production'])), 'true');
+    const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
     const final = await Trends.trends(request, response, useMock);
 
-    if (isProduction) {
+    if (isLocal) {
+        response.send(final);
+    } else {
         // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
         return db.doc(`trends/predict`).set(final).then((res) => {
             response.send(final);
         }).then((error) => {
             response.send(error);
         });
-    } else {
-        response.send(final);
     }
 });
 
@@ -141,46 +141,46 @@ export const createUserRoles = functions.firestore
     });
 });
 
-export const subscribeToTopic = functions.https.onCall(
-    async (data, context) => {
-        await admin.messaging().subscribeToTopic(data.token, _.capitalize(data.topic));
+// export const subscribeToTopic = functions.https.onCall(
+//     async (data, context) => {
+//         await admin.messaging().subscribeToTopic(data.token, _.capitalize(data.topic));
 
-      return `Subscribed to ${_.capitalize(data.topic)}`;
-    }
-);
+//       return `Subscribed to ${_.capitalize(data.topic)}`;
+//     }
+// );
 
-export const unsubscribeFromTopic = functions.https.onCall(
-    async (data, context) => {
-        await admin.messaging().unsubscribeFromTopic(data.token, _.capitalize(data.topic));
+// export const unsubscribeFromTopic = functions.https.onCall(
+//     async (data, context) => {
+//         await admin.messaging().unsubscribeFromTopic(data.token, _.capitalize(data.topic));
 
-        return `Unsubscribed from ${_.capitalize(data.topic)}`;
-    }
-);
+//         return `Unsubscribed from ${_.capitalize(data.topic)}`;
+//     }
+// );
 
-export const sendPushNotification = functions.firestore
-.document('notifications/{notificationId}')
-.onCreate(async (snapshot, context) => {
-    const fcm = snapshot.data();
+// export const sendPushNotification = functions.firestore
+// .document('notifications/{notificationId}')
+// .onCreate(async (snapshot, context) => {
+//     const fcm = snapshot.data();
 
-    const notification: admin.messaging.Notification = {
-        title: _.get(fcm, ['title'], 'We made some new updates'),
-        body: _.get(fcm, ['body'], 'Come check it out!')
-    };
+//     const notification: admin.messaging.Notification = {
+//         title: _.get(fcm, ['title'], 'We made some new updates'),
+//         body: _.get(fcm, ['body'], 'Come check it out!')
+//     };
 
-    const payload: admin.messaging.Message = {
-        notification,
-        webpush: {
-          notification: {
-            vibrate: [200, 100, 200],
-            icon: _.get(fcm, ['icon'], 'https://www.ventrips.com/favicon.ico'),
-            click_action: _.get(fcm, ['link'], 'https://www.ventrips.com/')
-          }
-        },
-        topic: _.capitalize('Ventrips')
-    };
+//     const payload: admin.messaging.Message = {
+//         notification,
+//         webpush: {
+//           notification: {
+//             vibrate: [200, 100, 200],
+//             icon: _.get(fcm, ['icon'], 'https://www.ventrips.com/favicon.ico'),
+//             click_action: _.get(fcm, ['link'], 'https://www.ventrips.com/')
+//           }
+//         },
+//         topic: _.capitalize('Ventrips')
+//     };
 
-    return admin.messaging().send(payload);
-});
+//     return admin.messaging().send(payload);
+// });
 
 // export const createStripeCheckOutCharge = functions.https.onCall(
 //     async (data, context) => {

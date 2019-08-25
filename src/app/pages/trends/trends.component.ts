@@ -37,8 +37,6 @@ export class TrendsComponent implements OnInit {
   public earnings: Array<any>= [];
   public forums: Array<any>= [];
 
-  public wordFrequency: any = {};
-
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
@@ -110,12 +108,8 @@ export class TrendsComponent implements OnInit {
       for (let article of source) {
         const title = _.get(article, ['title']);
         article['sentiment'] = (new Sentiment()).analyze(title);
-        // for (let word of _.compact(_.split(this.removeCommonTexts(title), ' '))) {
-        //   this.wordFrequency[word] = (this.wordFrequency[word] || 0) + 1
-        // }
       }
     }
-    // console.log(this.wordFrequency);
   }
 
   isPositive(change: string): boolean {
@@ -128,6 +122,21 @@ export class TrendsComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
+
+  // Fetches latest and sets to firestore DB
+  getTrends(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/trends`)
+    .pipe(map((response: Response) => { return response }));
+  };
+
+  refreshTrends(): void {
+    this.spinner.show();
+    this.getTrends().subscribe(response => {
+      this.spinner.hide();
+    }, (error) => {
+      this.spinner.hide();
+    });
+  }
 
   // For Local Purposes. Does not use write / read calls because it doesn't set data to firestore DB
   getPredict(): Observable<any> {
@@ -147,11 +156,6 @@ export class TrendsComponent implements OnInit {
     list.push(`${symbol} stock`);
     list.push(`${symbol} price`);
     list.push(`${symbol} news`);
-    // if (_.get(item, ['company'])) {
-    //   list.push(`${this.removeCommonTexts(_.get(item, ['company']))} news`);
-    // } else {
-    //   list.push(`${this.removeCommonTexts(_.get(item, ['title']))} news`);
-    // }
 
     list = _.compact(list);
 
