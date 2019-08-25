@@ -18,12 +18,12 @@
                 <div class="col-3 mb-3" *ngFor="let item of tickers; let index = index">
                     <ng-container>
                         <div class="mb-2">
-                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
+                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
                         </div>
                         <div class="mb-2">
-                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.regularMarketChangePercent ? 'USD' : 'CRYPTO'}}</span>
+                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.regularMarketChangePercent ? item?.currency : 'CRYPTO'}}</span>
                             <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
-                                {{item?.regularMarketPrice | currency: 'USD'}}
+                                {{item?.regularMarketPrice | currency:item?.currency}}
                             </span>
                             <span *ngIf="item?.regularMarketChangePercent"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}"
@@ -32,7 +32,7 @@
                             </span>
                         </div>
                         <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
-                        <div>
+                        <div class="mb-2">
                             <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
                             <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
                         </div>
