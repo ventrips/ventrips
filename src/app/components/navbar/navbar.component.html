@@ -12,6 +12,12 @@
           Home
         </a>
       </li>
+      <li *ngIf="authService?.canEdit(user)" [ngClass]="{'active': isActive('trends')}" class="nav-item">
+        <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
+          Trends
+          <span *ngIf="isActive('trends')" class="sr-only">(current)</span>
+        </a>
+      </li>
       <li *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" class="nav-item">
         <a [routerLink]="['', item?.url]" [title]="item?.title" class="nav-link">
           {{item?.title}}
@@ -30,12 +36,6 @@
           <span>{{user?.displayName}}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-toggle="collapse" data-target=".navbar-collapse.collapse.show">
-          <ng-container *ngIf="authService?.isAdmin(user)">
-              <a class="dropdown-item" title="Trends" [routerLink]="['/trends']" [ngClass]="{'active': isActive('/trends')}">
-                Trends
-              </a>
-              <div class="dropdown-divider"></div>
-          </ng-container>
           <ng-container *ngIf="authService?.isAdmin(user)">
               <a class="dropdown-item" title="Admin" [routerLink]="['/admin']" [ngClass]="{'active': isActive('/admin')}">
                 Admin
