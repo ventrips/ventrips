@@ -25,6 +25,10 @@
                             <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
                                 {{item?.regularMarketPrice | currency:item?.currency}}
                             </span>
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon *ngIf="isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-up']" class="text-success fa-2x"></fa-icon>
+                                <fa-icon *ngIf="!isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-down']" class="text-danger fa-2x"></fa-icon>
+                            </ng-container>
                             <span *ngIf="item?.regularMarketChange"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChange), 'text-danger': !isPositive(item?.regularMarketChange)}"
                                 class="font-weight-bold h4">
@@ -117,6 +121,10 @@
                             <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
                                 {{item?.regularMarketPrice | currency:item?.currency}}
                             </span>
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon *ngIf="isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-up']" class="text-success fa-2x"></fa-icon>
+                                <fa-icon *ngIf="!isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-down']" class="text-danger fa-2x"></fa-icon>
+                            </ng-container>
                             <span *ngIf="item?.regularMarketChange"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChange), 'text-danger': !isPositive(item?.regularMarketChange)}"
                                 class="font-weight-bold h4">
