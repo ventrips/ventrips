@@ -15,30 +15,37 @@
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Tickers')}}</h2>
             <div class="row">
-                <div class="col-3 mb-2" *ngFor="let item of tickers; let index = index">
+                <div class="col-3 mb-3" *ngFor="let item of tickers; let index = index">
                     <ng-container>
                         <div class="mb-2">
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2"><span class="text-dark">{{index + 1}}.</span> {{item?.company}} ({{item?.symbol}})</a>
-                            <span class="mr-2" *ngIf="item?.regularMarketChangePercent">
-                                <span class="font-weight-bold h3"
-                                [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}">
-                                    {{item?.regularMarketChangePercent}}
-                                </span>
+                        </div>
+                        <div class="mb-2" *ngIf="item?.regularMarketChangePercent">
+                            <span class="font-weight-bold h4"
+                            [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}">
+                                {{item?.regularMarketChangePercent}}
                             </span>
                         </div>
-                        <div class="mr-2 font-weight-bold" *ngIf="item?.signal">{{item?.signal}}</div>
-                        <div class="mb-2 mr-2" *ngIf="item?.watchlist_count">Watching: {{item?.watchlist_count}}</div>
-                        <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
-                        <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
+                        <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
+                        <div>
+                            <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
+                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
+                        </div>
+                        <div class="mb-2" *ngIf="item?.watchlist_count">
+                            <ng-container *ngIf="isPlatformBrowser()">
+                                <fa-icon [icon]="['fas', 'eye']" class="mr-2"></fa-icon>
+                            </ng-container>
+                            ({{item?.watchlist_count}})
+                        </div>
                         <div>
                             <span *ngIf="item?.finVizRank">
-                                FinVizRank: {{item?.finVizRank}}
+                                <a [href]="item?.finVizUrl">Finviz (#{{item?.finVizRank}})</a>
                             </span>
                             <span *ngIf="item?.yahooRank">
-                                yahooRank: {{item?.yahooRank}}
+                                <a [href]="item?.yahooUrl">Yahoo (#{{item?.yahooRank}})</a>
                             </span>
                             <span *ngIf="item?.stockTwitsRank">
-                                stockTwitsRank: {{item?.stockTwitsRank}}
+                                <a [href]="item?.stockTwitsUrl">Stocktwits (#{{item?.stockTwitsRank}})</a>
                             </span>
                         </div>
                     </ng-container>
