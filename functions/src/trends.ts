@@ -533,7 +533,8 @@ const getFourChanForums = async function(useMock: boolean = false): Promise<any>
         RequestPromise(options)
         .then(($: any) => {
             const data: Array<any> = [];
-            $('.thread').each(function (this: any, index: number) {
+            // Select after the first two stickied forum posts
+            ($('.thread').slice(2)).each(function (this: any, index: number) {
                 const obj = {
                     url: `http://boards.4channel.org/biz/${$(this).find('.replylink').attr('href')}`,
                     title: $(this).find('.postMessage').text(),
