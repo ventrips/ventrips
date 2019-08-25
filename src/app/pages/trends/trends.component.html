@@ -3,6 +3,9 @@
         <div class="text-center">
             <button class="btn btn-warning" (click)="refreshTrends()">Refresh</button>
         </div>
+        <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="updated">
+            Last Updated: {{updated | timeAgo}}
+        </p>
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Tickers')}}</h2>

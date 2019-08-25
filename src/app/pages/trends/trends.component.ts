@@ -32,6 +32,7 @@ export class TrendsComponent implements OnInit {
   public id: string = 'predict';
   public environment = environment;
 
+  public updated: string;
   public tickers: Array<any>= [];
   public news: Array<any>= [];
   public earnings: Array<any>= [];
@@ -61,6 +62,7 @@ export class TrendsComponent implements OnInit {
       this.setSentiment('news');
       this.setSentiment('forums');
 
+      this.updated = _.get(this.predict, ['updated']);
       this.tickers = _.get(this.predict, ['tickers']);
       this.tickers =  _.orderBy(this.tickers, [
       (item) => item.stockTwitsRank,
@@ -68,7 +70,7 @@ export class TrendsComponent implements OnInit {
       (item) => item.finVizRank
     ], ["asc", "asc", "asc"]);
 
-    this.news = _.get(this.predict, ['news']);
+      this.news = _.get(this.predict, ['news']);
       this.earnings = _.get(this.predict, ['earnings']);
       this.forums = _.get(this.predict, ['forums']);
 
