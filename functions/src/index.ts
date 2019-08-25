@@ -107,14 +107,14 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
     Utils.cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
-    const trends = await Trends.trends(request, response, useMock);
+    const data = await Trends.trends(request, response, useMock);
 
     if (isLocal) {
-        response.send(trends);
+        response.send(data);
     } else {
-        const final = _.assign(trends, {updated: admin.firestore.FieldValue.serverTimestamp()});
+        const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
         // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
-        return db.doc(`trends/predict`).set(final).then((res) => {
+        return db.doc(`trends/trends`).set(final).then((res) => {
             response.send(final);
         }).then((error) => {
             response.send(error);

@@ -29,7 +29,7 @@ export class TrendsComponent implements OnInit {
   public predict: any;
   public _ = _;
   public collection: string = 'trends';
-  public id: string = 'predict';
+  public id: string = 'trends';
   public environment = environment;
 
   public updated: string;
@@ -65,10 +65,14 @@ export class TrendsComponent implements OnInit {
       this.updated = _.get(this.predict, ['updated']);
       this.tickers = _.get(this.predict, ['tickers']);
       this.tickers =  _.orderBy(this.tickers, [
-      (item) => item.stockTwitsRank,
-      (item) => item.yahooRank,
-      (item) => item.finVizRank
-    ], ["asc", "asc", "asc"]);
+        (item) => item.finVizRank && item.stockTwitsRank && item.yahooRank,
+        (item) => item.finVizRank && item.stockTwitsRank,
+        (item) => item.finVizRank && item.yahooRank,
+        (item) => item.stockTwitsRank && item.yahooRank,
+        (item) => item.finVizRank,
+        (item) => item.stockTwitsRank,
+        (item) => item.yahooRank
+      ], ["asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
 
       this.news = _.get(this.predict, ['news']);
       this.earnings = _.get(this.predict, ['earnings']);
