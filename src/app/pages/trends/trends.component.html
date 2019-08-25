@@ -15,7 +15,7 @@
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Tickers')}}</h2>
             <div class="row">
-                <div class="col-3 mb-3" *ngFor="let item of tickers; let index = index">
+                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of tickers; let index = index">
                     <ng-container>
                         <div class="mb-2">
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
@@ -64,9 +64,10 @@
                 </div>
             </div>
         </section>
+        <!-- News -->
         <section *ngIf="!_.isEmpty(news)">
             <div class="row">
-                <div class="col-3" *ngFor="let key of _.keys(news)">
+                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(news)">
                     <h2>{{_.upperCase(key)}}</h2>
                     <div class="row">
                         <div class="col-12" *ngFor="let item of _.get(news, [key]); let index = index">
@@ -80,10 +81,28 @@
                 </div>
             </div>
         </section>
+        <!-- Forums -->
+        <section *ngIf="!_.isEmpty(forums)">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(forums)">
+                    <h2>{{_.upperCase(key)}}</h2>
+                    <div class="row">
+                        <div class="col-12" *ngFor="let item of _.get(forums, [key]); let index = index">
+                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
+                            <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
+                            <p>{{item?.date}}</p>
+                            <p>{{item?.description}}</p>
+                            <p><span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Earnings -->
         <section *ngIf="!_.isEmpty(earnings)">
             <h2>{{_.upperCase('Earnings')}}</h2>
             <div class="row">
-                <div class="col-3 mb-3" *ngFor="let item of earnings; let index = index">
+                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of earnings; let index = index">
                     <ng-container>
                         <div class="mb-2">
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
@@ -129,22 +148,6 @@
                             </a>
                         </div>
                     </ng-container>
-                </div>
-            </div>
-        </section>
-        <section *ngIf="!_.isEmpty(forums)">
-            <div class="row">
-                <div class="col-3" *ngFor="let key of _.keys(forums)">
-                    <h2>{{_.upperCase(key)}}</h2>
-                    <div class="row">
-                        <div class="col-12" *ngFor="let item of _.get(forums, [key]); let index = index">
-                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
-                            <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                            <p>{{item?.date}}</p>
-                            <p>{{item?.description}}</p>
-                            <p><span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span></p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
