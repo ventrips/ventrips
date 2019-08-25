@@ -13,7 +13,7 @@
         </p>
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
-            <h2>{{_.upperCase('Tickers')}}</h2>
+            <h2>{{_.upperCase('Trending Tickers')}}</h2>
             <div class="row">
                 <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of tickers; let index = index">
                     <ng-container>
@@ -109,7 +109,7 @@
         </section>
         <!-- Earnings -->
         <section *ngIf="!_.isEmpty(earnings)">
-            <h2>{{_.upperCase('Earnings')}}</h2>
+            <h2>{{_.upperCase('Earnings Report')}}</h2>
             <div class="row">
                 <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of earnings; let index = index">
                     <ng-container>
