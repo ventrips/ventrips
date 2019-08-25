@@ -117,6 +117,20 @@ export class TrendsComponent implements OnInit {
     }
   }
 
+  showFireIcon(ticker: any): boolean {
+    let count = 0;
+    if (_.get(ticker, ['finVizRank'])) {
+      count++;
+    }
+    if (_.get(ticker, ['stockTwitsRank'])) {
+      count++;
+    }
+    if (_.get(ticker, ['yahooRank'])) {
+      count++;
+    }
+    return count > 1;
+  }
+
   isPositive(change: string): boolean {
     let text = change;
     text = _.replace(text, '%', '');
