@@ -74,7 +74,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
-            const allSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
+            let allSymbolsOnly = _.union(['SPY'], finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
             const finalTickers = _.map(allSymbolsOnly, (symbol) => {
