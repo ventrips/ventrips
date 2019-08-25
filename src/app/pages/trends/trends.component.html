@@ -43,15 +43,15 @@
                             ({{item?.watchlist_count}})
                         </div>
                         <div class="mb-2">
-                                <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
-                                    Finviz (#{{item?.finVizRank}})
-                                </a>
-                                <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl">
-                                    Yahoo (#{{item?.yahooRank}})
-                                </a>
-                                <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
-                                    Stocktwits (#{{item?.stockTwitsRank}})
-                                </a>
+                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl">
+                                Finviz (#{{item?.finVizRank}})
+                            </a>
+                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl">
+                                Stocktwits (#{{item?.stockTwitsRank}})
+                            </a>
+                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl">
+                                Yahoo (#{{item?.yahooRank}})
+                            </a>
                         </div>
                     </ng-container>
                 </div>
