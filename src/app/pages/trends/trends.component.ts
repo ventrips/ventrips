@@ -80,7 +80,6 @@ export class TrendsComponent implements OnInit {
 
       this.initSearchNews();
     }, (error) => {
-      this.toastr.error(error);
       this.spinner.hide();
       this.initSearchNews();
     });
