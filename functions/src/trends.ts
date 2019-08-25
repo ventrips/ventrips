@@ -99,20 +99,33 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
-            const allSymbolsOnly = _.union(['SPY'], finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
+            const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
+
+            const seekingAlphaEarningsSymbolsOnly: Array<string> = _.map(seekingAlphaEarnings, (ticker) => _.get(ticker, ['symbol']));
+            const allSymbolsOnly = _.union(['SPY'], seekingAlphaEarningsSymbolsOnly, allTrendingSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-            const finalTickers = _.map(allSymbolsOnly, (symbol) => {
+            const finalTickers = _.map(allTrendingSymbolsOnly, (symbol) => {
                 const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
                 const yahoo = _.find(yahooTickers, { symbol: symbol });
-                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo);
+                const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
+                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo, seekingAlpha);
+            });
+
+            const finalEarnings = _.map(seekingAlphaEarningsSymbolsOnly, (symbol) => {
+                const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
+                const finViz = _.find(finVizTickers, { symbol: symbol });
+                const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
+                const yahoo = _.find(yahooTickers, { symbol: symbol });
+                const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
+                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo, seekingAlpha);
             });
 
             resolve({
                 tickers: finalTickers
-                ,earnings: seekingAlphaEarnings
+                ,earnings: finalEarnings
                 ,news: {
                     seekingAlphaNews
                     ,marketWatchNews
