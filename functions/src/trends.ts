@@ -172,7 +172,7 @@ const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
                 const obj = {
                     finVizRank: index + 1,
                     symbol: $(this).find('td a.tab-link').text(),
-                    finVizUrl: `https://finviz.com/quote.ashx?t=${$(this).find('td a.tab-link').attr('href')}`,
+                    finVizUrl: `https://finviz.com/${$(this).find('td a.tab-link').attr('href')}`,
                     signal: $(this).find('td .tab-link-nw').text()
                 }
                 data.push(obj);
