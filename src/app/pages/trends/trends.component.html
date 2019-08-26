@@ -97,7 +97,7 @@
                             <span *ngIf="item?.regularMarketChange"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChange), 'text-danger': !isPositive(item?.regularMarketChange)}"
                                 class="font-weight-bold h4">
-                                {{_.round(item?.regularMarketChange, 2)}}
+                                {{_.round(item?.regularMarketChange, 2) | currency:item?.currency}}
                             </span>
                             <span *ngIf="item?.regularMarketChangePercent"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}"
@@ -193,7 +193,7 @@
                             <span *ngIf="item?.regularMarketChange"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChange), 'text-danger': !isPositive(item?.regularMarketChange)}"
                                 class="font-weight-bold h4">
-                                {{_.round(item?.regularMarketChange, 2)}}
+                                {{_.round(item?.regularMarketChange, 2) | currency:item?.currency}}
                             </span>
                             <span *ngIf="item?.regularMarketChangePercent"
                                 [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}"
