@@ -104,6 +104,12 @@
                                 class="font-weight-bold h4">
                                 ({{_.round(item?.regularMarketChangePercent, 2)}}%)
                             </span>
+                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverage), 'text-danger': !isPositive(item?.fiftyDayAverage)}">Fifty Day Average: {{_.round(item?.fiftyDayAverage, 2)}}</div>
+                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChange), 'text-danger': !isPositive(item?.fiftyDayAverageChange)}">Fifty Day Average Change: {{_.round(item?.fiftyDayAverageChange, 2)}}</div>
+                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.fiftyDayAverageChangePercent)}">Fifty Day Average Change Percent: {{_.round(item?.fiftyDayAverageChangePercent, 2)}}</div>
+                            <div>Volume: {{item?.regularMarketVolume}}</div>
+                            <div>Average 10 Day Volume: {{item?.averageDailyVolume10Day}}</div>
+                            <div>Average 90 Day Volume: {{item?.averageDailyVolume3Month}}</div>
                         </div>
                         <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
                         <div class="mb-2">
