@@ -34,7 +34,7 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
         // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
         return db.doc(`trends/trends`).set(final).then((res) => {
             response.send(final);
-        }).then((error) => {
+        }).catch((error) => {
             response.send(error);
         });
     }
