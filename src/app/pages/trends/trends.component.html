@@ -108,7 +108,7 @@
                             <div>Two Hundred Day Average: {{_.round(item?.twoHundredDayAverage, 2)}}</div>
                             <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChange), 'text-danger': !isPositive(item?.fiftyDayAverageChange)}">Fifty Day Average Change: {{_.round(item?.fiftyDayAverageChange, 2)}}</div>
                             <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.fiftyDayAverageChangePercent)}">Fifty Day Average Change Percent: {{_.round(item?.fiftyDayAverageChangePercent, 2)}}</div>
-                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.twoHundredDayAverageChange)}">Two Hundred Day Average Change Percent: {{_.round(item?.twoHundredDayAverageChange, 2)}}</div>
+                            <div [ngClass]="{'text-success': isPositive(item?.twoHundredDayAverageChange), 'text-danger': !isPositive(item?.twoHundredDayAverageChange)}">Two Hundred Day Average Change Percent: {{_.round(item?.twoHundredDayAverageChange, 2)}}</div>
                             <div>Volume: {{item?.regularMarketVolume}}</div>
                             <div>Average 10 Day Volume: {{item?.averageDailyVolume10Day}}</div>
                             <div>Average 90 Day Volume: {{item?.averageDailyVolume3Month}}</div>
@@ -212,7 +212,7 @@
                             <div>Two Hundred Day Average: {{_.round(item?.twoHundredDayAverage, 2)}}</div>
                             <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChange), 'text-danger': !isPositive(item?.fiftyDayAverageChange)}">Fifty Day Average Change: {{_.round(item?.fiftyDayAverageChange, 2)}}</div>
                             <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.fiftyDayAverageChangePercent)}">Fifty Day Average Change Percent: {{_.round(item?.fiftyDayAverageChangePercent, 2)}}</div>
-                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.twoHundredDayAverageChange)}">Two Hundred Day Average Change Percent: {{_.round(item?.twoHundredDayAverageChange, 2)}}</div>
+                            <div [ngClass]="{'text-success': isPositive(item?.twoHundredDayAverageChange), 'text-danger': !isPositive(item?.twoHundredDayAverageChange)}">Two Hundred Day Average Change Percent: {{_.round(item?.twoHundredDayAverageChange, 2)}}</div>
                             <div>Volume: {{item?.regularMarketVolume}}</div>
                             <div>Average 10 Day Volume: {{item?.averageDailyVolume10Day}}</div>
                             <div>Average 90 Day Volume: {{item?.averageDailyVolume3Month}}</div>
