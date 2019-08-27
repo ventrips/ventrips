@@ -116,9 +116,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
 
             resolve({
                 tickers: finalTickers
-                ,global: [
-                    _.find(finalTickers, { symbol: 'SPY' }) || _.find(yahooFinanceTickers, { symbol: 'SPY' })
-                ]
+                ,global: {
+                    spy: _.find(finalTickers, { symbol: 'SPY' }) || _.find(yahooFinanceTickers, { symbol: 'SPY' })
+                }
                 ,news: {
                     marketWatchNews
                     ,businessInsiderNews
