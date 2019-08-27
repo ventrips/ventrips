@@ -68,9 +68,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* Earnings */
-            ,getSeekingAlphaEarnings(useMock)
+            // ,getSeekingAlphaEarnings(!useMock)
             /* News */
-            ,getSeekingAlphaNews(useMock)
+            // ,getSeekingAlphaNews(!useMock)
             ,getMarketWatchNews(useMock)
             ,getBusinessInsiderNews(useMock)
             ,getReutersNews(useMock)
@@ -82,27 +82,31 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getRedditForums(useMock)
         ])
         .then(async (result: any) => {
-            const finVizTickers = result[0];
-            const stockTwitsTickers = result[1];
-            const yahooTickers = result[2];
-            const seekingAlphaEarnings = result[3];
-            const seekingAlphaNews = result[4];
-            const marketWatchNews = result[5];
-            const businessInsiderNews = result[6];
-            const reutersNews = result[7];
-            const barronsNews = result[8];
-            const theFlyNews = result[9];
-            const fourChanForums = result[10];
-            const hackerForums = result[11];
-            const redditForums = result[12];
+            const [
+                finVizTickers,
+                stockTwitsTickers,
+                yahooTickers,
+                // seekingAlphaEarnings,
+                // seekingAlphaNews,
+                marketWatchNews,
+                businessInsiderNews,
+                reutersNews,
+                barronsNews,
+                theFlyNews,
+                fourChanForums,
+                hackerForums,
+                redditForums
+            ] = result;
 
             const finVizSymbolsOnly: Array<string> = _.map(finVizTickers, (ticker) => _.get(ticker, ['symbol']));
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
-            const seekingAlphaEarningsSymbolsOnly: Array<string> = _.map(seekingAlphaEarnings, (ticker) => _.get(ticker, ['symbol']));
-            const allSymbolsOnly = _.union(['SPY'], seekingAlphaEarningsSymbolsOnly, allTrendingSymbolsOnly);
+            // const seekingAlphaEarningsSymbolsOnly: Array<string> = _.map(seekingAlphaEarnings, (ticker) => _.get(ticker, ['symbol']));
+            const allSymbolsOnly = _.union(['SPY'],
+            // seekingAlphaEarningsSymbolsOnly,
+            allTrendingSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
             const finalTickers = _.map(allTrendingSymbolsOnly, (symbol) => {
@@ -110,27 +114,33 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
                 const yahoo = _.find(yahooTickers, { symbol: symbol });
-                const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
-                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo, seekingAlpha);
+                // const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
+                return _.assign({},
+                    yahooFinance
+                    ,finViz
+                    ,stockTwits
+                    ,yahoo
+                    // ,seekingAlpha
+                );
             });
 
-            const finalEarnings = _.map(seekingAlphaEarningsSymbolsOnly, (symbol) => {
-                const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
-                const finViz = _.find(finVizTickers, { symbol: symbol });
-                const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
-                const yahoo = _.find(yahooTickers, { symbol: symbol });
-                const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
-                return _.assign({}, yahooFinance, finViz, stockTwits, yahoo, seekingAlpha);
-            });
+            // const finalEarnings = _.map(seekingAlphaEarningsSymbolsOnly, (symbol) => {
+            //     const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
+            //     const finViz = _.find(finVizTickers, { symbol: symbol });
+            //     const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
+            //     const yahoo = _.find(yahooTickers, { symbol: symbol });
+            //     const seekingAlpha = _.find(seekingAlphaEarnings, { symbol: symbol });
+            //     return _.assign({}, yahooFinance, finViz, stockTwits, yahoo, seekingAlpha);
+            // });
 
             resolve({
                 tickers: finalTickers
-                ,earnings: finalEarnings
+                // ,earnings: finalEarnings
                 ,news: {
-                    seekingAlphaNews
-                    ,marketWatchNews
+                    marketWatchNews
                     ,businessInsiderNews
                     ,reutersNews
+                    // ,seekingAlphaNews
                     ,barronsNews
                     ,theFlyNews
                 }
@@ -284,87 +294,87 @@ const getYahooFinanceTickers = async function(symbols: Array<string>, useMock: b
 
 /* Earnings */
 
-const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
-        if (useMock) {
-            const data = require('./../mocks/trends/earnings/seeking-alpha-earnings.json');
-            resolve(data);
-            return data;
-        }
-        const options = {
-            uri: 'https://seekingalpha.com/earnings/earnings-calendar',
-            headers: {
-                'User-Agent': ((new UserAgent()).data).toString()
-            },
-            json: true,
-            transform: (body: any) => Cheerio.load(body)
-        };
-        RequestPromise(options)
-        .then(($: any) => {
-            const data: Array<any> = [];
-            $('.earningsTable tbody tr').each(function (this: any, index: number) {
-                const obj = {
-                    url: `https://seekingalpha.com${$(this).find('.sym').attr('href')}`,
-                    symbol: $(this).find('.sym').text(),
-                    company: $(this).find('.ticker-name').text(),
-                    releaseDate: $(this).find('.release-date').text(),
-                    releaseTime: $(this).find('.release-time').text()
-                }
-                data.push(obj);
-            });
-            // Process html like you would with jQuery...
-            resolve(data);
-            return data;
-        })
-        .catch((err: any) => {
-            // Crawling failed...
-            reject(err);
-            return err;
-        });
-    });
-}
+// const getSeekingAlphaEarnings = async function(useMock: boolean = false): Promise<any> {
+//     return new Promise((resolve,reject) => {
+//         if (useMock) {
+//             const data = require('./../mocks/trends/earnings/seeking-alpha-earnings.json');
+//             resolve(data);
+//             return data;
+//         }
+//         const options = {
+//             uri: 'https://seekingalpha.com/earnings/earnings-calendar',
+//             headers: {
+//                 'User-Agent': ((new UserAgent()).data).toString()
+//             },
+//             json: true,
+//             transform: (body: any) => Cheerio.load(body)
+//         };
+//         RequestPromise(options)
+//         .then(($: any) => {
+//             const data: Array<any> = [];
+//             $('.earningsTable tbody tr').each(function (this: any, index: number) {
+//                 const obj = {
+//                     url: `https://seekingalpha.com${$(this).find('.sym').attr('href')}`,
+//                     symbol: $(this).find('.sym').text(),
+//                     company: $(this).find('.ticker-name').text(),
+//                     releaseDate: $(this).find('.release-date').text(),
+//                     releaseTime: $(this).find('.release-time').text()
+//                 }
+//                 data.push(obj);
+//             });
+//             // Process html like you would with jQuery...
+//             resolve(data);
+//             return data;
+//         })
+//         .catch((err: any) => {
+//             // Crawling failed...
+//             reject(err);
+//             return err;
+//         });
+//     });
+// }
 
 /* News */
 
-const getSeekingAlphaNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
-        if (useMock) {
-            const data = require('./../mocks/trends/news/seeking-alpha-news.json');
-            resolve(data);
-            return data;
-        }
+// const getSeekingAlphaNews = async function(useMock: boolean = false): Promise<any> {
+//     return new Promise((resolve,reject) => {
+//         if (useMock) {
+//             const data = require('./../mocks/trends/news/seeking-alpha-news.json');
+//             resolve(data);
+//             return data;
+//         }
 
-        const options = {
-            uri: 'https://seekingalpha.com/earnings/earnings-news',
-            headers: {
-                'User-Agent': ((new UserAgent()).data).toString()
-            },
-            json: true,
-            transform: (body: any) => Cheerio.load(body)
-        };
-        RequestPromise(options)
-        .then(($: any) => {
-            const data: Array<any> = [];
-            $('#analysis-list-container > .media > .media-body').each(function (this: any, index: number) {
-                const obj = {
-                    url: `https://seekingalpha.com${$(this).find('h4 a.article-link').attr('href')}`,
-                    title: $(this).find('h4').text(),
-                    date: $(this).find('div.article-desc').text(),
-                    description: $(this).find('div.item-summary').text()
-                }
-                data.push(obj);
-            });
-            // Process html like you would with jQuery...
-            resolve(data);
-            return data;
-        })
-        .catch((err: any) => {
-            // Crawling failed...
-            reject(err);
-            return err;
-        });
-    });
-}
+//         const options = {
+//             uri: 'https://seekingalpha.com/earnings/earnings-news',
+//             headers: {
+//                 'User-Agent': ((new UserAgent()).data).toString()
+//             },
+//             json: true,
+//             transform: (body: any) => Cheerio.load(body)
+//         };
+//         RequestPromise(options)
+//         .then(($: any) => {
+//             const data: Array<any> = [];
+//             $('#analysis-list-container > .media > .media-body').each(function (this: any, index: number) {
+//                 const obj = {
+//                     url: `https://seekingalpha.com${$(this).find('h4 a.article-link').attr('href')}`,
+//                     title: $(this).find('h4').text(),
+//                     date: $(this).find('div.article-desc').text(),
+//                     description: $(this).find('div.item-summary').text()
+//                 }
+//                 data.push(obj);
+//             });
+//             // Process html like you would with jQuery...
+//             resolve(data);
+//             return data;
+//         })
+//         .catch((err: any) => {
+//             // Crawling failed...
+//             reject(err);
+//             return err;
+//         });
+//     });
+// }
 
 const getMarketWatchNews = async function(useMock: boolean = false): Promise<any> {
     return new Promise((resolve,reject) => {

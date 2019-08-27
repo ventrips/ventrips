@@ -35,7 +35,6 @@ export class TrendsComponent implements OnInit {
   public updated: string;
   public tickers: Array<any>= [];
   public news: Array<any>= [];
-  public earnings: Array<any>= [];
   public forums: Array<any>= [];
 
   constructor(
@@ -75,7 +74,6 @@ export class TrendsComponent implements OnInit {
       ], ["asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
 
       this.news = _.get(this.predict, ['news']);
-      this.earnings = _.get(this.predict, ['earnings']);
       this.forums = _.get(this.predict, ['forums']);
 
       this.initSearchNews();
@@ -141,6 +139,14 @@ export class TrendsComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
+
+  getEarningsDate(timeStamp: any): Date {
+    if (_.isNil(timeStamp)) {
+      return;
+    };
+
+    return new Date(timeStamp * 1000);
+  }
 
   // Fetches latest and sets to firestore DB
   getTrends(): Observable<any> {
