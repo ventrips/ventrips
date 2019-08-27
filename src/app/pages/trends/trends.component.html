@@ -119,7 +119,7 @@
                             <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
                         </div>
                         <p class="font-italic mb-2" *ngIf="getEarningsDate(item?.earningsTimestamp)">
-                            <span class="text-dark">Earnings:</span> {{getEarningsDate(item?.earningsTimestamp) | date}}
+                            <span class="text-dark">Earnings:</span> {{getEarningsDate(item?.earningsTimestamp) | date:'medium'}}
                         </p>
                         <div class="mb-2" *ngIf="item?.watchlist_count">
                             <ng-container *ngIf="isPlatformBrowser()">
