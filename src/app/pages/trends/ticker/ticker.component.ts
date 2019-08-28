@@ -82,6 +82,7 @@ export class TickerComponent implements OnInit {
         ticker.fiftyDayAverageChangePercent >= 0 &&
         ticker.twoHundredDayAverageChangePercent >= 0 &&
         ticker.regularMarketChangePercent >= 0 &&
+        ticker.epsForward >= 0 &&
         _.isEqual(ticker.financialCurrency, 'USD') &&
         _.isEqual(ticker.tradeable, true)
         // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
