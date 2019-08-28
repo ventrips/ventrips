@@ -77,80 +77,15 @@
             Last Updated: {{updated | timeAgo}}
         </p>
         <!-- GLOBAL -->
-        <!-- <section>
-            <h1>SPY</h1>
-            <pre>{{_.get(predict, ['global', 'spy', 'regularMarketChangePercent']) | json}}</pre>
-        </section> -->
+        <section>
+            <app-ticker [ticker]="_.get(predict, ['global', 'spy'])"></app-ticker>
+        </section>
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Trending Tickers')}}</h2>
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of tickers; let index = index">
-                    <ng-container>
-                        <div class="mb-2">
-                            <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
-                        </div>
-                        <div class="mb-2">
-                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.financialCurrency ? item?.financialCurrency : 'OTHER'}}</span>
-                            <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
-                                {{item?.regularMarketPrice | currency:item?.currency}}
-                            </span>
-                            <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon *ngIf="isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-up']" class="text-success fa-2x"></fa-icon>
-                                <fa-icon *ngIf="!isPositive(item?.regularMarketChangePercent)" [icon]="['fas', 'long-arrow-alt-down']" class="text-danger fa-2x"></fa-icon>
-                            </ng-container>
-                            <span *ngIf="item?.regularMarketChange"
-                                [ngClass]="{'text-success': isPositive(item?.regularMarketChange), 'text-danger': !isPositive(item?.regularMarketChange)}"
-                                class="font-weight-bold h4">
-                                {{_.round(item?.regularMarketChange, 2) | currency:item?.currency}}
-                            </span>
-                            <span *ngIf="item?.regularMarketChangePercent"
-                                [ngClass]="{'text-success': isPositive(item?.regularMarketChangePercent), 'text-danger': !isPositive(item?.regularMarketChangePercent)}"
-                                class="font-weight-bold h4">
-                                ({{_.round(item?.regularMarketChangePercent, 2)}}%)
-                            </span>
-                            <div>Fifty Day Average: {{_.round(item?.fiftyDayAverage, 2)}}</div>
-                            <div>Two Hundred Day Average: {{_.round(item?.twoHundredDayAverage, 2)}}</div>
-                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChange), 'text-danger': !isPositive(item?.fiftyDayAverageChange)}">Fifty Day Average Change: {{_.round(item?.fiftyDayAverageChange, 2)}}</div>
-                            <div [ngClass]="{'text-success': isPositive(item?.fiftyDayAverageChangePercent), 'text-danger': !isPositive(item?.fiftyDayAverageChangePercent)}">Fifty Day Average Change Percent: {{_.round(item?.fiftyDayAverageChangePercent, 2)}}</div>
-                            <div [ngClass]="{'text-success': isPositive(item?.twoHundredDayAverageChange), 'text-danger': !isPositive(item?.twoHundredDayAverageChange)}">Two Hundred Day Average Change Percent: {{_.round(item?.twoHundredDayAverageChange, 2)}}</div>
-                            <div>Volume: {{item?.regularMarketVolume}}</div>
-                            <div>Average 10 Day Volume: {{item?.averageDailyVolume10Day}}</div>
-                            <div>Average 90 Day Volume: {{item?.averageDailyVolume3Month}}</div>
-                            <div>Fifty Two Week Low Change: {{item?.fiftyTwoWeekLowChange}}</div>
-                            <div>Fifty Two Week High Change: {{item?.fiftyTwoWeekHighChange}}</div>
-                            <div>Fifty Two Week Low: {{item?.fiftyTwoWeekLow}}</div>
-                            <div>Fifty Two Week High {{item?.fiftyTwoWeekHigh}}</div>
-                        </div>
-                        <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
-                        <div class="mb-2">
-                            <a [href]="getGoogleTrends(item, 'hourly')" title="Google Trends Hourly on {{item?.company}}" target="__blank" class="mr-2">Hourly</a>
-                            <a [href]="getGoogleTrends(item, 'yearly')" title="Google Trends Yearly on {{item?.company}}" target="__blank" class="mr-2">Yearly</a>
-                        </div>
-                        <p class="font-italic mb-2" *ngIf="getEarningsDate(item?.earningsTimestamp)">
-                            <span class="text-dark">Earnings:</span> {{getEarningsDate(item?.earningsTimestamp) | date:'medium'}}
-                        </p>
-                        <div class="mb-2" *ngIf="item?.watchlist_count">
-                            <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fas', 'eye']" class="text-secondary mr-2"></fa-icon>
-                            </ng-container>
-                            <span class="text-secondary">{{item?.watchlist_count}}</span>
-                        </div>
-                        <div class="mb-2">
-                            <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon *ngIf="showFireIcon(item)" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
-                            </ng-container>
-                            <a *ngIf="item?.finVizRank" class="badge badge-info mr-2" [href]="item?.finVizUrl" target="__blank">
-                                Finviz (#{{item?.finVizRank}})
-                            </a>
-                            <a *ngIf="item?.stockTwitsRank" class="badge badge-primary mr-2" [href]="item?.stockTwitsUrl" target="__blank">
-                                Stocktwits (#{{item?.stockTwitsRank}})
-                            </a>
-                            <a *ngIf="item?.yahooRank" class="badge badge-success mr-2" [href]="item?.yahooUrl" target="__blank">
-                                Yahoo (#{{item?.yahooRank}})
-                            </a>
-                        </div>
-                    </ng-container>
+                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let ticker of tickers">
+                    <app-ticker [ticker]="ticker"></app-ticker>
                 </div>
             </div>
         </section>

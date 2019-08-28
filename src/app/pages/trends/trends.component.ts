@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
-import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
@@ -12,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
 import * as Sentiment from 'sentiment';
+import * as _ from 'lodash';
 
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import { KeysPipe } from '../../pipes/keys/keys.pipe';
@@ -73,23 +73,6 @@ export class TrendsComponent implements OnInit {
         (item) => item.yahooRank
       ], ["asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
 
-      // Filter by Preferred
-      // this.tickers = _.filter(this.tickers, (ticker) => {
-      //   if (
-      //     ((ticker.regularMarketPrice >= ticker.fiftyTwoWeekLowChange) || (ticker.regularMarketPrice <= ticker.fiftyTwoWeekHighChange)) &&
-      //     ticker.fiftyDayAverage >= ticker.twoHundredDayAverage &&
-      //     ticker.fiftyDayAverageChangePercent >= 0 &&
-      //     ticker.twoHundredDayAverageChangePercent >= 0 &&
-      //     ticker.regularMarketChangePercent >= 0 &&
-      //     _.isEqual(ticker.financialCurrency, 'USD') &&
-      //     _.isEqual(ticker.tradeable, true)
-      //     // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
-      //   ) {
-      //     return true;
-      //   }
-      //   return false;
-      // });
-
       this.news = _.get(this.predict, ['news']);
       this.forums = _.get(this.predict, ['forums']);
 
@@ -132,38 +115,10 @@ export class TrendsComponent implements OnInit {
     }
   }
 
-  showFireIcon(ticker: any): boolean {
-    let count = 0;
-    if (_.get(ticker, ['finVizRank'])) {
-      count++;
-    }
-    if (_.get(ticker, ['stockTwitsRank'])) {
-      count++;
-    }
-    if (_.get(ticker, ['yahooRank'])) {
-      count++;
-    }
-    return count > 1;
-  }
-
-  isPositive(change: string): boolean {
-    let text = change;
-    text = _.replace(text, '%', '');
-    return _.toNumber(text) >= 0;
-  }
-
   searchNews(q: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
     .pipe(map((response: Response) => { return response }));
   };
-
-  getEarningsDate(timeStamp: any): Date {
-    if (_.isNil(timeStamp)) {
-      return;
-    };
-
-    return new Date(timeStamp * 1000);
-  }
 
   // Fetches latest and sets to firestore DB
   getTrends(): Observable<any> {
@@ -188,29 +143,6 @@ export class TrendsComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/predict`)
     .pipe(map((response: Response) => { return response }));
   };
-
-  getGoogleSearch(query: string) {
-    return `https://www.google.com/search?q=${query}`;
-  }
-
-  getGoogleTrends(item: any, timeRange: string = 'hourly') {
-    let list = [];
-    const symbol = _.toLower(_.get(item, ['symbol']));
-    list.push(`buy ${symbol}`);
-    list.push(`sell ${symbol}`);
-    list.push(`${symbol} stock`);
-    list.push(`${symbol} price`);
-    list.push(`${symbol} news`);
-
-    list = _.compact(list);
-
-    if (_.isEqual(_.toLower(timeRange), 'yearly')) {
-      return `https://trends.google.com/trends/explore?date=${moment().startOf('year').format('YYYY-MM-DD')}`
-      + ' ' + `${moment().endOf('year').endOf('year').format('YYYY-MM-DD')}&geo=US&q=${list}`;
-    }
-
-    return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
-  }
 
   removeCommonTexts(value: string) {
     value = _.toLower(value);

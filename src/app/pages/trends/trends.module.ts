@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { TrendsRoutingModule } from './trends-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { TrendsComponent } from './trends.component';
+import { TickerComponent } from './ticker/ticker.component';
 
 @NgModule({
   declarations: [
-    TrendsComponent
+    TrendsComponent,
+    TickerComponent
   ],
   imports: [
     CommonModule,

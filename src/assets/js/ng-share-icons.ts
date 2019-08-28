@@ -3,7 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faChevronCircleUp, faPlusCircle, faPen, faSave, faAsterisk, faImage, faPaperPlane, faTimes, faSearch,
   faBars, faTrashAlt, faBell, faBellSlash, faEnvelope, faCheck, faPrint, faExclamation, faLink, faMinus, faNewspaper,
-  faToggleOn, faToggleOff, faSync, faEye, faLongArrowAltUp, faLongArrowAltDown
+  faToggleOn, faToggleOff, faSync, faEye, faLongArrowAltUp, faLongArrowAltDown, faStar
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
@@ -19,7 +19,7 @@ const icons = [
   faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr, faFacebookMessenger,
   faEnvelope, faCheck, faPrint, faExclamation, faLink, faMinus, faBars, faBell, faBellSlash, faTrashAlt, faChevronCircleUp,
   faPlusCircle, faPen, faImage, faAsterisk, faSave, faPaperPlane, faSearch, faTimes, faNewspaper, faToggleOn, faToggleOff,
-  faSync, faEye, faHotjar, faLongArrowAltUp, faLongArrowAltDown
+  faSync, faEye, faHotjar, faLongArrowAltUp, faLongArrowAltDown, faStar
 ];
 
 library.add(...icons);
