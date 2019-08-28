@@ -73,6 +73,23 @@ export class TrendsComponent implements OnInit {
         (item) => item.yahooRank
       ], ["asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
 
+      // Filter by Preferred
+      // this.tickers = _.filter(this.tickers, (ticker) => {
+      //   if (
+      //     ((ticker.regularMarketPrice >= ticker.fiftyTwoWeekLowChange) || (ticker.regularMarketPrice <= ticker.fiftyTwoWeekHighChange)) &&
+      //     ticker.fiftyDayAverage >= ticker.twoHundredDayAverage &&
+      //     ticker.fiftyDayAverageChangePercent >= 0 &&
+      //     ticker.twoHundredDayAverageChangePercent >= 0 &&
+      //     ticker.regularMarketChangePercent >= 0 &&
+      //     _.isEqual(ticker.financialCurrency, 'USD') &&
+      //     _.isEqual(ticker.tradeable, true)
+      //     // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
+      //   ) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+
       this.news = _.get(this.predict, ['news']);
       this.forums = _.get(this.predict, ['forums']);
 

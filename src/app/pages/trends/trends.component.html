@@ -76,6 +76,11 @@
         <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="updated">
             Last Updated: {{updated | timeAgo}}
         </p>
+        <!-- GLOBAL -->
+        <!-- <section>
+            <h1>SPY</h1>
+            <pre>{{_.get(predict, ['global', 'spy', 'regularMarketChangePercent']) | json}}</pre>
+        </section> -->
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
             <h2>{{_.upperCase('Trending Tickers')}}</h2>
@@ -86,7 +91,7 @@
                             <a [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="h5"><span class="text-dark">{{index + 1}}.</span> {{item?.longName ? item?.longName : item?.company}} ({{item?.symbol}})</a>
                         </div>
                         <div class="mb-2">
-                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.regularMarketChangePercent ? item?.currency : 'OTHER'}}</span>
+                            <span class="font-weight-bold h4 text-secondary mr-2">{{item?.financialCurrency ? item?.financialCurrency : 'OTHER'}}</span>
                             <span *ngIf="item?.regularMarketPrice" class="font-weight-bold h4 text-dark mr-2">
                                 {{item?.regularMarketPrice | currency:item?.currency}}
                             </span>
@@ -112,6 +117,10 @@
                             <div>Volume: {{item?.regularMarketVolume}}</div>
                             <div>Average 10 Day Volume: {{item?.averageDailyVolume10Day}}</div>
                             <div>Average 90 Day Volume: {{item?.averageDailyVolume3Month}}</div>
+                            <div>Fifty Two Week Low Change: {{item?.fiftyTwoWeekLowChange}}</div>
+                            <div>Fifty Two Week High Change: {{item?.fiftyTwoWeekHighChange}}</div>
+                            <div>Fifty Two Week Low: {{item?.fiftyTwoWeekLow}}</div>
+                            <div>Fifty Two Week High {{item?.fiftyTwoWeekHigh}}</div>
                         </div>
                         <div class="badge badge-warning font-weight-bold h3 mb-2" *ngIf="item?.signal">{{item?.signal}}</div>
                         <div class="mb-2">
