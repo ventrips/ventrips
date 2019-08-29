@@ -102,17 +102,31 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const allSymbolsOnly = _.union(['SPY'], allSpy500Symbols, allTrendingSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-            const finalTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
+            const allTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
                 const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
                 const yahoo = _.find(yahooTickers, { symbol: symbol });
-                return _.assign({},
+                const ticker = _.assign({},
                     yahooFinance
                     ,finViz
                     ,stockTwits
                     ,yahoo
                 );
+                ticker['recommended'] = ((ticker['regularMarketPrice'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPrice'] <= ticker['fiftyTwoWeekHighChange'])) &&
+                    ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
+                    ticker['fiftyDayAverageChangePercent'] >= 0 &&
+                    ticker['twoHundredDayAverageChangePercent'] >= 0 &&
+                    ticker['regularMarketChangePercent'] >= 0 &&
+                    (_.isNil(ticker['epsForward']) || ticker['epsForward'] >= 0) &&
+                    _.isEqual(ticker['financialCurrency'], 'USD') &&
+                    _.isEqual(ticker['tradeable'], true);
+                    // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
+
+                return ticker;
+            });
+            const finalTickers = _.filter(allTickers, (ticker) => {
+                return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended']
             });
 
             resolve({

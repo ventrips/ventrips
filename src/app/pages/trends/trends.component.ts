@@ -33,6 +33,7 @@ export class TrendsComponent implements OnInit {
   public environment = environment;
 
   public updated: string;
+  public recommended: Array<any> = [];
   public tickers: Array<any>= [];
   public news: Array<any>= [];
   public forums: Array<any>= [];
@@ -63,29 +64,10 @@ export class TrendsComponent implements OnInit {
 
       this.updated = _.get(this.predict, ['updated']);
       this.tickers = _.get(this.predict, ['tickers']);
-      // Set Recommended
-      this.predict['totalRecommended'] = 0;
-      this.tickers = _.map(this.tickers, (ticker) => {
-          if (
-            ((ticker.regularMarketPrice >= ticker.fiftyTwoWeekLowChange) || (ticker.regularMarketPrice <= ticker.fiftyTwoWeekHighChange)) &&
-            ticker.fiftyDayAverage >= ticker.twoHundredDayAverage &&
-            ticker.fiftyDayAverageChangePercent >= 0 &&
-            ticker.twoHundredDayAverageChangePercent >= 0 &&
-            ticker.regularMarketChangePercent >= 0 &&
-            (_.isNil(ticker.epsForward) || ticker.epsForward >= 0) &&
-            _.isEqual(ticker.financialCurrency, 'USD') &&
-            _.isEqual(ticker.tradeable, true)
-            // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
-          ) {
-            ticker.recommended = true;
-            this.predict['totalRecommended']++;
-          } else {
-            ticker.recommended = false;
-          }
-          return ticker;
-      });
+
       this.tickers =  _.orderBy(this.tickers, [
         (item) => item.recommended,
+        (item) => item.regularMarketPrice,
         (item) => item.finVizRank && item.stockTwitsRank && item.yahooRank,
         (item) => item.finVizRank && item.stockTwitsRank,
         (item) => item.finVizRank && item.yahooRank,
@@ -93,7 +75,8 @@ export class TrendsComponent implements OnInit {
         (item) => item.finVizRank,
         (item) => item.stockTwitsRank,
         (item) => item.yahooRank
-      ], ["desc", "asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
+      ], ["desc", "asc", "asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
+      this.recommended = _.filter(this.tickers, (ticker) => !ticker.recommended);
 
       this.news = _.get(this.predict, ['news']);
       this.forums = _.get(this.predict, ['forums']);
