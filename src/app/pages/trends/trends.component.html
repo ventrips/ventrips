@@ -76,13 +76,14 @@
         <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="updated">
             Last Updated: {{updated | timeAgo}}
         </p>
-        <!-- GLOBAL -->
-        <section>
-            <app-ticker [ticker]="_.get(predict, ['global', 'spy'])"></app-ticker>
-        </section>
         <!-- Tickers -->
         <section *ngIf="!_.isEmpty(tickers)">
-            <h2>{{_.upperCase('Trending Tickers')}}</h2>
+            <div class="d-flex flex-wrap">
+                <h2>{{_.upperCase('Trending Tickers')}}</h2>
+                <div class="h2 ml-auto">
+                    Recommended: {{predict.totalRecommended}} / {{tickers.length}}
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let ticker of tickers">
                     <app-ticker [ticker]="ticker"></app-ticker>

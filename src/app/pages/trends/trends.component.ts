@@ -64,6 +64,7 @@ export class TrendsComponent implements OnInit {
       this.updated = _.get(this.predict, ['updated']);
       this.tickers = _.get(this.predict, ['tickers']);
       // Set Recommended
+      this.predict['totalRecommended'] = 0;
       this.tickers = _.map(this.tickers, (ticker) => {
           if (
             ((ticker.regularMarketPrice >= ticker.fiftyTwoWeekLowChange) || (ticker.regularMarketPrice <= ticker.fiftyTwoWeekHighChange)) &&
@@ -77,6 +78,7 @@ export class TrendsComponent implements OnInit {
             // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
           ) {
             ticker.recommended = true;
+            this.predict['totalRecommended']++;
           } else {
             ticker.recommended = false;
           }
