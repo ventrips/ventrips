@@ -42,7 +42,7 @@
             <a [href]="getGoogleTrends(ticker, 'hourly')" title="Google Trends Hourly on {{ticker?.company}}" target="__blank" class="mr-2">Hourly</a>
             <a [href]="getGoogleTrends(ticker, 'yearly')" title="Google Trends Yearly on {{ticker?.company}}" target="__blank" class="mr-2">Yearly</a>
         </div>
-        <div *ngIf="isRecommended(ticker)" class="ml-auto">
+        <div *ngIf="ticker?.recommended" class="ml-auto">
             <span class="badge badge-dark">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon [icon]="['fas', 'star']" class="text-warning mr-1 fa-1x"></fa-icon>

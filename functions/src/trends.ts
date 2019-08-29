@@ -98,10 +98,11 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
-            const allSymbolsOnly = _.union(['SPY'], allTrendingSymbolsOnly);
+            const allSpy500Symbols = require('./../mocks/companies.json');
+            const allSymbolsOnly = _.union(['SPY'], allSpy500Symbols, allTrendingSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-            const finalTickers = _.map(allTrendingSymbolsOnly, (symbol) => {
+            const finalTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
                 const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });

@@ -71,27 +71,6 @@ export class TickerComponent implements OnInit {
     return count > 1;
   }
 
-  isRecommended(ticker: any): boolean {
-      if (_.isNil(ticker)) {
-        return false;
-      }
-
-      if (
-        ((ticker.regularMarketPrice >= ticker.fiftyTwoWeekLowChange) || (ticker.regularMarketPrice <= ticker.fiftyTwoWeekHighChange)) &&
-        ticker.fiftyDayAverage >= ticker.twoHundredDayAverage &&
-        ticker.fiftyDayAverageChangePercent >= 0 &&
-        ticker.twoHundredDayAverageChangePercent >= 0 &&
-        ticker.regularMarketChangePercent >= 0 &&
-        (_.isNil(ticker.epsForward) || ticker.epsForward >= 0) &&
-        _.isEqual(ticker.financialCurrency, 'USD') &&
-        _.isEqual(ticker.tradeable, true)
-        // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
-      ) {
-        return true;
-      }
-      return false;
-  }
-
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
   }
