@@ -99,7 +99,13 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
 
             const allSpy500Symbols = require('./../mocks/companies.json');
-            const allSymbolsOnly = _.union(['SPY'], allSpy500Symbols, allTrendingSymbolsOnly);
+            /*
+                Used 30 Day Upcoming Earnings Symbols and Converted CSV to JSON
+                https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
+                http://www.convertcsv.com/csv-to-json.htm
+            */
+            const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
+            const allSymbolsOnly = _.union(['SPY'], allSpy500Symbols, barChart30DayUpcomingEarnings, allTrendingSymbolsOnly);
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
             const allTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
