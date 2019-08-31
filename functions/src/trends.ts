@@ -113,7 +113,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             );
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-            const allTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
+            const allTickers = _.map(allSymbolsOnly, (symbol) => {
                 const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
