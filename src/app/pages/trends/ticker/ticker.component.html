@@ -30,9 +30,10 @@
         <div>Average 10 Day Volume: {{ticker?.averageDailyVolume10Day}}</div>
         <div>Average 90 Day Volume: {{ticker?.averageDailyVolume3Month}}</div>
         <div>Fifty Two Week Low Change: {{ticker?.fiftyTwoWeekLowChange}}</div>
-        <div>Fifty Two Week High Change: {{ticker?.fiftyTwoWeekHighChange}}</div>
+        <div>Fifty Two Week High: Change: {{ticker?.fiftyTwoWeekHighChange}}</div>
         <div>Fifty Two Week Low: {{ticker?.fiftyTwoWeekLow}}</div>
-        <div>Fifty Two Week High {{ticker?.fiftyTwoWeekHigh}}</div>
+        <div>Fifty Two Week High: {{ticker?.fiftyTwoWeekHigh}}</div>
+        <div>Market Cap: {{ticker?.marketCap | number:'.2'}}</div>
         <div *ngIf="ticker?.epsForward" [ngClass]="{'text-success': isPositive(ticker?.epsForward), 'text-danger': !isPositive(ticker?.epsForward)}">EPS Forward: {{ticker?.epsForward}}</div>
         <div *ngIf="ticker?.epsTrailingTwelveMonths"  [ngClass]="{'text-success': isPositive(ticker?.epsTrailingTwelveMonths), 'text-danger': !isPositive(ticker?.epsTrailingTwelveMonths)}">EPS Trailing Twelve Months: {{ticker?.epsTrailingTwelveMonths}}</div>
     </div>
