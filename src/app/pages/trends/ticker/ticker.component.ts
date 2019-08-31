@@ -20,6 +20,18 @@ export class TickerComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTradingView(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+    const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));
+    if (_.includes(exchangeName, 'NASDAQ')) {
+      return `https://www.tradingview.com/symbols/NASDAQ-${symbol}/?sort=recent`;
+    }
+    if (_.includes(exchangeName, 'NYSE')) {
+      return `https://www.tradingview.com/symbols/NYSE-${symbol}/?sort=recent`;
+    }
+    return `https://www.tradingview.com/ideas/search/${symbol}`;
+  }
+
   getGoogleSearch(ticker: any) {
     const symbol = _.get(ticker, ['symbol']);
     const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));
