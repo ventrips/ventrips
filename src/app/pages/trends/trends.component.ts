@@ -76,7 +76,7 @@ export class TrendsComponent implements OnInit {
         (item) => item.stockTwitsRank,
         (item) => item.yahooRank
       ], ["desc", "asc", "asc", "asc", "asc", "asc", "asc", "asc", "asc"]);
-      this.recommended = _.filter(this.tickers, (ticker) => !ticker.recommended);
+      this.recommended = _.filter(this.tickers, (ticker) => ticker.recommended);
 
       this.news = _.get(this.predict, ['news']);
       this.forums = _.get(this.predict, ['forums']);

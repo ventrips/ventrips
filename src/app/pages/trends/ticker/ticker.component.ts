@@ -20,8 +20,16 @@ export class TickerComponent implements OnInit {
   ngOnInit() {
   }
 
-  getGoogleSearch(query: string) {
-    return `https://www.google.com/search?q=${query}`;
+  getGoogleSearch(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+    const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));
+    if (_.includes(exchangeName, 'NASDAQ')) {
+      return `https://www.google.com/search?q=NASDAQ:${symbol}`;
+    }
+    if (_.includes(exchangeName, 'NYSE')) {
+      return `https://www.google.com/search?q=NYSE:${symbol}`;
+    }
+    return `https://www.google.com/search?q=${_.get(ticker, ['symbol'])} stock`;
   }
 
   getGoogleTrends(item: any, timeRange: string = 'now') {

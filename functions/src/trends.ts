@@ -118,6 +118,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     ticker['regularMarketChangePercent'] >= 0 &&
+                    (ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day'] || ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month']) &&
                     (_.isNil(ticker['epsForward']) || ticker['epsForward'] >= 0) &&
                     _.isEqual(ticker['financialCurrency'], 'USD') &&
                     _.isEqual(ticker['tradeable'], true);
@@ -126,7 +127,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 return ticker;
             });
             const finalTickers = _.filter(allTickers, (ticker) => {
-                return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended']
+                return /* _.includes(allTrendingSymbolsOnly, ticker.symbol) || */ ticker['recommended'];
             });
 
             resolve({
