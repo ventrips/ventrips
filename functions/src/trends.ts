@@ -105,7 +105,12 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 http://www.convertcsv.com/csv-to-json.htm
             */
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
-            const allSymbolsOnly = _.union(['SPY'], allSpy500Symbols, barChart30DayUpcomingEarnings, allTrendingSymbolsOnly);
+            const allSymbolsOnly = _.union(
+                ['SPY'],
+                allSpy500Symbols,
+                barChart30DayUpcomingEarnings,
+                allTrendingSymbolsOnly
+            );
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
             const allTickers = _.map(allSymbolsOnly /* allTrendingSymbolsOnly */, (symbol) => {
@@ -132,8 +137,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
 
                 return ticker;
             });
+
             const finalTickers = _.filter(allTickers, (ticker) => {
-                return /* _.includes(allTrendingSymbolsOnly, ticker.symbol) || */ ticker['recommended'];
+                return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended'];
             });
 
             resolve({
