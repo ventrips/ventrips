@@ -24,7 +24,7 @@ export class TickerComponent implements OnInit {
     return `https://www.google.com/search?q=${query}`;
   }
 
-  getGoogleTrends(item: any, timeRange: string = 'hourly') {
+  getGoogleTrends(item: any, timeRange: string = 'now') {
     let list = [];
     const symbol = _.toLower(_.get(item, ['symbol']));
     list.push(`buy ${symbol}`);
@@ -34,13 +34,19 @@ export class TickerComponent implements OnInit {
     list.push(`${symbol} news`);
 
     list = _.compact(list);
-
-    if (_.isEqual(_.toLower(timeRange), 'yearly')) {
-      return `https://trends.google.com/trends/explore?date=${moment().startOf('year').format('YYYY-MM-DD')}`
-      + ' ' + `${moment().endOf('year').endOf('year').format('YYYY-MM-DD')}&geo=US&q=${list}`;
+    switch (timeRange) {
+      case 'hourly':
+        return `https://trends.google.com/trends/explore?date=now%204-H&geo=US&q=${list}`;
+      case 'daily':
+        return `https://trends.google.com/trends/explore?date=now%201-d&geo=US&q=${list}`;
+      case 'weekly':
+        return `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${list}`;
+      case 'yearly':
+        return `https://trends.google.com/trends/explore?date=${moment().startOf('year').format('YYYY-MM-DD')}`
+        + ' ' + `${moment().endOf('year').endOf('year').format('YYYY-MM-DD')}&geo=US&q=${list}`;
+      default:
+        return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
     }
-
-    return `https://trends.google.com/trends/explore?date=now%201-H&geo=US&q=${list}`;
   }
 
   isPositive(change: string): boolean {
