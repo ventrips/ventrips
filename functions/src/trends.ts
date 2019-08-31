@@ -124,17 +124,25 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ,stockTwits
                     ,yahoo
                 );
-                ticker['recommended'] = ((ticker['regularMarketPrice'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPrice'] <= ticker['fiftyTwoWeekHighChange'])) &&
+                ticker['recommended'] =
+                    // Current Price is within the the stock's 52 week low and highs
+                    ((ticker['regularMarketPrice'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPrice'] <= ticker['fiftyTwoWeekHighChange'])) &&
+                    // 50 Day Moving AVG is GREATER than 200 Day Moving AVG
                     ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
+                    // All Positive Percent Changes
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     ticker['regularMarketChangePercent'] >= 0 &&
+                    // Current Volume is not overbought. Not 1.5 times more
+                    (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
+                    // Current Volume Or 10 Day Volume is EQUAL TO OR GREATER than 90 Day Volume
                     (ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day'] || ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month']) &&
+                    // Good EPS score IF it exists
                     (_.isNil(ticker['epsForward']) || ticker['epsForward'] >= 0) &&
+                    // US tradeable Stock
                     _.isEqual(ticker['financialCurrency'], 'USD') &&
                     _.isEqual(ticker['tradeable'], true);
                     // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
-
                 return ticker;
             });
 
