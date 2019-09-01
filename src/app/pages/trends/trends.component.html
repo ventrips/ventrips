@@ -24,11 +24,7 @@
                                 Recommended: {{recommended.length}} / {{tickers.length}}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let ticker of tickers">
-                                <app-ticker [ticker]="ticker"></app-ticker>
-                            </div>
-                        </div>
+                        <app-trending-tickers [tickers]="tickers"></app-trending-tickers>
                     </section>
                 </ng-template>
             </ngb-tab>

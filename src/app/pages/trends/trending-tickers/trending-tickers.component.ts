@@ -4,12 +4,17 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-ticker',
-  templateUrl: './ticker.component.html',
-  styleUrls: ['./ticker.component.scss']
+  selector: 'app-trending-tickers',
+  templateUrl: './trending-tickers.component.html',
+  styleUrls: ['./trending-tickers.component.scss']
 })
-export class TickerComponent implements OnInit {
-  @Input() ticker;
+export class TrendingTickersComponent implements OnInit {
+  @Input() tickers;
+
+  public page = 1;
+  public pageSize = 0;
+  public collectionSize = 0;
+  public keys = [];
 
   public _ = _;
 
@@ -18,6 +23,38 @@ export class TickerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.tickers =  _.orderBy(this.tickers, [
+      (ticker) => ticker.recommended,
+      (ticker) => ticker.regularMarketPrice,
+      (ticker) => ticker.finVizRank && ticker.stockTwitsRank && ticker.yahooRank,
+      (ticker) => ticker.finVizRank && ticker.stockTwitsRank,
+      (ticker) => ticker.finVizRank && ticker.yahooRank,
+      (ticker) => ticker.stockTwitsRank && ticker.yahooRank,
+      (ticker) => ticker.finVizRank,
+      (ticker) => ticker.stockTwitsRank,
+      (ticker) => ticker.yahooRank
+    ], ['desc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc']);
+    this.keys = _.orderBy(
+      _.keys(this.tickers[0]), [
+        (ticker) => _.isEqual(ticker, 'symbol'),
+        (ticker) => _.isEqual(ticker, 'longName'),
+        (ticker) => _.isEqual(ticker, 'recommended'),
+        (ticker) => _.includes(ticker, 'regularMarketPrice'),
+        (ticker) => _.includes(ticker, 'regular'),
+        (ticker) => _.includes(ticker, 'market')
+      ],
+      ['desc', 'desc', 'desc', 'desc', 'desc']
+    );
+    this.pageSize = this.tickers.length;
+    this.collectionSize = this.tickers.length;
+  }
+
+  formatText(ticker: any, key: string) {
+    const value = _.get(ticker, [key]);
+    if (_.isNumber(value)) {
+      return value.toFixed(2);
+    }
+    return value;
   }
 
   getTradingView(ticker: any) {
@@ -114,5 +151,12 @@ export class TickerComponent implements OnInit {
 
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
+  }
+
+
+  get data() {
+    return this.tickers
+      .map((ticker, i) => ({id: i + 1, ...ticker}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 }
