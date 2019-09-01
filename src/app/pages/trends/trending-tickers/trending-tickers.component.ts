@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Input, Inject, PLATFORM_ID, OnChanges } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -8,7 +8,7 @@ import * as _ from 'lodash';
   templateUrl: './trending-tickers.component.html',
   styleUrls: ['./trending-tickers.component.scss']
 })
-export class TrendingTickersComponent implements OnInit {
+export class TrendingTickersComponent implements OnInit, OnChanges {
   @Input() tickers;
 
   public page = 1;
@@ -22,7 +22,15 @@ export class TrendingTickersComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
+  ngOnChanges() {
+    this.initialize();
+  }
+
   ngOnInit() {
+    this.initialize();
+  }
+
+  initialize() {
     this.tickers =  _.orderBy(this.tickers, [
       (ticker) => ticker.recommended,
       (ticker) => ticker.regularMarketPrice,
