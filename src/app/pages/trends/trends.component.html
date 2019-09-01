@@ -1,128 +1,164 @@
 <section>
     <div class="container-fluid my-5">
-        <!-- Search News -->
-        <ng-container *ngIf="authService?.canEdit(user)">
-            <section class="mb-3">
-                <h1 class="text-center text-uppercase">{{q}}</h1>
-            </section>
-            <section class="mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
-                        [(ngModel)]="search" />
-                    <div class="input-group-append">
-                        <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
-                            <ng-container *ngIf="isPlatformBrowser()">
-                                <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
-                            </ng-container>
-                        </button>
-                    </div>
-                </div>
-            </section>
-            <section [hidden]="!data">
-                <h2 class="text-center" [hidden]="!data">
-                    Overall Sentiment: {{data?.overallSentiment.score}}
-                </h2>
-                <div class="d-flex flex-wrap mb-3">
-                    <p>
-                        Last Updated: {{data?.timestamp * 1000 | date: 'medium'}}
-                    </p>
-                    <p class="ml-auto">
-                        {{data?.articleCount || 0}} Results
-                    </p>
-                </div>
-                <section class="row">
-                    <div class="col-xs-12 col-lg-6" *ngFor="let article of data?.articles">
-                        <p class="text-break text-wrap">
-                            <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
-                                {{article?.title}}
-                            </a>
-                        </p>
-                        <p>
-                            {{article?.publishedAt | date: 'medium'}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            {{article?.description}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Sentiment: {{article?.sentiment?.score}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Comparative: {{article?.sentiment?.comparative}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Positive: {{article?.sentiment?.positive}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Negative: {{article?.sentiment?.negative}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Words: {{article?.sentiment?.words}}
-                        </p>
-                        <p class="text-break text-wrap">
-                            Tokens: {{article?.sentiment?.tokens}}
-                        </p>
-                    </div>
-                </section>
-            </section>
-        </ng-container>
-        <div *ngIf="authService?.canEdit(user)" class="text-center">
-            <button class="btn btn-warning" (click)="refreshTrends()">
+        <div class="text-center">
+            <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTrends()">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
                 </ng-container>
                 Refresh
             </button>
+            <p class="small text-secondary my-3 mr-3" *ngIf="updated">
+                Last Updated: {{updated | timeAgo}}
+            </p>
         </div>
-        <p class="small text-secondary my-3 d-lg-inline-block mr-3" *ngIf="updated">
-            Last Updated: {{updated | timeAgo}}
-        </p>
-        <!-- Tickers -->
-        <section *ngIf="!_.isEmpty(tickers)">
-            <div class="d-flex flex-wrap">
-                <h2>{{_.upperCase('Trending Tickers')}}</h2>
-                <div class="h2 ml-auto">
-                    Recommended: {{recommended.length}} / {{tickers.length}}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let ticker of tickers">
-                    <app-ticker [ticker]="ticker"></app-ticker>
-                </div>
-            </div>
-        </section>
-        <!-- News -->
-        <section *ngIf="!_.isEmpty(news)">
-            <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(news)">
-                    <h2>{{_.upperCase(key)}}</h2>
-                    <div class="row">
-                        <div class="col-12" *ngFor="let item of _.get(news, [key]); let index = index">
-                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
-                            <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                            <p>{{item?.date}}</p>
-                            <p>{{item?.description}}</p>
-                            <p><span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span></p>
+        <ngb-tabset [justify]="'justified'">
+            <ngb-tab *ngIf="!_.isEmpty(tickers)">
+                <ng-template ngbTabTitle>
+                    Trending Tickers
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="my-3">
+                        <div class="d-flex flex-wrap mb-2">
+                            <h2>{{_.upperCase('Trending Tickers')}}</h2>
+                            <div class="h2 ml-auto">
+                                Recommended: {{recommended.length}} / {{tickers.length}}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Forums -->
-        <section *ngIf="!_.isEmpty(forums)">
-            <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(forums)">
-                    <h2>{{_.upperCase(key)}}</h2>
-                    <div class="row">
-                        <div class="col-12" *ngFor="let item of _.get(forums, [key]); let index = index">
-                            <p class="mb-2 mr-2"><a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a></p>
-                            <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock" target="__blank" class="mr-2">({{item?.symbol}})</a>
-                            <p>{{item?.date}}</p>
-                            <p>{{item?.description}}</p>
-                            <p><span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span></p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let ticker of tickers">
+                                <app-ticker [ticker]="ticker"></app-ticker>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab *ngIf="!_.isEmpty(news)">
+                <ng-template ngbTabTitle>
+                    News
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="my-3">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(news)">
+                                <h2>{{_.upperCase(key)}}</h2>
+                                <div class="row">
+                                    <div class="col-12" *ngFor="let item of _.get(news, [key]); let index = index">
+                                        <p class="mb-2 mr-2">
+                                            <a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a>
+                                        </p>
+                                        <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock"
+                                            target="__blank" class="mr-2">({{item?.symbol}})</a>
+                                        <p>{{item?.date}}</p>
+                                        <p>{{item?.description}}</p>
+                                        <p>
+                                            <span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab *ngIf="!_.isEmpty(forums)">
+                <ng-template ngbTabTitle>
+                    Forums
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="my-3">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(forums)">
+                                <h2>{{_.upperCase(key)}}</h2>
+                                <div class="row">
+                                    <div class="col-12" *ngFor="let item of _.get(forums, [key]); let index = index">
+                                        <p class="mb-2 mr-2">
+                                            <a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a>
+                                        </p>
+                                        <a *ngIf="item?.symbol" [href]="getGoogleSearch(item?.symbol + ' stock')" title="Google Search on {{item?.symbol}} stock"
+                                            target="__blank" class="mr-2">({{item?.symbol}})</a>
+                                        <p>{{item?.date}}</p>
+                                        <p>{{item?.description}}</p>
+                                        <p>
+                                            <span class="font-weight-bold">Sentiment Score: {{item?.sentiment?.score}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab *ngIf="authService?.canEdit(user)">
+                <ng-template ngbTabTitle>
+                    Search
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="my-3">
+                        <section class="mb-3">
+                            <h1 class="text-center text-uppercase">{{q}}</h1>
+                        </section>
+                        <section class="mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
+                                    [(ngModel)]="search" />
+                                <div class="input-group-append">
+                                    <button [routerLink]="['/trends']" [queryParams]="{q: search}" class="btn btn-warning" [disabled]="!search">
+                                        <ng-container *ngIf="isPlatformBrowser()">
+                                            <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                                        </ng-container>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                        <section [hidden]="!data">
+                            <h2 class="text-center" [hidden]="!data">
+                                Overall Sentiment: {{data?.overallSentiment.score}}
+                            </h2>
+                            <div class="d-flex flex-wrap mb-3">
+                                <p>
+                                    Last Updated: {{data?.timestamp * 1000 | date: 'medium'}}
+                                </p>
+                                <p class="ml-auto">
+                                    {{data?.articleCount || 0}} Results
+                                </p>
+                            </div>
+                            <section class="row">
+                                <div class="col-xs-12 col-lg-6" *ngFor="let article of data?.articles">
+                                    <p class="text-break text-wrap">
+                                        <a [href]="article?.url" target="_blank" rel="noopener noreferrer">
+                                            {{article?.title}}
+                                        </a>
+                                    </p>
+                                    <p>
+                                        {{article?.publishedAt | date: 'medium'}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        {{article?.description}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Sentiment: {{article?.sentiment?.score}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Comparative: {{article?.sentiment?.comparative}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Positive: {{article?.sentiment?.positive}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Negative: {{article?.sentiment?.negative}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Words: {{article?.sentiment?.words}}
+                                    </p>
+                                    <p class="text-break text-wrap">
+                                        Tokens: {{article?.sentiment?.tokens}}
+                                    </p>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
 </section>
