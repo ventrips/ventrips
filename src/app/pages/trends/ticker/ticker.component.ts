@@ -32,6 +32,11 @@ export class TickerComponent implements OnInit {
     return `https://www.tradingview.com/ideas/search/${symbol}`;
   }
 
+  getMarketWatch(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+    return `https://www.marketwatch.com/investing/stock/${symbol}`;
+  }
+
   getGoogleSearch(ticker: any) {
     const symbol = _.get(ticker, ['symbol']);
     const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));
