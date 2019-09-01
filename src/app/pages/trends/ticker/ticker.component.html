@@ -56,6 +56,8 @@
     <div class="mb-2">
         <a [href]="getTradingView(ticker)" title="TradingView on {{ticker?.symbol}} stock" target="__blank" class="mr-2">TradingView</a>
         <a [href]="getMarketWatch(ticker)" title="MarketWatch on {{ticker?.symbol}} stock" target="__blank" class="mr-2">MarketWatch</a>
+        <a [href]="getNasdaq(ticker)" title="Nasdaq on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Nasdaq</a>
+        <a [href]="getStocktwits(ticker)" title="Stocktwits on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Stocktwits</a>
     </div>
     <p class="font-italic mb-2" *ngIf="getEarningsDate(ticker?.earningsTimestamp)">
         <span class="text-dark">Earnings:</span> {{getEarningsDate(ticker?.earningsTimestamp) | date:'medium'}}
