@@ -155,7 +155,7 @@ export class TrendingTickersComponent implements OnInit {
 
 
   get data() {
-    return this.tickers
+    return _.cloneDeep(this.tickers)
       .map((ticker, i) => ({id: i + 1, ...ticker}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
