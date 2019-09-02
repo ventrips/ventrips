@@ -12,7 +12,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
   @Input() tickers;
 
   public page = 1;
-  public pageSize = 10;
+  public pageSize = 25;
   public collectionSize = 0;
   public keys = [];
 
