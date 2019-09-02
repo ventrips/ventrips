@@ -143,7 +143,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
 
   getMarketWatch(ticker: any) {
     const symbol = _.get(ticker, ['symbol']);
-    return `https://www.marketwatch.com/investing/stock/${symbol}`;
+    return `https://www.marketwatch.com/investing/stock/${symbol}/charts`;
   }
 
   getNasdaq(ticker: any) {
