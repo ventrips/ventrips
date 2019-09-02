@@ -129,7 +129,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((ticker['regularMarketPrice'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPrice'] <= ticker['fiftyTwoWeekHighChange'])) &&
 
                     // 50 Day Moving AVG is GREATER than 200 Day Moving AVG
-                    // ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
+                    ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
 
                     // All Positive Percent Changes
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
@@ -150,7 +150,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // ((ticker['averageDailyVolume10Day'] >= ticker['regularMarketVolume']) && ticker['regularMarketVolume'] >= ticker['averageDailyVolume3Month']) &&
 
                     // Current Volume is not overbought. Not 1.5 times more
-                    // (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
+                    (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
 
                     // Current Volume Or 10 Day Volume is EQUAL TO OR GREATER than 90 Day Volume
                     (ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day'] || ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month']) &&
