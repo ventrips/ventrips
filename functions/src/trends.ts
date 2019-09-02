@@ -135,8 +135,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     ticker['regularMarketChangePercent'] >= 0 &&
-                    // Current Day's Open is GREATER than Previous Day Close
-                    ticker['regularMarketOpen'] >= ticker['regularMarketPreviousClose'] &&
+                    // Current Price is GREATER than Previous Day Close
+                    ticker['regularMarketPrice'] >= ticker['regularMarketPreviousClose'] &&
                     // Current Percent Change is Greather Than Previous Average Changes
                     ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
                     // MID LOW HIGH VOLUME (AKA Current Volume is beating 10 day avg volume and could surpass highest 90 day avg volume)
