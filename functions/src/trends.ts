@@ -125,8 +125,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ,yahoo
                 );
                 ticker['recommended'] =
-                    // Current Price is within the the stock's 52 week low and highs
-                    ((ticker['regularMarketPrice'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPrice'] <= ticker['fiftyTwoWeekHighChange'])) &&
+                    // Previous Day Price is within the the stock's 52 week low and highs
+                    ((ticker['regularMarketPreviousClose'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPreviousClose'] <= ticker['fiftyTwoWeekHighChange'])) &&
 
                     // 50 Day Moving AVG is GREATER than 200 Day Moving AVG
                     ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
@@ -135,7 +135,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     // Previous Day Close was POSITIVE
-                    ticker['regularMarketPreviousClose'] >= 0 &&
+                    ticker['regularMarketOpen'] >= ticker['regularMarketPreviousClose'] &&
                     // Current Percent Change is Greather Than Previous Average Changes
                     ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
                     // MID LOW HIGH VOLUME (AKA Current Volume is beating 10 day avg volume and could surpass highest 90 day avg volume)
