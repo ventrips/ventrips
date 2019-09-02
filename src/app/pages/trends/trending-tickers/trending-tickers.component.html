@@ -65,7 +65,7 @@
                 </span>
                 <!-- Number -->
                 <span *ngIf="isNumber(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
-                    {{_.round(ticker[key], 2)}}
+                    {{ticker[key] | number:'.2'}}
                 </span>
                 <!-- Other -->
                 <span *ngIf="isOther(key)">

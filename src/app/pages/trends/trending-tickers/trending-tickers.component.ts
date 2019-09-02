@@ -101,6 +101,11 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
 
   isNumber(key: string) {
     return _.includes([
+      'regularMarketVolume',
+      'averageDailyVolume10Day',
+      'averageDailyVolume3Month',
+      'marketCap',
+      'sharesOutstanding',
       'trailingAnnualDividendRate',
       'trailingAnnualDividendYield',
       'epsForward',
