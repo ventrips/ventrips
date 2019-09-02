@@ -228,7 +228,7 @@ const getStockTwitsTickers = function(useMock: boolean = false): Promise<any> {
             const data = _.map(JSON.parse(body).symbols, (stock: any, index: number) => {
                 stock.stockTwitsRank = index + 1;
                 stock.stockTwitsUrl = 'https://stocktwits.com/symbol/' + stock.symbol
-                stock.company = stock.title;
+                // stock.company = stock.title;
                 delete stock.title;
 
                 return stock;
@@ -266,10 +266,8 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
             $('tr.BdT').each(function (this: any, index: number) {
                 const obj = {
                     symbol: $(this).find('.data-col0').text(),
-                    company: $(this).find('.data-col1').text(),
                     yahooRank: index + 1,
-                    yahooUrl: `https://finance.yahoo.com${$(this).find('.data-col0 a').attr('href')}`,
-                    yahooChange: $(this).find('.data-col5').text()
+                    yahooUrl: `https://finance.yahoo.com${$(this).find('.data-col0 a').attr('href')}`
                 }
                 data.push(obj);
             });
