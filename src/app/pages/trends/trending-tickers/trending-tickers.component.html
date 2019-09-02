@@ -9,7 +9,30 @@
         <tr *ngFor="let ticker of data; let index = index;">
             <th scope="row">{{ index + 1 }}</th>
             <td *ngFor="let key of keys">
-                {{formatText(ticker, key)}}
+                <!-- Symbol -->
+                <span *ngIf="isSymbol(key)">
+                    <a [href]="getGoogleSearch(ticker)" title="Google Search on {{ticker?.symbol}} stock" target="__blank">{{ticker?.symbol}}</a>
+                </span>
+                <!-- Percentage -->
+                <span *ngIf="isPercentage(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                    {{_.round(ticker[key], 2)}}%
+                </span>
+                <!-- Currency -->
+                <span *ngIf="isCurrency(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                    {{_.round(ticker[key], 2) | currency: ticker?.currency}}
+                </span>
+                <!-- Timestamp -->
+                <span *ngIf="isTimestamp(key)">
+                    {{getEarningsDate(ticker[key]) | date:'medium'}}
+                </span>
+                <!-- Number -->
+                <span *ngIf="isNumber(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                    {{_.round(ticker[key], 2)}}
+                </span>
+                <!-- Other -->
+                <span *ngIf="isOther(key)">
+                    {{ticker[key]}}
+                </span>
             </td>
         </tr>
     </tbody>

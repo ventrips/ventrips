@@ -42,27 +42,86 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
       (ticker) => ticker.stockTwitsRank,
       (ticker) => ticker.yahooRank
     ], ['desc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc']);
-    this.keys = _.orderBy(
-      _.keys(this.tickers[0]), [
+    _.forEach(this.tickers, (ticker) => {
+      this.keys = _.uniq(_.concat(this.keys, _.keys(ticker)));
+    });
+    this.keys = _.orderBy(this.keys, [
         (ticker) => _.isEqual(ticker, 'symbol'),
         (ticker) => _.isEqual(ticker, 'longName'),
         (ticker) => _.isEqual(ticker, 'recommended'),
         (ticker) => _.includes(ticker, 'regularMarketPrice'),
-        (ticker) => _.includes(ticker, 'regular'),
-        (ticker) => _.includes(ticker, 'market')
+        (ticker) => _.includes(_.toLower(ticker), 'regular'),
+        (ticker) => _.includes(_.toLower(ticker), 'market'),
+        (ticker) => _.includes(_.toLower(ticker), 'forward'),
       ],
-      ['desc', 'desc', 'desc', 'desc', 'desc']
+      ['desc', 'desc', 'desc', 'desc', 'desc', 'desc', 'desc']
     );
     this.pageSize = this.tickers.length;
     this.collectionSize = this.tickers.length;
   }
 
-  formatText(ticker: any, key: string) {
-    const value = _.get(ticker, [key]);
-    if (_.isNumber(value)) {
-      return value.toFixed(2);
-    }
-    return value;
+  isSymbol(key: string) {
+    return _.includes(['symbol'], key);
+  }
+
+  isCurrency(key: string) {
+    return _.includes([
+      'regularMarketPrice',
+      'regularMarketChange',
+      'regularMarketDayLow',
+      'regularMarketDayHigh',
+      'regularMarketOpen',
+      'fiftyDayAverage',
+      'fiftyDayAverageChange',
+      'twoHundredDayAverage',
+      'twoHundredDayAverageChange',
+      'postMarketPrice',
+      'postMarketChange',
+      'regularMarketPreviousClose',
+      'fiftyTwoWeekLowChange',
+      'fiftyTwoWeekHighChange',
+      'fiftyTwoWeekLow',
+      'fiftyTwoWeekHigh',
+      'ask',
+      'bid',
+      'priceToBook',
+      'bookValue'
+      ], key)
+  }
+
+  isPercentage(key: string) {
+    return _.includes([
+      'fiftyDayAverageChangePercent',
+      'postMarketChangePercent',
+      'regularMarketChangePercent',
+      'twoHundredDayAverageChangePercent',
+      'fiftyTwoWeekLowChangePercent',
+      'fiftyTwoWeekHighChangePercent'], key);
+  }
+
+  isNumber(key: string) {
+    return _.includes([
+      'trailingAnnualDividendRate',
+      'trailingAnnualDividendYield',
+      'epsForward',
+      'forwardPE',
+      'trailingPE',
+      'epsTrailingTwelveMonths'], key);
+  }
+
+  isTimestamp(key: string) {
+    return _.includes([
+      'regularMarketTime',
+      'postMarketTime',
+      'dividendDate',
+      'earningsTimestamp',
+      'earningsTimestampStart',
+      'earningsTimestampEnd',
+      ], key)
+  }
+
+  isOther(key: string) {
+    return !this.isSymbol(key) && !this.isCurrency(key) && !this.isPercentage(key) && !this.isNumber(key) && !this.isTimestamp(key);
   }
 
   getTradingView(ticker: any) {
