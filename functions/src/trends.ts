@@ -68,15 +68,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(useMock)
-            ,getBusinessInsiderNews(useMock)
-            ,getReutersNews(useMock)
-            ,getBarronsNews(useMock)
-            ,getTheFlyNews(useMock)
+            ,getMarketWatchNews(!useMock)
+            ,getBusinessInsiderNews(!useMock)
+            ,getReutersNews(!useMock)
+            ,getBarronsNews(!useMock)
+            ,getTheFlyNews(!useMock)
             /* Forums */
-            ,getFourChanForums(useMock)
-            ,getHackerForums(useMock)
-            ,getRedditForums(useMock)
+            ,getFourChanForums(!useMock)
+            ,getHackerForums(!useMock)
+            ,getRedditForums(!useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -132,9 +132,24 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // All Positive Percent Changes
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
-                    ticker['regularMarketChangePercent'] >= 0 &&
+                    // Previous Day Close was POSITIVE
+                    ticker['regularMarketPreviousClose'] >= 0 &&
+                    // Current Percent Change is Greather Than Previous Average Changes
+                    ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
+                    // MID LOW HIGH VOLUME (AKA Current Volume is beating 10 day avg volume and could surpass highest 90 day avg volume)
+                    (((ticker['averageDailyVolume3Month'] >= ticker['regularMarketVolume']) && ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day']) ||
+                    // OR HIGH > MID > LOW (AKA Current Volume has beaten 10 day avg volume which has beaten 90 day avg volume)
+                    ((ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day']) && ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month'])) &&
+
+                    // HIGH LOW MID
+                    // ((ticker['regularMarketVolume'] >= ticker['averageDailyVolume3Month']) && ticker['averageDailyVolume3Month'] >= ticker['averageDailyVolume10Day']) &&
+
+                    // MID HIGH LOW
+                    // ((ticker['averageDailyVolume10Day'] >= ticker['regularMarketVolume']) && ticker['regularMarketVolume'] >= ticker['averageDailyVolume3Month']) &&
+
                     // Current Volume is not overbought. Not 1.5 times more
-                    (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
+                    // (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
+
                     // Current Volume Or 10 Day Volume is EQUAL TO OR GREATER than 90 Day Volume
                     (ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day'] || ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month']) &&
                     // Good EPS score IF it exists
