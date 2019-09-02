@@ -12,7 +12,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
   @Input() tickers;
 
   public page = 1;
-  public pageSize = 0;
+  public pageSize = 10;
   public collectionSize = 0;
   public keys = [];
 
@@ -47,16 +47,15 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     });
     this.keys = _.orderBy(this.keys, [
         (ticker) => _.isEqual(ticker, 'symbol'),
-        (ticker) => _.isEqual(ticker, 'longName'),
-        (ticker) => _.isEqual(ticker, 'recommended'),
+        (ticker) => _.isEqual(ticker, 'earningsTimestamp'),
         (ticker) => _.includes(ticker, 'regularMarketPrice'),
         (ticker) => _.includes(_.toLower(ticker), 'regular'),
+        (ticker) => _.includes(_.toLower(ticker), 'average'),
         (ticker) => _.includes(_.toLower(ticker), 'market'),
-        (ticker) => _.includes(_.toLower(ticker), 'forward'),
+        (ticker) => _.includes(_.toLower(ticker), 'forward')
       ],
       ['desc', 'desc', 'desc', 'desc', 'desc', 'desc', 'desc']
     );
-    this.pageSize = this.tickers.length;
     this.collectionSize = this.tickers.length;
   }
 
@@ -220,9 +219,8 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return isPlatformBrowser(this.platformId);
   }
 
-
   get data() {
-    return _.cloneDeep(this.tickers)
+    return this.tickers
       .map((ticker, i) => ({id: i + 1, ...ticker}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
