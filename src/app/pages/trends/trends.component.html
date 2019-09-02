@@ -11,8 +11,8 @@
                 Last Updated: {{updated | timeAgo}}
             </p>
         </div>
-        <ngb-tabset [justify]="'justified'">
-            <ngb-tab *ngIf="!_.isEmpty(tickers)">
+        <ngb-tabset [justify]="'justified'" #t="ngbTabset">
+            <ngb-tab *ngIf="!_.isEmpty(tickers)" id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
                     Trending Tickers
                 </ng-template>
@@ -28,16 +28,18 @@
                     </section>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab *ngIf="!_.isEmpty(news)">
+            <ngb-tab *ngIf="!_.isEmpty(news)" id="tab-selectbyid2">
                 <ng-template ngbTabTitle>
                     News
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <section class="my-3">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(news)">
+                    <ngb-tabset type="pills">
+                        <ngb-tab *ngFor="let key of _.keys(news)">
+                            <ng-template ngbTabTitle>
                                 <h2>{{_.upperCase(key)}}</h2>
-                                <div class="row">
+                            </ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="row my-2">
                                     <div class="col-12" *ngFor="let item of _.get(news, [key]); let index = index">
                                         <p class="mb-2 mr-2">
                                             <a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a>
@@ -51,21 +53,23 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab *ngIf="!_.isEmpty(forums)">
+            <ngb-tab *ngIf="!_.isEmpty(forums)" id="tab-selectbyid3">
                 <ng-template ngbTabTitle>
                     Forums
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <section class="my-3">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let key of _.keys(forums)">
+                    <ngb-tabset type="pills">
+                        <ngb-tab *ngFor="let key of _.keys(forums)">
+                            <ng-template ngbTabTitle>
                                 <h2>{{_.upperCase(key)}}</h2>
-                                <div class="row">
+                            </ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="row my-2">
                                     <div class="col-12" *ngFor="let item of _.get(forums, [key]); let index = index">
                                         <p class="mb-2 mr-2">
                                             <a [href]="item?.url" [title]="item?.title" target="__blank">{{index + 1}}. {{item?.title}}</a>
@@ -79,12 +83,12 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab *ngIf="authService?.canEdit(user)">
+            <ngb-tab *ngIf="authService?.canEdit(user)" id="tab-selectbyid4">
                 <ng-template ngbTabTitle>
                     Search
                 </ng-template>
