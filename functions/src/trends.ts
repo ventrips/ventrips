@@ -97,7 +97,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
-            // const allSpy500Symbols = require('./../mocks/companies.json');
+            const allSpy500Symbols = require('./../mocks/companies.json');
 
             /*
                 Used 30 Day Upcoming Earnings Symbols and Converted CSV to JSON
@@ -107,7 +107,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
             const allSymbolsOnly = _.union(
                 ['SPY'],
-                // allSpy500Symbols,
+                allSpy500Symbols,
                 barChart30DayUpcomingEarnings,
                 allTrendingSymbolsOnly
             );
