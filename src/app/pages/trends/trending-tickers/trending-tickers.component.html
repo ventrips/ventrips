@@ -8,7 +8,7 @@
         <tr *ngFor="let ticker of data">
             <td *ngFor="let key of keys">
                 <!-- Symbol -->
-                <span [hidden]="!isSymbol(key)">
+                <span *ngIf="isSymbol(key)">
                     <a [href]="getGoogleSearch(ticker)" title="Google Search on {{ticker?.symbol}} stock" target="__blank">{{ticker?.symbol}} - {{ticker?.longName}}</a>
                     <div class="d-flex flex-wrap my-2">
                         <div class="badge badge-warning font-weight-bold mr-2" *ngIf="ticker?.signal">{{ticker?.signal}}</div>
@@ -21,16 +21,16 @@
                         <ng-container *ngIf="isPlatformBrowser()">
                             <fa-icon *ngIf="showFireIcon(ticker)" [icon]="['fab', 'hotjar']" class="text-danger mr-2"></fa-icon>
                         </ng-container>
-                        <a [hidden]="!ticker?.finVizRank" class="badge badge-info mr-2" [href]="ticker?.finVizUrl" target="__blank">
+                        <a *ngIf="ticker?.finVizRank" class="badge badge-info mr-2" [href]="ticker?.finVizUrl" target="__blank">
                             Finviz (#{{ticker?.finVizRank}})
                         </a>
-                        <a [hidden]="!ticker?.stockTwitsRank" class="badge badge-primary mr-2" [href]="ticker?.stockTwitsUrl" target="__blank">
+                        <a *ngIf="ticker?.stockTwitsRank" class="badge badge-primary mr-2" [href]="ticker?.stockTwitsUrl" target="__blank">
                             Stocktwits (#{{ticker?.stockTwitsRank}})
                         </a>
-                        <a [hidden]="!ticker?.yahooRank" class="badge badge-success mr-2" [href]="ticker?.yahooUrl" target="__blank">
+                        <a *ngIf="ticker?.yahooRank" class="badge badge-success mr-2" [href]="ticker?.yahooUrl" target="__blank">
                             Yahoo (#{{ticker?.yahooRank}})
                         </a>
-                        <div [hidden]="!ticker?.watchlist_count">
+                        <div *ngIf="ticker?.watchlist_count">
                             <ng-container *ngIf="isPlatformBrowser()">
                                 <fa-icon [icon]="['fas', 'eye']" class="text-secondary mr-2"></fa-icon>
                             </ng-container>
@@ -52,11 +52,11 @@
                     </div>
                 </span>
                 <!-- Percentage -->
-                <span [hidden]="!isPercentage(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                <span *ngIf="isPercentage(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
                     {{_.round(ticker[key], 2)}}%
                 </span>
                 <!-- Currency -->
-                <span [hidden]="!isCurrency(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                <span *ngIf="isCurrency(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
                     {{_.round(ticker[key], 2) | currency: ticker?.currency}}
                 </span>
                 <!-- Timestamp -->
@@ -64,11 +64,11 @@
                     {{getEarningsDate(ticker[key]) | date:'medium'}}
                 </span>
                 <!-- Number -->
-                <span [hidden]="!isNumber(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
+                <span *ngIf="isNumber(key)" [ngClass]="{ 'text-success': isPositive(_.get(ticker, [key])), 'text-danger': !isPositive(_.get(ticker, [key])) }">
                     {{_.round(ticker[key], 2)}}
                 </span>
                 <!-- Other -->
-                <span [hidden]="!isOther(key)">
+                <span *ngIf="isOther(key)">
                     {{ticker[key]}}
                 </span>
             </td>
