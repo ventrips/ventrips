@@ -156,6 +156,11 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return `https://stocktwits.com/symbol/${symbol}`;
   }
 
+  getYahooFinance(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+    return `https://finance.yahoo.com/quote/${symbol}`;
+  }
+
   getGoogleSearch(ticker: any) {
     const symbol = _.get(ticker, ['symbol']);
     const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));

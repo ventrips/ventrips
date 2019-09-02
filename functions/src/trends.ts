@@ -107,9 +107,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
             const allSymbolsOnly = _.union(
                 ['SPY'],
-                allSpy500Symbols,
-                barChart30DayUpcomingEarnings,
-                allTrendingSymbolsOnly
+                // allSpy500Symbols,
+                barChart30DayUpcomingEarnings
+                // allTrendingSymbolsOnly
             );
 
             const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
