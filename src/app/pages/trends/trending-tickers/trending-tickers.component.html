@@ -9,7 +9,7 @@
             <td *ngFor="let key of keys">
                 <!-- Symbol -->
                 <span *ngIf="isSymbol(key)">
-                    <a [href]="getGoogleSearch(ticker)" title="Google Search on {{ticker?.symbol}} stock" target="__blank">{{ticker?.longName}} ({ticker?.symbol}})</a>
+                    <a [href]="getGoogleSearch(ticker)" title="Google Search on {{ticker?.symbol}} stock" target="__blank">{{ticker?.longName}} ({{ticker?.symbol}})</a>
                     <div class="d-flex flex-wrap my-2">
                         <div class="badge badge-warning font-weight-bold mr-2" *ngIf="ticker?.signal">{{ticker?.signal}}</div>
                         <div *ngIf="ticker?.recommended" class="badge badge-dark font-weight-bold mr-2">
