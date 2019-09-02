@@ -135,6 +135,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     // Previous Day Close was POSITIVE
+                    ticker['regularMarketPreviousClose'] >= 0 &&
+                    // Current Day's Open is GREATER than Previous Day Close
                     ticker['regularMarketOpen'] >= ticker['regularMarketPreviousClose'] &&
                     // Current Percent Change is Greather Than Previous Average Changes
                     ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
