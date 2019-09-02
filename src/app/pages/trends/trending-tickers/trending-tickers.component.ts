@@ -219,6 +219,11 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return isPlatformBrowser(this.platformId);
   }
 
+  scrollTopTop() {
+    if (isPlatformServer(this.platformId)) { return; }
+    window.scrollTo(0, 0);
+  }
+
   get data() {
     return this.tickers
       .map((ticker, i) => ({id: i + 1, ...ticker}))

@@ -76,8 +76,8 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"></ngb-pagination>
-    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (click)="scrollTopTop()"></ngb-pagination>
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (click)="scrollTopTop()">
         <option [ngValue]="10">10 items per page</option>
         <option [ngValue]="25">25 items per page</option>
         <option [ngValue]="tickers.length">{{tickers.length}} items per page</option>
