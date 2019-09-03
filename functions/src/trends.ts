@@ -97,6 +97,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
+            // const spy500Symbols = require('./../mocks/companies/spy500.json');
             const nasdaqSymbols = require('./../mocks/companies/nasdaq.json');
             const nyseSymbols = require('./../mocks/companies/nyse.json');
             const amexSymbols = require('./../mocks/companies/amex.json');
@@ -108,6 +109,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 ['SPY'],
+                // spy500Symbols,
                 nasdaqSymbols,
                 nyseSymbols,
                 amexSymbols,
