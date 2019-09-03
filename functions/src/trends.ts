@@ -97,8 +97,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const stockTwitsSymbolsOnly: Array<string> = _.map(stockTwitsTickers, (ticker) => _.get(ticker, ['symbol']));
             const yahooSymbolsOnly: Array<string> = _.map(yahooTickers, (ticker) => _.get(ticker, ['symbol']));
             const allTrendingSymbolsOnly = _.union(finVizSymbolsOnly, stockTwitsSymbolsOnly, yahooSymbolsOnly);
-            const allSpy500Symbols = require('./../mocks/companies.json');
-
+            const nasdaqSymbols = require('./../mocks/companies/nasdaq.json');
+            const nyseSymbols = require('./../mocks/companies/nyse.json');
+            const amexSymbols = require('./../mocks/companies/amex.json');
             /*
                 Used 30 Day Upcoming Earnings Symbols and Converted CSV to JSON
                 https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
@@ -107,13 +108,19 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 ['SPY'],
-                allSpy500Symbols,
+                nasdaqSymbols,
+                nyseSymbols,
+                amexSymbols,
                 barChart30DayUpcomingEarnings,
                 allTrendingSymbolsOnly
             );
-
-            const yahooFinanceTickers: Array<any> = await getYahooFinanceTickers(allSymbolsOnly, useMock);
-            const allTickers = _.map(allSymbolsOnly, (symbol) => {
+            let yahooFinanceTickers: Array<any> = [];
+            let chunks: any = _.chunk(allSymbolsOnly, 2500);
+            for (let i = 0; i < chunks.length; i++) {
+                const yahooFinanceChunks: Array<any> = await getYahooFinanceTickers(chunks[i], useMock);
+                yahooFinanceTickers = _.concat(yahooFinanceTickers, yahooFinanceChunks);
+            };
+            const allTickers = _.map(_.union(allSymbolsOnly), (symbol) => {
                 const yahooFinance = _.find(yahooFinanceTickers, { symbol: symbol });
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
