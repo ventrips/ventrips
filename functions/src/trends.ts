@@ -61,7 +61,7 @@ function constructData(data: any) {
 }
 
 exports.trends = async function(request: any, response: any, useMock: boolean = false) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         Promise.all([
             /* Tickers */
             getFinVizTickers(useMock)
@@ -105,7 +105,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 http://www.convertcsv.com/csv-to-json.htm
             */
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
-            const allSymbolsOnly = _.union(
+            const allSymbolsOnly: Array<any> = _.union(
                 ['SPY'],
                 allSpy500Symbols,
                 barChart30DayUpcomingEarnings,
@@ -118,7 +118,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const finViz = _.find(finVizTickers, { symbol: symbol });
                 const stockTwits = _.find(stockTwitsTickers, { symbol: symbol });
                 const yahoo = _.find(yahooTickers, { symbol: symbol });
-                const ticker = _.assign({},
+                const ticker: any = _.assign({},
                     yahooFinance
                     ,finViz
                     ,stockTwits
@@ -167,7 +167,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 return ticker;
             });
 
-            const finalTickers = _.filter(allTickers, (ticker) => {
+            const finalTickers = _.filter(allTickers, (ticker: any) => {
                 return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended'];
             });
 
@@ -192,7 +192,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
 
 /* Tickers */
 const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/tickers/fin-viz-tickers.json');
             resolve(data);
@@ -237,7 +237,7 @@ const getFinVizTickers = function(useMock: boolean = false): Promise<any> {
 
 const getStockTwitsTickers = function(useMock: boolean = false): Promise<any> {
     const Request = require('request');
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/tickers/stock-twits-tickers.json');
             resolve(data);
@@ -267,7 +267,7 @@ const getStockTwitsTickers = function(useMock: boolean = false): Promise<any> {
 }
 
 const getYahooTickers = function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/tickers/yahoo-tickers.json');
             resolve(data);
@@ -305,7 +305,7 @@ const getYahooTickers = function(useMock: boolean = false): Promise<any> {
 }
 
 const getYahooFinanceTickers = async function(symbols: Array<string>, useMock: boolean = false): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/tickers/yahoo-finance-tickers.json');
             resolve(data);
@@ -327,7 +327,7 @@ const getYahooFinanceTickers = async function(symbols: Array<string>, useMock: b
 };
 
 const getMarketWatchNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/news/market-watch-news.json');
             resolve(data);
@@ -365,7 +365,7 @@ const getMarketWatchNews = async function(useMock: boolean = false): Promise<any
 }
 
 const getBusinessInsiderNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/news/business-insider-news.json');
             resolve(data);
@@ -403,7 +403,7 @@ const getBusinessInsiderNews = async function(useMock: boolean = false): Promise
 }
 
 const getReutersNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/news/reuters-news.json');
             resolve(data);
@@ -441,7 +441,7 @@ const getReutersNews = async function(useMock: boolean = false): Promise<any> {
 }
 
 const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/news/barrons-news.json');
             resolve(data);
@@ -479,7 +479,7 @@ const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
 }
 
 const getTheFlyNews = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/news/the-fly-news.json');
             resolve(data);
@@ -519,7 +519,7 @@ const getTheFlyNews = async function(useMock: boolean = false): Promise<any> {
 
 /* Forums */
 const getFourChanForums = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/forums/four-chan-forums.json');
             resolve(data);
@@ -558,7 +558,7 @@ const getFourChanForums = async function(useMock: boolean = false): Promise<any>
 }
 
 const getHackerForums = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/forums/hacker-forums.json');
             resolve(data);
@@ -595,7 +595,7 @@ const getHackerForums = async function(useMock: boolean = false): Promise<any> {
 }
 
 const getRedditForums = async function(useMock: boolean = false): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/forums/reddit-forums.json');
             resolve(data);
