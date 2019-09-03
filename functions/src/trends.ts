@@ -133,7 +133,11 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ,stockTwits
                     ,yahoo
                 );
+                const minVolume = 100000;
                 ticker['recommended'] =
+                    // Trading Volume must be AT LEAST 100000
+                    ((ticker['regularMarketVolume'] >= minVolume) || (ticker['averageDailyVolume10Day'] >= minVolume) || (ticker['averageDailyVolume3Month'] >= minVolume)) &&
+
                     // Previous Day Price is within the the stock's 52 week low and highs
                     ((ticker['regularMarketPreviousClose'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPreviousClose'] <= ticker['fiftyTwoWeekHighChange'])) &&
 
@@ -144,8 +148,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ticker['fiftyDayAverageChangePercent'] >= 0 &&
                     ticker['twoHundredDayAverageChangePercent'] >= 0 &&
                     ticker['regularMarketChangePercent'] >= 0 &&
+
                     // Current Price is GREATER than Previous Day Close
                     ticker['regularMarketPrice'] >= ticker['regularMarketPreviousClose'] &&
+
                     // Current Percent Change is Greather Than Previous Average Changes
                     ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
                     // MID LOW HIGH VOLUME (AKA Current Volume is beating 10 day avg volume and could surpass highest 90 day avg volume)
