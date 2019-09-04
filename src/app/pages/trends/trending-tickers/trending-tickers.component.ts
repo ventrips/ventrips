@@ -34,7 +34,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     this.tickers =  _.orderBy(this.tickers, [
       (ticker) => ticker.recommended,
       (ticker) => moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(moment().startOf('day')),
-      (ticker) => ticker.regularMarketPrice,
+      (ticker) => ticker.regularMarketChangePercent,
       (ticker) => ticker.finVizRank && ticker.stockTwitsRank && ticker.yahooRank,
       (ticker) => ticker.finVizRank && ticker.stockTwitsRank,
       (ticker) => ticker.finVizRank && ticker.yahooRank,
@@ -42,7 +42,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
       (ticker) => ticker.finVizRank,
       (ticker) => ticker.stockTwitsRank,
       (ticker) => ticker.yahooRank,
-    ], ['desc', 'desc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc']);
+    ], ['desc', 'desc', 'desc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc', 'asc']);
     _.forEach(this.tickers, (ticker) => {
       this.keys = _.uniq(_.concat(this.keys, _.keys(ticker)));
     });
