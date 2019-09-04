@@ -32,9 +32,9 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
 
   initialize() {
     this.tickers =  _.orderBy(this.tickers, [
+      (ticker) => ticker.regularMarketChangePercent,
       (ticker) => ticker.recommended,
       (ticker) => moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(moment().startOf('day')),
-      (ticker) => ticker.regularMarketChangePercent,
       (ticker) => ticker.finVizRank && ticker.stockTwitsRank && ticker.yahooRank,
       (ticker) => ticker.finVizRank && ticker.stockTwitsRank,
       (ticker) => ticker.finVizRank && ticker.yahooRank,
