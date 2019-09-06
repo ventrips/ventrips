@@ -136,7 +136,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 );
                 const minVolume = 100000;
                 const minThreshold = 0.75;
-                const maxThreshold = 1.25;
+                // const maxThreshold = 1.25;
 
                 const regularMarketVolume = ticker['regularMarketVolume'];
                 const averageDailyVolume10Day = ticker['averageDailyVolume10Day'];
