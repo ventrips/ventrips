@@ -178,7 +178,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     let list = [];
     const symbol = _.toLower(_.get(ticker, ['symbol']));
     list.push(`${symbol} stock price`);
-    list.push(`${symbol}`);
+    list.push(`${symbol} price stock`);
     list.push(`${symbol} stock`);
     list.push(`${symbol} price`);
     list.push(`${symbol} news`);
