@@ -151,7 +151,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const fiftyTwoWeekHighChangePercent = ticker['fiftyTwoWeekHighChangePercent'];
 
                 const regularMarketDayLow = ticker['regularMarketDayLow'];
-                const regularMarketDayHigh = ticker['regularMarketDayHigh'];
+                // const regularMarketDayHigh = ticker['regularMarketDayHigh'];
                 const fiftyTwoWeekLow = ticker['fiftyTwoWeekLow'];
                 const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
 
