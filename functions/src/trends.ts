@@ -163,8 +163,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
                 const regularMarketPrice = ticker['regularMarketPrice'];
 
-                const postMarketPrice = ticker['postMarketPrice'];
-                const postMarketChangePercent = ticker['postMarketChangePercent'];
+                const postMarketPrice = _.get(ticker, ['postMarketPrice']);
+                const postMarketChangePercent = _.get(ticker, ['postMarketChangePercent']);
 
                 const epsTrailingTwelveMonths = _.get(ticker, ['epsTrailingTwelveMonths'])
                 const epsForward = _.get(ticker, ['epsForward']);
@@ -194,8 +194,11 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
                     // Price is within the 52 Week Lows and Highs
                     ((regularMarketPrice >= fiftyTwoWeekLow) && (regularMarketPrice <= fiftyTwoWeekHigh)) &&
-                    // Current Day's Lows and Highs cannot be 52 Week Lows and Highs
-                    ((regularMarketDayLow !== fiftyTwoWeekLow) && (regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
+                    // Current Day's Lows and Highs cannot be 52 Week Lows
+                    ((regularMarketDayLow !== fiftyTwoWeekLow) &&
+
+                    // Current Day's Lows and Highs cannot be 52 Week Highs
+                    // (regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
 
                     // Current Day's Lows must be higher than Open
                     // ((regularMarketDayLow >= regularMarketOpen)) &&
@@ -203,9 +206,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
                     // Post Price must be at least 2% and above
-                    ((postMarketChangePercent >= -0.2)) &&
+                    (_.isNil(postMarketChangePercent) || (postMarketChangePercent >= -0.2)) &&
                     // Post Price must be higher than Open
-                    ((postMarketPrice >= regularMarketOpen)) &&
+                    (_.isNil(postMarketPrice) || (postMarketPrice >= regularMarketOpen)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
