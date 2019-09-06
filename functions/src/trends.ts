@@ -69,15 +69,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(useMock)
-            ,getBusinessInsiderNews(useMock)
-            ,getReutersNews(useMock)
-            ,getBarronsNews(useMock)
-            ,getTheFlyNews(useMock)
+            ,getMarketWatchNews(!useMock)
+            ,getBusinessInsiderNews(!useMock)
+            ,getReutersNews(!useMock)
+            ,getBarronsNews(!useMock)
+            ,getTheFlyNews(!useMock)
             /* Forums */
-            ,getFourChanForums(useMock)
-            ,getHackerForums(useMock)
-            ,getRedditForums(useMock)
+            ,getFourChanForums(!useMock)
+            ,getHackerForums(!useMock)
+            ,getRedditForums(!useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -148,7 +148,11 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 // const fiftyTwoWeekLowChange = ticker['fiftyTwoWeekLowChange'];
                 // const fiftyTwoWeekHighChange = ticker['fiftyTwoWeekHighChange'];
 
-                const fiftyTwoWeekLow = ticker['FiftyTwoWeekLow'];
+                const fiftyTwoWeekHighChangePercent = ticker['fiftyTwoWeekHighChangePercent'];
+
+                const regularMarketDayLow = ticker['regularMarketDayLow'];
+                const regularMarketDayHigh = ticker['regularMarketDayHigh'];
+                const fiftyTwoWeekLow = ticker['fiftyTwoWeekLow'];
                 const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
 
                 const fiftyDayAverage = ticker['fiftyDayAverage'];
@@ -159,7 +163,12 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
                 const regularMarketPrice = ticker['regularMarketPrice'];
 
-                // const epsForward = ticker['epsForward'];
+                const postMarketChangePercent = _.get(ticker, ['postMarketChangePercent']);
+
+                const epsTrailingTwelveMonths = _.get(ticker, ['epsTrailingTwelveMonths'])
+                const epsForward = _.get(ticker, ['epsForward']);
+                const forwardPE = _.get(ticker, ['forwardPE']);
+
                 const tradeable = ticker['tradeable'];
                 const financialCurrency = ticker['financialCurrency'];
                 const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
@@ -169,8 +178,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketVolume >= minVolume)) &&
                     // Volume must be close to 10 Day OR 90 Day Volume Average
                     (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month)) &&
+
                     // Volume must be not be too high than 10 Day OR 90 Day Volume Average
                     // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
+
                     // Percent must be higher than 50 Day AND 200 Day Percent Average
                     ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // Percents must be higher than 0
@@ -181,6 +192,16 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
                     // Price is within the 52 Week Lows and Highs
                     ((regularMarketPrice >= fiftyTwoWeekLow) && (regularMarketPrice <= fiftyTwoWeekHigh)) &&
+                    // Current Day's Lows and Highs cannot be 52 Week Lows and Highs
+                    ((regularMarketDayLow !== fiftyTwoWeekLow) && (regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
+
+                    // Current Day's Lows must be higher than Open
+                    // ((regularMarketDayLow >= regularMarketOpen)) &&
+
+                    // 52 Week High Change Percent must be at least -0.1 and above
+                    ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
+                    // Post Price must be positive
+                    ((postMarketChangePercent >= 0)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
@@ -189,6 +210,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     _.isEqual(financialCurrency, 'USD') &&
                     // Tradeable
                     _.isEqual(tradeable, true) &&
+                    // Positive Reviews
+                    (_.isNil(epsTrailingTwelveMonths) || (epsTrailingTwelveMonths >= 0)) &&
+                    (_.isNil(epsForward) || (epsForward >= 0)) &&
+                    (_.isNil(forwardPE) || (forwardPE >= 0)) &&
                     // NASDAQ OR NYSE
                     ((_.includes(fullExchangeName, 'NASDAQ')) || (_.includes(fullExchangeName, 'NYSE')));
                 return ticker;
