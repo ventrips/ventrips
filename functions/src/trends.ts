@@ -170,6 +170,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const epsForward = _.get(ticker, ['epsForward']);
                 const forwardPE = _.get(ticker, ['forwardPE']);
 
+                const bookValue = ticker['bookValue'];
                 const tradeable = ticker['tradeable'];
                 const financialCurrency = ticker['financialCurrency'];
                 const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
@@ -209,6 +210,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
                     ((regularMarketOpen >= regularMarketPreviousClose)) &&
+                    // Book Value must be positive
+                    ((bookValue >= 0)) &&
                     // USD Currency
                     _.isEqual(financialCurrency, 'USD') &&
                     // Tradeable
