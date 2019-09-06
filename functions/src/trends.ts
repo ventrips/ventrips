@@ -180,7 +180,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // 50 and 200 Day Average must be higher than 0
                     ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
                     // Price is within the 52 Week Lows and Highs
-                    (((regularMarketPrice >= fiftyTwoWeekLow)) && ((regularMarketPrice <= fiftyTwoWeekHigh)))
+                    ((regularMarketPrice >= fiftyTwoWeekLow) && (regularMarketPrice <= fiftyTwoWeekHigh)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
