@@ -69,15 +69,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(!useMock)
-            ,getBusinessInsiderNews(!useMock)
-            ,getReutersNews(!useMock)
-            ,getBarronsNews(!useMock)
-            ,getTheFlyNews(!useMock)
+            ,getMarketWatchNews(useMock)
+            ,getBusinessInsiderNews(useMock)
+            ,getReutersNews(useMock)
+            ,getBarronsNews(useMock)
+            ,getTheFlyNews(useMock)
             /* Forums */
-            ,getFourChanForums(!useMock)
-            ,getHackerForums(!useMock)
-            ,getRedditForums(!useMock)
+            ,getFourChanForums(useMock)
+            ,getHackerForums(useMock)
+            ,getRedditForums(useMock)
         ])
         .then(async (result: any) => {
             const [
