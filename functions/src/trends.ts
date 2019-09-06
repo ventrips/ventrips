@@ -60,6 +60,7 @@ function constructData(data: any) {
     return data;
 }
 
+// *** LOCAL TESTING: REMEMBER TO ALWAYS TSC --WATCH BEFORE RUNNING EMULATOR ***
 exports.trends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
         Promise.all([
@@ -68,15 +69,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(useMock)
-            ,getBusinessInsiderNews(useMock)
-            ,getReutersNews(useMock)
-            ,getBarronsNews(useMock)
-            ,getTheFlyNews(useMock)
+            ,getMarketWatchNews(!useMock)
+            ,getBusinessInsiderNews(!useMock)
+            ,getReutersNews(!useMock)
+            ,getBarronsNews(!useMock)
+            ,getTheFlyNews(!useMock)
             /* Forums */
-            ,getFourChanForums(useMock)
-            ,getHackerForums(useMock)
-            ,getRedditForums(useMock)
+            ,getFourChanForums(!useMock)
+            ,getHackerForums(!useMock)
+            ,getRedditForums(!useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -166,7 +167,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Volume must be close to 10 Day OR 90 Day Volume Average
                     (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month)) &&
                     // Volume must be not be too high than 10 Day OR 90 Day Volume Average
-                    ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
+                    // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
                     // Percent must be higher than 50 Day AND 200 Day Percent Average
                     ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // Percents must be higher than 0
@@ -179,8 +180,6 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
                     ((regularMarketOpen >= regularMarketPreviousClose)) &&
-                    // Price must be higher than 52 Week Low
-                    ((regularMarketPrice >= fiftyTwoWeekLowChange)) &&
                     // USD Currency
                     _.isEqual(financialCurrency, 'USD') &&
                     // Tradeable
@@ -191,8 +190,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
-                return ticker['recommended'];
-                // return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended'];
+                return _.isEqual(ticker['recommended'], true);
             });
 
             resolve({
