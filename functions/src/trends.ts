@@ -195,8 +195,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Price is within the 52 Week Lows and Highs
                     ((regularMarketPrice >= fiftyTwoWeekLow) && (regularMarketPrice <= fiftyTwoWeekHigh)) &&
                     // Current Day's Lows and Highs cannot be 52 Week Lows
-                    ((regularMarketDayLow !== fiftyTwoWeekLow) &&
-
+                    ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Lows and Highs cannot be 52 Week Highs
                     // (regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
 
