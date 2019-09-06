@@ -134,56 +134,65 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ,yahoo
                 );
                 const minVolume = 100000;
+                const minThreshold = 0.75;
+                const maxThreshold = 1.25;
+
+                const regularMarketVolume = ticker['regularMarketVolume'];
+                const averageDailyVolume10Day = ticker['averageDailyVolume10Day'];
+                const averageDailyVolume3Month = ticker['averageDailyVolume3Month'];
+
+                const regularMarketOpen = ticker['regularMarketOpen'];
+                const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
+
+                const fiftyTwoWeekLowChange = ticker['fiftyTwoWeekLowChange'];
+                // const fiftyTwoWeekHighChange = ticker['fiftyTwoWeekHighChange'];
+
+                const fiftyDayAverage = ticker['fiftyDayAverage'];
+                const twoHundredDayAverage = ticker['twoHundredDayAverage'];
+
+                const fiftyDayAverageChangePercent = ticker['fiftyDayAverageChangePercent'];
+                const twoHundredDayAverageChangePercent = ticker['twoHundredDayAverageChangePercent'];
+                const regularMarketChangePercent = ticker['regularMarketChangePercent'];
+                const regularMarketPrice = ticker['regularMarketPrice'];
+
+                // const epsForward = ticker['epsForward'];
+                const tradeable = ticker['tradeable'];
+                const financialCurrency = ticker['financialCurrency'];
+                const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
+
                 ticker['recommended'] =
-                    // Trading Volume must be AT LEAST 100000
-                    ((ticker['regularMarketVolume'] >= minVolume) || (ticker['averageDailyVolume10Day'] >= minVolume) || (ticker['averageDailyVolume3Month'] >= minVolume)) &&
-
-                    // Previous Day Price is within the the stock's 52 week low and highs
-                    ((ticker['regularMarketPreviousClose'] >= ticker['fiftyTwoWeekLowChange']) || (ticker['regularMarketPreviousClose'] <= ticker['fiftyTwoWeekHighChange'])) &&
-
-                    // 50 Day Moving AVG is GREATER than 200 Day Moving AVG
-                    ticker['fiftyDayAverage'] >= ticker['twoHundredDayAverage'] &&
-
-                    // All Positive Percent Changes
-                    ticker['fiftyDayAverageChangePercent'] >= 0 &&
-                    ticker['twoHundredDayAverageChangePercent'] >= 0 &&
-                    ticker['regularMarketChangePercent'] >= 0 &&
-
-                    // Current Price is GREATER than Previous Day Close
-                    ticker['regularMarketPrice'] >= ticker['regularMarketPreviousClose'] &&
-
-                    // Current Percent Change is Greather Than Previous Average Changes
-                    ((ticker['regularMarketChangePercent'] >= ticker['fiftyDayAverageChangePercent']) && (ticker['regularMarketChangePercent'] >= ticker['twoHundredDayAverageChangePercent'])) &&
-                    // MID LOW HIGH VOLUME (AKA Current Volume is beating 10 day avg volume and could surpass highest 90 day avg volume)
-                    (((ticker['averageDailyVolume3Month'] >= ticker['regularMarketVolume']) && ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day']) ||
-                    // OR HIGH > MID > LOW (AKA Current Volume has beaten 10 day avg volume which has beaten 90 day avg volume)
-                    ((ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day']) && ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month'])) &&
-
-                    // HIGH LOW MID
-                    // ((ticker['regularMarketVolume'] >= ticker['averageDailyVolume3Month']) && ticker['averageDailyVolume3Month'] >= ticker['averageDailyVolume10Day']) &&
-
-                    // MID HIGH LOW
-                    // ((ticker['averageDailyVolume10Day'] >= ticker['regularMarketVolume']) && ticker['regularMarketVolume'] >= ticker['averageDailyVolume3Month']) &&
-
-                    // Current Volume is not overbought. Not 1.5 times more
-                    // (((ticker['regularMarketVolume'] / ticker['averageDailyVolume10Day']) <= 1.5) && (ticker['regularMarketVolume'] / ticker['averageDailyVolume3Month']) <= 1.5) &&
-
-                    // Current Volume Or 10 Day Volume is EQUAL TO OR GREATER than 90 Day Volume
-                    (ticker['regularMarketVolume'] >= ticker['averageDailyVolume10Day'] || ticker['averageDailyVolume10Day'] >= ticker['averageDailyVolume3Month']) &&
-
-                    // Good EPS score IF it exists
-                    (_.isNil(ticker['epsForward']) || ticker['epsForward'] >= 0) &&
-
-                    // US tradeable Stock
-                    _.isEqual(ticker['financialCurrency'], 'USD') &&
-                    _.isEqual(ticker['tradeable'], true);
-
-                    // && moment(this.getEarningsDate(ticker.earningsTimestamp)).isSameOrAfter(new Date())
+                    // Volume must be at least 100k
+                    ((regularMarketVolume >= minVolume)) &&
+                    // Volume must be close to 10 Day OR 90 Day Volume Average
+                    (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month)) &&
+                    // Volume must be not be too high than 10 Day OR 90 Day Volume Average
+                    ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
+                    // Percent must be higher than 50 Day AND 200 Day Percent Average
+                    ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
+                    // Percents must be higher than 0
+                    ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
+                    // 50 Day Average must be higher than 200 Day Average
+                    ((fiftyDayAverage >= twoHundredDayAverage)) &&
+                    // 50 and 200 Day Average must be higher than 0
+                    ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
+                    // Price must be higher than Open
+                    ((regularMarketPrice >= regularMarketOpen)) &&
+                    // Open must be higher than Close
+                    ((regularMarketOpen >= regularMarketPreviousClose)) &&
+                    // Price must be higher than 52 Week Low
+                    ((regularMarketPrice >= fiftyTwoWeekLowChange)) &&
+                    // USD Currency
+                    _.isEqual(financialCurrency, 'USD') &&
+                    // Tradeable
+                    _.isEqual(tradeable, true) &&
+                    // NASDAQ OR NYSE
+                    ((_.includes(fullExchangeName, 'NASDAQ')) || (_.includes(fullExchangeName, 'NYSE')));
                 return ticker;
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
-                return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended'];
+                return ticker['recommended'];
+                // return _.includes(allTrendingSymbolsOnly, ticker.symbol) || ticker['recommended'];
             });
 
             resolve({
