@@ -163,7 +163,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
                 const regularMarketPrice = ticker['regularMarketPrice'];
 
-                const postMarketChangePercent = _.get(ticker, ['postMarketChangePercent']);
+                const postMarketPrice = ticker['postMarketPrice'];
+                const postMarketChangePercent = ticker['postMarketChangePercent'];
 
                 const epsTrailingTwelveMonths = _.get(ticker, ['epsTrailingTwelveMonths'])
                 const epsForward = _.get(ticker, ['epsForward']);
@@ -198,10 +199,12 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Current Day's Lows must be higher than Open
                     // ((regularMarketDayLow >= regularMarketOpen)) &&
 
-                    // 52 Week High Change Percent must be at least -0.1 and above
+                    // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
-                    // Post Price must be positive
-                    ((postMarketChangePercent >= 0)) &&
+                    // Post Price must be at least 2% and above
+                    ((postMarketChangePercent >= -0.2)) &&
+                    // Post Price must be higher than Open
+                    ((postMarketPrice >= regularMarketOpen)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
