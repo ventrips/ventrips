@@ -226,7 +226,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
-                return _.isEqual(ticker['recommended'], true);
+                // return _.isEqual(ticker['recommended'], true);
+                return _.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true);
             });
 
             resolve({
