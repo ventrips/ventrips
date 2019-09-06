@@ -174,11 +174,11 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return `https://www.google.com/search?q=${_.get(ticker, ['symbol'])} stock`;
   }
 
-  getGoogleTrends(item: any, timeRange: string = 'now') {
+  getGoogleTrends(ticker: any, timeRange: string = 'now') {
     let list = [];
-    const symbol = _.toLower(_.get(item, ['symbol']));
-    list.push(`buy ${symbol}`);
-    list.push(`sell ${symbol}`);
+    const symbol = _.toLower(_.get(ticker, ['symbol']));
+    list.push(`${symbol} stock price`);
+    list.push(`${symbol}`);
     list.push(`${symbol} stock`);
     list.push(`${symbol} price`);
     list.push(`${symbol} news`);
