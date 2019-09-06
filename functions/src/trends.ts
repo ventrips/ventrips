@@ -145,8 +145,11 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketOpen = ticker['regularMarketOpen'];
                 const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
 
-                const fiftyTwoWeekLowChange = ticker['fiftyTwoWeekLowChange'];
+                // const fiftyTwoWeekLowChange = ticker['fiftyTwoWeekLowChange'];
                 // const fiftyTwoWeekHighChange = ticker['fiftyTwoWeekHighChange'];
+
+                const fiftyTwoWeekLow = ticker['FiftyTwoWeekLow'];
+                const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
 
                 const fiftyDayAverage = ticker['fiftyDayAverage'];
                 const twoHundredDayAverage = ticker['twoHundredDayAverage'];
@@ -176,6 +179,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((fiftyDayAverage >= twoHundredDayAverage)) &&
                     // 50 and 200 Day Average must be higher than 0
                     ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
+                    // Price is within the 52 Week Lows and Highs
+                    (((regularMarketPrice >= fiftyTwoWeekLow)) && ((regularMarketPrice <= fiftyTwoWeekHigh)))
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
