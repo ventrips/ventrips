@@ -69,15 +69,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(useMock)
-            ,getBusinessInsiderNews(useMock)
-            ,getReutersNews(useMock)
-            ,getBarronsNews(useMock)
-            ,getTheFlyNews(useMock)
+            ,getMarketWatchNews(!useMock)
+            ,getBusinessInsiderNews(!useMock)
+            ,getReutersNews(!useMock)
+            ,getBarronsNews(!useMock)
+            ,getTheFlyNews(!useMock)
             /* Forums */
-            ,getFourChanForums(useMock)
-            ,getHackerForums(useMock)
-            ,getRedditForums(useMock)
+            ,getFourChanForums(!useMock)
+            ,getHackerForums(!useMock)
+            ,getRedditForums(!useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -107,7 +107,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
                 http://www.convertcsv.com/csv-to-json.htm
             */
-            const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-sept-2019.json');
+            const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-9-11-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 ['SPY'],
                 // spy500Symbols,
@@ -208,6 +208,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     (_.isNil(postMarketChangePercent) || (postMarketChangePercent >= -0.2)) &&
                     // Post Price must be higher than Open
                     (_.isNil(postMarketPrice) || (postMarketPrice >= regularMarketOpen)) &&
+                    // Price must be higher than Close
+                    ((regularMarketPrice >= regularMarketPreviousClose)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
@@ -228,8 +230,17 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
-                // return _.isEqual(ticker['recommended'], true);
-                return _.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true);
+                const maxOpenCloseChangePercent = 0.10;
+                const signal = _.get(ticker, ['signal']);
+                const regularMarketOpen = ticker['regularMarketOpen'];
+                const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
+
+
+                return (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                // Change Percentage between Previous Close & Open cannot be greater than 10%
+                (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
+                // Not top losers or  new low
+                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low'], _.startCase(signal)));
             });
 
             resolve({
