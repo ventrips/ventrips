@@ -34,7 +34,8 @@ export class TrendsComponent implements OnInit {
 
   public updated: string;
   public recommended: Array<any> = [];
-  public tickers: Array<any>= [];
+  public tickers: Array<any> = [];
+  public requiredTickers: Array<any> = [];
   public news: Array<any>= [];
   public forums: Array<any>= [];
 
@@ -64,6 +65,7 @@ export class TrendsComponent implements OnInit {
 
       this.updated = _.get(this.predict, ['updated']);
       this.tickers = _.get(this.predict, ['tickers']);
+      this.requiredTickers = _.filter(this.tickers, (ticker) => _.includes(['SPY', '^DJI'], _.get(ticker, ['symbol'])));
       this.recommended = _.filter(this.tickers, (ticker) => ticker.recommended);
 
       this.news = _.get(this.predict, ['news']);

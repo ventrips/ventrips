@@ -107,9 +107,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
                 http://www.convertcsv.com/csv-to-json.htm
             */
+            const requiredSymbols = ['SPY', '^DJI'];
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-9-11-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
-                ['SPY'],
+                requiredSymbols,
                 // spy500Symbols,
                 nasdaqSymbols,
                 nyseSymbols,
@@ -173,7 +174,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const bookValue = ticker['bookValue'];
                 const tradeable = ticker['tradeable'];
                 const financialCurrency = ticker['financialCurrency'];
-                const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
+                // const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
 
                 ticker['recommended'] =
                     // Volume must be at least 100k
@@ -223,9 +224,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Positive Reviews
                     (_.isNil(epsTrailingTwelveMonths) || (epsTrailingTwelveMonths >= 0)) &&
                     (_.isNil(epsForward) || (epsForward >= 0)) &&
-                    (_.isNil(forwardPE) || (forwardPE >= 0)) &&
+                    (_.isNil(forwardPE) || (forwardPE >= 0))
                     // NASDAQ OR NYSE
-                    ((_.includes(fullExchangeName, 'NASDAQ')) || (_.includes(fullExchangeName, 'NYSE')));
+                    // && ((_.includes(fullExchangeName, 'NASDAQ')) || (_.includes(fullExchangeName, 'NYSE')));
                 return ticker;
             });
 
@@ -236,7 +237,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
 
 
-                return (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                return (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.includes(requiredSymbols, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
                 (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                 // Not top losers or  new low
