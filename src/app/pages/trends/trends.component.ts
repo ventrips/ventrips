@@ -52,7 +52,7 @@ export class TrendsComponent implements OnInit {
   ngOnInit() {
     this.predict = undefined;
     this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, true)
     .subscribe(response => {
       if (_.isEmpty(response)) {
         return;
