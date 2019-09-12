@@ -107,7 +107,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
                 http://www.convertcsv.com/csv-to-json.htm
             */
-            const requiredSymbols = ['SPY', '^DJI'];
+            const requiredSymbols = ['SPY', '^DJI', 'NDAQ'];
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-9-11-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 requiredSymbols,
