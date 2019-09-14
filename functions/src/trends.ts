@@ -191,7 +191,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Change Percentage between Previous Close & Open cannot be greater than 10%
                     (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                     // Not top losers or  new low
-                    (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades'], _.startCase(signal))) &&
+                    (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Overbought'], _.startCase(signal)));
                     // Percent must be higher than 50 Day AND 200 Day Percent Average
                     ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // 50 Day Average must be higher than 200 Day Average
