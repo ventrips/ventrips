@@ -175,7 +175,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const bookValue = ticker['bookValue'];
                 const tradeable = ticker['tradeable'];
                 const financialCurrency = ticker['financialCurrency'];
-                const signal = _.toUpper(_.get(ticker, ['signal']));
+                const signal = _.get(ticker, ['signal']);
 
                 ticker['recommended'] =
                     // Volume must be at least 100k
@@ -233,7 +233,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
                 const maxOpenCloseChangePercent = 0.10;
-                const signal = _.toUpper(_.get(ticker, ['signal']));
+                const signal = _.get(ticker, ['signal']);
                 const regularMarketOpen = ticker['regularMarketOpen'];
                 const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
