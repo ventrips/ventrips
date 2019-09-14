@@ -6,10 +6,10 @@ const Cheerio = require('cheerio');
 const UserAgent = require('user-agents');
 
 // const Utils = require('./utils');
-const GoogleTrends = require('google-trends-api');
-const { ExploreTrendRequest, SearchProviders } = require('g-trends')
+// const GoogleTrends = require('google-trends-api');
+const { ExploreTrendRequest } = require('g-trends')
 // import * as puppeteer from 'puppeteer';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 // exports.getGoogleTrends = async function(request: any, response: any, tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>>  {
 //     const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
