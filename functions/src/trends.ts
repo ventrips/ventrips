@@ -204,8 +204,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Highs cannot be 52 Week Highs
                     ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                    // Current Day's Lows must be higher than Open * 98%
-                    ((regularMarketDayLow >= (regularMarketOpen * .98))) &&
+                    // Current Day's Lows must be higher than Open * 99%
+                    ((regularMarketDayLow >= (regularMarketOpen * .99))) &&
                     // Current Day's Lows must be higher than Close * 99%
                     ((regularMarketDayLow >= (regularMarketPreviousClose * .99))) &&
                     // 52 Week High Change Percent must be at least -1% and above
@@ -256,8 +256,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                 // Current Day's Highs cannot be 52 Week Highs
                 ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                // Current Day's Lows must be higher than Open * 98%
-                ((regularMarketDayLow >= (regularMarketOpen * .98))) &&
+                // Current Day's Lows must be higher than Open * 99%
+                ((regularMarketDayLow >= (regularMarketOpen * .99))) &&
                 // Current Day's Lows must be higher than Close * 99%
                 ((regularMarketDayLow >= (regularMarketPreviousClose * .99))) &&
                 // Not top losers or  new low
