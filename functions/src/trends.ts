@@ -191,7 +191,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Change Percentage between Previous Close & Open cannot be greater than 10%
                     (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                     // Not top losers or  new low
-                    (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Overbought'], _.startCase(signal)));
+                    (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Upgrades', 'Overbought'], _.startCase(signal)));
                     // Percent must be higher than 50 Day AND 200 Day Percent Average
                     ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // 50 Day Average must be higher than 200 Day Average
@@ -204,8 +204,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Lows and Highs cannot be 52 Week Highs
                     ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                    // Current Day's Lows must be higher than Open
-                    ((regularMarketDayLow >= regularMarketOpen)) &&
+                    //  Open must be higher than Current Day's Lows
+                    ((regularMarketOpen >= regularMarketDayLow)) &&
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
                     // Post Price must be at least 2% and above
@@ -241,9 +241,12 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const twoHundredDayAverageChangePercent = ticker['twoHundredDayAverageChangePercent'];
                 const regularMarketDayHigh = ticker['regularMarketDayHigh'];
                 const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
+                const regularMarketDayLow = ticker['regularMarketDayLow'];
 
                 return  _.includes(requiredSymbols, _.get(ticker, ['symbol'])) ||
                 (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                //  Open must be higher than Current Day's Lows
+                ((regularMarketOpen >= regularMarketDayLow)) &&
                 // Percents must be higher than 0
                 ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
@@ -251,7 +254,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 // Current Day's Lows and Highs cannot be 52 Week Highs
                 ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                 // Not top losers or  new low
-                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Overbought'], _.startCase(signal)));
+                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Upgrades', 'Overbought'], _.startCase(signal)));
             });
 
             resolve({
