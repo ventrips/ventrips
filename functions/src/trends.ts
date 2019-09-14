@@ -33,11 +33,11 @@ const { ExploreTrendRequest } = require('g-trends')
 exports.googleTrends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
         if (useMock) {
-            resolve(require('./../mocks/trends/google-trends/google-trends.json'));
+            resolve(require('./../mocks/trends/charts/google-trends.json'));
         }
         const explorer = new ExploreTrendRequest();
         explorer.pastDay()
-        .addKeyword('fran stock', 'US')
+        .addKeyword('msft stock', 'US')
         .download().then((csv: any) => {
             console.log('[✔] Done, take a look at your beautiful CSV formatted data!')
             console.log(csv)

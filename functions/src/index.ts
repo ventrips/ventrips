@@ -21,13 +21,13 @@ export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512M
     Trends.searchNews(request, response, false);
 });
 
-// export const googleTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-//     Utils.cors(request, response);
-//     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
-//     const data = await Trends.googleTrends(request, response, useMock);
+export const googleTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+    Utils.cors(request, response);
+    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
+    const data = await Trends.googleTrends(request, response, useMock);
 
-//     response.send(data);
-// });
+    response.send(data);
+});
 
 export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
