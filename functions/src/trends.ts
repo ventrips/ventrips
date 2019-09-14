@@ -6,9 +6,10 @@ const Cheerio = require('cheerio');
 const UserAgent = require('user-agents');
 
 // const Utils = require('./utils');
-// const GoogleTrends = require('google-trends-api');
+const GoogleTrends = require('google-trends-api');
+const { ExploreTrendRequest, SearchProviders } = require('g-trends')
 // import * as puppeteer from 'puppeteer';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 
 // exports.getGoogleTrends = async function(request: any, response: any, tickers: Array<any> = [], useMock: boolean = false): Promise<Array<any>>  {
 //     const symbols: Array<string> = _.slice(_.map(tickers, (ticker) => _.get(ticker, ['symbol'])), 0, 5);
@@ -29,6 +30,25 @@ const UserAgent = require('user-agents');
 
 //     return data;
 // }
+exports.googleTrends = async function(request: any, response: any, useMock: boolean = false) {
+    return new Promise((resolve: any, reject: any) => {
+        if (useMock) {
+            resolve(require('./../mocks/trends/google-trends/google-trends.json'));
+        }
+        const explorer = new ExploreTrendRequest();
+        explorer.pastDay()
+        .addKeyword('fran stock', 'US')
+        .download().then((csv: any) => {
+            console.log('[✔] Done, take a look at your beautiful CSV formatted data!')
+            console.log(csv)
+            resolve(csv);
+        }).catch((error: any) => {
+            console.log('[!] Failed fetching csv data due to an error',error)
+            reject(error);
+        })
+    });
+}
+
 
 exports.searchNews = function(request: any, response: any, useMock: boolean = false) {
     let data = {};
@@ -107,7 +127,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 https://www.barchart.com/options/upcoming-earnings?timeFrame=30d&viewName=main
                 http://www.convertcsv.com/csv-to-json.htm
             */
-            const requiredSymbols = ['SPY', '^DJI', 'NDAQ'];
+            const requiredSymbols = ['SPY', 'XLF', '^DJI', 'NDAQ'];
             const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-9-11-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 requiredSymbols,
