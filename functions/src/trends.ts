@@ -187,7 +187,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
 
                     // Percents must be higher than 0
-                    ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
+                    ((regularMarketChangePercent > 0) && (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
                     // Change Percentage between Previous Close & Open cannot be greater than 10%
                     (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                     // Not top losers or  new low
@@ -249,7 +249,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 // Current Day's Lows must be higher than Open
                 ((regularMarketDayLow >= regularMarketOpen)) &&
                 // Percents must be higher than 0
-                ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
+                ((regularMarketChangePercent > 0) && (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
                 (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                 // Current Day's Lows cannot be 52 Week Lows
