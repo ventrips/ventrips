@@ -251,7 +251,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 // Current Day's Lows and Highs cannot be 52 Week Highs
                 ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                 // Not top losers or  new low
-                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades'], _.startCase(signal)));
+                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Overbought'], _.startCase(signal)));
             });
 
             resolve({
