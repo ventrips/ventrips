@@ -138,6 +138,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const minVolume = 100000;
                 const minThreshold = 0.75;
                 // const maxThreshold = 1.25;
+                const maxOpenCloseChangePercent = 0.10;
 
                 const regularMarketVolume = ticker['regularMarketVolume'];
                 const averageDailyVolume10Day = ticker['averageDailyVolume10Day'];
@@ -152,7 +153,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const fiftyTwoWeekHighChangePercent = ticker['fiftyTwoWeekHighChangePercent'];
 
                 const regularMarketDayLow = ticker['regularMarketDayLow'];
-                // const regularMarketDayHigh = ticker['regularMarketDayHigh'];
+                const regularMarketDayHigh = ticker['regularMarketDayHigh'];
                 const fiftyTwoWeekLow = ticker['fiftyTwoWeekLow'];
                 const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
 
@@ -174,7 +175,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const bookValue = ticker['bookValue'];
                 const tradeable = ticker['tradeable'];
                 const financialCurrency = ticker['financialCurrency'];
-                // const fullExchangeName = _.toUpper(ticker['fullExchangeName']);
+                const signal = _.toUpper(_.get(ticker, ['signal']));
 
                 ticker['recommended'] =
                     // Volume must be at least 100k
@@ -185,10 +186,14 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Volume must be not be too high than 10 Day OR 90 Day Volume Average
                     // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
 
-                    // Percent must be higher than 50 Day AND 200 Day Percent Average
-                    ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // Percents must be higher than 0
                     ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
+                    // Change Percentage between Previous Close & Open cannot be greater than 10%
+                    (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
+                    // Not top losers or  new low
+                    (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades'], _.startCase(signal))) &&
+                    // Percent must be higher than 50 Day AND 200 Day Percent Average
+                    ((regularMarketChangePercent >= fiftyDayAverageChangePercent) && (regularMarketChangePercent >= twoHundredDayAverageChangePercent)) &&
                     // 50 Day Average must be higher than 200 Day Average
                     ((fiftyDayAverage >= twoHundredDayAverage)) &&
                     // 50 and 200 Day Average must be higher than 0
@@ -198,11 +203,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Current Day's Lows and Highs cannot be 52 Week Lows
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Lows and Highs cannot be 52 Week Highs
-                    // (regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-
+                    ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                     // Current Day's Lows must be higher than Open
-                    // ((regularMarketDayLow >= regularMarketOpen)) &&
-
+                    ((regularMarketDayLow >= regularMarketOpen)) &&
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
                     // Post Price must be at least 2% and above
@@ -225,23 +228,30 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     (_.isNil(epsTrailingTwelveMonths) || (epsTrailingTwelveMonths >= 0)) &&
                     (_.isNil(epsForward) || (epsForward >= 0)) &&
                     (_.isNil(forwardPE) || (forwardPE >= 0))
-                    // NASDAQ OR NYSE
-                    // && ((_.includes(fullExchangeName, 'NASDAQ')) || (_.includes(fullExchangeName, 'NYSE')));
                 return ticker;
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
                 const maxOpenCloseChangePercent = 0.10;
-                const signal = _.get(ticker, ['signal']);
+                const signal = _.toUpper(_.get(ticker, ['signal']));
                 const regularMarketOpen = ticker['regularMarketOpen'];
                 const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
+                const regularMarketChangePercent = ticker['regularMarketChangePercent'];
+                const fiftyDayAverageChangePercent = ticker['fiftyDayAverageChangePercent'];
+                const twoHundredDayAverageChangePercent = ticker['twoHundredDayAverageChangePercent'];
+                const regularMarketDayHigh = ticker['regularMarketDayHigh'];
+                const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
 
-
-                return (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.includes(requiredSymbols, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                return  _.includes(requiredSymbols, _.get(ticker, ['symbol'])) ||
+                (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                // Percents must be higher than 0
+                ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
                 (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
+                // Current Day's Lows and Highs cannot be 52 Week Highs
+                ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                 // Not top losers or  new low
-                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low'], _.startCase(signal)));
+                (_.isNil(signal) || !_.includes(['Top Losers', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades'], _.startCase(signal)));
             });
 
             resolve({
