@@ -33,7 +33,11 @@ const { ExploreTrendRequest } = require('g-trends')
 exports.googleTrends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
         if (useMock) {
-            resolve(require('./../mocks/trends/charts/google-trends.json'));
+            const data = {
+                googleTrends: require('./../mocks/trends/charts/google-trends.json'),
+                alphaVantageHistorical: require('./../mocks/trends/charts/alphavantage-historical.json')
+            }
+            resolve(data);
         }
         const explorer = new ExploreTrendRequest();
         explorer.pastDay()
