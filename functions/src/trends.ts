@@ -204,8 +204,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Lows and Highs cannot be 52 Week Highs
                     ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                    //  Open must be higher than Current Day's Lows
-                    ((regularMarketOpen >= regularMarketDayLow)) &&
+                    // Current Day's Lows must be higher than Open
+                    ((regularMarketDayLow >= regularMarketOpen)) &&
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
                     // Post Price must be at least 2% and above
@@ -245,8 +245,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
 
                 return  _.includes(requiredSymbols, _.get(ticker, ['symbol'])) ||
                 (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
-                //  Open must be higher than Current Day's Lows
-                ((regularMarketOpen >= regularMarketDayLow)) &&
+                // Current Day's Lows must be higher than Open
+                ((regularMarketDayLow >= regularMarketOpen)) &&
                 // Percents must be higher than 0
                 ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
