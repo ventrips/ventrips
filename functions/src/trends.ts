@@ -200,9 +200,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
                     // Price is within the 52 Week Lows and Highs
                     ((regularMarketPrice >= fiftyTwoWeekLow) && (regularMarketPrice <= fiftyTwoWeekHigh)) &&
-                    // Current Day's Lows and Highs cannot be 52 Week Lows
+                    // Current Day's Lows cannot be 52 Week Lows
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
-                    // Current Day's Lows and Highs cannot be 52 Week Highs
+                    // Current Day's Highs cannot be 52 Week Highs
                     ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                     // Current Day's Lows must be higher than Open
                     ((regularMarketDayLow >= regularMarketOpen)) &&
@@ -252,9 +252,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 ((regularMarketChangePercent >= 0) && (fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
                 (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
-                // Current Day's Lows and Highs cannot be 52 Week Lows
+                // Current Day's Lows cannot be 52 Week Lows
                 ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
-                // Current Day's Lows and Highs cannot be 52 Week Highs
+                // Current Day's Highs cannot be 52 Week Highs
                 ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
                 // Open must be higher than Close
                 ((regularMarketOpen >= regularMarketPreviousClose)) &&
