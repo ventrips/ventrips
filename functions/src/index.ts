@@ -21,10 +21,10 @@ export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512M
     Trends.searchNews(request, response, false);
 });
 
-export const googleTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
-    const data = await Trends.googleTrends(request, response, useMock);
+    const data = await Trends.chartTrends(request, response, useMock);
 
     response.send(data);
 });

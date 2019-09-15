@@ -30,7 +30,7 @@ const { ExploreTrendRequest } = require('g-trends')
 
 //     return data;
 // }
-exports.googleTrends = async function(request: any, response: any, useMock: boolean = false) {
+exports.chartTrends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = {
