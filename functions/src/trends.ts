@@ -32,27 +32,66 @@ const { ExploreTrendRequest } = require('g-trends')
 // }
 exports.chartTrends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
-        if (useMock) {
+        const symbol = _.toUpper(_.get(request, ['query', 'symbol']));
+        Promise.all([
+            getGoogleTrends(symbol, useMock),
+            getAlphaVantage(symbol, useMock)
+        ])
+        .then(async (result: any) => {
+            const [
+                googleTrends,
+                alphaVantage
+            ] = result;
+
             const data = {
-                googleTrends: require('./../mocks/trends/charts/google-trends.json'),
-                alphaVantage: require('./../mocks/trends/charts/alphavantage.json')
+                googleTrends,
+                alphaVantage
             }
             resolve(data);
-        }
-        const explorer = new ExploreTrendRequest();
-        explorer.pastDay()
-        .addKeyword('msft stock', 'US')
-        .download().then((csv: any) => {
-            console.log('[✔] Done, take a look at your beautiful CSV formatted data!')
-            console.log(csv)
-            resolve(csv);
-        }).catch((error: any) => {
-            console.log('[!] Failed fetching csv data due to an error',error)
-            reject(error);
-        })
+            return data;
+        }).catch((error: any) => reject(`Error in promises ${error}`));
     });
 }
 
+const getGoogleTrends = function(symbol: string, useMock: boolean = false): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/charts/google-trends.json');
+            resolve(data);
+            return data;
+        }
+        const explorer = new ExploreTrendRequest();
+        explorer.pastDay()
+        .addKeyword(`${_.toLower(symbol)} stock`, 'US')
+        .download().then((data: any) => {
+            resolve(data);
+            return data;
+        }).catch((error: any) => {
+            reject(error);
+        })
+    })
+}
+
+const getAlphaVantage = function(symbol: string, useMock: boolean = false): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+        if (useMock) {
+            const data = require('./../mocks/trends/charts/alphavantage.json');
+            resolve(data);
+            return data;
+        }
+        const Request = require('request');
+        const apiKey = 'J5LLHCUPAQ0CR0IN';
+        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&outputsize=full&apikey=${apiKey}`;
+        Request(url, function (error: any, res: any, body: any) {
+            if (!_.isNil(error)) {
+                reject(error);
+            }
+            const data = JSON.parse(body);
+            resolve(data);
+            return data;
+        });
+    })
+}
 
 exports.searchNews = function(request: any, response: any, useMock: boolean = false) {
     let data = {};

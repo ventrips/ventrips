@@ -1,8 +1,8 @@
 <section>
     <div class="container-fluid my-5">
-        <!-- <div class="container">
+        <div class="container">
             <app-combo-chart-trends></app-combo-chart-trends>
-        </div> -->
+        </div>
         <div class="text-center">
             <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTrends()">
                 <ng-container *ngIf="isPlatformBrowser()">
