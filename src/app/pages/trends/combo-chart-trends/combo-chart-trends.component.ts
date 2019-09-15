@@ -180,8 +180,8 @@ export class ComboChartTrendsComponent implements OnInit {
     console.log(event, active);
   }
 
-  public hideOne() {
-    const isHidden = this.chart.isDatasetHidden(1);
-    this.chart.hideDataset(1, !isHidden);
+  public hideIndex(index: number) {
+    const isHidden = this.chart.isDatasetHidden(index);
+    this.chart.hideDataset(index, !isHidden);
   }
 }

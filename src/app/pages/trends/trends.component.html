@@ -11,7 +11,7 @@
                 Last Updated: {{updated | timeAgo}}
             </p>
         </div>
-        <div class="container" *ngIf="!_.isNil(chartTrends)">
+        <div class="w-100" *ngIf="!_.isNil(chartTrends)">
             <app-combo-chart-trends [chartTrends]="chartTrends"></app-combo-chart-trends>
         </div>
         <ngb-tabset [justify]="'justified'" #t="ngbTabset">

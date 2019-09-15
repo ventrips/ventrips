@@ -16,6 +16,7 @@
                 <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
             </tr>
         </table>
-        <button mat-button mat-raised-button color="primary" (click)="hideOne()">Toggle Series B</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(0)">Toggle Series A</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(1)">Toggle Series B</button>
     </div>
 </div>
