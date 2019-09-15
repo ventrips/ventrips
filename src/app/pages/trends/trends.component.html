@@ -1,8 +1,5 @@
 <section>
     <div class="container-fluid my-5">
-        <div class="container">
-            <app-combo-chart-trends></app-combo-chart-trends>
-        </div>
         <div class="text-center">
             <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTrends()">
                 <ng-container *ngIf="isPlatformBrowser()">
@@ -13,6 +10,9 @@
             <p class="small text-secondary my-3 mr-3" *ngIf="updated">
                 Last Updated: {{updated | timeAgo}}
             </p>
+        </div>
+        <div class="container" *ngIf="!_.isNil(chartTrends)">
+            <app-combo-chart-trends [chartTrends]="chartTrends"></app-combo-chart-trends>
         </div>
         <ngb-tabset [justify]="'justified'" #t="ngbTabset">
             <ngb-tab *ngIf="!_.isEmpty(tickers)" id="tab-selectbyid1">
@@ -27,9 +27,9 @@
                                 Recommended: {{recommended.length}} / {{tickers.length}}
                             </div>
                         </div>
-                        <app-trending-tickers [tickers]="tickers"></app-trending-tickers>
+                        <app-trending-tickers [tickers]="tickers" (onGetChartTrends)="getChartTrends($event)"></app-trending-tickers>
                         <h3>Overall Market</h3>
-                        <app-trending-tickers [tickers]="requiredTickers"></app-trending-tickers>
+                        <app-trending-tickers [tickers]="requiredTickers" (onGetChartTrends)="getChartTrends($event)"></app-trending-tickers>
                     </section>
                 </ng-template>
             </ngb-tab>

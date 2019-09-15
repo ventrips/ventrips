@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, PLATFORM_ID, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Inject, PLATFORM_ID, OnChanges, Output, EventEmitter } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 })
 export class TrendingTickersComponent implements OnInit, OnChanges {
   @Input() tickers;
-
+  @Output() onGetChartTrends = new EventEmitter();
   public page = 1;
   public pageSize = 25;
   public collectionSize = 0;
@@ -242,5 +242,9 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return this.tickers
       .map((ticker, i) => ({id: i + 1, ...ticker}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  getChartTrendsEmitter(symbol: string) {
+    this.onGetChartTrends.emit(symbol);
   }
 }

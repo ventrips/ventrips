@@ -22,6 +22,7 @@ import { KeysPipe } from '../../pipes/keys/keys.pipe';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
+  public chartTrends: any;
   public search: string;
   public q: string;
   public data: any;
@@ -113,6 +114,18 @@ export class TrendsComponent implements OnInit {
   searchNews(q: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
     .pipe(map((response: Response) => { return response }));
+  };
+
+  getChartTrends(symbol: string): void {
+    this.spinner.show();
+    this.http.get(`${environment.apiUrl}/chartTrends?symbol=${symbol}&mock=false`)
+    .pipe(map((response: Response) => { return response }))
+    .subscribe((data: any) => {
+      this.chartTrends = data;
+      this.spinner.hide();
+    }, (error) => {
+      this.spinner.hide();
+    });
   };
 
   // Fetches latest and sets to firestore DB
