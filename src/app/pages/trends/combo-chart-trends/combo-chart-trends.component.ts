@@ -150,20 +150,20 @@ export class ComboChartTrendsComponent implements OnInit {
     );
     const filterPastDayData = _.filter(combinedData, (item) => {
       return moment(_.get(item, ['date'])).isSameOrAfter(moment().subtract(24, 'hours'))
+      // return true;
     });
-
     const finalLabels = _.union(_.map(filterPastDayData, (item) => {
       return moment(_.get(item, ['date'])).format('LLL');
     }));
 
     this.lineChartData = [
       {
-        data: this.formatValues(combinedData, 'alphaVantage', 'volume'),
+        data: this.formatValues(filterPastDayData, 'alphaVantage', 'volume'),
         label: 'AlphaVantage',
         yAxisID: 'y-axis-0'
       },
       {
-        data: this.formatValues(combinedData, 'googleTrends', 'searchVolume'),
+        data: this.formatValues(filterPastDayData, 'googleTrends', 'searchVolume'),
         label: 'Google Trends',
         yAxisID: 'y-axis-1'
       }
