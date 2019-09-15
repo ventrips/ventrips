@@ -35,7 +35,7 @@ exports.googleTrends = async function(request: any, response: any, useMock: bool
         if (useMock) {
             const data = {
                 googleTrends: require('./../mocks/trends/charts/google-trends.json'),
-                alphaVantageHistorical: require('./../mocks/trends/charts/alphavantage-historical.json')
+                alphaVantage: require('./../mocks/trends/charts/alphavantage.json')
             }
             resolve(data);
         }
