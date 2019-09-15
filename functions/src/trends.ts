@@ -33,9 +33,10 @@ const { ExploreTrendRequest } = require('g-trends')
 exports.chartTrends = async function(request: any, response: any, useMock: boolean = false) {
     return new Promise((resolve: any, reject: any) => {
         const symbol = _.toUpper(_.get(request, ['query', 'symbol']));
+        const period = _.get(request, ['query', 'period']);
         Promise.all([
-            getGoogleTrends(symbol, useMock),
-            getAlphaVantage(symbol, useMock)
+            getGoogleTrends(symbol, period, useMock),
+            getAlphaVantage(symbol, period, useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -53,7 +54,7 @@ exports.chartTrends = async function(request: any, response: any, useMock: boole
     });
 }
 
-const getGoogleTrends = function(symbol: string, useMock: boolean = false): Promise<any> {
+const getGoogleTrends = function(symbol: string, period: string, useMock: boolean = false): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/charts/google-trends.json');
@@ -61,7 +62,37 @@ const getGoogleTrends = function(symbol: string, useMock: boolean = false): Prom
             return data;
         }
         const explorer = new ExploreTrendRequest();
-        explorer.pastDay()
+        let timeRange: any;
+        switch (_.camelCase(period)) {
+            case 'pastHour':
+                timeRange = explorer.pastHour();
+                break;
+            case 'pastFourHours':
+                timeRange = explorer.pastFourHours();
+                break;
+            case 'pastDay':
+                timeRange = explorer.pastDay();
+                break;
+            case 'past7Days':
+                timeRange = explorer.past7Days();
+                break;
+            case 'past30Days':
+                timeRange = explorer.past30Days();
+                break;
+            case 'past90Days':
+                timeRange = explorer.past90Days();
+                break;
+            case 'past12Months':
+                timeRange = explorer.past12Months();
+                break;
+            case 'past5Years':
+                timeRange = explorer.past5Years();
+                break;
+            default:
+                timeRange = explorer.pastDay()
+                break;
+        }
+        timeRange
         .addKeyword(`${_.toLower(symbol)} stock`, 'US')
         .download().then((data: any) => {
             resolve(data);
@@ -72,7 +103,7 @@ const getGoogleTrends = function(symbol: string, useMock: boolean = false): Prom
     })
 }
 
-const getAlphaVantage = function(symbol: string, useMock: boolean = false): Promise<any> {
+const getAlphaVantage = function(symbol: string, period: string, useMock: boolean = false): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
         if (useMock) {
             const data = require('./../mocks/trends/charts/alphavantage.json');
@@ -81,7 +112,27 @@ const getAlphaVantage = function(symbol: string, useMock: boolean = false): Prom
         }
         const Request = require('request');
         const apiKey = 'J5LLHCUPAQ0CR0IN';
-        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&outputsize=full&apikey=${apiKey}`;
+        let timeRange: string;
+        switch (_.camelCase(period)) {
+            case 'pastHour':
+            case 'pastFourHours':
+            case 'pastDay':
+                timeRange = 'TIME_SERIES_INTRADAY';
+                break;
+            case 'past7Days':
+            case 'past30Days':
+            case 'past90Days':
+                timeRange = 'TIME_SERIES_DAILY';
+                break;
+            case 'past12Months':
+            case 'past5Years':
+                timeRange = 'TIME_SERIES_WEEKLY';
+                break;
+            default:
+                timeRange = 'TIME_SERIES_INTRADAY';
+                break;
+        }
+        const url = `https://www.alphavantage.co/query?function=${timeRange}&symbol=${symbol}&interval=5min&outputsize=full&apikey=${apiKey}`;
         Request(url, function (error: any, res: any, body: any) {
             if (!_.isNil(error)) {
                 reject(error);

@@ -116,9 +116,10 @@ export class TrendsComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   };
 
-  getChartTrends(symbol: string): void {
+  getChartTrends(symbol: string, period: string = 'pastDay'): void {
     this.spinner.show();
-    this.http.get(`${environment.apiUrl}/chartTrends?symbol=${symbol}&mock=false`)
+    // this.http.get(`http://localhost:5001/ventrips-website/us-central1/chartTrends?symbol=${symbol}&period=${period}&mock=false`)
+    this.http.get(`${environment.apiUrl}/chartTrends?symbol=${symbol}&period=${period}&mock=false`)
     .pipe(map((response: Response) => { return response }))
     .subscribe((data: any) => {
       this.chartTrends = data;
