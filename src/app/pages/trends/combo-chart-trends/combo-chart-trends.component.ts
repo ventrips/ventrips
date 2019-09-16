@@ -127,7 +127,7 @@ export class ComboChartTrendsComponent implements OnInit {
       [item => moment(_.get(item, ['date']))], ['asc']
     );
     const filterPastDayData = _.filter(combinedData, (item) => {
-      return moment(_.get(item, ['date'])).isSameOrAfter(moment().subtract(4, 'hours'))
+      return moment(_.get(item, ['date'])).isSameOrAfter(moment().subtract(24, 'hours'))
       // return true;
     });
     const finalLabels = _.union(_.map(filterPastDayData, (item) => {
