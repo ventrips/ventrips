@@ -16,7 +16,6 @@ export class ComboChartTrendsComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{}],
@@ -33,6 +32,8 @@ export class ComboChartTrendsComponent implements OnInit {
           },
           ticks: {
             fontColor: 'red',
+            max : 100,
+            min: 0
           }
         }
       ]
