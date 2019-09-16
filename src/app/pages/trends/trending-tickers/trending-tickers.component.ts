@@ -168,6 +168,9 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     if (_.includes(exchangeName, 'NASDAQ')) {
       return `https://www.google.com/search?q=NASDAQ:${symbol}`;
     }
+    if (_.includes(exchangeName, 'NYSEARCA')) {
+      return `https://www.google.com/search?q=NYSEARCA:${symbol}`;
+    }
     if (_.includes(exchangeName, 'NYSE')) {
       return `https://www.google.com/search?q=NYSE:${symbol}`;
     }
