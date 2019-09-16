@@ -189,6 +189,16 @@ export class TrendsComponent implements OnInit {
     return _.trim(_.replace(value, /[&]/gi, '%26'));
   }
 
+  isGoodDay(): boolean {
+    let count = 0;
+    _.forEach(this.requiredTickers, (ticker) => {
+      if (_.get(ticker, ['regularMarketChangePercent']) >= 0) {
+        count++;
+      }
+    });
+    return (count / this.requiredTickers.length) >= .75;
+  }
+
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
   }

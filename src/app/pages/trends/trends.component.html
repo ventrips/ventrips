@@ -24,6 +24,7 @@
                         <div class="d-flex flex-wrap mb-2">
                             <h2>{{_.upperCase('Trending Tickers')}}</h2>
                             <div class="h2 ml-auto">
+                                <span [ngClass]="{'text-success': isGoodDay(), 'text-danger': !isGoodDay()}">{{isGoodDay() ? 'Good Day :)' : 'Bad Day :('}}</span>
                                 Recommended: {{recommended.length}} / {{tickers.length}}
                             </div>
                         </div>
