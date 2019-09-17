@@ -76,7 +76,7 @@ export class ComboChartTrendsComponent implements OnInit {
     this.formatChart(this.chartTrends);
   }
 
-  formatGoogleTrends(original: Array<any>): any {
+  formatGoogleTrends(original: Array<any>): Array<any> {
     return _.map(_.drop(original, 1), (item) => {
       return {
         date: moment(_.get(item, ['0'])).toDate(),
@@ -86,10 +86,10 @@ export class ComboChartTrendsComponent implements OnInit {
     });
   }
 
-  formatAlphaVantage(original: any): any {
+  formatAlphaVantage(original: any): Array<any> {
     return _.map(_.get(original, ['Time Series (5min)']), (info, time) => {
         return {
-          date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').toDate(),
+          date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').subtract(20, 'minutes').toDate(),
           volume: _.toNumber(_.get(info, ['5. volume'])),
           type: 'alphaVantage'
         }
@@ -105,11 +105,8 @@ export class ComboChartTrendsComponent implements OnInit {
    let previous = 0;
    return _.map(combinedData, (item, index) => {
      const isType = _.isEqual(_.get(item, ['type']), type);
-     if (_.isEqual(index, 0) && !isType) {
-       return previous;
-     }
      if (isType) {
-       const current = _.get(item, [field]);
+      const current = _.get(item, [field]);
        previous = current;
        return current;
      } else {
@@ -130,18 +127,18 @@ export class ComboChartTrendsComponent implements OnInit {
       return moment(_.get(item, ['date'])).isSameOrAfter(moment().subtract(24, 'hours'))
       // return true;
     });
-    const finalLabels = _.union(_.map(filterPastDayData, (item) => {
+    const finalLabels = _.uniq(_.map(filterPastDayData, (item) => {
       return moment(_.get(item, ['date'])).format('LLL');
     }));
 
     this.lineChartData = [
       {
-        data: this.formatValues(filterPastDayData, 'alphaVantage', 'volume'),
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'volume'),
         label: 'AlphaVantage',
         yAxisID: 'y-axis-0'
       },
       {
-        data: this.formatValues(filterPastDayData, 'googleTrends', 'searchVolume'),
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'googleTrends', 'searchVolume'),
         label: 'Google Trends',
         yAxisID: 'y-axis-1'
       }
