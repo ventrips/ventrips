@@ -18,7 +18,12 @@ export class ComboChartTrendsComponent implements OnInit {
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
+      xAxes: [{
+        type: 'time',
+        time: {
+            unit: 'hour'
+        }
+      }],
       yAxes: [
         {
           id: 'y-axis-0',
