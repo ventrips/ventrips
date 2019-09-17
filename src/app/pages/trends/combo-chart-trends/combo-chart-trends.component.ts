@@ -132,9 +132,9 @@ export class ComboChartTrendsComponent implements OnInit {
       return moment(_.get(item, ['date'])).isSameOrAfter(moment().subtract(24, 'hours'))
       // return true;
     });
-    const finalLabels = _.uniq(_.map(filterPastDayData, (item) => {
+    const finalLabels = _.map(filterPastDayData, (item) => {
       return moment(_.get(item, ['date'])).format('LLL');
-    }));
+    });
 
     this.lineChartData = [
       {
