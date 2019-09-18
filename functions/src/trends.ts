@@ -300,8 +300,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // Volume must be not be too high than 10 Day OR 90 Day Volume Average
                     // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
 
-                    // **** Regular Market Percent must be higher than 0.02 ***
-                    ((regularMarketChangePercent >= 0.02) &&
+                    // **** Regular Market Percent must be higher than 0.01 ***
+                    ((regularMarketChangePercent >= 0.01) &&
                     // Percents must be higher than 0
                     (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
                     // Change Percentage between Previous Close & Open cannot be greater than 10%
