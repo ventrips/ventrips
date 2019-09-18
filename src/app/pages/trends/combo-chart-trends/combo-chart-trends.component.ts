@@ -33,22 +33,26 @@ export class ComboChartTrendsComponent implements OnInit {
           },
           ticks: {
             fontColor: 'red',
-            max : 100,
-            min: 0
+            max: 100,
+            min: 0,
+            stepSize: 25
           }
         },
         {
           id: 'y-axis-1',
           position: 'right',
           ticks: {
-            fontColor: 'blue'
+            fontColor: 'blue',
+            min: 100000,
+            stepSize: 500000
           }
         },
         {
           id: 'y-axis-2',
           position: 'right',
           ticks: {
-            fontColor: 'orange'
+            fontColor: 'orange',
+            min: 10
           }
         }
       ]
