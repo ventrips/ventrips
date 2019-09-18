@@ -94,7 +94,7 @@ export class ComboChartTrendsComponent implements OnInit {
   formatAlphaVantage(original: any): Array<any> {
     return _.map(_.get(original, ['Time Series (5min)']), (info, time) => {
         return {
-          date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').subtract(20, 'minutes').toDate(),
+          date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').subtract(0, 'minutes').toDate(),
           volume: _.toNumber(_.get(info, ['5. volume'])),
           type: 'alphaVantage'
         }
