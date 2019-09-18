@@ -34,12 +34,19 @@ export class ComboChartTrendsComponent implements OnInit {
         },
         {
           id: 'y-axis-1',
+          position: 'left',
+          ticks: {
+            fontColor: 'blue'
+          }
+        },
+        {
+          id: 'y-axis-2',
           position: 'right',
           gridLines: {
             color: 'rgba(255,0,0,0.3)',
           },
           ticks: {
-            fontColor: 'blue',
+            fontColor: 'orange',
             max : 100,
             min: 0
           }
@@ -95,6 +102,7 @@ export class ComboChartTrendsComponent implements OnInit {
     return _.map(_.get(original, ['Time Series (5min)']), (info, time) => {
         return {
           date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').subtract(0, 'minutes').toDate(),
+          open: _.toNumber(_.get(info, ['1. open'])),
           volume: _.toNumber(_.get(info, ['5. volume'])),
           type: 'alphaVantage'
         }
@@ -138,14 +146,19 @@ export class ComboChartTrendsComponent implements OnInit {
 
     this.lineChartData = [
       {
-        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'volume'),
-        label: 'AlphaVantage',
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'open'),
+        label: 'Price',
         yAxisID: 'y-axis-0'
       },
       {
-        data: this.formatValues(_.cloneDeep(filterPastDayData), 'googleTrends', 'searchVolume'),
-        label: 'Google Trends',
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'volume'),
+        label: 'Volume',
         yAxisID: 'y-axis-1'
+      },
+      {
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'googleTrends', 'searchVolume'),
+        label: 'Trends',
+        yAxisID: 'y-axis-2'
       }
     ]
     this.lineChartLabels = finalLabels;
