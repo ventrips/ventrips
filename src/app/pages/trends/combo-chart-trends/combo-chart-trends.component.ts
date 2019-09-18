@@ -28,13 +28,18 @@ export class ComboChartTrendsComponent implements OnInit {
         {
           id: 'y-axis-0',
           position: 'left',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
           ticks: {
-            fontColor: 'red'
+            fontColor: 'red',
+            max : 100,
+            min: 0
           }
         },
         {
           id: 'y-axis-1',
-          position: 'left',
+          position: 'right',
           ticks: {
             fontColor: 'blue'
           }
@@ -42,13 +47,8 @@ export class ComboChartTrendsComponent implements OnInit {
         {
           id: 'y-axis-2',
           position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
           ticks: {
-            fontColor: 'orange',
-            max : 100,
-            min: 0
+            fontColor: 'orange'
           }
         }
       ]
@@ -103,6 +103,9 @@ export class ComboChartTrendsComponent implements OnInit {
         return {
           date: moment(time, 'YYYY-MM-DD HH:mm:ss').subtract(3, 'hours').subtract(0, 'minutes').toDate(),
           open: _.toNumber(_.get(info, ['1. open'])),
+          high: _.toNumber(_.get(info, ['2. high'])),
+          low: _.toNumber(_.get(info, ['3. low'])),
+          close: _.toNumber(_.get(info, ['4. close'])),
           volume: _.toNumber(_.get(info, ['5. volume'])),
           type: 'alphaVantage'
         }
@@ -146,8 +149,8 @@ export class ComboChartTrendsComponent implements OnInit {
 
     this.lineChartData = [
       {
-        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'open'),
-        label: 'Price',
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'googleTrends', 'searchVolume'),
+        label: 'Trends',
         yAxisID: 'y-axis-0'
       },
       {
@@ -156,8 +159,23 @@ export class ComboChartTrendsComponent implements OnInit {
         yAxisID: 'y-axis-1'
       },
       {
-        data: this.formatValues(_.cloneDeep(filterPastDayData), 'googleTrends', 'searchVolume'),
-        label: 'Trends',
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'open'),
+        label: 'Open',
+        yAxisID: 'y-axis-2'
+      },
+      {
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'high'),
+        label: 'High',
+        yAxisID: 'y-axis-2'
+      },
+      {
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'low'),
+        label: 'Low',
+        yAxisID: 'y-axis-2'
+      },
+      {
+        data: this.formatValues(_.cloneDeep(filterPastDayData), 'alphaVantage', 'close'),
+        label: 'Close',
         yAxisID: 'y-axis-2'
       }
     ]
@@ -178,3 +196,4 @@ export class ComboChartTrendsComponent implements OnInit {
     this.chart.hideDataset(index, !isHidden);
   }
 }
+

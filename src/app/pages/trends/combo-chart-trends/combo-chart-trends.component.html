@@ -17,7 +17,11 @@
                 <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
             </tr>
         </table>
-        <button mat-button mat-raised-button color="primary" (click)="hideIndex(0)">Toggle Series A</button>
-        <button mat-button mat-raised-button color="primary" (click)="hideIndex(1)">Toggle Series B</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(0)">Trends</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(1)">Volume</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(2)">Open</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(3)">High</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(4)">Low</button>
+        <button mat-button mat-raised-button color="primary" (click)="hideIndex(5)">Close</button>
     </div>
 </div>
