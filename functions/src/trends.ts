@@ -367,7 +367,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 // Percents must be higher than 0
                 ((regularMarketChangePercent > 0) && (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
-                (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
+                (Math.abs((regularMarketOpen - regularMarketPreviousClose) / regularMarketPreviousClose) <= maxOpenCloseChangePercent) &&
                 // Current Day's Lows cannot be 52 Week Lows
                 ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                 // Current Day's Highs cannot be 52 Week Highs
