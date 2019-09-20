@@ -249,7 +249,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ,stockTwits
                     ,yahoo
                 );
-                const minVolume = 100000;
+                const minVolume = 1000000;
                 const minThreshold = 0.75;
                 // const maxThreshold = 1.25;
                 const maxOpenCloseChangePercent = 0.10;
@@ -292,8 +292,8 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const signal = _.get(ticker, ['signal']);
 
                 ticker['recommended'] =
-                    // Volume must be at least 100k
-                    ((regularMarketVolume >= minVolume)) &&
+                    // Two Volumes must be at least 100k
+                    ((regularMarketVolume >= minVolume) && ((averageDailyVolume10Day >= minVolume) || (averageDailyVolume3Month >= minVolume))) &&
                     // Volume must be close to 10 Day OR 90 Day Volume Average
                     (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month)) &&
 
