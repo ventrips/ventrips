@@ -8958,6 +8958,7 @@ export class TrendsComponent implements OnInit {
     .subscribe((data: any) => {
       this.chartTrends = data;
       this.spinner.hide();
+      this.scrollToTop();
     }, (error) => {
       this.spinner.hide();
     });
@@ -9031,6 +9032,11 @@ export class TrendsComponent implements OnInit {
       }
     });
     return (count / this.requiredTickers.length) >= .75;
+  }
+
+  scrollToTop() {
+    if (isPlatformServer(this.platformId)) { return; }
+    window.scrollTo(0, 0);
   }
 
   isPlatformBrowser() {

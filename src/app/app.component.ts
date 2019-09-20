@@ -32,10 +32,10 @@ export class AppComponent implements OnInit {
 
   // Scroll to top whenever route changes
   onActivate(event) {
-    this.scrollTopTop();
+    this.scrollToTop();
   }
 
-  scrollTopTop() {
+  scrollToTop() {
     if (isPlatformServer(this.platformId)) { return; }
     window.scrollTo(0, 0);
   }

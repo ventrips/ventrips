@@ -58,7 +58,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
       ['desc', 'desc', 'desc', 'desc', 'desc', 'desc', 'desc']
     );
     this.collectionSize = this.tickers.length;
-    this.scrollTopTop();
+    this.scrollToTop();
   }
 
   isSymbol(key: string) {
@@ -234,7 +234,7 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return isPlatformBrowser(this.platformId);
   }
 
-  scrollTopTop() {
+  scrollToTop() {
     if (isPlatformServer(this.platformId)) { return; }
     this.page = 1;
 
