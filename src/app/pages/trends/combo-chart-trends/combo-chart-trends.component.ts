@@ -51,7 +51,7 @@ export class ComboChartTrendsComponent implements OnInit {
           position: 'right',
           ticks: {
             fontColor: 'orange',
-            stepSize: 10
+            stepSize: 25
           }
         }
       ]
