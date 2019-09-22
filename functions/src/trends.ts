@@ -183,15 +183,15 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
             ,getStockTwitsTickers(useMock)
             ,getYahooTickers(useMock)
             /* News */
-            ,getMarketWatchNews(useMock)
-            ,getBusinessInsiderNews(useMock)
-            ,getReutersNews(useMock)
-            ,getBarronsNews(useMock)
-            ,getTheFlyNews(useMock)
+            ,getMarketWatchNews(!useMock)
+            ,getBusinessInsiderNews(!useMock)
+            ,getReutersNews(!useMock)
+            ,getBarronsNews(!useMock)
+            ,getTheFlyNews(!useMock)
             /* Forums */
-            ,getFourChanForums(useMock)
-            ,getHackerForums(useMock)
-            ,getRedditForums(useMock)
+            ,getFourChanForums(!useMock)
+            ,getHackerForums(!useMock)
+            ,getRedditForums(!useMock)
         ])
         .then(async (result: any) => {
             const [
@@ -222,7 +222,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 http://www.convertcsv.com/csv-to-json.htm
             */
             const requiredSymbols = ['SPY', 'XLF', '^DJI', 'NDAQ'];
-            const barChart30DayUpcomingEarnings = require('./../mocks/barchart-30d-9-11-2019.json');
+            const barChart30DayUpcomingEarnings = require('./../mocks/earnings-within-30-days-09-22-2019.json');
             const allSymbolsOnly: Array<any> = _.union(
                 requiredSymbols,
                 // spy500Symbols,
@@ -252,7 +252,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const minVolume = 1000000;
                 const minThreshold = 0.75;
                 // const maxThreshold = 1.25;
-                const maxOpenCloseChangePercent = 0.10;
+                // const maxOpenCloseChangePercent = 0.10;
 
                 const regularMarketVolume = ticker['regularMarketVolume'];
                 const averageDailyVolume10Day = ticker['averageDailyVolume10Day'];
@@ -279,15 +279,13 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
                 const regularMarketPrice = ticker['regularMarketPrice'];
 
-                const postMarketPrice = _.get(ticker, ['postMarketPrice']);
-                const postMarketChangePercent = _.get(ticker, ['postMarketChangePercent']);
+                // const postMarketPrice = _.get(ticker, ['postMarketPrice']);
+                // const postMarketChangePercent = _.get(ticker, ['postMarketChangePercent']);
+                // const epsTrailingTwelveMonths = _.get(ticker, ['epsTrailingTwelveMonths'])
+                // const epsForward = _.get(ticker, ['epsForward']);
+                // const forwardPE = _.get(ticker, ['forwardPE']);
 
-                const epsTrailingTwelveMonths = _.get(ticker, ['epsTrailingTwelveMonths'])
-                const epsForward = _.get(ticker, ['epsForward']);
-                const forwardPE = _.get(ticker, ['forwardPE']);
-
-                const bookValue = ticker['bookValue'];
-                const tradeable = ticker['tradeable'];
+                // const bookValue = ticker['bookValue'];
                 const financialCurrency = ticker['financialCurrency'];
                 const signal = _.get(ticker, ['signal']);
 
@@ -301,11 +299,9 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     // ((regularMarketVolume <= (averageDailyVolume10Day * maxThreshold)) || (regularMarketVolume <= (averageDailyVolume3Month * maxThreshold))) &&
 
                     // **** Regular Market Percent must be higher than 1 ***
-                    ((regularMarketChangePercent >= 1) &&
+                    ((regularMarketChangePercent >= 2) &&
                     // Percents must be higher than 0
                     (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
-                    // Change Percentage between Previous Close & Open cannot be greater than 10%
-                    (((regularMarketOpen - regularMarketPreviousClose) / Math.abs(regularMarketPreviousClose)) <= maxOpenCloseChangePercent) &&
                     // Not top losers or  new low
                     (_.isNil(signal) || !_.includes(['Top Losers', 'New High', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Upgrades', 'Overbought', 'Oversold'], _.startCase(signal)));
                     // Percent must be higher than 50 Day AND 200 Day Percent Average
@@ -326,48 +322,53 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketDayLow >= (regularMarketPreviousClose * .99))) &&
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
-                    // Post Price must be at least 2% and above
-                    (_.isNil(postMarketChangePercent) || (postMarketChangePercent >= -0.2)) &&
-                    // Post Price must be higher than Open
-                    (_.isNil(postMarketPrice) || (postMarketPrice >= regularMarketOpen)) &&
                     // Price must be higher than Close
                     ((regularMarketPrice >= regularMarketPreviousClose)) &&
                     // Price must be higher than Open
                     ((regularMarketPrice >= regularMarketOpen)) &&
                     // Open must be higher than Close
                     ((regularMarketOpen >= regularMarketPreviousClose)) &&
-                    // Book Value must be positive
-                    ((bookValue >= 0)) &&
                     // USD Currency
-                    _.isEqual(financialCurrency, 'USD') &&
-                    // Tradeable
-                    _.isEqual(tradeable, true) &&
+                    _.isEqual(financialCurrency, 'USD')
+                    // Book Value must be positive
+                    // (_.isNil(bookValue) || (bookValue >= 0)) &&
+                    // Post Price must be at least 2% and above
+                    // (_.isNil(postMarketChangePercent) || (postMarketChangePercent >= -0.2)) &&
+                    // Post Price must be higher than Open
+                    // (_.isNil(postMarketPrice) || (postMarketPrice >= regularMarketOpen)) &&
                     // Positive Reviews
-                    (_.isNil(epsTrailingTwelveMonths) || (epsTrailingTwelveMonths >= 0)) &&
-                    (_.isNil(epsForward) || (epsForward >= 0)) &&
-                    (_.isNil(forwardPE) || (forwardPE >= 0))
+                    // (_.isNil(epsTrailingTwelveMonths) || (epsTrailingTwelveMonths >= 0)) &&
+                    // (_.isNil(epsForward) || (epsForward >= 0)) &&
+                    // (_.isNil(forwardPE) || (forwardPE >= 0))
                 return ticker;
             });
 
             const finalTickers = _.filter(allTickers, (ticker: any) => {
-                const maxOpenCloseChangePercent = 0.10;
+                const regularMarketPrice = ticker['regularMarketPrice'];
                 const signal = _.get(ticker, ['signal']);
                 const regularMarketOpen = ticker['regularMarketOpen'];
                 const regularMarketPreviousClose = ticker['regularMarketPreviousClose'];
                 const regularMarketChangePercent = ticker['regularMarketChangePercent'];
+                const averageDailyVolume10Day = ticker['averageDailyVolume10Day'];
+                const averageDailyVolume3Month = ticker['averageDailyVolume3Month'];
                 const fiftyDayAverageChangePercent = ticker['fiftyDayAverageChangePercent'];
                 const twoHundredDayAverageChangePercent = ticker['twoHundredDayAverageChangePercent'];
                 const regularMarketDayHigh = ticker['regularMarketDayHigh'];
                 const fiftyTwoWeekLow = ticker['fiftyTwoWeekLow'];
                 const fiftyTwoWeekHigh = ticker['fiftyTwoWeekHigh'];
                 const regularMarketDayLow = ticker['regularMarketDayLow'];
+                // const maxOpenCloseChangePercent = 0.10;
 
                 return  _.includes(requiredSymbols, _.get(ticker, ['symbol'])) ||
                 (_.includes(allTrendingSymbolsOnly, _.get(ticker, ['symbol'])) || _.isEqual(ticker['recommended'], true)) &&
+                // Price must be under $50
+                ((regularMarketPrice) <= 50) &&
+                // One of past volumes must be at least 100k
+                ((averageDailyVolume10Day >= 100000) || (averageDailyVolume3Month >= 100000)) &&
                 // Percents must be higher than 0
                 ((regularMarketChangePercent > 0) && (fiftyDayAverageChangePercent > 0) && (twoHundredDayAverageChangePercent > 0)) &&
                 // Change Percentage between Previous Close & Open cannot be greater than 10%
-                (Math.abs((regularMarketOpen - regularMarketPreviousClose) / regularMarketPreviousClose) <= maxOpenCloseChangePercent) &&
+                // (Math.abs((regularMarketOpen - regularMarketPreviousClose) / regularMarketPreviousClose) <= maxOpenCloseChangePercent) &&
                 // Current Day's Lows cannot be 52 Week Lows
                 ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                 // Current Day's Highs cannot be 52 Week Highs

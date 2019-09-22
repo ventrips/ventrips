@@ -8,7 +8,7 @@
                 Refresh
             </button>
             <p class="small text-secondary my-3 mr-3" *ngIf="updated">
-                Last Updated: {{updated | timeAgo}}
+                Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
             </p>
         </div>
         <div class="w-100" *ngIf="!_.isNil(chartTrends)">
