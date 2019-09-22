@@ -52,11 +52,13 @@
                         <a [href]="getGoogleTrends(ticker, 'yearly')" title="Google Trends Yearly on {{ticker?.company}}" target="__blank" class="mr-2">Yearly</a>
                     </div>
                     <div class="mb-2">
+                        <a [href]="getTwitter(ticker)" title="Twitter on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Twitter</a>
                         <a [href]="getYahooFinance(ticker)" title="Yahoo Finance on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Yahoo</a>
                         <a [href]="getTradingView(ticker)" title="TradingView on {{ticker?.symbol}} stock" target="__blank" class="mr-2">TradingView</a>
                         <a [href]="getMarketWatch(ticker)" title="MarketWatch on {{ticker?.symbol}} stock" target="__blank" class="mr-2">MarketWatch</a>
                         <a [href]="getNasdaq(ticker)" title="Nasdaq on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Nasdaq</a>
                         <a [href]="getStocktwits(ticker)" title="Stocktwits on {{ticker?.symbol}} stock" target="__blank" class="mr-2">Stocktwits</a>
+                        <a [href]="getSwingTradeBot(ticker)" title="SwingTradeBot on {{ticker?.symbol}} stock" target="__blank" class="mr-2">SwingTradeBot</a>
                     </div>
                 </span>
                 <!-- Percentage -->

@@ -130,6 +130,17 @@ export class TrendingTickersComponent implements OnInit, OnChanges {
     return !this.isSymbol(key) && !this.isCurrency(key) && !this.isPercentage(key) && !this.isNumber(key) && !this.isTimestamp(key);
   }
 
+  getSwingTradeBot(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+
+    return `https://swingtradebot.com/equities/${symbol}/`;
+  }
+
+  getTwitter(ticker: any) {
+    const symbol = _.get(ticker, ['symbol']);
+    return `https://twitter.com/search?f=tweets&q=%24${symbol}&src=typd`;
+  }
+
   getTradingView(ticker: any) {
     const symbol = _.get(ticker, ['symbol']);
     const exchangeName = _.toUpper(_.get(ticker, ['fullExchangeName']));
