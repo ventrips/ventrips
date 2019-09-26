@@ -316,10 +316,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                     ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                     // Current Day's Highs cannot be 52 Week Highs
                     ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                    // Current Day's Lows must be higher than Open * 99%
-                    ((regularMarketDayLow >= (regularMarketOpen * .99))) &&
-                    // Current Day's Lows must be higher than Close * 99%
-                    ((regularMarketDayLow >= (regularMarketPreviousClose * .99))) &&
+                    // Current Day's Lows must be higher than Open * 95%
+                    ((regularMarketDayLow >= (regularMarketOpen * .95))) &&
+                    // Current Day's Lows must be higher than Close * 95%
+                    ((regularMarketDayLow >= (regularMarketPreviousClose * .95))) &&
                     // 52 Week High Change Percent must be at least -1% and above
                     ((fiftyTwoWeekHighChangePercent >= -0.1)) &&
                     // Price must be higher than Close
@@ -373,10 +373,10 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 ((regularMarketDayLow !== fiftyTwoWeekLow)) &&
                 // Current Day's Highs cannot be 52 Week Highs
                 ((regularMarketDayHigh !== fiftyTwoWeekHigh)) &&
-                // Current Day's Lows must be higher than Open * 99%
-                ((regularMarketDayLow >= (regularMarketOpen * .99))) &&
-                // Current Day's Lows must be higher than Close * 99%
-                ((regularMarketDayLow >= (regularMarketPreviousClose * .99))) &&
+                // Current Day's Lows must be higher than Open * 95%
+                ((regularMarketDayLow >= (regularMarketOpen * .95))) &&
+                // Current Day's Lows must be higher than Close * 95%
+                ((regularMarketDayLow >= (regularMarketPreviousClose * .95))) &&
                 // Not top losers or  new low
                 (_.isNil(signal) || !_.includes(['Top Losers', 'New High', 'New Low', 'Unusual Volume', 'Insider Buying', 'Insider Selling', 'Downgrades', 'Upgrades', 'Overbought', 'Oversold'], _.startCase(signal)));
             });
