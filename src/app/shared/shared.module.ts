@@ -13,10 +13,11 @@ import { PaymentButtonComponent } from './../components/payment-button/payment-b
 import { ErrorNotFoundComponent } from './../components/errors/error-not-found/error-not-found.component';
 
 // Pipes
-import { TimeStampDatePipe } from '../pipes/time-stamp-date/time-stamp-date.pipe';
-import { TimeAgoPipe } from '../pipes/time-ago/time-ago.pipe';
-import { KeysPipe } from '../pipes/keys/keys.pipe';
-import { SearchHighlightPipe } from '../pipes/search-highlight/search-highlight.pipe';
+import { OrderByPipe } from './../pipes/order-by/order-by.pipe';
+import { TimeStampDatePipe } from './../pipes/time-stamp-date/time-stamp-date.pipe';
+import { TimeAgoPipe } from './../pipes/time-ago/time-ago.pipe';
+import { KeysPipe } from './../pipes/keys/keys.pipe';
+import { SearchHighlightPipe } from './../pipes/search-highlight/search-highlight.pipe';
 
 import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from 'ngx-disqus';
@@ -27,6 +28,7 @@ import { DisqusModule } from 'ngx-disqus';
     EditButtonComponent,
     PaymentButtonComponent,
     ErrorNotFoundComponent,
+    OrderByPipe,
     TimeStampDatePipe,
     TimeAgoPipe,
     KeysPipe,
@@ -55,6 +57,7 @@ import { DisqusModule } from 'ngx-disqus';
     EditButtonComponent,
     PaymentButtonComponent,
     ErrorNotFoundComponent,
+    OrderByPipe,
     TimeStampDatePipe,
     TimeAgoPipe,
     KeysPipe,

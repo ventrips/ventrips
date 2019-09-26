@@ -6,7 +6,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { HomeComponent } from './home.component';
 
 import { SanitizeHtmlPipe } from './../../pipes/sanitize-html/sanitize-html.pipe';
-import { OrderByPipe } from './../../pipes/order-by/order-by.pipe';
 import { FilterByPipe } from './../../pipes/filter-by/filter-by.pipe';
 import { SearchByPipe } from './../../pipes/search-by/search-by.pipe';
 
@@ -14,7 +13,6 @@ import { SearchByPipe } from './../../pipes/search-by/search-by.pipe';
   declarations: [
     HomeComponent,
     SanitizeHtmlPipe,
-    OrderByPipe,
     FilterByPipe,
     SearchByPipe
   ],
