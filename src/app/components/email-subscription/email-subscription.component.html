@@ -1,13 +1,15 @@
 <ng-container *ngIf="!emailSubmitted">
-    <section class="email-subscription container mt-5 p-5 text-dark text-center bg-light box-shadow">
-        <ng-container *ngIf="isPlatformBrowser()">
-            <fa-icon [icon]="['fas', 'newspaper']" class="fa-3x"></fa-icon>
-        </ng-container>
-        <h1 class="text-center mb-3">
-            Subscribe to Newsletter
-        </h1>
-        <p class="text-center mb-3">Get the latest posts delivered to your inbox</p>
-        <input [(ngModel)]="email" [required]="true" type="email" class="form-control mb-3" aria-label="Enter your email address to get notified!" placeholder="Enter your email address to get notified!">
-        <button class="btn btn-block btn-warning mb-3" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
+    <section class="email-subscription mt-5 p-4 text-dark text-center bg-light box-shadow">
+        <div class="container">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <fa-icon [icon]="['fas', 'newspaper']" class="fa-3x"></fa-icon>
+            </ng-container>
+            <h1 class="text-center mb-3">
+                Subscribe to Newsletter
+            </h1>
+            <p class="text-center mb-3">Get the latest posts delivered to your inbox</p>
+            <input [(ngModel)]="email" [required]="true" type="email" class="form-control form-control-lg mb-3" aria-label="Enter your email address to get notified!" placeholder="Enter your email address to get notified!">
+            <button class="btn btn-block btn-lg btn-warning mb-3 font-weight-bold" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
+        </div>
     </section>
 </ng-container>
