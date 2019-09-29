@@ -233,7 +233,7 @@ exports.trends = async function(request: any, response: any, useMock: boolean = 
                 allTrendingSymbolsOnly
             );
             let yahooFinanceTickers: Array<any> = [];
-            let chunks: any = _.chunk(allSymbolsOnly, 2500);
+            const chunks: any = _.chunk(allSymbolsOnly, 2500);
             for (let i = 0; i < chunks.length; i++) {
                 const yahooFinanceChunks: Array<any> = await getYahooFinanceTickers(chunks[i], useMock);
                 yahooFinanceTickers = _.concat(yahooFinanceTickers, yahooFinanceChunks);
