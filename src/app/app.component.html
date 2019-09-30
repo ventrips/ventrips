@@ -1,59 +1,57 @@
-<main>
-    <app-navbar></app-navbar>
-    <div class="row">
-        <div class="hidden-lg-down col-xl-2"></div>
-        <div class="col-xs-12 col-xl-8">
-            <router-outlet (activate)="onActivate($event)"></router-outlet>
-            <app-email-subscription></app-email-subscription>
-        </div>
-        <div class="hidden-lg-down col-xl-2">
-            <!-- Horizontal Display Ad-->
-            <section class="container text-center">
-                <ng-adsense
-                    [fullWidthResponsive]="true"
-                    [display]="'block'"
-                    [adClient]="'ca-pub-4642980268605791'"
-                    [adSlot]=2801999023
-                    [adFormat]="'auto'">
-                </ng-adsense>
-            </section>
-            <!-- Horizontal Display Ad-->
-            <section class="container text-center my-5">
-                <ng-adsense
-                    [fullWidthResponsive]="true"
-                    [display]="'block'"
-                    [adClient]="'ca-pub-4642980268605791'"
-                    [adSlot]=2801999023
-                    [adFormat]="'auto'">
-                </ng-adsense>
-            </section>
-            <!-- Horizontal Display Ad-->
-            <section class="container text-center">
-                <ng-adsense
-                    [fullWidthResponsive]="true"
-                    [display]="'block'"
-                    [adClient]="'ca-pub-4642980268605791'"
-                    [adSlot]=2801999023
-                    [adFormat]="'auto'">
-                </ng-adsense>
-            </section>
-        </div>
+<app-navbar></app-navbar>
+<div class="row no-gutters">
+    <div class="hidden-lg-down col-xl-2"></div>
+    <div class="col-xs-12 col-xl-8">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+        <app-email-subscription></app-email-subscription>
     </div>
-    <app-footer></app-footer>
-    <div class="scroll-progress scroll-progress--fixed">
-        <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
+    <div class="hidden-lg-down col-xl-2">
+        <!-- Horizontal Display Ad-->
+        <section class="container text-center">
+            <ng-adsense
+                [fullWidthResponsive]="true"
+                [display]="'block'"
+                [adClient]="'ca-pub-4642980268605791'"
+                [adSlot]=2801999023
+                [adFormat]="'auto'">
+            </ng-adsense>
+        </section>
+        <!-- Horizontal Display Ad-->
+        <section class="container text-center my-5">
+            <ng-adsense
+                [fullWidthResponsive]="true"
+                [display]="'block'"
+                [adClient]="'ca-pub-4642980268605791'"
+                [adSlot]=2801999023
+                [adFormat]="'auto'">
+            </ng-adsense>
+        </section>
+        <!-- Horizontal Display Ad-->
+        <section class="container text-center">
+            <ng-adsense
+                [fullWidthResponsive]="true"
+                [display]="'block'"
+                [adClient]="'ca-pub-4642980268605791'"
+                [adSlot]=2801999023
+                [adFormat]="'auto'">
+            </ng-adsense>
+        </section>
     </div>
-    <ngx-spinner
-        bdColor="rgba(33, 37, 41, 0.8)"
-        size="large"
-        color="#ffc107"
-        type="ball-clip-rotate">
-        <p class="text-warning">Loading...</p>
-    </ngx-spinner>
-    <span (click)="scrollToTop()" class="top-scroll">
-        <ng-container *ngIf="isPlatformBrowser()">
-            <fa-icon [icon]="['fas', 'chevron-circle-up']" class="fa-3x"></fa-icon>
-        </ng-container>
-    </span>
-    <ng-adsense [adClient]="'ca-pub-4642980268605791'" [pageLevelAds]="true"></ng-adsense>
-</main>
+</div>
+<app-footer></app-footer>
+<div class="scroll-progress scroll-progress--fixed">
+    <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
+</div>
+<ngx-spinner
+    bdColor="rgba(33, 37, 41, 0.8)"
+    size="large"
+    color="#ffc107"
+    type="ball-clip-rotate">
+    <p class="text-warning">Loading...</p>
+</ngx-spinner>
+<span (click)="scrollToTop()" class="top-scroll">
+    <ng-container *ngIf="isPlatformBrowser()">
+        <fa-icon [icon]="['fas', 'chevron-circle-up']" class="fa-3x"></fa-icon>
+    </ng-container>
+</span>
+<ng-adsense [adClient]="'ca-pub-4642980268605791'" [pageLevelAds]="true"></ng-adsense>

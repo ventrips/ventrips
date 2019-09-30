@@ -16,6 +16,10 @@
 /* You can add global styles to this file, and also import other style files */
 /* Sticky footer styles
 -------------------------------------------------- */
+body {
+    overflow-x: hidden;
+}
+
 main {
     position: relative  !important;
     min-height: 100vh !important;
