@@ -20,10 +20,6 @@ body {
     overflow-x: hidden !important;
 }
 
-main {
-    overflow: hidden !important; // Prevent inner body scroll
-}
-
 ::selection {
     background: #ffc107;
     text-shadow: 0 1px 1px #212529 !important
