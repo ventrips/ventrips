@@ -17,12 +17,10 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 main {
-    position: relative  !important;
-    min-height: 100vh !important;
     overflow: hidden !important; // Prevent inner body scroll
 }
 

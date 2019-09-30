@@ -3,50 +3,31 @@
     <div class="hidden-lg-down col-xl-2"></div>
     <div class="col-xs-12 col-xl-8">
         <router-outlet (activate)="onActivate($event)"></router-outlet>
-        <app-email-subscription></app-email-subscription>
+        <div class="scroll-progress scroll-progress--fixed">
+            <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
+        </div>
     </div>
     <div class="hidden-lg-down col-xl-2">
         <!-- Horizontal Display Ad-->
         <section class="container text-center">
-            <ng-adsense
-                [fullWidthResponsive]="true"
-                [display]="'block'"
-                [adClient]="'ca-pub-4642980268605791'"
-                [adSlot]=2801999023
-                [adFormat]="'auto'">
+            <ng-adsense [fullWidthResponsive]="true" [display]="'block'" [adClient]="'ca-pub-4642980268605791'" [adSlot]=2801999023 [adFormat]="'auto'">
             </ng-adsense>
         </section>
         <!-- Horizontal Display Ad-->
         <section class="container text-center my-5">
-            <ng-adsense
-                [fullWidthResponsive]="true"
-                [display]="'block'"
-                [adClient]="'ca-pub-4642980268605791'"
-                [adSlot]=2801999023
-                [adFormat]="'auto'">
+            <ng-adsense [fullWidthResponsive]="true" [display]="'block'" [adClient]="'ca-pub-4642980268605791'" [adSlot]=2801999023 [adFormat]="'auto'">
             </ng-adsense>
         </section>
         <!-- Horizontal Display Ad-->
         <section class="container text-center">
-            <ng-adsense
-                [fullWidthResponsive]="true"
-                [display]="'block'"
-                [adClient]="'ca-pub-4642980268605791'"
-                [adSlot]=2801999023
-                [adFormat]="'auto'">
+            <ng-adsense [fullWidthResponsive]="true" [display]="'block'" [adClient]="'ca-pub-4642980268605791'" [adSlot]=2801999023 [adFormat]="'auto'">
             </ng-adsense>
         </section>
     </div>
 </div>
+<app-email-subscription></app-email-subscription>
 <app-footer></app-footer>
-<div class="scroll-progress scroll-progress--fixed">
-    <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
-</div>
-<ngx-spinner
-    bdColor="rgba(33, 37, 41, 0.8)"
-    size="large"
-    color="#ffc107"
-    type="ball-clip-rotate">
+<ngx-spinner bdColor="rgba(33, 37, 41, 0.8)" size="large" color="#ffc107" type="ball-clip-rotate">
     <p class="text-warning">Loading...</p>
 </ngx-spinner>
 <span (click)="scrollToTop()" class="top-scroll">
