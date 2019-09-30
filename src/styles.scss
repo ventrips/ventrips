@@ -17,9 +17,9 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 main {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden; // Prevent inner body scroll
+    position: relative  !important;
+    min-height: 100vh !important;
+    overflow: hidden !important; // Prevent inner body scroll
 }
 
 ::selection {
@@ -150,7 +150,7 @@ quill-editor .ql-toolbar {
 
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) {
-    figure.container {
+    figure.container, figure.container-fluid {
         padding-left: 0;
         padding-right: 0;
         max-width: unset;

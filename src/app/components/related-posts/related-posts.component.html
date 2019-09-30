@@ -1,6 +1,6 @@
 <ng-container *ngIf="!_.isEmpty(relatedPosts)">
     <hr>
-    <div class="container my-5">
+    <div class="container-fluid my-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb h4 bg-white mb-0 p-0">
             <li class="breadcrumb-item">
@@ -12,12 +12,12 @@
             </ol>
         </nav>
     </div>
-    <div class="container mt-5">
-        <div class="row no-gutters">
+    <div class="container-fluid mt-5">
+        <div class="row">
             <div class="col-12">
                 <h2 class="mb-3 capitalize">You May Also Like</h2>
             </div>
-            <div class="col-xs-12" *ngFor="let relatedPost of relatedPosts | orderBy: 'created': 'desc'" [ngClass]="{'bg-light': !relatedPost.publish }">
+            <div class="col-xs-12 col-xl-6" *ngFor="let relatedPost of relatedPosts | orderBy: 'created': 'desc'" [ngClass]="{'bg-light': !relatedPost.publish }">
                 <app-post
                     [showEditButton]="false"
                     [post]="relatedPost"

@@ -1,5 +1,5 @@
 // Medium devices (tablets, less than 992px)
-@media (min-width: 1200px) {
+@media (min-width: 0px) {
     .email-subscription {
         overflow: hidden;
         position: relative;
@@ -11,8 +11,8 @@
     .email-subscription:after {
         position: absolute;
         top: -0.25em;
-        width: 85%;
-        height: 27%;
+        width: 50%;
+        height: 26%;
         content: '';
     }
 
@@ -31,7 +31,7 @@
     }
 
     .email-subscription {
-        max-width: 50%;
+        max-width: 1000px;
         margin: 0 auto;
     }
     .container {

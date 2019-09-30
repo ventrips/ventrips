@@ -1,5 +1,5 @@
 <!-- Horizontal Display Ad-->
-<section class="container text-center mb-5">
+<section class="container-fluid text-center mb-5">
   <ng-adsense
     [fullWidthResponsive]="true"
     [display]="'block'"
@@ -10,7 +10,7 @@
 </section>
 <section>
   <ng-container class="mt-5">
-    <div class="d-flex container-fluid my-3" *ngIf="authService?.canEdit(user, post?.uid)">
+    <div class="d-flex container my-3" *ngIf="authService?.canEdit(user, post?.uid)">
       <app-edit-button
         [collection]="collection"
         [id]="post?.slug"
@@ -74,19 +74,37 @@
     <div class="container my-5">
       <quill-view-html [content]="quillService.format(post?.body)" theme="snow"></quill-view-html>
     </div>
-    <section class="container text-center">
-      <!-- In-article Ad -->
+    <section class="container-fluid text-center">
+      <!-- Horizontal Display Ad-->
       <ng-adsense
+        [fullWidthResponsive]="true"
         [display]="'block'"
         [adClient]="'ca-pub-4642980268605791'"
-        [adSlot]="5528837351"
-        [adLayout]="'in-article'"
-        [adFormat]="'fluid'">
+        [adSlot]=2801999023
+        [adFormat]="'auto'">
       </ng-adsense>
     </section>
     <div class="container my-5" *ngIf="environment.production">
       <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="post?.title" [category]="post?.category"></disqus>
     </div>
+    <section class="container-fluid text-center">
+      <!-- Horizontal Display Ad-->
+      <ng-adsense
+        [fullWidthResponsive]="true"
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]=2801999023
+        [adFormat]="'auto'">
+      </ng-adsense>
+      <!-- In-article Ad -->
+      <!-- <ng-adsense
+        [display]="'block'"
+        [adClient]="'ca-pub-4642980268605791'"
+        [adSlot]="5528837351"
+        [adLayout]="'in-article'"
+        [adFormat]="'fluid'">
+      </ng-adsense> -->
+    </section>
     <app-related-posts
       [post]="post"
       [collection]="collection"
@@ -94,8 +112,8 @@
     </app-related-posts>
   </ng-container>
 </section>
-<section class="container text-center mt-5">
-  <!-- In-feed Ad -->
+<!-- In-feed Ad -->
+<!-- <section class="container-fluid text-center mt-5">
   <ng-adsense
       [fullWidthResponsive]="true"
       [display]="'block'"
@@ -104,4 +122,4 @@
       [adFormat]="'fluid'"
       [adLayoutKey]="'+5l+pg-2c-ha+144'">
   </ng-adsense>
-</section>
+</section> -->
