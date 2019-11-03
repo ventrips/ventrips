@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { Calculator } from './../../interfaces/calculator';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-calculator',
@@ -6,10 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit {
+  public form: Calculator = new Calculator('', '', '', '');
 
-  constructor() { }
+  constructor(
+    public toastrService: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.toastrService.success(`Form has been submitted.`, 'Submission Success!');
+  }
+
+  isPlatformBrowser() {
+    return isPlatformBrowser(this.platformId);
+  }
 }
