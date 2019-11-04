@@ -70,13 +70,13 @@
                                         <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="item.taxable" id="taxable">
-                                        <label class="form-check-label" for="taxable">
-                                            Taxable
+                                        <input class="form-check-input" type="checkbox" [(ngModel)]="item.includeTax" id="includeTax">
+                                        <label class="form-check-label" for="includeTax">
+                                            Include Tax
                                         </label>
                                     </div>
                                 </ng-container>
-                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({taxable:true})">Add New Item</button>
+                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({includeTax:true})">Add New Item</button>
                             </section>
                         </div>
                         <!-- Total -->

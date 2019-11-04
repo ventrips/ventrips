@@ -28,7 +28,7 @@ export class CalculatorComponent implements OnInit {
           {
             name: `SOONTOFU MUSHROOM LESS SPICY`,
             price: 11.95,
-            taxable: true
+            includeTax: true
           }
         ]
       },
@@ -38,12 +38,12 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Spicy Pork Ramen`,
             price: 12.95,
-            taxable: true
+            includeTax: true
           },
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
-            taxable: true
+            includeTax: true
           }
         ]
       },
@@ -53,7 +53,7 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken & Beef`,
             price: 13.95,
-            taxable: true
+            includeTax: true
           }
         ]
       },
@@ -63,7 +63,7 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
-            taxable: true
+            includeTax: true
           }
         ]
       },
@@ -73,7 +73,7 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
-            taxable: true
+            includeTax: true
           }
         ]
       },
@@ -83,12 +83,12 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Cod Egg Udon`,
             price: 17.95,
-            taxable: true
+            includeTax: true
           },
           {
             name: `STF COMBO LA GALBI`,
             price: 20.95,
-            taxable: true
+            includeTax: true
           }
         ]
       }
@@ -115,9 +115,9 @@ export class CalculatorComponent implements OnInit {
     let total = 0;
     _.forEach(filledItemPrices, (item) => {
       const ItemPrice = _.get(item, ['price']);
-      const withTax = _.get(item, ['taxable']) ? (ItemPrice * (_.get(this.form, ['tax']) / 100)) : 0;
-      const withGratuity = ItemPrice * (_.get(this.form, ['gratuity']) / 100);
-      total += ItemPrice + withTax + withGratuity
+      const includeTax = _.get(item, ['includeTax']) ? (ItemPrice * (_.get(this.form, ['tax']) / 100)) : 0;
+      const includeGratuity = ItemPrice * (_.get(this.form, ['gratuity']) / 100);
+      total += ItemPrice + includeTax + includeGratuity
     })
     return total;
   }
