@@ -27,7 +27,8 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `SOONTOFU MUSHROOM LESS SPICY`,
-            price: 11.95
+            price: 11.95,
+            taxable: true
           }
         ]
       },
@@ -36,11 +37,13 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `Spicy Pork Ramen`,
-            price: 12.95
+            price: 12.95,
+            taxable: true
           },
           {
             name: `Chicken Katsu Curry`,
-            price: 12.95
+            price: 12.95,
+            taxable: true
           }
         ]
       },
@@ -49,7 +52,8 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `Chicken & Beef`,
-            price: 13.95
+            price: 13.95,
+            taxable: true
           }
         ]
       },
@@ -58,7 +62,8 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `Chicken Katsu Curry`,
-            price: 12.95
+            price: 12.95,
+            taxable: true
           }
         ]
       },
@@ -67,7 +72,8 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `Chicken Katsu Curry`,
-            price: 12.95
+            price: 12.95,
+            taxable: true
           }
         ]
       },
@@ -76,11 +82,13 @@ export class CalculatorComponent implements OnInit {
         items: [
           {
             name: `Cod Egg Udon`,
-            price: 17.95
+            price: 17.95,
+            taxable: true
           },
           {
             name: `STF COMBO LA GALBI`,
-            price: 20.95
+            price: 20.95,
+            taxable: true
           }
         ]
       }
@@ -103,10 +111,13 @@ export class CalculatorComponent implements OnInit {
   }
 
   calculatePersonTotal(person: any) {
-    const filledItemPrices = _.filter(_.get(person, ['items']), (item) => !_.isEmpty(item) && !_.isNil(item));
+    const filledItemPrices = _.filter(_.get(person, ['items']), (item) => _.get(item, ['price'], false));
     let total = 0;
     _.forEach(filledItemPrices, (item) => {
-      total += (item.price + (item.price * (_.get(this.form, ['tax']) / 100)) + (item.price * (_.get(this.form, ['gratuity']) / 100)));
+      const ItemPrice = _.get(item, ['price']);
+      const withTax = _.get(item, ['taxable']) ? (ItemPrice * (_.get(this.form, ['tax']) / 100)) : 0;
+      const withGratuity = ItemPrice * (_.get(this.form, ['gratuity']) / 100);
+      total += ItemPrice + withTax + withGratuity
     })
     return total;
   }
