@@ -14,7 +14,11 @@ export class CalculatorComponent implements OnInit {
   public defaultForm: any = {
     persons: [
       {
-        items: []
+        items: [
+          {
+            includeTax:true
+          }
+        ]
       }
     ],
     tax: 10,
