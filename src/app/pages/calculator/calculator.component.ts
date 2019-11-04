@@ -11,7 +11,16 @@ import * as _ from 'lodash';
 })
 export class CalculatorComponent implements OnInit {
   public _ = _;
-  public form = {
+  public defaultForm: any = {
+    persons: [
+      {
+        items: []
+      }
+    ],
+    tax: 10,
+    gratuity: 15
+  };
+  public form: any = {
     persons: [
       {
         name: `Solinda`,
@@ -108,6 +117,10 @@ export class CalculatorComponent implements OnInit {
       grandTotal += this.calculatePersonTotal(person);
     });
     return grandTotal;
+  }
+
+  clearForm(): void {
+    this.form = _.cloneDeep(this.defaultForm);
   }
 
   isPlatformBrowser() {
