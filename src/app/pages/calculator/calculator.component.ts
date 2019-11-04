@@ -11,6 +11,8 @@ import * as _ from 'lodash';
 })
 export class CalculatorComponent implements OnInit {
   public _ = _;
+  public defaultTax = 10.1;
+  public defaultGratuity = 15;
   public defaultForm: any = {
     persons: [
       {
@@ -21,8 +23,8 @@ export class CalculatorComponent implements OnInit {
         ]
       }
     ],
-    tax: 10,
-    gratuity: 15
+    tax: _.cloneDeep(this.defaultTax),
+    gratuity: _.cloneDeep(this.defaultGratuity)
   };
   public form: any = {
     persons: [
