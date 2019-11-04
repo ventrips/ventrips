@@ -13,31 +13,85 @@
     <div class="container mb-4">
       <div class="h5 my-4">
         <h1 class="mb-4">Split Bill Calculator</h1>
-        <form (ngSubmit)="onSubmit()" #calculatorForm="ngForm">
-            <div class="form-group">
-                <label for="displayName" class="font-weight-bold">Name (Required)</label>
-                <input [(ngModel)]="form.displayName" placeholder="What is your name?" type="text" class="form-control" id="displayName"
-                    name="displayName" #name="ngModel" required>
-            </div>
-            <div class="form-group">
-                <label for="email" class="font-weight-bold">Email (Required)</label>
-                <input [(ngModel)]="form.email" placeholder="What is your email address?" type="text" class="form-control" id="email" name="email"
-                    #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-            </div>
-            <div class="form-group">
-                <label for="message" class="font-weight-bold">Message (Required)</label>
-                <textarea [(ngModel)]="form.message" placeholder="What do you want to say?" type="text" class="form-control" id="message"
-                    name="message" required></textarea>
-            </div>
-            <div class="text-right">
-                <button type="submit" class="btn btn-warning" title="Send" [disabled]="!calculatorForm.form.valid">
-                    <ng-container *ngIf="isPlatformBrowser()">
-                        <fa-icon [icon]="['fas', 'paper-plane']" class="text-dark"></fa-icon>
-                    </ng-container> Send
-                </button>
-            </div>
-        </form>
+        <p>Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your part. This calculator helps you!</p>
       </div>
+      <div>
+          <!-- Person Section -->
+          <section>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <label for="{{'tax'}">Tax Percent</label>
+                            <input [(ngModel)]="form.tax" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Tax'}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h2>
+                            The State Tax is... <span class="text-primary">{{form?.tax}}%</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <label for="{{'gratuity'}">Gratuity Percent</label>
+                            <input [(ngModel)]="form.gratuity" type="number" class="form-control" id="{{'gratuity'}}" placeholder="{{'Enter Gratuity'}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h2>
+                            The Gratuity is... <span class="text-primary">{{form?.gratuity}}%</span>
+                        </h2>
+                    </div>
+                </div>
+                <ng-container *ngFor="let person of form?.persons; let pIndex = index">
+                    <div class="row">
+                        <!-- Form -->
+                        <div class="col-sm-12 col-md-6">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-danger text-capitalize" (click)="(form?.persons).splice(pIndex, 1)">Remove {{person?.name || 'person #' + (pIndex + 1)}}</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{'personName' + (pIndex + 1)}}">Person #{{(pIndex + 1)}} Name</label>
+                                <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person' + (pIndex + 1)}}" placeholder="{{'Enter Person ' + (pIndex + 1) + ' Name'}}">
+                            </div>
+                            <!-- Items Section -->
+                            <section class="ml-4">
+                                <ng-container class="ml-3" *ngFor="let item of person?.items; let iIndex = index; ">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-danger text-capitalize" (click)="(person?.items).splice(iIndex, 1)">Remove {{item?.name || 'Item #' + (iIndex + 1)}}</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="{{'itemName' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Name</label>
+                                        <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="{{'itemPrice' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Price</label>
+                                        <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
+                                    </div>
+                                </ng-container>
+                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({})">Add New Item</button>
+                            </section>
+                        </div>
+                        <!-- Total -->
+                        <div class="col-sm-12 col-md-6">
+                            <h2>{{person?.name || 'Person ' + (pIndex + 1)}} owes... <span class="text-success">{{calculatePersonTotal(person) | currency}}</span></h2>
+                        </div>
+                    </div>
+                </ng-container>
+            </section>
+            <button class="btn btn-primary d-block mb-3" (click)="form?.persons?.push({items:[{}]})">Add New person</button>
+            <!-- Grand Total -->
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h2>
+                        The Grand Total is... <span class="text-success">{{calculateGrandTotal(form?.persons) | currency}}</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
     </div>
    </ng-container>
     <section class="container text-center">
