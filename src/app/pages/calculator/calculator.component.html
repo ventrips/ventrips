@@ -48,22 +48,38 @@
                     <div class="row">
                         <!-- Form -->
                         <div class="col-sm-12 col-md-6">
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-danger text-capitalize" (click)="(form?.persons).splice(pIndex, 1)">Remove {{person?.name || 'person #' + (pIndex + 1)}}</button>
-                            </div>
                             <div class="form-group">
                                 <label for="{{'personName' + (pIndex + 1)}}">Person #{{(pIndex + 1)}} Name</label>
-                                <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person' + (pIndex + 1)}}" placeholder="{{'Enter Person ' + (pIndex + 1) + ' Name'}}">
+                                <div class="input-group custom-input-group">
+                                    <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person' + (pIndex + 1)}}" placeholder="{{'Enter Person ' + (pIndex + 1) + ' Name'}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-danger text-capitalize" (click)="(form?.persons).splice(pIndex, 1)">
+                                            <ng-container *ngIf="isPlatformBrowser()">
+                                                <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                                            </ng-container>
+                                            <ng-container *ngIf="!isPlatformBrowser()">
+                                                Remove
+                                            </ng-container>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Items Section -->
                             <section class="ml-4">
                                 <ng-container class="ml-3" *ngFor="let item of person?.items; let iIndex = index; ">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-danger text-capitalize" (click)="(person?.items).splice(iIndex, 1)">Remove {{item?.name || 'Item #' + (iIndex + 1)}}</button>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="{{'itemName' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Name</label>
+                                    <label for="{{'itemName' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Name</label>
+                                    <div class="input-group custom-input-group">
                                         <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger text-capitalize" (click)="(person?.items).splice(iIndex, 1)">
+                                                <ng-container *ngIf="isPlatformBrowser()">
+                                                    <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                                                </ng-container>
+                                                <ng-container *ngIf="!isPlatformBrowser()">
+                                                    Remove
+                                                </ng-container>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="{{'itemPrice' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Price</label>
@@ -76,19 +92,26 @@
                                         </label>
                                     </div>
                                 </ng-container>
-                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({includeTax:true})">Add New Item</button>
+                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({includeTax:true})">
+                                    Add New Item
+                                    <ng-container *ngIf="isPlatformBrowser()">
+                                        <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
+                                    </ng-container>
+                                </button>
                             </section>
                         </div>
                         <!-- Total -->
                         <div class="col-sm-12 col-md-6">
                             <h2>{{person?.name || 'Person #' + (pIndex + 1)}} owes... <span class="text-success">{{calculatePersonTotal(person) | currency}}</span></h2>
-                            <div *ngFor="let item of person?.items">
-                                <div class="row">
-                                    <div class="col-8">
-                                        {{item?.name}}
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        {{item?.price | currency}}
+                            <div class="mb-5">
+                                <div *ngFor="let item of person?.items; let iIndex = index">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            {{item?.name || 'Item #' + (iIndex + 1)}}
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            {{item?.price | currency}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +119,11 @@
                     </div>
                 </ng-container>
             </section>
-            <button class="btn btn-primary d-block mb-3" (click)="form?.persons?.push({items:[{}]})">Add New person</button>
+            <button class="btn btn-primary d-block mb-3" (click)="form?.persons?.push({items:[{}]})">Add New Person
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
+                </ng-container>
+            </button>
             <button class="btn btn-warning d-block mb-3" (click)="clearForm()">Clear Form</button>
             <!-- Grand Total -->
             <div class="row">
