@@ -90,12 +90,12 @@
                         </div>
                         <!-- Total -->
                         <div class="col-sm-12 col-md-6">
-                            <h2>{{person?.name || ('Person #' + (pIndex + 1))}} pays... <span class="text-success">{{calculateGrandTotal(person) | currency}}</span></h2>
+                            <h2><span class="text-capitalize">{{person?.name || ('Person #' + (pIndex + 1))}}</span> pays... <span class="text-success">{{calculateGrandTotal(person) | currency}}</span></h2>
                             <div class="my-4">
                                 <div *ngFor="let item of person?.items; let iIndex = index">
                                     <div class="row">
                                         <div class="col-8">
-                                            {{item?.name || ('Item #' + (iIndex + 1))}}
+                                            <span class="text-capitalize">{{item?.name || ('Item #' + (iIndex + 1))}}</span>
                                         </div>
                                         <div class="col-4 text-right">
                                             {{(item?.price || 0) | currency}}
