@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                 </ng-container>
-                                <button class="btn btn-lg btn-primary d-block my-5 mx-auto" (click)="person?.items?.push({includeTax:true})">
+                                <button class="btn btn-lg btn-block btn-primary d-block py-3 my-5 mx-auto" (click)="person?.items?.push({includeTax:true})">
                                     Add New Item
                                     <ng-container *ngIf="isPlatformBrowser()">
                                         <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
@@ -138,7 +138,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row h1">
+                                <div class="row h2">
                                     <div class="col-8 text-dark font-weight-bold">
                                         Total
                                     </div>
@@ -152,7 +152,7 @@
                 </ng-container>
             </section>
             <div class="d-flex flex-wrap justify-content-center">
-                <button class="btn btn-lg btn-primary d-block my-5 mr-3" (click)="form?.persons?.push({items:[{}]})">Add New Person
+                <button class="btn btn-lg btn-block btn-primary d-block py-3 my-5" (click)="form?.persons?.push({items:[{}]})">Add New Person
                     <ng-container *ngIf="isPlatformBrowser()">
                         <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
                     </ng-container>
