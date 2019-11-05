@@ -120,7 +120,7 @@ export class CalculatorComponent implements OnInit {
   ngOnInit() {
     // this.ssrService.setSeo({
     //   title: `Split Bill Calculator`,
-    //   description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your part. This calculator helps you!`
+    //   description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your part. This tool will calculate individual bills for you!`
     // }, `calculator`, true)
   }
 
