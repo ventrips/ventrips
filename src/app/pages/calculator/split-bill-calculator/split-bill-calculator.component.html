@@ -146,6 +146,14 @@
                                         {{(calculateAllTaxOrGratuity(person, 'tax') || 0) | currency}}
                                     </div>
                                 </div>
+                                <div class="row h3">
+                                    <div class="col-8 text-dark font-weight-bold">
+                                        After Tax
+                                    </div>
+                                    <div class="col-4 text-right font-weight-bold">
+                                        {{((calculateAllSubTotal(person) || 0) + (calculateAllTaxOrGratuity(person, 'tax') || 0)) | currency}}
+                                    </div>
+                                </div>
                                 <div class="row h4 ml-3">
                                     <div class="col-8">
                                         Gratuity
