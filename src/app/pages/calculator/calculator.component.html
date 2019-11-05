@@ -93,7 +93,7 @@
                         <!-- Total -->
                         <div class="col-sm-12 col-md-6">
                             <h2>{{person?.name || ('Person #' + (pIndex + 1))}} pays... <span class="text-success">{{calculateGrandTotal(person) | currency}}</span></h2>
-                            <div class="mb-5">
+                            <div class="my-4">
                                 <div *ngFor="let item of person?.items; let iIndex = index">
                                     <div class="row">
                                         <div class="col-8">
@@ -121,7 +121,7 @@
                                         {{calculateAllSubTotal(person) | currency}}
                                     </div>
                                 </div>
-                                <div class="row h3">
+                                <div class="row h4">
                                     <div class="col-8">
                                         Sub Tax
                                     </div>
@@ -129,7 +129,7 @@
                                         {{calculateAllTaxOrGratuity(person, 'tax') | currency}}
                                     </div>
                                 </div>
-                                <div class="row h3">
+                                <div class="row h4">
                                     <div class="col-8">
                                         Gratuity
                                     </div>
