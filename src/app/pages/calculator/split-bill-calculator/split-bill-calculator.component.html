@@ -73,7 +73,7 @@
                                         <div class="input-group custom-input-group">
                                             <input [(ngModel)]="item.tax" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.tax = tax" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 10]">
+                                                <button class="btn btn-outline-primary" (click)="item.tax = tax" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 6, 7, 8, 9, 10]">
                                                     {{tax || 0}}%
                                                 </button>
                                             </div>
@@ -84,7 +84,7 @@
                                         <div class="input-group custom-input-group">
                                             <input [(ngModel)]="item.gratuity" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18]">
+                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
                                                     {{percent}}%
                                                 </button>
                                             </div>
