@@ -125,14 +125,14 @@ export class CalculatorComponent implements OnInit {
   }
 
   calculateTaxOrGratuity(item: any, type: string) {
-    return _.get(item, ['price']) * (_.get(item, [type]) / 100);
+    return _.get(item, ['price'], 0) * (_.get(item, [type], 0) / 100);
   }
 
   calculateAllSubTotal(person: any) {
     let final = 0;
     const items = _.get(person, ['items']);
     _.forEach(items, (item) => {
-      final += _.get(item, ['price']);
+      final += _.get(item, ['price'], 0);
     });
     return final;
   }
@@ -152,7 +152,7 @@ export class CalculatorComponent implements OnInit {
     _.forEach(filledItemPrices, (item) => {
       const includeTax = this.calculateTaxOrGratuity(item, 'tax');
       const includeGratuity = this.calculateTaxOrGratuity(item, 'gratuity');
-      total += _.get(item, ['price']) + includeTax + includeGratuity
+      total += _.get(item, ['price'], 0) + includeTax + includeGratuity
     })
     return total;
   }

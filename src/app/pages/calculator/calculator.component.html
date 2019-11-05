@@ -41,9 +41,10 @@
                             <!-- Items Section -->
                             <section class="ml-4">
                                 <ng-container class="ml-3" *ngFor="let item of person?.items; let iIndex = index; ">
-                                    <label for="{{'itemName' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Name</label>
+                                    <h4>Item #{{(iIndex + 1)}}</h4>
+                                    <label for="{{'itemName'}}">Name</label>
                                     <div class="input-group mb-3">
-                                        <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
+                                        <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName'}}" placeholder="{{'Enter Item Name'}}">
                                         <div class="input-group-append">
                                             <button class="btn btn-danger text-capitalize" (click)="(person?.items).splice(iIndex, 1)">
                                                 <ng-container *ngIf="isPlatformBrowser()">
@@ -56,24 +57,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="{{'itemPrice' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Price</label>
-                                        <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Price'}}">
+                                        <label for="{{'itemPrice'}}">Price</label>
+                                        <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice'}}" placeholder="{{'Enter Item Price'}}">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="{{'itemTax' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Tax</label>
+                                        <label for="{{'itemTax'}}">Tax</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.tax" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Tax'}}">
+                                            <input [(ngModel)]="item.tax" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-primary" (click)="item.tax = tax" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 10]">
-                                                    {{tax}}%
+                                                    {{tax || 0}}%
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="{{'itemGratuity' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Gratuity</label>
+                                        <label for="{{'itemGratuity'}}">Gratuity</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.gratuity" type="number" class="form-control" id="{{'itemGratuity' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Gratuity'}}">
+                                            <input [(ngModel)]="item.gratuity" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-primary" (click)="item.gratuity = percent" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18]">
                                                     {{percent}}%
@@ -105,10 +106,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-8">
-                                            Tax ({{item?.tax}}%)
+                                            Tax ({{item?.tax || 0}}%)
                                         </div>
                                         <div class="col-4 text-right">
-                                            {{calculateTaxOrGratuity(item, 'tax') | currency}}
+                                            {{(calculateTaxOrGratuity(item, 'tax') || 0) | currency}}
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +119,7 @@
                                         Sub Total
                                     </div>
                                     <div class="col-4 text-right font-weight-bold">
-                                        {{calculateAllSubTotal(person) | currency}}
+                                        {{(calculateAllSubTotal(person) || 0) | currency}}
                                     </div>
                                 </div>
                                 <div class="row h4">
@@ -126,7 +127,7 @@
                                         Sub Tax
                                     </div>
                                     <div class="col-4 text-right">
-                                        {{calculateAllTaxOrGratuity(person, 'tax') | currency}}
+                                        {{(calculateAllTaxOrGratuity(person, 'tax') || 0) | currency}}
                                     </div>
                                 </div>
                                 <div class="row h4">
@@ -134,7 +135,7 @@
                                         Gratuity
                                     </div>
                                     <div class="col-4 text-right">
-                                        {{calculateAllTaxOrGratuity(person, 'gratuity') | currency}}
+                                        {{(calculateAllTaxOrGratuity(person, 'gratuity') || 0) | currency}}
                                     </div>
                                 </div>
                                 <hr>
@@ -143,7 +144,7 @@
                                         Total
                                     </div>
                                     <div class="col-4 text-right font-weight-bold">
-                                        {{calculateGrandTotal(person) | currency}}
+                                        {{(calculateGrandTotal(person) || 0) | currency}}
                                     </div>
                                 </div>
                             </div>
