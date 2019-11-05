@@ -71,9 +71,9 @@
                                     <div class="form-group mb-3">
                                         <label for="{{'itemTax'}}">Tax (%)</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.tax" (ngModelChange)="defaultItem.tax = _.cloneDeep(item.tax)" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
+                                            <input [(ngModel)]="item.tax" (ngModelChange)="defaultItem.tax = _.cloneDeep(item.tax); defaultItem.gratuity = _.cloneDeep(item.gratuity)" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.tax = tax; defaultItem.tax = _.cloneDeep(item.tax)" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 6, 7, 8, 9, 10]">
+                                                <button class="btn btn-outline-primary" (click)="item.tax = tax; defaultItem.tax = _.cloneDeep(item.tax); defaultItem.gratuity = _.cloneDeep(item.gratuity)" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 6, 7, 8, 9, 10]">
                                                     {{tax || 0}}%
                                                 </button>
                                             </div>
@@ -82,9 +82,9 @@
                                     <div class="form-group mb-3">
                                         <label for="{{'itemGratuity'}}">Gratuity (%)</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.gratuity" (ngModelChange)="defaultItem.gratuity = _.cloneDeep(item.gratuity)" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
+                                            <input [(ngModel)]="item.gratuity" (ngModelChange)="defaultItem.tax = _.cloneDeep(item.tax); defaultItem.gratuity = _.cloneDeep(item.gratuity)" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent; defaultItem.gratuity = _.cloneDeep(item.gratuity)" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
+                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent; defaultItem.tax = _.cloneDeep(item.tax); defaultItem.gratuity = _.cloneDeep(item.gratuity)" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
                                                     {{percent}}%
                                                 </button>
                                             </div>
