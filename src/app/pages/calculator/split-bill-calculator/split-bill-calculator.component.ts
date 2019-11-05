@@ -16,19 +16,17 @@ export class SplitBillCalculatorComponent implements OnInit {
   public description: string = `Whether you're dining out or traveling with a group, there comes a time when you need to split the bill and pay your part. This tool calculates individual bills for you!`;
   public environment = environment;
   public _ = _;
-  public defaultTax = 10;
-  public defaultGratuity = 0;
-  public defaultForm: any = {
-    persons: [
-      {
-        items: [
-          {
-            tax: _.cloneDeep(this.defaultTax),
-            gratuity: _.cloneDeep(this.defaultGratuity)
-          }
-        ]
-      }
+  public defaultItem: any = {
+    tax: 10,
+    gratuity: 0
+  };
+  public defaultPerson :any = {
+    items: [
+      this.defaultItem
     ]
+  }
+  public defaultForm: any = {
+    persons: []
   };
   public form: any = _.cloneDeep(this.defaultForm);
   public sampleForm: any = {
