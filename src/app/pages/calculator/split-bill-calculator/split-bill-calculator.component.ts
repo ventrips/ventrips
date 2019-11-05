@@ -34,19 +34,18 @@ export class SplitBillCalculatorComponent implements OnInit {
   public sampleForm: any = {
     persons: [
       {
-        name: `Phuong`,
+        name: `Johnson`,
         items: [
           {
-            name: `SOONTOFU MUSHROOM LESS SPICY`,
-            price: 11.95,
+            name: `Chicken & Beef`,
+            price: 13.95,
             tax: 10,
-            gratuity: 18,
-            includeTax: true
+            gratuity: 18
           }
         ]
       },
       {
-        name: `Kimhong`,
+        name: `Kimhong & Talia`,
         items: [
           {
             name: `Spicy Pork Ramen`,
@@ -65,18 +64,19 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Johnson`,
+        name: `Solinda`,
         items: [
           {
-            name: `Chicken & Beef`,
-            price: 13.95,
+            name: `SOONTOFU MUSHROOM LESS SPICY`,
+            price: 11.95,
             tax: 10,
-            gratuity: 18
+            gratuity: 18,
+            includeTax: true
           }
         ]
       },
       {
-        name: `Sokleng`,
+        name: `Shullina`,
         items: [
           {
             name: `Chicken Katsu Curry`,
