@@ -17,9 +17,9 @@
       </div>
       <div>
           <!-- Person Section -->
-          <section>
+          <section class="person mb-3">
                 <ng-container *ngFor="let person of form?.persons; let pIndex = index">
-                    <div class="row">
+                    <div class="row py-3">
                         <!-- Form -->
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                 </ng-container>
-                                <button class="btn btn-primary d-block mb-5" (click)="person?.items?.push({includeTax:true})">
+                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({includeTax:true})">
                                     Add New Item
                                     <ng-container *ngIf="isPlatformBrowser()">
                                         <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
@@ -117,7 +117,7 @@
                                     <div class="col-8 text-dark font-weight-bold">
                                         Sub Total
                                     </div>
-                                    <div class="col-4 text-right">
+                                    <div class="col-4 text-right font-weight-bold">
                                         {{calculateAllSubTotal(person) | currency}}
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                     <div class="col-8 text-dark font-weight-bold">
                                         Total
                                     </div>
-                                    <div class="col-4 text-right">
+                                    <div class="col-4 text-right font-weight-bold">
                                         {{calculateGrandTotal(person) | currency}}
                                     </div>
                                 </div>
