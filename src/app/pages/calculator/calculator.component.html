@@ -95,13 +95,13 @@
                                 <div *ngFor="let item of person?.items; let iIndex = index">
                                     <div class="row">
                                         <div class="col-8">
-                                            <span class="text-capitalize">{{item?.name || ('Item #' + (iIndex + 1))}}</span>
+                                            <span class="text-capitalize font-weight-bold">{{item?.name || ('Item #' + (iIndex + 1))}}</span>
                                         </div>
                                         <div class="col-4 text-right">
                                             {{(item?.price || 0) | currency}}
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row ml-3">
                                         <div class="col-8">
                                             Tax ({{item?.tax || 0}}%)
                                         </div>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="row h4">
                                     <div class="col-8">
-                                        Sub Tax
+                                        Taxes
                                     </div>
                                     <div class="col-4 text-right">
                                         {{(calculateAllTaxOrGratuity(person, 'tax') || 0) | currency}}
