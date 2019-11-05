@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <h2>
-                            The Tax is... <span class="text-primary">{{form?.tax}}%</span>
+                            The Tax is... <span class="text-primary">{{form?.tax || 0}}%</span>
                         </h2>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <h2>
-                            The Gratuity is... <span class="text-primary">{{form?.gratuity}}%</span>
+                            The Gratuity is... <span class="text-primary">{{form?.gratuity || 0}}%</span>
                         </h2>
                     </div>
                 </div>
