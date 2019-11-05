@@ -26,7 +26,9 @@ export class SplitBillCalculatorComponent implements OnInit {
     ]
   }
   public defaultForm: any = {
-    persons: []
+    persons: [
+      this.defaultPerson
+    ]
   };
   public form: any = _.cloneDeep(this.defaultForm);
   public sampleForm: any = {

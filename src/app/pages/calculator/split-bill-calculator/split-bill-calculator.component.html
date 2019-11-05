@@ -27,32 +27,6 @@
         </share-buttons>
       </div>
       <div>
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group mt-3 mb-3">
-                        <label for="{{'defaultTax'}}" class="font-weight-bold">Default Tax Setting (%)</label>
-                        <div class="input-group custom-input-group">
-                            <input [(ngModel)]="defaultItem.tax" type="number" class="form-control" id="{{'defaultTax'}}" placeholder="{{'Enter Default Tax'}}">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" (click)="defaultItem.tax = percent" [ngClass]="{'active': _.isEqual(defaultItem.tax, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
-                                    {{percent}}%
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="{{'defaultGratuity'}}" class="font-weight-bold">Default Gratuity Setting (%)</label>
-                        <div class="input-group custom-input-group">
-                            <input [(ngModel)]="defaultItem.gratuity" type="number" class="form-control" id="{{'defaultGratuity'}}" placeholder="{{'Enter Default Gratuity'}}">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" (click)="defaultItem.gratuity = percent" [ngClass]="{'active': _.isEqual(defaultItem.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
-                                    {{percent}}%
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
           <!-- Person Section -->
           <section class="person mb-3">
                 <ng-container *ngFor="let person of form?.persons; let pIndex = index">
@@ -97,9 +71,9 @@
                                     <div class="form-group mb-3">
                                         <label for="{{'itemTax'}}">Tax (%)</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.tax" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
+                                            <input [(ngModel)]="item.tax" (ngModelChange)="defaultItem.tax = _.cloneDeep(item.tax)" type="number" class="form-control" id="{{'tax'}}" placeholder="{{'Enter Item Tax'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.tax = tax" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 6, 7, 8, 9, 10]">
+                                                <button class="btn btn-outline-primary" (click)="item.tax = tax; defaultItem.tax = _.cloneDeep(item.tax)" [ngClass]="{'active': _.isEqual(item?.tax, tax)}" *ngFor="let tax of [0, 6, 7, 8, 9, 10]">
                                                     {{tax || 0}}%
                                                 </button>
                                             </div>
@@ -108,9 +82,9 @@
                                     <div class="form-group mb-3">
                                         <label for="{{'itemGratuity'}}">Gratuity (%)</label>
                                         <div class="input-group custom-input-group">
-                                            <input [(ngModel)]="item.gratuity" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
+                                            <input [(ngModel)]="item.gratuity" (ngModelChange)="defaultItem.gratuity = _.cloneDeep(item.gratuity)" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Item Gratuity'}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
+                                                <button class="btn btn-outline-primary" (click)="item.gratuity = percent; defaultItem.gratuity = _.cloneDeep(item.gratuity)" [ngClass]="{'active': _.isEqual(item?.gratuity, percent)}" *ngFor="let percent of [0, 10, 15, 18, 20]">
                                                     {{percent}}%
                                                 </button>
                                             </div>
@@ -138,12 +112,20 @@
                                             {{(item?.price || 0) | currency}}
                                         </div>
                                     </div>
-                                    <div class="row ml-3">
+                                    <div class="row ml-3" *ngIf="!_.isEqual(item?.tax, 0)">
                                         <div class="col-8">
                                             Tax ({{item?.tax || 0}}%)
                                         </div>
                                         <div class="col-4 text-right">
                                             {{(calculateTaxOrGratuity(item, 'tax') || 0) | currency}}
+                                        </div>
+                                    </div>
+                                    <div class="row ml-3" *ngIf="!_.isEqual(item?.gratuity, 0)">
+                                        <div class="col-8">
+                                            Gratuity ({{item?.gratuity || 0}}%)
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            {{(calculateTaxOrGratuity(item, 'gratuity') || 0) | currency}}
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +148,7 @@
                                 </div>
                                 <div class="row h4">
                                     <div class="col-8">
-                                        Gratuity
+                                        Gratuities
                                     </div>
                                     <div class="col-4 text-right">
                                         {{(calculateAllTaxOrGratuity(person, 'gratuity') || 0) | currency}}
