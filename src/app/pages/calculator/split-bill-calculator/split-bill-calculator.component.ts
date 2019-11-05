@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./split-bill-calculator.component.scss']
 })
 export class SplitBillCalculatorComponent implements OnInit {
+  public title: string = `Split Bill Calculator - Pay Your Portion`;
+  public description: string = `Whether you're dining out or traveling with a group, there may come a time when you need to split the bill and pay your part. This tool calculates individual bills for you!`;
   public environment = environment;
   public _ = _;
   public defaultTax = 10;
@@ -32,7 +34,7 @@ export class SplitBillCalculatorComponent implements OnInit {
   public sampleForm: any = {
     persons: [
       {
-        name: `Solinda`,
+        name: `Phuong`,
         items: [
           {
             name: `SOONTOFU MUSHROOM LESS SPICY`,
@@ -44,7 +46,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Kimhong & Talia`,
+        name: `Jaylin`,
         items: [
           {
             name: `Spicy Pork Ramen`,
@@ -74,7 +76,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Shullina`,
+        name: `Jennifer`,
         items: [
           {
             name: `Chicken Katsu Curry`,
@@ -96,7 +98,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Jennifer & Rob`,
+        name: `Rob`,
         items: [
           {
             name: `Cod Egg Udon`,
@@ -129,8 +131,8 @@ export class SplitBillCalculatorComponent implements OnInit {
       this.url = this.router.url;
     });
     this.ssrService.setSeo({
-      title: `Split Bill Calculator - Pay Your Part`,
-      description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your portion. This tool will calculate individual bills for you!`
+      title: this.title,
+      description: this.description
     }, `calculator-split-bill`, true);
   }
 
