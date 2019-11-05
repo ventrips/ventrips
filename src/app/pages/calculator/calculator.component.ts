@@ -18,13 +18,12 @@ export class CalculatorComponent implements OnInit {
       {
         items: [
           {
-            includeTax:true
+            tax: _.cloneDeep(this.defaultTax),
+            gratuity: _.cloneDeep(this.defaultGratuity)
           }
         ]
       }
-    ],
-    tax: _.cloneDeep(this.defaultTax),
-    gratuity: _.cloneDeep(this.defaultGratuity)
+    ]
   };
   public form: any = {
     persons: [
@@ -34,6 +33,8 @@ export class CalculatorComponent implements OnInit {
           {
             name: `SOONTOFU MUSHROOM LESS SPICY`,
             price: 11.95,
+            tax: 10,
+            gratuity: 18,
             includeTax: true
           }
         ]
@@ -44,11 +45,15 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Spicy Pork Ramen`,
             price: 12.95,
+            tax: 10,
+            gratuity: 18,
             includeTax: true
           },
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
+            tax: 10,
+            gratuity: 18,
             includeTax: true
           }
         ]
@@ -59,7 +64,8 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken & Beef`,
             price: 13.95,
-            includeTax: true
+            tax: 10,
+            gratuity: 18
           }
         ]
       },
@@ -69,7 +75,8 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
-            includeTax: true
+            tax: 10,
+            gratuity: 18
           }
         ]
       },
@@ -79,7 +86,8 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
-            includeTax: true
+            tax: 10,
+            gratuity: 18
           }
         ]
       },
@@ -89,18 +97,18 @@ export class CalculatorComponent implements OnInit {
           {
             name: `Cod Egg Udon`,
             price: 17.95,
-            includeTax: true
+            tax: 10,
+            gratuity: 18
           },
           {
             name: `STF COMBO LA GALBI`,
             price: 20.95,
-            includeTax: true
+            tax: 10,
+            gratuity: 18
           }
         ]
       }
-    ],
-    tax: 10,
-    gratuity: 18
+    ]
   };
 
   constructor(
@@ -116,22 +124,43 @@ export class CalculatorComponent implements OnInit {
     // }, `calculator`, true)
   }
 
-  calculatePersonTotal(person: any) {
+  calculateTaxOrGratuity(item: any, type: string) {
+    return _.get(item, ['price']) * (_.get(item, [type]) / 100);
+  }
+
+  calculateAllSubTotal(person: any) {
+    let final = 0;
+    const items = _.get(person, ['items']);
+    _.forEach(items, (item) => {
+      final += _.get(item, ['price']);
+    });
+    return final;
+  }
+
+  calculateAllTaxOrGratuity(person: any, type: string) {
+    let final = 0;
+    const items = _.get(person, ['items']);
+    _.forEach(items, (item) => {
+      final += this.calculateTaxOrGratuity(item, type);
+    });
+    return final;
+  }
+
+  calculateGrandTotal(person: any): number {
     const filledItemPrices = _.filter(_.get(person, ['items']), (item) => _.get(item, ['price'], false));
     let total = 0;
     _.forEach(filledItemPrices, (item) => {
-      const ItemPrice = _.get(item, ['price']);
-      const includeTax = _.get(item, ['includeTax']) ? (ItemPrice * (_.get(this.form, ['tax']) / 100)) : 0;
-      const includeGratuity = ItemPrice * (_.get(this.form, ['gratuity']) / 100);
-      total += ItemPrice + includeTax + includeGratuity
+      const includeTax = this.calculateTaxOrGratuity(item, 'tax');
+      const includeGratuity = this.calculateTaxOrGratuity(item, 'gratuity');
+      total += _.get(item, ['price']) + includeTax + includeGratuity
     })
     return total;
   }
 
-  calculateGrandTotal(persons: Array<any>): number {
+  calculateAllGrandTotal(persons: Array<any>): number {
     let grandTotal = 0;
     _.forEach(persons, (person) => {
-      grandTotal += this.calculatePersonTotal(person);
+      grandTotal += this.calculateGrandTotal(person);
     });
     return grandTotal;
   }
