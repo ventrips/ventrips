@@ -46,7 +46,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Jaylin`,
+        name: `Kimhong`,
         items: [
           {
             name: `Spicy Pork Ramen`,
@@ -76,7 +76,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Jennifer`,
+        name: `Sokleng`,
         items: [
           {
             name: `Chicken Katsu Curry`,
@@ -98,7 +98,7 @@ export class SplitBillCalculatorComponent implements OnInit {
         ]
       },
       {
-        name: `Rob`,
+        name: `Rob & Jennifer`,
         items: [
           {
             name: `Cod Egg Udon`,
