@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { CalculatorRoutingModule } from './calculator-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { CalculatorComponent } from './calculator.component';
+import { SplitBillCalculatorComponent } from './split-bill-calculator/split-bill-calculator.component';
 
 
 @NgModule({
   declarations: [
-    CalculatorComponent
+    SplitBillCalculatorComponent
   ],
   imports: [
     CommonModule,

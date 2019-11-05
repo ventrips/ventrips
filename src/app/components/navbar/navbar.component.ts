@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
       _.includes(this.router.url, '/?q'))) {
       return true;
     }
-
+    console.log(this.router.url);
     return _.isEqual(this.router.url, `/${currentNav}`);
   }
 

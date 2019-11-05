@@ -1,15 +1,15 @@
 import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { SsrService } from '../../services/firestore/ssr/ssr.service';
+import { SsrService } from '../../../services/firestore/ssr/ssr.service';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-calculator',
-  templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.scss']
+  selector: 'app-split-bill-calculator',
+  templateUrl: './split-bill-calculator.component.html',
+  styleUrls: ['./split-bill-calculator.component.scss']
 })
-export class CalculatorComponent implements OnInit {
+export class SplitBillCalculatorComponent implements OnInit {
   public _ = _;
   public defaultTax = 10;
   public defaultGratuity = 0;
@@ -25,7 +25,8 @@ export class CalculatorComponent implements OnInit {
       }
     ]
   };
-  public form: any = {
+  public form: any = _.cloneDeep(this.defaultForm);
+  public sampleForm: any = {
     persons: [
       {
         name: `Solinda`,
@@ -118,10 +119,10 @@ export class CalculatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.ssrService.setSeo({
-    //   title: `Split Bill Calculator`,
-    //   description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your part. This tool will calculate individual bills for you!`
-    // }, `calculator`, true)
+    this.ssrService.setSeo({
+      title: `Split Bill Calculator - Pay Your Part`,
+      description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your portion. This tool will calculate individual bills for you!`
+    }, `split-bill-calculator`, true)
   }
 
   calculateTaxOrGratuity(item: any, type: string) {
@@ -165,7 +166,12 @@ export class CalculatorComponent implements OnInit {
     return grandTotal;
   }
 
-  clearForm(): void {
+  demoForm(): void {
+    this.form = _.cloneDeep(this.sampleForm);
+    this.scrollToTop();
+  }
+
+  resetForm(): void {
     this.form = _.cloneDeep(this.defaultForm);
     this.scrollToTop();
   }

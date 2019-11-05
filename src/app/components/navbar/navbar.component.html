@@ -12,6 +12,11 @@
           Home
         </a>
       </li>
+      <li class="nav-item">
+        <a [routerLink]="['calculator', 'split-bill-calculator']" [ngClass]="{'active': isActive('calculator/split-bill-calculator')}" class="nav-link" title="Split Bill Calculator" >
+          Split Bill Calculator
+        </a>
+      </li>
       <li *ngIf="authService?.canRead(user)" [ngClass]="{'active': isActive('trends')}" class="nav-item">
         <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
           Trends

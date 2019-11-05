@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CalculatorComponent } from './calculator.component';
+import { SplitBillCalculatorComponent } from './split-bill-calculator/split-bill-calculator.component';
 
 
 const routes: Routes = [
   {
-    path: '',
-    component: CalculatorComponent
+    path: 'split-bill-calculator',
+    component: SplitBillCalculatorComponent
   }
 ];
 
