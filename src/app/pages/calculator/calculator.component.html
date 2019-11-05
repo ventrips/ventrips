@@ -35,7 +35,14 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label for="{{'gratuity'}">Gratuity Percent</label>
-                            <input [(ngModel)]="form.gratuity" type="number" class="form-control" id="{{'gratuity'}}" placeholder="{{'Enter Gratuity'}}">
+                            <div class="input-group custom-input-group">
+                                <input [(ngModel)]="form.gratuity" type="number" class="form-control" id="{{'gratuity'}}" placeholder="{{'Enter Gratuity'}}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" (click)="form.gratuity = percent" [ngClass]="{'active': _.isEqual(form?.gratuity, percent)}" *ngFor="let percent of [10, 15, 18]">
+                                        {{percent}}%
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
