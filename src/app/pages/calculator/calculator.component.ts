@@ -138,9 +138,15 @@ export class CalculatorComponent implements OnInit {
 
   clearForm(): void {
     this.form = _.cloneDeep(this.defaultForm);
+    this.scrollToTop();
   }
 
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
+  }
+
+  scrollToTop() {
+    if (isPlatformServer(this.platformId)) { return; }
+    window.scrollTo(0, 0);
   }
 }
