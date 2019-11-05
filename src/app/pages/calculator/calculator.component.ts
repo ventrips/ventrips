@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 export class CalculatorComponent implements OnInit {
   public _ = _;
   public defaultTax = 10.1;
-  public defaultGratuity = 15;
+  public defaultGratuity = 0;
   public defaultForm: any = {
     persons: [
       {

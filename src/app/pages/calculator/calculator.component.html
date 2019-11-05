@@ -13,12 +13,12 @@
     <div class="container mb-4">
       <div class="h5 my-4">
         <h1 class="mb-4">Split Bill Calculator</h1>
-        <p>Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your part. This calculator helps you!</p>
+        <p>Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your portion. This tool will calculate individual bills for you!</p>
       </div>
       <div>
           <!-- Person Section -->
           <section>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label for="{{'tax'}">Tax Percent</label>
@@ -31,7 +31,7 @@
                         </h2>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label for="{{'gratuity'}">Gratuity Percent</label>
@@ -68,7 +68,7 @@
                             <section class="ml-4">
                                 <ng-container class="ml-3" *ngFor="let item of person?.items; let iIndex = index; ">
                                     <label for="{{'itemName' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Name</label>
-                                    <div class="input-group custom-input-group">
+                                    <div class="input-group mb-3">
                                         <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
                                         <div class="input-group-append">
                                             <button class="btn btn-danger text-capitalize" (click)="(person?.items).splice(iIndex, 1)">
@@ -81,7 +81,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label for="{{'itemPrice' + (iIndex + 1)}}">Item #{{(iIndex + 1)}} Price</label>
                                         <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice' + (iIndex + 1)}}" placeholder="{{'Enter Item ' + (iIndex + 1) + ' Name'}}">
                                     </div>
@@ -92,7 +92,7 @@
                                         </label>
                                     </div>
                                 </ng-container>
-                                <button class="btn btn-primary d-block mb-3" (click)="person?.items?.push({includeTax:true})">
+                                <button class="btn btn-primary d-block mb-5" (click)="person?.items?.push({includeTax:true})">
                                     Add New Item
                                     <ng-container *ngIf="isPlatformBrowser()">
                                         <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
@@ -102,15 +102,15 @@
                         </div>
                         <!-- Total -->
                         <div class="col-sm-12 col-md-6">
-                            <h2>{{person?.name || 'Person #' + (pIndex + 1)}} owes... <span class="text-success">{{calculatePersonTotal(person) | currency}}</span></h2>
+                            <h2>{{person?.name || ('Person #' + (pIndex + 1))}} owes... <span class="text-success">{{calculatePersonTotal(person) | currency}}</span></h2>
                             <div class="mb-5">
                                 <div *ngFor="let item of person?.items; let iIndex = index">
                                     <div class="row">
                                         <div class="col-8">
-                                            {{item?.name || 'Item #' + (iIndex + 1)}}
+                                            {{item?.name || ('Item #' + (iIndex + 1))}}
                                         </div>
                                         <div class="col-4 text-right">
-                                            {{item?.price | currency}}
+                                            {{(item?.price || 0) | currency}}
                                         </div>
                                     </div>
                                 </div>
