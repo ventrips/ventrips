@@ -2,7 +2,9 @@ import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { SsrService } from '../../../services/firestore/ssr/ssr.service';
+import { environment } from '../../../../environments/environment';
 import * as _ from 'lodash';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-split-bill-calculator',
@@ -10,6 +12,7 @@ import * as _ from 'lodash';
   styleUrls: ['./split-bill-calculator.component.scss']
 })
 export class SplitBillCalculatorComponent implements OnInit {
+  public environment = environment;
   public _ = _;
   public defaultTax = 10;
   public defaultGratuity = 0;
@@ -111,18 +114,24 @@ export class SplitBillCalculatorComponent implements OnInit {
       }
     ]
   };
+  public url: string;
 
   constructor(
     public toastrService: ToastrService,
     private ssrService: SsrService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.url = this.router.url;
+    });
     this.ssrService.setSeo({
       title: `Split Bill Calculator - Pay Your Part`,
       description: `Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your portion. This tool will calculate individual bills for you!`
-    }, `split-bill-calculator`, true)
+    }, `split-bill-calculator`, true);
   }
 
   calculateTaxOrGratuity(item: any, type: string) {

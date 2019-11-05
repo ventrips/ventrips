@@ -15,6 +15,17 @@
         <h1 class="mb-4">Split Bill Calculator - Pay Your Part</h1>
         <p>Whether you're eating out or travelling with a group, there may come a time when you need to split the bill and pay your portion. This tool will calculate individual bills for you!</p>
       </div>
+      <div class="d-flex flex-wrap align-items-center my-2">
+        <span class="h5 my-2 mr-3">Share</span>
+        <share-buttons
+        [theme]="'default'"
+        [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+        [exclude]="[]"
+        [showText]="false"
+        [showCount]="false"
+        url="{{environment.url}}{{url}}">
+        </share-buttons>
+      </div>
       <div>
           <!-- Person Section -->
           <section class="person mb-3">
