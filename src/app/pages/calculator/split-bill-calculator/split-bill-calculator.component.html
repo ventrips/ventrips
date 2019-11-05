@@ -172,10 +172,15 @@
             <div class="row" *ngIf="form?.persons?.length">
                 <div class="col-sm-12 col-md-6">
                 </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <h2>
-                        The Grand Total is... <span class="text-success">{{calculateAllGrandTotal(form?.persons) | currency}}</span>
-                    </h2>
+                <div class="col-sm-12 col-md-6">
+                    <div class="row h2" *ngIf="form?.persons?.length">
+                        <div class="col-8 text-dark font-weight-bold">
+                            Grand Total
+                        </div>
+                        <div class="col-4 text-right font-weight-bold text-success">
+                            <span class="text-success">{{calculateAllGrandTotal(form?.persons) | currency}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="d-flex flex-wrap justify-content-center">
