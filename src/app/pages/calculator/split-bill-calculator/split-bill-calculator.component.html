@@ -49,8 +49,8 @@
                                 <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person'}}" placeholder="{{'Enter Person Name'}}">
                             </div>
                             <!-- Items Section -->
-                            <section class="ml-4">
-                                <ng-container class="ml-3" *ngFor="let item of person?.items; let iIndex = index; ">
+                            <section>
+                                <ng-container *ngFor="let item of person?.items; let iIndex = index; ">
                                     <h4 class="d-flex flex-wrap">
                                         <span>Item #{{(iIndex + 1)}}</span>
                                         <button class="btn btn-danger text-capitalize ml-auto" (click)="(person?.items).splice(iIndex, 1)">
