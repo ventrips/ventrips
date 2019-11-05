@@ -34,8 +34,8 @@
                                         </ng-container>
                                     </button>
                                 </h4>
-                                <label for="{{'personName' + (pIndex + 1)}}">Name</label>
-                                <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person' + (pIndex + 1)}}" placeholder="{{'Enter Person ' + (pIndex + 1) + ' Name'}}">
+                                <label for="{{'personName'}}">Name</label>
+                                <input [(ngModel)]="person.name" type="text" class="form-control" id="{{'person'}}" placeholder="{{'Enter Person Name'}}">
                             </div>
                             <!-- Items Section -->
                             <section class="ml-4">
@@ -52,6 +52,7 @@
                                         </button>
                                     </h4>
                                     <label for="{{'itemName'}}">Name</label>
+                                    <input [(ngModel)]="item.name" type="text" class="form-control" id="{{'itemName'}}" placeholder="{{'Enter Item Name'}}">
                                     <div class="form-group mb-3">
                                         <label for="{{'itemPrice'}}">Price ($)</label>
                                         <input [(ngModel)]="item.price" type="number" class="form-control" id="{{'itemPrice'}}" placeholder="{{'Enter Item Price'}}">
