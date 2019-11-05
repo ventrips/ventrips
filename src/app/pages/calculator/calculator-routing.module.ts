@@ -5,7 +5,7 @@ import { SplitBillCalculatorComponent } from './split-bill-calculator/split-bill
 
 const routes: Routes = [
   {
-    path: 'split-bill-calculator',
+    path: 'split-bill',
     component: SplitBillCalculatorComponent
   }
 ];
