@@ -101,7 +101,7 @@
                         </div>
                         <!-- Total -->
                         <div class="col-sm-12 col-md-6">
-                            <h2><span class="text-capitalize">{{person?.name || ('Person #' + (pIndex + 1))}}</span> pays... <span class="text-success">{{calculateGrandTotal(person) | currency}}</span></h2>
+                            <h2><span class="text-capitalize">{{person?.name || ('Person #' + (pIndex + 1))}}</span> pays <span class="text-success">{{calculateGrandTotal(person) | currency}}</span></h2>
                             <div class="my-4">
                                 <div *ngFor="let item of person?.items; let iIndex = index">
                                     <div class="row">
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <h2>
-                        Grand Total is...
+                        Grand Total is
                         <span class="text-success">{{calculateAllGrandTotal(form?.persons) | currency}}</span>
                     </h2>
                 </div>
