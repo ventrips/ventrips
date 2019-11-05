@@ -112,7 +112,7 @@
                                             {{(item?.price || 0) | currency}}
                                         </div>
                                     </div>
-                                    <div class="row ml-3" *ngIf="!_.isEqual(item?.tax, 0)">
+                                    <div class="row ml-3" *ngIf="_.get(item, ['tax'])">
                                         <div class="col-8">
                                             Tax ({{item?.tax || 0}}%)
                                         </div>
@@ -120,7 +120,7 @@
                                             {{(calculateTaxOrGratuity(item, 'tax') || 0) | currency}}
                                         </div>
                                     </div>
-                                    <div class="row ml-3" *ngIf="!_.isEqual(item?.gratuity, 0)">
+                                    <div class="row ml-3" *ngIf="_.get(item, ['gratuity'])">
                                         <div class="col-8">
                                             Gratuity ({{item?.gratuity || 0}}%)
                                         </div>
