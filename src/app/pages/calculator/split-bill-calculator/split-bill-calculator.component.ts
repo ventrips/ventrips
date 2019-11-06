@@ -28,8 +28,7 @@ export class SplitBillCalculatorComponent implements OnInit {
   public defaultForm: any = {
     persons: [
       this.defaultPerson
-    ],
-    includeGratuity: true
+    ]
   };
   public form: any = this.defaultForm;
   public sampleForm: any = {
@@ -52,15 +51,13 @@ export class SplitBillCalculatorComponent implements OnInit {
             name: `Spicy Pork Ramen`,
             price: 12.95,
             tax: 10,
-            gratuity: 18,
-            includeTax: true
+            gratuity: 18
           },
           {
             name: `Chicken Katsu Curry`,
             price: 12.95,
             tax: 10,
-            gratuity: 18,
-            includeTax: true
+            gratuity: 18
           }
         ]
       },
@@ -71,8 +68,7 @@ export class SplitBillCalculatorComponent implements OnInit {
             name: `SOONTOFU MUSHROOM LESS SPICY`,
             price: 11.95,
             tax: 10,
-            gratuity: 18,
-            includeTax: true
+            gratuity: 18
           }
         ]
       },
@@ -115,8 +111,7 @@ export class SplitBillCalculatorComponent implements OnInit {
           }
         ]
       }
-    ],
-    includeGratuity: true
+    ]
   };
   public url: string;
 
@@ -139,9 +134,6 @@ export class SplitBillCalculatorComponent implements OnInit {
   }
 
   calculateTaxOrGratuity(item: any, type: string) {
-    if (_.isEqual(type,'gratuity') && _.isEqual(_.get(this.form, ['includeGratuity']), false)) {
-      return 0;
-    }
     return _.get(item, ['price'], 0) * (_.get(item, [type], 0) / 100);
   }
 
