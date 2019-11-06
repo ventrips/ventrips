@@ -15,7 +15,7 @@
         <h1 class="mb-4">{{title}}</h1>
         <p>{{description}}</p>
       </div>
-      <div class="d-flex flex-wrap align-items-center my-2">
+      <div class="d-flex flex-wrap align-items-center my-5">
         <span class="h5 my-2 mr-3">Share</span>
         <share-buttons
         [theme]="'default'"
@@ -27,6 +27,15 @@
         </share-buttons>
       </div>
       <div>
+          <!-- Global Settings -->
+          <section>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="form.includeGratuity" id="includeGratuity">
+                    <label class="form-check-label" for="includeGratuity">
+                        Include Gratuity
+                    </label>
+                </div>
+          </section>
           <!-- Person Section -->
           <section class="person mb-3">
                 <ng-container *ngFor="let person of form?.persons; let pIndex = index">
@@ -79,7 +88,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3" *ngIf="form?.includeGratuity">
                                         <label for="{{'itemGratuity'}}">Gratuity (%)</label>
                                         <div class="input-group custom-input-group">
                                             <input [(ngModel)]="item.gratuity" (ngModelChange)="defaultItem.tax = _.cloneDeep(item.tax); defaultItem.gratuity = _.cloneDeep(item.gratuity)" type="number" class="form-control" id="{{'itemGratuity'}}" placeholder="{{'Enter Gratuity'}}">
@@ -120,7 +129,7 @@
                                             {{(calculateTaxOrGratuity(item, 'tax') || 0) | currency}}
                                         </div>
                                     </div>
-                                    <div class="row ml-3" *ngIf="_.get(item, ['gratuity'])">
+                                    <div class="row ml-3" *ngIf="form?.includeGratuity && _.get(item, ['gratuity'])">
                                         <div class="col-8">
                                             Gratuity ({{item?.gratuity || 0}}%)
                                         </div>
@@ -154,7 +163,7 @@
                                         {{((calculateAllSubTotal(person) || 0) + (calculateAllTaxOrGratuity(person, 'tax') || 0)) | currency}}
                                     </div>
                                 </div>
-                                <div class="row h4 ml-3">
+                                <div class="row h4 ml-3" *ngIf="form?.includeGratuity">
                                     <div class="col-8">
                                         Gratuity
                                     </div>
