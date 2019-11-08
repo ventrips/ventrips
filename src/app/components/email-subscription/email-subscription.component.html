@@ -9,7 +9,7 @@
             </h1>
             <p class="text-center mb-3">Get the latest posts delivered to your inbox</p>
             <input [(ngModel)]="email" [required]="true" type="email" class="form-control form-control-lg mb-3" aria-label="Enter your email address to get notified!" placeholder="Enter your email address to get notified!">
-            <button class="btn btn-block btn-lg btn-warning mb-3 font-weight-bold" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
+            <button class="btn btn-block btn-lg btn-warning font-weight-bold" type="button" (click)="subscribeToNewsLetter()" [disabled]="!validateEmail()">Subscribe</button>
         </div>
     </section>
 </ng-container>

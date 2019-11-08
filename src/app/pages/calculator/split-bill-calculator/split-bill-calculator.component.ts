@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SplitBillCalculatorComponent implements OnInit {
   public title: string = `Split Bill Calculator - Pay Your Part`;
-  public description: string = `Whether you're dining out or traveling with a group, there comes a time when you need to split the bill and pay your part with taxes and tips included. This tool calculates individual bills for you!`;
+  public description: string = `Whether you're eating out or shopping with a group, there comes a time when you need to split the bill and pay your part with taxes and tips included. This tool calculates individual bills for you!`;
   public environment = environment;
   public _ = _;
   public defaultItem: any = {
