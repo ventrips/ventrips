@@ -59,6 +59,7 @@
                                 <th scope="col">Display Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Message</th>
+                                <th scope="col">Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +69,7 @@
                                 <td>{{_.get(form, ['displayName'])}}</td>
                                 <td>{{_.get(form, ['email'])}}</td>
                                 <td>{{_.get(form, ['message'])}}</td>
+                                <td>{{_.get(form, ['date']) | timeStampDate:'long'}}</td>
                             </tr>
                         </tbody>
                     </table>

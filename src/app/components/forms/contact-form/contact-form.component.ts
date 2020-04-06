@@ -1,5 +1,6 @@
 import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { firestore } from 'firebase/app';
 import { Contact } from './../../../interfaces/contact';
 import * as _ from 'lodash';
 import { AuthService } from '../../../services/firestore/auth/auth.service';
@@ -14,7 +15,7 @@ const COLLECTION = 'forms';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-  public form: Contact = new Contact('', '', '', '');
+  public form: Contact = new Contact('', '', '', '', firestore.Timestamp.fromDate(new Date()));
   public user: User;
   public collection = COLLECTION;
 
@@ -33,6 +34,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.form.date = firestore.Timestamp.fromDate(new Date());
     this.afs.collection(this.collection).add(_.assign({}, this.form))
     .then(success => {
       this.newContact();
@@ -47,7 +49,8 @@ export class ContactFormComponent implements OnInit {
       _.get(this.user, ['uid']) || '',
       _.get(this.user, ['displayName'], '') || '',
       _.get(this.user, ['email'], '') || '',
-      ''
+      '',
+      firestore.Timestamp.fromDate(new Date())
     );
   }
 
