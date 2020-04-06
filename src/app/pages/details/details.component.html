@@ -55,7 +55,7 @@
             </p>
         </div>
       </div>
-      <section class="mb-3 d-flex flex-wrap align-items-center">
+      <!-- <section class="mb-3 d-flex flex-wrap align-items-center">
         <span class="h5 my-2 mr-3">Share</span>
         <share-buttons
           [theme]="'default'"
@@ -65,8 +65,8 @@
           [showCount]="false"
           url="{{environment.url}}{{url}}">
         </share-buttons>
+      </section> -->
         <!-- <app-payment-button *ngIf="authService?.canRead(user) && post?.amount && post?.category" class="my-3 ml-auto" [amount]="post?.amount" [category]="post?.category"></app-payment-button> -->
-      </section>
     </div>
     <figure class="text-center container" [hidden]="!post?.image">
       <img class="w-100 img-fluid box-shadow" src="../assets/img/image-placeholder.jpg" [attr.src]="post?.image" alt="Image Banner">

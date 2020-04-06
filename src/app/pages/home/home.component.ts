@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
   public url: string;
   public collection: string = 'blog';
   public token: string;
-  @ViewChild('searchBar', {static: false}) searchInputText: ElementRef; // Remove aria-multiline to improve SEO
+  @ViewChild('searchBar') searchInputText: ElementRef; // Remove aria-multiline to improve SEO
 
   constructor(
     private afs: AngularFirestore,

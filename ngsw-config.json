@@ -10,7 +10,8 @@
           "/favicon.ico",
           "/index.html",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/manifest.webmanifest"
         ],
         "urls":[
           "https://firebasestorage.googleapis.com/v0/b/*"

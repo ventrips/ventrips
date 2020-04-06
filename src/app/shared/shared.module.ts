@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdsenseModule } from 'ng2-adsense';
-import { ShareButtonsModule } from '@ngx-share/buttons';
+// import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Components
 import { PostComponent } from '../components/post/post.component';
@@ -21,6 +21,7 @@ import { SearchHighlightPipe } from './../pipes/search-highlight/search-highligh
 
 import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from 'ngx-disqus';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DisqusModule } from 'ngx-disqus';
     AdsenseModule.forRoot(),
     QuillModule.forRoot(),
     DisqusModule.forRoot('ventrips'),
-    ShareButtonsModule
+    FontAwesomeModule
+    // ShareButtonsModule
   ],
   exports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { DisqusModule } from 'ngx-disqus';
     AdsenseModule,
     QuillModule,
     DisqusModule,
-    ShareButtonsModule,
+    FontAwesomeModule,
+    // ShareButtonsModule,
     PostComponent,
     EditButtonComponent,
     PaymentButtonComponent,
@@ -65,7 +68,7 @@ import { DisqusModule } from 'ngx-disqus';
   ]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule
     }
