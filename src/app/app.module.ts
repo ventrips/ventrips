@@ -24,7 +24,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPayPalModule } from 'ngx-paypal';
 
 // Pages
@@ -64,7 +63,6 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule, // (Required) For share counts
     NgxSpinnerModule,
     NgxPayPalModule,
-    FontAwesomeModule,
     BrowserAnimationsModule, // required animations module for ngx-toastr
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left',
