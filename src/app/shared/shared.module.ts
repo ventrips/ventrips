@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdsenseModule } from 'ng2-adsense';
 // import { ShareButtonsModule } from '@ngx-share/buttons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // Components
 import { PostComponent } from '../components/post/post.component';
@@ -21,7 +23,6 @@ import { SearchHighlightPipe } from './../pipes/search-highlight/search-highligh
 
 import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from 'ngx-disqus';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AdsenseModule.forRoot(),
     QuillModule.forRoot(),
     DisqusModule.forRoot('ventrips'),
-    FontAwesomeModule
+    FontAwesomeModule,
     // ShareButtonsModule
   ],
   exports: [
