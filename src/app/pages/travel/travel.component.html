@@ -11,8 +11,8 @@
                         </ng-container>
                         Refresh
                     </button>
-                    <p class="small text-secondary my-3 mr-3" *ngIf="updated">
-                        Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
+                    <p class="small text-secondary my-3 mr-3" *ngIf="travelCharts.updated">
+                        Last Updated: {{travelCharts.updated | timeStampDate:'short'}} ({{travelCharts.updated | timeAgo}})
                     </p>
                 </div>
                 <pre>
