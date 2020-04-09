@@ -4,6 +4,17 @@
             <div class="h5 my-4">
                 <h1 class="mb-4">{{title}}</h1>
                 <p>{{description}}</p>
+                <div class="text-center">
+                    <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTravel()">
+                        <ng-container *ngIf="isPlatformBrowser()">
+                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                        </ng-container>
+                        Refresh
+                    </button>
+                    <p class="small text-secondary my-3 mr-3" *ngIf="updated">
+                        Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
+                    </p>
+                </div>
                 <pre>
                     {{travelCharts.results | json}}
                 </pre>

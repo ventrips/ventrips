@@ -69,6 +69,24 @@ export class TravelComponent implements OnInit {
     });
   }
 
+  // Fetches latest and sets to firestore DB
+  getTravelNumbers(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/getTravelNumbers`)
+    .pipe(map((response: Response) => { return response }));
+  };
+
+  refreshTravel(): void {
+    if (!this.authService.canEdit(this.user)) {
+      return;
+    }
+    this.spinner.show();
+    this.getTravelNumbers().subscribe(response => {
+      this.spinner.hide();
+    }, (error) => {
+      this.spinner.hide();
+    });
+  }
+
   scrollToTop() {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);
