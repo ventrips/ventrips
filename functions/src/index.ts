@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 const Utils = require('./utils');
 const Trends = require('./trends');
+const Travel = require('./travel');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -39,8 +40,28 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
         response.send(data);
     } else {
         const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
-        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&local=true
         return db.doc(`trends/trends`).set(final).then((res) => {
+            response.send(final);
+        }).catch((error) => {
+            response.send(error);
+        });
+    }
+});
+
+export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+    Utils.cors(request, response);
+    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
+    const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
+    const data = await Travel.getTravelNumbers(request, response, useMock);
+
+    if (isLocal) {
+        response.send(data);
+    } else {
+        const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
+        console.log(final);
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/travelNumbers?mock=false&local=false
+        return db.doc(`travel/travelNumbers`).set(final).then((res) => {
             response.send(final);
         }).catch((error) => {
             response.send(error);
