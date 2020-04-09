@@ -4,6 +4,17 @@
             <div class="h5 my-4">
                 <h1 class="mb-4">{{title}}</h1>
                 <p>{{description}}</p>
+                <div class="d-flex flex-wrap align-items-center my-5">
+                    <span class="h5 my-2 mr-3">Share</span>
+                    <share-buttons
+                    [theme]="'default'"
+                    [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+                    [exclude]="[]"
+                    [showText]="false"
+                    [showCount]="false"
+                    url="{{environment.url}}{{url}}">
+                    </share-buttons>
+                </div>
                 <div class="text-center my-5">
                     <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTravel()">
                         <ng-container *ngIf="isPlatformBrowser()">
@@ -11,21 +22,34 @@
                         </ng-container>
                         Refresh
                     </button>
-                    <p class="small text-secondary my-3 mr-3" *ngIf="travelCharts.updated">
-                        Last Updated: {{travelCharts.updated | timeStampDate:'short'}} ({{travelCharts.updated | timeAgo}})
+                    <p class="small text-secondary my-3 mr-3" *ngIf="travelCharts?.updated">
+                        Last Updated: {{travelCharts?.updated | timeStampDate:'short'}} ({{travelCharts?.updated | timeAgo}})
                     </p>
                 </div>
                 <h3 class="mb-3">Daily Travel Numbers in the US</h3>
                 <div class="flex">
                     <div class="flex-item">
-                        <div style="display: block;">
+                        <div style="display: block;" *ngIf="lineChartData.length">
                             <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
                                 [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"
                                 (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                             </canvas>
                         </div>
+                        <p class="h3" *ngIf="!lineChartData.length">
+                            Oops! Something went wrong on our end. Please check again :)
+                        </p>
                     </div>
                 </div>
+                <section class="container text-center">
+                    <!-- Horizontal Display Ad-->
+                    <ng-adsense
+                        [fullWidthResponsive]="true"
+                        [display]="'block'"
+                        [adClient]="'ca-pub-4642980268605791'"
+                        [adSlot]=2801999023
+                        [adFormat]="'auto'">
+                    </ng-adsense>
+                </section>
             </div>
         </div>
     </ng-container>

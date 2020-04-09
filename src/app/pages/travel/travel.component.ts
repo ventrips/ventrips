@@ -114,6 +114,9 @@ export class TravelComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.url = this.router.url;
+    });
     this.authService.user$.subscribe(user => this.user = user);
     this.spinner.show();
     this.ssrService.setSeo({
