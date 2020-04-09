@@ -4,7 +4,7 @@
             <div class="h5 my-4">
                 <h1 class="mb-4">{{title}}</h1>
                 <p>{{description}}</p>
-                <div class="text-center">
+                <div class="text-center my-5">
                     <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTravel()">
                         <ng-container *ngIf="isPlatformBrowser()">
                             <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
@@ -15,9 +15,17 @@
                         Last Updated: {{travelCharts.updated | timeStampDate:'short'}} ({{travelCharts.updated | timeAgo}})
                     </p>
                 </div>
-                <pre>
-                    {{travelCharts.results | json}}
-                </pre>
+                <h3 class="mb-3">Daily Travel Numbers in the US</h3>
+                <div class="flex">
+                    <div class="flex-item">
+                        <div style="display: block;">
+                            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                                [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"
+                                (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </ng-container>

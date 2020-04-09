@@ -13,8 +13,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
 import { InputsConfig } from '../../interfaces/inputs-config';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, BaseChartDirective, Label } from 'ng2-charts';
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import * as moment from 'moment';
 import * as _ from 'lodash';
-import LazyLoad from "vanilla-lazyload";
 
 @Component({
   selector: 'app-travel',
@@ -34,6 +37,68 @@ export class TravelComponent implements OnInit {
   public collection: string = 'travel'
   public id: string = 'travelNumbers';
   public travelCharts: Array<any> = [];
+
+
+  public lineChartData: ChartDataSets[] = [];
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{
+        type: 'time',
+        time: {
+            unit: 'day'
+        }
+      }],
+      yAxes: [
+        {
+          id: 'y-axis-0',
+          position: 'left',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            fontColor: 'red',
+            min: 0,
+            max: 3000000,
+            stepSize: 100000
+          }
+        },
+        {
+          id: 'y-axis-1',
+          position: 'right',
+          ticks: {
+            fontColor: 'blue',
+            min: 0,
+            max: 3000000,
+            stepSize: 100000
+          }
+        }
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+  };
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [pluginAnnotations];
+  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
+
 
   constructor(
     private afs: AngularFirestore,
@@ -57,16 +122,53 @@ export class TravelComponent implements OnInit {
     }, `travel`, true);
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
+      console.log(response);
       if (_.isEmpty(response)) {
         return;
       }
       this.travelCharts = response;
+      this.formatChart(_.get(response, ['results']));
       this.isLoading = false;
       this.spinner.hide();
     }, () => {
       this.isLoading = false;
       this.spinner.hide();
     });
+  }
+
+  ngOnChanges(changes: any): void {
+    console.log(changes);
+    this.formatChart(this.travelCharts);
+  }
+
+  formatChart(data: Array<any>): void {
+    const reformattedData = _.map(data, (item) =>
+      _.assign(item, {
+        date: new Date(_.get(item, ['date', 'seconds']) * 1000)
+      })
+    );
+    const sortedData = _.orderBy(data, [item => moment(_.get(item, ['date']))], ['asc']);
+    this.lineChartLabels = _.map(sortedData, (item) => moment(_.get(item, ['date'])).format('l'));
+    this.lineChartData = [
+      { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['currentYearTravelNumbers']))), label: "Current Year Travel Numbers", yAxisID: "y-axis-0"},
+      { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['previousYearTravelNumbers']))), label: "Previous Year Travel Numbers", yAxisID: "y-axis-1"},
+    ];
+    console.log(this.lineChartData);
+    console.log(this.lineChartLabels);
+  }
+
+  // events
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public hideIndex(index: number) {
+    const isHidden = this.chart.isDatasetHidden(index);
+    this.chart.hideDataset(index, !isHidden);
   }
 
   // Fetches latest and sets to firestore DB

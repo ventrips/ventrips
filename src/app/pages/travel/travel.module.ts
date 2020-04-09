@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TravelRoutingModule } from './travel-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { TravelComponent } from './travel.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { TravelComponent } from './travel.component';
   imports: [
     CommonModule,
     TravelRoutingModule,
-    SharedModule
+    SharedModule,
+    ChartsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
