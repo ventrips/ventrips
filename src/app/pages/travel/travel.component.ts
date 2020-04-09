@@ -36,7 +36,7 @@ export class TravelComponent implements OnInit {
   public url: string;
   public collection: string = 'travel'
   public id: string = 'travelNumbers';
-  public travelCharts: Array<any> = [];
+  public travelCharts: any;
 
 
   public lineChartData: ChartDataSets[] = [];
