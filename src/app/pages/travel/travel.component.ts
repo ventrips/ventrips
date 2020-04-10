@@ -119,6 +119,8 @@ export class TravelComponent implements OnInit {
       this.url = this.router.url;
     });
     this.authService.user$.subscribe(user => this.user = user);
+
+    this.travelCharts = undefined;
     this.spinner.show();
     this.ssrService.setSeo({
       title: this.title,
@@ -131,7 +133,7 @@ export class TravelComponent implements OnInit {
       }
       this.travelCharts = response;
       this.updated = _.get(this.travelCharts, ['updated']);
-      this.formatChart(_.get(response, ['results']));
+      this.formatChart(_.get(this.travelCharts, ['results']));
       this.isLoading = false;
       this.spinner.hide();
     }, () => {
@@ -141,7 +143,7 @@ export class TravelComponent implements OnInit {
   }
 
   ngOnChanges(changes: any): void {
-    this.formatChart(this.travelCharts);
+    this.formatChart(_.get(this.travelCharts, ['results']));
   }
 
   formatChart(data: Array<any>): void {

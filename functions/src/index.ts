@@ -59,7 +59,6 @@ export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory:
         response.send(data);
     } else {
         const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
-        console.log(final);
         // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/travelNumbers?mock=false&local=false
         return db.doc(`travel/travelNumbers`).set(final).then((res) => {
             response.send(final);
