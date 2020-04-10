@@ -125,17 +125,11 @@ export class TravelComponent implements OnInit {
     }, `travel`, true);
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
+      console.log(response);
       if (_.isEmpty(response)) {
         return;
       }
       this.travelCharts = response;
-      // const lastUpdated = moment((_.get(response, ['updated'])).toDate());
-      // const today9am = moment().set({h:9, m:0, s:0});
-      // const tomorrow9am = moment().set({h:9, m:0, s:0}).add(1, 'days');
-      // const shouldUpdate = !lastUpdated.isBetween(today9am, tomorrow9am);
-      // if (shouldUpdate) {
-      //   this.refreshTravel();
-      // }
       this.formatChart(_.get(response, ['results']));
       this.isLoading = false;
       this.spinner.hide();
@@ -146,13 +140,14 @@ export class TravelComponent implements OnInit {
   }
 
   ngOnChanges(changes: any): void {
+    console.log(changes);
     this.formatChart(this.travelCharts);
   }
 
   formatChart(data: Array<any>): void {
     const reformattedData = _.map(data, (item) =>
       _.assign(item, {
-        date: (_.get(item, ['date'])).toDate()
+        date: new Date(_.get(item, ['date', 'seconds']) * 1000)
       })
     );
     const sortedData = _.orderBy(data, [item => moment(_.get(item, ['date']))], ['asc']);
@@ -161,6 +156,8 @@ export class TravelComponent implements OnInit {
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['currentYearTravelNumbers']))), label: "Current Year Travel Numbers", yAxisID: "y-axis-0"},
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['previousYearTravelNumbers']))), label: "Previous Year Travel Numbers", yAxisID: "y-axis-1"},
     ];
+    console.log(this.lineChartData);
+    console.log(this.lineChartLabels);
   }
 
   // events
