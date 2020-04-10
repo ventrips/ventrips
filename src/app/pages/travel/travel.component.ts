@@ -37,6 +37,7 @@ export class TravelComponent implements OnInit {
   public collection: string = 'travel'
   public id: string = 'travelNumbers';
   public travelCharts: any;
+  public updated: string;
 
 
   public lineChartData: ChartDataSets[] = [];
@@ -125,11 +126,11 @@ export class TravelComponent implements OnInit {
     }, `travel`, true);
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
-      console.log(response);
       if (_.isEmpty(response)) {
         return;
       }
       this.travelCharts = response;
+      this.updated = _.get(this.travelCharts, ['updated']);
       this.formatChart(_.get(response, ['results']));
       this.isLoading = false;
       this.spinner.hide();
@@ -140,7 +141,6 @@ export class TravelComponent implements OnInit {
   }
 
   ngOnChanges(changes: any): void {
-    console.log(changes);
     this.formatChart(this.travelCharts);
   }
 
@@ -156,8 +156,6 @@ export class TravelComponent implements OnInit {
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['currentYearTravelNumbers']))), label: "Current Year Travel Numbers", yAxisID: "y-axis-0"},
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['previousYearTravelNumbers']))), label: "Previous Year Travel Numbers", yAxisID: "y-axis-1"},
     ];
-    console.log(this.lineChartData);
-    console.log(this.lineChartLabels);
   }
 
   // events
