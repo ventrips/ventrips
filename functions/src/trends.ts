@@ -668,7 +668,7 @@ const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
         RequestPromise(options)
         .then(($: any) => {
             const data: Array<any> = [];
-            $('.BarronsTheme--scroll-bar--vyrS6WGI > .BarronsTheme--story--3Z0LVZ5M').each(function (this: any, index: number) {
+            $('.BarronsTheme--scroll-bar--10VqbQwZ > .BarronsTheme--story--13Re0lAk').each(function (this: any, index: number) {
                 const obj = {
                     url: `${$(this).find('a').attr('href')}`,
                     title: $(this).find('h3').text(),
