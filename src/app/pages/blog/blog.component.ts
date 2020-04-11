@@ -17,12 +17,12 @@ import * as _ from 'lodash';
 import LazyLoad from "vanilla-lazyload";
 // import { FcmService } from '../../services/fcm/fcm.service';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.scss'],
   providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
 })
-export class HomeComponent implements OnInit {
+export class BlogComponent implements OnInit {
   public inputsConfig: InputsConfig = {
     string: ['slug', 'category', 'title', 'description'],
     number: [],
@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
       this.url = this.router.url;
     });
     this.spinner.show();
-    this.ssrService.ssrFirestoreCollection(this.collection, `home`, true).subscribe(response => {
+    this.ssrService.ssrFirestoreCollection(this.collection, `blog`, true).subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = response;
         // Adding Search Options

@@ -7,7 +7,7 @@ import { EditorGuard } from './guards/editor/editor.guard';
 import { SubscriberGuard } from './guards/subscriber/subscriber.guard';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./pages/home/home.module').then(mod => mod.HomeModule)},
+  { path: '', loadChildren: () => import('./pages/blog/blog.module').then(mod => mod.BlogModule)},
   { path: 'blog/:slug', loadChildren: () => import('./pages/details/details.module').then(mod => mod.DetailsModule)},
   { path: 'profile/:uid', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},
   { path: 'johnson-huynh', loadChildren: () => import('./pages/profile/profile.module').then(mod => mod.ProfileModule)},
