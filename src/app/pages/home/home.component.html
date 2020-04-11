@@ -92,7 +92,7 @@
     <ng-container *ngIf="!_.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-12 col-xl-12" *ngFor="let post of (posts | filterBy: 'publish':true:user | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
+          <div class="col-xs-12 col-xl-6" *ngFor="let post of (posts | filterBy: 'publish':true:user | searchBy: searchTerm | orderBy: selectedOrderBy?.type: selectedOrderBy?.direction)" [ngClass]="{'bg-light': !post.publish }">
             <app-post
               [showEditButton]="true"
               [post]="post"

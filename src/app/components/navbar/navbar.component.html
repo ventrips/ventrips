@@ -18,15 +18,15 @@
           <span *ngIf="isActive('travel')" class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a [routerLink]="['calculator', 'split-bill']" [ngClass]="{'active': isActive('calculator/split-bill')}" class="nav-link" title="Split Bill Calculator">
-          Split Bill Calculator
-        </a>
-      </li>
       <li *ngIf="authService?.canRead(user)" [ngClass]="{'active': isActive('trends')}" class="nav-item">
         <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
           Trends
           <span *ngIf="isActive('trends')" class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['calculator', 'split-bill']" [ngClass]="{'active': isActive('calculator/split-bill')}" class="nav-link" title="Split Bill Calculator">
+          Split Bill Calculator
         </a>
       </li>
       <li *ngFor="let item of navBarLinks" [ngClass]="{'active': isActive(item?.url)}" class="nav-item">
