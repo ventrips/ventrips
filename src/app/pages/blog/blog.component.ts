@@ -117,7 +117,7 @@ export class BlogComponent implements OnInit {
       this.url = this.router.url;
     });
     this.spinner.show();
-    this.ssrService.ssrFirestoreCollection(this.collection, `blog`, true).subscribe(response => {
+    this.ssrService.ssrFirestoreCollection(this.collection, `home`, true).subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.posts = response;
         // Adding Search Options
