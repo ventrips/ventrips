@@ -1,5 +1,44 @@
-<section>
-  <section class="my-5">
+<section class="my-5">
+    <section class="container-fluid mb-4 d-flex flex-wrap align-items-center">
+      <div class="d-flex flex-wrap align-items-center my-2">
+        <span class="h5 my-2 mr-3">Share</span>
+        <share-buttons
+          [theme]="'default'"
+          [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+          [exclude]="[]"
+          [showText]="false"
+          [showCount]="false"
+          url="{{environment.url}}{{url}}">
+        </share-buttons>
+      </div>
+      <!-- <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
+        <span class="h5 my-2 mr-3">Subscribe</span>
+        <div class="btn-group">
+          <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" title="Subscribe" class="btn btn-warning" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
+            <fa-icon [icon]="['fas', 'bell']"></fa-icon>
+          </button>
+          <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" title="Unsubscribe" class="btn btn-warning" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
+            <fa-icon [icon]="['fas', 'bell-slash']"></fa-icon>
+          </button>
+        </div>
+      </div> -->
+    </section>
+    <div class="container-fluid mb-5">
+      <div class="input-group">
+        <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for blogs" placeholder="Search for blogs"
+          [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+          <div class="input-group-append">
+            <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text bg-warning">
+              <ng-container *ngIf="isPlatformBrowser()">
+                <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+              </ng-container>
+            </span>
+            <a [routerLink]="['']" class="btn text-dark btn-warning" title="Clear" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning">
+              Clear <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'times']" class="text-dark"></fa-icon></ng-container>
+            </a>
+          </div>
+        </div>
+    </div>
     <div class="container-fluid">
       <div class="d-flex flex-wrap">
         <!-- Create New -->
@@ -25,47 +64,7 @@
           </div>
         </div>
       </div>
-      <p class="h5 my-3 text-dark text-capitalize text-right">{{(posts | filterBy:'publish':true:user | searchBy: searchTerm).length}} Results</p>
-    </div>
-    <section class="container-fluid mb-3 d-flex flex-wrap align-items-center">
-      <div class="d-flex flex-wrap align-items-center my-2">
-        <span class="h5 my-2 mr-3">Share</span>
-        <share-buttons
-          [theme]="'default'"
-          [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
-          [exclude]="[]"
-          [showText]="false"
-          [showCount]="false"
-          url="{{environment.url}}{{url}}">
-        </share-buttons>
-      </div>
-      <!-- <div *ngIf="fcmService.token" class="d-flex flex-wrap align-items-center my-2 ml-auto">
-        <span class="h5 my-2 mr-3">Subscribe</span>
-        <div class="btn-group">
-          <button (click)="fcmService.subscribeToTopic(environment.name); isSubscribed = true" title="Subscribe" class="btn btn-warning" [ngClass]="{'active': isSubscribed && !_.isNil(isSubscribed)}" [disabled]="isSubscribed && !_.isNil(isSubscribed)">
-            <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-          </button>
-          <button (click)="fcmService.unsubscribeFromTopic(environment.name); isSubscribed = false" title="Unsubscribe" class="btn btn-warning" [ngClass]="{'active': !isSubscribed && !_.isNil(isSubscribed)}" [disabled]="!isSubscribed && !_.isNil(isSubscribed)">
-            <fa-icon [icon]="['fas', 'bell-slash']"></fa-icon>
-          </button>
-        </div>
-      </div> -->
-    </section>
-    <div class="container-fluid py-4">
-      <div class="input-group">
-        <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for blogs" placeholder="Search for blogs"
-          [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
-          <div class="input-group-append">
-            <span *ngIf="_.isEmpty(searchTerm)" class="input-group-text bg-warning">
-              <ng-container *ngIf="isPlatformBrowser()">
-                <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
-              </ng-container>
-            </span>
-            <a [routerLink]="['']" class="btn text-dark btn-warning" title="Clear" *ngIf="!_.isEmpty(searchTerm)" class="btn btn-warning">
-              Clear <ng-container *ngIf="isPlatformBrowser()"><fa-icon [icon]="['fas', 'times']" class="text-dark"></fa-icon></ng-container>
-            </a>
-          </div>
-        </div>
+      <div class="h5 my-3 text-dark text-capitalize text-right">{{(posts | filterBy:'publish':true:user | searchBy: searchTerm).length}} Results</div>
     </div>
     <!-- No results -->
     <ng-container *ngIf="!isLoading && _.isEmpty((posts | filterBy:'publish':true:user | searchBy: searchTerm))">
@@ -93,7 +92,6 @@
         </div>
       </div>
     </ng-container>
-  </section>
 </section>
 <!-- Horizontal Display Ad-->
 <section class="container text-center mt-5">
