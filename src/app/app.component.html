@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 <main>
     <div class="row no-gutters">
-        <div class="hidden-lg-down col-xl-2"></div>
-        <div class="col-xs-12 col-xl-8">
+        <div class="hidden-lg-down col-xl-1"></div>
+        <div class="col-xs-12 col-xl-10">
             <router-outlet (activate)="onActivate($event)"></router-outlet>
             <div class="scroll-progress scroll-progress--fixed">
                 <div class="scroll-progress__indicator box-shadow" [style.width.%]="pageScroll"></div>
             </div>
         </div>
-        <div class="hidden-lg-down col-xl-2">
+        <div class="hidden-lg-down col-xl-1">
             <div class="pt-2 sticky-top">
                 <!-- Horizontal Display Ad-->
                 <section class="container text-center mb-2">
