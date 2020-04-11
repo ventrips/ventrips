@@ -152,7 +152,6 @@ export class HomeComponent implements OnInit {
     distinctUntilChanged(),
     map(term => {
       const queryParams = _.isEmpty(term) ? {} : { queryParams: { q: term } };
-      this.scrollToTop();
       this.router.navigate( [], queryParams);
       return term.length < 1 ? []
       : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);

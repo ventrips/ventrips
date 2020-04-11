@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top box-shadow">
   <a [routerLink]="['']" [title]="environment?.name" class="navbar-brand text-warning text-capitalize">{{environment?.name}}</a>
   <button class="navbar-toggler text-dark bg-warning" type="button" data-toggle="collapse" data-target="#customNavBar" aria-controls="customNavBar" aria-expanded="false" aria-label="Toggle navigation">
     <ng-container *ngIf="isPlatformBrowser()">
