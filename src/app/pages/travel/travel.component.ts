@@ -27,7 +27,7 @@ import * as _ from 'lodash';
 })
 export class TravelComponent implements OnInit {
   public title: string = `Real-Time Travel Dashboard Tracker`;
-  public description: string = `See data, social media trends, and learn about travel news`;
+  public description: string = `See data, trends, and learn about the latest travel news all in one go`;
   public environment = environment;
   public posts: Array<Post>;
   public isLoading = true;
