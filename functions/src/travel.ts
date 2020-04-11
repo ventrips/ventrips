@@ -46,7 +46,7 @@ const getTravelNumbers = async function(useMock: boolean = false): Promise<any> 
                     return;
                 }
                 const obj = {
-                    date: new Date($(this).find('td:nth-child(1)').text()),
+                    date: $(this).find('td:nth-child(1)').text(),
                     currentYearTravelNumbers: _.replace($(this).find('td:nth-child(2)').text(), /,/g, ''),
                     previousYearTravelNumbers: _.replace($(this).find('td:nth-child(3)').text(), /,/g, '')
                 }

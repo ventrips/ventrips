@@ -149,11 +149,11 @@ export class TravelComponent implements OnInit {
   formatChart(data: Array<any>): void {
     const reformattedData = _.map(data, (item) =>
       _.assign(item, {
-        date: new Date(_.get(item, ['date', 'seconds']) * 1000)
+        date: moment(_.get(item, ['date'])).utcOffset(0)
       })
     );
-    const sortedData = _.orderBy(data, [item => moment(_.get(item, ['date']))], ['asc']);
-    this.lineChartLabels = _.map(sortedData, (item) => moment(_.get(item, ['date'])).format('l'));
+    const sortedData = _.orderBy(data, [item => moment(_.get(item, ['date'])).utcOffset(0)], ['asc']);
+    this.lineChartLabels = _.map(sortedData, (item) => moment(_.get(item, ['date'])).utcOffset(0).format('l'));
     this.lineChartData = [
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['currentYearTravelNumbers']))), label: "Current Year Travel Numbers", yAxisID: "y-axis-0"},
       { data: _.map(sortedData, (item) => _.toNumber(_.get(item, ['previousYearTravelNumbers']))), label: "Previous Year Travel Numbers", yAxisID: "y-axis-1"},
