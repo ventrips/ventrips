@@ -7,6 +7,8 @@ const Travel = require('./travel');
 
 admin.initializeApp();
 const db = admin.firestore();
+export * from './news-api';
+
 // import * as Stripe from 'stripe';
 // const stripe = new Stripe(functions.config().stripe.secret);
 
