@@ -1,8 +1,9 @@
 import * as functions from 'firebase-functions';
-// import * as admin from 'firebase-admin';
+import * as admin from 'firebase-admin';
 import * as querystring from 'querystring';
 import * as _ from 'lodash';
 import * as Request from 'request';
+const db = admin.firestore();
 const Sentiment = require('sentiment');
 const Utils = require('./utils');
 
@@ -34,17 +35,29 @@ const commonRequest = async (request: any, endpoint: string): Promise<any> => {
     });
 };
 
+const setFirebase = (request: any, response: any, data: any, firebasePath: string, setFirebase: boolean) => {
+    setSentiment(data);
+    if (!setFirebase) {
+        return response.send(data);
+    }
+    const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
+    // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&local=true
+    return db.doc(firebasePath).set(final).then(() => {
+        return response.send(final);
+    }).catch((error) => {
+        return response.send(error);
+    });
+}
+
 export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
     let data;
     /* Mock */
     data = require('./../mocks/news-api/get-everything-news-api.json');
-    setSentiment(data);
-    return response.send(data);
+    return setFirebase(request, response, data, 'trends/get-everything-news-api', false);
     /* Real */
     data = await commonRequest(request, 'everything');
-    setSentiment(data);
-    return response.send(data);
+    setFirebase(request, response, data, 'trends/get-everything-news-api', true);
 });
 
 export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
@@ -52,10 +65,8 @@ export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, m
     let data;
     /* Mock */
     data = require('./../mocks/news-api/get-everything-news-api.json');
-    setSentiment(data);
-    return response.send(data);
+    return setFirebase(request, response, data, 'trends/get-top-headlines-news-api', false);
     /* Real */
     data = await commonRequest(request, 'top-headlines');
-    setSentiment(data);
-    return response.send(data);
+    setFirebase(request, response, data, 'trends/get-top-headlines-news-api', true);
 });
