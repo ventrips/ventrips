@@ -46,7 +46,7 @@ export class NewsApiComponent implements OnInit {
 
   // Fetches latest and sets to firestore DB
   getTopHeadlines(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/getTopHeadlinesNewsAPI?country=us&category=business&pageSize=100`)
+    return this.http.get(`${environment.apiUrl}/getTopHeadlinesNewsAPI?country=us&category=business`)
     .pipe(map((response: Response) => { return response }));
   };
 

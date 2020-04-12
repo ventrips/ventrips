@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import * as Request from 'request';
 const db = admin.firestore();
 const Sentiment = require('sentiment');
+const isBullish = require('is-bullish');
 const Utils = require('./utils');
 
 const BASE_URL = 'http://newsapi.org/v2';
@@ -19,6 +20,11 @@ const setSentiment = (data: any) => {
     });
     const overallSentiment = new Sentiment();
     data.overallSentiment = overallSentiment.analyze(_.join(_.uniq(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), [])), ' '));
+}
+
+const setIsBullish = (data: any) => {
+    const sortedData = _.sortBy(_.get(data, ['articles']), ['publishedAt']);
+    data.isBullish = isBullish(_.map(_.get(sortedData, ['articles']), (article) => _.get(article, ['sentiment', 'score'])));
 }
 
 const commonRequest = async (request: any, endpoint: string): Promise<any> => {
@@ -37,6 +43,8 @@ const commonRequest = async (request: any, endpoint: string): Promise<any> => {
 
 const setFirebase = (request: any, response: any, data: any, firebasePath: string, setFirebase: boolean) => {
     setSentiment(data);
+    setIsBullish(data);
+
     if (!setFirebase) {
         return response.send(data);
     }
