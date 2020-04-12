@@ -8,12 +8,14 @@ import { TrendingTickersComponent } from './trending-tickers/trending-tickers.co
 import { ComboChartTrendsComponent } from './combo-chart-trends/combo-chart-trends.component';
 import { ChartsModule } from 'ng2-charts';
 import { NewsApiComponent } from './news-api/news-api.component';
+import { NewsApiArticleComponent } from './news-api/news-api-article/news-api-article.component';
 @NgModule({
   declarations: [
     TrendsComponent,
     TrendingTickersComponent,
     ComboChartTrendsComponent,
-    NewsApiComponent
+    NewsApiComponent,
+    NewsApiArticleComponent
   ],
   imports: [
     CommonModule,

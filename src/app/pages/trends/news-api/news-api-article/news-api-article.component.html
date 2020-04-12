@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-2">
+        <a [href]="article?.url" [title]="article?.title" target="__blank">
+            <img class="img-fluid" src="../assets/img/image-placeholder.jpg" [attr.data-src]="article?.urlToImage" alt="Article Image">
+        </a>
+    </div>
+    <div class="col">
+        <p class="mb-2 mr-2">
+            <a [href]="article?.url" [title]="article?.title" target="__blank">{{article?.title}}</a>
+        </p>
+        <p>{{article?.publishedAt | date:'medium'}}</p>
+        <p>{{article?.description}}</p>
+        <p>
+            <span class="font-weight-bold">Sentiment Score: {{article?.sentiment?.score}}</span>
+        </p>
+    </div>
+</div>

@@ -20,14 +20,7 @@
         </div>
         <div class="row my-2">
             <div class="col-12" *ngFor="let article of topHeadlines?.articles; let index = index">
-                <p class="mb-2 mr-2">
-                    <a [href]="article?.url" [title]="article?.title" target="__blank">{{index + 1}}. {{article?.title}}</a>
-                </p>
-                <p>{{article?.publishedAt | date:'medium'}}</p>
-                <p>{{article?.description}}</p>
-                <p>
-                    <span class="font-weight-bold">Sentiment Score: {{article?.sentiment?.score}}</span>
-                </p>
+                <app-news-api-article [article]="article"></app-news-api-article>
             </div>
         </div>
     </div>
