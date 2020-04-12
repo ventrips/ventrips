@@ -18,10 +18,19 @@ import * as _ from 'lodash';
 export class NewsApiComponent implements OnInit {
   public environment = environment;
   public collection = 'trends';
-  public id = 'get-top-headlines-news-api';
   public user: User;
-
-  public topHeadlines;
+  public mapperOption = 'everything';
+  public newsApi = {
+    everything: {
+      id: 'get-everything-news-api',
+      endpoint: 'getEverythingNewsAPI?q=airlines&from=2020-04-11&to=2020-04-12'
+    },
+    topHeadlines: {
+      id: 'get-top-headlines-news-api',
+      endpoint: 'getTopHeadlinesNewsAPI?country=us&category=business'
+    }
+  }
+  public data;
 
   constructor(
     private http: HttpClient,
@@ -34,32 +43,33 @@ export class NewsApiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.newsApi[this.mapperOption].id}`, `${this.collection}-${this.newsApi[this.mapperOption].id}`, false)
     .subscribe(response => {
       if (_.isEmpty(response)) {
         return;
       }
-      this.topHeadlines = response;
+      this.data = response;
     }, () => {
     });
   }
 
   // Fetches latest and sets to firestore DB
-  getTopHeadlines(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/getTopHeadlinesNewsAPI?country=us&category=business`)
+  getNewsApi(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/${this.newsApi[this.mapperOption].endpoint}`)
     .pipe(map((response: Response) => { return response }));
   };
 
-  refreshTopHeadlines(): void {
+  refreshNewsApi(): void {
     if (!this.authService.canEdit(this.user)) {
       return;
     }
     this.spinner.show();
-    this.getTopHeadlines().subscribe(response => {
+    this.getNewsApi().subscribe(response => {
       this.spinner.hide();
     }, (error) => {
       this.spinner.hide();
     });
+
   }
 
   isPlatformBrowser() {

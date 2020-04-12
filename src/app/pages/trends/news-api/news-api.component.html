@@ -1,25 +1,25 @@
 <section>
     <div class="container-fluid my-5">
         <div class="text-center">
-            <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshTopHeadlines()">
+            <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
                 </ng-container>
                 Refresh
             </button>
-            <p class="small text-secondary my-3 mr-3" *ngIf="topHeadlines?.updated">
-                Last Updated: {{topHeadlines?.updated | timeStampDate:'short'}} ({{topHeadlines?.updated | timeAgo}})
+            <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
+                Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
             </p>
         </div>
         <!-- Overall -->
         <div>
-            <p><span class="font-weight-bold">Overall Sentiment Score: {{topHeadlines?.overallSentiment?.score}}</span></p>
-            <p><span class="font-weight-bold">Bullish: {{topHeadlines?.isBullish}}</span></p>
-            <!-- <p><span class="font-weight-bold">Positive Words: {{topHeadlines?.overallSentiment?.positive}}</span></p>
-            <p><span class="font-weight-bold">Negative Words: {{topHeadlines?.overallSentiment?.negative}}</span></p> -->
+            <p><span class="font-weight-bold">Overall Sentiment Score: {{data?.overallSentiment?.score}}</span></p>
+            <p><span class="font-weight-bold">Bullish: {{data?.isBullish}}</span></p>
+            <!-- <p><span class="font-weight-bold">Positive Words: {{data?.overallSentiment?.positive}}</span></p>
+            <p><span class="font-weight-bold">Negative Words: {{data?.overallSentiment?.negative}}</span></p> -->
         </div>
         <div class="row my-2">
-            <div class="col-12" *ngFor="let article of topHeadlines?.articles; let index = index">
+            <div class="col-12" *ngFor="let article of data?.articles; let index = index">
                 <app-news-api-article [article]="article"></app-news-api-article>
             </div>
         </div>
