@@ -18,8 +18,9 @@
             <!-- <p><span class="font-weight-bold">Positive Words: {{data?.overallSentiment?.positive}}</span></p>
             <p><span class="font-weight-bold">Negative Words: {{data?.overallSentiment?.negative}}</span></p> -->
         </div>
-        <div class="row my-2">
-            <div class="col-12" *ngFor="let article of data?.articles; let index = index">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+            <div *ngFor="let article of data?.articles; let index = index">
                 <app-news-api-article [article]="article"></app-news-api-article>
             </div>
         </div>
