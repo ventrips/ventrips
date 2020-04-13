@@ -3,7 +3,7 @@
         <img class="article-image mr-4 rounded" src="../assets/img/image-placeholder.jpg" [attr.data-src]="article?.urlToImage" alt="Article Image">
     </a>
     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <a [href]="article?.url" [title]="article?.title" target="__blank"><h4>{{article?.title}}</h4></a>
+        <a [href]="article?.url" [title]="article?.title" target="__blank"><h5>{{article?.title}}</h5></a>
         <strong class="d-block text-gray-dark">{{article?.source?.name}}</strong>
         <strong class="d-block text-gray-dark">{{article?.publishedAt | date:'medium'}}</strong>
         <p>{{article?.description}}</p>

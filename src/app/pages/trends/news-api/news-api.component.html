@@ -1,27 +1,33 @@
 <section>
     <div class="container-fluid my-5">
-        <div class="text-center">
-            <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
-                <ng-container *ngIf="isPlatformBrowser()">
-                    <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                </ng-container>
-                Refresh
-            </button>
-            <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
-                Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
-            </p>
-        </div>
-        <!-- Overall -->
-        <div>
-            <p><span class="font-weight-bold">Overall Sentiment Score: {{data?.overallSentiment?.score}}</span></p>
-            <p><span class="font-weight-bold">Bullish: {{data?.isBullish}}</span></p>
-            <!-- <p><span class="font-weight-bold">Positive Words: {{data?.overallSentiment?.positive}}</span></p>
-            <p><span class="font-weight-bold">Negative Words: {{data?.overallSentiment?.negative}}</span></p> -->
-        </div>
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
-            <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-            <div *ngFor="let article of data?.articles; let index = index">
-                <app-news-api-article [article]="article"></app-news-api-article>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="text-center">
+                    <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
+                        <ng-container *ngIf="isPlatformBrowser()">
+                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                        </ng-container>
+                        Refresh
+                    </button>
+                    <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
+                        Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
+                    </p>
+                </div>
+                <!-- Overall -->
+                <div>
+                    <p><span class="font-weight-bold">Overall Sentiment Score: {{data?.overallSentiment?.score}}</span></p>
+                    <p><span class="font-weight-bold">Bullish: {{data?.isBullish}}</span></p>
+                    <!-- <p><span class="font-weight-bold">Positive Words: {{data?.overallSentiment?.positive}}</span></p>
+                    <p><span class="font-weight-bold">Negative Words: {{data?.overallSentiment?.negative}}</span></p> -->
+                </div>
+                <h3 class="mb-2">Recent Updates</h3>
+                <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
+                    <div *ngFor="let article of data?.articles; let index = index">
+                        <app-news-api-article [article]="article"></app-news-api-article>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
