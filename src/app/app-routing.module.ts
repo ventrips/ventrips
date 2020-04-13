@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'terms', loadChildren: () => import('./pages/page/page.module').then(mod => mod.PageModule)},
   { path: 'about', loadChildren: () => import('./pages/page/page.module').then(mod => mod.PageModule)},
   { path: 'admin', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/admin.module').then(mod => mod.AdminModule)},
-  { path: 'trends', canActivate: [SubscriberGuard], loadChildren: () => import('./pages/trends/trends.module').then(mod => mod.TrendsModule)},
+  { path: 'trends', loadChildren: () => import('./pages/trends/trends.module').then(mod => mod.TrendsModule)},
   { path: 'calculator', loadChildren: () => import('./pages/calculator/calculator.module').then(mod => mod.CalculatorModule)},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
