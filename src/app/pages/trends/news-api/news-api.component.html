@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="data">
     <div class="text-center">
         <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
             <ng-container *ngIf="isPlatformBrowser()">

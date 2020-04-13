@@ -23,9 +23,8 @@ export class NewsApiComponent implements OnInit {
   public user: User;
   public q: string;
   public search: string;
-  public mapperOption = 'everything';
   public id = 'get-everything-news-api'; //get-top-headlines-news-api
-  public data;
+  public data: any;
 
   constructor(
     private http: HttpClient,
