@@ -6,13 +6,11 @@ import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/op
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Post } from '../../interfaces/post';
-import { AuthService } from '../../services/firestore/auth/auth.service';
-import { environment } from '../../../environments/environment';
+import { AuthService } from '../../../services/firestore/auth/auth.service';
+import { environment } from '../../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from '../../interfaces/user';
-import { InputsConfig } from '../../interfaces/inputs-config';
-import { SsrService } from '../../services/firestore/ssr/ssr.service';
+import { User } from '../../../interfaces/user';
+import { SsrService } from '../../../services/firestore/ssr/ssr.service';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -26,10 +24,7 @@ import * as _ from 'lodash';
   providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
 })
 export class TravelComponent implements OnInit {
-  public title: string = `Real-Time Travel Dashboard Tracker`;
-  public description: string = `See data, trends, and learn about the latest travel news all in one go`;
   public environment = environment;
-  public posts: Array<Post>;
   public isLoading = true;
   public _ = _;
   public user: User;
@@ -122,10 +117,6 @@ export class TravelComponent implements OnInit {
 
     this.travelCharts = undefined;
     this.spinner.show();
-    this.ssrService.setSeo({
-      title: this.title,
-      description: this.description
-    }, `travel`, true);
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
       if (_.isEmpty(response)) {

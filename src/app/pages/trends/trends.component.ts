@@ -7,7 +7,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/firestore/auth/auth.service';
 import { User } from '../../interfaces/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
 import * as Sentiment from 'sentiment';
@@ -32,6 +32,7 @@ export class TrendsComponent implements OnInit {
   public collection: string = 'trends';
   public id: string = 'trends';
   public environment = environment;
+  public url: string;
 
   public updated: string;
   public recommended: Array<any> = [];
@@ -47,11 +48,15 @@ export class TrendsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ssrService: SsrService,
     public authService: AuthService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.url = this.router.url;
+    });
     this.predict = undefined;
     this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, true)

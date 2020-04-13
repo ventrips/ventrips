@@ -1,36 +1,28 @@
 <section>
-    <div class="container-fluid my-5">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="text-center">
-                    <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
-                        <ng-container *ngIf="isPlatformBrowser()">
-                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                        </ng-container>
-                        Refresh
-                    </button>
-                    <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
-                        Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
-                    </p>
-                </div>
-                <!-- Overall -->
-                <div class="d-flex flex-wrap mb-2">
-                    <h3 class="mb-0 mr-3">Recent Updates</h3>
-                    <span class="badge" [ngClass]="{'badge-success': data?.isBullish, 'badge-danger': !data?.isBullish}">
-                        <span class="h4">{{data?.isBullish ? 'Bullish' : 'Bearish'}}</span>
-                    </span>
-                    <div class="ml-auto">
-                        <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
-                    </div>
-                </div>
-                <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
-                    <div *ngFor="let article of data?.articles; let index = index">
-                        <app-news-api-article [article]="article"></app-news-api-article>
-                    </div>
-                </div>
-            </div>
+    <div class="text-center">
+        <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+            </ng-container>
+            Refresh
+        </button>
+        <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
+            Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
+        </p>
+    </div>
+    <!-- Overall -->
+    <div class="d-flex flex-wrap mb-2">
+        <h3 class="mb-0 mr-3">Recent Updates</h3>
+        <span class="badge" [ngClass]="{'badge-success': data?.isBullish, 'badge-danger': !data?.isBullish}">
+            <span class="h4">{{data?.isBullish ? 'Bullish' : 'Bearish'}}</span>
+        </span>
+        <div class="ml-auto">
+            <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
+        </div>
+    </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
+        <div *ngFor="let article of data?.articles; let index = index">
+            <app-news-api-article [article]="article"></app-news-api-article>
         </div>
     </div>
 </section>

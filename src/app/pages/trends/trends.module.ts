@@ -9,13 +9,15 @@ import { ComboChartTrendsComponent } from './combo-chart-trends/combo-chart-tren
 import { ChartsModule } from 'ng2-charts';
 import { NewsApiComponent } from './news-api/news-api.component';
 import { NewsApiArticleComponent } from './news-api/news-api-article/news-api-article.component';
+import { TravelComponent } from './travel/travel.component';
 @NgModule({
   declarations: [
     TrendsComponent,
     TrendingTickersComponent,
     ComboChartTrendsComponent,
     NewsApiComponent,
-    NewsApiArticleComponent
+    NewsApiArticleComponent,
+    TravelComponent
   ],
   imports: [
     CommonModule,
