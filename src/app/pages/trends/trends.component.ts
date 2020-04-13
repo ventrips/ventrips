@@ -22,6 +22,8 @@ import { KeysPipe } from '../../pipes/keys/keys.pipe';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
+  public title: string = `Real-Time Travel Dashboard Tracker`;
+  public description: string = `See data, trends, and learn about the latest travel news all in one go`;
   public chartTrends: any;
   public search: string;
   public q: string;
@@ -54,160 +56,14 @@ export class TrendsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ssrService.setSeo({
+      title: this.title,
+      description: this.description
+    }, `trends`, true);
     this.activatedRoute.queryParams.subscribe(params => {
       this.url = this.router.url;
     });
-    this.predict = undefined;
-    this.spinner.show();
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, true)
-    .subscribe(response => {
-      if (_.isEmpty(response)) {
-        return;
-      }
-      this.spinner.hide();
-      this.predict = response;
-      this.setSentiment('news');
-      this.setSentiment('forums');
-
-      this.updated = _.get(this.predict, ['updated']);
-      this.tickers = _.get(this.predict, ['tickers']);
-      this.requiredTickers = _.filter(this.tickers, (ticker) => _.includes(['SPY', 'XLF', '^DJI', 'NDAQ'], _.get(ticker, ['symbol'])));
-      this.recommended = _.filter(this.tickers, (ticker) => ticker.recommended);
-
-      this.news = _.get(this.predict, ['news']);
-      this.forums = _.get(this.predict, ['forums']);
-
-      this.initSearchNews();
-    }, (error) => {
-      this.spinner.hide();
-      this.initSearchNews();
-    });
-
     this.authService.user$.subscribe(user => this.user = user);
-  }
-
-  initSearchNews(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.q = params.q;
-      this.search = _.cloneDeep(this.q);
-      this.data = undefined;
-
-      if (_.isNil(this.q)) { return; };
-      this.spinner.show();
-      this.searchNews(this.q)
-      .subscribe((response) => {
-        this.spinner.hide();
-        this.data = response;
-        this.toastr.success(`${this.q}`, `Search Success!`)
-      }, (error) => {
-        this.toastr.error(error);
-      });
-    });
-  }
-
-  setSentiment(type: string): void {
-    const news = _.get(this.predict, [type]);
-    for (let key in news) {
-      const source = _.get(news, [key]);
-      for (let article of source) {
-        const title = _.get(article, ['title']);
-        article['sentiment'] = (new Sentiment()).analyze(title);
-      }
-    }
-  }
-
-  searchNews(q: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/searchNews?q=${q}`)
-    .pipe(map((response: Response) => { return response }));
-  };
-
-  getChartTrends(symbol: string, period: string = 'pastDay'): void {
-    this.spinner.show();
-    // this.http.get(`http://localhost:5001/ventrips-website/us-central1/chartTrends?symbol=${symbol}&period=${period}&mock=false`)
-    this.http.get(`${environment.apiUrl}/chartTrends?symbol=${symbol}&period=${period}&mock=false`)
-    .pipe(map((response: Response) => { return response }))
-    .subscribe((data: any) => {
-      this.chartTrends = data;
-      this.spinner.hide();
-      this.scrollToTop();
-    }, (error) => {
-      this.spinner.hide();
-    });
-  };
-
-  // Fetches latest and sets to firestore DB
-  getTrends(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/trends`)
-    .pipe(map((response: Response) => { return response }));
-  };
-
-  refreshTrends(): void {
-    if (!this.authService.canEdit(this.user)) {
-      return;
-    }
-    this.spinner.show();
-    this.getTrends().subscribe(response => {
-      this.spinner.hide();
-    }, (error) => {
-      this.spinner.hide();
-    });
-  }
-
-  // For Local Purposes. Does not use write / read calls because it doesn't set data to firestore DB
-  getPredict(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/predict`)
-    .pipe(map((response: Response) => { return response }));
-  };
-
-  removeCommonTexts(value: string) {
-    value = _.toLower(value);
-    _.forEach([
-      'the ',
-      ' and companies',
-      ' & company',
-      ' company',
-      ' companies',
-      ' and co.',
-      ' & co.',
-      ' co.',
-      ' incorporated',
-      ' corporation',
-      ' corp',
-      ' corp.',
-      ' designs',
-      ' limited',
-      ', inc',
-      ' inc.',
-      ' inc',
-      ' lp',
-      ' l.p.',
-      ' plc',
-      ' p.l.c',
-      ' ltd',
-      '. ',
-      `'s`,
-      `’s`,
-      ' .',
-      /[`~!@#$%^*()_|+\-=?;:",<>\{\}\[\]\\\/]/gi
-    ], (target) => {
-      value = _.replace(value, target, ' ');
-    });
-    return _.trim(_.replace(value, /[&]/gi, '%26'));
-  }
-
-  isGoodDay(): boolean {
-    let count = 0;
-    _.forEach(this.requiredTickers, (ticker) => {
-      if (_.get(ticker, ['regularMarketChangePercent']) >= 0) {
-        count++;
-      }
-    });
-    return (count / this.requiredTickers.length) >= .75;
-  }
-
-  scrollToTop() {
-    if (isPlatformServer(this.platformId)) { return; }
-    window.scrollTo(0, 0);
   }
 
   isPlatformBrowser() {
