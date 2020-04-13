@@ -22,8 +22,8 @@ import { KeysPipe } from '../../pipes/keys/keys.pipe';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
-  public title: string = `Real-Time Travel Dashboard Tracker`;
-  public description: string = `See data, trends, and learn about the latest travel news all in one go`;
+  public title: string = `Trends Tracker`;
+  public description: string = `See data, trends, and learn about the latest news all in one go`;
   public chartTrends: any;
   public search: string;
   public q: string;
