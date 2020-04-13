@@ -25,4 +25,6 @@
         </div>
     </div>
 </div>
-<!-- <app-stocks></app-stocks> -->
+<ng-container *ngIf="authService?.isAdmin(user)">
+    <app-stocks></app-stocks>
+</ng-container>
