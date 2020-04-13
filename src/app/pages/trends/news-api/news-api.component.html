@@ -16,13 +16,15 @@
                     </p>
                 </div>
                 <!-- Overall -->
-                <div>
-                    <p><span class="font-weight-bold">Overall Sentiment Score: {{data?.overallSentiment?.score}}</span></p>
-                    <p><span class="font-weight-bold">Bullish: {{data?.isBullish}}</span></p>
-                    <!-- <p><span class="font-weight-bold">Positive Words: {{data?.overallSentiment?.positive}}</span></p>
-                    <p><span class="font-weight-bold">Negative Words: {{data?.overallSentiment?.negative}}</span></p> -->
+                <div class="d-flex flex-wrap mb-2">
+                    <h3 class="mb-0 mr-3">Recent Updates</h3>
+                    <span class="badge" [ngClass]="{'badge-success': data?.isBullish, 'badge-danger': !data?.isBullish}">
+                        <span class="h4">{{data?.isBullish ? 'Bullish' : 'Bearish'}}</span>
+                    </span>
+                    <div class="ml-auto">
+                        <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
+                    </div>
                 </div>
-                <h3 class="mb-2">Recent Updates</h3>
                 <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
                     <div *ngFor="let article of data?.articles; let index = index">
                         <app-news-api-article [article]="article"></app-news-api-article>
