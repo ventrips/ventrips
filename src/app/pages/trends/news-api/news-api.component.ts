@@ -8,6 +8,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { User } from './../../../interfaces/user';
 import { environment } from './../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -20,17 +21,10 @@ export class NewsApiComponent implements OnInit {
   public environment = environment;
   public collection = 'trends';
   public user: User;
+  public q: string;
+  public search: string;
   public mapperOption = 'everything';
-  public newsApi = {
-    everything: {
-      id: 'get-everything-news-api',
-      endpoint: `getEverythingNewsAPI?q=airline&pageSize=100&from=${moment().subtract(1, 'days').format('YYYY-MM-DD')}&to=${moment().format('YYYY-MM-DD')}&sortBy=publishedAt`
-    },
-    topHeadlines: {
-      id: 'get-top-headlines-news-api',
-      endpoint: 'getTopHeadlinesNewsAPI?country=us&category=business'
-    }
-  }
+  public id = 'get-everything-news-api'; //get-top-headlines-news-api
   public data;
 
   constructor(
@@ -38,13 +32,14 @@ export class NewsApiComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
     public authService: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {
-    this.authService.user$.subscribe(user => this.user = user);
-  }
+  ) {}
 
   ngOnInit() {
-    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.newsApi[this.mapperOption].id}`, `${this.collection}-${this.newsApi[this.mapperOption].id}`, false)
+    this.authService.user$.subscribe(user => this.user = user);
+    this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
       if (_.isEmpty(response)) {
         return;
@@ -56,7 +51,8 @@ export class NewsApiComponent implements OnInit {
 
   // Fetches latest and sets to firestore DB
   getNewsApi(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/${this.newsApi[this.mapperOption].endpoint}`)
+    // getTopHeadlinesNewsAPI?country=us&category=business
+    return this.http.get(`${environment.apiUrl}/getEverythingNewsAPI?q=${this.search}&pageSize=100&from=${moment().subtract(1, 'days').format('YYYY-MM-DD')}&to=${moment().format('YYYY-MM-DD')}&sortBy=publishedAt`)
     .pipe(map((response: Response) => { return response }));
   };
 

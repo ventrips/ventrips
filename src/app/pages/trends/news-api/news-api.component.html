@@ -20,6 +20,17 @@
             <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
         </div>
     </div>
+    <div class="input-group">
+        <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
+            [(ngModel)]="search" />
+        <div class="input-group-append">
+            <button class="btn btn-warning" [disabled]="!search" (click)="refreshNewsApi()">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                </ng-container>
+            </button>
+        </div>
+    </div>
     <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
         <div *ngFor="let article of data?.articles; let index = index">
             <app-news-api-article [article]="article"></app-news-api-article>

@@ -61,8 +61,8 @@ export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, mem
     Utils.cors(request, response);
     let data;
     /* Mock */
-    data = require('./../mocks/news-api/get-everything-news-api.json');
-    return setFirebase(request, response, data, 'trends/get-everything-news-api', false);
+    // data = require('./../mocks/news-api/get-everything-news-api.json');
+    // return setFirebase(request, response, data, 'trends/get-everything-news-api', false);
     /* Real */
     data = await commonRequest(request, 'everything');
     setFirebase(request, response, data, 'trends/get-everything-news-api', true);
@@ -72,8 +72,8 @@ export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, m
     Utils.cors(request, response);
     let data;
     /* Mock */
-    data = require('./../mocks/news-api/get-everything-news-api.json');
-    return setFirebase(request, response, data, 'trends/get-top-headlines-news-api', false);
+    // data = require('./../mocks/news-api/get-everything-news-api.json');
+    // return setFirebase(request, response, data, 'trends/get-top-headlines-news-api', false);
     /* Real */
     data = await commonRequest(request, 'top-headlines');
     setFirebase(request, response, data, 'trends/get-top-headlines-news-api', true);
