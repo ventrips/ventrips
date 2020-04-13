@@ -20,7 +20,7 @@
             <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
         </div>
     </div>
-    <div class="input-group">
+    <div class="input-group" *ngIf="authService?.canEdit(user)">
         <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
             [(ngModel)]="search" />
         <div class="input-group-append">
