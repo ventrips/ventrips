@@ -9,6 +9,7 @@ import { User } from './../../../interfaces/user';
 import { environment } from './../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-news-api',
@@ -23,7 +24,7 @@ export class NewsApiComponent implements OnInit {
   public newsApi = {
     everything: {
       id: 'get-everything-news-api',
-      endpoint: 'getEverythingNewsAPI?q=airlines&from=2020-04-11&to=2020-04-12'
+      endpoint: `getEverythingNewsAPI?q=airline&pageSize=100&from=${moment().subtract(1, 'days').format('YYYY-MM-DD')}&to=${moment().format('YYYY-MM-DD')}&sortBy=publishedAt`
     },
     topHeadlines: {
       id: 'get-top-headlines-news-api',
