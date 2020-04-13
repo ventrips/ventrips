@@ -41,11 +41,11 @@ const commonRequest = async (request: any, endpoint: string): Promise<any> => {
     });
 };
 
-const setFirebase = (request: any, response: any, data: any, firebasePath: string, setFirebase: boolean) => {
+const setFirebase = (request: any, response: any, data: any, firebasePath: string, sendToFirebase: boolean) => {
     setSentiment(data);
     setIsBullish(data);
 
-    if (!setFirebase) {
+    if (!sendToFirebase) {
         return response.send(data);
     }
     const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
