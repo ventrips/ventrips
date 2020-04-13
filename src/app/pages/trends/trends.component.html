@@ -18,10 +18,12 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-6">
-            <app-news-api></app-news-api>
+            <ng-container *ngIf="isPlatformBrowser()">
+                <app-travel></app-travel>
+            </ng-container>
         </div>
         <div class="col-xs-12 col-md-6">
-            <app-travel></app-travel>
+            <app-news-api></app-news-api>
         </div>
     </div>
 </div>
