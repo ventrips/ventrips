@@ -20,6 +20,12 @@ body {
     overflow-x: hidden !important;
 }
 
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    line-height: 1.42;
+}
+
 ::selection {
     background: #ffc107;
     text-shadow: 0 1px 1px #212529 !important
@@ -65,7 +71,7 @@ quill-view-html .ql-container {
     font-family: -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     height: unset;
     .ql-editor {
-        font-size: 1.5rem;
+        font-size: 2rem;
         padding: 0;
         width: 100%;
     }
