@@ -29,7 +29,7 @@ export class SsrService {
         title = _.get(page, ['displayName'], 'Profile');
         description = _.get(page, ['description']);
         image = _.get(page, ['photoURL']);
-      } else if (_.includes(stateKey, 'blog')) {
+      } else if (_.includes(stateKey, 'home')) {
         // Home Page
         title = 'Home';
       }
