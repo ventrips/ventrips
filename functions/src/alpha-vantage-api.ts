@@ -42,7 +42,7 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
     Utils.cors(request, response);
     let data;
     /* Mock */
-    data = require('./../mocks/alpha-vantage-api/alpha-vantage-api.json');
+    data = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
     return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
     /* Real */
     data = await commonRequest(request, 'query');
