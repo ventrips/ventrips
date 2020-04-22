@@ -8,6 +8,7 @@ const Travel = require('./travel');
 admin.initializeApp();
 const db = admin.firestore();
 export * from './news-api';
+export * from './alpha-vantage-api';
 
 // import * as Stripe from 'stripe';
 // const stripe = new Stripe(functions.config().stripe.secret);
