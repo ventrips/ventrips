@@ -17,38 +17,7 @@ export class DynamicChartComponent implements OnInit {
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{
-        type: 'time',
-        time: {
-            unit: 'hour'
-        }
-      }],
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          position: 'left',
-          ticks: {
-            fontColor: 'blue',
-            stepSize: 10000000
-          }
-        },
-        {
-          id: 'y-axis-2',
-          position: 'right',
-          ticks: {
-            fontColor: 'orange',
-            stepSize: 10
-          }
-        }
-      ]
-    },
-    annotation: {
-      annotations: [],
-    },
-  };
+  public lineChartOptions: (ChartOptions & { annotation: any }) = { annotation: {}};
   public lineChartLegend = true;
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
@@ -96,7 +65,55 @@ export class DynamicChartComponent implements OnInit {
         this.lineChartData.push(axisData);
     });
     console.log(this.lineChartData);
-    console.log(this.lineChartLabels);
+    this.lineChartOptions = {
+      scales: {
+        // We use this empty structure as a placeholder for dynamic theming.
+        xAxes: [{
+          type: 'time',
+          time: {
+              unit: 'hour'
+          }
+        }],
+        yAxes: [
+          {
+            id: 'y-axis-1',
+            position: 'left',
+            ticks: {
+              fontColor: 'blue',
+              stepSize: 10000000
+            }
+          },
+          {
+            id: 'y-axis-2',
+            position: 'right',
+            ticks: {
+              fontColor: 'orange',
+              stepSize: 10
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+        ],
+      },
+    };
+      const openPrices = _.get(_.find(this.lineChartData, { label: 'Open'}), ['data']);
+      const openPrice = _.get(openPrices, [0]);
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: openPrice,
+          borderColor: "red",
+          label: {
+            content: `${'Open'} @ ${openPrice}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
   }
 
   // events
