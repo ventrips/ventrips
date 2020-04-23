@@ -12,10 +12,10 @@ const Utils = require('./utils');
 const BASE_URL = 'https://www.alphavantage.co/query';
 const API_KEY = 'J5LLHCUPAQ0CR0IN';
 
-const commonRequest = async (request: any, endpoint: string): Promise<any> => {
+const alphaVantageRequest = async (params: object): Promise<any> => {
     return new Promise((resolve: any, reject: any) => {
-        _.set(request.query, 'apikey', API_KEY);
-        const url = `${BASE_URL}/${endpoint}?${querystring.stringify(request.query)}`;
+        _.set(params, 'apikey', API_KEY);
+        const url = `${BASE_URL}?${querystring.stringify(params)}`;
         Request(url, function (error: any, res: any, body: any) {
             if (!_.isNil(error)) {
                 reject(error);
@@ -38,16 +38,12 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
     });
 }
 
-export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
-    let data: any;
-    /* Mock */
-    const fiveMinData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+
+const convertChartData = (fiveMinData: any, dayData: any) => {
     const fiveMinDates = Object.keys(fiveMinData['Time Series (5min)']).map(date => new Date(date).getTime());
     const minDate = `${((new Date(Math.min(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
     const maxDate = `${((new Date(Math.max(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
 
-    const dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
     _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
         _.set(dayData['Time Series (Daily)'], `${key} 09:30:00`, value);
         _.unset(dayData['Time Series (Daily)'], key);
@@ -80,7 +76,7 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
         _.set(chartData, key, chartDatum);
     });
 
-    data = {
+    return {
         metaData: {
             information: fiveMinData['Meta Data']['1. Information'],
             symbol: fiveMinData['Meta Data']['2. Symbol'],
@@ -91,10 +87,22 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
         },
         chartData
     }
-    return response.send(data);
+};
 
-    return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
+export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    Utils.cors(request, response);
+    let data;
+    let fiveMinData;
+    let dayData;
+    /* Mock */
+    // fiveMinData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+    // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
+    // data = convertChartData(fiveMinData, dayData);
+    // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
+
     /* Real */
-    data = await commonRequest(request, 'query');
-    setFirebase(request, response, data, 'trends/alpha-vantage-api', true);
+    fiveMinData = await alphaVantageRequest({function: 'TIME_SERIES_INTRADAY', symbol: request.query.symbol, interval: '5min', outputsize: 'full'});
+    dayData = await alphaVantageRequest({function: 'TIME_SERIES_DAILY', symbol: request.query.symbol, outputsize: 'compact'});
+    data = convertChartData(fiveMinData, dayData);
+    setFirebase(request, response, data, 'trends/get-alpha-vantage-api', true);
 });
