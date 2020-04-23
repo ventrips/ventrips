@@ -61,7 +61,7 @@ const convertChartData = (fiveMinData: any, dayData: any) => {
 
     const dateGroup = (item: any) => (item['date']).substring(0, 10);
 
-    let groupedData = _.groupBy(dates, dateGroup);
+    const groupedData = _.groupBy(dates, dateGroup);
 
     const chartData = {};
     _.forEach(groupedData, (value: any, key: any) => {
