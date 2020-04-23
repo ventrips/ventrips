@@ -32,7 +32,7 @@ export class DynamicChartComponent implements OnInit {
           position: 'left',
           ticks: {
             fontColor: 'blue',
-            stepSize: 2000000
+            stepSize: 10000000
           }
         },
         {
