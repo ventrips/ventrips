@@ -33,6 +33,7 @@ export class AlphaVantageApiComponent implements OnInit {
   public id: string = 'get-alpha-vantage-api';
   public metaData: any;
   public data: any;
+  public updated: string;
   public search: string = '';
 
   constructor(
@@ -72,6 +73,7 @@ export class AlphaVantageApiComponent implements OnInit {
           }
         ), 'date')
       );
+      this.updated = _.get(response, ['updated']);
       this.search = _.get(this.metaData, ['symbol'])
       this.isLoading = false;
       // this.spinner.hide();

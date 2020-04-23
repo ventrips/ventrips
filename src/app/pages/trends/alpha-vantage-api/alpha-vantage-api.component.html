@@ -11,8 +11,8 @@
                 </button>
             </div>
         </div>
-        <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
-            Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
+        <p class="small text-secondary my-3 mr-3" *ngIf="updated">
+            Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
         </p>
     </div>
     <section *ngFor="let item of data">
