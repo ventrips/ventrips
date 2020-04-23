@@ -40,9 +40,48 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
 
 export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
-    let data;
+    let data: any;
     /* Mock */
-    data = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+    const fiveMinData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+    const fiveMinDates = Object.keys(fiveMinData['Time Series (5min)']).map(date => new Date(date).getTime());
+    const minDate = `${((new Date(Math.min(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
+    const maxDate = `${((new Date(Math.max(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
+
+    const dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
+    _.forEach(dayData['Time Series (Daily)'], (value: any, key: string) => {
+        _.set(dayData['Time Series (Daily)'], `${key} 09:30:00`, value);
+        _.unset(dayData['Time Series (Daily)'], key);
+    });
+    _.forEach(dayData['Time Series (Daily)'], (value: any, key: string) => {
+        if (((new Date(key).getTime()) >= (new Date(minDate).getTime())) && ((new Date(key).getTime()) <= (new Date(maxDate).getTime()))) {
+            _.set(fiveMinData['Time Series (5min)'], key, value);
+        }
+    });
+    let dates: Array<any> = [];
+    _.forEach(fiveMinData['Time Series (5min)'], (value: any, key: string) => {
+        dates.push(_.assign(value, { date: key }));
+    });
+    dates = _.sortBy(dates, 'date');
+    data = {
+        metaData: {
+            information: fiveMinData['Meta Data']['1. Information'],
+            symbol: fiveMinData['Meta Data']['2. Symbol'],
+            lastRefreshed: fiveMinData['Meta Data']['3. Last Refreshed'],
+            interval: fiveMinData['Meta Data']['4. Interval'],
+            outputSize: fiveMinData['Meta Data']['5. Output Size'],
+            timeZone: fiveMinData['Meta Data']['6. Time Zone'],
+        },
+        chartData: {
+            date: _.map(dates, (item) => item['date']),
+            open: _.map(dates, (item) => item['1. open']),
+            high: _.map(dates, (item) => item['2. high']),
+            low: _.map(dates, (item) => item['3. low']),
+            close: _.map(dates, (item) => item['4. close']),
+            volume: _.map(dates, (item) => item['5. volume'])
+        }
+    }
+    return response.send(data);
+
     return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
     /* Real */
     data = await commonRequest(request, 'query');
