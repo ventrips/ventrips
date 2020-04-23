@@ -11,6 +11,8 @@ import { NewsApiComponent } from './news-api/news-api.component';
 import { NewsApiArticleComponent } from './news-api/news-api-article/news-api-article.component';
 import { TravelComponent } from './travel/travel.component';
 import { StocksComponent } from './stocks/stocks.component';
+import { AlphaVantageApiComponent } from './alpha-vantage-api/alpha-vantage-api.component';
+import { DynamicChartComponent } from './alpha-vantage-api/dynamic-chart/dynamic-chart.component';
 @NgModule({
   declarations: [
     TrendsComponent,
@@ -19,7 +21,9 @@ import { StocksComponent } from './stocks/stocks.component';
     NewsApiArticleComponent,
     StocksComponent,
     TrendingTickersComponent,
-    ComboChartTrendsComponent
+    ComboChartTrendsComponent,
+    AlphaVantageApiComponent,
+    DynamicChartComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,21 @@
+<section *ngIf="data">
+    <div class="text-center" *ngIf="authService?.canEdit(user)">
+        <div class="input-group">
+            <input type="text" class="form-control form-control" aria-label="Search for symbol" placeholder="Search for symbol"
+                [(ngModel)]="search" />
+            <div class="input-group-append">
+                <button class="btn btn-warning" [disabled]="!search" (click)="refreshData()">
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+        <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
+            Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
+        </p>
+    </div>
+    <section *ngFor="let item of data">
+        <app-dynamic-chart [date]="item?.date" [data]="item?.data"></app-dynamic-chart>
+    </section>
+</section>

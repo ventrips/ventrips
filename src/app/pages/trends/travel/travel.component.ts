@@ -116,7 +116,7 @@ export class TravelComponent implements OnInit {
     this.authService.user$.subscribe(user => this.user = user);
 
     this.travelCharts = undefined;
-    this.spinner.show();
+    // this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
       if (_.isEmpty(response)) {
@@ -126,10 +126,10 @@ export class TravelComponent implements OnInit {
       this.updated = _.get(this.travelCharts, ['updated']);
       this.formatChart(_.get(this.travelCharts, ['results']));
       this.isLoading = false;
-      this.spinner.hide();
+      // this.spinner.hide();
     }, () => {
       this.isLoading = false;
-      this.spinner.hide();
+      // this.spinner.hide();
     });
   }
 

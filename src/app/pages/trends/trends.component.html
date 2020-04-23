@@ -17,16 +17,25 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <app-alpha-vantage-api></app-alpha-vantage-api>
+            </ng-container>
+        </div>
         <div class="col-xs-12 col-lg-6">
             <ng-container *ngIf="isPlatformBrowser()">
                 <app-travel></app-travel>
             </ng-container>
         </div>
         <div class="col-xs-12 col-lg-6">
-            <app-news-api></app-news-api>
+            <ng-container *ngIf="isPlatformBrowser()">
+                <app-news-api></app-news-api>
+            </ng-container>
         </div>
     </div>
 </div>
 <ng-container *ngIf="authService?.isAdmin(user)">
-    <app-stocks></app-stocks>
+    <ng-container *ngIf="isPlatformBrowser()">
+        <app-stocks></app-stocks>
+    </ng-container>
 </ng-container>

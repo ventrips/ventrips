@@ -58,13 +58,13 @@ export class StocksComponent implements OnInit {
       this.url = this.router.url;
     });
     this.predict = undefined;
-    this.spinner.show();
+    // this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.id}`, `${this.collection}-${this.id}`, false)
     .subscribe(response => {
       if (_.isEmpty(response)) {
         return;
       }
-      this.spinner.hide();
+      // this.spinner.hide();
       this.predict = response;
       this.setSentiment('news');
       this.setSentiment('forums');
@@ -79,7 +79,7 @@ export class StocksComponent implements OnInit {
 
       this.initSearchNews();
     }, (error) => {
-      this.spinner.hide();
+      // this.spinner.hide();
       this.initSearchNews();
     });
 
