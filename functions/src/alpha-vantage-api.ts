@@ -48,20 +48,38 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
     const maxDate = `${((new Date(Math.max(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
 
     const dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
-    _.forEach(dayData['Time Series (Daily)'], (value: any, key: string) => {
+    _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
         _.set(dayData['Time Series (Daily)'], `${key} 09:30:00`, value);
         _.unset(dayData['Time Series (Daily)'], key);
     });
-    _.forEach(dayData['Time Series (Daily)'], (value: any, key: string) => {
+    _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
         if (((new Date(key).getTime()) >= (new Date(minDate).getTime())) && ((new Date(key).getTime()) <= (new Date(maxDate).getTime()))) {
             _.set(fiveMinData['Time Series (5min)'], key, value);
         }
     });
     let dates: Array<any> = [];
-    _.forEach(fiveMinData['Time Series (5min)'], (value: any, key: string) => {
+    _.forEach(fiveMinData['Time Series (5min)'], (value: any, key: any) => {
         dates.push(_.assign(value, { date: key }));
     });
     dates = _.sortBy(dates, 'date');
+
+    const dateGroup = (item: any) => (item['date']).substring(0, 10);
+
+    let groupedData = _.groupBy(dates, dateGroup);
+
+    const chartData = {};
+    _.forEach(groupedData, (value: any, key: any) => {
+        const chartDatum = {
+            date: _.map(value, (item: any) => item['date']),
+            open: _.map(value, (item: any) => item['1. open']),
+            high: _.map(value, (item: any) => item['2. high']),
+            low: _.map(value, (item: any) => item['3. low']),
+            close: _.map(value, (item: any) => item['4. close']),
+            volume: _.map(value, (item: any) => item['5. volume'])
+        }
+        _.set(chartData, key, chartDatum);
+    });
+
     data = {
         metaData: {
             information: fiveMinData['Meta Data']['1. Information'],
@@ -71,14 +89,7 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
             outputSize: fiveMinData['Meta Data']['5. Output Size'],
             timeZone: fiveMinData['Meta Data']['6. Time Zone'],
         },
-        chartData: {
-            date: _.map(dates, (item) => item['date']),
-            open: _.map(dates, (item) => item['1. open']),
-            high: _.map(dates, (item) => item['2. high']),
-            low: _.map(dates, (item) => item['3. low']),
-            close: _.map(dates, (item) => item['4. close']),
-            volume: _.map(dates, (item) => item['5. volume'])
-        }
+        chartData
     }
     return response.send(data);
 
