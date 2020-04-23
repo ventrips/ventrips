@@ -67,11 +67,11 @@ const convertChartData = (fiveMinData: any, dayData: any) => {
     _.forEach(groupedData, (value: any, key: any) => {
         const chartDatum = {
             date: _.map(value, (item: any) => item['date']),
-            open: _.map(value, (item: any) => item['1. open']),
-            high: _.map(value, (item: any) => item['2. high']),
-            low: _.map(value, (item: any) => item['3. low']),
-            close: _.map(value, (item: any) => item['4. close']),
-            volume: _.map(value, (item: any) => item['5. volume'])
+            open: _.map(value, (item: any) => _.toNumber(item['1. open'])),
+            high: _.map(value, (item: any) => _.toNumber(item['2. high'])),
+            low: _.map(value, (item: any) => _.toNumber(item['3. low'])),
+            close: _.map(value, (item: any) => _.toNumber(item['4. close'])),
+            volume: _.map(value, (item: any) => _.toNumber(item['5. volume']))
         }
         _.set(chartData, key, chartDatum);
     });
