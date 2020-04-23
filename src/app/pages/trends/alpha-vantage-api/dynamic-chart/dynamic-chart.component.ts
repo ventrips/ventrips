@@ -11,6 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./dynamic-chart.component.scss']
 })
 export class DynamicChartComponent implements OnInit {
+  @Input() symbol;
   @Input() date;
   @Input() data;
   public _ = _;
