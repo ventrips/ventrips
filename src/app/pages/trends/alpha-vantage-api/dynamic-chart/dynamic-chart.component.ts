@@ -148,6 +148,40 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
+      const noTradePercentage = 0.0020;
+      const noTradeGainLoss: number = _.round(noTradePercentage * noteOpenPrice, 2);
+      // Note .20% UP
+      const noTradeUpPoint: number = noteOpenPrice + noTradeGainLoss;
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: noTradeUpPoint,
+          borderColor: "black",
+          label: {
+            content: `(${noTradePercentage * 100}%) DO NOT TRADE @ ${noTradeUpPoint}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+      // Note .20% DOWN
+      const noTradeDownPoint: number = noteOpenPrice - noTradeGainLoss;
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: noTradeDownPoint,
+          borderColor: "black",
+          label: {
+            content: `(-${noTradePercentage * 100}%) DO NOT TRADE @ ${noTradeDownPoint}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
 
       // Note 10:00 AM Note
       // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '10:00'));
