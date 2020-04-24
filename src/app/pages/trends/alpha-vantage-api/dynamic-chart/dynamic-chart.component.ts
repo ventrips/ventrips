@@ -114,56 +114,63 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
-      const percentage = 0.0075;
-      const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
-      // Note .75% UP
-      const putsPoint: number = noteOpenPrice + gainLoss;
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          type: "line",
-          mode: "horizontal",
-          scaleID: "y-axis-2",
-          value: putsPoint,
-          borderColor: "black",
-          label: {
-            content: `(${percentage * 100}%) PUTS @ ${putsPoint}`,
-            enabled: true,
-            position: "top"
-          }
-        }
-      );
-      // Note .75% DOWN
-      const callsPoint: number = noteOpenPrice - gainLoss;
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          type: "line",
-          mode: "horizontal",
-          scaleID: "y-axis-2",
-          value: callsPoint,
-          borderColor: "black",
-          label: {
-            content: `(-${percentage * 100}%) CALLS @ ${callsPoint}`,
-            enabled: true,
-            position: "top"
-          }
-        }
-      );
+      const percentages = [
+        0.0075
+        ,0.02
+        ,0.03
+        ,0.04
+        ,0.05
+        ,0.06
+      ];
+      _.forEach(percentages, (percentage) => {
+          const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
+          const putsPoint: number = noteOpenPrice + gainLoss;
+          this.lineChartOptions.annotation.annotations.push(
+            {
+              type: "line",
+              mode: "horizontal",
+              scaleID: "y-axis-2",
+              value: putsPoint,
+              borderColor: "black",
+              label: {
+                content: `(${percentage * 100}%) PUTS @ ${putsPoint}`,
+                enabled: true,
+                position: "top"
+              }
+            }
+          );
+          const callsPoint: number = noteOpenPrice - gainLoss;
+          this.lineChartOptions.annotation.annotations.push(
+            {
+              type: "line",
+              mode: "horizontal",
+              scaleID: "y-axis-2",
+              value: callsPoint,
+              borderColor: "black",
+              label: {
+                content: `(-${percentage * 100}%) CALLS @ ${callsPoint}`,
+                enabled: true,
+                position: "top"
+              }
+            }
+          );
+      });
       // Note 09:50 AM Note
-      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '09:50'));
-      // this.lineChartOptions.annotation.annotations.push(
-      //   {
-      //     type: "line",
-      //     mode: "vertical",
-      //     scaleID: "x-axis-0",
-      //     value: this.lineChartLabels[noteDateIndex],
-      //     borderColor: "red",
-      //     label: {
-      //       content: `${this.lineChartLabels[noteDateIndex]}`,
-      //       enabled: true,
-      //       position: "top"
-      //     }
-      //   }
-      // );
+      const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '12:00'));
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "vertical",
+          scaleID: "x-axis-0",
+          value: this.lineChartLabels[noteDateIndex],
+          borderColor: "red",
+          label: {
+            content: `${this.lineChartLabels[noteDateIndex]}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
     }
 
   // events
