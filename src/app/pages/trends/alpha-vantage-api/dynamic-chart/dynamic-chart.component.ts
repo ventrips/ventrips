@@ -64,7 +64,6 @@ export class DynamicChartComponent implements OnInit {
         }
         this.lineChartData.push(axisData);
     });
-    console.log(this.lineChartData);
     this.lineChartOptions = {
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
@@ -98,22 +97,74 @@ export class DynamicChartComponent implements OnInit {
         ],
       },
     };
-      const openPrices = _.get(_.find(this.lineChartData, { label: 'Open'}), ['data']);
-      const openPrice = _.get(openPrices, [0]);
+      // Note Open Price
+      const noteOpenPrices: Array<any> = _.get(_.find(this.lineChartData, { label: 'Open'}), ['data']);
+      const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
       this.lineChartOptions.annotation.annotations.push(
         {
           type: "line",
           mode: "horizontal",
           scaleID: "y-axis-2",
-          value: openPrice,
+          value: noteOpenPrice,
           borderColor: "red",
           label: {
-            content: `${'Open'} @ ${openPrice}`,
+            content: `${'Open'} @ ${noteOpenPrice}`,
             enabled: true,
             position: "top"
           }
         }
       );
+      const percentage = 0.00628;
+      const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
+      // Note .75% UP
+      const putsPoint: number = noteOpenPrice + gainLoss;
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: putsPoint,
+          borderColor: "black",
+          label: {
+            content: `(${percentage * 100}%) PUTS @ ${putsPoint}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+      // Note .75% DOWN
+      const callsPoint: number = noteOpenPrice - gainLoss;
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: callsPoint,
+          borderColor: "black",
+          label: {
+            content: `(-${percentage * 100}%) 'CALLS @ ${callsPoint}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+
+      // Note 10:00 AM Note
+      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '10:00'));
+      // this.lineChartOptions.annotation.annotations.push(
+      //   {
+      //     type: "line",
+      //     mode: "vertical",
+      //     scaleID: "x-axis-0",
+      //     value: this.lineChartLabels[noteDateIndex],
+      //     borderColor: "red",
+      //     label: {
+      //       content: `${this.lineChartLabels[noteDateIndex]}`,
+      //       enabled: true,
+      //       position: "top"
+      //     }
+      //   }
+      // );
   }
 
   // events
