@@ -114,7 +114,7 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
-      const percentage = 0.00628;
+      const percentage = 0.0075;
       const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
       // Note .75% UP
       const putsPoint: number = noteOpenPrice + gainLoss;
@@ -142,7 +142,7 @@ export class DynamicChartComponent implements OnInit {
           value: callsPoint,
           borderColor: "black",
           label: {
-            content: `(-${percentage * 100}%) 'CALLS @ ${callsPoint}`,
+            content: `(-${percentage * 100}%) CALLS @ ${callsPoint}`,
             enabled: true,
             position: "top"
           }
