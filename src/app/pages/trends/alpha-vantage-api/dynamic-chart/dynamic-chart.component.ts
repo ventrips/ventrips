@@ -148,6 +148,7 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
+      /*
       const noTradePercentage = 0.0020;
       const noTradeGainLoss: number = _.round(noTradePercentage * noteOpenPrice, 2);
       // Note .20% UP
@@ -199,6 +200,7 @@ export class DynamicChartComponent implements OnInit {
       //     }
       //   }
       // );
+      */
   }
 
   // events
