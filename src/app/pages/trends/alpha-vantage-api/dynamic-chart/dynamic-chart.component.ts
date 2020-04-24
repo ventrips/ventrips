@@ -148,8 +148,8 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
-      // Note 10:00 AM Note
-      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '09:0'));
+      // Note 09:50 AM Note
+      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '09:50'));
       // this.lineChartOptions.annotation.annotations.push(
       //   {
       //     type: "line",
