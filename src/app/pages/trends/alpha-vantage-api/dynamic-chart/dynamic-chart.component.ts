@@ -108,7 +108,7 @@ export class DynamicChartComponent implements OnInit {
       const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
       this.lineChartOptions.annotation.annotations.push(
         {
-          drawTime: 'beforeDatasetsDraw',
+          drawTime: 'afterDatasetsDraw',
           type: "line",
           mode: "horizontal",
           scaleID: "y-axis-2",
@@ -124,6 +124,7 @@ export class DynamicChartComponent implements OnInit {
       );
       const percentages = [
         0.0075
+        ,0.0020
         // ,0.01
         // ,0.02
         // ,0.03
@@ -132,19 +133,20 @@ export class DynamicChartComponent implements OnInit {
         // ,0.06
       ];
       _.forEach(percentages, (percentage) => {
+          const isDoNotBuyRange = _.isEqual(percentage, 0.0020);
           const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
           const putsPoint: number = noteOpenPrice + gainLoss;
           this.lineChartOptions.annotation.annotations.push(
             {
-              drawTime: 'beforeDatasetsDraw',
+              drawTime: isDoNotBuyRange ? 'afterDatasetsDraw' : 'beforeDatasetsDraw',
               type: "line",
               mode: "horizontal",
               scaleID: "y-axis-2",
               value: putsPoint,
-              borderColor: "black",
-              borderWidth: 1,
+              borderColor: isDoNotBuyRange ? 'purple' : 'black',
+              borderWidth: isDoNotBuyRange ? 10 : 1,
               label: {
-                content: `(${percentage * 100}%) PUTS @ ${putsPoint}`,
+                content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
                 enabled: true,
                 position: "top"
               }
@@ -153,15 +155,15 @@ export class DynamicChartComponent implements OnInit {
           const callsPoint: number = _.round(noteOpenPrice - gainLoss, 2);
           this.lineChartOptions.annotation.annotations.push(
             {
-              drawTime: 'beforeDatasetsDraw',
+              drawTime: isDoNotBuyRange ? 'afterDatasetsDraw' : 'beforeDatasetsDraw',
               type: "line",
               mode: "horizontal",
               scaleID: "y-axis-2",
               value: callsPoint,
-              borderColor: "black",
-              borderWidth: 1,
+              borderColor: isDoNotBuyRange ? 'purple' : 'black',
+              borderWidth: isDoNotBuyRange ? 10 : 1,
               label: {
-                content: `(-${percentage * 100}%) CALLS @ ${callsPoint}`,
+                content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
                 enabled: true,
                 position: "top"
               }
