@@ -15,7 +15,7 @@
             Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
         </p>
     </div>
-    <section *ngFor="let item of data">
-        <app-dynamic-chart [symbol]="metaData?.symbol" [date]="item?.date" [data]="item?.data"></app-dynamic-chart>
+    <section *ngFor="let item of data; let index = index">
+        <app-dynamic-chart [id]="index" [symbol]="metaData?.symbol" [date]="item?.date" [data]="item?.data"></app-dynamic-chart>
     </section>
 </section>

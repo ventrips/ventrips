@@ -29,7 +29,6 @@ export class DynamicChartComponent implements OnInit {
   }
 
   ngOnChanges(changes: any): void {
-    console.log(changes);
     this.formatChart();
   }
 
@@ -98,7 +97,10 @@ export class DynamicChartComponent implements OnInit {
       },
     };
       // Note Open Price
-      const noteOpenPrices: Array<any> = _.get(_.find(this.lineChartData, { label: 'Open'}), ['data']);
+      const noteOpenPrices: Array<any> = _.get(data, ['open']);
+      const noteHighPrices: Array<any> = _.get(data, ['high']);
+      const noteLowPrices: Array<any> = _.get(data, ['low']);
+
       const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
       this.lineChartOptions.annotation.annotations.push(
         {
@@ -106,7 +108,8 @@ export class DynamicChartComponent implements OnInit {
           mode: "horizontal",
           scaleID: "y-axis-2",
           value: noteOpenPrice,
-          borderColor: "red",
+          borderColor: "black",
+          borderWidth: 10,
           label: {
             content: `${'Open'} @ ${noteOpenPrice}`,
             enabled: true,
@@ -116,6 +119,7 @@ export class DynamicChartComponent implements OnInit {
       );
       const percentages = [
         0.0075
+        ,0.01
         ,0.02
         ,0.03
         ,0.04
@@ -132,6 +136,7 @@ export class DynamicChartComponent implements OnInit {
               scaleID: "y-axis-2",
               value: putsPoint,
               borderColor: "black",
+              borderWidth: 1,
               label: {
                 content: `(${percentage * 100}%) PUTS @ ${putsPoint}`,
                 enabled: true,
@@ -139,7 +144,7 @@ export class DynamicChartComponent implements OnInit {
               }
             }
           );
-          const callsPoint: number = noteOpenPrice - gainLoss;
+          const callsPoint: number = _.round(noteOpenPrice - gainLoss, 2);
           this.lineChartOptions.annotation.annotations.push(
             {
               type: "line",
@@ -147,6 +152,7 @@ export class DynamicChartComponent implements OnInit {
               scaleID: "y-axis-2",
               value: callsPoint,
               borderColor: "black",
+              borderWidth: 1,
               label: {
                 content: `(-${percentage * 100}%) CALLS @ ${callsPoint}`,
                 enabled: true,
@@ -154,23 +160,81 @@ export class DynamicChartComponent implements OnInit {
               }
             }
           );
-      });
-      // Note 09:50 AM Note
-      const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '12:00'));
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          type: "line",
-          mode: "vertical",
-          scaleID: "x-axis-0",
-          value: this.lineChartLabels[noteDateIndex],
-          borderColor: "red",
-          label: {
-            content: `${this.lineChartLabels[noteDateIndex]}`,
-            enabled: true,
-            position: "top"
+          // _.forEach(noteOpenPrices, (price, index) => {
+          //   const wide = 0.0002;
+          //   const upper = noteOpenPrice + (noteOpenPrice * wide);
+          //   const lower = noteOpenPrice - (noteOpenPrice * wide);
+          //   if (price >= lower && price <= upper) {
+          //     this.lineChartOptions.annotation.annotations.push(
+          //       {
+          //         type: "line",
+          //         mode: "vertical",
+          //         scaleID: "x-axis-0",
+          //         value: this.lineChartLabels[index],
+          //         borderColor: "blue",
+          //         borderWidth: 10
+          //       }
+          //     );
+          //   }
+          // });
+          // Note BUY
+          if (percentage !== 0.0075) {
+            return;
           }
-        }
-      );
+          _.forEach(noteLowPrices, (price, index) => {
+            if (price <= callsPoint) {
+              const buyPrice = noteLowPrices[index];
+              this.lineChartOptions.annotation.annotations.push(
+                {
+                  type: "line",
+                  mode: "vertical",
+                  scaleID: "x-axis-0",
+                  value: this.lineChartLabels[index],
+                  borderColor: "red",
+                  borderWidth: 10
+                }
+              );
+              if (index !== 0) {
+                return false;
+              }
+            }
+          });
+          _.forEach(noteHighPrices, (price, index) => {
+            if (price >= putsPoint) {
+              const buyPrice = noteHighPrices[index];
+              this.lineChartOptions.annotation.annotations.push(
+                {
+                  type: "line",
+                  mode: "vertical",
+                  scaleID: "x-axis-0",
+                  value: this.lineChartLabels[index],
+                  borderColor: "green",
+                  borderWidth: 10
+                }
+              );
+              if (index !== 0) {
+                return false;
+              }
+            }
+          });
+      });
+
+      // Note 09:50 AM Note
+      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '12:00'));
+      // this.lineChartOptions.annotation.annotations.push(
+      //   {
+      //     type: "line",
+      //     mode: "vertical",
+      //     scaleID: "x-axis-0",
+      //     value: this.lineChartLabels[noteDateIndex],
+      //     borderColor: "red",
+      //     label: {
+      //       content: `${this.lineChartLabels[noteDateIndex]}`,
+      //       enabled: true,
+      //       position: "top"
+      //     }
+      //   }
+      // );
     }
 
   // events
