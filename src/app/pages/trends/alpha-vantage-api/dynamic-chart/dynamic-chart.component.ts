@@ -32,6 +32,10 @@ export class DynamicChartComponent implements OnInit {
     this.formatChart();
   }
 
+  isBeforeNoon(index: number): boolean {
+    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({"hour": 12, "minute": 0, "second": 0}));
+  }
+
   formatChart(): void {
     const data = _.cloneDeep(this.data);
     this.lineChartLabels = _.map(_.get(data, ['date']), (date) => {
@@ -104,6 +108,7 @@ export class DynamicChartComponent implements OnInit {
       const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
       this.lineChartOptions.annotation.annotations.push(
         {
+          drawTime: 'beforeDatasetsDraw',
           type: "line",
           mode: "horizontal",
           scaleID: "y-axis-2",
@@ -119,18 +124,19 @@ export class DynamicChartComponent implements OnInit {
       );
       const percentages = [
         0.0075
-        ,0.01
-        ,0.02
-        ,0.03
-        ,0.04
-        ,0.05
-        ,0.06
+        // ,0.01
+        // ,0.02
+        // ,0.03
+        // ,0.04
+        // ,0.05
+        // ,0.06
       ];
       _.forEach(percentages, (percentage) => {
           const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
           const putsPoint: number = noteOpenPrice + gainLoss;
           this.lineChartOptions.annotation.annotations.push(
             {
+              drawTime: 'beforeDatasetsDraw',
               type: "line",
               mode: "horizontal",
               scaleID: "y-axis-2",
@@ -147,6 +153,7 @@ export class DynamicChartComponent implements OnInit {
           const callsPoint: number = _.round(noteOpenPrice - gainLoss, 2);
           this.lineChartOptions.annotation.annotations.push(
             {
+              drawTime: 'beforeDatasetsDraw',
               type: "line",
               mode: "horizontal",
               scaleID: "y-axis-2",
@@ -160,81 +167,78 @@ export class DynamicChartComponent implements OnInit {
               }
             }
           );
-          // _.forEach(noteOpenPrices, (price, index) => {
-          //   const wide = 0.0002;
-          //   const upper = noteOpenPrice + (noteOpenPrice * wide);
-          //   const lower = noteOpenPrice - (noteOpenPrice * wide);
-          //   if (price >= lower && price <= upper) {
-          //     this.lineChartOptions.annotation.annotations.push(
-          //       {
-          //         type: "line",
-          //         mode: "vertical",
-          //         scaleID: "x-axis-0",
-          //         value: this.lineChartLabels[index],
-          //         borderColor: "blue",
-          //         borderWidth: 10
-          //       }
-          //     );
-          //   }
-          // });
+          // Note Reached Open Prices
+          _.forEach(noteOpenPrices, (price, index) => {
+            if (noteOpenPrice >= noteLowPrices[index] && noteOpenPrice <= noteHighPrices[index] && index !== 0) {
+              this.lineChartOptions.annotation.annotations.push(
+                {
+                  drawTime: 'beforeDatasetsDraw',
+                  type: "line",
+                  mode: "vertical",
+                  scaleID: "x-axis-0",
+                  value: this.lineChartLabels[index],
+                  borderColor: "black",
+                  borderWidth: 10,
+                  label: {
+                    content: `Reached Open Price @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
+                    enabled: true,
+                    position: "top"
+                  }
+                }
+              );
+            }
+          });
+
           // Note BUY
           if (percentage !== 0.0075) {
             return;
           }
           _.forEach(noteLowPrices, (price, index) => {
-            if (price <= callsPoint) {
+            if (price <= callsPoint && index !== 0 && this.isBeforeNoon(index)) {
               const buyPrice = noteLowPrices[index];
               this.lineChartOptions.annotation.annotations.push(
                 {
+                  drawTime: 'beforeDatasetsDraw',
                   type: "line",
                   mode: "vertical",
                   scaleID: "x-axis-0",
                   value: this.lineChartLabels[index],
                   borderColor: "red",
-                  borderWidth: 10
+                  borderWidth: 10,
+                  label: {
+                    content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
+                    enabled: true,
+                    position: "top"
+                  }
                 }
               );
-              if (index !== 0) {
-                return false;
-              }
+              return false;
             }
           });
-          _.forEach(noteHighPrices, (price, index) => {
-            if (price >= putsPoint) {
+          _.forEach(noteOpenPrices, (price, index) => {
+            const isBeforeNoon = moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({"hour": 12, "minute": 0, "second": 0}));
+            if (price >= putsPoint && index !== 0 && this.isBeforeNoon(index)) {
               const buyPrice = noteHighPrices[index];
               this.lineChartOptions.annotation.annotations.push(
                 {
+                  drawTime: 'beforeDatasetsDraw',
                   type: "line",
                   mode: "vertical",
                   scaleID: "x-axis-0",
                   value: this.lineChartLabels[index],
                   borderColor: "green",
-                  borderWidth: 10
+                  borderWidth: 10,
+                  label: {
+                    content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
+                    enabled: true,
+                    position: "top"
+                  }
                 }
               );
-              if (index !== 0) {
-                return false;
-              }
+              return false;
             }
           });
       });
-
-      // Note 09:50 AM Note
-      // const noteDateIndex = _.findIndex(_.get(data, ['date']), (date: any) => _.includes(date, '12:00'));
-      // this.lineChartOptions.annotation.annotations.push(
-      //   {
-      //     type: "line",
-      //     mode: "vertical",
-      //     scaleID: "x-axis-0",
-      //     value: this.lineChartLabels[noteDateIndex],
-      //     borderColor: "red",
-      //     label: {
-      //       content: `${this.lineChartLabels[noteDateIndex]}`,
-      //       enabled: true,
-      //       position: "top"
-      //     }
-      //   }
-      // );
     }
 
   // events
