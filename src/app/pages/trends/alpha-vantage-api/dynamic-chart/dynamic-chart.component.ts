@@ -215,7 +215,7 @@ export class DynamicChartComponent implements OnInit {
               return false;
             }
           });
-          _.forEach(noteOpenPrices, (price, index) => {
+          _.forEach(noteHighPrices, (price, index) => {
             const isBeforeNoon = moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({"hour": 12, "minute": 0, "second": 0}));
             if (price >= putsPoint && index !== 0 && this.isBeforeNoon(index)) {
               const buyPrice = noteHighPrices[index];
