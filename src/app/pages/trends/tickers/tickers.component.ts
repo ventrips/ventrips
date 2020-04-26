@@ -17,11 +17,11 @@ import { SsrService } from '../../../services/firestore/ssr/ssr.service';
 import { KeysPipe } from '../../../pipes/keys/keys.pipe';
 
 @Component({
-  selector: 'app-stocks',
-  templateUrl: './stocks.component.html',
-  styleUrls: ['./stocks.component.scss']
+  selector: 'app-tickers',
+  templateUrl: './tickers.component.html',
+  styleUrls: ['./tickers.component.scss']
 })
-export class StocksComponent implements OnInit {
+export class TickersComponent implements OnInit {
   public chartTrends: any;
   public search: string;
   public q: string;

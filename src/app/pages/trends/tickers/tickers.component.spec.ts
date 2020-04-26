@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlphaVantageApiComponent } from './alpha-vantage-api.component';
+import { TickersComponent } from './tickers.component';
 
-describe('AlphaVantageApiComponent', () => {
-  let component: AlphaVantageApiComponent;
-  let fixture: ComponentFixture<AlphaVantageApiComponent>;
+describe('TickersComponent', () => {
+  let component: TickersComponent;
+  let fixture: ComponentFixture<TickersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlphaVantageApiComponent ]
+      declarations: [ TickersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlphaVantageApiComponent);
+    fixture = TestBed.createComponent(TickersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

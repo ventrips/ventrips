@@ -55,6 +55,13 @@ service cloud.firestore {
       allow read;
       allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
     }
+		match /stocks/{document} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+      allow read;
+      allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+    }
 		match /trends/{document} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]

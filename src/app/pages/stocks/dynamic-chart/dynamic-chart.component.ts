@@ -12,6 +12,7 @@ import * as moment from 'moment';
 })
 export class DynamicChartComponent implements OnInit {
   @Input() symbol;
+  @Input() canEdit = false;
   @Input() date;
   @Input() data;
   public _ = _;
@@ -272,7 +273,13 @@ export class DynamicChartComponent implements OnInit {
     });
   }
 
-  annotateChart(): void {
+  annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
+    this.annotateOpenPrice(opens);
+    this.annotatePercentages(opens, lows, highs);
+    this.annotateOpenPricesReached(opens, lows, highs);
+  }
+
+  formatChart(): void {
     const opens: Array<any> = _.get(this.data, ['open']);
     const lows: Array<any> = _.get(this.data, ['low']);
     const highs: Array<any> = _.get(this.data, ['high']);
@@ -284,18 +291,15 @@ export class DynamicChartComponent implements OnInit {
     this.open.openToHigh = _.round(this.open.price / this.open.high, 2);
     this.open.lowToHigh = _.round(Math.abs(this.open.low - this.open.high), 2);
     this.open.volume = _.get(volumes, [0]);
-    this.annotateOpenPrice(opens);
-    this.annotatePercentages(opens, lows, highs);
-    this.annotateOpenPricesReached(opens, lows, highs);
-  }
 
-  formatChart(): void {
     this.lineChartData = [];
     this.lineChartLabels = _.map(_.get(this.data, ['date']), (date) => {
       return moment(date).format('LLL');
     });
     this.chartOptions();
-    this.annotateChart();
+    if (this.canEdit) {
+      this.annotateChart(opens, lows, highs);
+    }
   }
 
   // events
