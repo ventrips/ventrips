@@ -52,7 +52,7 @@
             </section>
         </ng-container>
     </ng-container>
-    <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
+    <ng-container *ngIf="!isLoading && _.isEmpty(data)">
         <div class="text-center my-5">
             <h1 class="text-uppercase">Loading...</h1>
             <p class="text-muted">If nothing shows up after a few seconds, this means that this symbol does not exist. To get this featured, you can <a class="text-warning" [routerLink]="['/contact']">Contact Us</a></p>

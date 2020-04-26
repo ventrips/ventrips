@@ -18,19 +18,19 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-stocks',
-  templateUrl: './stocks.component.html',
-  styleUrls: ['./stocks.component.scss'],
+  selector: 'app-symbol',
+  templateUrl: './symbol.component.html',
+  styleUrls: ['./symbol.component.scss'],
   providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
 })
-export class StocksComponent implements OnInit {
+export class SymbolComponent implements OnInit {
   public isLoading = true;
   public environment = environment;
   public _ = _;
   public user: User;
   public url: string;
   public description: string;
-  public collection: string = 'stocks'
+  public collection: string = 'symbol'
   public symbol: string;
   public metaData: any;
   public data: any;
@@ -115,7 +115,7 @@ export class StocksComponent implements OnInit {
     this.spinner.show();
     this.getData().subscribe(response => {
       this.spinner.hide();
-      this.router.navigate(['stocks', _.toUpper(this.symbol)]);
+      this.router.navigate(['symbol', _.toUpper(this.symbol)]);
     }, (error) => {
       this.spinner.hide();
     });

@@ -55,7 +55,7 @@ service cloud.firestore {
       allow read;
       allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
     }
-		match /stocks/{document} {
+		match /symbol/{document} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }

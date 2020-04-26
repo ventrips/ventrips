@@ -107,5 +107,5 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
     intraData = await alphaVantageRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'});
     dayData = await alphaVantageRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'});
     data = convertChartData(intraData, dayData, interval);
-    setFirebase(request, response, data, `stocks/${symbol}`, true);
+    setFirebase(request, response, data, `symbol/${symbol}`, true);
 });
