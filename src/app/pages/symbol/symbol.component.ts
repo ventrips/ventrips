@@ -29,6 +29,7 @@ export class SymbolComponent implements OnInit {
   public _ = _;
   public user: User;
   public url: string;
+  public title: string;
   public description: string;
   public collection: string = 'symbol'
   public symbol: string;
@@ -63,9 +64,10 @@ export class SymbolComponent implements OnInit {
     .subscribe(params => {
       this.url = this.router.url;
       this.symbol = _.toUpper(params.symbol);
+      this.title = `${this.symbol} | Free Historical Intraday Charts`;
       this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends of the past few days`;
       this.ssrService.setSeo({
-        title: `${this.symbol} | Free Historical Intraday Charts`,
+        title: this.title,
         description: this.description,
       }, `${this.collection}-${this.symbol}`, true);
       this.init();

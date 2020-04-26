@@ -1,6 +1,6 @@
 <div class="container-fluid my-5">
     <div class="h5 my-4">
-        <h1 class="mb-4">{{symbol}}</h1>
+        <h1 class="mb-4">{{title}}</h1>
         <p class="my-3">
             {{description}}
         </p>
@@ -45,17 +45,22 @@
     <p class="text-center small text-secondary my-5" *ngIf="updated">
         Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
     </p>
-    <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
-        <ng-container *ngIf="isPlatformBrowser()">
-            <section *ngFor="let item of data; let index = index">
-                <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService.canEdit(this.user)" [date]="item?.date" [data]="item?.data"></app-dynamic-chart>
-            </section>
+    <section>
+        <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <section *ngFor="let item of data; let index = index">
+                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService.canEdit(this.user)" [date]="item?.date" [data]="item?.data"></app-dynamic-chart>
+                </section>
+            </ng-container>
         </ng-container>
-    </ng-container>
-    <ng-container *ngIf="!isLoading && _.isEmpty(data)">
-        <div class="text-center my-5">
-            <h1 class="text-uppercase">Loading...</h1>
-            <p class="text-muted">If nothing shows up after a few seconds, this means that this symbol does not exist. To get this featured, you can <a class="text-warning" [routerLink]="['/contact']">Contact Us</a></p>
-        </div>
-    </ng-container>
+        <ng-container *ngIf="!isLoading && _.isEmpty(data)">
+            <div class="text-center my-5">
+                <h1 class="text-uppercase">Loading...</h1>
+                <p class="text-muted">If nothing shows up after a few seconds, this means that this symbol does not exist. To get this featured, you can <a class="text-warning" [routerLink]="['/contact']">Contact Us</a></p>
+            </div>
+        </ng-container>
+    </section>
+    <div class="container my-5" *ngIf="environment.production">
+        <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="title" [category]="'stocks'"></disqus>
+    </div>
 </div>
