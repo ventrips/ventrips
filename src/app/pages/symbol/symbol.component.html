@@ -60,7 +60,7 @@
             </div>
         </ng-container>
     </section>
-    <div class="container my-5" *ngIf="environment.production">
+    <div class="container my-5" *ngIf="environment.production && !_.isEmpty(data)">
         <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="title" [category]="'stocks'"></disqus>
     </div>
 </div>
