@@ -1,6 +1,12 @@
 <section class="my-5">
     <h1 class="text-capitalize">({{symbol}}) {{date | date:'fullDate'}}</h1>
-    <div class="flex">
+    <div>
+        <h5>Open Price: {{_.get(open, ['price'])}}</h5>
+        <h5>Open to Low: {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</h5>
+        <h5>Open to High: {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</h5>
+        <h5>Low to High: {{_.get(open, ['lowToHigh'])}}</h5>
+    </div>
+        <div class="flex">
         <div class="flex-item">
             <div style="display: block;">
                 <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
