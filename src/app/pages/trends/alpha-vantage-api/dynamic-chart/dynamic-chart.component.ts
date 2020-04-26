@@ -17,7 +17,7 @@ export class DynamicChartComponent implements OnInit {
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = { annotation: {}};
+  public lineChartOptions: (ChartOptions & { annotation: any }) = { annotation: {} };
   public lineChartLegend = true;
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
@@ -33,39 +33,33 @@ export class DynamicChartComponent implements OnInit {
   }
 
   isBeforeNoon(index: number): boolean {
-    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({"hour": 12, "minute": 0, "second": 0}));
+    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({ "hour": 12, "minute": 0, "second": 0 }));
   }
 
-  formatChart(): void {
-    const data = _.cloneDeep(this.data);
-    this.lineChartLabels = _.map(_.get(data, ['date']), (date) => {
-      return moment(date).format('LLL');
-    });
-    this.lineChartData = [];
-    let timeRange: any;
+  chartOptions(): void {
     const keys = ['volume', 'open', 'high', 'low', 'close'];
     _.forEach(keys, (key: any) => {
       let keyId = '';
-      const keyData = _.get(data, [key]);
+      const keyData = _.get(this.data, [key]);
       switch (key) {
-          case 'open':
-          case 'high':
-          case 'low':
-          case 'close':
-              keyId = '2';
-              break;
-          case 'volume':
-              keyId = '1';
-              break;
-          default:
-              keyId = '0';
+        case 'open':
+        case 'high':
+        case 'low':
+        case 'close':
+          keyId = '2';
+          break;
+        case 'volume':
+          keyId = '1';
+          break;
+        default:
+          keyId = '0';
       }
       const axisData = {
-          data: keyData,
-            label: _.startCase(key),
-            yAxisID: `y-axis-${keyId}`
-        }
-        this.lineChartData.push(axisData);
+        data: keyData,
+        label: _.startCase(key),
+        yAxisID: `y-axis-${keyId}`
+      }
+      this.lineChartData.push(axisData);
     });
     this.lineChartOptions = {
       scales: {
@@ -73,7 +67,7 @@ export class DynamicChartComponent implements OnInit {
         xAxes: [{
           type: 'time',
           time: {
-              unit: 'hour'
+            unit: 'hour'
           }
         }],
         yAxes: [
@@ -100,148 +94,201 @@ export class DynamicChartComponent implements OnInit {
         ],
       },
     };
-      // Note Open Price
-      const noteOpenPrices: Array<any> = _.get(data, ['open']);
-      const noteHighPrices: Array<any> = _.get(data, ['high']);
-      const noteLowPrices: Array<any> = _.get(data, ['low']);
+  };
 
-      const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          drawTime: 'afterDatasetsDraw',
-          type: "line",
-          mode: "horizontal",
-          scaleID: "y-axis-2",
-          value: noteOpenPrice,
-          borderColor: "black",
-          borderWidth: 10,
-          label: {
-            content: `${'Open'} @ ${noteOpenPrice}`,
-            enabled: true,
-            position: "top"
-          }
+  annotateOpenPrice(
+    noteOpenPrices: Array<number>,
+    noteOpenPrice: number
+  ): void {
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "horizontal",
+        scaleID: "y-axis-2",
+        value: noteOpenPrice,
+        borderColor: "black",
+        borderWidth: 5,
+        label: {
+          content: `${'Open'} @ ${noteOpenPrice}`,
+          enabled: true,
+          position: "top"
         }
-      );
-      const percentages = [
-        0.0075
-        ,0.0020
-        // ,0.01
-        // ,0.02
-        // ,0.03
-        // ,0.04
-        // ,0.05
-        // ,0.06
-      ];
-      _.forEach(percentages, (percentage) => {
-          const isDoNotBuyRange = _.isEqual(percentage, 0.0020);
-          const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
-          const putsPoint: number = noteOpenPrice + gainLoss;
-          this.lineChartOptions.annotation.annotations.push(
-            {
-              drawTime: isDoNotBuyRange ? 'afterDatasetsDraw' : 'beforeDatasetsDraw',
-              type: "line",
-              mode: "horizontal",
-              scaleID: "y-axis-2",
-              value: putsPoint,
-              borderColor: isDoNotBuyRange ? 'purple' : 'black',
-              borderWidth: isDoNotBuyRange ? 10 : 1,
-              label: {
-                content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
-                enabled: true,
-                position: "top"
-              }
-            }
-          );
-          const callsPoint: number = _.round(noteOpenPrice - gainLoss, 2);
-          this.lineChartOptions.annotation.annotations.push(
-            {
-              drawTime: isDoNotBuyRange ? 'afterDatasetsDraw' : 'beforeDatasetsDraw',
-              type: "line",
-              mode: "horizontal",
-              scaleID: "y-axis-2",
-              value: callsPoint,
-              borderColor: isDoNotBuyRange ? 'purple' : 'black',
-              borderWidth: isDoNotBuyRange ? 10 : 1,
-              label: {
-                content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
-                enabled: true,
-                position: "top"
-              }
-            }
-          );
-          // Note Reached Open Prices
-          _.forEach(noteOpenPrices, (price, index) => {
-            if (noteOpenPrice >= noteLowPrices[index] && noteOpenPrice <= noteHighPrices[index] && index !== 0) {
-              this.lineChartOptions.annotation.annotations.push(
-                {
-                  drawTime: 'beforeDatasetsDraw',
-                  type: "line",
-                  mode: "vertical",
-                  scaleID: "x-axis-0",
-                  value: this.lineChartLabels[index],
-                  borderColor: "black",
-                  borderWidth: 10,
-                  label: {
-                    content: `Reached Open Price @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
-                    enabled: true,
-                    position: "top"
-                  }
-                }
-              );
-            }
-          });
+      }
+    );
+  }
 
-          // Note BUY
-          if (percentage !== 0.0075) {
-            return;
+  annotateOpenPricesReached(
+    noteOpenPrices: Array<number>,
+    noteLowPrices: Array<number>,
+    noteHighPrices: Array<number>,
+    noteOpenPrice: number,
+  ): void {
+    _.forEach(noteOpenPrices, (price, index) => {
+      if (noteOpenPrice >= noteLowPrices[index] && noteOpenPrice <= noteHighPrices[index] && index !== 0) {
+        this.lineChartOptions.annotation.annotations.push(
+          {
+            drawTime: 'beforeDatasetsDraw',
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: this.lineChartLabels[index],
+            borderColor: "black",
+            borderWidth: 1
           }
-          _.forEach(noteLowPrices, (price, index) => {
-            if (price <= callsPoint && index !== 0 && this.isBeforeNoon(index)) {
-              const buyPrice = noteLowPrices[index];
-              this.lineChartOptions.annotation.annotations.push(
-                {
-                  drawTime: 'beforeDatasetsDraw',
-                  type: "line",
-                  mode: "vertical",
-                  scaleID: "x-axis-0",
-                  value: this.lineChartLabels[index],
-                  borderColor: "red",
-                  borderWidth: 10,
-                  label: {
-                    content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
-                    enabled: true,
-                    position: "top"
-                  }
-                }
-              );
-              return false;
+        );
+      }
+    });
+  }
+
+  annotatePercentagePoints(
+    noteOpenPrices: Array<number>,
+    noteLowPrices: Array<number>,
+    noteHighPrices: Array<number>,
+    noteOpenPrice: number,
+    percentage: number,
+    gainLoss: number,
+    putsPoint: number,
+    callsPoint: number
+  ): void {
+    const isDoNotBuyRange = _.isEqual(percentage, 0.0020);
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "horizontal",
+        scaleID: "y-axis-2",
+        value: putsPoint,
+        borderColor: isDoNotBuyRange ? 'purple' : 'black',
+        borderWidth: 5,
+        label: {
+          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
+          enabled: true,
+          position: "top"
+        }
+      }
+    );
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "horizontal",
+        scaleID: "y-axis-2",
+        value: callsPoint,
+        borderColor: isDoNotBuyRange ? 'purple' : 'black',
+        borderWidth: 5,
+        label: {
+          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `CALLS @ ${callsPoint}`}`,
+          enabled: true,
+          position: "top"
+        }
+      }
+    );
+  }
+  annotateBuyPoints(
+    noteOpenPrices: Array<number>,
+    noteLowPrices: Array<number>,
+    noteHighPrices: Array<number>,
+    noteOpenPrice: number,
+    percentage: number,
+    gainLoss: number,
+    putsPoint: number,
+    callsPoint: number
+  ): void {
+      if (percentage !== 0.0075) {
+        return;
+      }
+      _.forEach(noteLowPrices, (price, index) => {
+        if (price <= callsPoint && index !== 0 && this.isBeforeNoon(index)) {
+          const buyPrice = noteLowPrices[index];
+          this.lineChartOptions.annotation.annotations.push(
+            {
+              drawTime: 'afterDatasetsDraw',
+              type: "line",
+              mode: "vertical",
+              scaleID: "x-axis-0",
+              value: this.lineChartLabels[index],
+              borderColor: "red",
+              borderWidth: 5,
+              label: {
+                content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
+                enabled: true,
+                position: "top"
+              }
             }
-          });
-          _.forEach(noteHighPrices, (price, index) => {
-            const isBeforeNoon = moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({"hour": 12, "minute": 0, "second": 0}));
-            if (price >= putsPoint && index !== 0 && this.isBeforeNoon(index)) {
-              const buyPrice = noteHighPrices[index];
-              this.lineChartOptions.annotation.annotations.push(
-                {
-                  drawTime: 'beforeDatasetsDraw',
-                  type: "line",
-                  mode: "vertical",
-                  scaleID: "x-axis-0",
-                  value: this.lineChartLabels[index],
-                  borderColor: "green",
-                  borderWidth: 10,
-                  label: {
-                    content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
-                    enabled: true,
-                    position: "top"
-                  }
-                }
-              );
-              return false;
-            }
-          });
+          );
+          return false;
+        }
       });
-    }
+      _.forEach(noteHighPrices, (price, index) => {
+        const isBeforeNoon = moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({ "hour": 12, "minute": 0, "second": 0 }));
+        if (price >= putsPoint && index !== 0 && this.isBeforeNoon(index)) {
+          const buyPrice = noteHighPrices[index];
+          this.lineChartOptions.annotation.annotations.push(
+            {
+              drawTime: 'afterDatasetsDraw',
+              type: "line",
+              mode: "vertical",
+              scaleID: "x-axis-0",
+              value: this.lineChartLabels[index],
+              borderColor: "green",
+              borderWidth: 5,
+              label: {
+                content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
+                enabled: true,
+                position: "top"
+              }
+            }
+          );
+          return false;
+        }
+      });
+  }
+
+  annotatePercentages(
+    noteOpenPrices: Array<number>,
+    noteLowPrices: Array<number>,
+    noteHighPrices: Array<number>,
+    noteOpenPrice: number,
+  ): void {
+    const percentages = [
+      0.0075
+      ,0.0020
+      // ,0.01
+      // ,0.02
+      // ,0.03
+      // ,0.04
+      // ,0.05
+      // ,0.06
+    ];
+    _.forEach(percentages, (percentage) => {
+      const gainLoss: number = _.round(percentage * noteOpenPrice, 2);
+      const putsPoint: number = _.round(noteOpenPrice + gainLoss, 2);
+      const callsPoint: number = _.round(noteOpenPrice - gainLoss, 2);
+      this.annotatePercentagePoints(noteOpenPrices, noteLowPrices, noteHighPrices, noteOpenPrice, percentage, gainLoss, putsPoint, callsPoint);
+      this.annotateBuyPoints(noteOpenPrices, noteLowPrices, noteHighPrices, noteOpenPrice, percentage, gainLoss, putsPoint, callsPoint);
+    });
+  }
+
+  annotateChart(): void {
+    const noteOpenPrices: Array<any> = _.get(this.data, ['open']);
+    const noteLowPrices: Array<any> = _.get(this.data, ['low']);
+    const noteHighPrices: Array<any> = _.get(this.data, ['high']);
+    const noteOpenPrice: number = _.get(noteOpenPrices, [0]);
+
+    this.annotateOpenPrice(noteOpenPrices, noteOpenPrice);
+    this.annotateOpenPricesReached(noteOpenPrices, noteLowPrices, noteHighPrices, noteOpenPrice);
+    this.annotatePercentages(noteOpenPrices, noteLowPrices, noteHighPrices, noteOpenPrice);
+  }
+
+  formatChart(): void {
+    this.lineChartData = [];
+    this.lineChartLabels = _.map(_.get(this.data, ['date']), (date) => {
+      return moment(date).format('LLL');
+    });
+    this.chartOptions();
+    this.annotateChart();
+  }
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
