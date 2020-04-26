@@ -4,7 +4,8 @@
         <h5>Open Price: {{_.get(open, ['price'])}}</h5>
         <h5>Open Low: {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</h5>
         <h5>Open High: {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</h5>
-        <h5>Low to High: {{_.get(open, ['lowToHigh'])}}</h5>
+        <h5>Open Low to High: {{_.get(open, ['lowToHigh'])}}</h5>
+        <h5>Open Volume: {{_.get(open, ['volume']) | number:'1.2-2'}}</h5>
     </div>
         <div class="flex">
         <div class="flex-item">

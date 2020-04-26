@@ -103,7 +103,7 @@ export class DynamicChartComponent implements OnInit {
   };
 
   annotateOpenPrice(
-    noteOpenPrices: Array<number>
+    opens: Array<number>
   ): void {
     this.lineChartOptions.annotation.annotations.push(
       {
@@ -124,12 +124,12 @@ export class DynamicChartComponent implements OnInit {
   }
 
   annotateOpenPricesReached(
-    noteOpenPrices: Array<number>,
-    noteLowPrices: Array<number>,
-    noteHighPrices: Array<number>
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>
   ): void {
-    _.forEach(noteOpenPrices, (price, index) => {
-      if (this.open.price >= noteLowPrices[index] && this.open.price <= noteHighPrices[index]) {
+    _.forEach(opens, (price, index) => {
+      if (this.open.price >= lows[index] && this.open.price <= highs[index]) {
         this.lineChartOptions.annotation.annotations.push(
           {
             drawTime: 'beforeDatasetsDraw',
@@ -146,9 +146,9 @@ export class DynamicChartComponent implements OnInit {
   }
 
   annotatePercentagePoints(
-    noteOpenPrices: Array<number>,
-    noteLowPrices: Array<number>,
-    noteHighPrices: Array<number>,
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>,
     percentage: number,
     gainLoss: number,
     putsPoint: number,
@@ -189,9 +189,9 @@ export class DynamicChartComponent implements OnInit {
     );
   }
   annotateBuyPoints(
-    noteOpenPrices: Array<number>,
-    noteLowPrices: Array<number>,
-    noteHighPrices: Array<number>,
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>,
     percentage: number,
     gainLoss: number,
     putsPoint: number,
@@ -200,10 +200,10 @@ export class DynamicChartComponent implements OnInit {
       if (percentage !== 0.0075) {
         return;
       }
-      _.forEach(noteLowPrices, (price, index) => {
+      _.forEach(lows, (price, index) => {
         if (_.isEqual(index, 0)) { return true;}
         if (price <= callsPoint && this.isBeforeNoon(index)) {
-          const buyPrice = noteLowPrices[index];
+          const buyPrice = lows[index];
           this.lineChartOptions.annotation.annotations.push(
             {
               drawTime: 'afterDatasetsDraw',
@@ -223,10 +223,10 @@ export class DynamicChartComponent implements OnInit {
           return false;
         }
       });
-      _.forEach(noteHighPrices, (price, index) => {
+      _.forEach(highs, (price, index) => {
         if (_.isEqual(index, 0)) { return true;}
         if (price >= putsPoint && this.isBeforeNoon(index)) {
-          const buyPrice = noteHighPrices[index];
+          const buyPrice = highs[index];
           this.lineChartOptions.annotation.annotations.push(
             {
               drawTime: 'afterDatasetsDraw',
@@ -249,9 +249,9 @@ export class DynamicChartComponent implements OnInit {
   }
 
   annotatePercentages(
-    noteOpenPrices: Array<number>,
-    noteLowPrices: Array<number>,
-    noteHighPrices: Array<number>
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>
   ): void {
     const percentages = [
       0.0075
@@ -267,24 +267,26 @@ export class DynamicChartComponent implements OnInit {
       const gainLoss: number = _.round(percentage * this.open.price, 2);
       const putsPoint: number = _.round(this.open.price + gainLoss, 2);
       const callsPoint: number = _.round(this.open.price - gainLoss, 2);
-      this.annotatePercentagePoints(noteOpenPrices, noteLowPrices, noteHighPrices, percentage, gainLoss, putsPoint, callsPoint);
-      this.annotateBuyPoints(noteOpenPrices, noteLowPrices, noteHighPrices, percentage, gainLoss, putsPoint, callsPoint);
+      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
+      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
     });
   }
 
   annotateChart(): void {
-    const noteOpenPrices: Array<any> = _.get(this.data, ['open']);
-    const noteLowPrices: Array<any> = _.get(this.data, ['low']);
-    const noteHighPrices: Array<any> = _.get(this.data, ['high']);
-    this.open.price = _.get(noteOpenPrices, [0]);
-    this.open.low = _.get(noteLowPrices, [0]);
-    this.open.high = _.get(noteHighPrices, [0]);
+    const opens: Array<any> = _.get(this.data, ['open']);
+    const lows: Array<any> = _.get(this.data, ['low']);
+    const highs: Array<any> = _.get(this.data, ['high']);
+    const volumes: Array<any> = _.get(this.data, ['volume']);
+    this.open.price = _.get(opens, [0]);
+    this.open.low = _.get(lows, [0]);
+    this.open.high = _.get(highs, [0]);
     this.open.openToLow = -_.round(this.open.price / this.open.low, 2);
     this.open.openToHigh = _.round(this.open.price / this.open.high, 2);
     this.open.lowToHigh = _.round(Math.abs(this.open.low - this.open.high), 2);
-    this.annotateOpenPrice(noteOpenPrices);
-    this.annotatePercentages(noteOpenPrices, noteLowPrices, noteHighPrices);
-    this.annotateOpenPricesReached(noteOpenPrices, noteLowPrices, noteHighPrices);
+    this.open.volume = _.get(volumes, [0]);
+    this.annotateOpenPrice(opens);
+    this.annotatePercentages(opens, lows, highs);
+    this.annotateOpenPricesReached(opens, lows, highs);
   }
 
   formatChart(): void {
