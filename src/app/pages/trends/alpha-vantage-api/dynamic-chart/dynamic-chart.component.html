@@ -2,8 +2,8 @@
     <h1 class="text-capitalize">({{symbol}}) {{date | date:'fullDate'}}</h1>
     <div>
         <h5>Open Price: {{_.get(open, ['price'])}}</h5>
-        <h5>Open to Low: {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</h5>
-        <h5>Open to High: {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</h5>
+        <h5>Open Low: {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</h5>
+        <h5>Open High: {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</h5>
         <h5>Low to High: {{_.get(open, ['lowToHigh'])}}</h5>
     </div>
         <div class="flex">
