@@ -1,10 +1,23 @@
 <section *ngIf="data">
     <div class="text-center" *ngIf="authService?.canEdit(user)">
         <div class="input-group">
+            <div class="input-group-prepend">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
+                        {{ interval ? interval : 'Interval' }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+                        <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="!_.isEqual(option, interval)" [class.active]="_.isEqual(option, interval)"
+                        [disabled]="_.isEqual(option, interval)" *ngFor="let option of intervalOptions" (click)="interval = option">
+                            {{option}}
+                        </button>
+                    </div>
+                </div>
+            </div>
             <input type="text" class="form-control form-control" aria-label="Search for symbol" placeholder="Search for symbol"
-                [(ngModel)]="search" />
+                [(ngModel)]="symbol" />
             <div class="input-group-append">
-                <button class="btn btn-warning" [disabled]="!search" (click)="refreshData()">
+                <button class="btn btn-warning" [disabled]="!symbol" (click)="refreshData()">
                     <ng-container *ngIf="isPlatformBrowser()">
                         <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
                     </ng-container>

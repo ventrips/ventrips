@@ -34,7 +34,16 @@ export class AlphaVantageApiComponent implements OnInit {
   public metaData: any;
   public data: any;
   public updated: string;
-  public search: string = '';
+  public symbol: string = 'SPY';
+  public interval: string = '1min';
+  public intervalOptions: Array<any> = [
+    '1min',
+    '5min',
+    '15min',
+    '30min',
+    '60min'
+  ];
+
 
   constructor(
     private afs: AngularFirestore,
@@ -74,7 +83,8 @@ export class AlphaVantageApiComponent implements OnInit {
         ), 'date')
       );
       this.updated = _.get(response, ['updated']);
-      this.search = _.get(this.metaData, ['symbol'])
+      this.symbol = _.get(this.metaData, ['symbol'])
+      this.interval = _.get(this.metaData, ['interval'])
       this.isLoading = false;
       // this.spinner.hide();
     }, () => {
@@ -88,7 +98,7 @@ export class AlphaVantageApiComponent implements OnInit {
 
   // Fetches latest and sets to firestore DB
   getData(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/getAlphaVantageAPI?symbol=${this.search}`)
+    return this.http.get(`${environment.apiUrl}/getAlphaVantageAPI?symbol=${this.symbol}&interval=${this.interval}`)
     .pipe(map((response: Response) => { return response }));
   };
 

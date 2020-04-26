@@ -8,7 +8,7 @@ const db = admin.firestore();
 // const isBullish = require('is-bullish');
 const Utils = require('./utils');
 
-// https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=SPY&interval=1min&outputsize=full&apikey=J5LLHCUPAQ0CR0IN
+// https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=SPY&interval=5min&outputsize=full&apikey=J5LLHCUPAQ0CR0IN
 const BASE_URL = 'https://www.alphavantage.co/query';
 const API_KEY = 'J5LLHCUPAQ0CR0IN';
 
@@ -39,8 +39,8 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
 }
 
 
-const convertChartData = (fiveMinData: any, dayData: any) => {
-    const fiveMinDates = Object.keys(fiveMinData['Time Series (1min)']).map(date => new Date(date).getTime());
+const convertChartData = (intraData: any, dayData: any, interval: string) => {
+    const fiveMinDates = Object.keys(intraData[`Time Series (${interval})`]).map(date => new Date(date).getTime());
     const minDate = `${((new Date(Math.min(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
     const maxDate = `${((new Date(Math.max(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
 
@@ -50,11 +50,11 @@ const convertChartData = (fiveMinData: any, dayData: any) => {
     });
     _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
         if (((new Date(key).getTime()) >= (new Date(minDate).getTime())) && ((new Date(key).getTime()) <= (new Date(maxDate).getTime()))) {
-            _.set(fiveMinData['Time Series (1min)'], key, value);
+            _.set(intraData[`Time Series (${interval})`], key, value);
         }
     });
     let dates: Array<any> = [];
-    _.forEach(fiveMinData['Time Series (1min)'], (value: any, key: any) => {
+    _.forEach(intraData[`Time Series (${interval})`], (value: any, key: any) => {
         dates.push(_.assign(value, { date: key }));
     });
     dates = _.sortBy(dates, 'date');
@@ -78,12 +78,12 @@ const convertChartData = (fiveMinData: any, dayData: any) => {
 
     return {
         metaData: {
-            information: fiveMinData['Meta Data']['1. Information'],
-            symbol: fiveMinData['Meta Data']['2. Symbol'],
-            lastRefreshed: fiveMinData['Meta Data']['3. Last Refreshed'],
-            interval: fiveMinData['Meta Data']['4. Interval'],
-            outputSize: fiveMinData['Meta Data']['5. Output Size'],
-            timeZone: fiveMinData['Meta Data']['6. Time Zone'],
+            information: intraData['Meta Data']['1. Information'],
+            symbol: intraData['Meta Data']['2. Symbol'],
+            lastRefreshed: intraData['Meta Data']['3. Last Refreshed'],
+            interval: intraData['Meta Data']['4. Interval'],
+            outputSize: intraData['Meta Data']['5. Output Size'],
+            timeZone: intraData['Meta Data']['6. Time Zone'],
         },
         chartData
     }
@@ -91,18 +91,21 @@ const convertChartData = (fiveMinData: any, dayData: any) => {
 
 export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     Utils.cors(request, response);
+    const symbol = _.toUpper(request.query.symbol);
+    const interval = _.toLower(request.query.interval);
+
     let data;
-    let fiveMinData;
+    let intraData;
     let dayData;
     /* Mock */
-    // fiveMinData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+    // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
     // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
-    // data = convertChartData(fiveMinData, dayData);
+    // data = convertChartData(intraData, dayData, interval);
     // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
 
     /* Real */
-    fiveMinData = await alphaVantageRequest({function: 'TIME_SERIES_INTRADAY', symbol: request.query.symbol, interval: '1min', outputsize: 'full'});
-    dayData = await alphaVantageRequest({function: 'TIME_SERIES_DAILY', symbol: request.query.symbol, outputsize: 'compact'});
-    data = convertChartData(fiveMinData, dayData);
+    intraData = await alphaVantageRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'});
+    dayData = await alphaVantageRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'});
+    data = convertChartData(intraData, dayData, interval);
     setFirebase(request, response, data, 'trends/get-alpha-vantage-api', true);
 });
