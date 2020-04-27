@@ -26,8 +26,8 @@
         url="{{environment.url}}{{url}}">
         </share-buttons>
     </section>
-    <div class="text-center my-5" *ngIf="authService?.canEdit(user)">
-        <div class="input-group">
+    <div class="text-center my-5 p-3 bg-dark sticky-top" *ngIf="authService?.canEdit(user)">
+        <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
@@ -51,10 +51,10 @@
                 </button>
             </div>
         </div>
-        <section class="mb-3">
-            <input type="text" class="form-control form-control" aria-label="Low Param" placeholder="Low Param"
+        <section class="mb-2">
+            <input type="text" class="form-control form-control mb-2" aria-label="Low Param" placeholder="Low Param"
             [(ngModel)]="lowParam" />
-            <input type="text" class="form-control form-control" aria-label="High Param" placeholder="High Param"
+            <input type="text" class="form-control form-control mb-2" aria-label="High Param" placeholder="High Param"
             [(ngModel)]="highParam" />
         </section>
     </div>
