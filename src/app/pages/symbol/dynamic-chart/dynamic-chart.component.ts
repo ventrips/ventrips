@@ -335,10 +335,10 @@ export class DynamicChartComponent implements OnInit {
     const volumes: Array<any> = _.get(this.data, ['volume']);
     this.open.price = _.get(opens, [0]);
     // TODO: Fix API for opening because it takes in overall day lows/highs
-    _.set(this.data, 'low', 0);
-    _.set(this.data, 'high', 0);
-    _.set(this.data, 'close', 0);
-    _.set(this.data, 'volume', 0);
+    this.data.low[0] = this.data.open[0];
+    this.data.high[0] = this.data.open[0];
+    this.data.close[0] = this.data.open[0];
+    this.data.volume[0] = this.data.volume[1];
     // this.open.low = _.get(lows, [0]);
     // this.open.high = _.get(highs, [0]);
     // this.open.openToLow = -_.round(this.open.price / this.open.low, 2);
