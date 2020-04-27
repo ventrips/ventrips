@@ -65,7 +65,7 @@ export class SymbolComponent implements OnInit {
       this.url = this.router.url;
       this.symbol = _.toUpper(params.symbol);
       this.title = `${this.symbol} | Free Historical Intraday Charts`;
-      this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+      this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of free data`;
       this.ssrService.setSeo({
         title: this.title,
         description: this.description,
