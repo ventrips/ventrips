@@ -19,6 +19,7 @@ import { TimeStampDatePipe } from './../pipes/time-stamp-date/time-stamp-date.pi
 import { TimeAgoPipe } from './../pipes/time-ago/time-ago.pipe';
 import { KeysPipe } from './../pipes/keys/keys.pipe';
 import { SearchHighlightPipe } from './../pipes/search-highlight/search-highlight.pipe';
+import { NumberSuffixPipe } from '../pipes/number-suffix/number-suffix.pipe';
 
 import { QuillModule } from 'ngx-quill';
 import { DisqusModule } from 'ngx-disqus';
@@ -33,7 +34,8 @@ import { DisqusModule } from 'ngx-disqus';
     TimeStampDatePipe,
     TimeAgoPipe,
     KeysPipe,
-    SearchHighlightPipe
+    SearchHighlightPipe,
+    NumberSuffixPipe
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,8 @@ import { DisqusModule } from 'ngx-disqus';
     TimeStampDatePipe,
     TimeAgoPipe,
     KeysPipe,
-    SearchHighlightPipe
+    SearchHighlightPipe,
+    NumberSuffixPipe
   ]
 })
 export class SharedModule {

@@ -4,11 +4,13 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { NumberSuffixPipe } from '../../../pipes/number-suffix/number-suffix.pipe';
 
 @Component({
   selector: 'app-dynamic-chart',
   templateUrl: './dynamic-chart.component.html',
-  styleUrls: ['./dynamic-chart.component.scss']
+  styleUrls: ['./dynamic-chart.component.scss'],
+  providers: [ NumberSuffixPipe ]
 })
 export class DynamicChartComponent implements OnInit {
   @Input() symbol;
@@ -18,6 +20,38 @@ export class DynamicChartComponent implements OnInit {
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
+  public lineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(255, 206, 86, 1)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(153, 102, 255, 1)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(255, 159, 64, 1)',
+      borderWidth: 5
+    }
+  ];
   public lineChartOptions: (ChartOptions & { annotation: any }) = { annotation: {} };
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -30,6 +64,10 @@ export class DynamicChartComponent implements OnInit {
   };
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
+
+  constructor(
+    private numberSuffixPipe: NumberSuffixPipe
+  ) {}
 
   ngOnInit() {
     this.formatChart();
@@ -81,16 +119,20 @@ export class DynamicChartComponent implements OnInit {
           {
             id: 'y-axis-1',
             position: 'left',
+            gridLines: {
+              color: 'rgba(255,0,0,0.3)',
+            },
             ticks: {
-              fontColor: 'blue',
-              stepSize: 10000000
+              fontColor: 'black',
+              stepSize: 10000000,
+              callback: (value) => this.numberSuffixPipe.transform(value)
             }
           },
           {
             id: 'y-axis-2',
             position: 'right',
             ticks: {
-              fontColor: 'orange',
+              fontColor: 'black',
               stepSize: 10
             }
           }

@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../interfaces/user';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
+import { NumberSuffixPipe } from '../../pipes/number-suffix/number-suffix.pipe';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -20,8 +21,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-symbol',
   templateUrl: './symbol.component.html',
-  styleUrls: ['./symbol.component.scss'],
-  providers: [ NgbTypeaheadConfig ] // add NgbTypeaheadConfig to the component providers
+  styleUrls: ['./symbol.component.scss']
 })
 export class SymbolComponent implements OnInit {
   public isLoading = true;
@@ -65,7 +65,7 @@ export class SymbolComponent implements OnInit {
       this.url = this.router.url;
       this.symbol = _.toUpper(params.symbol);
       this.title = `${this.symbol} | Free Historical Intraday Charts`;
-      this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends of the past few days`;
+      this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends from the previous days`;
       this.ssrService.setSeo({
         title: this.title,
         description: this.description,
