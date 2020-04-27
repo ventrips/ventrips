@@ -212,7 +212,7 @@ export class DynamicChartComponent implements OnInit {
         borderColor: isDoNotBuyRange ? 'purple' : 'green',
         borderWidth: 5,
         label: {
-          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS @ ${putsPoint}`}`,
+          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS`} @ ${putsPoint}`,
           enabled: true,
           position: "top"
         }
@@ -228,7 +228,7 @@ export class DynamicChartComponent implements OnInit {
         borderColor: isDoNotBuyRange ? 'purple' : 'red',
         borderWidth: 5,
         label: {
-          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `CALLS @ ${callsPoint}`}`,
+          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `CALLS`} @ ${callsPoint}`,
           enabled: true,
           position: "top"
         }
