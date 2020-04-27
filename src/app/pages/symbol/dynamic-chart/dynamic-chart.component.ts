@@ -17,6 +17,8 @@ export class DynamicChartComponent implements OnInit {
   @Input() canEdit = false;
   @Input() date;
   @Input() data;
+  @Input() lowParam;
+  @Input() highParam;
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -198,10 +200,9 @@ export class DynamicChartComponent implements OnInit {
     percentage: number,
     gainLoss: number,
     putsPoint: number,
-    callsPoint: number,
-    lowParam: number
+    callsPoint: number
   ): void {
-    const isDoNotBuyRange = _.isEqual(percentage, lowParam);
+    const isDoNotBuyRange = _.isEqual(percentage, this.lowParam);
     this.lineChartOptions.annotation.annotations.push(
       {
         drawTime: 'afterDatasetsDraw',
@@ -242,10 +243,9 @@ export class DynamicChartComponent implements OnInit {
     percentage: number,
     gainLoss: number,
     putsPoint: number,
-    callsPoint: number,
-    highParam: number
+    callsPoint: number
   ): void {
-      if (percentage !== highParam) {
+      if (percentage !== this.highParam) {
         return;
       }
       _.forEach(lows, (price, index) => {
@@ -301,11 +301,9 @@ export class DynamicChartComponent implements OnInit {
     lows: Array<number>,
     highs: Array<number>
   ): void {
-    const lowParam = 0.0018;
-    const highParam = 0.0075;
     const percentages = [
-      lowParam
-      , highParam
+      this.lowParam
+      , this.highParam
       // ,0.01
       // ,0.02
       // ,0.03
@@ -317,8 +315,8 @@ export class DynamicChartComponent implements OnInit {
       const gainLoss: number = _.round(percentage * this.open.price, 2);
       const putsPoint: number = _.round(this.open.price + gainLoss, 2);
       const callsPoint: number = _.round(this.open.price - gainLoss, 2);
-      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint, lowParam);
-      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint, highParam);
+      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
+      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
     });
   }
 
