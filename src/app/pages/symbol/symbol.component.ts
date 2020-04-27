@@ -36,7 +36,7 @@ export class SymbolComponent implements OnInit {
   public metaData: any;
   public data: any;
   public updated: string;
-  public interval: string = '5min';
+  public interval: string = '1min';
   public intervalOptions: Array<any> = [
     '1min',
     '5min',
