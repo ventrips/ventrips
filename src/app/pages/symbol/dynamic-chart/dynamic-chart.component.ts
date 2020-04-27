@@ -198,9 +198,10 @@ export class DynamicChartComponent implements OnInit {
     percentage: number,
     gainLoss: number,
     putsPoint: number,
-    callsPoint: number
+    callsPoint: number,
+    lowParam: number
   ): void {
-    const isDoNotBuyRange = _.isEqual(percentage, 0.0020);
+    const isDoNotBuyRange = _.isEqual(percentage, lowParam);
     this.lineChartOptions.annotation.annotations.push(
       {
         drawTime: 'afterDatasetsDraw',
@@ -241,9 +242,10 @@ export class DynamicChartComponent implements OnInit {
     percentage: number,
     gainLoss: number,
     putsPoint: number,
-    callsPoint: number
+    callsPoint: number,
+    highParam: number
   ): void {
-      if (percentage !== 0.0075) {
+      if (percentage !== highParam) {
         return;
       }
       _.forEach(lows, (price, index) => {
@@ -299,9 +301,11 @@ export class DynamicChartComponent implements OnInit {
     lows: Array<number>,
     highs: Array<number>
   ): void {
+    const lowParam = 0.0018;
+    const highParam = 0.0075;
     const percentages = [
-      0.0075
-      ,0.0020
+      lowParam
+      , highParam
       // ,0.01
       // ,0.02
       // ,0.03
@@ -313,8 +317,8 @@ export class DynamicChartComponent implements OnInit {
       const gainLoss: number = _.round(percentage * this.open.price, 2);
       const putsPoint: number = _.round(this.open.price + gainLoss, 2);
       const callsPoint: number = _.round(this.open.price - gainLoss, 2);
-      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
-      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
+      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint, lowParam);
+      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint, highParam);
     });
   }
 
