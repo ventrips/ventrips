@@ -322,8 +322,10 @@ export class DynamicChartComponent implements OnInit {
 
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
     this.annotateOpenPrice(opens);
-    this.annotatePercentages(opens, lows, highs);
-    this.annotateOpenPricesReached(opens, lows, highs);
+    if (this.canEdit) {
+      this.annotatePercentages(opens, lows, highs);
+      this.annotateOpenPricesReached(opens, lows, highs);
+    }
   }
 
   formatChart(): void {
@@ -349,9 +351,7 @@ export class DynamicChartComponent implements OnInit {
       return moment(date).format('LLL');
     });
     this.chartOptions();
-    if (this.canEdit) {
-      this.annotateChart(opens, lows, highs);
-    }
+    this.annotateChart(opens, lows, highs);
   }
 
   // events
