@@ -57,13 +57,15 @@
             <input type="text" class="form-control form-control mb-2" aria-label="High Param" placeholder="High Param"
             [(ngModel)]="highParam" />
         </section>
-        <p class="text-center small text-secondary my-5" *ngIf="updated">
-            Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
-        </p>
     </div>
     <p class="text-center small text-secondary my-5" *ngIf="metaData?.lastRefreshed">
         Last Refreshed: {{metaData?.lastRefreshed | date:'fullDate'}} @ {{metaData?.lastRefreshed | date:'shortTime'}}  ({{metaData?.timeZone}})
     </p>
+    <ng-container *ngIf="authService?.canEdit(user)">
+        <p class="text-center small text-secondary my-5" *ngIf="updated">
+            Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
+        </p>
+    </ng-container>
     <section>
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
