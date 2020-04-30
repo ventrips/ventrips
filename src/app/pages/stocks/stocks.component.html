@@ -1,1 +1,53 @@
-<p>stocks works!</p>
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center pt-2 mb-5">
+        <ng-adsense
+            [fullWidthResponsive]="true"
+            [display]="'block'"
+            [adClient]="'ca-pub-4642980268605791'"
+            [adSlot]=2801999023
+            [adFormat]="'auto'">
+        </ng-adsense>
+    </section>
+    <div class="container-fluid my-5">
+        <div class="h5 my-4">
+            <h1 class="mb-4">{{title}}</h1>
+            <p class="my-3">
+                {{description}}
+            </p>
+        </div>
+        <section class="mb-3 d-flex flex-wrap align-items-center">
+            <span class="h5 my-2 mr-3">Share</span>
+            <share-buttons
+            [theme]="'default'"
+            [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']"
+            [exclude]="[]"
+            [showText]="false"
+            [showCount]="false"
+            url="{{environment.url}}{{url}}">
+            </share-buttons>
+        </section>
+    </div>
+    <div class="container-fluid mb-5">
+        <h3 class="mb-4">Search Historical Intraday Charts for... <span *ngIf="!_.isEmpty(searchTerm)">{{searchTerm}}</span></h3>
+        <div class="input-group">
+            <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for a stock symbol" placeholder="Search for a stock symbol"
+            [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+            <div class="input-group-append">
+                <a [routerLink]="[_.trim(searchTerm)]" class="btn btn-lg text-dark btn-warning" title="Search Stock Symbol" [class.disabled]="_.isEmpty(searchTerm)">
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                    </ng-container>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Horizontal Display Ad-->
+    <section class="container-fluid text-center pt-2 mb-5">
+        <ng-adsense
+            [fullWidthResponsive]="true"
+            [display]="'block'"
+            [adClient]="'ca-pub-4642980268605791'"
+            [adSlot]=2801999023
+            [adFormat]="'auto'">
+        </ng-adsense>
+    </section>

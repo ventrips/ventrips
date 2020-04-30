@@ -12,7 +12,12 @@
           Home
         </a>
       </li>
-      <li class="nav-item dropdown cursor-pointer">
+      <li class="nav-item">
+        <a [routerLink]="['symbol']" [ngClass]="{'active': isActive('symbol')}" class="nav-link" title="Stocks">
+          Stocks
+        </a>
+      </li>
+      <!-- <li class="nav-item dropdown cursor-pointer">
         <a class="nav-link dropdown-toggle" title="User Dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           [ngClass]="{'active': isActive('/symbol')}">
           <span>Stocks</span>
@@ -24,7 +29,7 @@
               </a>
           </ng-container>
         </div>
-      </li>
+      </li> -->
       <li [ngClass]="{'active': isActive('trends')}" class="nav-item">
         <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
           Trends
