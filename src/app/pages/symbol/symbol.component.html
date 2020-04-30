@@ -58,8 +58,8 @@
             [(ngModel)]="highParam" />
         </section>
     </div>
-    <p class="text-center small text-secondary my-5" *ngIf="metaData?.lastRefreshed">
-        Last Refreshed: {{metaData?.lastRefreshed | date:'fullDate'}} @ {{metaData?.lastRefreshed | date:'shortTime'}}  ({{metaData?.timeZone}})
+    <p class="text-center small text-secondary my-5" *ngIf="!_.isEmpty(_.get(metaData, ['lastRefreshed']))">
+        Last Refreshed: {{metaData.lastRefreshed | date:'fullDate'}} @ {{metaData.lastRefreshed | date:'fullTime'}}  ({{metaData?.timeZone}})
     </p>
     <ng-container *ngIf="authService?.canEdit(user)">
         <p class="text-center small text-secondary my-5" *ngIf="updated">
