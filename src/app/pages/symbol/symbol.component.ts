@@ -15,9 +15,9 @@ import { NumberSuffixPipe } from '../../pipes/number-suffix/number-suffix.pipe';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import * as _ from 'lodash';
-
+import {firestore} from 'firebase/app';
 @Component({
   selector: 'app-symbol',
   templateUrl: './symbol.component.html',
@@ -35,7 +35,7 @@ export class SymbolComponent implements OnInit {
   public symbol: string;
   public metaData: any;
   public data: any;
-  public updated: string;
+  public updated: firestore.Timestamp;
   public interval: string = '1min';
   public intervalOptions: Array<any> = [
     '1min',
@@ -77,9 +77,11 @@ export class SymbolComponent implements OnInit {
   }
 
   init() {
+    let count = 0;
     this.spinner.show();
     this.ssrService.ssrFirestoreDoc(`${this.collection}/${this.symbol}`, `${this.collection}-${this.symbol}`, false)
     .subscribe(response => {
+      count++;
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.metaData = _.get(response, ['metaData']);
         this.data = _.reverse(
@@ -94,7 +96,12 @@ export class SymbolComponent implements OnInit {
         );
         this.updated = _.get(response, ['updated']);
         this.interval = _.get(this.metaData, ['interval']);
-      };
+      }
+      if (count === 2) {
+        const lastRefreshed = _.get(this.metaData, ['lastRefreshed']);
+        const timeZone = _.get(this.metaData, ['timeZone']);
+        this.serverRefreshData(lastRefreshed, timeZone);
+      }
       this.isLoading = false;
       this.spinner.hide();
     }, () => {
@@ -111,6 +118,32 @@ export class SymbolComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/getAlphaVantageAPI?symbol=${this.symbol}&interval=${this.interval}`)
     .pipe(map((response: Response) => { return response }));
   };
+
+  serverRefreshData(lastRefreshed: string, timeZone: string): void {
+    if (!this.isPlatformBrowser()) {
+      return;
+    }
+    const format = 'YYYY-MM-DD HH:mm:ss';
+    const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
+    const today930am = (moment().set({h:9, m:30, s:0})).format(format);
+    const today4pm = (moment().set({h:16, m:0, s:0})).format(format);
+    const isNew = _.isNil(lastRefreshed);
+    const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
+    const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
+    const isOver24Hours = moment().diff(moment(lastRefreshedTimeZone), 'days') > 0;
+    // const currentIsAfterOpen = moment().isAfter(today930am);
+    // const currentIsAfterClose = moment().isAfter(today4pm);
+    // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
+
+   if (
+      isNew
+      || isOver24Hours
+      || (isWeekday && lastRefreshedIsBeforeClose)
+    ) {
+      // console.log(isNew, isOver24Hours, (isWeekday && lastRefreshedIsBeforeClose));
+      this.getData().subscribe(response => {}, (error) => {});
+    }
+  }
 
   refreshData(): void {
     if (!this.authService.canEdit(this.user)) {

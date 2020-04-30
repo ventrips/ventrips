@@ -32,7 +32,7 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
     }
     const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
     return db.doc(firebasePath).set(final).then(() => {
-        return response.send(final);
+        return response.send();
     }).catch((error) => {
         return response.send(error);
     });
