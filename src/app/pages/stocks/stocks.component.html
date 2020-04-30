@@ -27,7 +27,7 @@
             </share-buttons>
         </section>
     </div>
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-5 min-height-25vh">
         <h3 class="mb-4">Search Historical Intraday Charts for... <span *ngIf="!_.isEmpty(searchTerm)">{{searchTerm}}</span></h3>
         <div class="input-group">
             <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for a stock symbol" placeholder="Search for a stock symbol"
@@ -42,7 +42,7 @@
         </div>
     </div>
     <!-- Horizontal Display Ad-->
-    <!-- <section class="container-fluid text-center pt-2 mb-5">
+    <section class="container-fluid text-center pt-2 mb-5">
         <ng-adsense
             [fullWidthResponsive]="true"
             [display]="'block'"
@@ -50,4 +50,4 @@
             [adSlot]=2801999023
             [adFormat]="'auto'">
         </ng-adsense>
-    </section> -->
+    </section>
