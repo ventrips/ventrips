@@ -36,7 +36,7 @@ export class SymbolComponent implements OnInit {
   public metaData: any;
   public data: any;
   public updated: firestore.Timestamp;
-  public lastRefreshed: Date;
+  public lastRefreshed: any;
   public interval: string = '1min';
   public intervalOptions: Array<any> = [
     '1min',
