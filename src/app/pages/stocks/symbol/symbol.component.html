@@ -26,11 +26,11 @@
         url="{{environment.url}}{{url}}">
         </share-buttons>
     </section>
-    <div class="text-center my-5 p-3 bg-dark sticky-top" *ngIf="authService?.canEdit(user)">
-        <div class="input-group mb-2">
+    <div class="text-center my-5 p-3 bg-dark sticky-top">
+        <div class="input-group mb-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">
-                    <button class="btn btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
+                    <button class="btn btn-lg btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
                         {{ interval ? interval : 'Interval' }}
                     </button>
                     <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <input type="text" class="form-control form-control" aria-label="Search for symbol" placeholder="Search for symbol"
+            <input type="text" class="form-control form-control-lg" aria-label="Search for symbol" placeholder="Search for symbol"
                 [(ngModel)]="symbol" />
             <div class="input-group-append">
                 <button class="btn btn-warning" [disabled]="!symbol" (click)="refreshData()">
@@ -51,12 +51,13 @@
                 </button>
             </div>
         </div>
-        <section class="mb-2">
-            <input type="text" class="form-control form-control mb-2" aria-label="Low Param" placeholder="Low Param"
-            [(ngModel)]="lowParam" />
-            <input type="text" class="form-control form-control mb-2" aria-label="High Param" placeholder="High Param"
-            [(ngModel)]="highParam" />
-        </section>
+        <div class="input-group input-group-lg mb-2">
+            <div class="input-group-prepend">
+                <button class="btn" [ngClass]="{'btn-warning': toggleEdit, 'btn-secondary': !toggleEdit}" type="button" (click)="toggleEdit = !toggleEdit">Lower &amp; Upper Bounds (%) {{toggleEdit ? 'ON' : 'OFF'}} </button>
+            </div>
+            <input type="number" class="form-control" aria-label="Low Param" placeholder="Low Param" [(ngModel)]="lowParam" [disabled]="!toggleEdit" />
+            <input type="number" class="form-control" aria-label="High Param" placeholder="High Param" [(ngModel)]="highParam" [disabled]="!toggleEdit" />
+        </div>
     </div>
     <p class="text-center small text-secondary my-5" *ngIf="!_.isEmpty(lastRefreshed)">
         Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
@@ -70,7 +71,7 @@
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
                 <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService.canEdit(this.user)" [date]="item?.date" [data]="item?.data" [lowParam]="lowParam" [highParam]="highParam"></app-dynamic-chart>
+                    <app-dynamic-chart [symbol]="metaData?.symbol" [toggleEdit]="toggleEdit" [date]="item?.date" [data]="item?.data" [lowParam]="lowParam" [highParam]="highParam"></app-dynamic-chart>
                 </section>
             </ng-container>
         </ng-container>

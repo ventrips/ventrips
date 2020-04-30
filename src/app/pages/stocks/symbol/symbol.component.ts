@@ -45,8 +45,9 @@ export class SymbolComponent implements OnInit {
     '30min',
     '60min'
   ];
-  public lowParam = 0.0018;
-  public highParam = 0.0075;
+  public lowParam = 0.18;
+  public highParam = 0.75;
+  public toggleEdit: boolean = false;
 
   constructor(
     private afs: AngularFirestore,

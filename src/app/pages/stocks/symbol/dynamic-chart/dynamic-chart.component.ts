@@ -14,7 +14,7 @@ import { NumberSuffixPipe } from '../../../../pipes/number-suffix/number-suffix.
 })
 export class DynamicChartComponent implements OnInit {
   @Input() symbol;
-  @Input() canEdit = false;
+  @Input() toggleEdit = false;
   @Input() date;
   @Input() data;
   @Input() lowParam;
@@ -202,18 +202,18 @@ export class DynamicChartComponent implements OnInit {
     putsPoint: number,
     callsPoint: number
   ): void {
-    const isDoNotBuyRange = _.isEqual(percentage, this.lowParam);
+    const isDoNotBuyRange = _.isEqual(percentage, (this.lowParam / 100));
     this.lineChartOptions.annotation.annotations.push(
       {
         drawTime: 'afterDatasetsDraw',
         type: "line",
         mode: "horizontal",
         scaleID: "y-axis-2",
-        value: putsPoint,
-        borderColor: isDoNotBuyRange ? 'purple' : 'green',
+        value: callsPoint,
+        borderColor: isDoNotBuyRange ? 'red' : 'green',
         borderWidth: 5,
         label: {
-          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `PUTS`} @ ${putsPoint}`,
+          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Lower` : `Upper`} @ ${callsPoint}`,
           enabled: true,
           position: "top"
         }
@@ -225,11 +225,11 @@ export class DynamicChartComponent implements OnInit {
         type: "line",
         mode: "horizontal",
         scaleID: "y-axis-2",
-        value: callsPoint,
-        borderColor: isDoNotBuyRange ? 'purple' : 'red',
+        value: putsPoint,
+        borderColor: isDoNotBuyRange ? 'red' : 'green',
         borderWidth: 5,
         label: {
-          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `DO NOT BUY` : `CALLS`} @ ${callsPoint}`,
+          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Lower` : `Upper`} @ ${putsPoint}`,
           enabled: true,
           position: "top"
         }
@@ -245,12 +245,12 @@ export class DynamicChartComponent implements OnInit {
     putsPoint: number,
     callsPoint: number
   ): void {
-      if (percentage !== this.highParam) {
+      if (percentage !== (this.highParam/ 100)) {
         return;
       }
       _.forEach(lows, (price, index) => {
         if (_.isEqual(index, 0)) { return true;}
-        if (price <= callsPoint && this.isBeforeNoon(index)) {
+        if (price <= callsPoint) {
           const buyPrice = lows[index];
           this.lineChartOptions.annotation.annotations.push(
             {
@@ -259,7 +259,7 @@ export class DynamicChartComponent implements OnInit {
               mode: "vertical",
               scaleID: "x-axis-0",
               value: this.lineChartLabels[index],
-              borderColor: "red",
+              borderColor: "green",
               borderWidth: 5,
               label: {
                 content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
@@ -273,7 +273,7 @@ export class DynamicChartComponent implements OnInit {
       });
       _.forEach(highs, (price, index) => {
         if (_.isEqual(index, 0)) { return true;}
-        if (price >= putsPoint && this.isBeforeNoon(index)) {
+        if (price >= putsPoint) {
           const buyPrice = highs[index];
           this.lineChartOptions.annotation.annotations.push(
             {
@@ -311,7 +311,8 @@ export class DynamicChartComponent implements OnInit {
       // ,0.05
       // ,0.06
     ];
-    _.forEach(percentages, (percentage) => {
+    _.forEach(percentages, (percent) => {
+      const percentage = (percent / 100);
       const gainLoss: number = _.round(percentage * this.open.price, 2);
       const putsPoint: number = _.round(this.open.price + gainLoss, 2);
       const callsPoint: number = _.round(this.open.price - gainLoss, 2);
@@ -322,7 +323,7 @@ export class DynamicChartComponent implements OnInit {
 
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
     this.annotateOpenPrice(opens);
-    if (this.canEdit) {
+    if (this.toggleEdit) {
       this.annotatePercentages(opens, lows, highs);
       this.annotateOpenPricesReached(opens, lows, highs);
     }
