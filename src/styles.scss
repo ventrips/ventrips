@@ -156,6 +156,18 @@ quill-editor .ql-toolbar {
     min-height: 25vh;
 }
 
+.min-height-50vh {
+    min-height: 50vh;
+}
+
+.min-height-75vh {
+    min-height: 75vh;
+}
+
+.min-height-100vh {
+    min-height: 100vh;
+}
+
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) {
     figure.container, figure.container-fluid {
