@@ -4,7 +4,7 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { NumberSuffixPipe } from '../../../pipes/number-suffix/number-suffix.pipe';
+import { NumberSuffixPipe } from '../../../../pipes/number-suffix/number-suffix.pipe';
 
 @Component({
   selector: 'app-dynamic-chart',

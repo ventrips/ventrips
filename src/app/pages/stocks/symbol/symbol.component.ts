@@ -6,12 +6,12 @@ import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/op
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../services/firestore/auth/auth.service';
-import { environment } from '../../../environments/environment';
+import { AuthService } from '../../../services/firestore/auth/auth.service';
+import { environment } from '../../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from '../../interfaces/user';
-import { SsrService } from '../../services/firestore/ssr/ssr.service';
-import { NumberSuffixPipe } from '../../pipes/number-suffix/number-suffix.pipe';
+import { User } from '../../../interfaces/user';
+import { SsrService } from '../../../services/firestore/ssr/ssr.service';
+import { NumberSuffixPipe } from '../../../pipes/number-suffix/number-suffix.pipe';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';

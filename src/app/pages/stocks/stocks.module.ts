@@ -1,11 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SymbolRoutingModule } from './symbol-routing.module';
+import { StocksRoutingModule } from './stocks-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ChartsModule } from 'ng2-charts';
-import { SymbolComponent } from './symbol.component';
-import { DynamicChartComponent } from './dynamic-chart/dynamic-chart.component';
+import { SymbolComponent } from './symbol/symbol.component';
+import { DynamicChartComponent } from './symbol/dynamic-chart/dynamic-chart.component';
 @NgModule({
   declarations: [
     SymbolComponent,
@@ -13,7 +13,7 @@ import { DynamicChartComponent } from './dynamic-chart/dynamic-chart.component';
   ],
   imports: [
     CommonModule,
-    SymbolRoutingModule,
+    StocksRoutingModule,
     SharedModule,
     ChartsModule
   ],
@@ -21,4 +21,4 @@ import { DynamicChartComponent } from './dynamic-chart/dynamic-chart.component';
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class SymbolModule { }
+export class StocksModule { }
