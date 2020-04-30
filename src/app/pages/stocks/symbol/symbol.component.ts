@@ -36,6 +36,7 @@ export class SymbolComponent implements OnInit {
   public metaData: any;
   public data: any;
   public updated: firestore.Timestamp;
+  public lastRefreshed: Date;
   public interval: string = '1min';
   public intervalOptions: Array<any> = [
     '1min',
@@ -95,6 +96,7 @@ export class SymbolComponent implements OnInit {
           ), 'date')
         );
         this.updated = _.get(response, ['updated']);
+        this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
       }
       if (count === 2) {
