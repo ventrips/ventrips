@@ -27,11 +27,9 @@ export class StocksComponent implements OnInit {
   public url: string;
   public title: string = `Free Historical Intraday Charts`;
   public description: string  = `Current Historical Intraday Charts to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
-  public id: string = 'stocks';
   public collection: string = 'symbol'
   public searchTerm: any;
   public searchOptions: Array<string> = ['AAPL', 'AMZN', 'FB', 'MSFT', 'SPY', 'TSLA', 'VIX', 'WTI'];
-  public metaData: any;
   public data: any;
   @ViewChild('searchBar', {static: false}) searchInputText: ElementRef; // Remove aria-multiline to improve SEO
 
@@ -63,7 +61,12 @@ export class StocksComponent implements OnInit {
     this.ssrService.setSeo({
       title: this.title,
       description: this.description,
-    }, `${this.collection}-${this.id}`, false);
+    }, `${this.collection}`, false);
+    this.ssrService.ssrFirestoreCollection(`${this.collection}`, `symbol`, false)
+    .subscribe(response => {
+      this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
+      this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
+    }, () => {});
   }
 
   search = (text$: Observable<string>) => text$.pipe(

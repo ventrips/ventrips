@@ -27,9 +27,9 @@
             </share-buttons>
         </section>
     </div>
-    <div class="container-fluid mb-5 min-height-25vh">
-        <h3 class="mb-4">Search Historical Intraday Charts for... <span *ngIf="!_.isEmpty(searchTerm)">{{searchTerm}}</span></h3>
-        <div class="input-group">
+    <div class="container-fluid mb-5 min-height-50vh">
+        <h3 class="mb-4">Search Historical Intraday Charts for... <span *ngIf="!_.isEmpty(searchTerm)" class="badge badge-warning p-3">{{searchTerm}}</span></h3>
+        <div class="input-group mb-4">
             <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for a stock symbol" placeholder="Search for a stock symbol"
             [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
             <div class="input-group-append">
@@ -39,6 +39,10 @@
                     </ng-container>
                 </a>
             </div>
+        </div>
+        <h4 class="mb-4">Recent Searches</h4>
+        <div class="mb-4 d-flex flex-wrap align-items-center">
+           <a *ngFor="let item of data" [routerLink]="[item?.metaData?.symbol]" class="h3"><span class="badge badge-warning p-3 mb-3 mr-3" [innerHTML]="item?.metaData?.symbol | searchHighlight: searchTerm: 'text-white': 'bg-dark'"></span></a>
         </div>
     </div>
     <!-- Horizontal Display Ad-->

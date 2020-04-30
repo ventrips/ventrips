@@ -80,4 +80,17 @@ export class SsrService {
     );
   }
 
+  ssrFirestoreCollectionIds(path: string, stateKey: string, setSeo: boolean = false) {
+    const key = makeStateKey<any>(stateKey);
+    const exists = this.transferState.get(key, {} as any);
+    return this.afs.collection<any>(path).ref.get();
+    // return this.afs.doc<any>(path).get().valueChanges().pipe(
+    //   tap(page => {
+    //     this.transferState.set(key, page);
+    //     this.setSeo(page, stateKey, setSeo);
+    //   }),
+    //   startWith(exists)
+    // );
+  }
+
 }

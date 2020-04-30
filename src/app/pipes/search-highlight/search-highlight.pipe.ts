@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 export class SearchHighlightPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 
-  transform(originalText: any, inputText: any): any {
+  transform(originalText: any, inputText: any, textColor: string = 'text-dark', backgroundColor: string = 'bg-warning'): any {
     // Use original text if input text is empty
     if (_.isEmpty(inputText) || _.isNil(inputText)) {
       return originalText;
@@ -23,7 +23,7 @@ export class SearchHighlightPipe implements PipeTransform {
       return originalText;
     }
 
-    const replacedText = originalText.replace(filteredText, `<span class="text-shadow bg-warning p-1">${matchedText[0]}</span>`);
+    const replacedText = originalText.replace(filteredText, `<span class="text-shadow ${textColor} ${backgroundColor} p-1">${matchedText[0]}</span>`);
 
     return this.sanitizer.bypassSecurityTrustHtml(replacedText);
   }
