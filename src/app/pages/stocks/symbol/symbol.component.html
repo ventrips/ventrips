@@ -26,14 +26,13 @@
         url="{{environment.url}}{{url}}">
         </share-buttons>
     </section>
-    <div class="my-5 p-3 text-white bg-dark sticky-top" *ngIf="metaData?.symbol">
+    <div class="my-4 px-2 text-white bg-dark sticky-top" *ngIf="metaData?.symbol">
         <div class="mb-2">
             <span class="d-flex flex-wrap align-items-center justify-center">
-                <h3 class="badge badge-warning p-3 mr-3 mb-0">{{metaData?.symbol}}</h3>
-                <p class="text-center small text-white my-3" *ngIf="!_.isEmpty(lastRefreshed)">
+                <h3 class="badge p-2 mr-3 mb-0" [ngClass]="{'badge-primary': toggleEdit, 'badge-warning': !toggleEdit}" (click)="toggleEdit = !toggleEdit">{{metaData?.symbol}}</h3>
+                <p class="text-center small text-white my-3 ml-auto" *ngIf="!_.isEmpty(lastRefreshed)">
                     {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
                 </p>
-                <button class="btn btn-md ml-auto" [ngClass]="{'btn-warning': toggleEdit, 'btn-light': !toggleEdit}" type="button" (click)="toggleEdit = !toggleEdit">Annotations {{toggleEdit ? 'ON' : 'OFF'}}</button>
             </span>
         </div>
         <div class="input-group mb-2" *ngIf="authService?.canEdit(user)">
@@ -65,13 +64,13 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="lowerBound">Lower Bound (%)</label>
-                        <input type="number" id="lowerBound" class="form-control" aria-label="Lower Bound" placeholder="Lower Bound" [(ngModel)]="lowParam"/>
+                        <input type="number" id="lowerBound" class="form-control form-control-sm" aria-label="Lower Bound" placeholder="Lower Bound" [(ngModel)]="lowParam"/>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="upperBound">Upper Bound (%)</label>
-                        <input type="number" id="upperBound" class="form-control" aria-label="Upper Bound" placeholder="Upper Bound" [(ngModel)]="highParam"/>
+                        <input type="number" id="upperBound" class="form-control form-control-sm" aria-label="Upper Bound" placeholder="Upper Bound" [(ngModel)]="highParam"/>
                     </div>
                 </div>
             </div>
