@@ -26,7 +26,15 @@
         url="{{environment.url}}{{url}}">
         </share-buttons>
     </section>
-    <div class="text-center my-5 p-3 bg-dark sticky-top">
+    <div class="my-5 p-3 text-white bg-dark sticky-top">
+        <div class="mb-3" *ngIf="metaData?.symbol">
+            <span class="d-flex flex-wrap align-items-center justify-center">
+                <h3 class="badge badge-warning p-3 mr-3 mb-0">{{metaData?.symbol}}</h3>
+                <p class="text-center small text-white my-3 mr-3" *ngIf="!_.isEmpty(lastRefreshed)">
+                    Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
+                </p>
+            </span>
+        </div>
         <div class="input-group mb-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">
@@ -51,19 +59,28 @@
                 </button>
             </div>
         </div>
-        <div class="input-group input-group-lg mb-2">
-            <div class="input-group-prepend">
-                <button class="btn" [ngClass]="{'btn-warning': toggleEdit, 'btn-secondary': !toggleEdit}" type="button" (click)="toggleEdit = !toggleEdit">Lower &amp; Upper Bounds (%) {{toggleEdit ? 'ON' : 'OFF'}} </button>
+        <div class="row">
+            <ng-container *ngIf="toggleEdit">
+                <div class="col-xs-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="lowerBound">Lower Bound (%)</label>
+                        <input type="number" id="lowerBound" class="form-control" aria-label="Lower Bound" placeholder="Lower Bound" [(ngModel)]="lowParam"/>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                    <div class="form-group">
+                        <label for="upperBound">Upper Bound (%)</label>
+                        <input type="number" id="upperBound" class="form-control" aria-label="Upper Bound" placeholder="Upper Bound" [(ngModel)]="lowParam"/>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-xs-12 col-lg-12 text-center">
+                <button class="btn btn-block" [ngClass]="{'btn-warning': toggleEdit, 'btn-light': !toggleEdit}" type="button" (click)="toggleEdit = !toggleEdit">Annotations {{toggleEdit ? 'ON' : 'OFF'}}</button>
             </div>
-            <input type="number" class="form-control" aria-label="Low Param" placeholder="Low Param" [(ngModel)]="lowParam" [disabled]="!toggleEdit" />
-            <input type="number" class="form-control" aria-label="High Param" placeholder="High Param" [(ngModel)]="highParam" [disabled]="!toggleEdit" />
         </div>
     </div>
-    <p class="text-center small text-secondary my-5" *ngIf="!_.isEmpty(lastRefreshed)">
-        Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
-    </p>
     <ng-container *ngIf="authService?.canEdit(user)">
-        <p class="text-center small text-secondary my-5" *ngIf="updated">
+        <p class="text-center small my-5 text-dark" *ngIf="updated">
             Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
         </p>
     </ng-container>
