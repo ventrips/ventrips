@@ -34,6 +34,7 @@ export class SymbolComponent implements OnInit {
   public collection: string = 'symbol'
   public symbol: string;
   public metaData: any;
+  public yahooFinance: any;
   public data: any;
   public updated: firestore.Timestamp;
   public lastRefreshed: any;
@@ -69,7 +70,7 @@ export class SymbolComponent implements OnInit {
       this.url = this.router.url;
       this.symbol = _.toUpper(params.symbol);
       this.title = `${this.symbol} | Free Historical Intraday Charts`;
-      this.description = `Current Historical Intraday Charts for ${this.symbol} to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+      this.description = `Current Historical Intraday Charts for ${this.symbol}. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
       this.ssrService.setSeo({
         title: this.title,
         description: this.description,
@@ -86,6 +87,7 @@ export class SymbolComponent implements OnInit {
       count++;
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.metaData = _.get(response, ['metaData']);
+        this.yahooFinance = _.get(response, ['yahooFinance']);
         this.data = _.reverse(
           _.sortBy(
             _.map(_.get(response, ['chartData']), (value: any, key: any) => {
@@ -99,6 +101,16 @@ export class SymbolComponent implements OnInit {
         this.updated = _.get(response, ['updated']);
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
+        // Set short name if exists
+        const longName = _.get(this.yahooFinance, ['longName']);
+        if (longName) {
+          this.title = `${longName} (${this.symbol}) | Free Historical Intraday Charts`;
+          this.description = `Current Historical Intraday Charts for ${longName} (${this.symbol}). Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+          this.ssrService.setSeo({
+            title: this.title,
+            description: this.description,
+          }, `${this.collection}-${this.symbol}`, true);
+        }
       }
       if (count === 2) {
         const lastRefreshed = _.get(this.metaData, ['lastRefreshed']);

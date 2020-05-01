@@ -5,7 +5,7 @@ const RequestPromise = require('request-promise');
 const Cheerio = require('cheerio');
 const UserAgent = require('user-agents');
 
-// const Utils = require('./utils');
+// import { cors } from './utils';
 // const GoogleTrends = require('google-trends-api');
 const { ExploreTrendRequest } = require('g-trends')
 // import * as puppeteer from 'puppeteer';

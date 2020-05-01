@@ -1,30 +1,15 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import * as querystring from 'querystring';
 import * as _ from 'lodash';
-import * as Request from 'request';
 const db = admin.firestore();
 // const Sentiment = require('sentiment');
 // const isBullish = require('is-bullish');
-const Utils = require('./utils');
+import { cors, commonRequest } from './utils';
+import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 
 // https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=SPY&interval=5min&outputsize=full&apikey=J5LLHCUPAQ0CR0IN
 const BASE_URL = 'https://www.alphavantage.co/query';
 const API_KEY = 'J5LLHCUPAQ0CR0IN';
-
-const alphaVantageRequest = async (params: object): Promise<any> => {
-    return new Promise((resolve: any, reject: any) => {
-        _.set(params, 'apikey', API_KEY);
-        const url = `${BASE_URL}?${querystring.stringify(params)}`;
-        Request(url, function (error: any, res: any, body: any) {
-            if (!_.isNil(error)) {
-                reject(error);
-            }
-            const data = JSON.parse(body);
-            resolve(data);
-        });
-    });
-};
 
 const setFirebase = (request: any, response: any, data: any, firebasePath: string, sendToFirebase: boolean) => {
     if (!sendToFirebase) {
@@ -90,22 +75,29 @@ const convertChartData = (intraData: any, dayData: any, interval: string) => {
 };
 
 export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     const symbol = _.toUpper(request.query.symbol);
     const interval = _.toLower(request.query.interval);
 
-    let data;
+    let data = {};
     let intraData;
     let dayData;
-    /* Mock */
-    // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
-    // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
-    // data = convertChartData(intraData, dayData, interval);
-    // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
 
-    /* Real */
-    intraData = await alphaVantageRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'});
-    dayData = await alphaVantageRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'});
-    data = convertChartData(intraData, dayData, interval);
-    setFirebase(request, response, data, `symbol/${symbol}`, true);
+    try {
+        /* Mock */
+        // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+        // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
+        // data = convertChartData(intraData, dayData, interval);
+        // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
+
+        /* Real */
+        intraData = await commonRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'}, BASE_URL, API_KEY);
+        dayData = await commonRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'}, BASE_URL, API_KEY);
+        const yahooFinanceData: any = await getSingleYahooFinanceAPI(symbol);
+        data = convertChartData(intraData, dayData, interval);
+        _.set(data, 'yahooFinance', yahooFinanceData);
+        setFirebase(request, response, data, `symbol/${symbol}`, true);
+    } catch {
+        response.status(500).send('Internal Server Error');
+    }
 });

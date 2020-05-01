@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
-const Utils = require('./utils');
+import { cors } from './utils';
 const Trends = require('./trends');
 const Travel = require('./travel');
 
@@ -9,6 +9,7 @@ admin.initializeApp();
 const db = admin.firestore();
 export * from './news-api';
 export * from './alpha-vantage-api';
+// export * from './yahoo-finance-api';
 
 // import * as Stripe from 'stripe';
 // const stripe = new Stripe(functions.config().stripe.secret);
@@ -21,12 +22,12 @@ export * from './alpha-vantage-api';
 // });
 
 export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     Trends.searchNews(request, response, false);
 });
 
 export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const data = await Trends.chartTrends(request, response, useMock);
 
@@ -34,7 +35,7 @@ export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB
 });
 
 export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
     const data = await Trends.trends(request, response, useMock);
@@ -53,7 +54,7 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
 });
 
 export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
     const data = await Travel.getTravelNumbers(request, response, useMock);

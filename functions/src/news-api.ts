@@ -6,7 +6,7 @@ import * as Request from 'request';
 const db = admin.firestore();
 const Sentiment = require('sentiment');
 const isBullish = require('is-bullish');
-const Utils = require('./utils');
+import { cors } from './utils';
 
 const BASE_URL = 'http://newsapi.org/v2';
 const API_KEY = 'b0eae7a462074c9a9e5611da91dd5f88';
@@ -58,7 +58,7 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
 }
 
 export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     let data;
     /* Mock */
     // data = require('./../mocks/news-api/get-everything-news-api.json');
@@ -69,7 +69,7 @@ export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, mem
 });
 
 export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+    cors(request, response);
     let data;
     /* Mock */
     // data = require('./../mocks/news-api/get-everything-news-api.json');
