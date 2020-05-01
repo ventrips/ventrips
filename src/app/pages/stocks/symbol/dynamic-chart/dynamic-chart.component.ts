@@ -3,7 +3,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import { NumberSuffixPipe } from '../../../../pipes/number-suffix/number-suffix.pipe';
 
 @Component({
@@ -17,6 +17,7 @@ export class DynamicChartComponent implements OnInit {
   @Input() toggleEdit = false;
   @Input() date;
   @Input() data;
+  @Input() metaData;
   @Input() lowParam;
   @Input() highParam;
   public _ = _;
@@ -348,8 +349,8 @@ export class DynamicChartComponent implements OnInit {
     // this.open.volume = _.get(volumes, [0]);
 
     this.lineChartData = [];
-    this.lineChartLabels = _.map(_.get(this.data, ['date']), (date) => {
-      return moment(date).format('LLL');
+    this.lineChartLabels = _.map(_.get(this.data, ['date']), (date: any) => {
+      return moment.tz(date, _.get(this.metaData, ['timeZone'])).local().format('LLL');
     });
     this.chartOptions();
     this.annotateChart(opens, lows, highs);

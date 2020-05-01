@@ -86,7 +86,7 @@
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
                 <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [toggleEdit]="toggleEdit" [date]="item?.date" [data]="item?.data" [lowParam]="lowParam" [highParam]="highParam"></app-dynamic-chart>
+                    <app-dynamic-chart [symbol]="metaData?.symbol" [toggleEdit]="toggleEdit" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [lowParam]="lowParam" [highParam]="highParam"></app-dynamic-chart>
                 </section>
             </ng-container>
         </ng-container>
