@@ -31,7 +31,7 @@ export class SymbolComponent implements OnInit {
   public url: string;
   public title: string;
   public description: string;
-  public collection: string = 'symbol'
+  public collection: string = 'symbol';
   public symbol: string;
   public metaData: any;
   public yahooFinance: any;
@@ -139,6 +139,9 @@ export class SymbolComponent implements OnInit {
     if (!this.isPlatformBrowser()) {
       return;
     }
+    if (JSON.parse(localStorage.getItem(this.symbol))) {
+      return;
+    }
     const format = 'YYYY-MM-DD HH:mm:ss';
     const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
     const today930am = (moment().set({h:9, m:30, s:0})).format(format);
@@ -150,14 +153,15 @@ export class SymbolComponent implements OnInit {
     // const currentIsAfterOpen = moment().isAfter(today930am);
     // const currentIsAfterClose = moment().isAfter(today4pm);
     // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
-
    if (
       isNew
       || isOver24Hours
       || (isWeekday && lastRefreshedIsBeforeClose)
     ) {
       // console.log(isNew, isOver24Hours, (isWeekday && lastRefreshedIsBeforeClose));
-      this.getData().subscribe(response => {}, (error) => {});
+      this.getData().subscribe(response => {}, (error) => {
+        localStorage.setItem(this.symbol, JSON.stringify(true));
+      });
     }
   }
 
