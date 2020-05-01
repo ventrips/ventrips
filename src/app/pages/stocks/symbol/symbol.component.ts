@@ -101,6 +101,7 @@ export class SymbolComponent implements OnInit {
         this.updated = _.get(response, ['updated']);
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
+
         // Set short name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
         if (longName) {
