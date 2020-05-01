@@ -45,8 +45,8 @@ export class SymbolComponent implements OnInit {
     '30min',
     '60min'
   ];
-  public lowParam = 0.18;
-  public highParam = 0.75;
+  public innerBound = 0.18;
+  public outerBound = 0.75;
   public toggleEdit: boolean = false;
 
   constructor(

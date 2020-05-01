@@ -14,12 +14,12 @@ import { NumberSuffixPipe } from '../../../../pipes/number-suffix/number-suffix.
 })
 export class DynamicChartComponent implements OnInit {
   @Input() symbol;
-  @Input() toggleEdit = false;
+  @Input() canEdit = false;
   @Input() date;
   @Input() data;
   @Input() metaData;
-  @Input() lowParam;
-  @Input() highParam;
+  @Input() innerBound;
+  @Input() outerBound;
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -203,7 +203,7 @@ export class DynamicChartComponent implements OnInit {
     putsPoint: number,
     callsPoint: number
   ): void {
-    const isDoNotBuyRange = _.isEqual(percentage, (this.lowParam / 100));
+    const isDoNotBuyRange = _.isEqual(percentage, (this.innerBound / 100));
     this.lineChartOptions.annotation.annotations.push(
       {
         drawTime: 'afterDatasetsDraw',
@@ -214,7 +214,7 @@ export class DynamicChartComponent implements OnInit {
         borderColor: isDoNotBuyRange ? 'red' : 'green',
         borderWidth: 5,
         label: {
-          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Lower` : `Upper`} @ ${callsPoint}`,
+          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${callsPoint}`,
           enabled: true,
           position: "top"
         }
@@ -230,7 +230,7 @@ export class DynamicChartComponent implements OnInit {
         borderColor: isDoNotBuyRange ? 'red' : 'green',
         borderWidth: 5,
         label: {
-          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Lower` : `Upper`} @ ${putsPoint}`,
+          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${putsPoint}`,
           enabled: true,
           position: "top"
         }
@@ -246,7 +246,7 @@ export class DynamicChartComponent implements OnInit {
     putsPoint: number,
     callsPoint: number
   ): void {
-      if (percentage !== (this.highParam/ 100)) {
+      if (percentage !== (this.outerBound / 100)) {
         return;
       }
       _.forEach(lows, (price, index) => {
@@ -303,8 +303,8 @@ export class DynamicChartComponent implements OnInit {
     highs: Array<number>
   ): void {
     const percentages = [
-      this.lowParam
-      , this.highParam
+      this.innerBound
+      , this.outerBound
       // ,0.01
       // ,0.02
       // ,0.03
@@ -324,7 +324,7 @@ export class DynamicChartComponent implements OnInit {
 
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
     this.annotateOpenPrice(opens);
-    if (this.toggleEdit) {
+    if (this.canEdit) {
       this.annotatePercentages(opens, lows, highs);
       this.annotateOpenPricesReached(opens, lows, highs);
     }

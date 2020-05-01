@@ -9,21 +9,16 @@
     </ng-adsense>
 </section>
 <div class="container-fluid my-5">
-    <span class="d-flex flex-wrap align-items-center justify-center">
-        <nav aria-label="breadcrumb mb-3">
-            <ol class="breadcrumb h4 bg-light mr-5 mb-0 p-0">
-            <li class="breadcrumb-item">
-                <a [routerLink]="['', 'symbol']" class="badge badge-dark text-white text-capitalize py-2 pr-2">Stocks</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a [routerLink]="[]" class="badge badge-warning text-dark text-capitalize py-2 pr-2">{{symbol}}</a>
-            </li>
-            </ol>
-        </nav>
-        <p class="text-center small text-dark my-4 ml-sm-auto" *ngIf="!_.isEmpty(lastRefreshed)">
-            {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
-        </p>
-    </span>
+    <nav aria-label="breadcrumb mb-3">
+        <ol class="breadcrumb h4 bg-light mr-5 mb-0 p-0">
+        <li class="breadcrumb-item">
+            <a [routerLink]="['', 'symbol']" class="badge badge-dark text-white text-capitalize py-2 pr-2">Stocks</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a [routerLink]="[]" class="badge badge-warning text-dark text-capitalize py-2 pr-2">{{symbol}}</a>
+        </li>
+        </ol>
+    </nav>
     <div class="h5 my-5">
         <h1 class="mb-4">{{title}}</h1>
         <p class="my-3">
@@ -42,7 +37,7 @@
         </share-buttons>
     </section>
     <div class="my-4 px-2 text-white bg-dark sticky-top" *ngIf="metaData?.symbol">
-        <div class="input-group mb-2" *ngIf="authService?.canEdit(user)">
+        <div class="input-group my-3 pt-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-lg btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
@@ -66,23 +61,26 @@
                 </button>
             </div>
         </div>
-        <ng-container *ngIf="toggleEdit">
+        <ng-container *ngIf="authService?.canEdit(user)">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="lowerBound">Lower Bound (%)</label>
-                        <input type="number" id="lowerBound" class="form-control form-control-sm" aria-label="Lower Bound" placeholder="Lower Bound" [(ngModel)]="lowParam"/>
+                        <label for="innerBound">Inner Bound (%)</label>
+                        <input type="number" id="innerBound" class="form-control form-control-sm" aria-label="Inner Bound" placeholder="Inner Bound" [(ngModel)]="innerBound"/>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="upperBound">Upper Bound (%)</label>
-                        <input type="number" id="upperBound" class="form-control form-control-sm" aria-label="Upper Bound" placeholder="Upper Bound" [(ngModel)]="highParam"/>
+                        <label for="outerBound">Outer Bound (%)</label>
+                        <input type="number" id="outerBound" class="form-control form-control-sm" aria-label="Outer Bound" placeholder="Outer Bound" [(ngModel)]="outerBound"/>
                     </div>
                 </div>
             </div>
         </ng-container>
     </div>
+    <p class="text-center small text-dark my-5" *ngIf="!_.isEmpty(lastRefreshed)">
+        {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
+    </p>
     <ng-container *ngIf="authService?.canEdit(user)">
         <p class="text-center small my-5 text-dark" *ngIf="updated">
             Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
@@ -92,7 +90,7 @@
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
                 <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [toggleEdit]="toggleEdit" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [lowParam]="lowParam" [highParam]="highParam"></app-dynamic-chart>
+                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [innerBound]="innerBound" [outerBound]="outerBound"></app-dynamic-chart>
                 </section>
             </ng-container>
         </ng-container>
