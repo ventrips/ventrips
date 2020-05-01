@@ -79,7 +79,7 @@
         </ng-container>
     </div>
     <p class="text-center small text-dark my-5" *ngIf="!_.isEmpty(lastRefreshed)">
-        {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
+        Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
     </p>
     <ng-container *ngIf="authService?.canEdit(user)">
         <p class="text-center small my-5 text-dark" *ngIf="updated">
