@@ -1,18 +1,6 @@
 <section class="mb-5">
-    <div class="d-flex flex-wrap mb-2">
-        <h4 class="text-capitalize">{{date | date:'fullDate'}}</h4>
-        <div class="d-flex flex-wrap ml-auto">
-            <p class="ml-2">
-                <b>Open Price:</b> {{_.get(open, ['price'])}}</p>
-            <!-- <p class="ml-2">
-                <b>Open Low:</b> {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</p>
-            <p class="mr-2">
-                <b>Open High:</b> {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</p>
-            <p class="ml-2">
-                <b>Open Low to High:</b> {{_.get(open, ['lowToHigh'])}}</p>
-            <p class="ml-2">
-                <b>Open Volume:</b> {{_.get(open, ['volume']) | number:'1.2-2'}}</p> -->
-        </div>
+    <div class="d-flex flex-wrap mb-3">
+        <h5 class="text-capitalize mb-2">{{date | date:'fullDate'}}</h5>
     </div>
     <div class="flex">
         <div class="flex-item">

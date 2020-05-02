@@ -7,11 +7,13 @@ import { ChartsModule } from 'ng2-charts';
 import { StocksComponent } from './stocks.component';
 import { SymbolComponent } from './symbol/symbol.component';
 import { DynamicChartComponent } from './symbol/dynamic-chart/dynamic-chart.component';
+import { ShortCutsComponent } from './symbol/short-cuts/short-cuts.component';
 @NgModule({
   declarations: [
     StocksComponent,
     SymbolComponent,
-    DynamicChartComponent
+    DynamicChartComponent,
+    ShortCutsComponent
   ],
   imports: [
     CommonModule,

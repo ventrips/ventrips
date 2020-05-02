@@ -102,7 +102,7 @@ export class SymbolComponent implements OnInit {
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
 
-        // Set short name if exists
+        // Set long name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
         if (longName) {
           this.title = `${longName} (${this.symbol}) | Free Historical Intraday Charts`;
