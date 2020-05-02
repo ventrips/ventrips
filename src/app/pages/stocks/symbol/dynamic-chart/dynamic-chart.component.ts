@@ -118,7 +118,7 @@ export class DynamicChartComponent implements OnInit {
             unit: 'hour'
           },
           gridLines: {
-            color: 'rgba(255,0,0,0.3)',
+            color: 'rgba(0,0,0,0.3)',
           }
         }],
         yAxes: [
@@ -126,7 +126,7 @@ export class DynamicChartComponent implements OnInit {
             id: 'y-axis-1',
             position: 'left',
             gridLines: {
-              color: 'rgba(255,0,0,0.3)',
+              color: 'rgba(0,0,0,0.3)',
             },
             ticks: {
               fontColor: 'black',
