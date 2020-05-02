@@ -130,7 +130,7 @@ export class DynamicChartComponent implements OnInit {
             },
             ticks: {
               fontColor: 'black',
-              stepSize: 10000000,
+              stepSize: 1000000,
               callback: (value) => this.numberSuffixPipe.transform(value)
             }
           },
