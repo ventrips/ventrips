@@ -18,6 +18,7 @@ export class DynamicChartComponent implements OnInit {
   @Input() date;
   @Input() data;
   @Input() metaData;
+  @Input() yahooFinance;
   @Input() innerBound;
   @Input() outerBound;
   public _ = _;
