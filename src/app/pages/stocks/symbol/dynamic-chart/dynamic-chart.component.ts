@@ -127,7 +127,7 @@ export class DynamicChartComponent implements OnInit {
             id: 'y-axis-1',
             position: 'left',
             gridLines: {
-              color: 'rgba(0,0,0,0.3)',
+              color: 'rgba(0,0,0,0)',
             },
             ticks: {
               fontColor: 'black',
@@ -138,6 +138,9 @@ export class DynamicChartComponent implements OnInit {
           {
             id: 'y-axis-2',
             position: 'right',
+            gridLines: {
+              color: 'rgba(0,0,0,0.3)',
+            },
             ticks: {
               fontColor: 'black',
               stepSize: 1
