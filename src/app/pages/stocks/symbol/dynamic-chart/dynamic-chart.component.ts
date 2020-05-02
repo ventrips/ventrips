@@ -229,7 +229,7 @@ export class DynamicChartComponent implements OnInit {
         scaleID: "y-axis-2",
         value: putsPoint,
         borderColor: isDoNotBuyRange ? 'red' : 'green',
-        borderWidth: 5,
+        borderWidth: 2,
         label: {
           content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${putsPoint}`,
           enabled: true,
@@ -262,7 +262,7 @@ export class DynamicChartComponent implements OnInit {
               scaleID: "x-axis-0",
               value: this.lineChartLabels[index],
               borderColor: "green",
-              borderWidth: 5,
+              borderWidth: 2,
               label: {
                 content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
                 enabled: true,
@@ -285,7 +285,7 @@ export class DynamicChartComponent implements OnInit {
               scaleID: "x-axis-0",
               value: this.lineChartLabels[index],
               borderColor: "green",
-              borderWidth: 5,
+              borderWidth: 2,
               label: {
                 content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
                 enabled: true,
