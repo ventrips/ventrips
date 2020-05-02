@@ -139,7 +139,7 @@ export class DynamicChartComponent implements OnInit {
             position: 'right',
             ticks: {
               fontColor: 'black',
-              stepSize: 10
+              stepSize: 1
             }
           }
         ]
