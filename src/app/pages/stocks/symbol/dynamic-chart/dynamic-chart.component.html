@@ -1,17 +1,31 @@
-<section class="mb-5">
+<div class="control-section">
+    <div>
+        <ejs-stockchart id="{{'stockChartDefault' + index}}" [chartArea]='chartArea' [primaryXAxis]='primaryXAxis' style="display:block;"
+            [primaryYAxis]='primaryYAxis' [title]='title' [titleStyle]='titleStyle' [crosshair]='crosshair'
+            (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' (load)='load($event)' [periods]='periods'  [enablePeriodSelector]='enable'>
+            <e-stockchart-series-collection>
+                <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'></e-stockchart-series>
+            </e-stockchart-series-collection>
+            <e-stockchart-stockevents>
+                <e-stockchart-stockevent [date]="data1[4]['x']" text="Q2" description="2012 Quarter2" type="Flag"  background='#6c6d6d'></e-stockchart-stockevent>
+            </e-stockchart-stockevents>
+        </ejs-stockchart>
+    </div>
+</div>
+<!-- <section class="mb-5">
     <div class="d-flex flex-wrap mb-2">
         <h4 class="text-capitalize">{{date | date:'fullDate'}}</h4>
         <div class="d-flex flex-wrap ml-auto">
-            <p class="ml-2">
+            <p class="mr-2">
                 <b>Open Price:</b> {{_.get(open, ['price'])}}</p>
-            <!-- <p class="ml-2">
+            <p class="mr-2">
                 <b>Open Low:</b> {{_.get(open, ['low'])}} ({{_.get(open, ['openToLow'])}}%)</p>
             <p class="mr-2">
                 <b>Open High:</b> {{_.get(open, ['high'])}} ({{_.get(open, ['openToHigh'])}}%)</p>
-            <p class="ml-2">
+            <p class="mr-2">
                 <b>Open Low to High:</b> {{_.get(open, ['lowToHigh'])}}</p>
-            <p class="ml-2">
-                <b>Open Volume:</b> {{_.get(open, ['volume']) | number:'1.2-2'}}</p> -->
+            <p class="mr-2">
+                <b>Open Volume:</b> {{_.get(open, ['volume']) | number:'1.2-2'}}</p>
         </div>
     </div>
     <div class="flex">
@@ -23,7 +37,7 @@
                 </canvas>
             </div>
         </div>
-        <!-- <div class="flex-item">
+        <div class="flex-item">
             <table class="table table-responsive table-condensed">
                 <tr>
                     <th *ngFor="let label of lineChartLabels">{{label}}</th>
@@ -38,6 +52,6 @@
             <button mat-button mat-raised-button color="primary" (click)="hideIndex(3)">High</button>
             <button mat-button mat-raised-button color="primary" (click)="hideIndex(4)">Low</button>
             <button mat-button mat-raised-button color="primary" (click)="hideIndex(5)">Close</button>
-        </div> -->
+        </div>
     </div>
-</section>
+</section> -->

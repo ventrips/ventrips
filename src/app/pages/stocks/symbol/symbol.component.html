@@ -90,7 +90,9 @@
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
                 <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [innerBound]="innerBound" [outerBound]="outerBound"></app-dynamic-chart>
+                    <ng-container *ngIf="index === 0 || index === 1">
+                        <app-dynamic-chart [index]="index" [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [innerBound]="innerBound" [outerBound]="outerBound"></app-dynamic-chart>
+                    </ng-container>
                 </section>
             </ng-container>
         </ng-container>
