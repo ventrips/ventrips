@@ -49,6 +49,7 @@ export class SymbolComponent implements OnInit {
   public innerBound = 0.18;
   public outerBound = 0.75;
   public toggleEdit: boolean = false;
+  public toggleDetails: boolean = false;
 
   constructor(
     private afs: AngularFirestore,

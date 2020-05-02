@@ -36,7 +36,9 @@
         url="{{environment.url}}{{url}}">
         </share-buttons>
     </section>
-    <app-short-cuts [yahooFinance]="yahooFinance"></app-short-cuts>
+    <ng-container *ngIf="yahooFinance">
+        <app-short-cuts [yahooFinance]="yahooFinance"></app-short-cuts>
+    </ng-container>
     <div class="my-4 px-2 text-white bg-dark sticky-top" *ngIf="metaData?.symbol">
         <div class="input-group my-3 pt-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
@@ -86,6 +88,21 @@
         <p class="text-center small my-5 text-dark" *ngIf="updated">
             Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
         </p>
+    </ng-container>
+    <ng-container *ngIf="yahooFinance">
+        <div class="d-flex flex-wrap">
+            <span class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>
+                    <fa-icon *ngIf="!toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'info-circle']"></fa-icon>
+                </ng-container>
+            </span>
+            <section class="row no-gutters mb-5 p-3 bg-dark text-white rounded" *ngIf="toggleDetails">
+                <div class="col-xs-12 col-md-6 h6" *ngFor="let key of _.keys(yahooFinance)">
+                    <span class="font-weight-bold mr-2">{{_.startCase(key)}}:</span> {{yahooFinance[key]}}
+                </div>
+            </section>
+        </div>
     </ng-container>
     <section>
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
