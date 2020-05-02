@@ -162,7 +162,7 @@ export class DynamicChartComponent implements OnInit {
         scaleID: "y-axis-2",
         value: this.open.price,
         borderColor: "black",
-        borderWidth: 5,
+        borderWidth: 2,
         label: {
           content: `${'Open'} @ ${this.open.price}`,
           enabled: true,
@@ -187,7 +187,7 @@ export class DynamicChartComponent implements OnInit {
             scaleID: "x-axis-0",
             value: this.lineChartLabels[index],
             borderColor: "black",
-            borderWidth: 5
+            borderWidth: 2
           }
         );
       }
@@ -212,7 +212,7 @@ export class DynamicChartComponent implements OnInit {
         scaleID: "y-axis-2",
         value: callsPoint,
         borderColor: isDoNotBuyRange ? 'red' : 'green',
-        borderWidth: 5,
+        borderWidth: 2,
         label: {
           content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${callsPoint}`,
           enabled: true,

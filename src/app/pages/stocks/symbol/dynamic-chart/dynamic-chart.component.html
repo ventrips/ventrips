@@ -1,11 +1,9 @@
-<section class="mb-5">
-    <div class="d-flex flex-wrap mb-3">
-        <h4 class="text-capitalize mb-2">{{date | date:'fullDate'}}</h4>
-    </div>
+<section class="mb-5 bg-white">
+    <h4 class="text-capitalize text-center mb-0 py-3">{{date | date:'fullDate'}}</h4>
     <div class="flex">
         <div class="flex-item">
             <div style="display: block;">
-                <canvas class="bg-white" baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
                     [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" [colors]="lineChartColors"
                     (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                 </canvas>
