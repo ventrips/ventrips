@@ -81,16 +81,16 @@
             </div>
         </ng-container>
     </div>
-    <p class="text-center small text-dark my-5" *ngIf="!_.isEmpty(lastRefreshed)">
+    <p class="text-center small text-dark my-3" *ngIf="!_.isEmpty(lastRefreshed)">
         Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
     </p>
     <ng-container *ngIf="authService?.canEdit(user)">
-        <p class="text-center small my-5 text-dark" *ngIf="updated">
+        <p class="text-center small my-3 text-dark" *ngIf="updated">
             Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
         </p>
     </ng-container>
     <ng-container *ngIf="yahooFinance">
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap mb-3">
             <span class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>
