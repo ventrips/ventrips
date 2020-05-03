@@ -21,7 +21,10 @@ export class DynamicChartComponent implements OnInit {
   @Input() yahooFinance;
   @Input() dayTradeRules;
   @Output() onCountDayTradeRuleWorks = new EventEmitter();
-  public dayTradeRuleWorks: any = {};
+  public dayTradeRuleWorks: any = {
+    CALL: {},
+    PUT: {}
+  };
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -230,6 +233,12 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
+      // Order would have failed to fill
+      if (findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) {
+        _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
+        this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
+        return;
+      }
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -263,8 +272,8 @@ export class DynamicChartComponent implements OnInit {
             }
           }
         );
-        this.dayTradeRuleWorks[option] = true;
-        this.onCountDayTradeRuleWorks.emit(option);
+        _.set(this.dayTradeRuleWorks, [option, 'success'], true);
+        this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
       }
     });
   }

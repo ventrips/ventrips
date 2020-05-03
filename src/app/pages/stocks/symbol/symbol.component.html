@@ -99,6 +99,34 @@
                     </div>
                 </ng-container>
             </div>
+            <div *ngIf="authService?.canEdit(user)" class="mb-2">
+                <div class="mb-2">
+                    <span class="font-weight-bold mr-1">CALLs -</span>
+                    <span class="font-weight-bold mr-1">Success Rate:</span>
+                    <span class="mr-1">{{_.round((countDayTradeRuleWorks?.CALL.success / countDayTradeRuleWorks?.CALL.total) * 100, 2)}}%</span>
+                    <span class="font-weight-bold mr-1">Success:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.success}}</span>
+                    <span class="font-weight-bold mr-1">Fail:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.fail}}</span>
+                    <span class="font-weight-bold mr-1">Total:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.total}}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold mr-1">PUTs - </span>
+                    <span class="font-weight-bold mr-1">Success Rate:</span>
+                    <span class="mr-1">{{_.round((countDayTradeRuleWorks?.PUT.success / countDayTradeRuleWorks?.PUT.total) * 100, 2)}}%</span>
+                    <span class="font-weight-bold mr-1">Success:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.success}}</span>
+                    <span class="font-weight-bold mr-1">Fail:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.fail}}</span>
+                    <span class="font-weight-bold mr-1">Total:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.total}}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold mr-2">Overall:</span>
+                    {{countDayTradeRuleWorks?.overall}}
+                </div>
+            </div>
             <div class="d-flex flex-wrap">
                 <div>
                     <div class="form-group">
@@ -123,7 +151,6 @@
     </ng-container>
     <ng-container *ngIf="yahooFinance">
         <div class="d-flex flex-wrap mb-3">
-            <span *ngIf="authService?.canEdit(user)" class="text-success">{{countDayTradeRuleWorks?.CALL + countDayTradeRuleWorks?.PUT}} Day Trade Successes ({{countDayTradeRuleWorks.CALL}} CALLs &amp; {{countDayTradeRuleWorks.PUT}} PUTs) in the Past {{data?.length}} Trading Days</span>
             <span class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>

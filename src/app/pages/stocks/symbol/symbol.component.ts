@@ -72,8 +72,17 @@ export class SymbolComponent implements OnInit {
   public toggleEdit: boolean = false;
   public toggleDetails: boolean = false;
   public countDayTradeRuleWorks = {
-    CALL: 0,
-    PUT: 0
+    CALL: {
+      success: 0,
+      fail: 0,
+      total: 0
+    },
+    PUT: {
+      success: 0,
+      fail: 0,
+      total: 0
+    },
+    overall: 0
   };
 
   constructor(
@@ -209,13 +218,26 @@ export class SymbolComponent implements OnInit {
 
   resetCountDayTradeRuleWorks() {
     this.countDayTradeRuleWorks = {
-      CALL: 0,
-      PUT: 0
+      CALL: {
+        success: 0,
+        fail: 0,
+        total: 0
+      },
+      PUT: {
+        success: 0,
+        fail: 0,
+        total: 0
+      },
+      overall: 0
     };
   }
 
-  onCountDayTradeRuleWorks(option: string) {
-    this.countDayTradeRuleWorks[option]++;
+  onCountDayTradeRuleWorks(optionObj: any) {
+    const option = _.get(optionObj, ['option']);
+    const status = _.get(optionObj, ['status']);
+    this.countDayTradeRuleWorks[option][status]++;
+    this.countDayTradeRuleWorks[option]['total']++;
+    this.countDayTradeRuleWorks['overall']++;
   }
 
   scrollToTop() {
