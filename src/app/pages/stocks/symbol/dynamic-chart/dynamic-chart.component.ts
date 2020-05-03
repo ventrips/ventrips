@@ -161,14 +161,17 @@ export class DynamicChartComponent implements OnInit {
     highs: Array<number>
   ) {
     _.forEach(this.dayTradeRules, (rule: object) => {
-      const option = _.get(rule, ['option']);
+      const option = _.toUpper(_.get(rule, ['option']));
+      if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))) {
+        return;
+      }
       const dayTradeBuy = this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100));
       const dayTradeSell = this.open.price + (this.open.price * (_.get(rule, ['sell']) / 100));
       let findDayTradeBuyIndex;
       let findDayTradeSellIndex;
       let buy;
       let sell;
-      if (_.isEqual(option, 'call')) {
+      if (_.isEqual(option, 'CALL')) {
         findDayTradeBuyIndex = _.findIndex(lows, (price, index) => {
           return price <= dayTradeBuy && this.isBetweenBuyTimes(index);
         });
@@ -177,7 +180,7 @@ export class DynamicChartComponent implements OnInit {
           return price >= dayTradeSell && (index > findDayTradeBuyIndex);
         });
         sell = highs[findDayTradeSellIndex];
-      } else if (_.isEqual(option, 'put')) {
+      } else if (_.isEqual(option, 'PUT')) {
         findDayTradeBuyIndex = _.findIndex(highs, (price, index) => {
           return price >= dayTradeBuy && this.isBetweenBuyTimes(index);
         });

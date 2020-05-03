@@ -43,7 +43,7 @@
         <div class="input-group my-3 pt-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">
-                    <button class="btn btn-lg btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
+                    <button class="btn btn-sm btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
                         {{ interval ? interval : 'Interval' }}
                     </button>
                     <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
@@ -54,10 +54,10 @@
                     </div>
                 </div>
             </div>
-            <input type="text" class="form-control form-control-lg" aria-label="Search for symbol" placeholder="Search for symbol"
+            <input type="text" class="form-control form-control-sm" aria-label="Search for symbol" placeholder="Search for symbol"
                 [(ngModel)]="symbol" />
             <div class="input-group-append">
-                <button class="btn btn-warning" [disabled]="!symbol" (click)="refreshData()">
+                <button class="btn btn-sm btn-warning" [disabled]="!symbol" (click)="refreshData()">
                     <ng-container *ngIf="isPlatformBrowser()">
                         <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
                     </ng-container>
@@ -67,27 +67,34 @@
         <div class="pt-3" *ngIf="authService?.canEdit(user)">
             <div class="row">
                 <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="dayTradeOption-{{index}}">Option</label>
-                            <input type="text" id="dayTradeOption-{{index}}" name="dayTradeOption-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Option" placeholder="Day Trade Option" [(ngModel)]="rule.option"/>
+                    <div class="col-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-start p-4">
+                            <button class="btn btn-sm btn-danger mr-3" (click)="tempDayTradeRules.splice(index, 1)">Remove</button>
+                            <div class="input-group-prepend">
+                                <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-sm btn-warning" id="day-trade-option-dropdown" title="Day Trade Option" ngbDropdownToggle>
+                                        {{ rule?.option ? rule?.option : 'CALL / PUT' }}
+                                    </button>
+                                    <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+                                        <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="!_.isEqual(option, rule?.option)" [class.active]="_.isEqual(option, rule?.option)"
+                                        [disabled]="_.isEqual(option, rule?.option)" *ngFor="let option of dayTradeOptions" (click)="rule.option = option">
+                                            {{option}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="dayTradeBuy-{{index}}">Day Trade Buy (%)</label>
                             <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy" placeholder="Day Trade Buy" [(ngModel)]="rule.buy"/>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="dayTradeSell-{{index}}">Day Trade Sell (%)</label>
                             <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell" placeholder="Day Trade Sell" [(ngModel)]="rule.sell"/>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="my-4 py-1 text-center mr-4">
-                            <button class="btn btn-danger" (click)="tempDayTradeRules.splice(index, 1)">Remove</button>
                         </div>
                     </div>
                 </ng-container>
@@ -95,12 +102,12 @@
             <div class="d-flex flex-wrap">
                 <div>
                     <div class="form-group">
-                        <button class="btn btn-light" (click)="tempDayTradeRules.push({option: 'call', buy: -.78, sell: 0})">New Day Trade Rule</button>
+                        <button class="btn btn-light btn-sm" (click)="tempDayTradeRules.push({option: 'call', buy: -.78, sell: 0})">New Day Trade Rule</button>
                     </div>
                 </div>
                 <div class="ml-auto">
                     <div class="form-group">
-                        <button class="btn btn-warning" (click)="dayTradeRules = _.cloneDeep(tempDayTradeRules)"  [disabled]="_.isEqual(tempDayTradeRules, dayTradeRules)">Update</button>
+                        <button class="btn btn-warning btn-sm" (click)="dayTradeRules = _.cloneDeep(tempDayTradeRules)"  [disabled]="_.isEqual(tempDayTradeRules, dayTradeRules)">Update</button>
                     </div>
                 </div>
             </div>

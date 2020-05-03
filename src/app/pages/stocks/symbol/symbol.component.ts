@@ -42,14 +42,18 @@ export class SymbolComponent implements OnInit {
     '30min',
     '60min'
   ];
+  public dayTradeOptions: Array<any> = [
+    'CALL',
+    'PUT'
+  ];
   public tempDayTradeRules = [
     {
-      option: 'call',
+      option: 'CALL',
       buy: -1.8,
       sell: -1,
     },
     {
-      option: 'put',
+      option: 'PUT',
       buy: 3,
       sell: 2.5
     }
