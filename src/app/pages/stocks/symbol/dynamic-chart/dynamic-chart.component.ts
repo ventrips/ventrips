@@ -19,8 +19,6 @@ export class DynamicChartComponent implements OnInit {
   @Input() data;
   @Input() metaData;
   @Input() yahooFinance;
-  @Input() innerBound;
-  @Input() outerBound;
   @Input() dayTradeRules;
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
@@ -304,78 +302,9 @@ export class DynamicChartComponent implements OnInit {
     });
   }
 
-  annotatePercentagePoints(
-    opens: Array<number>,
-    lows: Array<number>,
-    highs: Array<number>,
-    percentage: number,
-    gainLoss: number,
-    putsPoint: number,
-    callsPoint: number
-  ): void {
-    const isDoNotBuyRange = _.isEqual(percentage, (this.innerBound / 100));
-    this.lineChartOptions.annotation.annotations.push(
-      {
-        drawTime: 'afterDatasetsDraw',
-        type: "line",
-        mode: "horizontal",
-        scaleID: "y-axis-2",
-        value: callsPoint,
-        borderColor: isDoNotBuyRange ? 'purple' : 'blue',
-        borderWidth: 2,
-        label: {
-          content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${callsPoint}`,
-          enabled: true,
-          position: "top"
-        }
-      }
-    );
-    this.lineChartOptions.annotation.annotations.push(
-      {
-        drawTime: 'afterDatasetsDraw',
-        type: "line",
-        mode: "horizontal",
-        scaleID: "y-axis-2",
-        value: putsPoint,
-        borderColor: isDoNotBuyRange ? 'purple' : 'blue',
-        borderWidth: 2,
-        label: {
-          content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${putsPoint}`,
-          enabled: true,
-          position: "top"
-        }
-      }
-    );
-  }
-
-  annotatePercentages(
-    opens: Array<number>,
-    lows: Array<number>,
-    highs: Array<number>
-  ): void {
-    const percentages = [
-      this.innerBound
-      , this.outerBound
-      // ,0.01
-      // ,0.02
-      // ,0.03
-      // ,0.04
-      // ,0.05
-      // ,0.06
-    ];
-    _.forEach(percentages, (percent) => {
-      const percentage = (percent / 100);
-      const gainLoss: number = _.round(percentage * this.open.price, 2);
-      const putsPoint: number = _.round(this.open.price + gainLoss, 2);
-      const callsPoint: number = _.round(this.open.price - gainLoss, 2);
-      this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
-    });
-  }
-
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
     this.annotateOpenPrice(opens);
     if (this.canEdit) {
-      this.annotatePercentages(opens, lows, highs);
       this.annotateOpenPricesReached(opens, lows, highs);
       this.annotateDayTradeRules(opens, lows, highs);
     }

@@ -42,9 +42,7 @@ export class SymbolComponent implements OnInit {
     '30min',
     '60min'
   ];
-  public innerBound = 0.18;
-  public outerBound = 0.75;
-  public dayTradeRules = [
+  public tempDayTradeRules = [
     {
       option: 'call',
       buy: -1.8,
@@ -56,6 +54,7 @@ export class SymbolComponent implements OnInit {
       sell: 2.5
     }
   ];
+  public dayTradeRules = [];
   public toggleEdit: boolean = false;
   public toggleDetails: boolean = false;
 
@@ -73,6 +72,7 @@ export class SymbolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
     this.authService.user$.subscribe(user => this.user = user);
     this.activatedRoute.params
     .subscribe(params => {

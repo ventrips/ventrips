@@ -64,22 +64,47 @@
                 </button>
             </div>
         </div>
-        <ng-container *ngIf="authService?.canEdit(user)">
+        <div class="pt-3" *ngIf="authService?.canEdit(user)">
             <div class="row">
-                <div class="col-6">
+                <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="dayTradeOption-{{index}}">Option</label>
+                            <input type="text" id="dayTradeOption-{{index}}" name="dayTradeOption-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Option" placeholder="Day Trade Option" [(ngModel)]="rule.option"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="dayTradeBuy-{{index}}">Day Trade Buy (%)</label>
+                            <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy" placeholder="Day Trade Buy" [(ngModel)]="rule.buy"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="dayTradeSell-{{index}}">Day Trade Sell (%)</label>
+                            <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell" placeholder="Day Trade Sell" [(ngModel)]="rule.sell"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="my-4 py-1 text-center mr-4">
+                            <button class="btn btn-danger" (click)="tempDayTradeRules.splice(index, 1)">Remove</button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="d-flex flex-wrap">
+                <div>
                     <div class="form-group">
-                        <label for="innerBound">Inner Bound (%)</label>
-                        <input type="number" id="innerBound" class="form-control form-control-sm" aria-label="Inner Bound" placeholder="Inner Bound" [(ngModel)]="innerBound"/>
+                        <button class="btn btn-light" (click)="tempDayTradeRules.push({option: 'call', buy: -.78, sell: 0})">New Day Trade Rule</button>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="ml-auto">
                     <div class="form-group">
-                        <label for="outerBound">Outer Bound (%)</label>
-                        <input type="number" id="outerBound" class="form-control form-control-sm" aria-label="Outer Bound" placeholder="Outer Bound" [(ngModel)]="outerBound"/>
+                        <button class="btn btn-warning" (click)="dayTradeRules = _.cloneDeep(tempDayTradeRules)"  [disabled]="_.isEqual(tempDayTradeRules, dayTradeRules)">Update</button>
                     </div>
                 </div>
             </div>
-        </ng-container>
+        </div>
     </div>
     <p class="text-center small text-dark my-3" *ngIf="!_.isEmpty(lastRefreshed)">
         Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
@@ -108,7 +133,7 @@
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
                 <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [yahooFinance]="yahooFinance" [innerBound]="innerBound" [outerBound]="outerBound" [dayTradeRules]="dayTradeRules"></app-dynamic-chart>
+                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules"></app-dynamic-chart>
                 </section>
             </ng-container>
         </ng-container>
