@@ -21,7 +21,7 @@ export class DynamicChartComponent implements OnInit {
   @Input() yahooFinance;
   @Input() dayTradeRules;
   @Output() onCountDayTradeRuleWorks = new EventEmitter();
-  public dayTradeRuleWorks: string;
+  public dayTradeRuleWorks: any = {};
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -162,7 +162,7 @@ export class DynamicChartComponent implements OnInit {
     lows: Array<number>,
     highs: Array<number>
   ) {
-    this.dayTradeRuleWorks = undefined;
+    this.dayTradeRuleWorks = {};
     _.forEach(this.dayTradeRules, (rule: object) => {
       const option = _.toUpper(_.get(rule, ['option']));
       if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))
@@ -263,8 +263,8 @@ export class DynamicChartComponent implements OnInit {
             }
           }
         );
-        this.dayTradeRuleWorks = option;
-        this.onCountDayTradeRuleWorks.emit(this.dayTradeRuleWorks);
+        this.dayTradeRuleWorks[option] = true;
+        this.onCountDayTradeRuleWorks.emit(option);
       }
     });
   }
