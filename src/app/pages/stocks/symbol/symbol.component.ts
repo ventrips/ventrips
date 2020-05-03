@@ -11,10 +11,6 @@ import { environment } from '../../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../../interfaces/user';
 import { SsrService } from '../../../services/firestore/ssr/ssr.service';
-import { NumberSuffixPipe } from '../../../pipes/number-suffix/number-suffix.pipe';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as moment from 'moment-timezone';
 import * as _ from 'lodash';
 import {firestore} from 'firebase/app';
@@ -162,7 +158,7 @@ export class SymbolComponent implements OnInit {
     const isNew = _.isNil(lastRefreshed);
     const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
     const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
-    const isOver24Hours = moment().diff(moment(lastRefreshedTimeZone), 'days') > 0;
+    const isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
     // const currentIsAfterOpen = moment().isAfter(today930am);
     // const currentIsAfterClose = moment().isAfter(today4pm);
     // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
@@ -171,9 +167,10 @@ export class SymbolComponent implements OnInit {
       || isOver24Hours
       || (isWeekday && lastRefreshedIsBeforeClose)
     ) {
-      // console.log(isNew, isOver24Hours, (isWeekday && lastRefreshedIsBeforeClose));
       this.getData().subscribe(response => {}, (error) => {
-        localStorage.setItem(this.symbol, JSON.stringify(true));
+        if (isNew) {
+          localStorage.setItem(this.symbol, JSON.stringify(true));
+        }
       });
     }
   }
