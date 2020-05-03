@@ -123,7 +123,7 @@
     </ng-container>
     <ng-container *ngIf="yahooFinance">
         <div class="d-flex flex-wrap mb-3">
-            <span *ngIf="authService?.canEdit(user)" class="text-success">{{countDayTradeRuleWorks?.CALL + countDayTradeRuleWorks?.PUT}} Day Trade Successes ({{countDayTradeRuleWorks.CALL}} Calls &amp; {{countDayTradeRuleWorks.PUT}} Puts) in {{data?.length}} Trading Days</span>
+            <span *ngIf="authService?.canEdit(user)" class="text-success">{{countDayTradeRuleWorks?.CALL + countDayTradeRuleWorks?.PUT}} Day Trade Successes ({{countDayTradeRuleWorks.CALL}} CALLs &amp; {{countDayTradeRuleWorks.PUT}} PUTs) in the Past {{data?.length}} Trading Days</span>
             <span class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>
