@@ -2,8 +2,8 @@
         <h5 class="text-capitalize text-center mb-0 p-3">
             <div>
                 {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
-                <span *ngIf="dayTradeRuleWorks && canEdit" class="badge badge-success font-weight-bold">
-                    <span>Success</span>
+                <span *ngIf="!_.isNil(dayTradeRuleWorks) && canEdit" class="badge badge-success font-weight-bold">
+                    <span>{{dayTradeRuleWorks}} Success</span>
                 </span>
             </div>
             <div>{{date | date:'fullDate'}}</div>

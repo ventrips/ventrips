@@ -61,7 +61,10 @@ export class SymbolComponent implements OnInit {
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
   public toggleDetails: boolean = false;
-  public countDayTradeRuleWorks = 0;
+  public countDayTradeRuleWorks = {
+    CALL: 0,
+    PUT: 0
+  };
 
   constructor(
     private afs: AngularFirestore,
@@ -195,11 +198,14 @@ export class SymbolComponent implements OnInit {
 
 
   resetCountDayTradeRuleWorks() {
-    this.countDayTradeRuleWorks = 0;
+    this.countDayTradeRuleWorks = {
+      CALL: 0,
+      PUT: 0
+    };
   }
 
-  onCountDayTradeRuleWorks($event) {
-    this.countDayTradeRuleWorks++;
+  onCountDayTradeRuleWorks(option: string) {
+    this.countDayTradeRuleWorks[option]++;
   }
 
   scrollToTop() {
