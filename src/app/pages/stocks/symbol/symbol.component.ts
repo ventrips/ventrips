@@ -48,6 +48,18 @@ export class SymbolComponent implements OnInit {
   ];
   public innerBound = 0.18;
   public outerBound = 0.75;
+  public dayTradeRules = [
+    {
+      option: 'call',
+      buy: -1.8,
+      sell: -1,
+    },
+    {
+      option: 'put',
+      buy: 3,
+      sell: 2.5
+    }
+  ];
   public toggleEdit: boolean = false;
   public toggleDetails: boolean = false;
 

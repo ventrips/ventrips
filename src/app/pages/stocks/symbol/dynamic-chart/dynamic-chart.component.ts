@@ -21,6 +21,7 @@ export class DynamicChartComponent implements OnInit {
   @Input() yahooFinance;
   @Input() innerBound;
   @Input() outerBound;
+  @Input() dayTradeRules;
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -81,8 +82,9 @@ export class DynamicChartComponent implements OnInit {
     this.formatChart();
   }
 
-  isBeforeNoon(index: number): boolean {
-    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({ "hour": 12, "minute": 0, "second": 0 }));
+  isBetweenBuyTimes(index: number): boolean {
+    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({ "hour": 9, "minute": 0, "second": 0 })) &&
+    moment(this.lineChartLabels[index]).isAfter(moment(this.lineChartLabels[index]).set({ "hour": 6, "minute": 30, "second": 0 }));
   }
 
   chartOptions(): void {
@@ -155,6 +157,110 @@ export class DynamicChartComponent implements OnInit {
     };
   };
 
+  annotateDayTradeRules(
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>
+  ) {
+    _.forEach(this.dayTradeRules, (rule: object) => {
+      const option = _.get(rule, ['option']);
+      const dayTradeBuy = this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100));
+      const dayTradeSell = this.open.price + (this.open.price * (_.get(rule, ['sell']) / 100));
+      let findDayTradeBuyIndex;
+      let findDayTradeSellIndex;
+      let buy;
+      let sell;
+      if (_.isEqual(option, 'call')) {
+        findDayTradeBuyIndex = _.findIndex(lows, (price, index) => {
+          return price <= dayTradeBuy && this.isBetweenBuyTimes(index);
+        });
+        buy = lows[findDayTradeBuyIndex];
+        findDayTradeSellIndex = _.findIndex(highs, (price, index) => {
+          return price >= dayTradeSell && (index > findDayTradeBuyIndex);
+        });
+        sell = highs[findDayTradeSellIndex];
+      } else if (_.isEqual(option, 'put')) {
+        findDayTradeBuyIndex = _.findIndex(highs, (price, index) => {
+          return price >= dayTradeBuy && this.isBetweenBuyTimes(index);
+        });
+        buy = highs[findDayTradeBuyIndex];
+        findDayTradeSellIndex = _.findIndex(lows, (price, index) => {
+          return price <= dayTradeSell && (index > findDayTradeBuyIndex);
+        });
+        sell = lows[findDayTradeSellIndex];
+      }
+
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          drawTime: 'afterDatasetsDraw',
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: dayTradeBuy,
+          borderColor: 'green',
+          borderWidth: 5,
+          label: {
+            content: `Buy @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          drawTime: 'afterDatasetsDraw',
+          type: "line",
+          mode: "horizontal",
+          scaleID: "y-axis-2",
+          value: dayTradeSell,
+          borderColor: 'red',
+          borderWidth: 5,
+          label: {
+            content: `Sell @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+
+      if (findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1 && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
+        this.lineChartOptions.annotation.annotations.push(
+          {
+            drawTime: 'afterDatasetsDraw',
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: this.lineChartLabels[findDayTradeBuyIndex],
+            borderColor: "green",
+            borderWidth: 5,
+            label: {
+              content: `Bought ${buy} @ ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
+              enabled: true,
+              position: "top"
+            }
+          }
+        );
+        this.lineChartOptions.annotation.annotations.push(
+          {
+            drawTime: 'afterDatasetsDraw',
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: this.lineChartLabels[findDayTradeSellIndex],
+            borderColor: "red",
+            borderWidth: 5,
+            label: {
+              content: `Sold ${sell} @ ${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}`,
+              enabled: true,
+              position: "bottom"
+            }
+          }
+        );
+      }
+    });
+  }
+
   annotateOpenPrice(
     opens: Array<number>
   ): void {
@@ -215,7 +321,7 @@ export class DynamicChartComponent implements OnInit {
         mode: "horizontal",
         scaleID: "y-axis-2",
         value: callsPoint,
-        borderColor: isDoNotBuyRange ? 'red' : 'green',
+        borderColor: isDoNotBuyRange ? 'purple' : 'blue',
         borderWidth: 2,
         label: {
           content: `(-${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${callsPoint}`,
@@ -231,7 +337,7 @@ export class DynamicChartComponent implements OnInit {
         mode: "horizontal",
         scaleID: "y-axis-2",
         value: putsPoint,
-        borderColor: isDoNotBuyRange ? 'red' : 'green',
+        borderColor: isDoNotBuyRange ? 'purple' : 'blue',
         borderWidth: 2,
         label: {
           content: `(${percentage * 100}%) ${isDoNotBuyRange ? `Inner` : `Outer`} @ ${putsPoint}`,
@@ -240,65 +346,6 @@ export class DynamicChartComponent implements OnInit {
         }
       }
     );
-  }
-  annotateBuyPoints(
-    opens: Array<number>,
-    lows: Array<number>,
-    highs: Array<number>,
-    percentage: number,
-    gainLoss: number,
-    putsPoint: number,
-    callsPoint: number
-  ): void {
-      if (percentage !== (this.outerBound / 100)) {
-        return;
-      }
-      _.forEach(lows, (price, index) => {
-        if (_.isEqual(index, 0)) { return true;}
-        if (price <= callsPoint) {
-          const buyPrice = lows[index];
-          this.lineChartOptions.annotation.annotations.push(
-            {
-              drawTime: 'afterDatasetsDraw',
-              type: "line",
-              mode: "vertical",
-              scaleID: "x-axis-0",
-              value: this.lineChartLabels[index],
-              borderColor: "green",
-              borderWidth: 2,
-              label: {
-                content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
-                enabled: true,
-                position: "top"
-              }
-            }
-          );
-          return false;
-        }
-      });
-      _.forEach(highs, (price, index) => {
-        if (_.isEqual(index, 0)) { return true;}
-        if (price >= putsPoint) {
-          const buyPrice = highs[index];
-          this.lineChartOptions.annotation.annotations.push(
-            {
-              drawTime: 'afterDatasetsDraw',
-              type: "line",
-              mode: "vertical",
-              scaleID: "x-axis-0",
-              value: this.lineChartLabels[index],
-              borderColor: "green",
-              borderWidth: 2,
-              label: {
-                content: `${buyPrice} @ ${moment(this.lineChartLabels[index]).format('hh:mm:ss A')}`,
-                enabled: true,
-                position: "top"
-              }
-            }
-          );
-          return false;
-        }
-      });
   }
 
   annotatePercentages(
@@ -322,7 +369,6 @@ export class DynamicChartComponent implements OnInit {
       const putsPoint: number = _.round(this.open.price + gainLoss, 2);
       const callsPoint: number = _.round(this.open.price - gainLoss, 2);
       this.annotatePercentagePoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
-      this.annotateBuyPoints(opens, lows, highs, percentage, gainLoss, putsPoint, callsPoint);
     });
   }
 
@@ -331,6 +377,7 @@ export class DynamicChartComponent implements OnInit {
     if (this.canEdit) {
       this.annotatePercentages(opens, lows, highs);
       this.annotateOpenPricesReached(opens, lows, highs);
+      this.annotateDayTradeRules(opens, lows, highs);
     }
   }
 

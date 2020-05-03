@@ -12,9 +12,7 @@ export class ShortCutsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.yahooFinance);
-  }
+  ngOnInit() { }
 
   getSwingTradeBot(yahooFinance: any) {
     const symbol = _.get(yahooFinance, ['symbol']);
