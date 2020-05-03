@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -20,6 +20,8 @@ export class DynamicChartComponent implements OnInit {
   @Input() metaData;
   @Input() yahooFinance;
   @Input() dayTradeRules;
+  @Output() onCountDayTradeRuleWorks = new EventEmitter();
+  public dayTradeRuleWorks = false;
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -258,6 +260,8 @@ export class DynamicChartComponent implements OnInit {
             }
           }
         );
+        this.dayTradeRuleWorks = true;
+        this.onCountDayTradeRuleWorks.emit();
       }
     });
   }
