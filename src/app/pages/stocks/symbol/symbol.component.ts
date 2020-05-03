@@ -47,26 +47,26 @@ export class SymbolComponent implements OnInit {
     'PUT'
   ];
   public tempDayTradeRules = [
+    // {
+    //   option: 'CALL',
+    //   buy: -.12,
+    //   sell: 0.20,
+    // },
+    // {
+    //   option: 'PUT',
+    //   buy: .11,
+    //   sell: -.17
+    // }
     {
       option: 'CALL',
-      buy: -.12,
-      sell: 0.20,
-    },
-    {
-      option: 'PUT',
-      buy: .11,
-      sell: -.17
+      buy: -1.8,
+      sell: -1,
     }
-    // ,{
-    //   option: 'CALL',
-    //   buy: -1.8,
-    //   sell: -1,
-    // }
-    // ,{
-    //   option: 'PUT',
-    //   buy: 3,
-    //   sell: 2.5
-    // }
+    ,{
+      option: 'PUT',
+      buy: 3,
+      sell: 2.5
+    }
   ];
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
