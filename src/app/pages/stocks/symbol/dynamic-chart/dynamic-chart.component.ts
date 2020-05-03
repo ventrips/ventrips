@@ -165,7 +165,10 @@ export class DynamicChartComponent implements OnInit {
     this.dayTradeRuleWorks = undefined;
     _.forEach(this.dayTradeRules, (rule: object) => {
       const option = _.toUpper(_.get(rule, ['option']));
-      if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))) {
+      if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))
+        || (_.isEqual(option, 'CALL') &&  (_.get(rule, ['buy']) >= _.get(rule, ['sell'])))
+        || (_.isEqual(option, 'PUT') &&  (_.get(rule, ['sell']) >= _.get(rule, ['buy'])))
+      ) {
         return;
       }
       const dayTradeBuy = this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100));
@@ -204,7 +207,7 @@ export class DynamicChartComponent implements OnInit {
           borderColor: 'green',
           borderWidth: 5,
           label: {
-            content: `Buy @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`,
+            content: `Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`,
             enabled: true,
             position: "top"
           }
@@ -221,14 +224,13 @@ export class DynamicChartComponent implements OnInit {
           borderColor: 'red',
           borderWidth: 5,
           label: {
-            content: `Sell @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`,
+            content: `Sell ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`,
             enabled: true,
             position: "top"
           }
         }
       );
-
-      if (findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1 && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
+      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
         this.lineChartOptions.annotation.annotations.push(
           {
             drawTime: 'afterDatasetsDraw',
@@ -239,7 +241,7 @@ export class DynamicChartComponent implements OnInit {
             borderColor: "green",
             borderWidth: 5,
             label: {
-              content: `Bought ${buy} @ ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
+              content: `Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%) - ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
               enabled: true,
               position: "top"
             }
@@ -255,7 +257,7 @@ export class DynamicChartComponent implements OnInit {
             borderColor: "red",
             borderWidth: 5,
             label: {
-              content: `Sold ${sell} @ ${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}`,
+              content: `Sold ${option} @ ${sell} (${_.get(rule, ['sell'])}%) - ${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}`,
               enabled: true,
               position: "bottom"
             }
