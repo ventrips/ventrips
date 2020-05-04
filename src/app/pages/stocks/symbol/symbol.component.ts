@@ -47,26 +47,26 @@ export class SymbolComponent implements OnInit {
     'PUT'
   ];
   public tempDayTradeRules = [
-    // {
-    //   option: 'CALL',
-    //   buy: -.12,
-    //   sell: 0.20,
-    // },
-    // {
-    //   option: 'PUT',
-    //   buy: .11,
-    //   sell: -.17
-    // }
     {
       option: 'CALL',
-      buy: -1.8,
-      sell: -1,
-    }
-    ,{
+      buy: -.12,
+      sell: 0.03,
+    },
+    {
       option: 'PUT',
-      buy: 3,
-      sell: 2.5
+      buy: .11,
+      sell: -.17
     }
+    // {
+    //   option: 'CALL',
+    //   buy: -1.8,
+    //   sell: -1,
+    // }
+    // ,{
+    //   option: 'PUT',
+    //   buy: 3,
+    //   sell: 2.5
+    // }
   ];
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
@@ -206,19 +206,18 @@ export class SymbolComponent implements OnInit {
     if (!this.authService.canEdit(this.user)) {
       return;
     }
+    this.onCountDayTradeRuleReset();
     this.spinner.show();
     this.getData().subscribe(response => {
       this.spinner.hide();
       this.router.navigate(['symbol', _.toUpper(this.symbol)]);
-      this.setDayTradeRules();
     }, (error) => {
       this.spinner.hide();
     });
   }
 
-
-  resetCountDayTradeRuleWorks() {
-    this.countDayTradeRuleWorks = {
+  onCountDayTradeRuleReset() {
+    const reset = {
       CALL: {
         success: 0,
         fail: 0,
@@ -231,10 +230,7 @@ export class SymbolComponent implements OnInit {
       },
       overall: 0
     };
-  }
-
-  setDayTradeRules() {
-    this.resetCountDayTradeRuleWorks();
+    this.countDayTradeRuleWorks = _.cloneDeep(reset);
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
   }
 
