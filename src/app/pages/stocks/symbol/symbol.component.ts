@@ -210,6 +210,7 @@ export class SymbolComponent implements OnInit {
     this.getData().subscribe(response => {
       this.spinner.hide();
       this.router.navigate(['symbol', _.toUpper(this.symbol)]);
+      this.setDayTradeRules();
     }, (error) => {
       this.spinner.hide();
     });
@@ -230,6 +231,11 @@ export class SymbolComponent implements OnInit {
       },
       overall: 0
     };
+  }
+
+  setDayTradeRules() {
+    this.resetCountDayTradeRuleWorks();
+    this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
   }
 
   onCountDayTradeRuleWorks(optionObj: any) {
