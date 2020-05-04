@@ -231,6 +231,10 @@ export class SymbolComponent implements OnInit {
       overall: 0
     };
     this.countDayTradeRuleWorks = _.cloneDeep(reset);
+  }
+
+  setDayTradeRules() {
+    this.onCountDayTradeRuleReset();
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
   }
 
