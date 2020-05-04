@@ -59,16 +59,16 @@ export class SymbolComponent implements OnInit {
       sell: -.17
     },
     /* 100% SAFE BUT RARE FOR SPY */
-    // {
-    //   option: 'CALL',
-    //   buy: -1.8,
-    //   sell: -1,
-    // }
-    // ,{
-    //   option: 'PUT',
-    //   buy: 3,
-    //   sell: 2.5
-    // },
+    {
+      option: 'CALL',
+      buy: -1.8,
+      sell: -1,
+    }
+    ,{
+      option: 'PUT',
+      buy: 3,
+      sell: 2.5
+    }
     /* 100% SAFE BUT RARE FOR SPXL */
     // {
     //   option: 'CALL',

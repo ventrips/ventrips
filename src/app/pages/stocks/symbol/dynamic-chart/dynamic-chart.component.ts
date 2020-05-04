@@ -240,23 +240,25 @@ export class DynamicChartComponent implements OnInit {
         }
       );
 
-      // set bought point always
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          drawTime: 'afterDatasetsDraw',
-          type: "line",
-          mode: "vertical",
-          scaleID: "x-axis-0",
-          value: this.lineChartLabels[findDayTradeBuyIndex],
-          borderColor: "green",
-          borderWidth: 5,
-          label: {
-            content: `Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%) - ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
-            enabled: true,
-            position: "top"
+      // set bought point always if exists
+      if (findDayTradeBuyIndex > -1) {
+        this.lineChartOptions.annotation.annotations.push(
+          {
+            drawTime: 'afterDatasetsDraw',
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: this.lineChartLabels[findDayTradeBuyIndex],
+            borderColor: "green",
+            borderWidth: 5,
+            label: {
+              content: `Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%) - ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
+              enabled: true,
+              position: "top"
+            }
           }
-        }
-      );
+        );
+      }
 
       // Order would have failed to fill today
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.lastRefreshedIsBeforeClose()) {
