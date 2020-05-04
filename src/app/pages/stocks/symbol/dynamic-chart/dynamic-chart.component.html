@@ -1,16 +1,22 @@
 <section class="mb-5 bg-white">
-        <h5 class="text-capitalize text-center mb-0 p-3">
-            <div>
-                {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
-                <span *ngIf="canEdit">
-                    <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success font-weight-bold mr-2">CALL Success</span>
-                    <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger font-weight-bold mr-2">CALL Fail</span>
-                    <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success font-weight-bold mr-2">PUT Success</span>
-                    <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT Fail</span>
-                </span>
-            </div>
-            <div>{{date | date:'fullDate'}}</div>
-        </h5>
+    <h5 class="text-capitalize text-center mb-0 p-3">
+        <div>
+            {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
+            <span *ngIf="canEdit">
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success font-weight-bold mr-2">CALL Success</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger font-weight-bold mr-2">CALL Fail</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success font-weight-bold mr-2">PUT Success</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT Fail</span>
+            </span>
+        </div>
+        <div>{{date | date:'fullDate'}}</div>
+    </h5>
+    <div class="p-3" *ngIf="canEdit && !_.isEmpty(dayTradeLogs)">
+        <h6>Day Trade Logs</h6>
+        <p class="mb-0" *ngFor="let log of dayTradeLogs">
+            {{log}}
+        </p>
+    </div>
     <div class="flex">
         <div class="flex-item">
             <div style="display: block;">
