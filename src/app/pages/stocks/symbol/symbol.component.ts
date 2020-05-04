@@ -47,16 +47,18 @@ export class SymbolComponent implements OnInit {
     'PUT'
   ];
   public tempDayTradeRules = [
-    {
-      option: 'CALL',
-      buy: -.12,
-      sell: 0.03,
-    },
-    {
-      option: 'PUT',
-      buy: .11,
-      sell: -.17
-    }
+    /* 80% SAFE BUT FREQUENT FOR SPY */
+    // {
+    //   option: 'CALL',
+    //   buy: -.12,
+    //   sell: 0.03,
+    // },
+    // {
+    //   option: 'PUT',
+    //   buy: .11,
+    //   sell: -.17
+    // },
+    /* 100% SAFE BUT RARE FOR SPY */
     // {
     //   option: 'CALL',
     //   buy: -1.8,
@@ -67,6 +69,12 @@ export class SymbolComponent implements OnInit {
     //   buy: 3,
     //   sell: 2.5
     // }
+    /* 90% SAFE BUT FREQUENT FOR SPXL */
+    {
+      option: 'CALL',
+      buy: -.74,
+      sell: 0.02,
+    }
   ];
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
