@@ -90,6 +90,12 @@ export class DynamicChartComponent implements OnInit {
     moment(this.lineChartLabels[index]).isAfter(moment(this.lineChartLabels[index]).set({ "hour": 6, "minute": 30, "second": 0 }));
   }
 
+  lastRefreshedIsBeforeClose(): boolean {
+    const format = 'YYYY-MM-DD HH:mm:ss';
+    const lastRefreshedTimeZone = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone'])).format(format);
+    return moment(lastRefreshedTimeZone).isBefore((moment().set({h:16, m:0, s:0})).format(format));
+  }
+
   chartOptions(): void {
     const keys = ['volume', 'open', 'high', 'low', 'close'];
     _.forEach(keys, (key: any) => {
@@ -233,12 +239,33 @@ export class DynamicChartComponent implements OnInit {
           }
         }
       );
-      // Order would have failed to fill
-      if (findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) {
+
+      // set bought point always
+      this.lineChartOptions.annotation.annotations.push(
+        {
+          drawTime: 'afterDatasetsDraw',
+          type: "line",
+          mode: "vertical",
+          scaleID: "x-axis-0",
+          value: this.lineChartLabels[findDayTradeBuyIndex],
+          borderColor: "green",
+          borderWidth: 5,
+          label: {
+            content: `Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%) - ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`,
+            enabled: true,
+            position: "top"
+          }
+        }
+      );
+
+      // Order would have failed to fill today
+      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.lastRefreshedIsBeforeClose()) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
         return;
       }
+
+      // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
         this.lineChartOptions.annotation.annotations.push(
           {
