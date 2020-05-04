@@ -61,7 +61,7 @@ export class StocksComponent implements OnInit {
     this.ssrService.setSeo({
       title: this.title,
       description: this.description,
-    }, `${this.collection}`, false);
+    }, `${this.collection}`, true);
     this.ssrService.ssrFirestoreCollection(`${this.collection}`, `symbol`, true)
     .subscribe(response => {
       this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
