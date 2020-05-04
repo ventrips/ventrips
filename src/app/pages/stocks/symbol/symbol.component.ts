@@ -260,6 +260,15 @@ export class SymbolComponent implements OnInit {
     this.countDayTradeRuleWorks['overall']++;
   }
 
+
+  getDayTradePointFromOpenWithYahooFinance(percent: number) {
+    if (!_.isEqual(_.get(this.yahooFinance, ['marketState']), 'REGULAR')) {
+      return;
+    }
+    const yahooFinanceOpenPrice = _.get(this.yahooFinance, ['regularMarketOpen']);
+    return _.round(yahooFinanceOpenPrice + (yahooFinanceOpenPrice * (percent / 100)), 2);
+  }
+
   scrollToTop() {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0, 0);

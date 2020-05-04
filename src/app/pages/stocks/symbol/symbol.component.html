@@ -66,6 +66,11 @@
         </div>
         <div class="pt-3" *ngIf="authService?.canEdit(user)">
             <div class="row">
+                <div class="col-12" *ngIf="_.isEqual(_.get(yahooFinance, ['marketState']), 'REGULAR')">
+                    <span class="font-weight-bold">
+                        Open Price: {{_.get(yahooFinance, ['regularMarketOpen'])}}
+                    </span>
+                </div>
                 <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
                     <div class="col-4">
                         <div class="d-flex flex-wrap align-items-center justify-content-start p-4">
@@ -87,13 +92,13 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="dayTradeBuy-{{index}}">Day Trade Buy (%)</label>
+                            <label for="dayTradeBuy-{{index}}">Day Trade Buy ({{rule?.buy}}%) {{getDayTradePointFromOpenWithYahooFinance(rule?.buy)}}</label>
                             <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy" placeholder="Day Trade Buy" [(ngModel)]="rule.buy"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="dayTradeSell-{{index}}">Day Trade Sell (%)</label>
+                            <label for="dayTradeSell-{{index}}">Day Trade Sell ({{rule?.sell}}%) {{getDayTradePointFromOpenWithYahooFinance(rule?.sell)}}</label>
                             <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell" placeholder="Day Trade Sell" [(ngModel)]="rule.sell"/>
                         </div>
                     </div>
