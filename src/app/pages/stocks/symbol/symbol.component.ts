@@ -274,8 +274,6 @@ export class SymbolComponent implements OnInit {
 
 
   getDayTradePointFromOpenWithYahooFinance(percent: number) {
-    return;
-
     if (!_.isEqual(_.get(this.yahooFinance, ['marketState']), 'REGULAR')) {
       return;
     }
