@@ -151,7 +151,9 @@ export class SymbolComponent implements OnInit {
         this.updated = _.get(response, ['updated']);
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
-
+        setTimeout(() => {
+          this.setDayTradeRules();
+        }, 0);
         // Set long name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
         if (longName) {
@@ -220,11 +222,13 @@ export class SymbolComponent implements OnInit {
     if (!this.authService.canEdit(this.user)) {
       return;
     }
-    this.onCountDayTradeRuleReset();
     this.spinner.show();
     this.getData().subscribe(response => {
       this.spinner.hide();
       this.router.navigate(['symbol', _.toUpper(this.symbol)]);
+      setTimeout(() => {
+        this.setDayTradeRules();
+      }, 0);
     }, (error) => {
       this.spinner.hide();
     });
