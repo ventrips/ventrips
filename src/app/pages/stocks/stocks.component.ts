@@ -62,11 +62,11 @@ export class StocksComponent implements OnInit {
       title: this.title,
       description: this.description,
     }, `${this.collection}`, true);
-    this.ssrService.ssrFirestoreCollection(`${this.collection}`, `symbol`, true)
-    .subscribe(response => {
-      this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
-      this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
-    }, () => {});
+    // this.ssrService.ssrFirestoreCollection(`${this.collection}`, `symbol`, true)
+    // .subscribe(response => {
+    //   this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
+    //   this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
+    // }, () => {});
   }
 
   search = (text$: Observable<string>) => text$.pipe(

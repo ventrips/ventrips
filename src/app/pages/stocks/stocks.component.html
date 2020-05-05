@@ -40,10 +40,12 @@
                 </a>
             </div>
         </div>
-        <h4 class="mb-4">Recent Searches</h4>
-        <div class="mb-4 d-flex flex-wrap align-items-center">
-           <a *ngFor="let item of data" title="{{item?.yahooFinance?.longName}} ({{item?.yahooFinance?.symbol}})" [routerLink]="[item?.metaData?.symbol]" class="h3"><span class="badge badge-warning p-3 mb-3 mr-3" [innerHTML]="item?.metaData?.symbol | searchHighlight: searchTerm: 'text-white': 'bg-dark'"></span></a>
-        </div>
+        <ng-container *ngIf="!_.isEmpty(data)">
+            <h4 class="mb-4">Recent Searches</h4>
+            <div class="mb-4 d-flex flex-wrap align-items-center">
+               <a *ngFor="let item of data" title="{{item?.yahooFinance?.longName}} ({{item?.yahooFinance?.symbol}})" [routerLink]="[item?.metaData?.symbol]" class="h3"><span class="badge badge-warning p-3 mb-3 mr-3" [innerHTML]="item?.metaData?.symbol | searchHighlight: searchTerm: 'text-white': 'bg-dark'"></span></a>
+            </div>
+        </ng-container>
     </div>
     <!-- Horizontal Display Ad-->
     <section class="container-fluid text-center pt-2 mb-5">
