@@ -66,11 +66,11 @@
         </div>
         <div class="pt-3" *ngIf="authService?.canEdit(user)">
             <div class="row">
-                <div class="col-12" *ngIf="_.isEqual(_.get(yahooFinance, ['marketState']), 'REGULAR')">
+                <!-- <div class="col-12" *ngIf="_.isEqual(_.get(yahooFinance, ['marketState']), 'REGULAR')">
                     <span class="font-weight-bold">
-                        Open Price: {{_.get(yahooFinance, ['regularMarketOpen'])}}
+                        Open Price: {{yahooFinanceOpenPrice}}
                     </span>
-                </div>
+                </div> -->
                 <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
                     <div class="col-4">
                         <div class="d-flex flex-wrap align-items-center justify-content-start p-4">

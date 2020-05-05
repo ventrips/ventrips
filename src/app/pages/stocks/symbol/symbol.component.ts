@@ -104,6 +104,7 @@ export class SymbolComponent implements OnInit {
     },
     overall: 0
   };
+  public yahooFinanceOpenPrice: number;
 
   constructor(
     private afs: AngularFirestore,
@@ -157,6 +158,8 @@ export class SymbolComponent implements OnInit {
         this.updated = _.get(response, ['updated']);
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
+        this.yahooFinanceOpenPrice = _.get(this.yahooFinance, ['regularMarketPrice']) - _.get(this.yahooFinance, ['regularMarketChange']);
+
         setTimeout(() => {
           this.setDayTradeRules();
         }, 0);
@@ -202,19 +205,20 @@ export class SymbolComponent implements OnInit {
     }
     const format = 'YYYY-MM-DD HH:mm:ss';
     const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
-    const today930am = (moment().set({h:9, m:30, s:0})).format(format);
-    const today4pm = (moment().set({h:16, m:0, s:0})).format(format);
+    const today930am = (moment().tz('timeZone').set({h:9, m:30, s:0})).format(format);
+    const today4pm = (moment().tz('timeZone').set({h:16, m:0, s:0})).format(format);
     const isNew = _.isNil(lastRefreshed);
     const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
     const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
     const isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
+    const timeIsAfterOpen = moment(moment().tz(timeZone).format(format)).isAfter(moment(today930am));
     // const currentIsAfterOpen = moment().isAfter(today930am);
     // const currentIsAfterClose = moment().isAfter(today4pm);
     // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
-   if (
+    if (
       isNew
       || isOver24Hours
-      || (isWeekday && lastRefreshedIsBeforeClose)
+      || (isWeekday && lastRefreshedIsBeforeClose && timeIsAfterOpen)
     ) {
       this.getData().subscribe(response => {}, (error) => {
         if (isNew) {
@@ -268,12 +272,14 @@ export class SymbolComponent implements OnInit {
   }
 
 
+
   getDayTradePointFromOpenWithYahooFinance(percent: number) {
+    return;
+
     if (!_.isEqual(_.get(this.yahooFinance, ['marketState']), 'REGULAR')) {
       return;
     }
-    const yahooFinanceOpenPrice = _.get(this.yahooFinance, ['regularMarketOpen']);
-    return _.round(yahooFinanceOpenPrice + (yahooFinanceOpenPrice * (percent / 100)), 2);
+    return _.round(this.yahooFinanceOpenPrice + (this.yahooFinanceOpenPrice * (_.get(this.yahooFinance, ['regularMarketChangePercent']) / 100)), 2);
   }
 
   scrollToTop() {
