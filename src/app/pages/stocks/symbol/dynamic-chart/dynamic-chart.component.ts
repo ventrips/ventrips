@@ -172,6 +172,23 @@ export class DynamicChartComponent implements OnInit {
     lows: Array<number>,
     highs: Array<number>
   ) {
+    // 8:00AM
+    // this.lineChartOptions.annotation.annotations.push(
+    //   {
+    //     drawTime: 'afterDatasetsDraw',
+    //     type: "line",
+    //     mode: "vertical",
+    //     scaleID: "x-axis-0",
+    //     value: this.lineChartLabels[_.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment().set({hours: 8, minutes: 0, seconds: 0}).format('hh:mm:ss A')))],
+    //     borderColor: "purple",
+    //     borderWidth: 10,
+    //     label: {
+    //       content: '8:00AM',
+    //       enabled: true,
+    //       position: "bottom"
+    //     }
+    //   }
+    // );
     this.dayTradeRuleWorks = {};
     this.dayTradeLogs = [];
     this.dayTradeLogs.push(`Open Price @ ${this.open.price}`);

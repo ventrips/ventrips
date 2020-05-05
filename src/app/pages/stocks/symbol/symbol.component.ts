@@ -81,6 +81,12 @@ export class SymbolComponent implements OnInit {
       buy: -.74,
       sell: 0.02,
     }
+    /* 90% SAFE BUT FREQUENT FOR SPXS */
+    // {
+    //   option: 'CALL',
+    //   buy: -.3,
+    //   sell: 0.5,
+    // }
   ];
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
