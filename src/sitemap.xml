@@ -22,6 +22,8 @@
     <url><loc>https://www.ventrips.com/symbol/FB</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/MSFT</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/SPY</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/symbol/SPXL</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/symbol/SPXS</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/TSLA</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/VIX</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/WTI</loc><priority>0.5</priority></url>
