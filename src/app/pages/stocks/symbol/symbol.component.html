@@ -40,7 +40,7 @@
         <app-short-cuts [yahooFinance]="yahooFinance"></app-short-cuts>
     </ng-container>
     <div class="my-4 px-2 text-white bg-dark" [ngClass]="{'sticky-top': !authService?.canEdit(user)}" *ngIf="metaData?.symbol">
-        <app-symbol-search-bar *ngIf="!authService?.canEdit(user)" [showHeader]="false" [symbol]="symbol"></app-symbol-search-bar>
+        <app-symbol-search-bar *ngIf="!authService?.canEdit(user)" [symbol]="symbol" [size]="'sm'"></app-symbol-search-bar>
         <div class="input-group my-3 pt-3" *ngIf="authService?.canEdit(user)">
             <div class="input-group-prepend">
                 <div ngbDropdown class="d-inline-block">

@@ -11,8 +11,9 @@ import * as _ from 'lodash';
   styleUrls: ['./symbol-search-bar.component.scss']
 })
 export class SymbolSearchBarComponent implements OnInit {
-  @Input() showHeader: boolean;
+  @Input() showHeader: boolean = false;
   @Input() symbol: string;
+  @Input() size: string = 'lg';
   @ViewChild('searchBar', {static: false}) searchInputText: ElementRef; // Remove aria-multiline to improve SEO
   public _ = _;
   public searchTerm: any;
