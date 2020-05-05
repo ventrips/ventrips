@@ -172,9 +172,11 @@
     <section>
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
-                <section *ngFor="let item of data; let index = index">
-                    <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"></app-dynamic-chart>
-                </section>
+                <div class="scrolling-wrapper">
+                    <section class="card" *ngFor="let item of data; let index = index">
+                        <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data" [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"></app-dynamic-chart>
+                    </section>
+                </div>
             </ng-container>
         </ng-container>
         <ng-container *ngIf="!isLoading && _.isEmpty(data)">
