@@ -226,9 +226,6 @@ export class SymbolComponent implements OnInit {
     this.getData().subscribe(response => {
       this.spinner.hide();
       this.router.navigate(['symbol', _.toUpper(this.symbol)]);
-      setTimeout(() => {
-        this.setDayTradeRules();
-      }, 0);
     }, (error) => {
       this.spinner.hide();
     });
