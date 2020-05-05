@@ -174,7 +174,7 @@ export class DynamicChartComponent implements OnInit {
   ) {
     this.dayTradeRuleWorks = {};
     this.dayTradeLogs = [];
-    this.dayTradeLogs.push(`The Open Price is: ${this.open.price}`);
+    this.dayTradeLogs.push(`Open Price @ ${this.open.price}`);
     _.forEach(this.dayTradeRules, (rule: object) => {
       const option = _.toUpper(_.get(rule, ['option']));
       if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))
@@ -183,8 +183,8 @@ export class DynamicChartComponent implements OnInit {
       ) {
         return;
       }
-      const dayTradeBuy = this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100));
-      const dayTradeSell = this.open.price + (this.open.price * (_.get(rule, ['sell']) / 100));
+      const dayTradeBuy = _.round(this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100)), 2);
+      const dayTradeSell = _.round(this.open.price + (this.open.price * (_.get(rule, ['sell']) / 100)), 2);
       let findDayTradeBuyIndex;
       let findDayTradeSellIndex;
       let buy;
@@ -193,20 +193,20 @@ export class DynamicChartComponent implements OnInit {
         findDayTradeBuyIndex = _.findIndex(lows, (price, index) => {
           return price <= dayTradeBuy && this.isBetweenBuyTimes(index);
         });
-        buy = lows[findDayTradeBuyIndex];
+        buy = _.round(lows[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(highs, (price, index) => {
           return price >= dayTradeSell && (index > findDayTradeBuyIndex);
         });
-        sell = highs[findDayTradeSellIndex];
+        sell = _.round(highs[findDayTradeSellIndex], 2);
       } else if (_.isEqual(option, 'PUT')) {
         findDayTradeBuyIndex = _.findIndex(highs, (price, index) => {
           return price >= dayTradeBuy && this.isBetweenBuyTimes(index);
         });
-        buy = highs[findDayTradeBuyIndex];
+        buy = _.round(highs[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(lows, (price, index) => {
           return price <= dayTradeSell && (index > findDayTradeBuyIndex);
         });
-        sell = lows[findDayTradeSellIndex];
+        sell = _.round(lows[findDayTradeSellIndex], 2);
       }
 
       const buyLog = `Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
@@ -250,7 +250,7 @@ export class DynamicChartComponent implements OnInit {
 
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
-        const boughtLog = `Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%) - ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`;
+        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%)`;
         this.dayTradeLogs.push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -274,13 +274,13 @@ export class DynamicChartComponent implements OnInit {
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.lastRefreshedIsBeforeClose()) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        this.dayTradeLogs.push(`Failed to sell for the day`);
+        this.dayTradeLogs.push(`Day Trade Rule Failed!`);
         return;
       }
 
       // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
-        const soldLog = `Sold ${option} @ ${sell} (${_.get(rule, ['sell'])}%) - ${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}`;
+        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold ${option} @ ${sell} (${_.get(rule, ['sell'])}%)`;
         this.dayTradeLogs.push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -300,6 +300,7 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
+        this.dayTradeLogs.push(`Day Trade Rule Succeeded!`);
       }
     });
   }
