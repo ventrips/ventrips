@@ -1,0 +1,14 @@
+<section class="py-3">
+    <h3 class="mb-4" *ngIf="showHeader">Search Historical Intraday Charts for... <a [routerLink]="['/symbol', _.trim(searchTerm)]" title="{{_.trim(searchTerm)}}" ><span *ngIf="!_.isEmpty(searchTerm)" class="badge badge-warning p-3">{{searchTerm}}</span></a></h3>
+    <div class="input-group">
+        <input #searchBar type="text" id="typeahead-config" class="form-control form-control-lg" aria-label="Search for a Ticker Symbol" placeholder="Search for a Ticker Symbol"
+        [(ngModel)]="searchTerm" [ngbTypeahead]="search" />
+        <div class="input-group-append">
+            <a [routerLink]="['/symbol', _.trim(searchTerm)]" class="btn btn-lg text-dark btn-warning" title="Search Ticker Symbol" [class.disabled]="_.isEmpty(searchTerm)">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                </ng-container>
+            </a>
+        </div>
+    </div>
+</section>

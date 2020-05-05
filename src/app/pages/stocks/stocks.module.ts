@@ -8,12 +8,14 @@ import { StocksComponent } from './stocks.component';
 import { SymbolComponent } from './symbol/symbol.component';
 import { DynamicChartComponent } from './symbol/dynamic-chart/dynamic-chart.component';
 import { ShortCutsComponent } from './symbol/short-cuts/short-cuts.component';
+import { SymbolSearchBarComponent } from './symbol-search-bar/symbol-search-bar.component';
 @NgModule({
   declarations: [
     StocksComponent,
     SymbolComponent,
     DynamicChartComponent,
-    ShortCutsComponent
+    ShortCutsComponent,
+    SymbolSearchBarComponent
   ],
   imports: [
     CommonModule,

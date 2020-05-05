@@ -28,10 +28,7 @@ export class StocksComponent implements OnInit {
   public title: string = `Free Historical Intraday Charts`;
   public description: string  = `Current Historical Intraday Charts to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
   public collection: string = 'symbol'
-  public searchTerm: any;
-  public searchOptions: Array<string> = ['AAPL', 'AMZN', 'FB', 'MSFT', 'SPY', 'TSLA', 'VIX', 'WTI'];
   public data: any;
-  @ViewChild('searchBar', {static: false}) searchInputText: ElementRef; // Remove aria-multiline to improve SEO
 
   constructor(
     private afs: AngularFirestore,
@@ -41,16 +38,9 @@ export class StocksComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ssrService: SsrService,
     public authService: AuthService,
-    private renderer: Renderer2,
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
-
-  ngAfterViewInit(): void {  // Remove aria-multiline to improve SEO
-    if (this.searchInputText !== undefined ) {
-        this.renderer.removeAttribute(this.searchInputText.nativeElement, 'aria-multiline');
-    }
-  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => this.user = user);
@@ -68,16 +58,6 @@ export class StocksComponent implements OnInit {
     //   this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
     // }, () => {});
   }
-
-  search = (text$: Observable<string>) => text$.pipe(
-    debounceTime(0),
-    distinctUntilChanged(),
-    map(term => {
-      this.searchTerm = _.replace(_.toUpper(term), new RegExp(/[^a-zA-Z0-9]/g), '');
-      return term.length < 1 ? []
-      : this.searchOptions.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10);
-    })
-  )
 
   isPlatformBrowser() {
     return isPlatformBrowser(this.platformId);
