@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="authService?.canEdit(user)" class="p-3 bg-light text-dark rounded">
+            <div *ngIf="authService?.canEdit(user)" class="p-3 bg-light text-dark rounded small">
                 <div class="mb-2" *ngIf="countDayTradeRuleWorks?.CALL?.total !== 0">
                     <span class="font-weight-bold mr-1">CALL Success Rate:</span>
                     <span class="mr-1" *ngIf="countDayTradeRuleWorks">{{_.round((_.get(countDayTradeRuleWorks, ['CALL', 'success'], 0) / _.get(countDayTradeRuleWorks, ['CALL',
@@ -139,13 +139,22 @@
         </p>
     </ng-container>
     <ng-container *ngIf="yahooFinance">
-        <div class="d-flex flex-wrap mb-3">
-            <span class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
+        <div class="d-flex flex-wrap align-items-center mb-3">
+            <div class="cursor-pointer mb-2" (click)="toggleHorizontalView = !toggleHorizontalView">
+                <button class="btn btn-info">
+                    {{toggleHorizontalView ? 'Horizontal' : 'Vertical'}} View
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon *ngIf="toggleHorizontalView" class="text-white" [icon]="['fas', 'arrows-alt-h']"></fa-icon>
+                        <fa-icon *ngIf="!toggleHorizontalView" class="text-white" [icon]="['fas', 'arrows-alt-v']"></fa-icon>
+                    </ng-container>
+                </button>
+            </div>
+            <div class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
                 <ng-container *ngIf="isPlatformBrowser()">
                     <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>
                     <fa-icon *ngIf="!toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'info-circle']"></fa-icon>
                 </ng-container>
-            </span>
+            </div>
             <section class="row no-gutters mb-5 p-3 bg-dark text-white rounded" *ngIf="toggleDetails">
                 <div class="col-xs-12 col-md-6 h6" *ngFor="let key of _.keys(yahooFinance)">
                     <span class="font-weight-bold mr-2">{{_.startCase(key)}}:</span> {{yahooFinance[key]}}
@@ -156,7 +165,7 @@
     <section>
         <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
             <ng-container *ngIf="isPlatformBrowser()">
-                <div class="scrolling-wrapper">
+                <div [ngClass]="{'scrolling-wrapper': toggleHorizontalView }">
                     <section class="card" *ngFor="let item of data; let index = index">
                         <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data"
                             [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"></app-dynamic-chart>

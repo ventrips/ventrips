@@ -105,6 +105,7 @@ export class SymbolComponent implements OnInit {
     overall: 0
   };
   public yahooFinanceOpenPrice: number;
+  public toggleHorizontalView: boolean = false;
 
   constructor(
     private afs: AngularFirestore,

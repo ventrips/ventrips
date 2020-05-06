@@ -296,7 +296,7 @@ export class DynamicChartComponent implements OnInit {
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.lastRefreshedIsBeforeClose()) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        this.dayTradeLogs.push(`Day Trade Rule Failed!`);
+        this.dayTradeLogs.push(`Day Trade Rule Failed`);
         return;
       }
 
@@ -322,7 +322,7 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
-        this.dayTradeLogs.push(`Day Trade Rule Succeeded!`);
+        this.dayTradeLogs.push(`Day Trade Rule Succeeded`);
       }
     });
   }
