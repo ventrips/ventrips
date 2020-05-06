@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="dayTradeRemove-{{index}}">Remove Day Trade Rule</label>
-                        <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1)">Remove</button>
+                        <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
                     </div>
                 </ng-container>
             </div>
