@@ -75,12 +75,12 @@
                     <div class="col-md-4 mb-3">
                         <label for="dayTradeBuy-{{index}}">Buy from Open Price ({{rule?.buy}}%)</label>
                         <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy"
-                            placeholder="Day Trade Buy" [(ngModel)]="rule.buy" />
+                            placeholder="Day Trade Buy" [(ngModel)]="rule.buy" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="dayTradeSell-{{index}}">Sell from Open Price ({{rule?.sell}}%)</label>
                         <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell"
-                            placeholder="Day Trade Sell" [(ngModel)]="rule.sell" />
+                            placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="dayTradeRemove-{{index}}">Remove Day Trade Rule</label>
@@ -88,18 +88,7 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="d-flex flex-wrap">
-                <div>
-                    <div class="form-group">
-                        <button class="btn btn-outline-warning btn-sm" (click)="tempDayTradeRules.push({option: undefined, buy: undefined, sell: undefined})">Create Rule</button>
-                    </div>
-                </div>
-                <div class="ml-auto">
-                    <div class="form-group">
-                        <button class="btn btn-warning btn-sm" (click)="setDayTradeRules()" [disabled]="_.isEqual(tempDayTradeRules, dayTradeRules)">Update Rule</button>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-outline-warning btn-sm btn-block mb-3" (click)="tempDayTradeRules.push({option: undefined, buy: undefined, sell: undefined})">Create Rule</button>
             <div *ngIf="authService?.canEdit(user)" class="p-3 bg-light text-dark rounded small">
                 <div class="mb-2" *ngIf="countDayTradeRuleWorks?.CALL?.total !== 0">
                     <span class="font-weight-bold mr-1">CALL Success Rate:</span>

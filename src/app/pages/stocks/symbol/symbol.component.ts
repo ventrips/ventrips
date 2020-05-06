@@ -107,6 +107,8 @@ export class SymbolComponent implements OnInit {
   public yahooFinanceOpenPrice: number;
   public toggleHorizontalView: boolean = false;
 
+  private autoSaveSub$ = new Subject<string>();
+
   constructor(
     private afs: AngularFirestore,
     private http: HttpClient,
@@ -135,6 +137,17 @@ export class SymbolComponent implements OnInit {
       }, `${this.collection}-${this.symbol}`, true);
       this.init();
     });
+    this.autoSaveSub$.pipe(
+      debounceTime(3000),
+      distinctUntilChanged()
+    ).subscribe((value: string) => {
+      console.log(value);
+      this.setDayTradeRules();
+    });
+  }
+
+  applyAutoSave(value: string) {
+    this.autoSaveSub$.next(value)
   }
 
   init() {
