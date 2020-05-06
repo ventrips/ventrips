@@ -86,9 +86,14 @@ export class DynamicChartComponent implements OnInit {
     this.formatChart();
   }
 
-  isBetweenBuyTimes(index: number): boolean {
-    return moment(this.lineChartLabels[index]).isBefore(moment(this.lineChartLabels[index]).set({ "hour": 9, "minute": 0, "second": 0 })) &&
-    moment(this.lineChartLabels[index]).isAfter(moment(this.lineChartLabels[index]).set({ "hour": 6, "minute": 30, "second": 0 }));
+  isBetweenCustomTradeTimes(index: number): boolean {
+    const now = moment(this.lineChartLabels[index]);
+    const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
+    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local();
+    return moment(now).isBetween(
+      moment(dayOpen),
+      moment(dayClose)
+    );
   }
 
   lastRefreshedIsBeforeClose(): boolean {
@@ -208,20 +213,20 @@ export class DynamicChartComponent implements OnInit {
       let sell;
       if (_.isEqual(option, 'CALL')) {
         findDayTradeBuyIndex = _.findIndex(lows, (price, index) => {
-          return price <= dayTradeBuy && this.isBetweenBuyTimes(index);
+          return price <= dayTradeBuy && this.isBetweenCustomTradeTimes(index);;
         });
         buy = _.round(lows[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(highs, (price, index) => {
-          return price >= dayTradeSell && (index > findDayTradeBuyIndex);
+          return price >= dayTradeSell && (index > findDayTradeBuyIndex) && this.isBetweenCustomTradeTimes(index);;
         });
         sell = _.round(highs[findDayTradeSellIndex], 2);
       } else if (_.isEqual(option, 'PUT')) {
         findDayTradeBuyIndex = _.findIndex(highs, (price, index) => {
-          return price >= dayTradeBuy && this.isBetweenBuyTimes(index);
+          return price >= dayTradeBuy && this.isBetweenCustomTradeTimes(index);
         });
         buy = _.round(highs[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(lows, (price, index) => {
-          return price <= dayTradeSell && (index > findDayTradeBuyIndex);
+          return price <= dayTradeSell && (index > findDayTradeBuyIndex) && this.isBetweenCustomTradeTimes(index);;
         });
         sell = _.round(lows[findDayTradeSellIndex], 2);
       }
