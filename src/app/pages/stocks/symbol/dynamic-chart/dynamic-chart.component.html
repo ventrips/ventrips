@@ -3,10 +3,10 @@
         <div>
             {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
             <span *ngIf="canEdit">
-                <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success font-weight-bold mr-2">CALL Success</span>
-                <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger font-weight-bold mr-2">CALL Fail</span>
-                <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success font-weight-bold mr-2">PUT Success</span>
-                <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT Fail</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success font-weight-bold mr-2">CALL SUCCESS</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger font-weight-bold mr-2">CALL fail</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success font-weight-bold mr-2">PUT SUCCESS</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT FAIL</span>
             </span>
         </div>
         <div>{{date | date:'fullDate'}}</div>
