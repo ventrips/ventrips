@@ -123,6 +123,9 @@ export class SymbolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Comment out for local dev rules
+    this.tempDayTradeRules = JSON.parse(localStorage.getItem('ventrips_rules'));
+
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
     this.authService.user$.subscribe(user => this.user = user);
     this.activatedRoute.params
@@ -273,6 +276,7 @@ export class SymbolComponent implements OnInit {
 
   setDayTradeRules() {
     this.onCountDayTradeRuleReset();
+    localStorage.setItem('ventrips_rules', JSON.stringify(this.tempDayTradeRules));
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
   }
 
