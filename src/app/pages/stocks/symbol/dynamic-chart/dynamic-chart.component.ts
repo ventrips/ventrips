@@ -96,12 +96,6 @@ export class DynamicChartComponent implements OnInit {
     );
   }
 
-  lastRefreshedIsBeforeClose(): boolean {
-    const format = 'YYYY-MM-DD HH:mm:ss';
-    const lastRefreshedTimeZone = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone'])).format(format);
-    return moment(lastRefreshedTimeZone).isBefore((moment().set({h:16, m:0, s:0})).format(format));
-  }
-
   chartOptions(): void {
     const keys = ['volume', 'open', 'high', 'low', 'close'];
     _.forEach(keys, (key: any) => {
@@ -293,7 +287,7 @@ export class DynamicChartComponent implements OnInit {
       }
 
       // Order would have failed to fill today
-      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.lastRefreshedIsBeforeClose()) {
+      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
         this.dayTradeLogs.push(`Day Trade Rule Failed`);
