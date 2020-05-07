@@ -46,7 +46,7 @@ export class SymbolComponent implements OnInit {
     'CALL',
     'PUT'
   ];
-  public tempDayTradeRules = [
+  public localDayTradeRules = [
     /* 80% SAFE BUT FREQUENT FOR SPY */
     {
       option: 'CALL',
@@ -88,6 +88,7 @@ export class SymbolComponent implements OnInit {
     //   sell: 0.5,
     // }
   ];
+  public tempDayTradeRules = [];
   public dayTradeRules = [];
   public toggleEdit: boolean = false;
   public toggleDetails: boolean = false;
@@ -123,9 +124,6 @@ export class SymbolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Comment out for local dev rules
-    this.tempDayTradeRules = JSON.parse(localStorage.getItem('ventrips_rules'));
-
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
     this.authService.user$.subscribe(user => this.user = user);
     this.activatedRoute.params
@@ -141,15 +139,15 @@ export class SymbolComponent implements OnInit {
       this.init();
     });
     this.autoSaveSub$.pipe(
-      debounceTime(1000),
+      debounceTime(1500),
       distinctUntilChanged()
-    ).subscribe((value: string) => {
+    ).subscribe((value?: string) => {
       this.setDayTradeRules();
     });
   }
 
-  applyAutoSave(value: string) {
-    this.autoSaveSub$.next(value)
+  applyAutoSave(value?: string) {
+    this.autoSaveSub$.next(value);
   }
 
   init() {
@@ -175,6 +173,14 @@ export class SymbolComponent implements OnInit {
         this.lastRefreshed = moment.tz(_.get(this.metaData, ['lastRefreshed']), _.get(this.metaData, ['timeZone']));
         this.interval = _.get(this.metaData, ['interval']);
         this.yahooFinanceOpenPrice = _.get(this.yahooFinance, ['regularMarketPrice']) - _.get(this.yahooFinance, ['regularMarketChange']);
+
+        // Comment out for local dev rules
+        // this.tempDayTradeRules = _.cloneDeep(this.localDayTradeRules);
+        if (this.isPlatformBrowser()) {
+          const ventrips_symbol_rules = JSON.parse(localStorage.getItem(`ventrips_symbol_rules`));
+          const symbol_rules = _.get(ventrips_symbol_rules, [this.symbol], [{}]);
+          this.tempDayTradeRules = _.cloneDeep(symbol_rules);
+        }
 
         setTimeout(() => {
           this.setDayTradeRules();
@@ -216,21 +222,31 @@ export class SymbolComponent implements OnInit {
     if (!this.isPlatformBrowser()) {
       return;
     }
-    if (JSON.parse(localStorage.getItem(this.symbol))) {
+    if (_.get(JSON.parse(localStorage.getItem('ventrips_symbol_invalid')), [this.symbol])) {
       return;
     }
-    const format = 'YYYY-MM-DD HH:mm:ss';
-    const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
-    const today930am = (moment().tz('timeZone').set({h:9, m:30, s:0})).format(format);
-    const today4pm = (moment().tz('timeZone').set({h:16, m:0, s:0})).format(format);
     const isNew = _.isNil(lastRefreshed);
-    const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
-    const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
-    const isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
-    const timeIsAfterOpen = moment(moment().tz(timeZone).format(format)).isAfter(moment(today930am));
-    // const currentIsAfterOpen = moment().isAfter(today930am);
-    // const currentIsAfterClose = moment().isAfter(today4pm);
-    // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
+    let lastRefreshedTimeZone;
+    let today930am;
+    let today4pm;
+    let lastRefreshedIsBeforeClose;
+    let isWeekday;;
+    let isOver24Hours;
+    let timeIsAfterOpen;
+
+    if (!isNew) {
+      const format = 'YYYY-MM-DD HH:mm:ss';
+      const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
+      const today930am = (moment().tz('timeZone').set({h:9, m:30, s:0})).format(format);
+      const today4pm = (moment().tz('timeZone').set({h:16, m:0, s:0})).format(format);
+      const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
+      const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
+      const isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
+      const timeIsAfterOpen = moment(moment().tz(timeZone).format(format)).isAfter(moment(today930am));
+      // const currentIsAfterOpen = moment().isAfter(today930am);
+      // const currentIsAfterClose = moment().isAfter(today4pm);
+      // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
+    }
     if (
       isNew
       || isOver24Hours
@@ -238,7 +254,9 @@ export class SymbolComponent implements OnInit {
     ) {
       this.getData().subscribe(response => {}, (error) => {
         if (isNew) {
-          localStorage.setItem(this.symbol, JSON.stringify(true));
+          const symbol_invalid = {};
+          _.set(symbol_invalid, this.symbol, true);
+          localStorage.setItem('ventrips_symbol_invalid', JSON.stringify(symbol_invalid));
         }
       });
     }
@@ -276,7 +294,14 @@ export class SymbolComponent implements OnInit {
 
   setDayTradeRules() {
     this.onCountDayTradeRuleReset();
-    localStorage.setItem('ventrips_rules', JSON.stringify(this.tempDayTradeRules));
+    // Comment out for local dev rules
+    if (this.isPlatformBrowser()) {
+      const other_symbol_rules = JSON.parse(localStorage.getItem(`ventrips_symbol_rules`)) || {};
+      const symbol_rules = {}
+      _.set(symbol_rules, this.symbol, this.tempDayTradeRules);
+      const new_ventrips_symbol_rules = _.assign(other_symbol_rules, symbol_rules);
+      localStorage.setItem(`ventrips_symbol_rules`, JSON.stringify(new_ventrips_symbol_rules));
+    }
     this.dayTradeRules = _.cloneDeep(this.tempDayTradeRules);
   }
 

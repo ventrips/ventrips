@@ -66,7 +66,7 @@
                             </button>
                             <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
                                 <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="!_.isEqual(option, rule?.option)" [class.active]="_.isEqual(option, rule?.option)"
-                                    [disabled]="_.isEqual(option, rule?.option)" *ngFor="let option of dayTradeOptions" (click)="rule.option = option">
+                                    [disabled]="_.isEqual(option, rule?.option)" *ngFor="let option of dayTradeOptions" (click)="rule.option = option; setDayTradeRules()">
                                     {{option}}
                                 </button>
                             </div>
@@ -90,7 +90,7 @@
             </div>
             <button class="btn btn-outline-warning btn-sm btn-block mb-3" (click)="tempDayTradeRules.push({option: undefined, buy: undefined, sell: undefined})">Create Rule</button>
             <div *ngIf="authService?.canEdit(user)" class="p-3 bg-light text-dark rounded small">
-                <div class="mb-2" *ngIf="countDayTradeRuleWorks?.CALL?.total !== 0">
+                <div class="mb-2" *ngIf="countDayTradeRuleWorks.CALL.total !== 0">
                     <span class="font-weight-bold mr-1">CALL Success Rate:</span>
                     <span class="mr-1" *ngIf="countDayTradeRuleWorks">{{_.round((_.get(countDayTradeRuleWorks, ['CALL', 'success'], 0) / _.get(countDayTradeRuleWorks, ['CALL',
                         'total'], 0)) * 100, 2)}}%</span>
@@ -101,7 +101,7 @@
                     <span class="font-weight-bold mr-1">Attempts:</span>
                     <span class="mr-1">{{countDayTradeRuleWorks?.CALL.total}}</span>
                 </div>
-                <div class="mb-2" *ngIf="countDayTradeRuleWorks?.PUT?.total !== 0">
+                <div class="mb-2" *ngIf="countDayTradeRuleWorks.PUT.total !== 0">
                     <span class="font-weight-bold mr-1">PUT Success Rate:</span>
                     <span class="mr-1" *ngIf="countDayTradeRuleWorks">{{_.round((_.get(countDayTradeRuleWorks, ['PUT', 'success'], 0) / _.get(countDayTradeRuleWorks, ['PUT',
                         'total'], 0)) * 100, 2)}}%</span>
