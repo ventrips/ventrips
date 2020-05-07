@@ -17,8 +17,11 @@
     <url><loc>https://www.ventrips.com/calculator/split-bill</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/trends</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/symbol/AAL</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/AAPL</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/symbol/ALK</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/AMZN</loc><priority>0.5</priority></url>
+    <url><loc>https://www.ventrips.com/symbol/DAL</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/FB</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/MSFT</loc><priority>0.5</priority></url>
     <url><loc>https://www.ventrips.com/symbol/SPY</loc><priority>0.5</priority></url>
