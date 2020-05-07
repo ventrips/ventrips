@@ -179,11 +179,11 @@ export class SymbolComponent implements OnInit {
           const symbol_rules = _.get(ventrips_symbol_rules, [this.symbol], [{}]);
           // this.tempDayTradeRules = .cloneDeep(this.localDayTradeRules);
           this.tempDayTradeRules = _.cloneDeep(symbol_rules);
-
-          setTimeout(() => {
-            this.setDayTradeRules();
-          }, 0);
         }
+        // must be outside of platform browser
+        setTimeout(() => {
+          this.setDayTradeRules();
+        }, 0);
 
         // Set long name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
@@ -296,10 +296,6 @@ export class SymbolComponent implements OnInit {
   }
 
   setDayTradeRules() {
-    if (!this.authService.canEdit(this.user)) {
-      return;
-    }
-
     this.onCountDayTradeRuleReset();
     // Comment out for local dev rules
     if (this.isPlatformBrowser()) {
