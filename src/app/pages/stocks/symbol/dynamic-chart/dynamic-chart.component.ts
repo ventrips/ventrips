@@ -25,7 +25,10 @@ export class DynamicChartComponent implements OnInit {
     CALL: {},
     PUT: {}
   };
-  public dayTradeLogs: Array<string> = [];
+  public dayTradeLogs: any = {
+    CALL: [],
+    PUT: []
+  };
   public _ = _;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -189,8 +192,10 @@ export class DynamicChartComponent implements OnInit {
     //   }
     // );
     this.dayTradeRuleWorks = {};
-    this.dayTradeLogs = [];
-    this.dayTradeLogs.push(`Open Price @ ${this.open.price}`);
+    this.dayTradeLogs = {
+      CALL: [],
+      PUT: []
+    };
     _.forEach(this.dayTradeRules, (rule: object) => {
       const option = _.toUpper(_.get(rule, ['option']));
       if (!_.includes(['CALL', 'PUT'], option) || !_.isNumber(_.get(rule, ['buy'])) || !_.isNumber(_.get(rule, ['sell']))
@@ -226,7 +231,8 @@ export class DynamicChartComponent implements OnInit {
       }
 
       const buyLog = `Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
-      this.dayTradeLogs.push(buyLog);
+
+      this.dayTradeLogs[option].push(buyLog);
 
       this.lineChartOptions.annotation.annotations.push(
         {
@@ -246,7 +252,7 @@ export class DynamicChartComponent implements OnInit {
       );
 
       const sellLog = `Sell ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
-      this.dayTradeLogs.push(sellLog);
+      this.dayTradeLogs[option].push(sellLog);
       this.lineChartOptions.annotation.annotations.push(
         {
           drawTime: 'afterDatasetsDraw',
@@ -267,7 +273,7 @@ export class DynamicChartComponent implements OnInit {
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
         const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%)`;
-        this.dayTradeLogs.push(boughtLog);
+        this.dayTradeLogs[option].push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
           {
             drawTime: 'afterDatasetsDraw',
@@ -290,14 +296,14 @@ export class DynamicChartComponent implements OnInit {
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        this.dayTradeLogs.push(`Day Trade Rule Failed`);
+        this.dayTradeLogs[option].push(`${option} Day Trade Rule Failed`);
         return;
       }
 
       // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
         const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold ${option} @ ${sell} (${_.get(rule, ['sell'])}%)`;
-        this.dayTradeLogs.push(soldLog);
+        this.dayTradeLogs[option].push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
           {
             drawTime: 'afterDatasetsDraw',
@@ -316,7 +322,7 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
-        this.dayTradeLogs.push(`Day Trade Rule Succeeded`);
+        this.dayTradeLogs[option].push(`${option} Day Trade Rule Succeeded`);
       }
     });
   }

@@ -11,10 +11,22 @@
             <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT FAIL</span>
         </div>
     </h5>
-    <div class="p-2 small bg-warning font-weight-bold" *ngIf="canEdit && !_.isEmpty(dayTradeLogs)">
-        <p class="mb-0" *ngFor="let log of dayTradeLogs">
-            {{log}}
-        </p>
+    <div *ngIf="open?.price" class="p-2 bg-warning">
+        <h6 class="text-center mb-0">Open Price @ {{open?.price}}</h6>
+    </div>
+    <div class="row no-gutters" *ngIf="!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT)">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white">
+            <h6>CALL</h6>
+            <p class="mb-0" *ngFor="let call of dayTradeLogs.CALL">
+                {{call}}
+            </p>
+        </div>
+        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" [ngClass]="{'bg-success': dayTradeRuleWorks?.PUT?.success, 'bg-danger': dayTradeRuleWorks?.PUT?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.PUT?.success && !dayTradeRuleWorks?.PUT?.fail }" class="col-xs-12 col p-2 text-white">
+            <h6>PUT</h6>
+            <p class="mb-0" *ngFor="let put of dayTradeLogs.PUT">
+                {{put}}
+            </p>
+        </div>
     </div>
     <div class="flex">
         <div class="flex-item">
