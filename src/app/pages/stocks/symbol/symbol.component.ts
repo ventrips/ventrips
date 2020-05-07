@@ -48,16 +48,16 @@ export class SymbolComponent implements OnInit {
   ];
   public localDayTradeRules = [
     /* 80% SAFE BUT FREQUENT FOR SPY */
-    {
-      option: 'CALL',
-      buy: -.12,
-      sell: 0.03,
-    },
-    {
-      option: 'PUT',
-      buy: .11,
-      sell: -.17
-    }
+    // {
+    //   option: 'CALL',
+    //   buy: -.12,
+    //   sell: 0.03,
+    // },
+    // {
+    //   option: 'PUT',
+    //   buy: .11,
+    //   sell: -.17
+    // }
     /* 100% SAFE BUT RARE FOR SPY */
     // {
     //   option: 'CALL',
@@ -174,17 +174,17 @@ export class SymbolComponent implements OnInit {
         this.interval = _.get(this.metaData, ['interval']);
         this.yahooFinanceOpenPrice = _.get(this.yahooFinance, ['regularMarketPrice']) - _.get(this.yahooFinance, ['regularMarketChange']);
 
-        // Comment out for local dev rules
-        // this.tempDayTradeRules = _.cloneDeep(this.localDayTradeRules);
         if (this.isPlatformBrowser()) {
           const ventrips_symbol_rules = JSON.parse(localStorage.getItem(`ventrips_symbol_rules`));
           const symbol_rules = _.get(ventrips_symbol_rules, [this.symbol], [{}]);
+          // this.tempDayTradeRules = .cloneDeep(this.localDayTradeRules);
           this.tempDayTradeRules = _.cloneDeep(symbol_rules);
+
+          setTimeout(() => {
+            this.setDayTradeRules();
+          }, 0);
         }
 
-        setTimeout(() => {
-          this.setDayTradeRules();
-        }, 0);
         // Set long name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
         if (longName) {
@@ -233,19 +233,22 @@ export class SymbolComponent implements OnInit {
     let isWeekday;;
     let isOver24Hours;
     let timeIsAfterOpen;
+    let currentIsAfterOpen;
+    let currentIsAfterClose;
+    let isBetweenMarketTime;
 
     if (!isNew) {
       const format = 'YYYY-MM-DD HH:mm:ss';
-      const lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
-      const today930am = (moment().tz('timeZone').set({h:9, m:30, s:0})).format(format);
-      const today4pm = (moment().tz('timeZone').set({h:16, m:0, s:0})).format(format);
-      const lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
-      const isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
-      const isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
-      const timeIsAfterOpen = moment(moment().tz(timeZone).format(format)).isAfter(moment(today930am));
-      // const currentIsAfterOpen = moment().isAfter(today930am);
-      // const currentIsAfterClose = moment().isAfter(today4pm);
-      // const isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
+      lastRefreshedTimeZone = moment.tz(lastRefreshed, timeZone).format(format);
+      today930am = (moment().tz('timeZone').set({h:9, m:30, s:0})).format(format);
+      today4pm = (moment().tz('timeZone').set({h:16, m:0, s:0})).format(format);
+      lastRefreshedIsBeforeClose = moment(lastRefreshedTimeZone).isBefore(today4pm);
+      isWeekday = !_.includes(['Saturday', 'Sunday'], moment().format('dddd'));
+      isOver24Hours = (moment().diff(moment(lastRefreshedTimeZone), 'days') > 0) && (moment().diff(moment(this.updated.toDate()), 'days') > 0);
+      timeIsAfterOpen = moment(moment().tz(timeZone).format(format)).isAfter(moment(today930am));
+      // currentIsAfterOpen = moment().isAfter(today930am);
+      // currentIsAfterClose = moment().isAfter(today4pm);
+      // isBetweenMarketTime = moment(lastRefreshedTimeZone).isBetween(moment(today930am).format(format), moment(today4pm).format(format),  null, '[]');
     }
     if (
       isNew
@@ -293,6 +296,10 @@ export class SymbolComponent implements OnInit {
   }
 
   setDayTradeRules() {
+    if (!this.authService.canEdit(this.user)) {
+      return;
+    }
+
     this.onCountDayTradeRuleReset();
     // Comment out for local dev rules
     if (this.isPlatformBrowser()) {
