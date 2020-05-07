@@ -59,7 +59,7 @@
             <div class="form-row">
                 <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeOption-{{index}}">Option Trading Type</label>
+                        <label for="dayTradeOption-{{index}}">Option Type</label>
                         <div ngbDropdown class="d-block">
                             <button class="btn btn-sm btn-block btn-warning" id="dayTradeOption-{{index}}" title="Day Trade Option" ngbDropdownToggle>
                                 {{ rule?.option ? rule?.option : 'CALL / PUT' }}
@@ -83,7 +83,7 @@
                             placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeRemove-{{index}}">Remove Day Trade Rule</label>
+                        <label for="dayTradeRemove-{{index}}">Remove Rule</label>
                         <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
                     </div>
                 </ng-container>
