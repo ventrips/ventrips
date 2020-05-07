@@ -48,16 +48,16 @@ export class SymbolComponent implements OnInit {
   ];
   public tempDayTradeRules = [
     /* 80% SAFE BUT FREQUENT FOR SPY */
-    // {
-    //   option: 'CALL',
-    //   buy: -.12,
-    //   sell: 0.03,
-    // },
-    // {
-    //   option: 'PUT',
-    //   buy: .11,
-    //   sell: -.17
-    // }
+    {
+      option: 'CALL',
+      buy: -.12,
+      sell: 0.03,
+    },
+    {
+      option: 'PUT',
+      buy: .11,
+      sell: -.17
+    }
     /* 100% SAFE BUT RARE FOR SPY */
     // {
     //   option: 'CALL',
@@ -76,11 +76,11 @@ export class SymbolComponent implements OnInit {
     //   sell: -3,
     // }
     /* 90% SAFE BUT FREQUENT FOR SPXL */
-    {
-      option: 'CALL',
-      buy: -.74,
-      sell: 0.02,
-    }
+    // {
+    //   option: 'CALL',
+    //   buy: -.74,
+    //   sell: 0.02,
+    // }
     /* 90% SAFE BUT FREQUENT FOR SPXS */
     // {
     //   option: 'CALL',
@@ -138,10 +138,9 @@ export class SymbolComponent implements OnInit {
       this.init();
     });
     this.autoSaveSub$.pipe(
-      debounceTime(3000),
+      debounceTime(1000),
       distinctUntilChanged()
     ).subscribe((value: string) => {
-      console.log(value);
       this.setDayTradeRules();
     });
   }
