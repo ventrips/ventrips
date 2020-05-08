@@ -322,7 +322,7 @@ export class DynamicChartComponent implements OnInit {
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
         const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
         const profitSharePercentageRange = Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell']));
-        this.dayTradeLogs[option].push(`Profit of ${profitShareRange}/share (${profitSharePercentageRange}%)`);
+        this.dayTradeLogs[option].push(`Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
         const buyingPower = 1000;
         const shares = Math.floor(buyingPower / dayTradeBuy);
         const totalProfit = _.round(profitShareRange * shares, 2);
