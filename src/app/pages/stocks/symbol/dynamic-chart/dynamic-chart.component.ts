@@ -230,10 +230,7 @@ export class DynamicChartComponent implements OnInit {
         sell = _.round(lows[findDayTradeSellIndex], 2);
       }
 
-      const buyLog = `Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
-
-      this.dayTradeLogs[option].push(buyLog);
-
+      const buyLog = `Buy @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
       this.lineChartOptions.annotation.annotations.push(
         {
           drawTime: 'afterDatasetsDraw',
@@ -251,8 +248,7 @@ export class DynamicChartComponent implements OnInit {
         }
       );
 
-      const sellLog = `Sell ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
-      this.dayTradeLogs[option].push(sellLog);
+      const sellLog = `Sell @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
       this.lineChartOptions.annotation.annotations.push(
         {
           drawTime: 'afterDatasetsDraw',
@@ -270,9 +266,11 @@ export class DynamicChartComponent implements OnInit {
         }
       );
 
+      this.dayTradeLogs[option].push(`${buyLog} | ${sellLog}`);
+
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
-        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought ${option} @ ${buy} (${_.get(rule, ['buy'])}%)`;
+        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought @ ${buy} (${_.get(rule, ['buy'])}%)`;
         this.dayTradeLogs[option].push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -296,13 +294,13 @@ export class DynamicChartComponent implements OnInit {
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        this.dayTradeLogs[option].push(`${option} Day Trade Rule Failed`);
+        this.dayTradeLogs[option].push(`${option} Rule Failed`);
         return;
       }
 
       // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
-        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold ${option} @ ${sell} (${_.get(rule, ['sell'])}%)`;
+        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold @ ${sell} (${_.get(rule, ['sell'])}%)`;
         this.dayTradeLogs[option].push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -322,7 +320,13 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
-        this.dayTradeLogs[option].push(`${option} Day Trade Rule Succeeded`);
+        const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
+        const profitSharePercentageRange = Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell']));
+        this.dayTradeLogs[option].push(`Profit of ${profitShareRange}/share (${profitSharePercentageRange}%)`);
+        const buyingPower = 1000;
+        const shares = Math.floor(buyingPower / dayTradeBuy);
+        const totalProfit = _.round(profitShareRange * shares, 2);
+        this.dayTradeLogs[option].push(`If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
     });
   }
