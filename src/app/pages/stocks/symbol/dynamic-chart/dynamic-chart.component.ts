@@ -172,7 +172,8 @@ export class DynamicChartComponent implements OnInit {
   annotateDayTradeRules(
     opens: Array<number>,
     lows: Array<number>,
-    highs: Array<number>
+    highs: Array<number>,
+    closes: Array<number>
   ) {
     // 8:00AM
     // this.lineChartOptions.annotation.annotations.push(
@@ -290,11 +291,18 @@ export class DynamicChartComponent implements OnInit {
         );
       }
 
+      const buyingPower = 1000;
+
       // Order would have failed to fill today
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        this.dayTradeLogs[option].push(`${option} Rule Failed`);
+        const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - buy), 2);
+        const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(buy / closes[closes.length - 1]), 2);
+        this.dayTradeLogs[option].push(`Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
+        const shares = Math.floor(buyingPower / buy);
+        const totalLoss= _.round(lossShareRange * shares, 2);
+        this.dayTradeLogs[option].push(`If you invested -$${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
         return;
       }
 
@@ -320,11 +328,10 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
-        const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
+        const profitShareRange = _.round(Math.abs(sell - buy), 2);
         const profitSharePercentageRange = Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell']));
         this.dayTradeLogs[option].push(`Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
-        const buyingPower = 1000;
-        const shares = Math.floor(buyingPower / dayTradeBuy);
+        const shares = Math.floor(buyingPower / buy);
         const totalProfit = _.round(profitShareRange * shares, 2);
         this.dayTradeLogs[option].push(`If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
@@ -374,11 +381,11 @@ export class DynamicChartComponent implements OnInit {
     });
   }
 
-  annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>): void {
+  annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>, closes: Array<number>): void {
     this.annotateOpenPrice(opens);
     if (this.canEdit) {
       this.annotateOpenPricesReached(opens, lows, highs);
-      this.annotateDayTradeRules(opens, lows, highs);
+      this.annotateDayTradeRules(opens, lows, highs, closes);
     }
   }
 
@@ -387,6 +394,7 @@ export class DynamicChartComponent implements OnInit {
     const lows: Array<any> = _.get(this.data, ['low']);
     const highs: Array<any> = _.get(this.data, ['high']);
     const volumes: Array<any> = _.get(this.data, ['volume']);
+    const closes: Array<any> = _.get(this.data, ['close']);
     this.open.price = _.get(opens, [0]);
     // TODO: Fix API for opening because it takes in overall day lows/highs
     this.data.low[0] = this.data.open[0];
@@ -405,7 +413,7 @@ export class DynamicChartComponent implements OnInit {
       return moment.tz(date, _.get(this.metaData, ['timeZone'])).local().format('LLL');
     });
     this.chartOptions();
-    this.annotateChart(opens, lows, highs);
+    this.annotateChart(opens, lows, highs, closes);
   }
 
   // events
