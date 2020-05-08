@@ -50,7 +50,9 @@ const getTravelNumbers = async function(useMock: boolean = false): Promise<any> 
                     currentYearTravelNumbers: _.replace($(this).find('td:nth-child(2)').text(), /,/g, ''),
                     previousYearTravelNumbers: _.replace($(this).find('td:nth-child(3)').text(), /,/g, '')
                 }
-                data.push(obj);
+                if (!_.isEmpty(_.get(obj, ['date']))) {
+                    data.push(obj);
+                }
             });
             // Process html like you would with jQuery...
 
