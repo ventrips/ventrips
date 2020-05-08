@@ -20,6 +20,7 @@
         <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
             <h6 class="text-uppercase">Call
                 <span *ngIf="dayTradeRuleWorks?.CALL?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success && dayTradeRuleWorks?.CALL?.fail" class="mx-2">&amp;</span>
                 <span *ngIf="dayTradeRuleWorks?.CALL?.fail">Fail</span>
             </h6>
             <p class="mb-0" *ngFor="let call of dayTradeLogs.CALL">
@@ -30,6 +31,7 @@
             <h6 class="text-uppercase">
                 Put
                 <span *ngIf="dayTradeRuleWorks?.PUT?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success && dayTradeRuleWorks?.PUT?.fail" class="mx-2">&amp;</span>
                 <span *ngIf="dayTradeRuleWorks?.PUT?.fail">Fail</span>
             </h6>
             <p class="mb-0" *ngFor="let put of dayTradeLogs.PUT">
