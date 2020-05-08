@@ -30,12 +30,14 @@
           </ng-container>
         </div>
       </li> -->
-      <li [ngClass]="{'active': isActive('trends')}" class="nav-item">
-        <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
-          Trends
-          <span *ngIf="isActive('trends')" class="sr-only">(current)</span>
-        </a>
-      </li>
+      <ng-container *ngIf="authService?.canEdit(user)">
+        <li [ngClass]="{'active': isActive('trends')}" class="nav-item">
+          <a [routerLink]="['', 'trends']" [title]="'Trends'" class="nav-link">
+            Trends
+            <span *ngIf="isActive('trends')" class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ng-container>
       <li class="nav-item">
         <a [routerLink]="['calculator', 'split-bill']" [ngClass]="{'active': isActive('calculator/split-bill')}" class="nav-link" title="Split Bill Calculator">
           Split Bill Calculator
