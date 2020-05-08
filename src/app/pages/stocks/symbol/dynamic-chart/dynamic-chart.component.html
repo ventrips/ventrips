@@ -1,28 +1,37 @@
 <section class="mb-5 bg-white">
-    <h5 class="text-capitalize text-center mb-0 p-3 text-wrap">
-        <div>
+    <div class="text-center my-3">
+        <h5 class="text-uppercase text-wrap">
             {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
+        </h5>
+        <h6 class="text-uppercase">{{date | date:'fullDate'}}</h6>
+        <div *ngIf="!_.isNil(_.get(data, ['bullish']))" class="mb-2">
+            <span *ngIf="_.get(data, ['bullish'])" class="badge badge-success font-weight-bold text-uppercase">
+                Bullish
+            </span>
+            <span *ngIf="!_.get(data, ['bullish'])" class="badge badge-danger font-weight-bold text-uppercase">
+                Bearish
+            </span>
         </div>
-        <div>{{date | date:'fullDate'}}</div>
-        <div *ngIf="canEdit">
-            <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success font-weight-bold mr-2">CALL SUCCESS</span>
-            <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger font-weight-bold mr-2">CALL FAIL</span>
-            <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success font-weight-bold mr-2">PUT SUCCESS</span>
-            <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger font-weight-bold mr-2">PUT FAIL</span>
-        </div>
-    </h5>
+    </div>
     <div *ngIf="open?.price" class="p-2 bg-warning">
         <h6 class="text-center mb-0">Open Price @ {{open?.price}}</h6>
     </div>
-    <div class="row no-gutters" *ngIf="!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT)">
-        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white">
-            <h6>CALL</h6>
+    <div class="row no-gutters small" *ngIf="!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT)">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
+            <h6 class="text-uppercase">Call
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.fail">Fail</span>
+            </h6>
             <p class="mb-0" *ngFor="let call of dayTradeLogs.CALL">
                 {{call}}
             </p>
         </div>
-        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" [ngClass]="{'bg-success': dayTradeRuleWorks?.PUT?.success, 'bg-danger': dayTradeRuleWorks?.PUT?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.PUT?.success && !dayTradeRuleWorks?.PUT?.fail }" class="col-xs-12 col p-2 text-white">
-            <h6>PUT</h6>
+        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" [ngClass]="{'bg-success': dayTradeRuleWorks?.PUT?.success, 'bg-danger': dayTradeRuleWorks?.PUT?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.PUT?.success && !dayTradeRuleWorks?.PUT?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
+            <h6 class="text-uppercase">
+                Put
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.fail">Fail</span>
+            </h6>
             <p class="mb-0" *ngFor="let put of dayTradeLogs.PUT">
                 {{put}}
             </p>
