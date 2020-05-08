@@ -16,7 +16,7 @@
     <div *ngIf="open?.price" class="p-2 bg-warning">
         <h6 class="text-center mb-0">Open Price @ {{open?.price}}</h6>
     </div>
-    <div class="row no-gutters small" *ngIf="!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT)">
+    <div class="row no-gutters small" *ngIf="canEdit && (!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT))">
         <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
             <h6 class="text-uppercase">Call
                 <span *ngIf="dayTradeRuleWorks?.CALL?.success">Success</span>
