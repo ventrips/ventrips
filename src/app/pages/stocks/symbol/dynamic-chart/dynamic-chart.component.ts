@@ -302,7 +302,7 @@ export class DynamicChartComponent implements OnInit {
         this.dayTradeLogs[option].push(`Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
         const shares = Math.floor(buyingPower / buy);
         const totalLoss= _.round(lossShareRange * shares, 2);
-        this.dayTradeLogs[option].push(`If you invested -$${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
+        this.dayTradeLogs[option].push(`If you invested $${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
         return;
       }
 
