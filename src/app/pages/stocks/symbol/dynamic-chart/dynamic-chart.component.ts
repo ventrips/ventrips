@@ -93,10 +93,7 @@ export class DynamicChartComponent implements OnInit {
     const now = moment(this.lineChartLabels[index]);
     const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
     const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local();
-    return moment(now).isBetween(
-      moment(dayOpen),
-      moment(dayClose)
-    );
+    return moment(now).isSameOrAfter(dayOpen) && moment(now).isSameOrBefore(dayClose);
   }
 
   chartOptions(): void {
