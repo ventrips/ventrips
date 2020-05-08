@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 const db = admin.firestore();
 // const Sentiment = require('sentiment');
-// const isBullish = require('is-bullish');
+const isBullish = require('is-bullish');
 import { cors, commonRequest } from './utils';
 import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 
@@ -56,8 +56,10 @@ const convertChartData = (intraData: any, dayData: any, interval: string) => {
             high: _.map(value, (item: any) => _.toNumber(item['2. high'])),
             low: _.map(value, (item: any) => _.toNumber(item['3. low'])),
             close: _.map(value, (item: any) => _.toNumber(item['4. close'])),
-            volume: _.map(value, (item: any) => _.toNumber(item['5. volume']))
+            volume: _.map(value, (item: any) => _.toNumber(item['5. volume'])),
         }
+        _.set(chartDatum, 'bullish', isBullish(_.get(chartDatum, ['open'])));
+
         _.set(chartData, key, chartDatum);
     });
 
@@ -83,14 +85,14 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
     let intraData;
     let dayData;
 
-    try {
-        /* Mock */
-        // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
-        // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
-        // data = convertChartData(intraData, dayData, interval);
-        // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
+    /* Mock */
+    // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
+    // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
+    // data = convertChartData(intraData, dayData, interval);
+    // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
 
-        /* Real */
+    /* Real */
+    try {
         intraData = await commonRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'}, BASE_URL, API_KEY);
         dayData = await commonRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'}, BASE_URL, API_KEY);
         const yahooFinanceData: any = await getSingleYahooFinanceAPI(symbol);
