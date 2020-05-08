@@ -271,7 +271,7 @@ export class DynamicChartComponent implements OnInit {
 
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
-        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought @ ${buy} (${_.get(rule, ['buy'])}%)`;
+        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
         this.dayTradeLogs[option].push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -297,10 +297,10 @@ export class DynamicChartComponent implements OnInit {
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
-        const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - buy), 2);
-        const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(buy / closes[closes.length - 1]), 2);
+        const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - dayTradeBuy), 2);
+        const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(dayTradeBuy / closes[closes.length - 1]), 2);
         this.dayTradeLogs[option].push(`Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
-        const shares = Math.floor(buyingPower / buy);
+        const shares = Math.floor(buyingPower / dayTradeBuy);
         const totalLoss= _.round(lossShareRange * shares, 2);
         this.dayTradeLogs[option].push(`If you invested $${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
         return;
@@ -308,7 +308,7 @@ export class DynamicChartComponent implements OnInit {
 
       // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
-        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold @ ${sell} (${_.get(rule, ['sell'])}%)`;
+        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
         this.dayTradeLogs[option].push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -328,10 +328,10 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
-        const profitShareRange = _.round(Math.abs(sell - buy), 2);
+        const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
         const profitSharePercentageRange = Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell']));
         this.dayTradeLogs[option].push(`Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
-        const shares = Math.floor(buyingPower / buy);
+        const shares = Math.floor(buyingPower / dayTradeBuy);
         const totalProfit = _.round(profitShareRange * shares, 2);
         this.dayTradeLogs[option].push(`If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
