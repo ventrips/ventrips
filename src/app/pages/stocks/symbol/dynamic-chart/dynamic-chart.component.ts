@@ -448,12 +448,6 @@ export class DynamicChartComponent implements OnInit {
     this.data.high[0] = this.data.open[0];
     this.data.close[0] = this.data.open[0];
     this.data.volume[0] = this.data.volume[1];
-    // this.open.low = _.get(lows, [0]);
-    // this.open.high = _.get(highs, [0]);
-    // this.open.openToLow = -_.round(this.open.price / this.open.low, 2);
-    // this.open.openToHigh = _.round(this.open.price / this.open.high, 2);
-    // this.open.lowToHigh = _.round(Math.abs(this.open.low - this.open.high), 2);
-    // this.open.volume = _.get(volumes, [0]);
 
     this.lineChartData = [];
     this.lineChartLabels = _.map(_.get(this.data, ['date']), (date: any) => {
