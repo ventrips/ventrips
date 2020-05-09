@@ -64,6 +64,38 @@ export class DynamicChartComponent implements OnInit {
       borderWidth: 2
     }
   ];
+  public dayTradeColors: Color[] = [
+    {
+      backgroundColor: 'rgba(26, 188, 156, 0.5)',
+      borderColor: 'rgba(26, 188, 156, 1.0)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(155, 89, 182, 0.5)',
+      borderColor: 'rgba(155, 89, 182, 1.0)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(230, 126, 34, 0.6)',
+      borderColor: 'rgba(230, 126, 34, 1.0)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(231, 76, 60, 0.5)',
+      borderColor: 'rgba(231, 76, 60,1.0)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(52, 152, 219, 0.5)',
+      borderColor: 'rgba(52, 152, 219, 1.0)',
+      borderWidth: 5
+    },
+    {
+      backgroundColor: 'rgba(241, 196, 15, 0.5)',
+      borderColor: 'rgba(241, 196, 15, 1.0)',
+      borderWidth: 5
+    }
+  ];
   public lineChartOptions: (ChartOptions & { annotation: any }) = { annotation: {} };
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -230,61 +262,63 @@ export class DynamicChartComponent implements OnInit {
 
       const buyLog = `[${index + 1}] Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
       this.lineChartOptions.annotation.annotations.push(
-        {
-          drawTime: 'afterDatasetsDraw',
-          type: "line",
-          mode: "horizontal",
-          scaleID: "y-axis-2",
-          value: dayTradeBuy,
-          borderColor: 'green',
-          borderWidth: 5,
-          label: {
-            content: buyLog,
-            enabled: true,
-            position: "top"
-          }
-        }
+        _.assign(
+          {
+            drawTime: 'afterDatasetsDraw',
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y-axis-2",
+            value: dayTradeBuy,
+            label: {
+              content: buyLog,
+              enabled: true,
+              position: "top"
+            }
+          },
+          this.dayTradeColors[index]
+        )
       );
 
       const sellLog = `[${index + 1}] Sell ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
-      this.lineChartOptions.annotation.annotations.push(
-        {
-          drawTime: 'afterDatasetsDraw',
-          type: "line",
-          mode: "horizontal",
-          scaleID: "y-axis-2",
-          value: dayTradeSell,
-          borderColor: 'red',
-          borderWidth: 5,
-          label: {
-            content: sellLog,
-            enabled: true,
-            position: "top"
-          }
-        }
-      );
-
       this.dayTradeLogs[option].push(`${buyLog} | ${sellLog}`);
+      this.lineChartOptions.annotation.annotations.push(
+        _.assign(
+            {
+            drawTime: 'afterDatasetsDraw',
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y-axis-2",
+            value: dayTradeSell,
+            label: {
+              content: sellLog,
+              enabled: true,
+              position: "top"
+            }
+          },
+          this.dayTradeColors[index]
+       )
+      );
 
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
         const boughtLog = `[${index + 1}] Bought ${option} for ${dayTradeBuy} (${_.get(rule, ['buy'])}%) @ ${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}`;
         this.dayTradeLogs[option].push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
-          {
-            drawTime: 'afterDatasetsDraw',
-            type: "line",
-            mode: "vertical",
-            scaleID: "x-axis-0",
-            value: this.lineChartLabels[findDayTradeBuyIndex],
-            borderColor: "green",
-            borderWidth: 5,
-            label: {
-              content: boughtLog,
-              enabled: true,
-              position: "top"
-            }
-          }
+          _.assign(
+            {
+              drawTime: 'afterDatasetsDraw',
+              type: "line",
+              mode: "vertical",
+              scaleID: "x-axis-0",
+              value: this.lineChartLabels[findDayTradeBuyIndex],
+              label: {
+                content: boughtLog,
+                enabled: true,
+                position: 'top'
+              }
+            },
+            this.dayTradeColors[index]
+          )
         );
       }
 
@@ -308,20 +342,36 @@ export class DynamicChartComponent implements OnInit {
         const soldLog = `[${index + 1}] Sold ${option} for ${dayTradeSell} (${_.get(rule, ['sell'])}%) @ ${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}`;
         this.dayTradeLogs[option].push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
-          {
-            drawTime: 'afterDatasetsDraw',
-            type: "line",
-            mode: "vertical",
-            scaleID: "x-axis-0",
-            value: this.lineChartLabels[findDayTradeSellIndex],
-            borderColor: "red",
-            borderWidth: 5,
-            label: {
-              content: soldLog,
-              enabled: true,
-              position: "bottom"
-            }
-          }
+          _.assign(
+            {
+              drawTime: 'afterDatasetsDraw',
+              type: "line",
+              mode: "vertical",
+              scaleID: "x-axis-0",
+              value: this.lineChartLabels[findDayTradeSellIndex],
+              label: {
+                content: soldLog,
+                enabled: true,
+                position: 'bottom'
+              }
+            },
+            this.dayTradeColors[index]
+          )
+        );
+        this.lineChartOptions.annotation.annotations.push(
+          _.assign(
+            {
+              drawTime: 'afterDatasetsDraw',
+              type: 'box',
+              xScaleID: 'x-axis-0',
+              xMin:  this.lineChartLabels[findDayTradeBuyIndex],
+              xMax: this.lineChartLabels[findDayTradeSellIndex],
+              yScaleID: 'y-axis-2',
+              yMin:  buy,
+              yMax: sell
+            },
+            this.dayTradeColors[index]
+          )
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
