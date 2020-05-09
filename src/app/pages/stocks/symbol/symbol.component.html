@@ -59,7 +59,7 @@
             <div class="form-row">
                 <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeOption-{{index}}">Option Type</label>
+                        <label for="dayTradeOption-{{index}}">[{{index + 1}}] Option Type</label>
                         <div ngbDropdown class="d-block">
                             <button class="btn btn-sm btn-block btn-warning" id="dayTradeOption-{{index}}" title="Day Trade Option" ngbDropdownToggle>
                                 {{ rule?.option ? rule?.option : 'CALL / PUT' }}
@@ -73,17 +73,17 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="dayTradeBuy-{{index}}">Buy from Open Price ({{rule?.buy}}%)</label>
+                        <label for="dayTradeBuy-{{index}}">[{{index + 1}}] Buy from Open Price ({{rule?.buy}}%)</label>
                         <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy"
                             placeholder="Day Trade Buy" [(ngModel)]="rule.buy" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="dayTradeSell-{{index}}">Sell from Open Price ({{rule?.sell}}%)</label>
+                        <label for="dayTradeSell-{{index}}">[{{index + 1}}] Sell from Open Price ({{rule?.sell}}%)</label>
                         <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell"
                             placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeRemove-{{index}}">Remove Rule</label>
+                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Remove Rule</label>
                         <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
                     </div>
                 </ng-container>
