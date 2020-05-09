@@ -17,22 +17,22 @@
         <h6 class="text-center mb-0">Open Price @ {{open?.price}}</h6>
     </div>
     <div class="row no-gutters small" *ngIf="canEdit && (!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT))">
-        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" [ngClass]="{'bg-success': dayTradeRuleWorks?.CALL?.success, 'bg-danger': dayTradeRuleWorks?.CALL?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.CALL?.success && !dayTradeRuleWorks?.CALL?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" class="col-xs-12 col p-2 border border-warning">
             <h6 class="text-uppercase">Call
-                <span *ngIf="dayTradeRuleWorks?.CALL?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success p-2">Success</span>
                 <span *ngIf="dayTradeRuleWorks?.CALL?.success && dayTradeRuleWorks?.CALL?.fail" class="mx-2">&amp;</span>
-                <span *ngIf="dayTradeRuleWorks?.CALL?.fail">Fail</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger p-2">Fail</span>
             </h6>
             <p class="mb-0" *ngFor="let call of dayTradeLogs.CALL">
                 {{call}}
             </p>
         </div>
-        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" [ngClass]="{'bg-success': dayTradeRuleWorks?.PUT?.success, 'bg-danger': dayTradeRuleWorks?.PUT?.fail, 'text-dark bg-warning': !dayTradeRuleWorks?.PUT?.success && !dayTradeRuleWorks?.PUT?.fail }" class="col-xs-12 col p-2 text-white border border-warning">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" class="col-xs-12 col p-2 text-white border border-warning">
             <h6 class="text-uppercase">
                 Put
-                <span *ngIf="dayTradeRuleWorks?.PUT?.success">Success</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success p-2">Success</span>
                 <span *ngIf="dayTradeRuleWorks?.PUT?.success && dayTradeRuleWorks?.PUT?.fail" class="mx-2">&amp;</span>
-                <span *ngIf="dayTradeRuleWorks?.PUT?.fail">Fail</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger p-2">Fail</span>
             </h6>
             <p class="mb-0" *ngFor="let put of dayTradeLogs.PUT">
                 {{put}}

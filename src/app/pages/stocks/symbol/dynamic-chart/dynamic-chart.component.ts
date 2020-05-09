@@ -228,7 +228,7 @@ export class DynamicChartComponent implements OnInit {
         sell = _.round(lows[findDayTradeSellIndex], 2);
       }
 
-      const buyLog = `Buy @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
+      const buyLog = `Buy ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
       this.lineChartOptions.annotation.annotations.push(
         {
           drawTime: 'afterDatasetsDraw',
@@ -246,7 +246,7 @@ export class DynamicChartComponent implements OnInit {
         }
       );
 
-      const sellLog = `Sell @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
+      const sellLog = `Sell ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
       this.lineChartOptions.annotation.annotations.push(
         {
           drawTime: 'afterDatasetsDraw',
@@ -268,7 +268,7 @@ export class DynamicChartComponent implements OnInit {
 
       // set bought point always if exists
       if (findDayTradeBuyIndex > -1) {
-        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
+        const boughtLog = `[${moment(this.lineChartLabels[findDayTradeBuyIndex]).format('hh:mm:ss A')}] Bought ${option} @ ${dayTradeBuy} (${_.get(rule, ['buy'])}%)`;
         this.dayTradeLogs[option].push(boughtLog);
         this.lineChartOptions.annotation.annotations.push(
           {
@@ -305,7 +305,7 @@ export class DynamicChartComponent implements OnInit {
 
       // Order succeeded
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex > -1) && (findDayTradeSellIndex > findDayTradeBuyIndex)) {
-        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
+        const soldLog = `[${moment(this.lineChartLabels[findDayTradeSellIndex]).format('hh:mm:ss A')}] Sold ${option} @ ${dayTradeSell} (${_.get(rule, ['sell'])}%)`;
         this.dayTradeLogs[option].push(soldLog);
         this.lineChartOptions.annotation.annotations.push(
           {
