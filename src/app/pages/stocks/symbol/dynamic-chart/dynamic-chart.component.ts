@@ -327,7 +327,6 @@ export class DynamicChartComponent implements OnInit {
       // Order would have failed to fill today
       if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
-        this.onCountDayTradeRuleWorks.emit({option, status: 'fail'});
         const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - dayTradeBuy), 2);
         const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(dayTradeBuy / closes[closes.length - 1]), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
@@ -374,7 +373,6 @@ export class DynamicChartComponent implements OnInit {
           )
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
-        this.onCountDayTradeRuleWorks.emit({option, status: 'success'});
         const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
         const profitSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell'])), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
@@ -383,6 +381,22 @@ export class DynamicChartComponent implements OnInit {
         this.dayTradeLogs[option].push(`[${index + 1}] If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
     });
+
+    // Hackish way to ignore any fails if there is at least one success with one of the options
+
+    if (!_.isNil(_.get(this.dayTradeRuleWorks, ['CALL', 'success'])) && _.get(this.dayTradeRuleWorks, ['CALL', 'success'])) {
+      _.set(this.dayTradeRuleWorks, ['CALL', 'fail'], undefined);
+      this.onCountDayTradeRuleWorks.emit({option: 'CALL', status: 'success'});
+    } else if (!_.isNil(_.get(this.dayTradeRuleWorks, ['CALL', 'fail'])) && _.get(this.dayTradeRuleWorks, ['CALL', 'fail'])) {
+      this.onCountDayTradeRuleWorks.emit({option: 'CALL', status: 'fail'});
+    }
+
+    if (!_.isNil(_.get(this.dayTradeRuleWorks, ['PUT', 'success'])) && _.get(this.dayTradeRuleWorks, ['PUT', 'success'])) {
+      _.set(this.dayTradeRuleWorks, ['PUT', 'fail'], undefined);
+      this.onCountDayTradeRuleWorks.emit({option: 'PUT', status: 'success'});
+    } else if (!_.isNil(_.get(this.dayTradeRuleWorks, ['PUT', 'fail'])) && _.get(this.dayTradeRuleWorks, ['PUT', 'fail'])) {
+      this.onCountDayTradeRuleWorks.emit({option: 'PUT', status: 'fail'});
+    }
   }
 
   annotateOpenPrice(

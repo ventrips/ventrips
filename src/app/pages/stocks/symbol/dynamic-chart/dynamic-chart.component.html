@@ -27,7 +27,7 @@
                 {{call}}
             </p>
         </div>
-        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" class="col-xs-12 col p-2 text-white border border-warning">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" class="col-xs-12 col p-2 border border-warning">
             <h6 class="text-uppercase">
                 <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success p-2">PUT Succeeded</span>
                 <span *ngIf="dayTradeRuleWorks?.PUT?.success && dayTradeRuleWorks?.PUT?.fail" class="mx-2">&amp;</span>
