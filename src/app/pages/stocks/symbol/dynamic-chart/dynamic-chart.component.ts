@@ -124,7 +124,8 @@ export class DynamicChartComponent implements OnInit {
   isBetweenCustomTradeTimes(index: number): boolean {
     const now = moment(this.lineChartLabels[index]);
     const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
-    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local();
+    // Don't buy anything by 12pm PST because one hour before closing
+    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 15, minutes: 0, seconds: 0}).local();
     return moment(now).isSameOrAfter(dayOpen) && moment(now).isSameOrBefore(dayClose);
   }
 
@@ -242,11 +243,11 @@ export class DynamicChartComponent implements OnInit {
       let sell;
       if (_.isEqual(option, 'CALL')) {
         findDayTradeBuyIndex = _.findIndex(lows, (price, index) => {
-          return price <= dayTradeBuy && this.isBetweenCustomTradeTimes(index);;
+          return price <= dayTradeBuy && this.isBetweenCustomTradeTimes(index);
         });
         buy = _.round(lows[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(highs, (price, index) => {
-          return price >= dayTradeSell && (index > findDayTradeBuyIndex) && this.isBetweenCustomTradeTimes(index);;
+          return price >= dayTradeSell && (index > findDayTradeBuyIndex);
         });
         sell = _.round(highs[findDayTradeSellIndex], 2);
       } else if (_.isEqual(option, 'PUT')) {
@@ -255,7 +256,7 @@ export class DynamicChartComponent implements OnInit {
         });
         buy = _.round(highs[findDayTradeBuyIndex], 2);
         findDayTradeSellIndex = _.findIndex(lows, (price, index) => {
-          return price <= dayTradeSell && (index > findDayTradeBuyIndex) && this.isBetweenCustomTradeTimes(index);;
+          return price <= dayTradeSell && (index > findDayTradeBuyIndex);
         });
         sell = _.round(lows[findDayTradeSellIndex], 2);
       }
