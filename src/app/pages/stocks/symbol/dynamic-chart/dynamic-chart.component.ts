@@ -21,6 +21,7 @@ export class DynamicChartComponent implements OnInit {
   @Input() yahooFinance;
   @Input() dayTradeRules;
   @Output() onCountDayTradeRuleWorks = new EventEmitter();
+  public chartData;
   public dayTradeRuleWorks: any = {
     CALL: {},
     PUT: {}
@@ -100,8 +101,11 @@ export class DynamicChartComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
-  public open: any = {
+  public day: any = {
     price: undefined,
+    close: undefined,
+    low: undefined,
+    high: undefined,
     openToHigh: undefined,
     openToLow: undefined,
     lowToHigh: undefined
@@ -114,11 +118,34 @@ export class DynamicChartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setDay();
+    this.setChartData();
     this.formatChart();
   }
 
   ngOnChanges(changes: any): void {
     this.formatChart();
+  }
+
+  // Simplify to access overall day's values
+  setDay() {
+    this.day.open = _.get(this.data, ['open', 0]);
+    this.day.close = _.get(this.data, ['close', 0]);
+    this.day.low = _.get(this.data, ['low', 0]);
+    this.day.high = _.get(this.data, ['high', 0]);
+    this.day.openToLowPercent = -_.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
+    this.day.openToHighPercent = _.round(((this.day.high - this.day.open) / this.day.open) * 100, 2);
+    this.day.lowToHighRange = _.round(Math.abs(this.day.low - this.day.high), 2);
+    this.day.volume = _.get(this.data, ['volume', 0]);
+  }
+
+  // Make a copy of original data and modify the very first minute (index 0) since API gives overall values for the day instead
+  setChartData() {
+    this.chartData = _.cloneDeep(this.data);
+    this.chartData.low[0] = this.chartData.open[0];
+    this.chartData.high[0] = this.chartData.open[0];
+    this.chartData.close[0] = this.chartData.open[0];
+    this.chartData.volume[0] = this.chartData.volume[1];
   }
 
   isBetweenCustomTradeTimes(index: number): boolean {
@@ -133,7 +160,7 @@ export class DynamicChartComponent implements OnInit {
     const keys = ['volume', 'open', 'high', 'low', 'close'];
     _.forEach(keys, (key: any) => {
       let keyId = '';
-      const keyData = _.get(this.data, [key]);
+      const keyData = _.get(this.chartData, [key]);
       switch (key) {
         case 'open':
         case 'high':
@@ -235,8 +262,8 @@ export class DynamicChartComponent implements OnInit {
       ) {
         return;
       }
-      const dayTradeBuy = _.round(this.open.price + (this.open.price * (_.get(rule, ['buy']) / 100)), 2);
-      const dayTradeSell = _.round(this.open.price + (this.open.price * (_.get(rule, ['sell']) / 100)), 2);
+      const dayTradeBuy = _.round(this.day.open + (this.day.open * (_.get(rule, ['buy']) / 100)), 2);
+      const dayTradeSell = _.round(this.day.open + (this.day.open * (_.get(rule, ['sell']) / 100)), 2);
       let findDayTradeBuyIndex;
       let findDayTradeSellIndex;
       let buy;
@@ -409,11 +436,11 @@ export class DynamicChartComponent implements OnInit {
         type: "line",
         mode: "horizontal",
         scaleID: "y-axis-2",
-        value: this.open.price,
+        value: this.day.open,
         borderColor: "black",
         borderWidth: 2,
         label: {
-          content: `${'Open'} @ ${this.open.price}`,
+          content: `${'Open'} @ ${this.day.open}`,
           enabled: true,
           position: "top"
         }
@@ -427,7 +454,7 @@ export class DynamicChartComponent implements OnInit {
     highs: Array<number>
   ): void {
     _.forEach(opens, (price, index) => {
-      if (this.open.price >= lows[index] && this.open.price <= highs[index]) {
+      if (this.day.open >= lows[index] && this.day.open <= highs[index]) {
         this.lineChartOptions.annotation.annotations.push(
           {
             drawTime: 'beforeDatasetsDraw',
@@ -452,20 +479,14 @@ export class DynamicChartComponent implements OnInit {
   }
 
   formatChart(): void {
-    const opens: Array<any> = _.get(this.data, ['open']);
-    const lows: Array<any> = _.get(this.data, ['low']);
-    const highs: Array<any> = _.get(this.data, ['high']);
-    const volumes: Array<any> = _.get(this.data, ['volume']);
-    const closes: Array<any> = _.get(this.data, ['close']);
-    this.open.price = _.get(opens, [0]);
-    // TODO: Fix API for opening because it takes in overall day lows/highs
-    this.data.low[0] = this.data.open[0];
-    this.data.high[0] = this.data.open[0];
-    this.data.close[0] = this.data.open[0];
-    this.data.volume[0] = this.data.volume[1];
+    const opens: Array<any> = _.get(this.chartData, ['open']);
+    const lows: Array<any> = _.get(this.chartData, ['low']);
+    const highs: Array<any> = _.get(this.chartData, ['high']);
+    const volumes: Array<any> = _.get(this.chartData, ['volume']);
+    const closes: Array<any> = _.get(this.chartData, ['close']);
 
     this.lineChartData = [];
-    this.lineChartLabels = _.map(_.get(this.data, ['date']), (date: any) => {
+    this.lineChartLabels = _.map(_.get(this.chartData, ['date']), (date: any) => {
       return moment.tz(date, _.get(this.metaData, ['timeZone'])).local().format('LLL');
     });
     this.chartOptions();

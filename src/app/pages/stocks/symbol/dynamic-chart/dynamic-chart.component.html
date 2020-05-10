@@ -13,8 +13,15 @@
             </span>
         </div>
     </div>
-    <div *ngIf="open?.price" class="p-2 bg-warning">
-        <h6 class="text-center mb-0">Open Price @ {{open?.price}}</h6>
+    <div *ngIf="day" class="p-2 bg-warning">
+        <div class="d-flex flex-wrap font-weight-bold justify-content-center">
+            <span class="text-center mr-2">Open: {{day?.open}}</span>
+            <span class="text-center mr-2">Close: {{day?.close}}</span>
+            <span class="text-center mr-2">Low: {{day?.low}} ({{day?.openToLowPercent}}%)</span>
+            <span class="text-center mr-2">High: {{day?.high}} ({{day?.openToHighPercent}}%)</span>
+            <span class="text-center mr-2">Range: {{day?.lowToHighRange}}</span>
+            <span class="text-center">Volume: {{day?.volume | numberSuffix}}</span>
+        </div>
     </div>
     <div class="row no-gutters small" *ngIf="canEdit && (!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT))">
         <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" class="col-xs-12 col p-2 border border-warning">
