@@ -129,10 +129,10 @@ export class DynamicChartComponent implements OnInit {
 
   // Simplify to access overall day's values
   setDay() {
-    this.day.open = _.get(this.data, ['open', 0]);
-    this.day.close = _.get(this.data, ['close', 0]);
-    this.day.low = _.get(this.data, ['low', 0]);
-    this.day.high = _.get(this.data, ['high', 0]);
+    this.day.open = _.round(_.get(this.data, ['open', 0]), 2);
+    this.day.close = _.round(_.get(this.data, ['close', 0]), 2);
+    this.day.low = _.round(_.get(this.data, ['low', 0]), 2);
+    this.day.high = _.round(_.get(this.data, ['high', 0]), 2);
     this.day.openToLowPercent = _.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
     this.day.openToHighPercent = _.round(((this.day.high - this.day.open) / this.day.open) * 100, 2);
     this.day.lowToHighRange = _.round(Math.abs(this.day.low - this.day.high), 2);
