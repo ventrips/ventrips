@@ -133,7 +133,7 @@ export class DynamicChartComponent implements OnInit {
     this.day.close = _.get(this.data, ['close', 0]);
     this.day.low = _.get(this.data, ['low', 0]);
     this.day.high = _.get(this.data, ['high', 0]);
-    this.day.openToLowPercent = -_.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
+    this.day.openToLowPercent = _.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
     this.day.openToHighPercent = _.round(((this.day.high - this.day.open) / this.day.open) * 100, 2);
     this.day.lowToHighRange = _.round(Math.abs(this.day.low - this.day.high), 2);
     this.day.volume = _.get(this.data, ['volume', 0]);
