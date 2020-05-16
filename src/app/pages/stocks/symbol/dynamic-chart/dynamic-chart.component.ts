@@ -520,21 +520,22 @@ export class DynamicChartComponent implements OnInit {
       const buyingPowerToRisk: number = originalBuyingPower * xDownRiskPercent; //300, 600
       const shares: number = Math.floor(buyingPowerToRisk / buyPrice);
       const cost: number = (buyPrice * shares);
+      const profitMargin: number = sellPrice - buyPrice;
 
-      console.log(`Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`);
+      console.log(`[${nextNumBuysFilled}] Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)} | Profit Margin: ${_.round(profitMargin, 2)}/share`);
 
       totalShares = totalShares + shares;
       totalCumulativeCost = totalCumulativeCost + cost;
       averagePrice = (totalCumulativeCost / totalShares);
       buyingPower = originalBuyingPower - totalCumulativeCost;
       numBuysFilled = nextNumBuysFilled;
-      console.log(`Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')} | Buying Power: ${_.round(buyingPower, 2)}`);
       console.log(
-        'Avg Price: ', _.round(averagePrice, 2),
+        `[${nextNumBuysFilled}]`,
+        `Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`,
+        '| Avg Price: ', _.round(averagePrice, 2),
         '| Total Shares:', _.round(totalShares, 2),
         '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
-        '| Buying Power:', _.round(buyingPower, 2),
-        '| Num Buys Filled:', _.round(numBuysFilled, 2)
+        '| Buying Power:', _.round(buyingPower, 2)
       );
 
       // NEXT BUY PRICE
@@ -553,7 +554,15 @@ export class DynamicChartComponent implements OnInit {
         totalShares = 0;
         totalCumulativeCost = 0;
         const ruleSold: number = highs[sellIndex]; // for annotating the exact high point
-        console.log(`Sold @ ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')} | Buying Power: ${_.round(buyingPower, 2)}`);
+        console.log(
+          `[${nextNumBuysFilled}]`,
+          `Sold @ ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')}`,
+          '| Avg Price: ', _.round(averagePrice, 2),
+          '| Total Shares:', _.round(totalShares, 2),
+          '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
+          '| Buying Power:', _.round(buyingPower, 2)
+        );
+
         return;
       }
 
