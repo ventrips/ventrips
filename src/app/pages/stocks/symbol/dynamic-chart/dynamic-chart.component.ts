@@ -358,7 +358,7 @@ export class DynamicChartComponent implements OnInit {
         const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - dayTradeBuy), 2);
         const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(dayTradeBuy / closes[closes.length - 1]), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
-        const shares = _.round(buyingPower / dayTradeBuy, 2);
+        const shares = _.round(Math.floor(buyingPower / dayTradeBuy), 2);
         const totalLoss= _.round(lossShareRange * shares, 2);
         this.dayTradeLogs[option].push(`[${index + 1}] If you invested $${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
         return;
@@ -404,7 +404,7 @@ export class DynamicChartComponent implements OnInit {
         const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
         const profitSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell'])), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
-        const shares =_.round(buyingPower / dayTradeBuy, 2);
+        const shares =_.round(Math.floor(buyingPower / dayTradeBuy), 2);
         const totalProfit = _.round(profitShareRange * shares, 2);
         this.dayTradeLogs[option].push(`[${index + 1}] If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
@@ -518,7 +518,7 @@ export class DynamicChartComponent implements OnInit {
       xDownRiskPercent = xDownRiskPercent * nextNumBuysFilled;
       xDownRiskPercentOverall = xDownRiskPercentOverall + xDownRiskPercent;
       const buyingPowerToRisk: number = originalBuyingPower * xDownRiskPercent; //300, 600
-      const shares: number = buyingPowerToRisk / buyPrice;
+      const shares: number = Math.floor(buyingPowerToRisk / buyPrice);
       const cost: number = (buyPrice * shares);
 
       console.log(`Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`);
@@ -547,7 +547,7 @@ export class DynamicChartComponent implements OnInit {
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
       if (((sellIndex !== -1) && (nextBuyIndex == -1)) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex < nextBuyIndex))) {
-        const soldPosition: number = (totalShares * sellPrice);
+        const soldPosition: number = Math.floor(totalShares * sellPrice);
         buyingPower = buyingPower + soldPosition;
         averagePrice = 0;
         totalShares = 0;
