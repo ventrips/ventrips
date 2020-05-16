@@ -358,7 +358,7 @@ export class DynamicChartComponent implements OnInit {
         const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - dayTradeBuy), 2);
         const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(dayTradeBuy / closes[closes.length - 1]), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Loss of -$${lossShareRange}/share (-${lossSharePercentageRange}%) by closing`);
-        const shares = Math.floor(buyingPower / dayTradeBuy);
+        const shares = _.round(buyingPower / dayTradeBuy, 2);
         const totalLoss= _.round(lossShareRange * shares, 2);
         this.dayTradeLogs[option].push(`[${index + 1}] If you invested $${buyingPower}, you would have bought ${shares} shares and lost -$${totalLoss}`);
         return;
@@ -404,7 +404,7 @@ export class DynamicChartComponent implements OnInit {
         const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
         const profitSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell'])), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
-        const shares = Math.floor(buyingPower / dayTradeBuy);
+        const shares =_.round(buyingPower / dayTradeBuy, 2);
         const totalProfit = _.round(profitShareRange * shares, 2);
         this.dayTradeLogs[option].push(`[${index + 1}] If you invested $${buyingPower}, you would have bought ${shares} shares and earned $${totalProfit}`);
       }
@@ -485,23 +485,21 @@ export class DynamicChartComponent implements OnInit {
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
       return;
     }
-    let buyingPower = 1000;
-    let maxDownRiskPercent = 10 / 100; // risking 10% per trade
-    let xDownRiskPercent = maxDownRiskPercent; // initially 10%, then 20%, etc...
-    let xDownRiskPercentOverall = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
-    let numBuysFilled = 0;
-    let buyPercent = _.get(firstRule, ['buy']) / 100;
-    let sellPercent = _.get(firstRule, ['sell']) / 100;
-    let buyPrice = this.day.open + (this.day.open * buyPercent);
-    let sellPrice = this.day.open + (this.day.open * sellPercent);
+    let buyingPower: number = 1000;
+    let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
+    let xDownRiskPercent: number = maxDownRiskPercent; // initially 10%, then 20%, etc...
+    let xDownRiskPercentOverall: number = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
+    let numBuysFilled: number = 0;
+    let buyPercent: number = _.get(firstRule, ['buy']) / 100;
+    let sellPercent: number = _.get(firstRule, ['sell']) / 100;
+    let buyPrice: number = this.day.open + (this.day.open * buyPercent);
+    let sellPrice: number = this.day.open + (this.day.open * sellPercent);
     let openPrice = this.day.open;
-    let lowPrice;
-    let highPrice;
-    let averagePosition = 0;
-    let totalShares = 0;
-    let totalCumulativePosition = 0;
-    let buyIndex = -1;
-    let sellIndex = -1;
+    let averagePrice: number = 0;
+    let totalShares: number = 0;
+    let totalCumulativeCost: number = 0;
+    let buyIndex: number = -1;
+    let sellIndex: number = -1;
     buyIndex = _.findIndex(lows, (price, index) => {
       return (price <= buyPrice) && (index > buyIndex);
     });
@@ -513,48 +511,48 @@ export class DynamicChartComponent implements OnInit {
 
     const originalBuyingPower = _.cloneDeep(buyingPower);
     while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
-      const ruleBought = lows[buyIndex]; // for annotating the exact low point
+      const ruleBought: number = lows[buyIndex]; // for annotating the exact low point
 
-      const nextNumBuysFilled = numBuysFilled + 1;
+      const nextNumBuysFilled: number = numBuysFilled + 1;
 
       xDownRiskPercent = xDownRiskPercent * nextNumBuysFilled;
       xDownRiskPercentOverall = xDownRiskPercentOverall + xDownRiskPercent;
-      const buyingPowerToRisk = originalBuyingPower * xDownRiskPercent; //300, 600
-      const shares = buyingPowerToRisk / buyPrice;
-      const position = (buyPrice * shares);
+      const buyingPowerToRisk: number = originalBuyingPower * xDownRiskPercent; //300, 600
+      const shares: number = buyingPowerToRisk / buyPrice;
+      const cost: number = (buyPrice * shares);
 
-      console.log(`Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Position: ${_.round(position, 2)}`);
+      console.log(`Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`);
 
       totalShares = totalShares + shares;
-      totalCumulativePosition = totalCumulativePosition + position;
-      averagePosition = (totalCumulativePosition / totalShares);
-      buyingPower = originalBuyingPower - totalCumulativePosition;
+      totalCumulativeCost = totalCumulativeCost + cost;
+      averagePrice = (totalCumulativeCost / totalShares);
+      buyingPower = originalBuyingPower - totalCumulativeCost;
       numBuysFilled = nextNumBuysFilled;
       console.log(`Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')} | Buying Power: ${_.round(buyingPower, 2)}`);
       console.log(
-        'Avg Position: ', _.round(averagePosition, 2),
+        'Avg Price: ', _.round(averagePrice, 2),
         '| Total Shares:', _.round(totalShares, 2),
-        '| Total Cumulative Position:', _.round(totalCumulativePosition, 2),
+        '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
         '| Buying Power:', _.round(buyingPower, 2),
         '| Num Buys Filled:', _.round(numBuysFilled, 2)
       );
 
       // NEXT BUY PRICE
 
-      const nextBuyPercentage = buyPercent - (1 / 100);
-      const nextBuyPrice = this.day.open + (this.day.open * nextBuyPercentage);
-      const nextBuyIndex = _.findIndex(lows, (price, index) => {
+      const nextBuyPercentage: number = buyPercent - (1 / 100);
+      const nextBuyPrice: number = this.day.open + (this.day.open * nextBuyPercentage);
+      const nextBuyIndex: number = _.findIndex(lows, (price, index) => {
         return (price <= nextBuyPrice) && (index > buyIndex);
       });
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
       if (((sellIndex !== -1) && (nextBuyIndex == -1)) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex < nextBuyIndex))) {
-        const soldPosition = (totalShares * sellPrice);
+        const soldPosition: number = (totalShares * sellPrice);
         buyingPower = buyingPower + soldPosition;
-        averagePosition = 0;
+        averagePrice = 0;
         totalShares = 0;
-        totalCumulativePosition = 0;
-        const ruleSold = highs[sellIndex]; // for annotating the exact high point
+        totalCumulativeCost = 0;
+        const ruleSold: number = highs[sellIndex]; // for annotating the exact high point
         console.log(`Sold @ ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')} | Buying Power: ${_.round(buyingPower, 2)}`);
         return;
       }
