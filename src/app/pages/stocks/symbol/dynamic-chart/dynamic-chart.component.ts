@@ -470,11 +470,101 @@ export class DynamicChartComponent implements OnInit {
     });
   }
 
+  annotateNizom(
+    opens: Array<number>,
+    lows: Array<number>,
+    highs: Array<number>,
+    closes: Array<number>
+  ) {
+    // TEMP
+    // if (!_.includes(this.date, '2020-05-12')) {
+    //   return;
+    // }
+
+    const firstRule = _.get(this.dayTradeRules, [0]);
+    if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
+      return;
+    }
+    let buyingPower = 1000;
+    let buyPercentage = _.get(firstRule, ['buy']) / 100;
+    let sellPercentage = _.get(firstRule, ['sell']) / 100;
+    let buyPrice = this.day.open + (this.day.open * buyPercentage);
+    let sellPrice = this.day.open + (this.day.open * sellPercentage);
+    let openPrice = this.day.open;
+    let lowPrice;
+    let highPrice;
+    let averagePosition = 0;
+    let shares = 0;
+    let totalCumulativePosition = 0;
+    let buyIndex = -1;
+    let sellIndex = -1;
+    buyIndex = _.findIndex(lows, (price, index) => {
+      return (price <= buyPrice) && (index > buyIndex);
+    });
+    sellIndex = _.findIndex(highs, (price, index) => {
+      return (price >= sellPrice) && (index > buyIndex);
+    });
+    console.log(this.date);
+    console.log(`buy price: ${buyPrice} | sell price: ${sellPrice}`);
+
+    while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
+      const ruleBought = lows[buyIndex];
+      console.log(`Bought @ ${ruleBought} (${buyPercentage * 100}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`);
+
+      shares = shares + Math.floor(buyingPower / buyPrice);
+      totalCumulativePosition = totalCumulativePosition + (buyPrice * shares);
+      averagePosition = (averagePosition + buyPrice) / shares;
+
+      const newBuyPercentage = buyPercentage - (1 / 100);
+      const newBuyPrice = this.day.open + (this.day.open * newBuyPercentage);
+      const newBuyIndex = _.findIndex(lows, (price, index) => {
+        return (price <= newBuyPrice) && (index > buyIndex);
+      });
+
+      // const newSellPercentage = sellPercentage - (1 / 100);
+      // const newSellPrice = this.day.open + (this.day.open * newSellPercentage);
+      // const newSellIndex = _.findIndex(highs, (price, index) => {
+      //   return (price >= sellPrice) && (index > buyIndex);
+      // });
+
+      // console.log(newBuyPercentage, newBuyPrice, moment(this.lineChartLabels[newBuyIndex]).format('hh:mm:ss A'));
+      // console.log(newBuyIndex, sellIndex);
+
+      // Check if there's a new lower buy point where it is before current sell point or no current sell point
+      if ((newBuyIndex !== -1) && ((newBuyIndex < sellIndex) || (sellIndex == -1))) {
+        buyPercentage = newBuyPercentage;
+        buyPrice = newBuyPrice;
+        buyIndex = newBuyIndex;
+        sellPercentage = sellPercentage - (1 / 100);
+        sellPrice = this.day.open + (this.day.open * sellPercentage);
+        sellIndex = _.findIndex(highs, (price, index) => {
+          return (price >= sellPrice) && (index > buyIndex);
+        });
+        continue;
+      }
+
+      if (sellIndex !== -1) {
+        const ruleSold = highs[sellIndex];
+        console.log(`Sold @ ${ruleSold} (${sellPercentage * 100}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')}`);
+
+        sellIndex = -1;
+        return;
+      }
+
+      sellPercentage = sellPercentage - (1 / 100);
+      sellPrice = this.day.open + (this.day.open * sellPercentage);
+      sellIndex = _.findIndex(highs, (price, index) => {
+        return (price >= sellPrice) && (index > buyIndex);
+      });
+    }
+  };
+
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>, closes: Array<number>): void {
     this.annotateOpenPrice(opens);
     if (this.canEdit) {
       this.annotateOpenPricesReached(opens, lows, highs);
       this.annotateDayTradeRules(opens, lows, highs, closes);
+      // this.annotateNizom(opens, lows, highs, closes);
     }
   }
 
@@ -495,11 +585,11 @@ export class DynamicChartComponent implements OnInit {
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   public hideIndex(index: number) {
