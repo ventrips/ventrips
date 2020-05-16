@@ -548,7 +548,6 @@ export class DynamicChartComponent implements OnInit {
       });
 
       // If there is a sell index and no next buy index OR sell index is less than buy index, this means sell
-      debugger;
       if ((sellIndex !== -1) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex < nextBuyIndex))) {
         const soldPosition = (totalShares * sellPrice);
         buyingPower = buyingPower + soldPosition;
