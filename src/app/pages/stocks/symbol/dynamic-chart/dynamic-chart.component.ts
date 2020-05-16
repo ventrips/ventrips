@@ -547,7 +547,7 @@ export class DynamicChartComponent implements OnInit {
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
       if (((sellIndex !== -1) && (nextBuyIndex == -1)) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex < nextBuyIndex))) {
-        const soldPosition: number = Math.floor(totalShares * sellPrice);
+        const soldPosition: number = totalShares * sellPrice;
         buyingPower = buyingPower + soldPosition;
         averagePrice = 0;
         totalShares = 0;
