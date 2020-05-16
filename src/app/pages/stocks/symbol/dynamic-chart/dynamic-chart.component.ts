@@ -477,18 +477,18 @@ export class DynamicChartComponent implements OnInit {
     closes: Array<number>
   ) {
     // TEMP
-    if (!_.includes(this.date, '2020-05-12')) {
-      return;
-    }
+    // if (!_.includes(this.date, '2020-05-12')) {
+    //   return;
+    // }
 
     const firstRule = _.get(this.dayTradeRules, [0]);
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
       return;
     }
     let buyingPower = 10000;
-    let maxDownRiskPercent = 3 / 100; // risking 30% per trade
-    let xDownRiskPercent = maxDownRiskPercent; // initially 30%, then 60%, etc...
-    let xDownRiskPercentOverall = xDownRiskPercent; // initially 30%, then 30% + 60%, etc...
+    let maxDownRiskPercent = 10 / 100; // risking 10% per trade
+    let xDownRiskPercent = maxDownRiskPercent; // initially 10%, then 20%, etc...
+    let xDownRiskPercentOverall = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
     let numBuysFilled = 0;
     let buyPercent = _.get(firstRule, ['buy']) / 100;
     let sellPercent = _.get(firstRule, ['sell']) / 100;
@@ -513,7 +513,7 @@ export class DynamicChartComponent implements OnInit {
 
     const originalBuyingPower = _.cloneDeep(buyingPower);
     while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
-      console.log(`buy price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | sell price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%)`);
+      console.log(`buy price: ${_.round(buyPrice, 3)} (${_.round(buyPercent * 100, 3)}%) | sell price: ${_.round(sellPrice, 3)} (${_.round(sellPercent * 100, 3)}%)`);
       const ruleBought = lows[buyIndex];
 
       const nextNumBuysFilled = numBuysFilled + 1;
@@ -529,15 +529,14 @@ export class DynamicChartComponent implements OnInit {
       averagePosition = (totalCumulativePosition / totalShares);
       buyingPower = originalBuyingPower - totalCumulativePosition;
       numBuysFilled = nextNumBuysFilled;
-      console.log(`Bought @ ${ruleBought} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')} | buying power: ${_.round(buyingPower, 2)} | position: ${_.round(position, 2)} | shares: ${_.round(shares, 2)}`);
+      console.log(`Bought @ ${ruleBought} (${_.round(buyPercent * 100, 3)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')} | buying power: ${_.round(buyingPower, 3)} | position: ${_.round(position, 3)} | shares: ${_.round(shares, 3)}`);
       console.log(
-        'average position: ', _.round(averagePosition, 2),
-        '| total shares:', _.round(totalShares, 2),
-        '| total cumulative position:', _.round(totalCumulativePosition, 2),
-        '| buying power:', _.round(buyingPower, 2),
-        '| num buys filled:', _.round(numBuysFilled, 2)
+        'average position: ', _.round(averagePosition, 3),
+        '| total shares:', _.round(totalShares, 3),
+        '| total cumulative position:', _.round(totalCumulativePosition, 3),
+        '| buying power:', _.round(buyingPower, 3),
+        '| num buys filled:', _.round(numBuysFilled, 3)
       );
-
 
       // NEXT BUY PRICE
 
@@ -555,7 +554,7 @@ export class DynamicChartComponent implements OnInit {
         totalShares = 0;
         totalCumulativePosition = 0;
         const ruleSold = highs[sellIndex];
-        console.log(`Sold @ ${ruleSold} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')} | buying power: ${_.round(buyingPower, 2)}`);
+        console.log(`Sold @ ${ruleSold} (${_.round(sellPercent * 100, 3)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')} | buying power: ${_.round(buyingPower, 3)}`);
         return;
       }
 
