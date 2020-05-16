@@ -477,14 +477,15 @@ export class DynamicChartComponent implements OnInit {
     closes: Array<number>
   ) {
     // TEMP
-    // if (!_.includes(this.date, '2020-05-12')) {
-    //   return;
-    // }
+    if (!_.includes(this.date, '2020-05-15')) {
+      return;
+    }
 
     const firstRule = _.get(this.dayTradeRules, [0]);
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
       return;
     }
+    let numBuysFilled = 0;
     let buyingPower = 1000;
     let buyPercentage = _.get(firstRule, ['buy']) / 100;
     let sellPercentage = _.get(firstRule, ['sell']) / 100;
@@ -494,7 +495,7 @@ export class DynamicChartComponent implements OnInit {
     let lowPrice;
     let highPrice;
     let averagePosition = 0;
-    let shares = 0;
+    let totalShares = 0;
     let totalCumulativePosition = 0;
     let buyIndex = -1;
     let sellIndex = -1;
@@ -505,15 +506,32 @@ export class DynamicChartComponent implements OnInit {
       return (price >= sellPrice) && (index > buyIndex);
     });
     console.log(this.date);
-    console.log(`buy price: ${buyPrice} | sell price: ${sellPrice}`);
-
     while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
+      console.log(`buy price: ${buyPrice} (${buyPercentage * 100}%) | sell price: ${sellPrice} (${sellPercentage * 100}%)`);
       const ruleBought = lows[buyIndex];
-      console.log(`Bought @ ${ruleBought} (${buyPercentage * 100}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`);
 
-      shares = shares + Math.floor(buyingPower / buyPrice);
-      totalCumulativePosition = totalCumulativePosition + (buyPrice * shares);
-      averagePosition = (averagePosition + buyPrice) / shares;
+      if (buyingPower >= buyPrice) {
+        const shares = buyingPower / buyPrice;
+        const position = (buyPrice * shares);
+        totalShares = totalShares + shares;
+        totalCumulativePosition = totalCumulativePosition + position;
+        averagePosition = (totalCumulativePosition / totalShares);
+        buyingPower = buyingPower - totalCumulativePosition;
+        numBuysFilled = numBuysFilled + 1;
+        console.log(
+          'position:', position,
+          '| shares:', shares,
+          '| average position: ', averagePosition,
+          '| total shares:', totalShares,
+          '| total cumulative position:', totalCumulativePosition,
+          '| buying power:', buyingPower,
+          '| num buys filled:', numBuysFilled
+        );
+        console.log(`Bought @ ${ruleBought} (${buyPercentage * 100}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')} | buying power: ${buyingPower}`);
+      } else {
+        console.log(`You don't have enough buying power: ${buyingPower} to buy ${buyPrice}`);
+        return;
+      }
 
       const newBuyPercentage = buyPercentage - (1 / 100);
       const newBuyPrice = this.day.open + (this.day.open * newBuyPercentage);
@@ -544,10 +562,13 @@ export class DynamicChartComponent implements OnInit {
       }
 
       if (sellIndex !== -1) {
+        const soldPosition = (totalShares * sellPrice);
+        totalShares = 0;
+        totalCumulativePosition = 0;
+        buyingPower = buyingPower + soldPosition;
+        averagePosition = 0;
         const ruleSold = highs[sellIndex];
-        console.log(`Sold @ ${ruleSold} (${sellPercentage * 100}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')}`);
-
-        sellIndex = -1;
+        console.log(`Sold @ ${ruleSold} (${sellPercentage * 100}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')} | buying power: ${buyingPower}`);
         return;
       }
 
