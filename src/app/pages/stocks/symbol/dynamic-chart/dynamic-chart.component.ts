@@ -488,7 +488,7 @@ export class DynamicChartComponent implements OnInit {
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
       return;
     }
-    let buyingPower: number = 1000;
+    let buyingPower: number = 1200;
     let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
     let xDownRiskPercent: number = maxDownRiskPercent; // initially 10%, then 20%, etc...
     let xDownRiskPercentOverall: number = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
@@ -523,18 +523,20 @@ export class DynamicChartComponent implements OnInit {
       const buyingPowerToRisk: number = originalBuyingPower * xDownRiskPercent; //300, 600
       const shares: number = Math.floor(buyingPowerToRisk / buyPrice);
       const cost: number = (buyPrice * shares);
-      const profitMargin: number = sellPrice - buyPrice;
 
-      console.log(`[${nextNumBuysFilled}] Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)} | Profit Margin: ${_.round(profitMargin, 2)}/share`);
+      console.log(`[${nextNumBuysFilled}] Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`);
 
       totalShares = totalShares + shares;
       totalCumulativeCost = totalCumulativeCost + cost;
       averagePrice = (totalCumulativeCost / totalShares);
       buyingPower = originalBuyingPower - totalCumulativeCost;
       numBuysFilled = nextNumBuysFilled;
+      const profitMargin: number = sellPrice - averagePrice;
       console.log(
         `[${nextNumBuysFilled}]`,
         `Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`,
+        '| Shares: ', _.round(shares, 2),
+        `| Profit Margin: ${_.round(profitMargin, 2)}/share`,
         '| Avg Price: ', _.round(averagePrice, 2),
         '| Total Shares:', _.round(totalShares, 2),
         '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
