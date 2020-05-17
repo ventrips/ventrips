@@ -113,14 +113,16 @@
                     <span class="mr-1">{{countDayTradeRuleWorks?.PUT.total}}</span>
                 </div>
                 <div class="mb-2">
+                    <span class="font-weight-bold mr-2">Trading Days:</span>
+                    <span class="mr-2">{{data.length}}</span>
                     <ng-container *ngIf="nizom.profit">
-                        <span class="font-weight-bold mr-2">Buying Power:</span>
+                        <span class="font-weight-bold mr-2">Original Buying Power:</span>
+                        <span class="mr-2">{{_.round(nizom.buyingPower - nizom.profit, 2)}}</span>
+                        <span class="font-weight-bold mr-2">Total Buying Power:</span>
                         <span class="mr-2">{{_.round(nizom.buyingPower, 2)}}</span>
                         <span class="font-weight-bold mr-2">Profit:</span>
                         <span class="mr-2">{{_.round(nizom.profit, 2)}}</span>
                     </ng-container>
-                    <span class="font-weight-bold mr-2">Trading Days:</span>
-                    <span>{{data.length}}</span>
                 </div>
             </div>
         </div>
