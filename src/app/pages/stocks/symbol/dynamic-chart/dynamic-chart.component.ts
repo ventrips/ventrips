@@ -21,6 +21,9 @@ export class DynamicChartComponent implements OnInit {
   @Input() yahooFinance;
   @Input() dayTradeRules;
   @Output() onCountDayTradeRuleWorks = new EventEmitter();
+  @Input() nizom;
+  @Output() onNizom = new EventEmitter();
+
   public chartData;
   public dayTradeRuleWorks: any = {
     CALL: {},
@@ -485,11 +488,11 @@ export class DynamicChartComponent implements OnInit {
     // }
 
     const firstRule = _.get(this.dayTradeRules, [0]);
-    if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
+    let buyingPower: number = _.get(this.nizom, ['buyingPower']);
+    let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
+    if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(this.nizom)) {
       return;
     }
-    let buyingPower: number = 10000;
-    let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
     let xDownRiskPercent: number = maxDownRiskPercent; // initially 10%, then 20%, etc...
     let xDownRiskPercentOverall: number = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
     let numBuysFilled: number = 0;
@@ -570,6 +573,10 @@ export class DynamicChartComponent implements OnInit {
           `Sold @ ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')}`,
           '| Profit:', _.round(profit, 2)
         );
+        this.onNizom.emit({
+          buyingPower,
+          profit
+        });
 
         return;
       }

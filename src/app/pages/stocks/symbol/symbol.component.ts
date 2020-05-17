@@ -105,6 +105,10 @@ export class SymbolComponent implements OnInit {
     },
     overall: 0
   };
+  public nizom = {
+    buyingPower: 1000,
+    profit: 0
+  };
   public yahooFinanceOpenPrice: number;
   public toggleHorizontalView: boolean = false;
 
@@ -316,6 +320,12 @@ export class SymbolComponent implements OnInit {
     this.countDayTradeRuleWorks['overall']++;
   }
 
+  onNizom(optionObj: any) {
+    const profit = _.get(optionObj, ['profit']);
+    const buyingPower = _.get(optionObj, ['buyingPower']);
+    this.nizom['buyingPower'] = buyingPower;
+    this.nizom['profit'] += profit;
+  }
 
 
   getDayTradePointFromOpenWithYahooFinance(percent: number) {

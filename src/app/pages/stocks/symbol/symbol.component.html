@@ -113,8 +113,14 @@
                     <span class="mr-1">{{countDayTradeRuleWorks?.PUT.total}}</span>
                 </div>
                 <div class="mb-2">
+                    <ng-container *ngIf="nizom.profit">
+                        <span class="font-weight-bold mr-2">Buying Power:</span>
+                        <span class="mr-2">{{_.round(nizom.buyingPower, 2)}}</span>
+                        <span class="font-weight-bold mr-2">Profit:</span>
+                        <span class="mr-2">{{_.round(nizom.profit, 2)}}</span>
+                    </ng-container>
                     <span class="font-weight-bold mr-2">Trading Days:</span>
-                    {{data.length}}
+                    <span>{{data.length}}</span>
                 </div>
             </div>
         </div>
@@ -157,7 +163,8 @@
                 <div [ngClass]="{'scrolling-wrapper': toggleHorizontalView }">
                     <section class="card" *ngFor="let item of data; let index = index">
                         <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data"
-                            [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"></app-dynamic-chart>
+                            [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"
+                            [nizom]="nizom" (onNizom)="onNizom($event)"></app-dynamic-chart>
                     </section>
                 </div>
             </ng-container>
