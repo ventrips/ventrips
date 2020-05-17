@@ -543,11 +543,11 @@ export class DynamicChartComponent implements OnInit {
       const nextBuyPercentage: number = buyPercent - (1 / 100);
       const nextBuyPrice: number = this.day.open + (this.day.open * nextBuyPercentage);
       const nextBuyIndex: number = _.findIndex(lows, (price, index) => {
-        return (price <= nextBuyPrice) && (index > buyIndex);
+        return (price <= nextBuyPrice) && (index >= buyIndex); // it's possible for next buy percentage is on same buy index
       });
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
-      if (((sellIndex !== -1) && (nextBuyIndex == -1)) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex < nextBuyIndex))) {
+      if (((sellIndex !== -1) && (nextBuyIndex == -1)) || ((sellIndex !== -1) && (nextBuyIndex !== -1) && (sellIndex <= nextBuyIndex))) {
         const soldPosition: number = totalShares * sellPrice;
         buyingPower = buyingPower + soldPosition;
         averagePrice = 0;
