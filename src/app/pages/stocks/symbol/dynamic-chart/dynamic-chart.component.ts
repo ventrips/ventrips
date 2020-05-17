@@ -593,7 +593,7 @@ export class DynamicChartComponent implements OnInit {
     if (this.canEdit) {
       this.annotateOpenPricesReached(opens, lows, highs);
       this.annotateDayTradeRules(opens, lows, highs, closes);
-      this.annotateNizom(opens, lows, highs, closes);
+      // this.annotateNizom(opens, lows, highs, closes);
     }
   }
 
