@@ -106,7 +106,7 @@ export class SymbolComponent implements OnInit {
     overall: 0
   };
   public nizom = {
-    buyingPower: 10000,
+    buyingPower: 1000,
     profit: 0
   };
   public yahooFinanceOpenPrice: number;
