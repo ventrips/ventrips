@@ -488,7 +488,7 @@ export class DynamicChartComponent implements OnInit {
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs)) {
       return;
     }
-    let buyingPower: number = 1200;
+    let buyingPower: number = 10000;
     let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
     let xDownRiskPercent: number = maxDownRiskPercent; // initially 10%, then 20%, etc...
     let xDownRiskPercentOverall: number = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
@@ -532,12 +532,12 @@ export class DynamicChartComponent implements OnInit {
         averagePrice = (totalCumulativeCost / totalShares);
         buyingPower = originalBuyingPower - totalCumulativeCost;
         numBuysFilled = nextNumBuysFilled;
-        const profitMargin: number = sellPrice - averagePrice;
+        const gainsPerShare: number = sellPrice - averagePrice;
         console.log(
           `[${nextNumBuysFilled}]`,
           `Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`,
           '| Shares: ', _.round(shares, 2),
-          `| Profit Margin: ${_.round(profitMargin, 2)}/share`,
+          `| Gains Per Share: ${_.round(gainsPerShare, 2)}/share`,
           '| Avg Price: ', _.round(averagePrice, 2),
           '| Total Shares:', _.round(totalShares, 2),
           '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
@@ -563,14 +563,12 @@ export class DynamicChartComponent implements OnInit {
         averagePrice = 0;
         totalShares = 0;
         totalCumulativeCost = 0;
+        const profit = buyingPower - originalBuyingPower;
         const ruleSold: number = highs[sellIndex]; // for annotating the exact high point
         console.log(
           `[${nextNumBuysFilled}]`,
           `Sold @ ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[sellIndex]).format('hh:mm:ss A')}`,
-          '| Avg Price: ', _.round(averagePrice, 2),
-          '| Total Shares:', _.round(totalShares, 2),
-          '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
-          '| Buying Power:', _.round(buyingPower, 2)
+          '| Profit:', _.round(profit, 2)
         );
 
         return;
