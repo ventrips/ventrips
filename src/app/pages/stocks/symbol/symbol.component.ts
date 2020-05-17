@@ -106,7 +106,7 @@ export class SymbolComponent implements OnInit {
     overall: 0
   };
   public nizom = {
-    buyingPower: 1000,
+    buyingPower: 10000,
     profit: 0
   };
   public yahooFinanceOpenPrice: number;
@@ -300,6 +300,7 @@ export class SymbolComponent implements OnInit {
   }
 
   setDayTradeRules() {
+    this.onNizomReset();
     this.onCountDayTradeRuleReset();
     // Comment out for local dev rules
     if (this.isPlatformBrowser()) {
@@ -318,6 +319,14 @@ export class SymbolComponent implements OnInit {
     this.countDayTradeRuleWorks[option][status]++;
     this.countDayTradeRuleWorks[option]['total']++;
     this.countDayTradeRuleWorks['overall']++;
+  }
+
+  onNizomReset() {
+    const resetNizom = {
+      buyingPower: this.nizom.buyingPower - this.nizom.profit,
+      profit: 0
+    }
+    this.nizom = resetNizom;
   }
 
   onNizom(optionObj: any) {
