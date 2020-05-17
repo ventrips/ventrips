@@ -232,6 +232,9 @@ export class DynamicChartComponent implements OnInit {
     highs: Array<number>,
     closes: Array<number>
   ) {
+    if (_.isEmpty(this.dayTradeRules) || _.isEmpty(opens) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(closes)) {
+      return;
+    }
     // 8:00AM
     // this.lineChartOptions.annotation.annotations.push(
     //   {
