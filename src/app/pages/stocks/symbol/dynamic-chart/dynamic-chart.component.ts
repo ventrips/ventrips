@@ -513,7 +513,7 @@ export class DynamicChartComponent implements OnInit {
       return (price >= sellPrice) && (index > buyIndex);
     });
 
-    console.log(this.date);
+    console.log(moment.tz(this.date, _.get(this.metaData, ['timeZone'])).format('ll'));
 
     const originalBuyingPower = _.cloneDeep(buyingPower);
     while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
@@ -527,7 +527,12 @@ export class DynamicChartComponent implements OnInit {
       const shares: number = Math.floor(buyingPowerToRisk / buyPrice);
       const cost: number = (buyPrice * shares);
 
-      console.log(`[${nextNumBuysFilled}] Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) | Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%) | Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`);
+      console.log(
+        `[${nextNumBuysFilled}]`,
+        `Buy Price: ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%)`,
+        `| Sell Price: ${_.round(sellPrice, 2)} (${_.round(sellPercent * 100, 2)}%)`,
+        `| Shares: ${_.round(shares, 2)} | Cost: ${_.round(cost, 2)}`
+      );
 
       if (buyingPower >= cost) {
         totalShares = totalShares + shares;
@@ -540,8 +545,8 @@ export class DynamicChartComponent implements OnInit {
           `[${nextNumBuysFilled}]`,
           `Bought @ ${_.round(buyPrice, 2)} (${_.round(buyPercent * 100, 2)}%) @ ${moment(this.lineChartLabels[buyIndex]).format('hh:mm:ss A')}`,
           '| Shares: ', _.round(shares, 2),
-          `| Gains Per Share: ${_.round(gainsPerShare, 2)}/share`,
           '| Avg Price: ', _.round(averagePrice, 2),
+          `| Gains Per Share: ${_.round(gainsPerShare, 2)}/share`,
           '| Total Shares:', _.round(totalShares, 2),
           '| Total Cumulative Cost:', _.round(totalCumulativeCost, 2),
           '| Buying Power:', _.round(buyingPower, 2)

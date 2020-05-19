@@ -106,7 +106,7 @@ export class SymbolComponent implements OnInit {
     overall: 0
   };
   public nizom = {
-    buyingPower: 1000,
+    buyingPower: 3000,
     profit: 0
   };
   public yahooFinanceOpenPrice: number;
@@ -330,9 +330,9 @@ export class SymbolComponent implements OnInit {
   }
 
   onNizom(optionObj: any) {
-    const profit = _.get(optionObj, ['profit']);
     const buyingPower = _.get(optionObj, ['buyingPower']);
     this.nizom['buyingPower'] = buyingPower;
+    const profit = _.get(optionObj, ['profit']);
     this.nizom['profit'] += profit;
   }
 
