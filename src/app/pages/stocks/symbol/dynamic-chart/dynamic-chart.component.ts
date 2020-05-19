@@ -513,7 +513,7 @@ export class DynamicChartComponent implements OnInit {
       return (price >= sellPrice) && (index > buyIndex);
     });
 
-    console.log(moment.tz(this.date, _.get(this.metaData, ['timeZone'])).format('ll'));
+    console.log(moment.tz(this.date, _.get(this.metaData, ['timeZone'])).format('dddd, MMMM Do YYYY'));
 
     const originalBuyingPower = _.cloneDeep(buyingPower);
     while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
