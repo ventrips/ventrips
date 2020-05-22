@@ -10,7 +10,8 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
+    ],
+    "source": "functions"
   },
   "hosting": {
     "public": "dist",
@@ -18,36 +19,26 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "angularUniversalFunction"
-      }
-    ],
-    "headers": [ {
-      "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
-      "headers": [ {
-        "key": "Access-Control-Allow-Origin",
-        "value": "*"
-      } ]
-    }, {
-      "source": "**/*.@(jpg|jpeg|gif|png)",
-      "headers": [ {
-        "key": "Cache-Control",
-        "value": "max-age=31557600"
-      } ]
-    }, {
-      "source": "404.html",
-      "headers": [ {
-        "key": "Cache-Control",
-        "value": "max-age=300"
-      } ]
-    } ],
-    "cleanUrls": true,
-    "trailingSlash": false
+    ]
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true
+    }
   }
 }
