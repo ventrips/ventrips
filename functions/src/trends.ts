@@ -170,7 +170,7 @@ function constructData(data: any) {
         article.sentiment = sentiment;
     });
     const overallSentiment = new Sentiment();
-    data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
+    data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list: any, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
     return data;
 }
 

@@ -28,7 +28,7 @@ export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512M
 
 export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
-    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
+    const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
     const data = await Trends.chartTrends(request, response, useMock);
 
     response.send(data);
@@ -36,8 +36,8 @@ export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB
 
 export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
-    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
-    const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
+    const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
+    const isLocal = _.isEqual(_.toLower(_.get(request, 'query.local')), 'true');
     const data = await Trends.trends(request, response, useMock);
 
     if (isLocal) {
@@ -55,8 +55,8 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
 
 export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
-    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
-    const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
+    const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
+    const isLocal = _.isEqual(_.toLower(_.get(request, 'query.local')), 'true');
     const data = await Travel.getTravelNumbers(request, response, useMock);
 
     if (isLocal) {

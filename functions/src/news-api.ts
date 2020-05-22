@@ -19,7 +19,7 @@ const setSentiment = (data: any) => {
         article.sentiment = sentiment;
     });
     const overallSentiment = new Sentiment();
-    data.overallSentiment = overallSentiment.analyze(_.join(_.uniq(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), [])), ' '));
+    data.overallSentiment = overallSentiment.analyze(_.join(_.uniq(_.reduce(_.get(data, ['articles']), (list: any, article: any) => _.concat(list, article.sentiment.tokens), [])), ' '));
 }
 
 const setIsBullish = (data: any) => {

@@ -78,8 +78,8 @@ const convertChartData = (intraData: any, dayData: any, interval: string) => {
 
 export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
-    const symbol = _.toUpper(request.query.symbol);
-    const interval = _.toLower(request.query.interval);
+    const symbol = _.toUpper(_.get(request, 'query.symbol'));
+    const interval = _.toLower(_.get(request, 'query.interval'));
 
     let data = {};
     let intraData;
