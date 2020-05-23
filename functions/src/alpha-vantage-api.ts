@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+const functions = require('firebase-functions');
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 const db = admin.firestore();
@@ -76,7 +76,7 @@ const convertChartData = (intraData: any, dayData: any, interval: string) => {
     }
 };
 
-export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     const symbol = _.toUpper(_.get(request, 'query.symbol'));
     const interval = _.toLower(_.get(request, 'query.interval'));

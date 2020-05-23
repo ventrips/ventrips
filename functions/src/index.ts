@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+const functions = require('firebase-functions');
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 import { cors } from './utils';
@@ -21,12 +21,12 @@ export * from './alpha-vantage-api';
 //  response.send("Hello from Firebase!");
 // });
 
-export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     Trends.searchNews(request, response, false);
 });
 
-export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
     const data = await Trends.chartTrends(request, response, useMock);
@@ -34,7 +34,7 @@ export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB
     response.send(data);
 });
 
-export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, 'query.local')), 'true');
@@ -53,7 +53,7 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
     }
 });
 
-export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
+export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, 'query.mock')), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, 'query.local')), 'true');
@@ -77,7 +77,7 @@ export const angularUniversalFunction = functions.runWith({ timeoutSeconds: 540,
 
 export const createUserRoles = functions.firestore
 .document('users/{uid}')
-.onCreate(async snapshot => {
+.onCreate(async (snapshot: { data: () => any; }) => {
     // const customer = await stripe.customers.create({
     //     metadata: { firebaseUID: snapshot.data()!.uid }
     // });

@@ -1,4 +1,4 @@
-// import * as functions from 'firebase-functions';
+// const functions = require('firebase-functions');
 import * as _ from 'lodash';
 import { commonRequest } from './utils';
 

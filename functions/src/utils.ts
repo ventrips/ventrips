@@ -13,7 +13,7 @@ export const cors = function(request: any, response: any): void {
     return;
 }
 
-export const commonRequest = async (params: object, BASE_URL: string, API_KEY?: string): Promise<any> => {
+export const commonRequest = async (params: any, BASE_URL: string, API_KEY?: string): Promise<any> => {
     return new Promise((resolve: any, reject: any) => {
         if (!_.isNil(API_KEY)) {
             _.set(params, 'apikey', API_KEY);

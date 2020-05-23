@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+const functions = require('firebase-functions');
 import * as admin from 'firebase-admin';
 import * as querystring from 'querystring';
 import * as _ from 'lodash';
@@ -57,7 +57,7 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
     });
 }
 
-export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     let data;
     /* Mock */
@@ -68,7 +68,7 @@ export const getEverythingNewsAPI = functions.runWith({ timeoutSeconds: 540, mem
     setFirebase(request, response, data, 'trends/get-everything-news-api', true);
 });
 
-export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const getTopHeadlinesNewsAPI = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
     cors(request, response);
     let data;
     /* Mock */
