@@ -83,7 +83,7 @@
                             placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Remove Rule</label>
+                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Profit ({{getProfitSharePercentageRange(rule)}}%)</label>
                         <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
                     </div>
                 </ng-container>

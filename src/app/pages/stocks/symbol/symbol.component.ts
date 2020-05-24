@@ -106,7 +106,7 @@ export class SymbolComponent implements OnInit {
     overall: 0
   };
   public nizom = {
-    buyingPower: 10000,
+    buyingPower: 3000,
     profit: 0
   };
   public yahooFinanceOpenPrice: number;
@@ -342,6 +342,10 @@ export class SymbolComponent implements OnInit {
       return;
     }
     return _.round(this.yahooFinanceOpenPrice + (this.yahooFinanceOpenPrice * (_.get(this.yahooFinance, ['regularMarketChangePercent']) / 100)), 2);
+  }
+
+  getProfitSharePercentageRange(rule: any) {
+    return _.round((Math.abs(_.get(rule, ['sell']) - _.get(rule, ['buy']))), 2);
   }
 
   getYear() {
