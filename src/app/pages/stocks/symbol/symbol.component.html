@@ -120,8 +120,13 @@
                         <span class="mr-2">{{_.round(nizom.buyingPower - nizom.profit, 2)}}</span>
                         <span class="font-weight-bold mr-2">Total Buying Power:</span>
                         <span class="mr-2">{{_.round(nizom.buyingPower, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Profit:</span>
+                        <span class="font-weight-bold mr-2">Weekly Profit:</span>
                         <span class="mr-2">{{_.round(nizom.profit, 2)}}</span>
+                        <span class="font-weight-bold mr-2">Yearly Profit:</span>
+                        <span class="mr-2">
+                            <span class="mr-2">{{_.round(nizom.profit * 50, 2)}}</span>
+                            <span>({{_.round(100 * ((nizom.profit * 50) / (nizom.buyingPower - nizom.profit)), 2)}}%)</span>
+                        </span>
                     </ng-container>
                 </div>
             </div>
