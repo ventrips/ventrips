@@ -489,6 +489,7 @@ export class DynamicChartComponent implements OnInit {
 
     const firstRule = _.get(this.dayTradeRules, [0]);
     let buyingPower: number = _.get(this.nizom, ['buyingPower']);
+    let profit: number = _.get(this.nizom, ['profit']);
     let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(this.nizom)) {
       return;
