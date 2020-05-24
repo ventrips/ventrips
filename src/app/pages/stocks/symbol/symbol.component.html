@@ -118,13 +118,19 @@
                     <ng-container *ngIf="nizom.profit">
                         <span class="font-weight-bold mr-2">Original Buying Power:</span>
                         <span class="mr-2">{{_.round(nizom.buyingPower - nizom.profit, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Total Buying Power:</span>
-                        <span class="mr-2">{{_.round(nizom.buyingPower, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Weekly Profit:</span>
-                        <span class="mr-2">{{_.round(nizom.profit, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Yearly Profit:</span>
+                        <span class="font-weight-bold mr-2">Weekly Returns:</span>
                         <span class="mr-2">
-                            <span class="mr-2">{{_.round(nizom.profit * 50, 2)}}</span>
+                            <span class="mr-2">${{_.round(nizom.profit, 2)}}</span>
+                            <span>({{_.round(100 * ((nizom.profit) / (nizom.buyingPower - nizom.profit)), 2)}}%)</span>
+                        </span>
+                        <span class="font-weight-bold mr-2">EST Monthly Returns:</span>
+                        <span class="mr-2">
+                            <span class="mr-2">${{_.round(nizom.profit * 4, 2)}}</span>
+                            <span>({{_.round(100 * ((nizom.profit * 4) / (nizom.buyingPower - nizom.profit)), 2)}}%)</span>
+                        </span>
+                        <span class="font-weight-bold mr-2">EST Yearly Returns:</span>
+                        <span class="mr-2">
+                            <span class="mr-2">${{_.round(nizom.profit * 50, 2)}}</span>
                             <span>({{_.round(100 * ((nizom.profit * 50) / (nizom.buyingPower - nizom.profit)), 2)}}%)</span>
                         </span>
                     </ng-container>
