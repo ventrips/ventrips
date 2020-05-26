@@ -155,7 +155,7 @@ export class DynamicChartComponent implements OnInit {
     const now = moment(this.lineChartLabels[index]);
     const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
     // Don't buy anything by 12pm PST because one hour before closing
-    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local();
+    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 15, minutes: 0, seconds: 0}).local();
     return moment(now).isSameOrAfter(dayOpen) && moment(now).isSameOrBefore(dayClose);
   }
 
