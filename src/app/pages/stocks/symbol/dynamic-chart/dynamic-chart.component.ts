@@ -185,6 +185,7 @@ export class DynamicChartComponent implements OnInit {
       this.lineChartData.push(axisData);
     });
     this.lineChartOptions = {
+      responsive: true,
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
         xAxes: [{
