@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as _ from 'lodash';
@@ -186,6 +186,18 @@ export class DynamicChartComponent implements OnInit {
     });
     this.lineChartOptions = {
       responsive: true,
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem: any) => {
+            let label = `${_.startCase(keys[tooltipItem.datasetIndex])}:`;
+            label += ` ${tooltipItem.yLabel}`;
+            if (!_.isEqual(keys[tooltipItem.datasetIndex], 'volume')) {
+              label += ` (${_.round(((tooltipItem.yLabel - this.day.open) / this.day.open) * 100, 2)}%)`;
+            }
+            return label;
+          }
+        }
+      },
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
         xAxes: [{
@@ -615,7 +627,6 @@ export class DynamicChartComponent implements OnInit {
     const highs: Array<any> = _.get(this.chartData, ['high']);
     const volumes: Array<any> = _.get(this.chartData, ['volume']);
     const closes: Array<any> = _.get(this.chartData, ['close']);
-
     this.lineChartData = [];
     this.lineChartLabels = _.map(_.get(this.chartData, ['date']), (date: any) => {
       return moment.tz(date, _.get(this.metaData, ['timeZone'])).local().format('LLL');
