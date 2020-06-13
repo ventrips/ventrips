@@ -142,13 +142,14 @@ export class DynamicChartComponent implements OnInit {
     this.day.volume = _.get(this.data, ['volume', 0]);
   }
 
-  // Make a copy of original data and modify the very first minute (index 0) since API gives overall values for the day instead
   setChartData() {
     this.chartData = _.cloneDeep(this.data);
-    this.chartData.low[0] = this.chartData.open[0];
-    this.chartData.high[0] = this.chartData.open[0];
-    this.chartData.close[0] = this.chartData.open[0];
-    this.chartData.volume[0] = this.chartData.volume[1];
+    // If we want to enable open market prices
+    // Make a copy of original data and modify the very first minute (index 0) since API gives overall values for the day instead
+    // this.chartData.low[0] = this.chartData.open[0];
+    // this.chartData.high[0] = this.chartData.open[0];
+    // this.chartData.close[0] = this.chartData.open[0];
+    // this.chartData.volume[0] = this.chartData.volume[1];
   }
 
   isBetweenCustomTradeTimes(index: number): boolean {

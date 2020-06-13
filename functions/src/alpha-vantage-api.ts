@@ -24,20 +24,24 @@ const setFirebase = (request: any, response: any, data: any, firebasePath: strin
 }
 
 
-const convertChartData = (intraData: any, dayData: any, interval: string) => {
+const convertChartData = (interval: string, intraData: any, dayData: any = {}) => {
     const fiveMinDates = Object.keys(intraData[`Time Series (${interval})`]).map(date => new Date(date).getTime());
     const minDate = `${((new Date(Math.min(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
     const maxDate = `${((new Date(Math.max(...fiveMinDates))).toISOString()).substring(0, 10)} 09:30:00`;
 
-    _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
-        _.set(dayData['Time Series (Daily)'], `${key} 09:30:00`, value);
-        _.unset(dayData['Time Series (Daily)'], key);
-    });
-    _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
-        if (((new Date(key).getTime()) >= (new Date(minDate).getTime())) && ((new Date(key).getTime()) <= (new Date(maxDate).getTime()))) {
-            _.set(intraData[`Time Series (${interval})`], key, value);
-        }
-    });
+    // If we want to enable open market prices
+    if (_.has(dayData, 'Time Series (Daily)')) {
+        _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
+            _.set(dayData['Time Series (Daily)'], `${key} 09:30:00`, value);
+            _.unset(dayData['Time Series (Daily)'], key);
+        });
+        _.forEach(dayData['Time Series (Daily)'], (value: any, key: any) => {
+            if (((new Date(key).getTime()) >= (new Date(minDate).getTime())) && ((new Date(key).getTime()) <= (new Date(maxDate).getTime()))) {
+                _.set(intraData[`Time Series (${interval})`], key, value);
+            }
+        });
+    }
+
     let dates: Array<any> = [];
     _.forEach(intraData[`Time Series (${interval})`], (value: any, key: any) => {
         dates.push(_.assign(value, { date: key }));
@@ -81,22 +85,23 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
     const symbol = _.toUpper(request.query.symbol);
     const interval = _.toLower(request.query.interval);
 
-    let data = {};
-    let intraData;
-    let dayData;
+    let data: any = {};
+    let intraData: any = {};
+    let dayData: any = {};
 
     /* Mock */
     // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');
     // dayData = require('./../mocks/alpha-vantage-api/alpha-vantage-1-day-api.json');
-    // data = convertChartData(intraData, dayData, interval);
+    // data = convertChartData(interval, intraData, dayData);
     // return setFirebase(request, response, data, 'trends/alpha-vantage-api', false);
 
     /* Real */
     try {
         intraData = await commonRequest({function: 'TIME_SERIES_INTRADAY', symbol, interval, outputsize: 'full'}, BASE_URL, API_KEY);
-        dayData = await commonRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'}, BASE_URL, API_KEY);
+        // If we want to enable open market prices
+        // dayData = await commonRequest({function: 'TIME_SERIES_DAILY', symbol, outputsize: 'compact'}, BASE_URL, API_KEY);
         const yahooFinanceData: any = await getSingleYahooFinanceAPI(symbol);
-        data = convertChartData(intraData, dayData, interval);
+        data = convertChartData(interval, intraData, dayData);
         _.set(data, 'yahooFinance', yahooFinanceData);
         setFirebase(request, response, data, `symbol/${symbol}`, true);
     } catch {
