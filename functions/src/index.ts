@@ -9,6 +9,7 @@ admin.initializeApp();
 const db = admin.firestore();
 export * from './news-api';
 export * from './alpha-vantage-api';
+export * from './ventrips';
 // export * from './yahoo-finance-api';
 
 // import * as Stripe from 'stripe';

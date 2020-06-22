@@ -83,7 +83,7 @@
                             placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Remove Rule</label>
+                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Profit ({{getProfitSharePercentageRange(rule)}}%)</label>
                         <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
                     </div>
                 </ng-container>
@@ -117,11 +117,24 @@
                     <span class="mr-2">{{data.length}}</span>
                     <ng-container *ngIf="nizom.profit">
                         <span class="font-weight-bold mr-2">Original Buying Power:</span>
-                        <span class="mr-2">{{_.round(nizom.buyingPower - nizom.profit, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Total Buying Power:</span>
-                        <span class="mr-2">{{_.round(nizom.buyingPower, 2)}}</span>
-                        <span class="font-weight-bold mr-2">Profit:</span>
-                        <span class="mr-2">{{_.round(nizom.profit, 2)}}</span>
+                        <span class="mr-2">${{_.round(getOriginalBuyingPower(), 2)}}</span>
+                        <span class="font-weight-bold mr-2">{{data.length}}-Day Profit:</span>
+                        <span>
+                            <span class="mr-1">${{_.round(nizom.profit, 2)}}</span>
+                            <span>({{getPercentage(nizom.profit, getOriginalBuyingPower())}}%)</span>
+                        </span>
+                        <div>
+                            <span class="font-weight-bold mr-2">Estimated Yearly Profit:</span>
+                            <span class="mr-2">
+                                <span class="mr-1">${{_.round(nizom.profit * getYear(), 2)}}</span>
+                                <span>({{getPercentage((nizom.profit * getYear()), getOriginalBuyingPower())}}%)</span>
+                            </span>
+                            <span class="font-weight-bold mr-2">Estimated Yearly Profit Compounded:</span>
+                            <span class="mr-2">
+                                <span class="mr-1">${{_.round(getYearlyProfit(), 2)}}</span>
+                                <span>({{getPercentage(getYearlyProfit(), getOriginalBuyingPower())}}%)</span>
+                            </span>    
+                        </div>
                     </ng-container>
                 </div>
             </div>

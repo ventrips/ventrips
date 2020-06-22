@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as _ from 'lodash';
@@ -132,31 +132,41 @@ export class DynamicChartComponent implements OnInit {
 
   // Simplify to access overall day's values
   setDay() {
-    this.day.open = _.round(_.get(this.data, ['open', 0]), 2);
-    this.day.close = _.round(_.get(this.data, ['close', 0]), 2);
-    this.day.low = _.round(_.get(this.data, ['low', 0]), 2);
-    this.day.high = _.round(_.get(this.data, ['high', 0]), 2);
+    const findMarketOpenIndex = _.findIndex(_.get(this.data, ['date']), (date: string) => {
+      const now = moment.tz(date, _.get(this.metaData, ['timeZone']));
+      const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
+      return now.isSameOrAfter(dayOpen);
+    });
+
+    if (findMarketOpenIndex < 0) {
+      return;
+    }
+    this.day.open = _.round(_.get(this.data, ['open', findMarketOpenIndex]), 2);
+    this.day.close = _.round(_.get(this.data, ['close', findMarketOpenIndex]), 2);
+    this.day.low = _.round(_.get(this.data, ['low', findMarketOpenIndex]), 2);
+    this.day.high = _.round(_.get(this.data, ['high', findMarketOpenIndex]), 2);
     this.day.openToLowPercent = _.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
     this.day.openToHighPercent = _.round(((this.day.high - this.day.open) / this.day.open) * 100, 2);
     this.day.lowToHighRange = _.round(Math.abs(this.day.low - this.day.high), 2);
-    this.day.volume = _.get(this.data, ['volume', 0]);
+    this.day.volume = _.get(this.data, ['volume', findMarketOpenIndex]);
   }
 
-  // Make a copy of original data and modify the very first minute (index 0) since API gives overall values for the day instead
   setChartData() {
     this.chartData = _.cloneDeep(this.data);
-    this.chartData.low[0] = this.chartData.open[0];
-    this.chartData.high[0] = this.chartData.open[0];
-    this.chartData.close[0] = this.chartData.open[0];
-    this.chartData.volume[0] = this.chartData.volume[1];
+    // If we want to enable open market prices
+    // Make a copy of original data and modify the very first minute (index 0) since API gives overall values for the day instead
+    // this.chartData.low[0] = this.chartData.open[0];
+    // this.chartData.high[0] = this.chartData.open[0];
+    // this.chartData.close[0] = this.chartData.open[0];
+    // this.chartData.volume[0] = this.chartData.volume[1];
   }
 
   isBetweenCustomTradeTimes(index: number): boolean {
     const now = moment(this.lineChartLabels[index]);
-    const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
+    const dayOpen = moment.tz(now, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
     // Don't buy anything by 12pm PST because one hour before closing
-    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local();
-    return moment(now).isSameOrAfter(dayOpen) && moment(now).isSameOrBefore(dayClose);
+    const dayClose = moment.tz(now, _.get(this.metaData, ['timeZone'])).set({hours: 15, minutes: 0, seconds: 0});
+    return moment(now).isBetween(dayOpen, dayClose);
   }
 
   chartOptions(): void {
@@ -185,6 +195,19 @@ export class DynamicChartComponent implements OnInit {
       this.lineChartData.push(axisData);
     });
     this.lineChartOptions = {
+      responsive: true,
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem: any) => {
+            let label = `${_.startCase(keys[tooltipItem.datasetIndex])}:`;
+            label += ` ${tooltipItem.yLabel}`;
+            if (!_.isEqual(keys[tooltipItem.datasetIndex], 'volume')) {
+              label += ` (${_.round(((tooltipItem.yLabel - this.day.open) / this.day.open) * 100, 2)}%)`;
+            }
+            return label;
+          }
+        }
+      },
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
         xAxes: [{
@@ -238,23 +261,6 @@ export class DynamicChartComponent implements OnInit {
     if (_.isEmpty(this.dayTradeRules) || _.isEmpty(opens) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(closes)) {
       return;
     }
-    // 8:00AM
-    // this.lineChartOptions.annotation.annotations.push(
-    //   {
-    //     drawTime: 'afterDatasetsDraw',
-    //     type: "line",
-    //     mode: "vertical",
-    //     scaleID: "x-axis-0",
-    //     value: this.lineChartLabels[_.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment().set({hours: 8, minutes: 0, seconds: 0}).format('hh:mm:ss A')))],
-    //     borderColor: "purple",
-    //     borderWidth: 10,
-    //     label: {
-    //       content: '8:00AM',
-    //       enabled: true,
-    //       position: "bottom"
-    //     }
-    //   }
-    // );
     this.dayTradeRuleWorks = {};
     this.dayTradeLogs = {
       CALL: [],
@@ -408,7 +414,7 @@ export class DynamicChartComponent implements OnInit {
         );
         _.set(this.dayTradeRuleWorks, [option, 'success'], true);
         const profitShareRange = _.round(Math.abs(dayTradeSell - dayTradeBuy), 2);
-        const profitSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(_.get(rule, ['sell'])), 2);
+        const profitSharePercentageRange = _.round(Math.abs(_.get(rule, ['sell']) - _.get(rule, ['buy'])), 2);
         this.dayTradeLogs[option].push(`[${index + 1}] Profit of $${profitShareRange}/share (${profitSharePercentageRange}%)`);
         const shares =_.round(Math.floor(buyingPower / dayTradeBuy), 2);
         const totalProfit = _.round(profitShareRange * shares, 2);
@@ -431,6 +437,51 @@ export class DynamicChartComponent implements OnInit {
     } else if (!_.isNil(_.get(this.dayTradeRuleWorks, ['PUT', 'fail'])) && _.get(this.dayTradeRuleWorks, ['PUT', 'fail'])) {
       this.onCountDayTradeRuleWorks.emit({option: 'PUT', status: 'fail'});
     }
+  }
+
+  annotateMarketOpenClose(): void {
+    const findMarketOpenIndex = _.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local().format('hh:mm:ss A')));
+    if (findMarketOpenIndex < 0) {
+      return;
+    }
+    // Market Open
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "vertical",
+        scaleID: "x-axis-0",
+        value: this.lineChartLabels[findMarketOpenIndex],
+        borderColor: "#ffc107",
+        borderWidth: 3,
+        label: {
+          content: 'Open',
+          enabled: true,
+          position: "bottom"
+        }
+      }
+    );
+    const findMarketCloseIndex = _.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local().format('hh:mm:ss A')));
+    if (findMarketCloseIndex < 0) {
+      return;
+    }
+    // Market Close
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "vertical",
+        scaleID: "x-axis-0",
+        value: this.lineChartLabels[findMarketCloseIndex],
+        borderColor: "#ffc107",
+        borderWidth: 3,
+        label: {
+          content: 'Close',
+          enabled: true,
+          position: "bottom"
+        }
+      }
+    );
   }
 
   annotateOpenPrice(
@@ -489,12 +540,13 @@ export class DynamicChartComponent implements OnInit {
 
     const firstRule = _.get(this.dayTradeRules, [0]);
     let buyingPower: number = _.get(this.nizom, ['buyingPower']);
-    let maxDownRiskPercent: number = 10 / 100; // risking 10% per trade
+    let profit: number = _.get(this.nizom, ['profit']);
+    let maxDownRiskPercent: number = 11.1 / 100; // risking 11.1% per trade
     if (_.isNil(firstRule) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(this.nizom)) {
       return;
     }
-    let xDownRiskPercent: number = maxDownRiskPercent; // initially 10%, then 20%, etc...
-    let xDownRiskPercentOverall: number = xDownRiskPercent; // initially 10%, then 10% + 20%, etc...
+    let xDownRiskPercent: number = maxDownRiskPercent; // initially 11.1%, 22.22%, 66.66%, etc...
+    let xDownRiskPercentOverall: number = xDownRiskPercent; // 99.99% max risk of portfolio
     let numBuysFilled: number = 0;
     let buyPercent: number = _.get(firstRule, ['buy']) / 100;
     let sellPercent: number = _.get(firstRule, ['sell']) / 100;
@@ -507,16 +559,14 @@ export class DynamicChartComponent implements OnInit {
     let buyIndex: number = -1;
     let sellIndex: number = -1;
     buyIndex = _.findIndex(lows, (price, index) => {
-      return (price <= buyPrice) && (index > buyIndex);
+      return (price <= buyPrice) && (index > buyIndex) && this.isBetweenCustomTradeTimes(index);
     });
     sellIndex = _.findIndex(highs, (price, index) => {
-      return (price >= sellPrice) && (index > buyIndex);
+      return (price >= sellPrice) && (index > buyIndex) && this.isBetweenCustomTradeTimes(index);
     });
 
-    console.log(moment.tz(this.date, _.get(this.metaData, ['timeZone'])).format('dddd, MMMM Do YYYY'));
-
     const originalBuyingPower = _.cloneDeep(buyingPower);
-    while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
+    while (buyIndex !== -1) {
       const ruleBought: number = lows[buyIndex]; // for annotating the exact low point
 
       const nextNumBuysFilled: number = numBuysFilled + 1;
@@ -561,7 +611,7 @@ export class DynamicChartComponent implements OnInit {
       const nextBuyPercentage: number = buyPercent - (1 / 100);
       const nextBuyPrice: number = this.day.open + (this.day.open * nextBuyPercentage);
       const nextBuyIndex: number = _.findIndex(lows, (price, index) => {
-        return (price <= nextBuyPrice) && (index >= buyIndex); // it's possible for next buy percentage is on same buy index
+        return (price <= nextBuyPrice) && (index >= buyIndex) && this.isBetweenCustomTradeTimes(index); // it's possible for next buy percentage is on same buy index
       });
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
@@ -600,10 +650,11 @@ export class DynamicChartComponent implements OnInit {
 
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>, closes: Array<number>): void {
     this.annotateOpenPrice(opens);
+    this.annotateMarketOpenClose();
     if (this.canEdit) {
       this.annotateOpenPricesReached(opens, lows, highs);
       this.annotateDayTradeRules(opens, lows, highs, closes);
-      // this.annotateNizom(opens, lows, highs, closes);
+      this.annotateNizom(opens, lows, highs, closes);
     }
   }
 
@@ -613,7 +664,6 @@ export class DynamicChartComponent implements OnInit {
     const highs: Array<any> = _.get(this.chartData, ['high']);
     const volumes: Array<any> = _.get(this.chartData, ['volume']);
     const closes: Array<any> = _.get(this.chartData, ['close']);
-
     this.lineChartData = [];
     this.lineChartLabels = _.map(_.get(this.chartData, ['date']), (date: any) => {
       return moment.tz(date, _.get(this.metaData, ['timeZone'])).local().format('LLL');

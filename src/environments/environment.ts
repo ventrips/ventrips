@@ -16,7 +16,8 @@ export const environment = {
     projectId: 'ventrips-website',
     storageBucket: 'ventrips-website.appspot.com',
     messagingSenderId: '556585707956',
-    appId: '1:556585707956:web:752f1d8777908fad'
+    appId: '1:556585707956:web:752f1d8777908fad',
+    measurementId: 'G-Q849X91Y5J'
   },
   googleAnalyticsKey: 'UA-124647836-1',
   facebookAppId: '512336042564323',

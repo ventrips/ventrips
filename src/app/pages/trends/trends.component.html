@@ -16,7 +16,7 @@
             </share-buttons>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-xs-12 col-lg-6">
             <ng-container *ngIf="isPlatformBrowser()">
                 <app-travel></app-travel>
@@ -27,9 +27,9 @@
                 <app-news-api></app-news-api>
             </ng-container>
         </div>
-    </div>
+    </div> -->
 </div>
-<ng-container *ngIf="authService?.isAdmin(user)">
+<ng-container>
     <ng-container *ngIf="isPlatformBrowser()">
         <app-tickers></app-tickers>
     </ng-container>
