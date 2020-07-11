@@ -132,14 +132,20 @@ export class DynamicChartComponent implements OnInit {
 
   // Simplify to access overall day's values
   setDay() {
-    this.day.open = _.round(_.get(this.data, ['open', 0]), 2);
-    this.day.close = _.round(_.get(this.data, ['close', 0]), 2);
-    this.day.low = _.round(_.get(this.data, ['low', 0]), 2);
-    this.day.high = _.round(_.get(this.data, ['high', 0]), 2);
+    const findMarketOpenIndex = _.findIndex(_.get(this.data, ['date']), (date: string) => {
+      return date.includes('09:30:00');
+    });
+    if (findMarketOpenIndex < 0) {
+      return;
+    }
+    this.day.open = _.round(_.get(this.data, ['open', findMarketOpenIndex]), 2);
+    this.day.close = _.round(_.get(this.data, ['close', findMarketOpenIndex]), 2);
+    this.day.low = _.round(_.get(this.data, ['low', findMarketOpenIndex]), 2);
+    this.day.high = _.round(_.get(this.data, ['high', findMarketOpenIndex]), 2);
     this.day.openToLowPercent = _.round(((this.day.low - this.day.open) / this.day.open) * 100, 2);
     this.day.openToHighPercent = _.round(((this.day.high - this.day.open) / this.day.open) * 100, 2);
     this.day.lowToHighRange = _.round(Math.abs(this.day.low - this.day.high), 2);
-    this.day.volume = _.get(this.data, ['volume', 0]);
+    this.day.volume = _.get(this.data, ['volume', findMarketOpenIndex]);
   }
 
   setChartData() {
@@ -252,23 +258,6 @@ export class DynamicChartComponent implements OnInit {
     if (_.isEmpty(this.dayTradeRules) || _.isEmpty(opens) || _.isEmpty(lows) || _.isEmpty(highs) || _.isEmpty(closes)) {
       return;
     }
-    // 8:00AM
-    // this.lineChartOptions.annotation.annotations.push(
-    //   {
-    //     drawTime: 'afterDatasetsDraw',
-    //     type: "line",
-    //     mode: "vertical",
-    //     scaleID: "x-axis-0",
-    //     value: this.lineChartLabels[_.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment().set({hours: 8, minutes: 0, seconds: 0}).format('hh:mm:ss A')))],
-    //     borderColor: "purple",
-    //     borderWidth: 10,
-    //     label: {
-    //       content: '8:00AM',
-    //       enabled: true,
-    //       position: "bottom"
-    //     }
-    //   }
-    // );
     this.dayTradeRuleWorks = {};
     this.dayTradeLogs = {
       CALL: [],
@@ -447,6 +436,51 @@ export class DynamicChartComponent implements OnInit {
     }
   }
 
+  annotateMarketOpenClose(): void {
+    const findMarketOpenIndex = _.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local().format('hh:mm:ss A')));
+    if (findMarketOpenIndex < 0) {
+      return;
+    }
+    // Market Open
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "vertical",
+        scaleID: "x-axis-0",
+        value: this.lineChartLabels[findMarketOpenIndex],
+        borderColor: "#ffc107",
+        borderWidth: 3,
+        label: {
+          content: 'Open',
+          enabled: true,
+          position: "bottom"
+        }
+      }
+    );
+    const findMarketCloseIndex = _.findIndex(this.lineChartLabels, (chart) => _.isEqual(moment(chart).format('hh:mm:ss A'), moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 16, minutes: 0, seconds: 0}).local().format('hh:mm:ss A')));
+    if (findMarketCloseIndex < 0) {
+      return;
+    }
+    // Market Close
+    this.lineChartOptions.annotation.annotations.push(
+      {
+        drawTime: 'afterDatasetsDraw',
+        type: "line",
+        mode: "vertical",
+        scaleID: "x-axis-0",
+        value: this.lineChartLabels[findMarketCloseIndex],
+        borderColor: "#ffc107",
+        borderWidth: 3,
+        label: {
+          content: 'Close',
+          enabled: true,
+          position: "bottom"
+        }
+      }
+    );
+  }
+
   annotateOpenPrice(
     opens: Array<number>
   ): void {
@@ -615,6 +649,7 @@ export class DynamicChartComponent implements OnInit {
 
   annotateChart(opens: Array<number>, lows: Array<number>, highs: Array<number>, closes: Array<number>): void {
     this.annotateOpenPrice(opens);
+    this.annotateMarketOpenClose();
     if (this.canEdit) {
       this.annotateOpenPricesReached(opens, lows, highs);
       this.annotateDayTradeRules(opens, lows, highs, closes);
