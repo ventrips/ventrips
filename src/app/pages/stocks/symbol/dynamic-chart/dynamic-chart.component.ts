@@ -134,7 +134,7 @@ export class DynamicChartComponent implements OnInit {
   setDay() {
     const findMarketOpenIndex = _.findIndex(_.get(this.data, ['date']), (date: string) => {
       const now = moment.tz(date, _.get(this.metaData, ['timeZone']));
-      const dayOpen = moment.tz(date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
+      const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
       return now.isSameOrAfter(dayOpen);
     });
 
@@ -163,10 +163,10 @@ export class DynamicChartComponent implements OnInit {
 
   isBetweenCustomTradeTimes(index: number): boolean {
     const now = moment(this.lineChartLabels[index]);
-    const dayOpen = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0}).local();
+    const dayOpen = moment.tz(now, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
     // Don't buy anything by 12pm PST because one hour before closing
-    const dayClose = moment.tz(this.date, _.get(this.metaData, ['timeZone'])).set({hours: 15, minutes: 0, seconds: 0}).local();
-    return moment(now).isSameOrAfter(dayOpen) && moment(now).isSameOrBefore(dayClose);
+    const dayClose = moment.tz(now, _.get(this.metaData, ['timeZone'])).set({hours: 15, minutes: 0, seconds: 0});
+    return moment(now).isBetween(dayOpen, dayClose);
   }
 
   chartOptions(): void {
@@ -559,16 +559,14 @@ export class DynamicChartComponent implements OnInit {
     let buyIndex: number = -1;
     let sellIndex: number = -1;
     buyIndex = _.findIndex(lows, (price, index) => {
-      return (price <= buyPrice) && (index > buyIndex);
+      return (price <= buyPrice) && (index > buyIndex) && this.isBetweenCustomTradeTimes(index);
     });
     sellIndex = _.findIndex(highs, (price, index) => {
-      return (price >= sellPrice) && (index > buyIndex);
+      return (price >= sellPrice) && (index > buyIndex) && this.isBetweenCustomTradeTimes(index);
     });
 
-    console.log(moment.tz(this.date, _.get(this.metaData, ['timeZone'])).format('dddd, MMMM Do YYYY'));
-
     const originalBuyingPower = _.cloneDeep(buyingPower);
-    while (buyIndex !== -1 && this.isBetweenCustomTradeTimes(buyIndex)) {
+    while (buyIndex !== -1) {
       const ruleBought: number = lows[buyIndex]; // for annotating the exact low point
 
       const nextNumBuysFilled: number = numBuysFilled + 1;
@@ -613,7 +611,7 @@ export class DynamicChartComponent implements OnInit {
       const nextBuyPercentage: number = buyPercent - (1 / 100);
       const nextBuyPrice: number = this.day.open + (this.day.open * nextBuyPercentage);
       const nextBuyIndex: number = _.findIndex(lows, (price, index) => {
-        return (price <= nextBuyPrice) && (index >= buyIndex); // it's possible for next buy percentage is on same buy index
+        return (price <= nextBuyPrice) && (index >= buyIndex) && this.isBetweenCustomTradeTimes(index); // it's possible for next buy percentage is on same buy index
       });
 
       // If sell index exists but nextBuyIndex doesnt or if sell index is less than next buy index
