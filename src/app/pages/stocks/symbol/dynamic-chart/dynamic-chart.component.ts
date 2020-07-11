@@ -133,8 +133,11 @@ export class DynamicChartComponent implements OnInit {
   // Simplify to access overall day's values
   setDay() {
     const findMarketOpenIndex = _.findIndex(_.get(this.data, ['date']), (date: string) => {
-      return date.includes('09:30:00');
+      const now = moment.tz(date, _.get(this.metaData, ['timeZone']));
+      const dayOpen = moment.tz(date, _.get(this.metaData, ['timeZone'])).set({hours: 9, minutes: 30, seconds: 0});
+      return now.isSameOrAfter(dayOpen);
     });
+
     if (findMarketOpenIndex < 0) {
       return;
     }
