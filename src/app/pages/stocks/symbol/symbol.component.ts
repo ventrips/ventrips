@@ -34,7 +34,7 @@ export class SymbolComponent implements OnInit {
   public data: any;
   public updated: firestore.Timestamp;
   public lastRefreshed: any;
-  public interval: string = '1min';
+  public interval: string = '5min';
   public intervalOptions: Array<any> = [
     '1min',
     '5min',
@@ -134,8 +134,8 @@ export class SymbolComponent implements OnInit {
     .subscribe(params => {
       this.url = this.router.url;
       this.symbol = _.toUpper(params.symbol);
-      this.title = `${this.symbol} | Free Historical Intraday Charts`;
-      this.description = `Current Historical Intraday Charts for ${this.symbol}. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+      this.title = `${this.symbol} | Free Historical Intraday Stock Charts`;
+      this.description = `Current Historical Intraday Stock Charts for ${this.symbol}. Look for trading strategies, patterns, and trends in 5 minute intervals of data`;
       this.ssrService.setSeo({
         title: this.title,
         description: this.description,
@@ -192,8 +192,8 @@ export class SymbolComponent implements OnInit {
         // Set long name if exists
         const longName = _.get(this.yahooFinance, ['longName']);
         if (longName) {
-          this.title = `${longName} (${this.symbol}) | Free Historical Intraday Charts`;
-          this.description = `Current Historical Intraday Charts for ${longName} (${this.symbol}). Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+          this.title = `${longName} (${this.symbol}) | Free Historical Intraday Stock Charts`;
+          this.description = `Current Historical Intraday Stock Charts for ${longName} (${this.symbol}). Look for trading strategies, patterns, and trends in 5 minute intervals of data`;
           this.ssrService.setSeo({
             title: this.title,
             description: this.description,

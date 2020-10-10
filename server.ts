@@ -51,7 +51,11 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
+/*
+  https://stackoverflow.com/questions/62056995/firebase-function-for-my-react-app-not-working
+  I discovered this error after upgrading Node from 8 to 10. In my particular case, I was calling app.listen in my app, but Firebase Functions appears to set up the port automatically. Removing app.listen(PORT, () => {}) fixed it for me.
+*/
 // Start up the Node server
-app.listen(PORT, () => {
-  console.log(`Node Express server listening on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Node Express server listening on http://localhost:${PORT}`);
+// });

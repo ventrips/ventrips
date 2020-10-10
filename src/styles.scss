@@ -28,7 +28,6 @@ body {
 
 ::selection {
     background: #ffc107;
-    text-shadow: 0 1px 1px #212529 !important
 }
 
 .fill-available {
@@ -54,7 +53,7 @@ body {
     cursor: pointer;
 }
 
-.text-shadow, h1, h2, h3, h4, h5, h6 {
+.text-shadow {
     text-shadow: 0 1px 1px #212529 !important
 }
 
@@ -68,6 +67,7 @@ img {
 
 /* Custom ngx-quill */
 quill-view-html .ql-container {
+    font-size: 1rem;
     font-family: -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     height: unset;
     .ql-editor {

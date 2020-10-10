@@ -25,8 +25,8 @@ export class StocksComponent implements OnInit {
   public _ = _;
   public user: User;
   public url: string;
-  public title: string = `Free Historical Intraday Charts`;
-  public description: string  = `Current Historical Intraday Charts to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
+  public title: string = `Free Historical Intraday Stock Charts`;
+  public description: string  = `Current Historical Intraday Stock Charts to perform technical analysis. Look for trading strategies, patterns, and trends in 1 minute intervals of data`;
   public collection: string = 'symbol'
   public data: any;
 
