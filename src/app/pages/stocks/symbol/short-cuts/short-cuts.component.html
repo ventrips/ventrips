@@ -1,0 +1,24 @@
+<section class="d-flex flex-wrap my-4">
+    <div class="mb-2">
+        <span class="mr-2 font-weight-bold">Google Trends:</span>
+        <a [href]="getGoogleTrends(yahooFinance, 'now')" title="Google Trends Now on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank"
+            class="mr-2">Now</a>
+        <a [href]="getGoogleTrends(yahooFinance, 'hourly')" title="Google Trends Hourly on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank"
+            class="mr-2">1H</a>
+        <a [href]="getGoogleTrends(yahooFinance, 'daily')" title="Google Trends Daily on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank"
+            class="mr-2">1D</a>
+        <a [href]="getGoogleTrends(yahooFinance, 'weekly')" title="Google Trends Weekly on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank"
+            class="mr-2">1W</a>
+        <a [href]="getGoogleTrends(yahooFinance, 'yearly')" title="Google Trends Yearly on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank"
+            class="mr-2">1Y</a>
+    </div>
+    <div class="d-flex flex-wrap">
+        <a [href]="getStocktwits(yahooFinance)" title="Stocktwits on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">Stocktwits</a>
+        <a [href]="getTwitter(yahooFinance)" title="Twitter on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">Twitter</a>
+        <a [href]="getSwingTradeBot(yahooFinance)" title="SwingTradeBot on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">SwingTradeBot</a>
+        <a [href]="getYahooFinance(yahooFinance)" title="Yahoo Finance on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">Yahoo Finance</a>
+        <a [href]="getTradingView(yahooFinance)" title="TradingView on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">TradingView</a>
+        <a [href]="getMarketWatch(yahooFinance)" title="MarketWatch on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">MarketWatch</a>
+        <a [href]="getNasdaq(yahooFinance)" title="NASDAQ on {{yahooFinance?.longName}} ({{yahooFinance?.symbol}})" target="__blank" class="mr-2">NASDAQ</a>
+    </div>
+</section>

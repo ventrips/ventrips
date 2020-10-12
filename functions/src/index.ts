@@ -1,11 +1,17 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
-const Utils = require('./utils');
+import { cors } from './utils';
 const Trends = require('./trends');
+const Travel = require('./travel');
 
 admin.initializeApp();
 const db = admin.firestore();
+export * from './news-api';
+export * from './alpha-vantage-api';
+export * from './ventrips';
+// export * from './yahoo-finance-api';
+
 // import * as Stripe from 'stripe';
 // const stripe = new Stripe(functions.config().stripe.secret);
 
@@ -16,21 +22,21 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+export const searchNews = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
+    cors(request, response);
     Trends.searchNews(request, response, false);
 });
 
-export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+export const chartTrends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
+    cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const data = await Trends.chartTrends(request, response, useMock);
 
     response.send(data);
 });
 
-export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request, response): Promise<any> => {
-    Utils.cors(request, response);
+export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
+    cors(request, response);
     const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
     const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
     const data = await Trends.trends(request, response, useMock);
@@ -39,8 +45,27 @@ export const trends = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).
         response.send(data);
     } else {
         const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
-        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&production=true
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/trends?mock=false&local=true
         return db.doc(`trends/trends`).set(final).then((res) => {
+            response.send(final);
+        }).catch((error) => {
+            response.send(error);
+        });
+    }
+});
+
+export const getTravelNumbers = functions.runWith({ timeoutSeconds: 540, memory: '1GB' }).https.onRequest(async (request: any, response: any): Promise<any> => {
+    cors(request, response);
+    const useMock = _.isEqual(_.toLower(_.get(request, ['query', 'mock'])), 'true');
+    const isLocal = _.isEqual(_.toLower(_.get(request, ['query', 'local'])), 'true');
+    const data = await Travel.getTravelNumbers(request, response, useMock);
+
+    if (isLocal) {
+        response.send(data);
+    } else {
+        const final = _.assign(data, {updated: admin.firestore.FieldValue.serverTimestamp()});
+        // USE POSTMAN - http://localhost:5001/ventrips-website/us-central1/travelNumbers?mock=false&local=false
+        return db.doc(`travel/travelNumbers`).set(final).then((res) => {
             response.send(final);
         }).catch((error) => {
             response.send(error);

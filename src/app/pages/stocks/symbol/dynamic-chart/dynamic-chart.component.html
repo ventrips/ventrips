@@ -1,0 +1,58 @@
+<section class="mb-5 bg-white">
+    <div class="text-center my-3">
+        <h5 class="text-uppercase text-wrap">
+            {{yahooFinance?.shortName}} ({{yahooFinance?.symbol}})
+        </h5>
+        <h6 class="text-uppercase">{{date | date:'fullDate'}}</h6>
+        <div *ngIf="!_.isNil(_.get(data, ['bullish']))" class="mb-2">
+            <span *ngIf="_.get(data, ['bullish'])" class="badge badge-success font-weight-bold text-uppercase">
+                Bullish
+            </span>
+            <span *ngIf="!_.get(data, ['bullish'])" class="badge badge-danger font-weight-bold text-uppercase">
+                Bearish
+            </span>
+        </div>
+    </div>
+    <div *ngIf="day" class="p-2 bg-warning">
+        <div class="d-flex flex-wrap font-weight-bold justify-content-center">
+            <span class="text-center mr-2">Open: {{day?.open}}</span>
+            <span class="text-center mr-2">Close: {{day?.close}}</span>
+            <span class="text-center mr-2">Low: {{day?.low}} ({{day?.openToLowPercent}}%)</span>
+            <span class="text-center mr-2">High: {{day?.high}} ({{day?.openToHighPercent}}%)</span>
+            <span class="text-center mr-2">Range: {{day?.lowToHighRange}}</span>
+            <span class="text-center">Volume: {{day?.volume | numberSuffix}}</span>
+        </div>
+    </div>
+    <div class="row no-gutters small" *ngIf="canEdit && (!_.isEmpty(dayTradeLogs.CALL) || !_.isEmpty(dayTradeLogs.PUT))">
+        <div *ngIf="!_.isEmpty(dayTradeLogs.CALL)" class="col-xs-12 col p-2 border border-warning">
+            <h6 class="text-uppercase">
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success" class="badge badge-success p-2">CALL Succeeded</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.success && dayTradeRuleWorks?.CALL?.fail" class="mx-2">&amp;</span>
+                <span *ngIf="dayTradeRuleWorks?.CALL?.fail" class="badge badge-danger p-2">CALL Failed</span>
+            </h6>
+            <p class="mb-0" *ngFor="let call of dayTradeLogs.CALL">
+                {{call}}
+            </p>
+        </div>
+        <div *ngIf="!_.isEmpty(dayTradeLogs.PUT)" class="col-xs-12 col p-2 border border-warning">
+            <h6 class="text-uppercase">
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success" class="badge badge-success p-2">PUT Succeeded</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.success && dayTradeRuleWorks?.PUT?.fail" class="mx-2">&amp;</span>
+                <span *ngIf="dayTradeRuleWorks?.PUT?.fail" class="badge badge-danger p-2">PUT Failed</span>
+            </h6>
+            <p class="mb-0" *ngFor="let put of dayTradeLogs.PUT">
+                {{put}}
+            </p>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="flex-item">
+            <div style="display: block;">
+                <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                    [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" [colors]="lineChartColors"
+                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</section>

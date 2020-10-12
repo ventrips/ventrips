@@ -1,8 +1,10 @@
 // import * as puppeteer from 'puppeteer';
 // import * as moment from 'moment';
+import * as querystring from 'querystring';
+import * as Request from 'request';
 import * as _ from 'lodash';
 
-exports.cors = function(request: any, response: any): void {
+export const cors = function(request: any, response: any): void {
     const allowedOrigins: Array<String> = ['http://localhost:4200', 'https://www.ventrips.com'];
     const origin: any = request.headers.origin;
     if (_.indexOf(allowedOrigins, origin) > -1) {
@@ -10,6 +12,22 @@ exports.cors = function(request: any, response: any): void {
     }
     return;
 }
+
+export const commonRequest = async (params: any, BASE_URL: string, API_KEY?: string): Promise<any> => {
+    return new Promise((resolve: any, reject: any) => {
+        if (!_.isNil(API_KEY)) {
+            _.set(params, 'apikey', API_KEY);
+        }
+        const url = `${BASE_URL}?${querystring.stringify(params)}`;
+        Request(url, function (error: any, res: any, body: any) {
+            if (!_.isNil(error)) {
+                reject(error);
+            }
+            const data = JSON.parse(body);
+            resolve(data);
+        });
+    });
+};
 
 // exports.puppeteerScrape = async function(url: string, baseUrl: string, sectionsTarget: string, keysObj: object): Promise<any> {
 //     const results: Array<any> = [];

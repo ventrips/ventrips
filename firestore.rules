@@ -55,11 +55,26 @@ service cloud.firestore {
       allow read;
       allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
     }
+		match /symbol/{document} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+      allow read;
+      allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+    }
 		match /trends/{document} {
       function getRole(role) {
         return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
       }
-      allow read, create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+      allow read;
+      allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
+    }
+		match /travel/{document} {
+      function getRole(role) {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+      }
+      allow read;
+      allow create, update, delete: if getRole('admin') == true || getRole('editor') == true;
     }
 	}
 }

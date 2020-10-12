@@ -15,7 +15,7 @@ const COLLECTION = 'forms';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-  public form: Contact = new Contact('', '', '', '', firestore.Timestamp.fromDate(new Date()));
+  public form: Contact = new Contact('', '', '', '', undefined);
   public user: User;
   public collection = COLLECTION;
 
@@ -50,7 +50,7 @@ export class ContactFormComponent implements OnInit {
       _.get(this.user, ['displayName'], '') || '',
       _.get(this.user, ['email'], '') || '',
       '',
-      firestore.Timestamp.fromDate(new Date())
+      undefined
     );
   }
 

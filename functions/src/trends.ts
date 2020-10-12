@@ -5,7 +5,7 @@ const RequestPromise = require('request-promise');
 const Cheerio = require('cheerio');
 const UserAgent = require('user-agents');
 
-// const Utils = require('./utils');
+// import { cors } from './utils';
 // const GoogleTrends = require('google-trends-api');
 const { ExploreTrendRequest } = require('g-trends')
 // import * as puppeteer from 'puppeteer';
@@ -170,7 +170,7 @@ function constructData(data: any) {
         article.sentiment = sentiment;
     });
     const overallSentiment = new Sentiment();
-    data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
+    data.overallSentiment = overallSentiment.analyze(_.join(_.reduce(_.get(data, ['articles']), (list: any, article: any) => _.concat(list, article.sentiment.tokens), []), ' '));
     return data;
 }
 
@@ -668,7 +668,7 @@ const getBarronsNews = async function(useMock: boolean = false): Promise<any> {
         RequestPromise(options)
         .then(($: any) => {
             const data: Array<any> = [];
-            $('.BarronsTheme--scroll-bar--3vISrLk6 > .BarronsTheme--story--3Z0LVZ5M').each(function (this: any, index: number) {
+            $('.BarronsTheme--scroll-bar--10VqbQwZ > .BarronsTheme--story--13Re0lAk').each(function (this: any, index: number) {
                 const obj = {
                     url: `${$(this).find('a').attr('href')}`,
                     title: $(this).find('h3').text(),

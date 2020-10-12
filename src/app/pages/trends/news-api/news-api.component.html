@@ -1,0 +1,39 @@
+<section *ngIf="data">
+    <div class="text-center">
+        <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshNewsApi()">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+            </ng-container>
+            Refresh
+        </button>
+        <p class="small text-secondary my-3 mr-3" *ngIf="data?.updated">
+            Last Updated: {{data?.updated | timeStampDate:'short'}} ({{data?.updated | timeAgo}})
+        </p>
+    </div>
+    <!-- Overall -->
+    <div class="d-flex flex-wrap mb-2">
+        <h3 class="mb-0 mr-3">Recent Updates</h3>
+        <span class="badge" [ngClass]="{'badge-success': data?.isBullish, 'badge-danger': !data?.isBullish}">
+            <span class="h4">{{data?.isBullish ? 'Bullish' : 'Bearish'}}</span>
+        </span>
+        <div class="ml-auto">
+            <span class="h4 mr-3">Sentiment: {{data?.overallSentiment?.score}}</span>
+        </div>
+    </div>
+    <div class="input-group" *ngIf="authService?.canEdit(user)">
+        <input type="text" class="form-control form-control" aria-label="Search for company name, ticker symbol, anything" placeholder="Search for company name, ticker symbol, anything"
+            [(ngModel)]="search" />
+        <div class="input-group-append">
+            <button class="btn btn-warning" [disabled]="!search" (click)="refreshNewsApi()">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                </ng-container>
+            </button>
+        </div>
+    </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm border overflow-auto">
+        <div *ngFor="let article of data?.articles; let index = index">
+            <app-news-api-article [article]="article"></app-news-api-article>
+        </div>
+    </div>
+</section>

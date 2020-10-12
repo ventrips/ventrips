@@ -1,0 +1,207 @@
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center pt-2 mb-5">
+    <ng-adsense [fullWidthResponsive]="true" [display]="'block'" [adClient]="'ca-pub-4642980268605791'" [adSlot]=2801999023 [adFormat]="'auto'">
+    </ng-adsense>
+</section>
+<div class="container my-5">
+    <nav aria-label="breadcrumb mb-3">
+        <ol class="breadcrumb h4 bg-light mr-5 mb-0 p-0">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['', 'symbol']" class="badge badge-dark text-white text-capitalize py-2 pr-2">Stocks</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a [routerLink]="[]" class="badge badge-warning text-dark text-capitalize py-2 pr-2">{{symbol}}</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="h5 my-5">
+        <h1 class="mb-4">{{title}}</h1>
+        <p class="my-3">
+            {{description}}
+        </p>
+    </div>
+    <section class="mb-3 d-flex flex-wrap align-items-center">
+        <!-- <span class="h5 my-2 mr-3">Share</span>
+        <share-buttons [theme]="'default'" [include]="['twitter', 'facebook', 'linkedin', 'reddit', 'tumblr', 'copy']" [exclude]="[]"
+            [showText]="false" [showCount]="false" url="{{environment.url}}{{url}}">
+        </share-buttons> -->
+    </section>
+    <ng-container *ngIf="yahooFinance">
+        <app-short-cuts [yahooFinance]="yahooFinance"></app-short-cuts>
+    </ng-container>
+    <div class="my-4 px-2 text-white bg-dark" [ngClass]="{'sticky-top': !authService?.canEdit(user)}" *ngIf="metaData?.symbol">
+        <app-symbol-search-bar *ngIf="!authService?.canEdit(user)" [symbol]="symbol" [size]="'sm'"></app-symbol-search-bar>
+        <div class="input-group my-3 pt-3" *ngIf="authService?.canEdit(user)">
+            <div class="input-group-prepend">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-sm btn-warning" id="order-by-dropdown" title="Sort By" ngbDropdownToggle>
+                        {{ interval ? interval : 'Interval' }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+                        <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="!_.isEqual(option, interval)" [class.active]="_.isEqual(option, interval)"
+                            [disabled]="_.isEqual(option, interval)" *ngFor="let option of intervalOptions" (click)="interval = option">
+                            {{option}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <input type="text" class="form-control form-control-sm" aria-label="Search for symbol" placeholder="Search for symbol" [(ngModel)]="symbol"
+            />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-warning" [disabled]="!symbol" (click)="refreshData()">
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon [icon]="['fas', 'search']" class="text-dark"></fa-icon>
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+        <div class="py-3" *ngIf="authService?.canEdit(user)">
+            <div class="form-row">
+                <ng-container *ngFor="let rule of tempDayTradeRules; let index = index;">
+                    <div class="col-md-2 mb-3">
+                        <label for="dayTradeOption-{{index}}">[{{index + 1}}] Option Type</label>
+                        <div ngbDropdown class="d-block">
+                            <button class="btn btn-sm btn-block btn-warning" id="dayTradeOption-{{index}}" title="Day Trade Option" ngbDropdownToggle>
+                                {{ rule?.option ? rule?.option : 'CALL / PUT' }}
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="order-by-dropdown">
+                                <button class="dropdown-item cursor-pointer" [class.cursor-pointer]="!_.isEqual(option, rule?.option)" [class.active]="_.isEqual(option, rule?.option)"
+                                    [disabled]="_.isEqual(option, rule?.option)" *ngFor="let option of dayTradeOptions" (click)="rule.option = option; setDayTradeRules()">
+                                    {{option}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="dayTradeBuy-{{index}}">[{{index + 1}}] Buy from Open Price ({{rule?.buy}}%)</label>
+                        <input type="number" id="dayTradeBuy-{{index}}" name="dayTradeBuy-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Buy"
+                            placeholder="Day Trade Buy" [(ngModel)]="rule.buy" (keyup)="applyAutoSave($event.target.value)"/>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="dayTradeSell-{{index}}">[{{index + 1}}] Sell from Open Price ({{rule?.sell}}%)</label>
+                        <input type="number" id="dayTradeSell-{{index}}" name="dayTradeSell-{{index}}" class="form-control form-control-sm" aria-label="Day Trade Sell"
+                            placeholder="Day Trade Sell" [(ngModel)]="rule.sell" (keyup)="applyAutoSave($event.target.value)"/>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="dayTradeRemove-{{index}}">[{{index + 1}}] Profit ({{getProfitSharePercentageRange(rule)}}%)</label>
+                        <button id="dayTradeRemove-{{index}}" class="btn btn-sm btn-block btn-danger" (click)="tempDayTradeRules.splice(index, 1); setDayTradeRules()">Remove</button>
+                    </div>
+                </ng-container>
+            </div>
+            <button class="btn btn-outline-warning btn-sm btn-block mb-3" (click)="tempDayTradeRules.push({option: undefined, buy: undefined, sell: undefined})">Create Rule</button>
+            <div *ngIf="authService?.canEdit(user)" class="p-3 bg-light text-dark rounded small">
+                <div class="mb-2" *ngIf="countDayTradeRuleWorks.CALL.total !== 0">
+                    <span class="font-weight-bold mr-1">CALL Success Rate:</span>
+                    <span class="mr-1" *ngIf="countDayTradeRuleWorks">{{_.round((_.get(countDayTradeRuleWorks, ['CALL', 'success'], 0) / _.get(countDayTradeRuleWorks, ['CALL',
+                        'total'], 0)) * 100, 2)}}%</span>
+                    <span class="font-weight-bold mr-1">Success:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.success}}</span>
+                    <span class="font-weight-bold mr-1">Fail:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.fail}}</span>
+                    <span class="font-weight-bold mr-1">Attempts:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.CALL.total}}</span>
+                </div>
+                <div class="mb-2" *ngIf="countDayTradeRuleWorks.PUT.total !== 0">
+                    <span class="font-weight-bold mr-1">PUT Success Rate:</span>
+                    <span class="mr-1" *ngIf="countDayTradeRuleWorks">{{_.round((_.get(countDayTradeRuleWorks, ['PUT', 'success'], 0) / _.get(countDayTradeRuleWorks, ['PUT',
+                        'total'], 0)) * 100, 2)}}%</span>
+                    <span class="font-weight-bold mr-1">Success:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.success}}</span>
+                    <span class="font-weight-bold mr-1">Fail:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.fail}}</span>
+                    <span class="font-weight-bold mr-1">Attempts:</span>
+                    <span class="mr-1">{{countDayTradeRuleWorks?.PUT.total}}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-weight-bold mr-2">Trading Days:</span>
+                    <span class="mr-2">{{data.length}}</span>
+                    <ng-container *ngIf="nizom.profit">
+                        <span class="font-weight-bold mr-2">Original Buying Power:</span>
+                        <span class="mr-2">${{_.round(getOriginalBuyingPower(), 2)}}</span>
+                        <span class="font-weight-bold mr-2">{{data.length}}-Day Profit:</span>
+                        <span>
+                            <span class="mr-1">${{_.round(nizom.profit, 2)}}</span>
+                            <span>({{getPercentage(nizom.profit, getOriginalBuyingPower())}}%)</span>
+                        </span>
+                        <div>
+                            <span class="font-weight-bold mr-2">Estimated Yearly Profit:</span>
+                            <span class="mr-2">
+                                <span class="mr-1">${{_.round(nizom.profit * getYear(), 2)}}</span>
+                                <span>({{getPercentage((nizom.profit * getYear()), getOriginalBuyingPower())}}%)</span>
+                            </span>
+                            <span class="font-weight-bold mr-2">Estimated Yearly Profit Compounded:</span>
+                            <span class="mr-2">
+                                <span class="mr-1">${{_.round(getYearlyProfit(), 2)}}</span>
+                                <span>({{getPercentage(getYearlyProfit(), getOriginalBuyingPower())}}%)</span>
+                            </span>    
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="text-center small text-dark my-3" *ngIf="!_.isEmpty(lastRefreshed)">
+        Last Refreshed: {{lastRefreshed | date:'fullDate'}} @ {{lastRefreshed | date:'mediumTime'}}
+    </p>
+    <ng-container *ngIf="authService?.canEdit(user)">
+        <p class="text-center small my-3 text-dark" *ngIf="updated">
+            Last Updated: {{updated | timeStampDate:'short'}} ({{updated | timeAgo}})
+        </p>
+    </ng-container>
+    <ng-container *ngIf="yahooFinance">
+        <div class="d-flex flex-wrap align-items-center mb-3">
+            <div class="cursor-pointer mb-2" (click)="toggleHorizontalView = !toggleHorizontalView">
+                <button class="btn btn-info">
+                    {{toggleHorizontalView ? 'Horizontal' : 'Vertical'}} View
+                    <ng-container *ngIf="isPlatformBrowser()">
+                        <fa-icon *ngIf="toggleHorizontalView" class="text-white" [icon]="['fas', 'arrows-alt-h']"></fa-icon>
+                        <fa-icon *ngIf="!toggleHorizontalView" class="text-white" [icon]="['fas', 'arrows-alt-v']"></fa-icon>
+                    </ng-container>
+                </button>
+            </div>
+            <div class="ml-auto cursor-pointer mb-2" (click)="toggleDetails = !toggleDetails">
+                <ng-container *ngIf="isPlatformBrowser()">
+                    <fa-icon *ngIf="toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'times']"></fa-icon>
+                    <fa-icon *ngIf="!toggleDetails" class="text-dark fa-2x" [icon]="['fas', 'info-circle']"></fa-icon>
+                </ng-container>
+            </div>
+            <section class="row no-gutters mb-5 p-3 bg-dark text-white rounded" *ngIf="toggleDetails">
+                <div class="col-xs-12 col-md-6 h6" *ngFor="let key of _.keys(yahooFinance)">
+                    <span class="font-weight-bold mr-2">{{_.startCase(key)}}:</span> {{yahooFinance[key]}}
+                </div>
+            </section>
+        </div>
+    </ng-container>
+    <section>
+        <ng-container *ngIf="!isLoading && !_.isEmpty(data)">
+            <ng-container *ngIf="isPlatformBrowser()">
+                <div [ngClass]="{'scrolling-wrapper': toggleHorizontalView }">
+                    <section class="card" *ngFor="let item of data; let index = index">
+                        <app-dynamic-chart [symbol]="metaData?.symbol" [canEdit]="authService?.canEdit(user)" [date]="item?.date" [data]="item?.data"
+                            [metaData]="metaData" [yahooFinance]="yahooFinance" [dayTradeRules]="dayTradeRules" (onCountDayTradeRuleWorks)="onCountDayTradeRuleWorks($event)"
+                            [nizom]="nizom" (onNizom)="onNizom($event)"></app-dynamic-chart>
+                    </section>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!isLoading && _.isEmpty(data)">
+            <div class="my-5 text-center d-flex flex-wrap justify-content-center align-items-center min-height-25vh">
+                <div>
+                    <h1 class="text-uppercase">Loading...</h1>
+                    <p class="text-muted">If nothing shows up after a few seconds, this means that this symbol does not exist. To get this featured,
+                        you can
+                        <a class="text-warning" [routerLink]="['/contact']">Contact Us</a>
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+    </section>
+    <div class="container my-5" *ngIf="environment.production && !_.isEmpty(data)">
+        <disqus [identifier]="url" url="{{environment.url}}{{url}}" [title]="title" [category]="'stocks'"></disqus>
+    </div>
+</div>
+<!-- Horizontal Display Ad-->
+<section class="container-fluid text-center pt-2 mb-5">
+    <ng-adsense [fullWidthResponsive]="true" [display]="'block'" [adClient]="'ca-pub-4642980268605791'" [adSlot]=2801999023 [adFormat]="'auto'">
+    </ng-adsense>
+</section>

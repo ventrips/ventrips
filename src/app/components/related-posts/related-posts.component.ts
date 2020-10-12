@@ -32,7 +32,7 @@ export class RelatedPostsComponent implements OnInit {
   ngOnInit() {}
 
   init() {
-    this.ssrService.ssrFirestoreCollection(this.collection, `home`) // Use homepage cache if already exists
+    this.ssrService.ssrFirestoreCollection(this.collection, `blog`) // Use blog cache if already exists
     .subscribe(response => {
       if (!_.isEmpty(response) && !_.isNil(response)) {
         this.relatedPosts = _.filter(response, (item) =>
