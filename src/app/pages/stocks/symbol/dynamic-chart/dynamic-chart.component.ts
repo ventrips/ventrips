@@ -365,7 +365,7 @@ export class DynamicChartComponent implements OnInit {
       const buyingPower = 1000;
 
       // Order would have failed to fill today
-      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && !this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
+      if ((findDayTradeBuyIndex > -1 && findDayTradeSellIndex == -1) && this.isBetweenCustomTradeTimes(findDayTradeSellIndex)) {
         _.set(this.dayTradeRuleWorks, [option, 'fail'], true);
         const lossShareRange = _.round(Math.abs(closes[closes.length - 1] - dayTradeBuy), 2);
         const lossSharePercentageRange = _.round(Math.abs(_.get(rule, ['buy'])) + Math.abs(dayTradeBuy / closes[closes.length - 1]), 2);
