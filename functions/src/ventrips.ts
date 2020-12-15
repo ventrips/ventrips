@@ -20,39 +20,39 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         let data: any;
 
         /* Step 1: Get all ticker symbols in US Exchange from Finn Hub */
-        const finnHubOptions: object = _.assign({
-            uri: 'https://finnhub.io/api/v1/stock/symbol',
-            qs: {
-                exchange: 'US',
-                token: 'brno9hfrh5reu6jtc7k0'
-            }
-        }, defaultUserAgentOptions);
-        const finnHubResponse = await RequestPromise(finnHubOptions);
-        const finnHubAllTickerSymbols: Array<string> = _.map(finnHubResponse, (item: any) => item.symbol);
+        // const finnHubOptions: object = _.assign({
+        //     uri: 'https://finnhub.io/api/v1/stock/symbol',
+        //     qs: {
+        //         exchange: 'US',
+        //         token: 'brno9hfrh5reu6jtc7k0'
+        //     }
+        // }, defaultUserAgentOptions);
+        // const finnHubResponse = await RequestPromise(finnHubOptions);
+        // const finnHubAllTickerSymbols: Array<string> = _.map(finnHubResponse, (item: any) => item.symbol);
 
         /* Mock Data */
         // const finnHubAllTickerSymbols = ['SPXL', 'SPY'];
         // data = finnHubAllTickerSymbols;
 
         /* Step 2: Get all yahoo data stock information of every ticker symbol from Yahoo Finance */
-        let yahooFinanceResponse: Array<object> = [];
-        const tickerSymbolChunks: any = _.chunk(finnHubAllTickerSymbols, 1500);
-        for (const tickerSymbolChunk of tickerSymbolChunks) {
-            const yahooFinanceOptions: object = _.assign({
-                uri: 'https://query2.finance.yahoo.com/v7/finance/quote',
-                qs: {
-                    symbols: _.toString(tickerSymbolChunk),
-                }
-            }, defaultUserAgentOptions);
+        // let yahooFinanceResponse: Array<object> = [];
+        // const tickerSymbolChunks: any = _.chunk(finnHubAllTickerSymbols, 1500);
+        // for (const tickerSymbolChunk of tickerSymbolChunks) {
+        //     const yahooFinanceOptions: object = _.assign({
+        //         uri: 'https://query2.finance.yahoo.com/v7/finance/quote',
+        //         qs: {
+        //             symbols: _.toString(tickerSymbolChunk),
+        //         }
+        //     }, defaultUserAgentOptions);
 
-            let yahooFinanceChunkResponse: Array<object> = await RequestPromise(yahooFinanceOptions);
-            yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
-            yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
-        };
-        data = yahooFinanceResponse;
+        //     let yahooFinanceChunkResponse: Array<object> = await RequestPromise(yahooFinanceOptions);
+        //     yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
+        //     yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
+        // };
+        // data = yahooFinanceResponse;
 
         /* Mock Data */
-        // data = require('./../mocks/ventrips/yahoo-finance.json');
+        data = require('./../mocks/ventrips/yahoo-finance.json');
 
         /* Step 3: Filter stocks with custom logic */
         const minPrice: number = 2;
@@ -99,16 +99,17 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             && (fiftyTwoWeekHighChangePercent >= minFiftyTwoWeekHighChangePercent)
             // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
             && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
-            // Condition #7: Market Cap must be greater than minMarketCap
-            // && (marketCap >= minMarketCap)
             // Condition #7: All Volumes must be greater than minRegularMarketVolume
             && ((regularMarketVolume >= minRegularMarketVolume) && ((averageDailyVolume10Day >= minRegularMarketVolume) || (averageDailyVolume3Month >= minRegularMarketVolume)))
-            // Condition #9: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
+            // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
             && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
+            // // Condition #9: Market Cap must be greater than minMarketCap
+            // && (marketCap >= minMarketCap)
         });
 
         response.send({
             results: _.get(data, ['length'], 0),
+            symbols: _.map(data, (item: object) => _.get(item, ['symbol'])),
             data
         });
     } catch {
