@@ -105,6 +105,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
             // // Condition #9: Market Cap must be greater than minMarketCap
             // && (marketCap >= minMarketCap)
+            // TODO: GOOGLE TRENDS MUST BE >= 10
         });
 
         response.send({
