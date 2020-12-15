@@ -57,10 +57,10 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         /* Step 3: Filter stocks with custom logic */
         const minPrice: number = 2;
         const maxPrice: number = 10;
-        const minRegularMarketVolume: number = 10000000;
-        const minThreshold: number = 0.75;
         const minFiftyTwoWeekHighChangePercent: number = -0.30;
         const minFiftyTwoWeekLow: number = 1;
+        const minRegularMarketVolume: number = 5000000;
+        const minThreshold: number = 0.75;
         const minMarketCap: number = 1000000000;
 
         data = _.filter(data, (item: object) => {
@@ -89,26 +89,22 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 
             // Condition #1: Price must be within target price range
             return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
-            // Condition #2: All Volumes must be greater than minRegularMarketVolume
-            && ((regularMarketVolume >= minRegularMarketVolume) && ((averageDailyVolume10Day >= minRegularMarketVolume) || (averageDailyVolume3Month >= minRegularMarketVolume)))
-            // Condition #3: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
-            && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
-            // Condition #4: 50-Day Average Change Percent, 200-Day Average Change Percent must be greater than 0
+            // Condition #2: 10-Day Average Volume must be greater than 3-Month Average Volume
+            && (averageDailyVolume10Day >= averageDailyVolume3Month)
+            // Condition #3: 50-Day Average Change Percent, 200-Day Average Change Percent must be greater than 0
             && ((fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0))
-            // Condition #5: 50-Day Average must be higher than 200-Day Average
+            // Condition #4: 50-Day Average must be higher than 200-Day Average
             && (fiftyDayAverage >= twoHundredDayAverage)
-            // Condition #6: 52-Week High Change Percent must be greater than minFiftyTwoWeekHighChangePercent
+            // Condition #5: 52-Week High Change Percent must be greater than minFiftyTwoWeekHighChangePercent
             && (fiftyTwoWeekHighChangePercent >= minFiftyTwoWeekHighChangePercent)
-            // Condition #8: 52-Week Low Price must be greater than minFiftyTwoWeekLow
+            // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
             && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
-            // Condition #9: Market Cap must be greater than minMarketCap
+            // Condition #7: Market Cap must be greater than minMarketCap
             // && (marketCap >= minMarketCap)
-
-
-            // // 50 Day Average must be higher than 200 Day Average
-            // ((fiftyDayAverage >= twoHundredDayAverage)) &&
-            // // 50 and 200 Day Average must be higher than 0
-            // ((fiftyDayAverage >= 0) && (twoHundredDayAverage >= 0)) &&
+            // Condition #7: All Volumes must be greater than minRegularMarketVolume
+            && ((regularMarketVolume >= minRegularMarketVolume) && ((averageDailyVolume10Day >= minRegularMarketVolume) || (averageDailyVolume3Month >= minRegularMarketVolume)))
+            // Condition #9: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
+            && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
         });
 
         response.send({
