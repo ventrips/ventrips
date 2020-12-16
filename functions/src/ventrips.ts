@@ -55,8 +55,8 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         // data = require('./../mocks/ventrips/yahoo-finance.json');
 
         /* Step 3: Filter stocks with custom logic */
-        const minPrice: number = 2;
-        const maxPrice: number = 10;
+        const minPrice: number = 1;
+        const maxPrice: number = 20;
         const minFiftyTwoWeekHighChangePercent: number = -0.30;
         const minFiftyTwoWeekLow: number = 1;
         const minRegularMarketVolume: number = 5000000;
@@ -110,7 +110,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 
         response.send({
             results: _.get(data, ['length'], 0),
-            symbols: _.map(data, (item: object) => _.get(item, ['symbol'])),
+            symbols: _.map(data, (item: object) => `${_.get(item, ['symbol'])} @ ${_.get(item, ['regularMarketPrice'])}`),
             data
         });
     } catch {
