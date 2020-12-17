@@ -132,12 +132,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
                     volume: _.toNumber(value['5. volume']),
                 }
             }), ['date']);
-            const finalAlphaVantageResponse: any = {
-                isPriceBullish: isBullish(_.map(alphaVantageData, (datum) => _.get(datum, ['open']))),
-                isVolumeBullish: isBullish(_.map(alphaVantageData, (datum) => _.get(datum, ['volume']))),
-                data: alphaVantageData
-            }
-            _.set(datum, 'alphaVantage', finalAlphaVantageResponse);
+            _.set(datum, 'alphaVantage', alphaVantageData);
         };
 
         /* Step 5: Get Google Trends */
@@ -151,18 +146,24 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
                 }
                 return { date: item[0], trend: _.toNumber(item[1]) }
             }));
-            const finalGoogleTrendsResponse: any = {
-                isTrendBullish: isBullish(_.map(googleTrendsData, (datum) => _.get(datum, ['trend']))),
-                data: googleTrendsData
-            }
-            _.set(datum, 'googleTrends', finalGoogleTrendsResponse);
+            _.set(datum, 'googleTrends', googleTrendsData);
         };
 
-        /* Step 6: Final Filter */
+        /* Step 6: Add Bullish Stats */
+        for (const datum of data) {
+            const stats: object = {
+                isPriceBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['open']))),
+                isVolumeBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['volume']))),
+                isTrendBullish: isBullish(_.map(_.get(datum, ['googleTrends'], []), (value) => _.get(value, ['trend'])))
+            };
+            _.set(datum, 'stats', stats);
+        }
+
+        /* Step 7: Final Filter */
         data = _.filter(data, (datum: any) => {
-            return _.get(datum, ['alphaVantage', 'isPriceBullish'], false)
-            && _.get(datum, ['alphaVantage', 'isVolumeBullish'], false)
-            && _.get(datum, ['googleTrends', 'isTrendBullish'], false)
+            return _.get(datum, ['stats', 'isPriceBullish'], false)
+            && _.get(datum, ['stats', 'isVolumeBullish'], false)
+            && _.get(datum, ['stats', 'isTrendBullish'], false)
         });
 
         const final: object = {
