@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 import { cors } from './utils';
 const RequestPromise = require('request-promise');
 const UserAgent = require('user-agents');
+const { ExploreTrendRequest } = require('g-trends');
+const isBullish = require('is-bullish');
 
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
@@ -49,7 +51,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        data = yahooFinanceResponse;
+        data = _.map(yahooFinanceResponse, (datum: any) => { return { yahooFinance: datum } });
 
         /* Mock Data */
         // data = require('./../mocks/ventrips/yahoo-finance.json');
@@ -64,28 +66,28 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         const minMarketCap: number = 1000000000;
 
         data = _.filter(data, (item: object) => {
-            const regularMarketPrice: number = _.get(item, ['regularMarketPrice']);
+            const regularMarketPrice: number = _.get(item, ['yahooFinance', 'regularMarketPrice']);
 
-            const regularMarketVolume: number = _.get(item, ['regularMarketVolume']);
-            const averageDailyVolume10Day: number = _.get(item, ['averageDailyVolume10Day']);
-            const averageDailyVolume3Month: number = _.get(item, ['averageDailyVolume3Month']);
+            const regularMarketVolume: number = _.get(item, ['yahooFinance', 'regularMarketVolume']);
+            const averageDailyVolume10Day: number = _.get(item, ['yahooFinance', 'averageDailyVolume10Day']);
+            const averageDailyVolume3Month: number = _.get(item, ['yahooFinance', 'averageDailyVolume3Month']);
 
-            const regularMarketChangePercent: number = _.get(item, ['regularMarketChangePercent']);
-            const fiftyDayAverageChangePercent: number = _.get(item, ['fiftyDayAverageChangePercent']);
-            const twoHundredDayAverageChangePercent: number = _.get(item, ['twoHundredDayAverageChangePercent']);
+            const regularMarketChangePercent: number = _.get(item, ['yahooFinance', 'regularMarketChangePercent']);
+            const fiftyDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'fiftyDayAverageChangePercent']);
+            const twoHundredDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'twoHundredDayAverageChangePercent']);
 
-            const fiftyTwoWeekLowChangePercent: number = _.get(item, ['fiftyTwoWeekLowChangePercent']);
-            const fiftyTwoWeekHighChangePercent: number = _.get(item, ['fiftyTwoWeekHighChangePercent']);
+            const fiftyTwoWeekLowChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLowChangePercent']);
+            const fiftyTwoWeekHighChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHighChangePercent']);
 
-            const fiftyDayAverage: number = _.get(item, ['fiftyDayAverage']);
-            const twoHundredDayAverage: number = _.get(item, ['twoHundredDayAverage']);
+            const fiftyDayAverage: number = _.get(item, ['yahooFinance', 'fiftyDayAverage']);
+            const twoHundredDayAverage: number = _.get(item, ['yahooFinance', 'twoHundredDayAverage']);
 
-            const fiftyTwoWeekLow: number = _.get(item, ['fiftyTwoWeekLow']);
-            const fiftyTwoWeekHigh: number = _.get(item, ['fiftyTwoWeekHigh']);
+            const fiftyTwoWeekLow: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLow']);
+            const fiftyTwoWeekHigh: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHigh']);
 
-            const sharesOutstanding: number = _.get(item, ['sharesOutstanding']);
+            const sharesOutstanding: number = _.get(item, ['yahooFinance', 'sharesOutstanding']);
 
-            const marketCap: number = _.get(item, ['marketCap']);
+            const marketCap: number = _.get(item, ['yahooFinance', 'marketCap']);
 
             // Condition #1: Price must be within target price range
             return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
@@ -108,12 +110,70 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             // TODO: GOOGLE TRENDS MUST BE >= 10
         });
 
-        response.send({
-            results: _.get(data, ['length'], 0),
-            symbols: _.map(data, (item: object) => `${_.get(item, ['symbol'])} @ ${_.get(item, ['regularMarketPrice'])}`),
-            data
+        /* Step 4: Get Alpha Vantage Data */
+        for (const datum of data) {
+            const alphaVantageOptions: object = _.assign({
+                uri: 'https://www.alphavantage.co/query',
+                qs: {
+                    function: 'TIME_SERIES_DAILY',
+                    symbol: _.get(datum, ['yahooFinance', 'symbol']),
+                    outputsize: 'compact',
+                    apikey: 'J5LLHCUPAQ0CR0IN'
+                }
+            }, defaultUserAgentOptions);
+            const alphaVantageResponse: any = await RequestPromise(alphaVantageOptions);
+            const alphaVantageData: any = _.sortBy(_.map(_.get(alphaVantageResponse, ['Time Series (Daily)'], []), (value: any, key: string) => {
+                return {
+                    date: key,
+                    open: _.toNumber(value['1. open']),
+                    high: _.toNumber(value['2. high']),
+                    low: _.toNumber(value['3. low']),
+                    close: _.toNumber(value['4. close']),
+                    volume: _.toNumber(value['5. volume']),
+                }
+            }), ['date']);
+            const finalAlphaVantageResponse: any = {
+                isPriceBullish: isBullish(_.map(alphaVantageData, (datum) => _.get(datum, ['open']))),
+                isVolumeBullish: isBullish(_.map(alphaVantageData, (datum) => _.get(datum, ['volume']))),
+                data: alphaVantageData
+            }
+            _.set(datum, 'alphaVantage', finalAlphaVantageResponse);
+        };
+
+        /* Step 5: Get Google Trends */
+        for (const datum of data) {
+            const googleTrends = new ExploreTrendRequest();
+            const googleTrendsResponse = await googleTrends.past12Months().addKeyword(`${_.toLower(_.get(datum, ['yahooFinance', 'symbol']))} stock`, 'US').download()
+            const googleTrendsData: Array<object> = _.compact(_.map(googleTrendsResponse, (item: any) => {
+                const isNumeric: boolean = /^\d+$/.test(item[1]);
+                if (!isNumeric) {
+                    return null;
+                }
+                return { date: item[0], trend: _.toNumber(item[1]) }
+            }));
+            const finalGoogleTrendsResponse: any = {
+                isTrendBullish: isBullish(_.map(googleTrendsData, (datum) => _.get(datum, ['trend']))),
+                data: googleTrendsData
+            }
+            _.set(datum, 'googleTrends', finalGoogleTrendsResponse);
+        };
+
+        /* Step 6: Final Filter */
+        data = _.filter(data, (datum: any) => {
+            return _.get(datum, ['alphaVantage', 'isPriceBullish'], false)
+            && _.get(datum, ['alphaVantage', 'isVolumeBullish'], false)
+            && _.get(datum, ['googleTrends', 'isTrendBullish'], false)
         });
-    } catch {
-        response.status(500).send('Internal Server Error');
+
+        const final: object = {
+            results: _.get(data, ['length'], 0),
+            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])}`),
+            data
+        };
+        console.log(JSON.stringify(final, null, 4));
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
     }
 });
