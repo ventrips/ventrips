@@ -88,6 +88,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             const sharesOutstanding: number = _.get(item, ['yahooFinance', 'sharesOutstanding']);
 
             const marketCap: number = _.get(item, ['yahooFinance', 'marketCap']);
+            const priceToBook: number = _.get(item, ['yahooFinance', 'priceToBook']);
 
             // Condition #1: Price must be within target price range
             return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
@@ -105,7 +106,9 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             && ((regularMarketVolume >= minRegularMarketVolume) && ((averageDailyVolume10Day >= minRegularMarketVolume) || (averageDailyVolume3Month >= minRegularMarketVolume)))
             // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
             && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
-            // // Condition #9: Market Cap must be greater than minMarketCap
+            // // Condition #9: Price To Book Ratio must not be too over-valued
+            && (priceToBook <= 2)
+            // // Condition #10: Market Cap must be greater than minMarketCap
             // && (marketCap >= minMarketCap)
             // TODO: GOOGLE TRENDS MUST BE >= 10
         });
