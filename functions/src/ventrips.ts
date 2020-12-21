@@ -58,7 +58,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 
         /* Step 3: Filter stocks with custom logic */
         const minPrice: number = 1;
-        const maxPrice: number = 20;
+        const maxPrice: number = 500;
         const minFiftyTwoWeekHighChangePercent: number = -0.30;
         const minFiftyTwoWeekLow: number = 1;
         const minRegularMarketVolume: number = 5000000;
@@ -107,7 +107,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
             && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
             // // Condition #9: Price To Book Ratio must not be too over-valued
-            && (priceToBook <= 2)
+            && (priceToBook <= 3)
             // // Condition #10: Market Cap must be greater than minMarketCap
             // && (marketCap >= minMarketCap)
             // TODO: GOOGLE TRENDS MUST BE >= 10
