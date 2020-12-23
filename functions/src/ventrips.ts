@@ -10,18 +10,15 @@ const isBullish = require('is-bullish');
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
 
-export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
-    cors(request, response);
+const getFinnHubStockSymbols = async (): Promise<Array<string>> => {
     const defaultUserAgentOptions: object = {
         headers: {
             'User-Agent': ((new UserAgent()).data).toString()
         },
         json: true
     };
-    try {
-        let data: any;
-
-        /* Step 1: Get all ticker symbols in US Exchange from Finn Hub */
+    return new Promise(async (resolve: any) => {
+        // resolve(['SPXL', 'SPY']); return;
         const finnHubOptions: object = _.assign({
             uri: 'https://finnhub.io/api/v1/stock/symbol',
             qs: {
@@ -31,14 +28,21 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         }, defaultUserAgentOptions);
         const finnHubResponse = await RequestPromise(finnHubOptions);
         const finnHubAllTickerSymbols: Array<string> = _.map(finnHubResponse, (item: any) => item.symbol);
+        resolve(finnHubAllTickerSymbols);
+    });
+};
 
-        /* Mock Data */
-        // const finnHubAllTickerSymbols = ['SPXL', 'SPY'];
-        // data = finnHubAllTickerSymbols;
-
-        /* Step 2: Get all yahoo data stock information of every ticker symbol from Yahoo Finance */
+const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise<Array<string>> => {
+    const defaultUserAgentOptions: object = {
+        headers: {
+            'User-Agent': ((new UserAgent()).data).toString()
+        },
+        json: true
+    };
+    return new Promise(async (resolve: any) => {
+        // resolve(require('./../mocks/ventrips/yahoo-finance.json')); return;
         let yahooFinanceResponse: Array<object> = [];
-        const tickerSymbolChunks: any = _.chunk(finnHubAllTickerSymbols, 1500);
+        const tickerSymbolChunks: any = _.chunk(stockSymbols, 1500);
         for (const tickerSymbolChunk of tickerSymbolChunks) {
             const yahooFinanceOptions: object = _.assign({
                 uri: 'https://query2.finance.yahoo.com/v7/finance/quote',
@@ -51,10 +55,72 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        data = _.map(yahooFinanceResponse, (datum: any) => { return { yahooFinance: datum } });
+        const yahooFinanceStockDetails = _.map(yahooFinanceResponse, (datum: any) => { return { yahooFinance: datum } });
+        resolve(yahooFinanceStockDetails);
+    });
+};
 
-        /* Mock Data */
-        // data = require('./../mocks/ventrips/yahoo-finance.json');
+const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<string>> => {
+    const defaultUserAgentOptions: object = {
+        headers: {
+            'User-Agent': ((new UserAgent()).data).toString()
+        },
+        json: true
+    };
+    return new Promise(async (resolve: any) => {
+        const alphaVantageOptions: object = _.assign({
+            uri: 'https://www.alphavantage.co/query',
+            qs: {
+                function: 'TIME_SERIES_DAILY',
+                symbol: stockSymbol,
+                outputsize: 'compact',
+                apikey: 'J5LLHCUPAQ0CR0IN'
+            }
+        }, defaultUserAgentOptions);
+        const alphaVantageResponse: any = await RequestPromise(alphaVantageOptions);
+        const alphaVantageData: any = _.sortBy(_.map(_.get(alphaVantageResponse, ['Time Series (Daily)'], []), (value: any, key: string) => {
+            return {
+                date: key,
+                open: _.toNumber(value['1. open']),
+                high: _.toNumber(value['2. high']),
+                low: _.toNumber(value['3. low']),
+                close: _.toNumber(value['4. close']),
+                volume: _.toNumber(value['5. volume']),
+            }
+        }), ['date']);
+        resolve(alphaVantageData);
+    });
+};
+
+const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>> => {
+    const defaultUserAgentOptions: object = {
+        headers: {
+            'User-Agent': ((new UserAgent()).data).toString()
+        },
+        json: true
+    };
+    return new Promise(async (resolve: any) => {
+        const googleTrends = new ExploreTrendRequest();
+        const googleTrendsResponse = await googleTrends.past12Months().addKeyword(`${stockSymbol} stock`, 'US').download()
+        const googleTrendsData: Array<object> = _.compact(_.map(googleTrendsResponse, (item: any) => {
+            const isNumeric: boolean = /^\d+$/.test(item[1]);
+            if (!isNumeric) {
+                return null;
+            }
+            return { date: item[0], trend: _.toNumber(item[1]) }
+        }));
+        resolve(googleTrendsData);
+    });
+};
+
+export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
+    try {
+        let data: any;
+        /* Step 1: Get all ticker symbols in US Exchange from Finn Hub */
+        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        /* Step 2: Get all yahoo data stock information of every ticker symbol from Yahoo Finance */
+        data = await getYahooFinanceStockDetails(finnHubStockSymbols);
 
         /* Step 3: Filter stocks with custom logic */
         const minPrice: number = 0;
@@ -113,42 +179,13 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             // TODO: GOOGLE TRENDS MUST BE >= 10
         });
 
-        /* Step 4: Get Alpha Vantage Data */
         for (const datum of data) {
-            const alphaVantageOptions: object = _.assign({
-                uri: 'https://www.alphavantage.co/query',
-                qs: {
-                    function: 'TIME_SERIES_DAILY',
-                    symbol: _.get(datum, ['yahooFinance', 'symbol']),
-                    outputsize: 'compact',
-                    apikey: 'J5LLHCUPAQ0CR0IN'
-                }
-            }, defaultUserAgentOptions);
-            const alphaVantageResponse: any = await RequestPromise(alphaVantageOptions);
-            const alphaVantageData: any = _.sortBy(_.map(_.get(alphaVantageResponse, ['Time Series (Daily)'], []), (value: any, key: string) => {
-                return {
-                    date: key,
-                    open: _.toNumber(value['1. open']),
-                    high: _.toNumber(value['2. high']),
-                    low: _.toNumber(value['3. low']),
-                    close: _.toNumber(value['4. close']),
-                    volume: _.toNumber(value['5. volume']),
-                }
-            }), ['date']);
+            const stockSymbol: string = _.toLower(_.get(datum, ['yahooFinance', 'symbol']));
+            /* Step 4: Get Alpha Vantage Data */
+            const alphaVantageData: any = await getAlphaVantageStockChart(stockSymbol);
             _.set(datum, 'alphaVantage', alphaVantageData);
-        };
-
-        /* Step 5: Get Google Trends */
-        for (const datum of data) {
-            const googleTrends = new ExploreTrendRequest();
-            const googleTrendsResponse = await googleTrends.past12Months().addKeyword(`${_.toLower(_.get(datum, ['yahooFinance', 'symbol']))} stock`, 'US').download()
-            const googleTrendsData: Array<object> = _.compact(_.map(googleTrendsResponse, (item: any) => {
-                const isNumeric: boolean = /^\d+$/.test(item[1]);
-                if (!isNumeric) {
-                    return null;
-                }
-                return { date: item[0], trend: _.toNumber(item[1]) }
-            }));
+            /* Step 5: Get Google Trends */
+            const googleTrendsData: any = await getGoogleStockTrends(stockSymbol);
             _.set(datum, 'googleTrends', googleTrendsData);
         };
 
@@ -163,11 +200,11 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         }
 
         /* Step 7: Final Filter */
-        data = _.filter(data, (datum: any) => {
-            return _.get(datum, ['stats', 'isPriceBullish'], false)
-            && _.get(datum, ['stats', 'isVolumeBullish'], false)
-            && _.get(datum, ['stats', 'isTrendBullish'], false)
-        });
+        // data = _.filter(data, (datum: any) => {
+        //     return _.get(datum, ['stats', 'isPriceBullish'], false)
+        //     && _.get(datum, ['stats', 'isVolumeBullish'], false)
+        //     && _.get(datum, ['stats', 'isTrendBullish'], false)
+        // });
 
         const final: object = {
             results: _.get(data, ['length'], 0),
