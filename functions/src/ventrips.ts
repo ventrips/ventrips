@@ -10,6 +10,19 @@ const isBullish = require('is-bullish');
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
 
+const abbreviateNumbers = (n: number): string => {
+    const round = (n: number, precision: number): number => {
+        const prec = Math.pow(10, precision);
+        return Math.round(n*prec)/prec;
+    };
+    const pow: number = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
+    const abbrev: string = 'KMB'; // could be an array of strings: [' m', ' Mo', ' Md']
+    let base: number = floor(log(abs(n))/log(1000));
+    const suffix: string = abbrev[Math.min(2, base - 1)];
+    base = abbrev.indexOf(suffix) + 1;
+    return suffix ? round(n/pow(1000,base),2)+suffix : ''+n;
+}
+
 const getFinnHubStockSymbols = async (): Promise<Array<string>> => {
     const defaultUserAgentOptions: object = {
         headers: {
@@ -32,7 +45,7 @@ const getFinnHubStockSymbols = async (): Promise<Array<string>> => {
     });
 };
 
-const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise<Array<string>> => {
+const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise<Array<object>> => {
     const defaultUserAgentOptions: object = {
         headers: {
             'User-Agent': ((new UserAgent()).data).toString()
@@ -55,12 +68,12 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        const yahooFinanceStockDetails = _.map(yahooFinanceResponse, (datum: any) => { return { yahooFinance: datum } });
+        const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (datum: object) => { return { yahooFinance: datum } });
         resolve(yahooFinanceStockDetails);
     });
 };
 
-const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<string>> => {
+const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<object>> => {
     const defaultUserAgentOptions: object = {
         headers: {
             'User-Agent': ((new UserAgent()).data).toString()
@@ -112,6 +125,48 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
         resolve(googleTrendsData);
     });
 };
+
+const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number): Promise<Array<object>> => {
+    return new Promise(async (resolve: any) => {
+        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        const yahooFinanceStockDetails: Array<object> = await getYahooFinanceStockDetails(finnHubStockSymbols);
+        const filteredYahooFinanceStockDetails = _.filter(yahooFinanceStockDetails, (yahooFinanceStock: object) => {
+            const regularMarketPrice: number = _.get(yahooFinanceStock, ['yahooFinance', 'regularMarketPrice']);
+            const fullExchangeName: number = _.get(yahooFinanceStock, ['yahooFinance', 'fullExchangeName']);
+            return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
+                    && !_.includes(['Other OTC'], fullExchangeName);
+        });
+        resolve(filteredYahooFinanceStockDetails);
+    });
+};
+
+export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    const minPrice: number = _.toNumber(_.get(request, ['query', 'minPrice'], 0));
+    const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
+    const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
+    const sortByField: string = _.get(request, ['query', 'sortByField']);
+    try {
+        let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice);
+        let data: Array<object> = allStocksByPriceRange;
+        if (!_.isNil(minVolume)) {
+            data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
+        }
+        if (!_.isNil(sortByField)) {
+            data = _.orderBy(data, (datum: object) => {
+                return _.get(datum, ['yahooFinance', sortByField], 0);
+            }, 'desc');
+        };
+        const final: object = {
+            results: _.get(data, ['length'], 0),
+            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
+            data
+        };
+        console.log(JSON.stringify(data, null, 4));
+        response.send(final);
+    } catch (error) {
+        response.send(error);
+    }
+});
 
 export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
@@ -208,7 +263,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 
         const final: object = {
             results: _.get(data, ['length'], 0),
-            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])}`),
+            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
             data
         };
         console.log(JSON.stringify(final, null, 4));
