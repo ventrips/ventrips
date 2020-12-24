@@ -10,6 +10,18 @@ const isBullish = require('is-bullish');
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
 
+const displayQuickViewText = (data: Array<object>): Array<string> => {
+    return _.map(data, (datum: object) => {
+        const symbol: string = _.get(datum, ['yahooFinance', 'symbol']);
+        const fullExchangeName: string = _.get(datum, ['yahooFinance', 'fullExchangeName']);
+        const regularMarketPrice: number = _.get(datum, ['yahooFinance', 'regularMarketPrice']);
+        const regularMarketVolume: number = _.get(datum, ['yahooFinance', 'regularMarketVolume'], 0);
+        const averageDailyVolume10Day: number =  _.get(datum, ['yahooFinance', 'averageDailyVolume10Day'], 0);
+        const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
+        return `${fullExchangeName}: ${symbol} @ ${regularMarketPrice} | Volume: ${abbreviateNumbers(regularMarketVolume)} (${volumeMultiplied}X)`
+    });
+};
+
 const abbreviateNumbers = (n: number): string => {
     const round = (n: number, precision: number): number => {
         const prec = Math.pow(10, precision);
@@ -188,6 +200,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const minPrice: number = _.toNumber(_.get(request, ['query', 'minPrice'], 0));
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
+    const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
     const sortByField: string = _.get(request, ['query', 'sortByField']);
     const filterField: string = _.get(request, ['query', 'filter']);
 
@@ -196,6 +209,14 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
         let data: Array<object> = allStocksByPriceRange;
         if (!_.isNil(minVolume)) {
             data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
+        }
+        if (!_.isNil(volumeHasMultipliedBy)) {
+            data = _.filter(data, (datum: object) => {
+                const regularMarketVolume: number =  _.get(datum, ['yahooFinance', 'regularMarketVolume']);
+                const averageDailyVolume10Day: number =  _.get(datum, ['yahooFinance', 'averageDailyVolume10Day']);
+                const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
+                return volumeMultiplied >= volumeHasMultipliedBy;
+            });
         }
         if (!_.isNil(sortByField)) {
             data = _.orderBy(data, (datum: object) => {
@@ -207,7 +228,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
 
         const final: any = {
             results: _.get(data, ['length'], 0),
-            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
+            symbols: displayQuickViewText(data),
             data
         };
         if (_.isEqual(filterField, 'stats')) {
@@ -311,7 +332,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 
         const final: object = {
             results: _.get(data, ['length'], 0),
-            symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
+            symbols: displayQuickViewText(data),
             data
         };
         console.log(JSON.stringify(final, null, 4));
