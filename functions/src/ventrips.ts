@@ -108,7 +108,8 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             const stockSymbol: string = _.get(datum, ['symbol']);
             return {
                 symbol: stockSymbol,
-                url: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                financeUrl: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                trendsUrl: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                 yahooFinance: datum
             }
         });
