@@ -37,8 +37,7 @@ const past7DaysHighestGoogleTrend = (datum: object): any => {
 
 const getExternalSources = async (data: Array<object>): Promise<Array<object>> => {
     for (const datum of data) {
-        const stockSymbol: string = _.toLower(_.get(datum, ['yahooFinance', 'symbol']));
-        _.set(datum, 'symbol', stockSymbol);
+        const stockSymbol: string = _.toLower(_.get(datum, ['symbol']));
         /* Get Alpha Vantage Data */
         const alphaVantageData: any = await getAlphaVantageStockChart(stockSymbol);
         _.set(datum, 'alphaVantage', alphaVantageData);
@@ -105,7 +104,14 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (datum: object) => { return { yahooFinance: datum } });
+        const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (datum: object) => {
+            const stockSymbol: string = _.get(datum, ['symbol']);
+            return {
+                symbol: stockSymbol,
+                url: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                yahooFinance: datum
+            }
+        });
         resolve(yahooFinanceStockDetails);
     });
 };
@@ -204,7 +210,11 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
             data
         };
         if (_.isEqual(filterField, 'stats')) {
-            final['data'] = _.map(final['data'], (datum: object) => _.get(datum, ['stats']));
+            _.forEach(final['data'], (datum: any) => {
+                delete datum['yahooFinance'];
+                delete datum['alphaVantage'];
+                delete datum['googleTrends'];
+            });
         }
         console.log(JSON.stringify(data, null, 4));
         response.send(final);
