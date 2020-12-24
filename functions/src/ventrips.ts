@@ -38,6 +38,7 @@ const past7DaysHighestGoogleTrend = (datum: object): any => {
 const getExternalSources = async (data: Array<object>): Promise<Array<object>> => {
     for (const datum of data) {
         const stockSymbol: string = _.toLower(_.get(datum, ['yahooFinance', 'symbol']));
+        _.set(datum, 'symbol', stockSymbol);
         /* Get Alpha Vantage Data */
         const alphaVantageData: any = await getAlphaVantageStockChart(stockSymbol);
         _.set(datum, 'alphaVantage', alphaVantageData);
@@ -181,6 +182,8 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
     const sortByField: string = _.get(request, ['query', 'sortByField']);
+    const filterField: string = _.get(request, ['query', 'filter']);
+
     try {
         let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice);
         let data: Array<object> = allStocksByPriceRange;
@@ -195,11 +198,14 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
 
         data = await getExternalSources(data);
 
-        const final: object = {
+        const final: any = {
             results: _.get(data, ['length'], 0),
             symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
             data
         };
+        if (_.isEqual(filterField, 'stats')) {
+            final['data'] = _.map(final['data'], (datum: object) => _.get(datum, ['stats']));
+        }
         console.log(JSON.stringify(data, null, 4));
         response.send(final);
     } catch (error) {
