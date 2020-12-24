@@ -36,8 +36,22 @@ const abbreviateNumbers = (n: number): string => {
 }
 
 const pastDaysHighestVolume = (datum: object): any => {
+    let yahooFinance: object = _.get(datum, ['yahooFinance']);
+    const regularMarketVolume: number = _.get(yahooFinance, ['regularMarketVolume'], 0);
+    const regularMarketTime: number = _.get(yahooFinance, ['regularMarketTime']);
     let alphaVantage: Array<object> = _.get(datum, ['alphaVantage'], []);
-    return _.maxBy(alphaVantage, (value: object) => _.get(value, ['volume']));
+    let highestVolume: any = _.maxBy(alphaVantage, (value: object) => _.get(value, ['volume']));
+    highestVolume = {
+        date: highestVolume.date,
+        volume: highestVolume.volume
+    }
+    if (regularMarketVolume >= _.get(highestVolume, ['volume'])) {
+        _.set(highestVolume, 'previousDate', highestVolume.date);
+        _.set(highestVolume, 'previousVolume', highestVolume.date);
+        highestVolume.date = new Date().toISOString().slice(0, 10);
+        highestVolume.volume = regularMarketVolume;
+    }
+    return highestVolume;
 }
 
 const past7DaysHighestGoogleTrend = (datum: object): any => {
@@ -176,7 +190,7 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
             if (!isNumeric) {
                 return null;
             }
-            return { date: item[0], trend: _.toNumber(item[1]) }
+            return { date: _.get(item, [0]).slice(0, 10), trend: _.toNumber(_.get(item, [1], 0)) }
         }));
         resolve(googleTrendsData);
     });
@@ -202,7 +216,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
     const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
     const sortByField: string = _.get(request, ['query', 'sortByField']);
-    const filterField: string = _.get(request, ['query', 'filter']);
+    const statsOnly: boolean = _.get(request, ['query', 'statsOnly'], false);
 
     try {
         let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice);
@@ -231,7 +245,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
             symbols: displayQuickViewText(data),
             data
         };
-        if (_.isEqual(filterField, 'stats')) {
+        if (statsOnly) {
             _.forEach(final['data'], (datum: any) => {
                 delete datum['yahooFinance'];
                 delete datum['alphaVantage'];
