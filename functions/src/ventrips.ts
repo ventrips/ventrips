@@ -23,6 +23,42 @@ const abbreviateNumbers = (n: number): string => {
     return suffix ? round(n/pow(1000,base),2)+suffix : ''+n;
 }
 
+const pastDaysHighestVolume = (datum: object): any => {
+    let alphaVantage: Array<object> = _.get(datum, ['alphaVantage'], []);
+    return _.maxBy(alphaVantage, (value: object) => _.get(value, ['volume']));
+}
+
+const past7DaysHighestGoogleTrend = (datum: object): any => {
+    let googleTrends: Array<object> = _.get(datum, ['googleTrends'], []);
+    return _.maxBy(googleTrends, (value: object) => {
+        return _.get(value, ['trend']);
+    });
+}
+
+const getExternalSources = async (data: Array<object>): Promise<Array<object>> => {
+    for (const datum of data) {
+        const stockSymbol: string = _.toLower(_.get(datum, ['yahooFinance', 'symbol']));
+        /* Get Alpha Vantage Data */
+        const alphaVantageData: any = await getAlphaVantageStockChart(stockSymbol);
+        _.set(datum, 'alphaVantage', alphaVantageData);
+        /* Get Google Trends */
+        const googleTrendsData: any = await getGoogleStockTrends(stockSymbol);
+        _.set(datum, 'googleTrends', googleTrendsData);
+
+        /* Get Bullish Stats */
+        const stats: object = {
+            isPriceBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['open']))),
+            isVolumeBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['volume']))),
+            isTrendBullish: isBullish(_.map(_.get(datum, ['googleTrends'], []), (value) => _.get(value, ['trend']))),
+            pastDaysHighestVolume: pastDaysHighestVolume(datum),
+            past7DaysHighestGoogleTrend: past7DaysHighestGoogleTrend(datum)
+        };
+        _.set(datum, 'stats', stats);
+    };
+    return data;
+}
+
+
 const getFinnHubStockSymbols = async (): Promise<Array<string>> => {
     const defaultUserAgentOptions: object = {
         headers: {
@@ -114,7 +150,7 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
     };
     return new Promise(async (resolve: any) => {
         const googleTrends = new ExploreTrendRequest();
-        const googleTrendsResponse = await googleTrends.past12Months().addKeyword(`${stockSymbol} stock`, 'US').download()
+        const googleTrendsResponse = await googleTrends.past7Days().addKeyword(`${stockSymbol} stock`, 'US').download()
         const googleTrendsData: Array<object> = _.compact(_.map(googleTrendsResponse, (item: any) => {
             const isNumeric: boolean = /^\d+$/.test(item[1]);
             if (!isNumeric) {
@@ -156,6 +192,9 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                 return _.get(datum, ['yahooFinance', sortByField], 0);
             }, 'desc');
         };
+
+        data = await getExternalSources(data);
+
         const final: object = {
             results: _.get(data, ['length'], 0),
             symbols: _.map(data, (item: object) => `${_.get(item, ['yahooFinance', 'fullExchangeName'])}:${_.get(item, ['yahooFinance', 'symbol'])} @ ${_.get(item, ['yahooFinance', 'regularMarketPrice'])} (${abbreviateNumbers(_.get(item, ['yahooFinance', 'regularMarketVolume'], 0))})`),
@@ -234,15 +273,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             // TODO: GOOGLE TRENDS MUST BE >= 10
         });
 
-        for (const datum of data) {
-            const stockSymbol: string = _.toLower(_.get(datum, ['yahooFinance', 'symbol']));
-            /* Step 4: Get Alpha Vantage Data */
-            const alphaVantageData: any = await getAlphaVantageStockChart(stockSymbol);
-            _.set(datum, 'alphaVantage', alphaVantageData);
-            /* Step 5: Get Google Trends */
-            const googleTrendsData: any = await getGoogleStockTrends(stockSymbol);
-            _.set(datum, 'googleTrends', googleTrendsData);
-        };
+        data = await getExternalSources(data);
 
         /* Step 6: Add Bullish Stats */
         for (const datum of data) {
