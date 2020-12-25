@@ -10,6 +10,22 @@ const isBullish = require('is-bullish');
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
 
+const getMarketBeatUrl = (yahooFinanceDatum: object): string => {
+    const symbol: string = _.get(yahooFinanceDatum, ['symbol']);
+    const exchangeName: string = _.toUpper(_.get(yahooFinanceDatum, ['fullExchangeName']));
+    let newExchangeName: string = '';
+    if (_.includes(exchangeName, ['OTHER OTC'])) {
+        newExchangeName = 'OTCMKTS';
+    }
+    if (_.includes(exchangeName, 'NASDAQ')) {
+        newExchangeName = 'NASDAQ';
+    }
+    if (_.includes(exchangeName, 'NYSE')) {
+        newExchangeName = 'NYSE';
+    }
+    return `https://www.marketbeat.com/stocks/${newExchangeName}/${symbol}/`
+};
+
 const volumeMultiplied = (yahooFinanceDatum: object): number => {
     const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume'], 0);
     const averageDailyVolume10Day: number =  _.get(yahooFinanceDatum, ['averageDailyVolume10Day'], 0);
@@ -145,6 +161,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             return {
                 company: `${stockSymbol} (${_.get(yahooFinanceDatum, ['longName'])}) - ${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
                 info: `$${_.get(yahooFinanceDatum, ['regularMarketPrice'])} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`,
+                marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
                 ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
                 reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
                 search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
