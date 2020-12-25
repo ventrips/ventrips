@@ -162,13 +162,14 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 company: `${stockSymbol} (${_.get(yahooFinanceDatum, ['longName'])}) - ${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
                 info: `$${_.get(yahooFinanceDatum, ['regularMarketPrice'])} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`,
                 marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
-                ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
+                whalewisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
                 reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
                 stocktwits: `https://stocktwits.com/symbol/${stockSymbol}`,
                 search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
                 news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                 history: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
                 trends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
+                ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
                 yahooFinance: yahooFinanceDatum
             }
         });
