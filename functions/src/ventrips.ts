@@ -164,6 +164,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
                 ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
                 reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
+                stocktwits: `https://stocktwits.com/symbol/${stockSymbol}`,
                 search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
                 news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                 history: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
