@@ -222,7 +222,8 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
     const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
     const sortByField: string = _.get(request, ['query', 'sortByField']);
-    const statsOnly: boolean = _.get(request, ['query', 'statsOnly'], false);
+    const statsOnly: string = JSON.parse(_.get(request, ['query', 'statsOnly'], false));
+    const externalSources: boolean = JSON.parse(_.get(request, ['query', 'externalSources'], false));
     const stockSymbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'stockSymbols'], ''), ','));
 
     try {
@@ -246,8 +247,9 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                 return _.get(datum, ['yahooFinance', sortByField], 0);
             }, 'desc');
         };
-
-        data = await getExternalSources(data);
+        if (externalSources) {
+            data = await getExternalSources(data);
+        }
 
         const final: any = {
             results: _.get(data, ['length'], 0),
