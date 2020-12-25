@@ -135,8 +135,11 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             return {
                 symbol: stockSymbol,
                 ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
-                financeUrl: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
-                trendsUrl: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
+                volume: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
+                news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
+                search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
+                trends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                 yahooFinance: datum
             }
         });
@@ -197,15 +200,17 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
     });
 };
 
-const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number): Promise<Array<object>> => {
+const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, stockSymbols: Array<string> = []): Promise<Array<object>> => {
     return new Promise(async (resolve: any) => {
-        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
-        const yahooFinanceStockDetails: Array<object> = await getYahooFinanceStockDetails(finnHubStockSymbols);
+        if (_.isEmpty(stockSymbols)) {
+            stockSymbols = await getFinnHubStockSymbols();
+        }
+        const yahooFinanceStockDetails: Array<object> = await getYahooFinanceStockDetails(stockSymbols);
         const filteredYahooFinanceStockDetails = _.filter(yahooFinanceStockDetails, (yahooFinanceStock: object) => {
             const regularMarketPrice: number = _.get(yahooFinanceStock, ['yahooFinance', 'regularMarketPrice']);
             const fullExchangeName: number = _.get(yahooFinanceStock, ['yahooFinance', 'fullExchangeName']);
             return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
-                    && !_.includes(['Other OTC'], fullExchangeName);
+                    // && !_.includes(['Other OTC'], fullExchangeName);
         });
         resolve(filteredYahooFinanceStockDetails);
     });
@@ -218,20 +223,23 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
     const sortByField: string = _.get(request, ['query', 'sortByField']);
     const statsOnly: boolean = _.get(request, ['query', 'statsOnly'], false);
+    const stockSymbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'stockSymbols'], ''), ','));
 
     try {
-        let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice);
+        let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, stockSymbols);
         let data: Array<object> = allStocksByPriceRange;
-        if (!_.isNil(minVolume)) {
-            data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
-        }
-        if (!_.isNil(volumeHasMultipliedBy)) {
-            data = _.filter(data, (datum: object) => {
-                const regularMarketVolume: number =  _.get(datum, ['yahooFinance', 'regularMarketVolume']);
-                const averageDailyVolume10Day: number =  _.get(datum, ['yahooFinance', 'averageDailyVolume10Day']);
-                const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
-                return volumeMultiplied >= volumeHasMultipliedBy;
-            });
+        if (_.isEmpty(stockSymbols)) {
+            if (!_.isNil(minVolume)) {
+                data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
+            }
+            if (!_.isNil(volumeHasMultipliedBy)) {
+                data = _.filter(data, (datum: object) => {
+                    const regularMarketVolume: number =  _.get(datum, ['yahooFinance', 'regularMarketVolume']);
+                    const averageDailyVolume10Day: number =  _.get(datum, ['yahooFinance', 'averageDailyVolume10Day']);
+                    const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
+                    return volumeMultiplied >= volumeHasMultipliedBy;
+                });
+            }
         }
         if (!_.isNil(sortByField)) {
             data = _.orderBy(data, (datum: object) => {
