@@ -10,15 +10,25 @@ const isBullish = require('is-bullish');
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
 
+const volumeMultiplied = (yahooFinanceDatum: object): number => {
+    const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume'], 0);
+    const averageDailyVolume10Day: number =  _.get(yahooFinanceDatum, ['averageDailyVolume10Day'], 0);
+    const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
+    return volumeMultiplied;
+}
+
+const displayFriendlyVolume = (yahooFinanceDatum: object): string => {
+    const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume'], 0);
+    return `${abbreviateNumbers(regularMarketVolume)} (${volumeMultiplied(yahooFinanceDatum)}X)`;
+}
+
 const displayQuickViewText = (data: Array<object>): Array<string> => {
     return _.map(data, (datum: object) => {
-        const symbol: string = _.get(datum, ['yahooFinance', 'symbol']);
-        const fullExchangeName: string = _.get(datum, ['yahooFinance', 'fullExchangeName']);
-        const regularMarketPrice: number = _.get(datum, ['yahooFinance', 'regularMarketPrice']);
-        const regularMarketVolume: number = _.get(datum, ['yahooFinance', 'regularMarketVolume'], 0);
-        const averageDailyVolume10Day: number =  _.get(datum, ['yahooFinance', 'averageDailyVolume10Day'], 0);
-        const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
-        return `${fullExchangeName}: ${symbol} @ ${regularMarketPrice} | Volume: ${abbreviateNumbers(regularMarketVolume)} (${volumeMultiplied}X)`
+        const yahooFinanceDatum: object = _.get(datum, ['yahooFinance']);
+        const symbol: string = _.get(yahooFinanceDatum, ['symbol']);
+        const fullExchangeName: string = _.get(yahooFinanceDatum, ['fullExchangeName']);
+        const regularMarketPrice: number = _.get(yahooFinanceDatum, ['regularMarketPrice']);
+        return `${fullExchangeName}: ${symbol} @ $${regularMarketPrice} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`
     });
 };
 
@@ -130,17 +140,18 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (datum: object) => {
-            const stockSymbol: string = _.get(datum, ['symbol']);
+        const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
+            const stockSymbol: string = _.get(yahooFinanceDatum, ['symbol']);
             return {
-                symbol: stockSymbol,
+                company: `${stockSymbol} (${_.get(yahooFinanceDatum, ['longName'])}) - ${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
+                info: `$${_.get(yahooFinanceDatum, ['regularMarketPrice'])} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`,
                 ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
-                volume: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
                 reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
-                news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                 search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
+                news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
+                history: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
                 trends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
-                yahooFinance: datum
+                yahooFinance: yahooFinanceDatum
             }
         });
         resolve(yahooFinanceStockDetails);
