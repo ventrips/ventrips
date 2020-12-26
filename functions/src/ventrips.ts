@@ -6,6 +6,7 @@ const RequestPromise = require('request-promise');
 const UserAgent = require('user-agents');
 const { ExploreTrendRequest } = require('g-trends');
 const isBullish = require('is-bullish');
+const csvToJson = require('csvtojson');
 
 // import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
 // const db = admin.firestore();
@@ -87,6 +88,17 @@ const past7DaysHighestGoogleTrend = (datum: object): any => {
     });
 }
 
+const getAllHoldings = async (filers: Array<object>): Promise<any> => {
+    return new Promise(async (resolve) => {
+        const data: object = {};
+        for (let filerObj of filers) {
+            const holdings: Array<object> = await csvToJson().fromFile(_.get(filerObj, ['csvFilePath']));
+            _.set(data, _.get(filerObj, ['filer']), holdings);
+        }
+        resolve(data);
+    });
+};
+
 const getExternalSources = async (data: Array<object>): Promise<Array<object>> => {
     for (const datum of data) {
         const stockSymbol: string = _.toLower(_.get(datum, ['symbol']));
@@ -96,7 +108,6 @@ const getExternalSources = async (data: Array<object>): Promise<Array<object>> =
         /* Get Google Trends */
         const googleTrendsData: any = await getGoogleStockTrends(stockSymbol);
         _.set(datum, 'googleTrends', googleTrendsData);
-
         /* Get Bullish Stats */
         const stats: object = {
             isPriceBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['open']))),
@@ -255,6 +266,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
     const statsOnly: string = JSON.parse(_.get(request, ['query', 'statsOnly'], false));
     const externalSources: boolean = JSON.parse(_.get(request, ['query', 'externalSources'], false));
     const stockSymbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'stockSymbols'], ''), ','));
+    const showHoldings: boolean = JSON.parse(_.get(request, ['query', 'showHoldings'], false));
 
     try {
         let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, stockSymbols);
@@ -277,6 +289,30 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                 return _.get(datum, ['yahooFinance', sortByField], 0);
             }, 'desc');
         };
+
+        if (showHoldings) {
+            const allHoldings: object = await getAllHoldings([
+                {
+                    filer: 'vanguard',
+                    csvFilePath: './mocks/holdings/vanguard_group_inc-current-2020-12-26_18_46_42.csv'
+                },
+                {
+                    filer: 'jp-morgan',
+                    csvFilePath: './mocks/holdings/jpmorgan_chase_&_company-current-2020-12-26_18_46_23.csv'
+                }
+            ]);
+            for (const datum of data) {
+                _.forEach(allHoldings, (holdings: Array<object>, filer: string) => {
+                    const stockSymbol: string = _.get(datum, ['yahooFinance', 'symbol'])
+                    const holdingsFound: any = _.find(holdings, {'Symbol': stockSymbol});
+                    if (!_.isNil(holdingsFound)) {
+                        const message = `[${_.get(holdingsFound, ['Qtr first owned'])}] ${_.toUpper(_.get(holdingsFound, ['Change Type']))} @ $${_.get(holdingsFound, ['Avg Price'])} for ${_.get(holdingsFound, ['Change in shares'])} shares.`;
+                        _.set(datum, ['holdings', filer], message);
+                    }
+                });
+            }
+        }
+
         if (externalSources) {
             data = await getExternalSources(data);
         }
