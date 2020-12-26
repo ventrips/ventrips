@@ -293,6 +293,10 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
         if (showHoldings) {
             const allHoldings: object = await getAllHoldings([
                 {
+                    filer: 'ark',
+                    csvFilePath: './mocks/holdings/ark_investment_management_llc-current-2020-12-26_20_28_44.csv'
+                },
+                {
                     filer: 'vanguard',
                     csvFilePath: './mocks/holdings/vanguard_group_inc-current-2020-12-26_18_46_42.csv'
                 },
@@ -306,7 +310,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                     const stockSymbol: string = _.get(datum, ['yahooFinance', 'symbol'])
                     const holdingsFound: any = _.find(holdings, {'Symbol': stockSymbol});
                     if (!_.isNil(holdingsFound)) {
-                        const message = `[${_.get(holdingsFound, ['Qtr first owned'])}] ${_.toUpper(_.get(holdingsFound, ['Change Type']))} @ $${_.get(holdingsFound, ['Avg Price'])} for ${_.get(holdingsFound, ['Change in shares'])} shares.`;
+                        const message = `[${_.get(holdingsFound, ['Qtr first owned'])}] ${_.toUpper(_.get(holdingsFound, ['Change Type']))} @ $${_.get(holdingsFound, ['Avg Price'], '?')} for ${abbreviateNumbers(_.get(holdingsFound, ['Change in shares']))} shares.`;
                         _.set(datum, ['holdings', filer], message);
                     }
                 });
