@@ -321,9 +321,10 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                         const firstOwned: string = _.get(holdingsFound, ['Qtr first owned']);
                         const changeType: string = _.toUpper(_.get(holdingsFound, ['Change Type']));
                         const avgPrice: string = _.get(holdingsFound, ['Avg Price']);
-                        const sharedHeld: string = _.get(holdingsFound, ['Shares Held']);
+                        const sharesHeld: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
+                        const changeInShares: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         const sourceDate: string = _.get(holdingsFound, ['source_date']);
-                        let message = _.isEmpty(changeType) ? `HOLDING ${_.isEmpty(avgPrice) ? '' : '@ $' + avgPrice} for ${sharedHeld} shares` : `${changeType} @ ${_.isEmpty(avgPrice) ? 'N/A' : '$' + avgPrice} for ${abbreviateNumbers(_.get(holdingsFound, ['Change in shares']))} shares`;
+                        let message = `${_.isEmpty(changeType) ? 'HOLDING' : changeType} ${_.isEmpty(changeInShares) ? abbreviateNumbers(sharesHeld) : abbreviateNumbers(changeInShares)} shares${_.isEmpty(avgPrice) ? '' : ' @ $' + avgPrice}`;
                         _.set(datum, ['holdings', filer], `[${sourceDate}] ${message}. First owned since ${firstOwned}`);
                     }
                 });
