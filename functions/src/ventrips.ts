@@ -1,15 +1,36 @@
-import * as functions from 'firebase-functions';
-// import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
 import { cors } from './utils';
+import * as functions from 'firebase-functions';
+// import * as admin from 'firebase-admin';
+// const db = admin.firestore();
+const { ExploreTrendRequest } = require('g-trends');
 const RequestPromise = require('request-promise');
 const UserAgent = require('user-agents');
-const { ExploreTrendRequest } = require('g-trends');
 const isBullish = require('is-bullish');
 const csvToJson = require('csvtojson');
 
-// import { getSingleYahooFinanceAPI } from './yahoo-finance-api';
-// const db = admin.firestore();
+const HOLDINGS: Array<object> = [
+    {
+        filer: 'ARK',
+        csvFilePath: './mocks/holdings/ark_investment_management_llc-current-2020-12-26_20_28_44.csv'
+    },
+    {
+        filer: 'VANGUARD',
+        csvFilePath: './mocks/holdings/vanguard_group_inc-current-2020-12-26_18_46_42.csv'
+    },
+    {
+        filer: 'MORGAN STANLEY',
+        csvFilePath: './mocks/holdings/morgan_stanley-current-2020-12-26_21_07_22.csv'
+    },
+    {
+        filer: 'JP MORGAN',
+        csvFilePath: './mocks/holdings/jpmorgan_chase_&_company-current-2020-12-26_18_46_23.csv'
+    },
+    {
+        filer: 'BLACKROCK',
+        csvFilePath: './mocks/holdings/blackrock_inc_-current-2020-12-26_20_49_21.csv'
+    }
+]
 
 const getMarketBeatUrl = (yahooFinanceDatum: object): string => {
     const symbol: string = _.get(yahooFinanceDatum, ['symbol']);
@@ -291,27 +312,19 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
         };
 
         if (showHoldings) {
-            const allHoldings: object = await getAllHoldings([
-                {
-                    filer: 'ark',
-                    csvFilePath: './mocks/holdings/ark_investment_management_llc-current-2020-12-26_20_28_44.csv'
-                },
-                {
-                    filer: 'vanguard',
-                    csvFilePath: './mocks/holdings/vanguard_group_inc-current-2020-12-26_18_46_42.csv'
-                },
-                {
-                    filer: 'jp-morgan',
-                    csvFilePath: './mocks/holdings/jpmorgan_chase_&_company-current-2020-12-26_18_46_23.csv'
-                }
-            ]);
+            const allHoldings: object = await getAllHoldings(HOLDINGS);
             for (const datum of data) {
                 _.forEach(allHoldings, (holdings: Array<object>, filer: string) => {
                     const stockSymbol: string = _.get(datum, ['yahooFinance', 'symbol'])
                     const holdingsFound: any = _.find(holdings, {'Symbol': stockSymbol});
                     if (!_.isNil(holdingsFound)) {
-                        const message = `[${_.get(holdingsFound, ['Qtr first owned'])}] ${_.toUpper(_.get(holdingsFound, ['Change Type']))} @ $${_.get(holdingsFound, ['Avg Price'], '?')} for ${abbreviateNumbers(_.get(holdingsFound, ['Change in shares']))} shares.`;
-                        _.set(datum, ['holdings', filer], message);
+                        const firstOwned: string = _.get(holdingsFound, ['Qtr first owned']);
+                        const changeType: string = _.toUpper(_.get(holdingsFound, ['Change Type']));
+                        const avgPrice: string = _.get(holdingsFound, ['Avg Price']);
+                        const sharedHeld: string = _.get(holdingsFound, ['Shares Held']);
+                        const sourceDate: string = _.get(holdingsFound, ['source_date']);
+                        let message = _.isEmpty(changeType) ? `HOLDING ${_.isEmpty(avgPrice) ? '' : '@ $' + avgPrice} for ${sharedHeld} shares` : `${changeType} @ ${_.isEmpty(avgPrice) ? 'N/A' : '$' + avgPrice} for ${abbreviateNumbers(_.get(holdingsFound, ['Change in shares']))} shares`;
+                        _.set(datum, ['holdings', filer], `[${sourceDate}] ${message}. First owned since ${firstOwned}`);
                     }
                 });
             }
