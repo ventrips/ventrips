@@ -29,6 +29,8 @@ export class StocksComponent implements OnInit {
   public description: string  = `Current Historical Intraday Stock Charts to perform technical analysis. Look for trading strategies, patterns, and trends in 5 minute intervals of data`;
   public collection: string = 'symbol'
   public data: any;
+  public stocksUpdated: any;
+  public stocks: any;
 
   constructor(
     private afs: AngularFirestore,
@@ -57,6 +59,29 @@ export class StocksComponent implements OnInit {
     //   this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
     //   this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
     // }, () => {});
+    this.ssrService.ssrFirestoreDoc(`stocks/${moment().format('YYYY-MM-DD')}`, `stocks-${moment().format('YYYY-MM-DD')}`, false)
+    .subscribe(response => {
+      this.stocksUpdated = _.get(response, ['updated']);
+      this.stocks = response;
+    }, () => {});
+  }
+
+  // Fetches latest and sets to firestore DB
+  getStocks(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/getStocks?minPrice=0.01&maxPrice=100&sortByField=regularMarketVolume&minVolume=1000000&volumeHasMultipliedBy=0&externalSources=false&statsOnly=true&showHoldings=true`)
+    .pipe(map((response: Response) => { return response }));
+  };
+
+  refreshStocks(): void {
+    if (!this.authService.canEdit(this.user)) {
+      return;
+    }
+    this.spinner.show();
+    this.getStocks().subscribe(response => {
+      this.spinner.hide();
+    }, (error) => {
+      this.spinner.hide();
+    });
   }
 
   isPlatformBrowser() {

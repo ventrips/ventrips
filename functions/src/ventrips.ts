@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import { cors } from './utils';
 import * as functions from 'firebase-functions';
-// import * as admin from 'firebase-admin';
-// const db = admin.firestore();
+import * as admin from 'firebase-admin';
+const db = admin.firestore();
 const { ExploreTrendRequest } = require('g-trends');
 const RequestPromise = require('request-promise');
 const UserAgent = require('user-agents');
@@ -190,21 +190,30 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
         };
         const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
             const stockSymbol: string = _.get(yahooFinanceDatum, ['symbol']);
-            return {
-                company: `${stockSymbol} (${_.get(yahooFinanceDatum, ['longName'])}) - ${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
-                info: `$${_.get(yahooFinanceDatum, ['regularMarketPrice'])} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`,
-                marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
-                whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
-                cnnForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
-                reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
-                stocktwits: `https://stocktwits.com/symbol/${stockSymbol}`,
-                search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
-                news: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
-                history: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
-                trends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
-                ceo: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
+            const final: object = {
+                symbol: stockSymbol,
+                company: `${_.get(yahooFinanceDatum, ['longName'])}`,
+                exchange: `${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
+                price: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketPrice']))}`,
+                priceChange: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent']))}`,
+                volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
+                volumeDisplay: `${displayFriendlyVolume(yahooFinanceDatum)}`,
+                volumeMultiplied: `${volumeMultiplied(yahooFinanceDatum)}`,
+                resources: {
+                    CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
+                    marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
+                    whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
+                    reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
+                    stockTwits: `https://stocktwits.com/symbol/${stockSymbol}`,
+                    yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                    googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
+                    googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
+                    googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
+                    googleSearchForCEO: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`
+                },
                 yahooFinance: yahooFinanceDatum
             }
+            return final;
         });
         resolve(yahooFinanceStockDetails);
     });
@@ -279,7 +288,7 @@ const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, stoc
     });
 };
 
-export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     const minPrice: number = _.toNumber(_.get(request, ['query', 'minPrice'], 0));
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
@@ -336,7 +345,7 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
             data = await getExternalSources(data);
         }
 
-        const final: any = {
+        let final: any = {
             results: _.get(data, ['length'], 0),
             symbols: displayQuickViewText(data),
             data
@@ -348,8 +357,14 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                 delete datum['googleTrends'];
             });
         }
-        console.log(JSON.stringify(data, null, 4));
-        response.send(final);
+        const date: string = new Date().toISOString().slice(0, 10);
+        final = _.assign(final, {updated: admin.firestore.FieldValue.serverTimestamp()});
+        return db.doc(`stocks/${date}`).set(final).then(() => {
+            return response.send(final);
+        }).catch((error: any) => {
+            return response.send(error);
+        });
+        // response.send(final);
     } catch (error) {
         response.send(error);
     }
