@@ -194,7 +194,8 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 company: `${stockSymbol} (${_.get(yahooFinanceDatum, ['longName'])}) - ${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
                 info: `$${_.get(yahooFinanceDatum, ['regularMarketPrice'])} | Volume: ${displayFriendlyVolume(yahooFinanceDatum)}`,
                 marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
-                whalewisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
+                whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
+                cnnForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
                 reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
                 stocktwits: `https://stocktwits.com/symbol/${stockSymbol}`,
                 search: `https://www.google.com/search?q=${stockSymbol}%20stock`,
@@ -324,8 +325,8 @@ export const getAllPennyStocks = functions.runWith({ timeoutSeconds: 540, memory
                         const sharesHeld: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         const changeInShares: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         const sourceDate: string = _.get(holdingsFound, ['source_date']);
-                        let message = `${_.isEmpty(changeType) ? 'HOLDING' : changeType} ${_.isEmpty(changeInShares) ? abbreviateNumbers(sharesHeld) : abbreviateNumbers(changeInShares)} shares${_.isEmpty(avgPrice) ? '' : ' @ $' + avgPrice}`;
-                        _.set(datum, ['holdings', filer], `[${sourceDate}] ${message}. First owned since ${firstOwned}`);
+                        let message = `${_.isEmpty(changeType) ? 'HOLDING' : changeType} ${_.isEmpty(changeInShares) ? abbreviateNumbers(sharesHeld) : abbreviateNumbers(changeInShares)} shares${_.isEmpty(avgPrice) ? '' : ' @ $' + avgPrice} AVG`;
+                        _.set(datum, ['holdings', filer], `[${sourceDate}] ${message}.${_.isEmpty(firstOwned) ? '' : ' First owned since ' + firstOwned}`);
                     }
                 });
             }
