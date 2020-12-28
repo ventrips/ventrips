@@ -34,7 +34,7 @@ const HOLDINGS: Array<object> = [
 
 const getMarketBeatUrl = (yahooFinanceDatum: object): string => {
     const symbol: string = _.get(yahooFinanceDatum, ['symbol']);
-    const exchangeName: string = _.toUpper(_.get(yahooFinanceDatum, ['fullExchangeName']));
+    const exchangeName: any = _.toUpper(_.get(yahooFinanceDatum, ['fullExchangeName']));
     let newExchangeName: string = '';
     if (_.includes(exchangeName, ['OTHER OTC'])) {
         newExchangeName = 'OTCMKTS';
@@ -74,10 +74,10 @@ const abbreviateNumbers = (n: number): string => {
         const prec = Math.pow(10, precision);
         return Math.round(n*prec)/prec;
     };
-    const pow: number = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
+    const pow: any = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
     const abbrev: string = 'KMB'; // could be an array of strings: [' m', ' Mo', ' Md']
     let base: number = floor(log(abs(n))/log(1000));
-    const suffix: string = abbrev[Math.min(2, base - 1)];
+    const suffix: any = abbrev[Math.min(2, base - 1)];
     base = abbrev.indexOf(suffix) + 1;
     return suffix ? round(n/pow(1000,base),2)+suffix : ''+n;
 }
@@ -270,7 +270,8 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
     });
 };
 
-const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, stockSymbols: Array<string> = []): Promise<Array<object>> => {
+const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, symbols: Array<string> = []): Promise<Array<object>> => {
+    let stockSymbols: Array<string> = symbols;
     return new Promise(async (resolve: any) => {
         if (_.isEmpty(stockSymbols)) {
             stockSymbols = await getFinnHubStockSymbols();
