@@ -333,7 +333,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                         const sharesHeld: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         const changeInShares: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         const sourceDate: string = _.get(holdingsFound, ['source_date']);
-                        let message = `${_.isEmpty(changeType) ? 'HOLDING' : changeType} ${_.isEmpty(changeInShares) ? abbreviateNumbers(sharesHeld) : abbreviateNumbers(changeInShares)} shares${_.isEmpty(avgPrice) ? '' : ' @ $' + avgPrice} AVG`;
+                        const message = `${_.isEmpty(changeType) ? 'HOLDING' : changeType} ${_.isEmpty(changeInShares) ? abbreviateNumbers(sharesHeld) : abbreviateNumbers(changeInShares)} shares${_.isEmpty(avgPrice) ? '' : ' @ $' + avgPrice} AVG`;
                         _.set(datum, ['holdings', filer], `[${sourceDate}] ${message}.${_.isEmpty(firstOwned) ? '' : ' First owned since ' + firstOwned}`);
                     }
                 });
