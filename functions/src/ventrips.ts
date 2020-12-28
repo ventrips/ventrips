@@ -299,7 +299,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
     const showHoldings: boolean = JSON.parse(_.get(request, ['query', 'showHoldings'], false));
 
     try {
-        let allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, stockSymbols);
+        const allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, stockSymbols);
         let data: Array<object> = allStocksByPriceRange;
         if (_.isEmpty(stockSymbols)) {
             if (!_.isNil(minVolume)) {
