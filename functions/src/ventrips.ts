@@ -307,7 +307,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
         }
         if (!_.isEmpty(sortByFields)) {
             data = _.orderBy(data, (datum: object) => {
-                return _.get(datum, sortByFields, 0);
+                return _.toNumber(_.get(datum, sortByFields, 0));
             }, 'desc');
         };
 
