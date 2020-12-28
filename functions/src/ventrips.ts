@@ -48,16 +48,15 @@ const getMarketBeatUrl = (yahooFinanceDatum: object): string => {
     return `https://www.marketbeat.com/stocks/${newExchangeName}/${symbol}/`
 };
 
-const volumeMultiplied = (yahooFinanceDatum: object): number => {
+const volumeChange = (yahooFinanceDatum: object): number => {
     const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume'], 0);
     const averageDailyVolume10Day: number =  _.get(yahooFinanceDatum, ['averageDailyVolume10Day'], 0);
-    const volumeMultiplied: number = _.floor(regularMarketVolume / averageDailyVolume10Day);
-    return volumeMultiplied;
+    return (regularMarketVolume - averageDailyVolume10Day) / averageDailyVolume10Day
 }
 
 const displayFriendlyVolume = (yahooFinanceDatum: object): string => {
     const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume'], 0);
-    return `${abbreviateNumbers(regularMarketVolume)} (${volumeMultiplied(yahooFinanceDatum)}X)`;
+    return `${abbreviateNumbers(regularMarketVolume)} (${volumeChange(yahooFinanceDatum)}%)`;
 }
 
 const displayQuickViewText = (data: Array<object>): Array<string> => {
@@ -195,10 +194,9 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 company: `${_.get(yahooFinanceDatum, ['longName'])}`,
                 exchange: `${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
                 price: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketPrice']))}`,
-                priceChange: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent']))}`,
+                priceChange: `${_.round(_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent'])), 2)}`,
                 volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
-                volumeDisplay: `${displayFriendlyVolume(yahooFinanceDatum)}`,
-                volumeMultiplied: `${volumeMultiplied(yahooFinanceDatum)}`,
+                volumeChange: `${_.round(volumeChange(yahooFinanceDatum), 2)}`,
                 resources: {
                     CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
                     marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,

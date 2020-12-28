@@ -59,7 +59,7 @@ export class StocksComponent implements OnInit {
     //   this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
     //   this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
     // }, () => {});
-    this.ssrService.ssrFirestoreDoc(`stocks/${moment().format('YYYY-MM-DD')}`, `stocks-${moment().format('YYYY-MM-DD')}`, false)
+    this.ssrService.ssrFirestoreDoc(`stocks/${moment().utc().format('YYYY-MM-DD')}`, `stocks-${moment().utc().format('YYYY-MM-DD')}`, false)
     .subscribe(response => {
       this.stocksUpdated = _.get(response, ['updated']);
       this.stocks = response;
