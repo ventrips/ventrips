@@ -326,7 +326,6 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                         // const sharesHeld: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         // const percentOwned: number = _.toNumber(_.get(holdingsFound, ['% Ownership']));
                         const sourceDate: string = _.get(holdingsFound, ['source_date'], '');
-                        console.log(JSON.stringify(holdingsFound, null, 4));
                         _.set(datum, ['holdings', filer], {
                             changeType: `${_.isEmpty(changeType) ? 'HOLDING' : changeType}`,
                             sharesChange,
