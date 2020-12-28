@@ -68,7 +68,7 @@ export class StocksComponent implements OnInit {
 
   // Fetches latest and sets to firestore DB
   getStocks(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/getStocks?minPrice=0.01&maxPrice=100&sortByField=regularMarketVolume&minVolume=1000000&volumeHasMultipliedBy=0&externalSources=false&statsOnly=true&showHoldings=true`)
+    return this.http.get(`${environment.apiUrl}/getStocks?minPrice=0.01&maxPrice=100&sortByFields=yahooFinance,regularMarketVolume&minVolume=1000000&volumeHasMultipliedBy=0&externalSources=false&statsOnly=true&showHoldings=true`)
     .pipe(map((response: Response) => { return response }));
   };
 

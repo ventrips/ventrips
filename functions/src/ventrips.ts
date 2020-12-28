@@ -283,7 +283,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
     const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
-    const sortByField: string = _.get(request, ['query', 'sortByField']);
+    const sortByFields: Array<string> = _.compact(_.split(_.get(request, ['query', 'sortByFields'], ''), ','));
     const statsOnly: string = JSON.parse(_.get(request, ['query', 'statsOnly'], false));
     const externalSources: boolean = JSON.parse(_.get(request, ['query', 'externalSources'], false));
     const stockSymbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'stockSymbols'], ''), ','));
@@ -305,9 +305,9 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                 });
             }
         }
-        if (!_.isNil(sortByField)) {
+        if (!_.isEmpty(sortByFields)) {
             data = _.orderBy(data, (datum: object) => {
-                return _.get(datum, ['yahooFinance', sortByField], 0);
+                return _.get(datum, sortByFields, 0);
             }, 'desc');
         };
 
