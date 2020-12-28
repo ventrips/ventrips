@@ -111,7 +111,7 @@ const past7DaysHighestGoogleTrend = (datum: object): any => {
 const getAllHoldings = async (filers: Array<object>): Promise<any> => {
     return new Promise(async (resolve) => {
         const data: object = {};
-        for (let filerObj of filers) {
+        for (const filerObj of filers) {
             const holdings: Array<object> = await csvToJson().fromFile(_.get(filerObj, ['csvFilePath']));
             _.set(data, _.get(filerObj, ['filer']), holdings);
         }
