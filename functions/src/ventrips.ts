@@ -192,7 +192,6 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             const final: object = {
                 symbol: stockSymbol,
                 company: `${_.get(yahooFinanceDatum, ['longName'])}`,
-                exchange: `${_.get(yahooFinanceDatum, ['fullExchangeName'])}`,
                 price: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketPrice']))}`,
                 priceChange: `${_.round(_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent'])), 2)}`,
                 volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
@@ -200,7 +199,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 resources: {
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
-                    googleSearchForStock: `https://www.google.com/search?q=${longName}%20stock%20price`,
+                    googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
                     youTube: `https://www.youtube.com/results?search_query=${longName}`,
                     reddit: `https://www.reddit.com/search/?q=${stockSymbol}&sort=new&type=link`,
                     yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
