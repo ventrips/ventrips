@@ -198,16 +198,16 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
                 volumeChange: `${_.round(volumeChange(yahooFinanceDatum), 2)}`,
                 resources: {
-                    CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
-                    marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
-                    whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
-                    reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
-                    stockTwits: `https://stocktwits.com/symbol/${stockSymbol}`,
-                    yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                     googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
-                    googleSearchForCEO: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`
+                    googleSearchForCEO: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
+                    reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
+                    yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                    stockTwits: `https://stocktwits.com/symbol/${stockSymbol}`,
+                    CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
+                    marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
+                    whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
                 },
                 yahooFinance: yahooFinanceDatum
             }
