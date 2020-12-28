@@ -87,7 +87,7 @@ export const getAlphaVantageAPI = functions.runWith({ timeoutSeconds: 540, memor
 
     let data: any = {};
     let intraData: any = {};
-    let dayData: any = {};
+    const dayData: any = {};
 
     /* Mock */
     // intraData = require('./../mocks/alpha-vantage-api/alpha-vantage-5-min-api.json');

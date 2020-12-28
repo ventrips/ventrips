@@ -70,9 +70,9 @@ const displayQuickViewText = (data: Array<object>): Array<string> => {
 };
 
 const abbreviateNumbers = (n: number): string => {
-    const round = (n: number, precision: number): number => {
+    const round = (number: number, precision: number): number => {
         const prec = Math.pow(10, precision);
-        return Math.round(n*prec)/prec;
+        return Math.round(number * prec) / prec;
     };
     const pow: any = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
     const abbrev: string = 'KMB'; // could be an array of strings: [' m', ' Mo', ' Md']
@@ -83,10 +83,9 @@ const abbreviateNumbers = (n: number): string => {
 }
 
 const pastDaysHighestVolume = (datum: object): any => {
-    let yahooFinance: object = _.get(datum, ['yahooFinance']);
+    const yahooFinance: object = _.get(datum, ['yahooFinance']);
     const regularMarketVolume: number = _.get(yahooFinance, ['regularMarketVolume'], 0);
-    const regularMarketTime: number = _.get(yahooFinance, ['regularMarketTime']);
-    let alphaVantage: Array<object> = _.get(datum, ['alphaVantage'], []);
+    const alphaVantage: Array<object> = _.get(datum, ['alphaVantage'], []);
     let highestVolume: any = _.maxBy(alphaVantage, (value: object) => _.get(value, ['volume']));
     highestVolume = {
         date: highestVolume.date,
@@ -102,7 +101,7 @@ const pastDaysHighestVolume = (datum: object): any => {
 }
 
 const past7DaysHighestGoogleTrend = (datum: object): any => {
-    let googleTrends: Array<object> = _.get(datum, ['googleTrends'], []);
+    const googleTrends: Array<object> = _.get(datum, ['googleTrends'], []);
     return _.maxBy(googleTrends, (value: object) => {
         return _.get(value, ['trend']);
     });
@@ -250,12 +249,6 @@ const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<obj
 };
 
 const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>> => {
-    const defaultUserAgentOptions: object = {
-        headers: {
-            'User-Agent': ((new UserAgent()).data).toString()
-        },
-        json: true
-    };
     return new Promise(async (resolve: any) => {
         const googleTrends = new ExploreTrendRequest();
         const googleTrendsResponse = await googleTrends.past7Days().addKeyword(`${stockSymbol} stock`, 'US').download()
@@ -279,9 +272,7 @@ const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, symb
         const yahooFinanceStockDetails: Array<object> = await getYahooFinanceStockDetails(stockSymbols);
         const filteredYahooFinanceStockDetails = _.filter(yahooFinanceStockDetails, (yahooFinanceStock: object) => {
             const regularMarketPrice: number = _.get(yahooFinanceStock, ['yahooFinance', 'regularMarketPrice']);
-            const fullExchangeName: number = _.get(yahooFinanceStock, ['yahooFinance', 'fullExchangeName']);
-            return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
-                    // && !_.includes(['Other OTC'], fullExchangeName);
+            return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice);
         });
         resolve(filteredYahooFinanceStockDetails);
     });
@@ -385,7 +376,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         const minFiftyTwoWeekLow: number = 1;
         const minRegularMarketVolume: number = 5000000;
         const minThreshold: number = 0.75;
-        const minMarketCap: number = 1000000000;
+        // const minMarketCap: number = 1000000000;
 
         data = _.filter(data, (item: object) => {
             const regularMarketPrice: number = _.get(item, ['yahooFinance', 'regularMarketPrice']);
@@ -394,22 +385,22 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             const averageDailyVolume10Day: number = _.get(item, ['yahooFinance', 'averageDailyVolume10Day']);
             const averageDailyVolume3Month: number = _.get(item, ['yahooFinance', 'averageDailyVolume3Month']);
 
-            const regularMarketChangePercent: number = _.get(item, ['yahooFinance', 'regularMarketChangePercent']);
+            // const regularMarketChangePercent: number = _.get(item, ['yahooFinance', 'regularMarketChangePercent']);
             const fiftyDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'fiftyDayAverageChangePercent']);
             const twoHundredDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'twoHundredDayAverageChangePercent']);
 
-            const fiftyTwoWeekLowChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLowChangePercent']);
+            // const fiftyTwoWeekLowChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLowChangePercent']);
             const fiftyTwoWeekHighChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHighChangePercent']);
 
             const fiftyDayAverage: number = _.get(item, ['yahooFinance', 'fiftyDayAverage']);
             const twoHundredDayAverage: number = _.get(item, ['yahooFinance', 'twoHundredDayAverage']);
 
             const fiftyTwoWeekLow: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLow']);
-            const fiftyTwoWeekHigh: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHigh']);
+            // const fiftyTwoWeekHigh: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHigh']);
 
-            const sharesOutstanding: number = _.get(item, ['yahooFinance', 'sharesOutstanding']);
+            // const sharesOutstanding: number = _.get(item, ['yahooFinance', 'sharesOutstanding']);
 
-            const marketCap: number = _.get(item, ['yahooFinance', 'marketCap']);
+            // const marketCap: number = _.get(item, ['yahooFinance', 'marketCap']);
             const priceToBook: number = _.get(item, ['yahooFinance', 'priceToBook']);
 
             // Condition #1: Price must be within target price range
