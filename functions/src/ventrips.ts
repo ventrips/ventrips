@@ -188,6 +188,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
         };
         const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
             const stockSymbol: string = _.get(yahooFinanceDatum, ['symbol']);
+            const longName: string = _.get(yahooFinanceDatum, ['longName']);
             const final: object = {
                 symbol: stockSymbol,
                 company: `${_.get(yahooFinanceDatum, ['longName'])}`,
@@ -199,10 +200,11 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 resources: {
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
-                    googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
-                    googleSearchForCEO: `https://www.google.com/search?q=${stockSymbol}%20stock%20CEO`,
-                    reddit: `https://www.google.com/search?q=${stockSymbol}%20stock%20reddit`,
+                    googleSearchForStock: `https://www.google.com/search?q=${longName}%20stock%20price`,
+                    youTube: `https://www.youtube.com/results?search_query=${longName}`,
+                    reddit: `https://www.reddit.com/search/?q=${stockSymbol}&sort=new&type=link`,
                     yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+                    twitter: `https://twitter.com/search?q=%24${stockSymbol}&src=typed_query`,
                     stockTwits: `https://stocktwits.com/symbol/${stockSymbol}`,
                     CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
                     marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
