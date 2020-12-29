@@ -59,7 +59,7 @@ export class StocksComponent implements OnInit {
     //   this.data = _.orderBy(response, [(item: any) => _.get(item, ['updated'])], ['desc']);
     //   this.searchOptions = _.map(this.data, (item) => _.get(item, ['metaData', 'symbol']));
     // }, () => {});
-    const days = 1;
+    const days = 0;
     this.ssrService.ssrFirestoreDoc(`stocks/${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, `stocks-${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, false)
     .subscribe(response => {
       this.stocksUpdated = _.get(response, ['updated']);

@@ -188,6 +188,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
         };
         const yahooFinanceStockDetails: Array<object> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
             const stockSymbol: string = _.get(yahooFinanceDatum, ['symbol']);
+            const fullExchangeName: string = _.get(yahooFinanceDatum, ['fullExchangeName']);
             const longName: string = _.get(yahooFinanceDatum, ['longName']);
             const final: object = {
                 symbol: stockSymbol,
@@ -210,6 +211,9 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
                 },
                 yahooFinance: yahooFinanceDatum
+            }
+            if (_.includes(fullExchangeName, ['OTHER OTC'])) {
+                _.set(final, ['resources', 'OTCMarkets'], `https://www.otcmarkets.com/stock/${stockSymbol}/news`);
             }
             return final;
         });
