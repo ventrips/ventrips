@@ -213,7 +213,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 yahooFinance: yahooFinanceDatum
             }
             if (_.includes(fullExchangeName, ['OTHER OTC'])) {
-                _.set(final, ['resources', 'OTCMarkets'], `https://www.otcmarkets.com/stock/${stockSymbol}/news`);
+                _.set(final, ['resources', 'OTCMarkets'], `https://www.otcmarkets.com/stock/${stockSymbol}/financials`);
             }
             return final;
         });
