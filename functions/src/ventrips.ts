@@ -319,14 +319,14 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                     const stockSymbol: string = _.get(datum, ['yahooFinance', 'symbol'])
                     const holdingsFound: any = _.find(holdings, {'Symbol': stockSymbol});
                     if (!_.isNil(holdingsFound)) {
-                        // const firstOwned: string = _.get(holdingsFound, ['Qtr first owned']);
+                        const firstOwned: string = _.get(holdingsFound, ['Qtr first owned']);
                         const changeType: string = _.toUpper(_.get(holdingsFound, ['Change Type']));
                         const avgPrice: number = _.toNumber(_.get(holdingsFound, ['Avg Price'], 0));
                         const changeInShares: number = _.toNumber(_.get(holdingsFound, ['Change in shares'], 0));
                         const sharesChange: number = _.round(_.toNumber(_.get(holdingsFound, ['% Change'], 0)), 2);
                         // const sharesHeld: number = _.toNumber(_.get(holdingsFound, ['Shares Held']));
                         // const percentOwned: number = _.toNumber(_.get(holdingsFound, ['% Ownership']));
-                        const sourceDate: string = _.get(holdingsFound, ['source_date'], '');
+                        // const sourceDate: string = _.get(holdingsFound, ['source_date'], '');
                         _.set(datum, ['holdings', filer], {
                             changeType: `${_.isEmpty(changeType) ? 'HOLDING' : changeType}`,
                             sharesChange,
@@ -334,8 +334,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                             // sharesHeld,
                             // percentOwned,
                             avgPrice,
-                            // firstOwned,
-                            sourceDate
+                            firstOwned
                         });
                     }
                 });
