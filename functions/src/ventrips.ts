@@ -201,7 +201,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                     googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
-                    youTube: `https://www.youtube.com/results?search_query=${longName}`,
+                    youtube: `https://www.youtube.com/results?search_query=${longName}`,
                     reddit: `https://www.reddit.com/search/?q=${stockSymbol}&sort=new&type=link`,
                     yahooVolumeHistory: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
                     twitter: `https://twitter.com/search?q=%24${stockSymbol}&src=typed_query`,
