@@ -230,17 +230,20 @@ const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<obj
         json: true
     };
     return new Promise(async (resolve: any) => {
+        const interval = 'Daily'; // '1min';
         const alphaVantageOptions: object = _.assign({
             uri: 'https://www.alphavantage.co/query',
             qs: {
                 function: 'TIME_SERIES_DAILY',
+                // function: 'TIME_SERIES_INTRADAY',
                 symbol: stockSymbol,
+                // interval,
                 outputsize: 'compact',
                 apikey: 'J5LLHCUPAQ0CR0IN'
             }
         }, defaultUserAgentOptions);
         const alphaVantageResponse: any = await RequestPromise(alphaVantageOptions);
-        const alphaVantageData: any = _.sortBy(_.map(_.get(alphaVantageResponse, ['Time Series (Daily)'], []), (value: any, key: string) => {
+        const alphaVantageData: any = _.sortBy(_.map(_.get(alphaVantageResponse, [`Time Series (${interval})`], []), (value: any, key: string) => {
             return {
                 date: key,
                 open: _.toNumber(value['1. open']),
@@ -263,7 +266,7 @@ const getGoogleStockTrends = async (stockSymbol: string): Promise<Array<object>>
             if (!isNumeric) {
                 return null;
             }
-            return { date: _.get(item, [0]).slice(0, 10), trend: _.toNumber(_.get(item, [1], 0)) }
+            return { date: _.get(item, [0]), trend: _.toNumber(_.get(item, [1], 0)) }
         }));
         resolve(googleTrendsData);
     });
@@ -292,13 +295,14 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
     const sortByFields: Array<string> = _.compact(_.split(_.get(request, ['query', 'sortByFields'], ''), ','));
     const statsOnly: string = JSON.parse(_.get(request, ['query', 'statsOnly'], false));
     const externalSources: boolean = JSON.parse(_.get(request, ['query', 'externalSources'], false));
-    const stockSymbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'stockSymbols'], ''), ','));
+    const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
     const showHoldings: boolean = JSON.parse(_.get(request, ['query', 'showHoldings'], false));
+    const firebase: boolean = JSON.parse(_.get(request, ['query', 'firebase'], false));
 
     try {
-        const allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, stockSymbols);
+        const allStocksByPriceRange: Array<object> = await getAllStocksByPriceRange(minPrice, maxPrice, symbols);
         let data: Array<object> = allStocksByPriceRange;
-        if (_.isEmpty(stockSymbols)) {
+        if (_.isEmpty(symbols)) {
             if (!_.isNil(minVolume)) {
                 data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
             }
@@ -345,7 +349,6 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
                 });
             }
         }
-
         if (externalSources) {
             data = await getExternalSources(data);
         }
@@ -364,6 +367,9 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
         }
         const date: string = new Date().toISOString().slice(0, 10);
         final = _.assign(final, {updated: admin.firestore.FieldValue.serverTimestamp()});
+        if (!firebase) {
+            return response.send(final);
+        }
         return db.doc(`stocks/${date}`).set(final).then(() => {
             return response.send(final);
         }).catch((error: any) => {
