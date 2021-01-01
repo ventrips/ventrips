@@ -199,7 +199,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 volumeChange: `${_.round(volumeChange(yahooFinanceDatum), 2)}`,
                 resources: {
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
-                    googleNews: `https://www.google.com/search?q=${stockSymbol}%20stock&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
+                    googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                     googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
                     youtube: `https://www.youtube.com/results?search_query=${longName}`,
