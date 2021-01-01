@@ -197,6 +197,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 priceChange: `${_.round(_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent'])), 2)}`,
                 volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
                 volumeChange: `${_.round(volumeChange(yahooFinanceDatum), 2)}`,
+                marketCap: `${_.toNumber(_.get(yahooFinanceDatum, ['marketCap']))}`,
                 resources: {
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
@@ -291,6 +292,7 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
     const minPrice: number = _.toNumber(_.get(request, ['query', 'minPrice'], 0));
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));
+    const minMarketCap: number = _.toNumber(_.get(request, ['query', 'minMarketCap'], 0));
     const volumeHasMultipliedBy: number = _.toNumber(_.get(request, ['query', 'volumeHasMultipliedBy'], 0));
     const sortByFields: Array<string> = _.compact(_.split(_.get(request, ['query', 'sortByFields'], ''), ','));
     const statsOnly: string = JSON.parse(_.get(request, ['query', 'statsOnly'], false));
@@ -305,6 +307,9 @@ export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB
         if (_.isEmpty(symbols)) {
             if (!_.isNil(minVolume)) {
                 data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'regularMarketVolume']) >= minVolume);
+            }
+            if (!_.isNil(minMarketCap)) {
+                data = _.filter(data, (datum: object) => _.get(datum, ['yahooFinance', 'marketCap']) >= minMarketCap);
             }
             if (!_.isNil(volumeHasMultipliedBy)) {
                 data = _.filter(data, (datum: object) => {
