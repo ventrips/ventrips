@@ -193,12 +193,14 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
             const final: object = {
                 symbol: stockSymbol,
                 company: `${_.get(yahooFinanceDatum, ['longName'])}`,
+                fullExchangeName,
                 price: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketPrice']))}`,
                 priceChange: `${_.round(_.toNumber(_.get(yahooFinanceDatum, ['regularMarketChangePercent'])), 2)}`,
                 volume: `${_.toNumber(_.get(yahooFinanceDatum, ['regularMarketVolume']))}`,
                 volumeChange: `${_.round(volumeChange(yahooFinanceDatum), 2)}`,
                 marketCap: `${_.toNumber(_.get(yahooFinanceDatum, ['marketCap']))}`,
                 resources: {
+                    OTCMarkets: `https://www.otcmarkets.com/stock/${stockSymbol}/financials`,
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
@@ -213,9 +215,6 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
                 },
                 yahooFinance: yahooFinanceDatum
-            }
-            if (_.includes(fullExchangeName, ['OTHER OTC'])) {
-                _.set(final, ['resources', 'OTCMarkets'], `https://www.otcmarkets.com/stock/${stockSymbol}/financials`);
             }
             return final;
         });
