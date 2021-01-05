@@ -202,6 +202,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 resources: {
                     OTCMarkets: `https://www.otcmarkets.com/stock/${stockSymbol}/financials`,
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
+                    googleWebsite: `https://www.google.com/search?q=${longName}%20website`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
                     googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
                     googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
