@@ -201,7 +201,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 marketCap: `${_.toNumber(_.get(yahooFinanceDatum, ['marketCap']))}`,
                 resources: {
                     OTCMarkets: `https://www.otcmarkets.com/stock/${stockSymbol}/financials`,
-                    linkedIn: `https://www.linkedin.com/jobs/search/?keywords=${longName}`,
+                    linkedin: `https://www.linkedin.com/jobs/search/?keywords=${longName}`,
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
                     googleWebsite: `https://www.google.com/search?q=${longName}%20website`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
@@ -478,6 +478,61 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             data
         };
         console.log(JSON.stringify(final, null, 4));
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
+    }
+});
+
+export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
+    try {
+        const qtrFirstOwnedText: string = `Q3 2020`;
+        const minNumHoldings: number = 4;
+        const maxPrice: number = 20;
+        const includesChangeTypes: Array<string> = ['ADDITION', 'NEW', 'HOLDING'];
+        const sortByFields: string = 'price';
+
+        let data: object;
+        let holdingsObj: object = {};
+        const allHoldings: object = await getAllHoldings(HOLDINGS);
+        _.forEach(allHoldings, (holding: object, filer: string) => {
+            _.forEach(holding, (stock: any) => {
+                const stockSymbol: string = _.get(stock, ['Symbol']);
+                const qtrFirstOwned: string = _.get(stock, ['Qtr first owned']);
+                const change: string = _.toUpper(_.get(stock, ['Change Type']));
+                const changeType: string = _.isEmpty(change) ? 'HOLDING' : change;
+                if (_.includes(qtrFirstOwned, qtrFirstOwnedText) && _.includes(includesChangeTypes, changeType)) {
+                    _.set(holdingsObj, [stockSymbol, filer], stock);
+                }
+            });
+        });
+        let holdingsArray: Array<any> = [];
+        _.forEach(holdingsObj, (holdingObj: object, stockSymbol: string) => {
+            const keys: Array<string> = _.keys(holdingObj);
+            const datum: object = {
+                symbol: stockSymbol,
+                holdings: keys
+            };
+            holdingsArray.push(datum);
+        });
+        const filteredData: Array<any> = _.filter(holdingsArray, (datum: object) => {
+            return _.get(datum, ['holdings']).length >= minNumHoldings;
+        });
+        const symbolsInCommon: Array<any> = _.map(filteredData, (datum: object) => _.get(datum, ['symbol']));
+        data = await getYahooFinanceStockDetails(symbolsInCommon);
+        _.forEach(data, (datum: object) => {
+            _.merge(datum, _.find(holdingsArray, { symbol: _.get(datum, ['symbol'])}));
+        });
+
+        let final: Array<any> = _.filter(data, (datum: object) => {
+            const price: number = _.toNumber(_.get(datum, ['price'], 0));
+            return price <= maxPrice;
+        });
+        final = _.orderBy(data, (datum: object) => {
+            return _.toNumber(_.get(datum, sortByFields, 0));
+        }, 'asc');
         response.send(final);
     } catch (error) {
         console.log(JSON.stringify(error, null, 4));
