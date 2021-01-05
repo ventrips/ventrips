@@ -491,7 +491,11 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
         const qtrFirstOwnedText: string = `Q3 2020`;
         const minNumHoldings: number = 3;
         const maxPrice: number = 20;
-        const includesChangeTypes: Array<string> = ['ADDITION', 'NEW', 'HOLDING'];
+        const includesChangeTypes: Array<string> = [
+            // 'ADDITION',
+            'NEW',
+            // 'HOLDING'
+        ];
         const sortByFields: string = 'price';
 
         let data: object;
