@@ -510,10 +510,10 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
         });
         let holdingsArray: Array<any> = [];
         _.forEach(holdingsObj, (holdingObj: object, stockSymbol: string) => {
-            const keys: Array<string> = _.keys(holdingObj);
+            const values: Array<string> = _.values(holdingObj);
             const datum: object = {
                 symbol: stockSymbol,
-                holdings: keys
+                holdings: values
             };
             holdingsArray.push(datum);
         });
