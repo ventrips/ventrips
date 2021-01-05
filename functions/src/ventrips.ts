@@ -489,7 +489,7 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
     cors(request, response);
     try {
         const qtrFirstOwnedText: string = `Q3 2020`;
-        const minNumHoldings: number = 4;
+        const minNumHoldings: number = 3;
         const maxPrice: number = 20;
         const includesChangeTypes: Array<string> = ['ADDITION', 'NEW', 'HOLDING'];
         const sortByFields: string = 'price';
@@ -528,9 +528,10 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
 
         let final: Array<any> = _.filter(data, (datum: object) => {
             const price: number = _.toNumber(_.get(datum, ['price'], 0));
+            console.log(price, maxPrice);
             return price <= maxPrice;
         });
-        final = _.orderBy(data, (datum: object) => {
+        final = _.orderBy(final, (datum: object) => {
             return _.toNumber(_.get(datum, sortByFields, 0));
         }, 'asc');
         response.send(final);
