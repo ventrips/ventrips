@@ -201,6 +201,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                 marketCap: `${_.toNumber(_.get(yahooFinanceDatum, ['marketCap']))}`,
                 resources: {
                     OTCMarkets: `https://www.otcmarkets.com/stock/${stockSymbol}/financials`,
+                    linkedIn: `https://www.linkedin.com/jobs/search/?keywords=${longName}`,
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
                     googleWebsite: `https://www.google.com/search?q=${longName}%20website`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
