@@ -528,7 +528,6 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
 
         let final: Array<any> = _.filter(data, (datum: object) => {
             const price: number = _.toNumber(_.get(datum, ['price'], 0));
-            console.log(price, maxPrice);
             return price <= maxPrice;
         });
         final = _.orderBy(final, (datum: object) => {
