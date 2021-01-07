@@ -82,6 +82,62 @@ const abbreviateNumbers = (n: number): string => {
     return suffix ? round(n/pow(1000,base),2)+suffix : ''+n;
 }
 
+const isRecommended = (yahooFinanceDatum: object): boolean => {
+    const minPrice: number = 0;
+    const maxPrice: number = 500;
+    const minFiftyTwoWeekHighChangePercent: number = -0.30;
+    const minFiftyTwoWeekLow: number = 0;
+    const minRegularMarketVolume: number = 5000000;
+    const minThreshold: number = 0.75;
+    // const minMarketCap: number = 1000000000;
+
+    const regularMarketPrice: number = _.get(yahooFinanceDatum, ['regularMarketPrice']);
+
+    const regularMarketVolume: number = _.get(yahooFinanceDatum, ['regularMarketVolume']);
+    const averageDailyVolume10Day: number = _.get(yahooFinanceDatum, ['averageDailyVolume10Day']);
+    const averageDailyVolume3Month: number = _.get(yahooFinanceDatum, ['averageDailyVolume3Month']);
+
+    // const regularMarketChangePercent: number = _.get(yahooFinanceDatum, ['regularMarketChangePercent']);
+    const fiftyDayAverageChangePercent: number = _.get(yahooFinanceDatum, ['fiftyDayAverageChangePercent']);
+    const twoHundredDayAverageChangePercent: number = _.get(yahooFinanceDatum, ['twoHundredDayAverageChangePercent']);
+
+    // const fiftyTwoWeekLowChangePercent: number = _.get(yahooFinanceDatum, ['fiftyTwoWeekLowChangePercent']);
+    const fiftyTwoWeekHighChangePercent: number = _.get(yahooFinanceDatum, ['fiftyTwoWeekHighChangePercent']);
+
+    const fiftyDayAverage: number = _.get(yahooFinanceDatum, ['fiftyDayAverage']);
+    const twoHundredDayAverage: number = _.get(yahooFinanceDatum, ['twoHundredDayAverage']);
+
+    const fiftyTwoWeekLow: number = _.get(yahooFinanceDatum, ['fiftyTwoWeekLow']);
+    // const fiftyTwoWeekHigh: number = _.get(yahooFinanceDatum, ['fiftyTwoWeekHigh']);
+
+    // const sharesOutstanding: number = _.get(yahooFinanceDatum, ['sharesOutstanding']);
+
+    // const marketCap: number = _.get(yahooFinanceDatum, ['marketCap']);
+    // const priceToBook: number = _.get(yahooFinanceDatum, ['priceToBook']);
+
+    // Condition #1: Price must be within target price range
+    return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
+    // Condition #2: 10-Day Average Volume must be greater than 3-Month Average Volume
+    && (averageDailyVolume10Day >= averageDailyVolume3Month)
+    // Condition #3: 50-Day Average Change Percent, 200-Day Average Change Percent must be greater than 0
+    && ((fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0))
+    // Condition #4: 50-Day Average must be higher than 200-Day Average
+    && (fiftyDayAverage >= twoHundredDayAverage)
+    // Condition #5: 52-Week High Change Percent must be greater than minFiftyTwoWeekHighChangePercent
+    && (fiftyTwoWeekHighChangePercent >= minFiftyTwoWeekHighChangePercent)
+    // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
+    && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
+    // Condition #7: All Volumes must be greater than minRegularMarketVolume
+    && ((regularMarketVolume >= minRegularMarketVolume) && (averageDailyVolume10Day >= minRegularMarketVolume)) // || (averageDailyVolume3Month >= minRegularMarketVolume)))
+    // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
+    && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) && ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
+    // // Condition #9: Price To Book Ratio must not be too over-valued
+    // && (priceToBook <= 3)
+    // // Condition #10: Market Cap must be greater than minMarketCap
+    // && (marketCap >= minMarketCap)
+    // TODO: GOOGLE TRENDS MUST BE >= 10
+}
+
 const pastDaysHighestVolume = (datum: object): any => {
     const yahooFinance: object = _.get(datum, ['yahooFinance']);
     const regularMarketVolume: number = _.get(yahooFinance, ['regularMarketVolume'], 0);
@@ -217,6 +273,10 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
                 },
                 yahooFinance: yahooFinanceDatum
+            }
+            const recommended: boolean = isRecommended(yahooFinanceDatum);
+            if (recommended) {
+                _.set(final, 'recommended', recommended);
             }
             return final;
         });
@@ -397,60 +457,9 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         data = await getYahooFinanceStockDetails(finnHubStockSymbols);
 
         /* Step 3: Filter stocks with custom logic */
-        const minPrice: number = 0;
-        const maxPrice: number = 500;
-        const minFiftyTwoWeekHighChangePercent: number = -0.30;
-        const minFiftyTwoWeekLow: number = 0;
-        const minRegularMarketVolume: number = 5000000;
-        const minThreshold: number = 0.75;
-        // const minMarketCap: number = 1000000000;
-
-        data = _.filter(data, (item: object) => {
-            const regularMarketPrice: number = _.get(item, ['yahooFinance', 'regularMarketPrice']);
-
-            const regularMarketVolume: number = _.get(item, ['yahooFinance', 'regularMarketVolume']);
-            const averageDailyVolume10Day: number = _.get(item, ['yahooFinance', 'averageDailyVolume10Day']);
-            const averageDailyVolume3Month: number = _.get(item, ['yahooFinance', 'averageDailyVolume3Month']);
-
-            // const regularMarketChangePercent: number = _.get(item, ['yahooFinance', 'regularMarketChangePercent']);
-            const fiftyDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'fiftyDayAverageChangePercent']);
-            const twoHundredDayAverageChangePercent: number = _.get(item, ['yahooFinance', 'twoHundredDayAverageChangePercent']);
-
-            // const fiftyTwoWeekLowChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLowChangePercent']);
-            const fiftyTwoWeekHighChangePercent: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHighChangePercent']);
-
-            const fiftyDayAverage: number = _.get(item, ['yahooFinance', 'fiftyDayAverage']);
-            const twoHundredDayAverage: number = _.get(item, ['yahooFinance', 'twoHundredDayAverage']);
-
-            const fiftyTwoWeekLow: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekLow']);
-            // const fiftyTwoWeekHigh: number = _.get(item, ['yahooFinance', 'fiftyTwoWeekHigh']);
-
-            // const sharesOutstanding: number = _.get(item, ['yahooFinance', 'sharesOutstanding']);
-
-            // const marketCap: number = _.get(item, ['yahooFinance', 'marketCap']);
-            const priceToBook: number = _.get(item, ['yahooFinance', 'priceToBook']);
-
-            // Condition #1: Price must be within target price range
-            return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
-            // Condition #2: 10-Day Average Volume must be greater than 3-Month Average Volume
-            && (averageDailyVolume10Day >= averageDailyVolume3Month)
-            // Condition #3: 50-Day Average Change Percent, 200-Day Average Change Percent must be greater than 0
-            && ((fiftyDayAverageChangePercent >= 0) && (twoHundredDayAverageChangePercent >= 0))
-            // Condition #4: 50-Day Average must be higher than 200-Day Average
-            && (fiftyDayAverage >= twoHundredDayAverage)
-            // Condition #5: 52-Week High Change Percent must be greater than minFiftyTwoWeekHighChangePercent
-            && (fiftyTwoWeekHighChangePercent >= minFiftyTwoWeekHighChangePercent)
-            // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
-            && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
-            // Condition #7: All Volumes must be greater than minRegularMarketVolume
-            && ((regularMarketVolume >= minRegularMarketVolume) && (averageDailyVolume10Day >= minRegularMarketVolume)) // || (averageDailyVolume3Month >= minRegularMarketVolume)))
-            // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
-            && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) && ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
-            // // Condition #9: Price To Book Ratio must not be too over-valued
-            // && (priceToBook <= 3)
-            // // Condition #10: Market Cap must be greater than minMarketCap
-            // && (marketCap >= minMarketCap)
-            // TODO: GOOGLE TRENDS MUST BE >= 10
+        data = _.filter(data, (datum: object) => {
+            const yahooFinanceDatum: any = _.get(datum, ['yahooFinance']);
+            return isRecommended(yahooFinanceDatum);
         });
 
         // data = await getExternalSources(data);
@@ -472,7 +481,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         //     && _.get(datum, ['stats', 'isTrendBullish'], false)
         // });
         data = _.orderBy(data, (datum: object) => {
-            return _.toNumber(_.get(datum, ['yahooFinance', 'regularMarketPrice'], 0));
+            return _.toNumber(_.get(datum, ['yahooFinance', 'regularMarketVolume'], 0));
         }, 'asc');
 
         const final: object = {
