@@ -400,7 +400,7 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         const minPrice: number = 0;
         const maxPrice: number = 500;
         const minFiftyTwoWeekHighChangePercent: number = -0.30;
-        const minFiftyTwoWeekLow: number = 1;
+        const minFiftyTwoWeekLow: number = 0;
         const minRegularMarketVolume: number = 5000000;
         const minThreshold: number = 0.75;
         // const minMarketCap: number = 1000000000;
@@ -443,27 +443,27 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
             // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
             && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
             // Condition #7: All Volumes must be greater than minRegularMarketVolume
-            && ((regularMarketVolume >= minRegularMarketVolume) && ((averageDailyVolume10Day >= minRegularMarketVolume) || (averageDailyVolume3Month >= minRegularMarketVolume)))
+            && ((regularMarketVolume >= minRegularMarketVolume) && (averageDailyVolume10Day >= minRegularMarketVolume)) // || (averageDailyVolume3Month >= minRegularMarketVolume)))
             // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
-            && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) || ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
+            && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) && ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
             // // Condition #9: Price To Book Ratio must not be too over-valued
-            && (priceToBook <= 3)
+            // && (priceToBook <= 3)
             // // Condition #10: Market Cap must be greater than minMarketCap
             // && (marketCap >= minMarketCap)
             // TODO: GOOGLE TRENDS MUST BE >= 10
         });
 
-        data = await getExternalSources(data);
+        // data = await getExternalSources(data);
 
         /* Step 6: Add Bullish Stats */
-        for (const datum of data) {
-            const stats: object = {
-                isPriceBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['open']))),
-                isVolumeBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['volume']))),
-                isTrendBullish: isBullish(_.map(_.get(datum, ['googleTrends'], []), (value) => _.get(value, ['trend'])))
-            };
-            _.set(datum, 'stats', stats);
-        }
+        // for (const datum of data) {
+        //     const stats: object = {
+        //         isPriceBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['open']))),
+        //         isVolumeBullish: isBullish(_.map(_.get(datum, ['alphaVantage'], []), (value) => _.get(value, ['volume']))),
+        //         isTrendBullish: isBullish(_.map(_.get(datum, ['googleTrends'], []), (value) => _.get(value, ['trend'])))
+        //     };
+        //     _.set(datum, 'stats', stats);
+        // }
 
         /* Step 7: Final Filter */
         // data = _.filter(data, (datum: any) => {
@@ -471,6 +471,9 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
         //     && _.get(datum, ['stats', 'isVolumeBullish'], false)
         //     && _.get(datum, ['stats', 'isTrendBullish'], false)
         // });
+        data = _.orderBy(data, (datum: object) => {
+            return _.toNumber(_.get(datum, ['yahooFinance', 'regularMarketPrice'], 0));
+        }, 'asc');
 
         const final: object = {
             results: _.get(data, ['length'], 0),
