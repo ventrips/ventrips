@@ -271,6 +271,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${stockSymbol}`,
                     marketBeat: `${getMarketBeatUrl(yahooFinanceDatum)}`,
                     whaleWisdom: `https://whalewisdom.com/stock/${stockSymbol}`,
+                    walletInvestor: `https://walletinvestor.com/stock-forecast/${stockSymbol}-stock-prediction`
                 },
                 yahooFinance: yahooFinanceDatum
             }
