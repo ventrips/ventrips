@@ -88,8 +88,8 @@ const isRecommended = (yahooFinanceDatum: object): boolean => {
     const minFiftyTwoWeekHighChangePercent: number = -0.30;
     const minFiftyTwoWeekLow: number = 0;
     const minRegularMarketVolume: number = 5000000;
-    // const minThreshold: number = 0.75;
-    // const minMarketCap: number = 1000000000;
+    const minThreshold: number = 0.75;
+    const minMarketCap: number = 1000000;
 
     const regularMarketPrice: number = _.get(yahooFinanceDatum, ['regularMarketPrice']);
 
@@ -112,8 +112,8 @@ const isRecommended = (yahooFinanceDatum: object): boolean => {
 
     // const sharesOutstanding: number = _.get(yahooFinanceDatum, ['sharesOutstanding']);
 
-    // const marketCap: number = _.get(yahooFinanceDatum, ['marketCap']);
-    // const priceToBook: number = _.get(yahooFinanceDatum, ['priceToBook']);
+    const marketCap: number = _.get(yahooFinanceDatum, ['marketCap']);
+    const priceToBook: number = _.get(yahooFinanceDatum, ['priceToBook']);
 
     // Condition #1: Price must be within target price range
     return (regularMarketPrice >= minPrice && regularMarketPrice <= maxPrice)
@@ -128,13 +128,13 @@ const isRecommended = (yahooFinanceDatum: object): boolean => {
     // Condition #6: 52-Week Low Price must be greater than minFiftyTwoWeekLow
     && (fiftyTwoWeekLow >= minFiftyTwoWeekLow)
     // Condition #7: All Volumes must be greater than minRegularMarketVolume
-    && (regularMarketVolume >= minRegularMarketVolume) // || (averageDailyVolume10Day >= minRegularMarketVolume)) // || (averageDailyVolume3Month >= minRegularMarketVolume)))
+    && (regularMarketVolume >= minRegularMarketVolume) || (averageDailyVolume10Day >= minRegularMarketVolume) // || (averageDailyVolume3Month >= minRegularMarketVolume)))
     // Condition #8: Regular Market Volume must be close to 10-Day Volume Average OR 3-Month Volume Average
-    // && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) && ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
+    && (((regularMarketVolume * minThreshold) >= averageDailyVolume10Day) && ((regularMarketVolume * minThreshold) >= averageDailyVolume3Month))
     // // Condition #9: Price To Book Ratio must not be too over-valued
-    // && (priceToBook <= 3)
+    && (priceToBook <= 3)
     // // Condition #10: Market Cap must be greater than minMarketCap
-    // && (marketCap >= minMarketCap)
+    && (marketCap >= minMarketCap)
     // TODO: GOOGLE TRENDS MUST BE >= 10
 }
 
