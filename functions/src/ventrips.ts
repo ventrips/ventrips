@@ -12,23 +12,23 @@ const csvToJson = require('csvtojson');
 const HOLDINGS: Array<object> = [
     {
         filer: 'ARK',
-        csvFilePath: './mocks/holdings/ark_investment_management_llc-current-2020-12-26_20_28_44.csv'
+        csvFilePath: './mocks/holdings/ark_investment_management_llc-current-2021-01-17_21_49_28.csv'
     },
     {
         filer: 'Vanguard',
-        csvFilePath: './mocks/holdings/vanguard_group_inc-current-2020-12-26_18_46_42.csv'
+        csvFilePath: './mocks/holdings/vanguard_group_inc-current-2021-01-17_21_47_04.csv'
     },
     {
         filer: 'Morgan Stanley',
-        csvFilePath: './mocks/holdings/morgan_stanley-current-2020-12-26_21_07_22.csv'
+        csvFilePath: './mocks/holdings/morgan_stanley-current-2021-01-17_21_48_33.csv'
     },
     {
         filer: 'JP Morgan',
-        csvFilePath: './mocks/holdings/jpmorgan_chase_&_company-current-2020-12-26_18_46_23.csv'
+        csvFilePath: './mocks/holdings/jpmorgan_chase_&_company-current-2021-01-17_21_48_06.csv'
     },
     {
         filer: 'Blackrock',
-        csvFilePath: './mocks/holdings/blackrock_inc_-current-2020-12-26_20_49_21.csv'
+        csvFilePath: './mocks/holdings/blackrock_inc_-current-2021-01-17_21_48_59.csv'
     }
 ]
 
@@ -261,7 +261,7 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
                     googleCEO: `https://www.google.com/search?q=${longName}%20CEO`,
                     googleWebsite: `https://www.google.com/search?q=${longName}%20website`,
                     googleNews: `https://www.google.com/search?q=${stockSymbol}%20${longName}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
-                    googleTrends: `https://trends.google.com/trends/explore?date=now%207-d&geo=US&q=${stockSymbol}%20stock`,
+                    googleTrends: `https://trends.google.com/trends/explore?date==today%201-m&geo=US&q=${stockSymbol}%20stock`,
                     googleSearchForStock: `https://www.google.com/search?q=${stockSymbol}%20stock`,
                     youtube: `https://www.youtube.com/results?search_query=${longName}`,
                     reddit: `https://www.reddit.com/search/?q=${stockSymbol}&sort=new&type=link`,
@@ -501,13 +501,14 @@ export const getTrendingTickerSymbols = functions.runWith({ timeoutSeconds: 540,
 export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
     try {
-        const qtrFirstOwnedText: string = `Q3 2020`;
-        const minNumHoldings: number = 3;
-        const maxPrice: number = 20;
+        const qtrFirstOwnedText: string = `2020`;
+        const minNumHoldings: number = 2;
+        const maxPrice: number = 5;
         const includesChangeTypes: Array<string> = [
-            // 'ADDITION',
-            'NEW',
-            // 'HOLDING'
+            'NEW'
+            , 'ADDITION'
+            , 'HOLDING'
+            , 'REDUCTION'
         ];
         const sortByFields: string = 'price';
 
@@ -521,6 +522,7 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
                 const change: string = _.toUpper(_.get(stock, ['Change Type']));
                 const changeType: string = _.isEmpty(change) ? 'HOLDING' : change;
                 if (_.includes(qtrFirstOwned, qtrFirstOwnedText) && _.includes(includesChangeTypes, changeType)) {
+                    _.set(stock, ['filer'], filer);
                     _.set(holdingsObj, [stockSymbol, filer], stock);
                 }
             });
