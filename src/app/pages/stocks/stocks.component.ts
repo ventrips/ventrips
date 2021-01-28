@@ -90,10 +90,10 @@ export class StocksComponent implements OnInit {
     const list = [];
     if (this.stocks && this.stocks.data) {
       this.stocks.data.forEach((stockData, i) => {
-        if (stockData.recommended) {
-          this.stocks.data[i].loading = true;
+        // if (stockData.recommended) {
+          // this.stocks.data[i].loading = true;
           recommendedStocks.push(stockData);
-        }
+        // }
       });
     }
     if (recommendedStocks.length > 0) {

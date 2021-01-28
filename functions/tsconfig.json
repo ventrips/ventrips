@@ -5,12 +5,15 @@
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
+    "alwaysStrict": false,
+    "skipLibCheck": true,
     "target": "es2017",
+    "checkJs": false,
     "lib": [
       "esnext.asynciterable",
       "dom"
-    ]
+    ],
   },
   "compileOnSave": true,
   "include": [
