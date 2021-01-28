@@ -64,7 +64,7 @@ export class StocksComponent implements OnInit {
     .subscribe(response => {
       this.stocksUpdated = _.get(response, ['updated']);
       const recommendedStocks = this.getListOfStocksForVolume(response);
-      this.populateVolumeGraphData(recommendedStocks);
+      // this.populateVolumeGraphData(recommendedStocks);
       this.stocks = response;
     }, () => {});
   }
