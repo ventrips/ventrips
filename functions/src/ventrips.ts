@@ -428,12 +428,85 @@ const runAll = async (stockSymbols, withinDays) => {
     return chunkPromises;
 }
 
+const runPinkInfoScrape = (stockSymbol: string) => {
+    const puppeteer = require('puppeteer');
+    return new Promise(async (resolve, reject) => {
+        try {
+            const browser = await puppeteer.launch({args: ['--no-sandbox']});
+            const page = await browser.newPage();
+            await page.goto(`https://www.otcmarkets.com/stock/${stockSymbol}/financials`);
+            const hasPink = await page.evaluate(() => {
+                const scrapeOtc = () => {
+                    const rootEl = document.getElementById('root');
+                    const spanList = rootEl ? rootEl.querySelectorAll('span') : [];
+                    let hasPinkData = false;
+                    spanList.forEach((span) => {
+                        const spanContent = span.textContent;
+                        if (spanContent.toLowerCase().indexOf('pink current information') >= 0){
+                            hasPinkData = true;
+                            return;
+                        }
+                    })
+                    return hasPinkData;
+                }
+                const pinkData = scrapeOtc();
+                return pinkData;
+            });
+            browser.close();
+            return resolve({
+                'symbol': stockSymbol,
+                'hasPink': hasPink,
+            });
+        } catch (e) {
+            return reject(e);
+        }
+    })
+}
+
+const runPinkInfoBatch = async (chunk) => {
+    const promise = new Promise(async (resolve) => {
+        const listOfVolumePromiseCalls = [];
+        chunk.forEach((currentSymbol: string) => {
+            listOfVolumePromiseCalls.push(runPinkInfoScrape(currentSymbol));
+        });
+        const volumesList = await Promise.all(listOfVolumePromiseCalls);
+        setTimeout(() => {
+            resolve(volumesList);
+        }, 1000);
+    });
+    return promise;
+}
+
+const runPinkInfoCalls = async (stockSymbols) => {
+    const chunkStockSumbols = _.chunk(stockSymbols, 10);
+    const chunkPromises = [];
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+        const chunkPromise = await runPinkInfoBatch(chunkStockSumbols[i]);
+        chunkPromises.push(chunkPromise);
+        console.log('finishing batch #:', i + 1);
+    }
+    return chunkPromises;
+}
+
 export const getVolumeForStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
     const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
     const withinDays: number | undefined = _.get(request, ['query', 'withinDays'], undefined);
     //"SRMX,HCMC,NAKD,KYNC,AMC,PHIL,NOK,CTRM,ALKM,IGEX,HVCW,VPER,BRNW,BB,ILUS,AFOM,WRFX,BIEL,ETFM,RSHN,DSCR,MAXD,GRLF,AAL,PLTR,NSAV,UATG,SIRI,GE,RIG,FPVD,KPAY,HMNY,NEOM,NTRR,BBBY,IDEX,F,M,ICTY,SPCE,LUMN,PLUG,INQD,NPHC,T,IRNC,BNGO,NWGC,BIOL,TGRR,VSPC,DMNXF,FUBO,NAK,MAC,GRST,INTC,XSPA,GEVO,WKHS,TNXP,VIAC,ERIC,CCIV,RDWD,MJWL,KR,ZNGA,NNDM,SNDD,MJNA,GM,CBBT,TLRY,TTOO,DISCA,DD,XCLL,WTII,SWN,GOLD,CNK,XRT,SBFM,PURA,MLFB,GBHL,AUY,SKT,OPK,PBF,GHSI,KOSS,IVR,DISCK,FOXA,RMSL,CLVS,XLI,IRM,EGOC,FXI,TXMD,HPE,STX,VTMB,FTI,XLU,CUBV,KNDI,HST,FNMA,CLF,LPCN,SBUX,APRU,LGBI,APHA,NEE,AEO,INTK,IPOE,WBA,AHT,TRCH,CDEV,GTE,SPWR,NOVN,SDC,CETY,DVN,GNW,AR,CRSR,NHMD,MRVL,GEO,BKRKF,BGS,UMC,MIK,GOGO,RYCEY,UNVC,CX,AMWL,ON,HPQ,IEMG,GRCU,OEG,TENX,XLB,MYFT,ACRX,MARK,JNPR,AESE,UAMY,AVVH,AGNC,LLBO,DISH,FLEX,TBLT,LTHUQ,MUR,AAPT,KGKG"
     try {
         const data: any = await runAll(symbols, withinDays);
+        response.set('Access-Control-Allow-Origin', "*")
+        response.set('Access-Control-Allow-Methods', 'GET, POST')
+        response.status(200).send(data.flat());
+    } catch (err) {
+        console.log(err);
+        response.status(500).send("Could not get list of volumes for stock");
+    }
+});
+
+export const getPinkInfoForStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
+    const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
+    try {
+        const data: any = await runPinkInfoCalls(symbols);
         response.set('Access-Control-Allow-Origin', "*")
         response.set('Access-Control-Allow-Methods', 'GET, POST')
         response.status(200).send(data.flat());

@@ -35,6 +35,8 @@ export class StocksComponent implements OnInit {
   public volumeGraphLoading = false;
   public withinDays = '';
   public numberOfStocks = '';
+  public numberOfStocksForPink = '';
+  public pinkDataLoading = false;
 
   constructor(
     private afs: AngularFirestore,
@@ -87,10 +89,48 @@ export class StocksComponent implements OnInit {
     return res;
   }
 
+  populatePinkData = async (recommendedStocks) => {
+    const res =  await this.getPinkDataOfStocks(recommendedStocks);
+    res.forEach((pinkStockData) => {
+      if (this.stocks && this.stocks.data) {
+        this.stocks.data.forEach((currentStock, i) => {
+          if (currentStock.symbol === pinkStockData.symbol) {
+            this.stocks.data[i].hasPink = pinkStockData.hasPink;
+          }
+        });
+      }
+    });
+    return res;
+  }
+
   getListOfStocksForVolume() {
     let getUpTo = this.numberOfStocks === '' || !this.numberOfStocks
       ? 10
       : parseInt(this.numberOfStocks, 10);
+
+    const recommendedStocks = [];
+    const list = [];
+    if (this.stocks && this.stocks.data) {
+      this.stocks.data.forEach((stockData, i) => {
+        // if (stockData.recommended) {
+          // this.stocks.data[i].loading = true;
+          recommendedStocks.push(stockData);
+        // }
+      });
+    }
+    if (recommendedStocks.length > 0) {
+      getUpTo = getUpTo > recommendedStocks.length ? recommendedStocks.length : getUpTo;
+      recommendedStocks.slice(0, getUpTo).map((stock) => {
+        list.push(stock.symbol);
+      });
+    }
+    return list;
+  }
+
+  getListOfStocksForPinkData() {
+    let getUpTo = this.numberOfStocksForPink === '' || !this.numberOfStocksForPink
+      ? 10
+      : parseInt(this.numberOfStocksForPink, 10);
 
     const recommendedStocks = [];
     const list = [];
@@ -157,6 +197,11 @@ export class StocksComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}${withinDays}`).toPromise();
   }
 
+  getPinkDataOfStocks(listOfStocks): Promise<any> {
+    const stringOfStocks = listOfStocks.join();
+    return this.http.get(`${environment.apiUrl}/getPinkInfoForStocks?symbols=${stringOfStocks}`).toPromise();
+  }
+
   async getVolumeGraphs(): Promise<any> {
     this.volumeGraphLoading = true;
     if (this.stocks) {
@@ -164,6 +209,15 @@ export class StocksComponent implements OnInit {
       await this.populateVolumeGraphData(recommendedStocks);
     }
     this.volumeGraphLoading = false;
+  }
+
+  async getPinkData(): Promise<any> {
+    this.pinkDataLoading = true;
+    if (this.stocks) {
+      const recommendedStocks = this.getListOfStocksForPinkData();
+      await this.populatePinkData(recommendedStocks);
+    }
+    this.pinkDataLoading = false;
   }
 
   refreshStocks(): void {

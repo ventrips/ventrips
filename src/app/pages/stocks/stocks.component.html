@@ -54,6 +54,15 @@
                     <input placeholder="Enter number of days" [(ngModel)]="withinDays" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                     <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocks" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                 </div>
+                <div>
+                    <button [disabled]="pinkDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getPinkData()">
+                        Get Pink Data 
+                        <span *ngIf="pinkDataLoading">
+                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                        </span>
+                    </button>
+                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForPink" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
+                </div>
                 <p class="small text-secondary my-3 mr-3" *ngIf="stocksUpdated">
                     Last Updated: {{stocksUpdated | timeStampDate:'short'}} ({{stocksUpdated | timeAgo}})
                 </p>
@@ -88,6 +97,9 @@
                         </div>
                         <div class="d-flex flex-wrap">
                             <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.loading"></app-stock-graph>
+                        </div>
+                        <div class="d-flex flex-wrap" *ngIf="stock.hasPink">
+                            <h3 class="text-success">Has Pink Data</h3>
                         </div>
                     </div>
                 </li>
