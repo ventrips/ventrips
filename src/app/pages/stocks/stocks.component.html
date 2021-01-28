@@ -76,6 +76,9 @@
                         <div class="d-flex flex-wrap">
                             <a [href]="_.get(stock, ['resources', key])" [title]="_.startCase(key)" target="__blank" class="mb-2 mr-2" *ngFor="let key of stock.resources | keys">{{_.startCase(key)}}</a>
                         </div>
+                        <div class="d-flex flex-wrap">
+                            <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.disableGraph"></app-stock-graph>
+                        </div>
                     </div>
                 </li>
             </ul>

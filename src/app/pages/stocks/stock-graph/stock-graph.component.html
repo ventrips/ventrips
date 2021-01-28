@@ -1,0 +1,22 @@
+<section>
+    <h2 *ngIf="!disableGraph && !volumeData">Loading...</h2>
+    <h2 *ngIf="disableGraph">No graph available</h2>
+    <ngx-charts-line-chart
+    *ngIf="volumeData"
+    [view]="view"
+    [scheme]="colorScheme"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="volumeData"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    >
+  </ngx-charts-line-chart>
+</section>

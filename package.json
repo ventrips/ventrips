@@ -49,6 +49,7 @@
     "@ngx-share/button": "^7.1.2",
     "@ngx-share/buttons": "^7.1.2",
     "@ngx-share/core": "^7.1.2",
+    "@swimlane/ngx-charts": "^12.1.0",
     "@types/faker": "^4.1.5",
     "@types/lodash": "^4.14.136",
     "@types/moment-timezone": "^0.5.13",

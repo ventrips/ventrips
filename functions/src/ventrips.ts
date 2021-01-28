@@ -350,7 +350,100 @@ const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, symb
     });
 };
 
-export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+const runBatch = async (chunk, withinDays) => {
+    const promise = new Promise(async (resolve) => {
+        const listOfVolumePromiseCalls = [];
+        chunk.forEach((currentSymbol: string) => {
+            listOfVolumePromiseCalls.push(run(currentSymbol, withinDays));
+        });
+        const volumesList = await Promise.all(listOfVolumePromiseCalls);
+        setTimeout(() => {
+            resolve(volumesList);
+        }, 1000);
+    });
+    return promise;
+}
+
+const run  = (stockSymbol: string, withinDay) => {
+    const puppeteer = require('puppeteer');
+    return new Promise(async (resolve, reject) => {
+        try {
+            const browser = await puppeteer.launch({args: ['--no-sandbox']});
+            const page = await browser.newPage();
+            await page.goto(`https://finance.yahoo.com/quote/${stockSymbol}/history`);
+            const volumeDataForStock = await page.evaluate((withinDay) => {
+                const numDaysBetween = function(d1: any, d2: any) {
+                    const diff = Math.abs(d1.getTime() - d2.getTime());
+                    return diff / (1000 * 60 * 60 * 24);
+                };
+                const scrape = (withinDay) => {
+                    const currentDate = new Date();
+                    const currentYear = currentDate.getFullYear();
+                    const currentMonth = currentDate.getMonth();
+                    const currentDay = currentDate.getDate();
+                    const table = [];
+                    const tableEl = document.querySelectorAll('table[data-test]');
+                    const hasTable = tableEl && tableEl[0] && tableEl[0].childNodes && tableEl[0].childNodes[1] && tableEl[0].childNodes[1].childNodes;
+                    const listOfTableRows = hasTable
+                        ? document.querySelectorAll('table[data-test]')[0].childNodes[1].childNodes
+                        : [];
+                    listOfTableRows.forEach((tableRowEl: any) => {
+                        const rowData = {};
+                        const date = tableRowEl.firstElementChild.textContent;
+                        rowData['date'] = date;
+                        const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
+                        const stockDate = new Date(date);
+                        const volumeString = tableRowEl.lastElementChild.textContent;
+                        rowData['volume'] = !volumeString || volumeString === '-'
+                            ? '-'
+                            : parseInt(volumeString.replace(/,/g, ''));
+                        if ((withinDay && numDaysBetween(stockDate, currentDateFormatted) <= withinDay) || !withinDay) {
+                                table.push(rowData);
+                        }
+                    });
+                    return table;
+                }
+                const volumeData = scrape(withinDay);
+                return volumeData;
+            }, withinDay);
+            browser.close();
+            return resolve({
+                'symbol': stockSymbol,
+                volumeData: volumeDataForStock,
+            });
+        } catch (e) {
+            return reject(e);
+        }
+    })
+}
+
+const runAll = async (stockSymbols, withinDays) => {
+    const chunkStockSumbols = _.chunk(stockSymbols, 10);
+    const chunkPromises = [];
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+        const chunkPromise = await runBatch(chunkStockSumbols[i], withinDays);
+        chunkPromises.push(chunkPromise);
+        console.log('finishing batch #:', i + 1);
+    }
+    return chunkPromises;
+}
+
+export const getVolumeForStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
+    const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
+    const withinDays: number | undefined = _.get(request, ['query', 'withinDays'], undefined);
+    //"SRMX,HCMC,NAKD,KYNC,AMC,PHIL,NOK,CTRM,ALKM,IGEX,HVCW,VPER,BRNW,BB,ILUS,AFOM,WRFX,BIEL,ETFM,RSHN,DSCR,MAXD,GRLF,AAL,PLTR,NSAV,UATG,SIRI,GE,RIG,FPVD,KPAY,HMNY,NEOM,NTRR,BBBY,IDEX,F,M,ICTY,SPCE,LUMN,PLUG,INQD,NPHC,T,IRNC,BNGO,NWGC,BIOL,TGRR,VSPC,DMNXF,FUBO,NAK,MAC,GRST,INTC,XSPA,GEVO,WKHS,TNXP,VIAC,ERIC,CCIV,RDWD,MJWL,KR,ZNGA,NNDM,SNDD,MJNA,GM,CBBT,TLRY,TTOO,DISCA,DD,XCLL,WTII,SWN,GOLD,CNK,XRT,SBFM,PURA,MLFB,GBHL,AUY,SKT,OPK,PBF,GHSI,KOSS,IVR,DISCK,FOXA,RMSL,CLVS,XLI,IRM,EGOC,FXI,TXMD,HPE,STX,VTMB,FTI,XLU,CUBV,KNDI,HST,FNMA,CLF,LPCN,SBUX,APRU,LGBI,APHA,NEE,AEO,INTK,IPOE,WBA,AHT,TRCH,CDEV,GTE,SPWR,NOVN,SDC,CETY,DVN,GNW,AR,CRSR,NHMD,MRVL,GEO,BKRKF,BGS,UMC,MIK,GOGO,RYCEY,UNVC,CX,AMWL,ON,HPQ,IEMG,GRCU,OEG,TENX,XLB,MYFT,ACRX,MARK,JNPR,AESE,UAMY,AVVH,AGNC,LLBO,DISH,FLEX,TBLT,LTHUQ,MUR,AAPT,KGKG"
+    try {
+        const data: any = await runAll(symbols, withinDays);
+        response.set('Access-Control-Allow-Origin', "*")
+        response.set('Access-Control-Allow-Methods', 'GET, POST')
+        response.status(200).send(data.flat());
+    } catch (err) {
+        console.log(err);
+        response.status(500).send("Could not get list of volumes for stock");
+    }
+});
+
+export const getStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
     const minPrice: number = _.toNumber(_.get(request, ['query', 'minPrice'], 0));
     const maxPrice: number = _.toNumber(_.get(request, ['query', 'maxPrice'], 0));
     const minVolume: number = _.toNumber(_.get(request, ['query', 'minVolume'], 0));

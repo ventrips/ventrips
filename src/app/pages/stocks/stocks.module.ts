@@ -9,19 +9,23 @@ import { SymbolComponent } from './symbol/symbol.component';
 import { DynamicChartComponent } from './symbol/dynamic-chart/dynamic-chart.component';
 import { ShortCutsComponent } from './symbol/short-cuts/short-cuts.component';
 import { SymbolSearchBarComponent } from './symbol-search-bar/symbol-search-bar.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { StockGraphComponent } from './stock-graph/stock-graph.component';
 @NgModule({
   declarations: [
     StocksComponent,
     SymbolComponent,
     DynamicChartComponent,
     ShortCutsComponent,
-    SymbolSearchBarComponent
+    SymbolSearchBarComponent,
+    StockGraphComponent
   ],
   imports: [
     CommonModule,
     StocksRoutingModule,
     SharedModule,
-    ChartsModule
+    ChartsModule,
+    NgxChartsModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

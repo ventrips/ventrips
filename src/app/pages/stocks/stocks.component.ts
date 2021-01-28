@@ -13,7 +13,7 @@ import { User } from '../../interfaces/user';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as moment from 'moment-timezone';
 import * as _ from 'lodash';
-import {firestore} from 'firebase/app';
+
 @Component({
   selector: 'app-stocks',
   templateUrl: './stocks.component.html',
@@ -63,15 +63,95 @@ export class StocksComponent implements OnInit {
     this.ssrService.ssrFirestoreDoc(`stocks/${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, `stocks-${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, false)
     .subscribe(response => {
       this.stocksUpdated = _.get(response, ['updated']);
+      const recommendedStocks = this.getListOfStocksForVolume(response);
+      this.populateVolumeGraphData(recommendedStocks);
       this.stocks = response;
     }, () => {});
   }
+
+  populateVolumeGraphData = (recommendedStocks) => {
+    this.getVolumeOfStocks(recommendedStocks).subscribe((res: any) => {
+      res.forEach((volumeStockData) => {
+        if (this.stocks && this.stocks.data) {
+          const volumeStockDataArray = [volumeStockData];
+          const chartData = this.transformToMultiChartData(volumeStockDataArray);
+          this.stocks.data.forEach((currentStock, i) => {
+            if (currentStock.symbol === volumeStockData.symbol) {
+              this.stocks.data[i].volumeData = chartData;
+            }
+          });
+        }
+      });
+    })
+  }
+  getListOfStocksForVolume(response) {
+    let getUpTo = 50;
+    const recommendedStocks = [];
+    const list = [];
+    if (response && response.data) {
+      response.data.forEach((stockData, i) => {
+        response.data[i].disableGraph = true;
+        if (stockData.recommended) {
+          response.data[i].disableGraph = false;
+          recommendedStocks.push(stockData);
+        }
+      });
+    }
+    if (recommendedStocks.length > 0) {
+      getUpTo = getUpTo > recommendedStocks.length ? recommendedStocks.length : getUpTo;
+      recommendedStocks.slice(0, getUpTo).map((stock) => {
+        list.push(stock.symbol);
+      });
+    }
+    return list;
+  }
+
+  transformToSingleChartData(data) {
+    let chartData = [];
+    data.forEach((currentStockData) => {
+        currentStockData.volumeData.forEach((volume) => {
+            const seriesObj = {};
+            if (volume.volume !== '-') {
+                seriesObj['name'] = new Date(volume.date);
+                seriesObj['value'] = volume.volume;
+                chartData.push(seriesObj);
+            }
+        });
+    });
+    return chartData;
+  }
+
+  transformToMultiChartData(data) {
+    let chartData = [];
+    data.forEach((currentStockData) => {
+        const stockObj = {};
+        stockObj['name'] = currentStockData['symbol'];
+        stockObj['series'] = [];
+        currentStockData.volumeData.forEach((volume) => {
+            const seriesObj = {};
+            if (volume.volume !== '-') {
+                seriesObj['name'] = new Date(volume.date);
+                seriesObj['value'] = volume.volume;
+                stockObj['series'].push(seriesObj);
+            }
+        });
+       chartData.push(stockObj);
+    });
+    return chartData;
+}
 
   // Fetches latest and sets to firestore DB
   getStocks(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/getStocks?minPrice=0.001&maxPrice=100&sortByFields=yahooFinance,regularMarketVolume&minVolume=10000000&volumeHasMultipliedBy=0&minMarketCap=0&externalSources=false&statsOnly=true&showHoldings=true&firebase=true`)
     .pipe(map((response: Response) => { return response }));
-  };
+  }
+
+  getVolumeOfStocks(listOfStocks): Observable<any> {
+    const stringOfStocks = listOfStocks.join();
+    const withinDays = 60;
+    return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}&withinDays=${withinDays}`)
+    .pipe(map((response: Response) => { return response }));
+  }
 
   refreshStocks(): void {
     if (!this.authService.canEdit(this.user)) {
