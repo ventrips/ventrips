@@ -1,6 +1,7 @@
 <section>
-    <h2 *ngIf="!disableGraph && !volumeData">Loading...</h2>
-    <h2 *ngIf="disableGraph">No graph available</h2>
+    <!-- <h2 *ngIf="!disableGraph && !volumeData">Loading...</h2>
+    <h2 *ngIf="disableGraph">No graph available</h2> -->
+    <h2 *ngIf="loading && !volumeData">Loading...</h2>
     <ngx-charts-line-chart
     *ngIf="volumeData"
     [view]="view"

@@ -31,6 +31,7 @@ export class StocksComponent implements OnInit {
   public data: any;
   public stocksUpdated: any;
   public stocks: any;
+  public volumeGraphLoading = false;
 
   constructor(
     private afs: AngularFirestore,
@@ -63,36 +64,34 @@ export class StocksComponent implements OnInit {
     this.ssrService.ssrFirestoreDoc(`stocks/${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, `stocks-${moment().subtract(days, 'days').utc().format('YYYY-MM-DD')}`, false)
     .subscribe(response => {
       this.stocksUpdated = _.get(response, ['updated']);
-      const recommendedStocks = this.getListOfStocksForVolume(response);
-      this.populateVolumeGraphData(recommendedStocks);
       this.stocks = response;
     }, () => {});
   }
 
-  populateVolumeGraphData = (recommendedStocks) => {
-    this.getVolumeOfStocks(recommendedStocks).subscribe((res: any) => {
-      res.forEach((volumeStockData) => {
-        if (this.stocks && this.stocks.data) {
-          const volumeStockDataArray = [volumeStockData];
-          const chartData = this.transformToMultiChartData(volumeStockDataArray);
-          this.stocks.data.forEach((currentStock, i) => {
-            if (currentStock.symbol === volumeStockData.symbol) {
-              this.stocks.data[i].volumeData = chartData;
-            }
-          });
-        }
-      });
-    })
+  populateVolumeGraphData = async (recommendedStocks) => {
+    const res =  await this.getVolumeOfStocks(recommendedStocks);
+    res.forEach((volumeStockData) => {
+      if (this.stocks && this.stocks.data) {
+        const volumeStockDataArray = [volumeStockData];
+        const chartData = this.transformToMultiChartData(volumeStockDataArray);
+        this.stocks.data.forEach((currentStock, i) => {
+          if (currentStock.symbol === volumeStockData.symbol) {
+            this.stocks.data[i].volumeData = chartData;
+          }
+        });
+      }
+    });
+    return res;
   }
-  getListOfStocksForVolume(response) {
-    let getUpTo = 50;
+
+  getListOfStocksForVolume() {
+    let getUpTo = 10;
     const recommendedStocks = [];
     const list = [];
-    if (response && response.data) {
-      response.data.forEach((stockData, i) => {
-        response.data[i].disableGraph = true;
+    if (this.stocks && this.stocks.data) {
+      this.stocks.data.forEach((stockData, i) => {
         if (stockData.recommended) {
-          response.data[i].disableGraph = false;
+          this.stocks.data[i].loading = true;
           recommendedStocks.push(stockData);
         }
       });
@@ -146,11 +145,19 @@ export class StocksComponent implements OnInit {
     .pipe(map((response: Response) => { return response }));
   }
 
-  getVolumeOfStocks(listOfStocks): Observable<any> {
+  getVolumeOfStocks(listOfStocks): Promise<any> {
     const stringOfStocks = listOfStocks.join();
     const withinDays = 60;
-    return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}&withinDays=${withinDays}`)
-    .pipe(map((response: Response) => { return response }));
+    return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}&withinDays=${withinDays}`).toPromise();
+  }
+
+  async getVolumeGraphs(): Promise<any> {
+    this.volumeGraphLoading = true;
+    if (this.stocks) {
+      const recommendedStocks = this.getListOfStocksForVolume();
+      await this.populateVolumeGraphData(recommendedStocks);
+    }
+    this.volumeGraphLoading = false;
   }
 
   refreshStocks(): void {

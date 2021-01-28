@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StockGraphComponent implements OnInit {
 
   @Input() volumeData;
-  @Input() disableGraph: boolean;
+  @Input() loading: boolean;
   view: any[] = [700, 300];
   // options
   legend = true;
