@@ -13,6 +13,7 @@ import { User } from '../../interfaces/user';
 import { SsrService } from '../../services/firestore/ssr/ssr.service';
 import * as moment from 'moment-timezone';
 import * as _ from 'lodash';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-stocks',
@@ -32,6 +33,8 @@ export class StocksComponent implements OnInit {
   public stocksUpdated: any;
   public stocks: any;
   public volumeGraphLoading = false;
+  public withinDays = '';
+  public numberOfStocks = '';
 
   constructor(
     private afs: AngularFirestore,
@@ -85,7 +88,10 @@ export class StocksComponent implements OnInit {
   }
 
   getListOfStocksForVolume() {
-    let getUpTo = 10;
+    let getUpTo = this.numberOfStocks === '' || !this.numberOfStocks
+      ? 10
+      : parseInt(this.numberOfStocks, 10);
+
     const recommendedStocks = [];
     const list = [];
     if (this.stocks && this.stocks.data) {
@@ -147,8 +153,8 @@ export class StocksComponent implements OnInit {
 
   getVolumeOfStocks(listOfStocks): Promise<any> {
     const stringOfStocks = listOfStocks.join();
-    const withinDays = 60;
-    return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}&withinDays=${withinDays}`).toPromise();
+    const withinDays = this.withinDays === ''  || !this.withinDays ? '' : `&withinDays=${parseInt(this.withinDays, 10)}`;
+    return this.http.get(`${environment.apiUrl}/getVolumeForStocks?symbols=${stringOfStocks}${withinDays}`).toPromise();
   }
 
   async getVolumeGraphs(): Promise<any> {

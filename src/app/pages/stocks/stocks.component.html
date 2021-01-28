@@ -44,12 +44,16 @@
                     </ng-container>
                     Refresh
                 </button>
-                <button class="ml-1 btn btn-warning" [disabled]="volumeGraphLoading" (click)="getVolumeGraphs()">
-                    Get Volumes 
-                    <span *ngIf="volumeGraphLoading">
-                        <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                    </span>
-                </button>
+                <div>
+                    <button [disabled]="volumeGraphLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getVolumeGraphs()">
+                        Get Volumes 
+                        <span *ngIf="volumeGraphLoading">
+                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                        </span>
+                    </button>
+                    <input placeholder="Enter number of days" [(ngModel)]="withinDays" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
+                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocks" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
+                </div>
                 <p class="small text-secondary my-3 mr-3" *ngIf="stocksUpdated">
                     Last Updated: {{stocksUpdated | timeStampDate:'short'}} ({{stocksUpdated | timeAgo}})
                 </p>
