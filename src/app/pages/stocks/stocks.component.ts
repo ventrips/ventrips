@@ -38,6 +38,10 @@ export class StocksComponent implements OnInit {
   public numberOfStocksForPink = '';
   public pinkDataLoading = false;
 
+
+  public numberOfStocksForSec = '';
+  public secDataLoading = false;
+
   constructor(
     private afs: AngularFirestore,
     private http: HttpClient,
@@ -111,6 +115,17 @@ export class StocksComponent implements OnInit {
     return _.flatten(chunkPromises);
   }
 
+  getSecDataChunks = async (recommendedStocks) => {
+    const chunkPromises = [];
+    const chunkStockSumbols = _.chunk(recommendedStocks, 20);
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+      const chunkPromise = await this.getSecDataOfStocks(chunkStockSumbols[i]);
+      chunkPromises.push(chunkPromise);
+      console.log('finishing batch #:', i + 1);
+    }
+    return _.flatten(chunkPromises);
+  }
+
   populatePinkData = async (recommendedStocks) => {
     const res =  await this.getPinkDataChunks(recommendedStocks);
     res.forEach((pinkStockData) => {
@@ -118,6 +133,20 @@ export class StocksComponent implements OnInit {
         this.stocks.data.forEach((currentStock, i) => {
           if (currentStock.symbol === pinkStockData.symbol) {
             this.stocks.data[i].otcData = pinkStockData.data;
+          }
+        });
+      }
+    });
+    return res;
+  }
+
+  populateSecData = async (recommendedStocks) => {
+    const res =  await this.getSecDataChunks(recommendedStocks);
+    res.forEach((secStockData) => {
+      if (this.stocks && this.stocks.data) {
+        this.stocks.data.forEach((currentStock, i) => {
+          if (currentStock.symbol === secStockData.symbol) {
+            this.stocks.data[i].secData = secStockData.data;
           }
         });
       }
@@ -153,6 +182,30 @@ export class StocksComponent implements OnInit {
     let getUpTo = this.numberOfStocksForPink === '' || !this.numberOfStocksForPink
       ? 10
       : parseInt(this.numberOfStocksForPink, 10);
+
+    const recommendedStocks = [];
+    const list = [];
+    if (this.stocks && this.stocks.data) {
+      this.stocks.data.forEach((stockData, i) => {
+        // if (stockData.recommended) {
+          // this.stocks.data[i].loading = true;
+          recommendedStocks.push(stockData);
+        // }
+      });
+    }
+    if (recommendedStocks.length > 0) {
+      getUpTo = getUpTo > recommendedStocks.length ? recommendedStocks.length : getUpTo;
+      recommendedStocks.slice(0, getUpTo).map((stock) => {
+        list.push(stock.symbol);
+      });
+    }
+    return list;
+  }
+
+  getListOfStocksForSecData() {
+    let getUpTo = this.numberOfStocksForSec === '' || !this.numberOfStocksForSec
+      ? 10
+      : parseInt(this.numberOfStocksForSec, 10);
 
     const recommendedStocks = [];
     const list = [];
@@ -224,6 +277,11 @@ export class StocksComponent implements OnInit {
     return this.http.get(`${environment.apiUrl}/getPinkInfoForStocks?symbols=${stringOfStocks}`).toPromise();
   }
 
+  getSecDataOfStocks(listOfStocks): Promise<any> {
+    const stringOfStocks = listOfStocks.join();
+    return this.http.get(`${environment.apiUrl}/getSecData?symbols=${stringOfStocks}`).toPromise();
+  }
+
   async getVolumeGraphs(): Promise<any> {
     this.volumeGraphLoading = true;
     if (this.stocks) {
@@ -240,6 +298,15 @@ export class StocksComponent implements OnInit {
       await this.populatePinkData(recommendedStocks);
     }
     this.pinkDataLoading = false;
+  }
+
+  async getSecData(): Promise<any> {
+    this.secDataLoading = true;
+    if (this.stocks) {
+      const recommendedStocks = this.getListOfStocksForSecData();
+      await this.populateSecData(recommendedStocks);
+    }
+    this.secDataLoading = false;
   }
 
   refreshStocks(): void {

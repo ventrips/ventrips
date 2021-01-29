@@ -407,6 +407,49 @@ const getVolumeFromYahoo = async (stockSymbol: string, ...args: any[]) => {
     });
 }
 
+const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
+    return new Promise((resolve: any, reject: any) => {
+        const options = {
+            uri: `https://sec.report/Ticker/${stockSymbol}`,
+            headers: {
+                'User-Agent': ((new UserAgent()).data).toString()
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            // Process html like you would with jQuery...
+            const secData = [];
+            const tableRowElements = $('#document_heading').parent().find('table tr'); // .//first().children().first().text()
+            tableRowElements.each(function(this: any, index: number) {
+                if (index !== 0) {
+                    const tableRowEl= $(this);
+                    let reportObj: any = {};
+                    const formColumnText = tableRowEl.first().children().first().text();
+                    const reportLink = tableRowEl.last().children().last().children().first().find('a').attr("href");
+                    const reportText = tableRowEl.last().children().last().children().first().find('a').text();
+                    const reportDate = tableRowEl.last().children().last().children().last().text();
+                    reportObj.formColumnText = formColumnText;
+                    reportObj.reportLink = reportLink;
+                    reportObj.reportText = reportText;
+                    reportObj.reportDate = reportDate;
+                    secData.push(reportObj);
+                }
+            });
+            resolve({
+                'symbol': stockSymbol,
+                data: secData,
+            });
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
 const runAll = async (stockSymbols, scrapeFunction, ...args: any[]) => {
     const listOfVolumePromiseCalls = [];
     for (let i = 0; i < stockSymbols.length; i++) {
@@ -515,6 +558,19 @@ export const getPinkInfoForStocks = functions.runWith({ timeoutSeconds: 540, mem
     const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
     try {
         const data: any = await runPinkInfoCalls(symbols);
+        response.set('Access-Control-Allow-Origin', "*")
+        response.set('Access-Control-Allow-Methods', 'GET, POST')
+        response.status(200).send(data.flat());
+    } catch (err) {
+        console.log(err);
+        response.status(500).send("Could not get list of volumes for stock");
+    }
+});
+
+export const getSecData = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
+    const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
+    try {
+        const data: any = await runAll(symbols, getDataForSec);
         response.set('Access-Control-Allow-Origin', "*")
         response.set('Access-Control-Allow-Methods', 'GET, POST')
         response.status(200).send(data.flat());

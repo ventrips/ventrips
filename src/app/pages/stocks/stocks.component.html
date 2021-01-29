@@ -54,7 +54,7 @@
                     <input placeholder="Enter number of days" [(ngModel)]="withinDays" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                     <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocks" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                 </div>
-                <div>
+                <div class="mt-1">
                     <button [disabled]="pinkDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getPinkData()">
                         Get Pink Data
                         <span *ngIf="pinkDataLoading">
@@ -62,6 +62,15 @@
                         </span>
                     </button>
                     <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForPink" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
+                </div>
+                <div class="mt-1">
+                    <button [disabled]="secDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getSecData()">
+                        Get Sec Data
+                        <span *ngIf="secDataLoading">
+                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                        </span>
+                    </button>
+                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForSec" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                 </div>
                 <p class="small text-secondary my-3 mr-3" *ngIf="stocksUpdated">
                     Last Updated: {{stocksUpdated | timeStampDate:'short'}} ({{stocksUpdated | timeAgo}})
@@ -104,6 +113,32 @@
                             <p *ngIf="stock.otcData.pennyStockExempt" class="text-success">Penny Stock Exempt</p>
                             <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
                             <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
+                        </div>
+                        <div *ngIf="stock.secData">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Form</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Link</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let report of stock.secData; let index = index;">
+                                      <th scope="row">{{index}}</th>
+                                      <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
+                                      <td *ngIf="report.reportText">{{report.reportText}}</td>
+                                      <td *ngIf="report.reportDate">{{report.reportDate}}</td>
+                                      <td *ngIf="report.reportLink">
+                                        <a href="https://sec.report/{{report.reportLink}}" target="_blank">
+                                            Link to report
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                            </table>
                         </div>
                         <div>
                             <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
