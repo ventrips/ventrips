@@ -98,8 +98,12 @@
                         <div class="d-flex flex-wrap">
                             <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.loading"></app-stock-graph>
                         </div>
-                        <div class="d-flex flex-wrap" *ngIf="stock.hasPink">
-                            <h3 class="text-success">Has Pink Data</h3>
+                        <div *ngIf="stock.otcData">
+                            <p *ngIf="stock.otcData.hasPinkData" class="text-success">Pink Current Information</p>
+                            <p *ngIf="stock.otcData.verifiedProfile" class="text-success">{{stock.otcData.verifiedProfile}}</p>
+                            <p *ngIf="stock.otcData.pennyStockExempt" class="text-success">Penny Stock Exempt</p>
+                            <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
+                            <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
                         </div>
                     </div>
                 </li>

@@ -73,8 +73,19 @@ export class StocksComponent implements OnInit {
     }, () => {});
   }
 
+  getVolumeGraphChunks = async (recommendedStocks) => {
+    const chunkPromises = [];
+    const chunkStockSumbols = _.chunk(recommendedStocks, 20);
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+      const chunkPromise = await this.getVolumeOfStocks(chunkStockSumbols[i]);
+      chunkPromises.push(chunkPromise);
+      console.log('finishing batch #:', i + 1);
+    }
+    return _.flatten(chunkPromises);
+  }
+
   populateVolumeGraphData = async (recommendedStocks) => {
-    const res =  await this.getVolumeOfStocks(recommendedStocks);
+    const res =  await this.getVolumeGraphChunks(recommendedStocks);
     res.forEach((volumeStockData) => {
       if (this.stocks && this.stocks.data) {
         const volumeStockDataArray = [volumeStockData];
@@ -89,13 +100,24 @@ export class StocksComponent implements OnInit {
     return res;
   }
 
+  getPinkDataChunks = async (recommendedStocks) => {
+    const chunkPromises = [];
+    const chunkStockSumbols = _.chunk(recommendedStocks, 20);
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+      const chunkPromise = await this.getPinkDataOfStocks(chunkStockSumbols[i]);
+      chunkPromises.push(chunkPromise);
+      console.log('finishing batch #:', i + 1);
+    }
+    return _.flatten(chunkPromises);
+  }
+
   populatePinkData = async (recommendedStocks) => {
-    const res =  await this.getPinkDataOfStocks(recommendedStocks);
+    const res =  await this.getPinkDataChunks(recommendedStocks);
     res.forEach((pinkStockData) => {
       if (this.stocks && this.stocks.data) {
         this.stocks.data.forEach((currentStock, i) => {
           if (currentStock.symbol === pinkStockData.symbol) {
-            this.stocks.data[i].hasPink = pinkStockData.hasPink;
+            this.stocks.data[i].otcData = pinkStockData.data;
           }
         });
       }

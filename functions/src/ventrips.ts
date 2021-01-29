@@ -8,6 +8,7 @@ const RequestPromise = require('request-promise');
 const UserAgent = require('user-agents');
 const isBullish = require('is-bullish');
 const csvToJson = require('csvtojson');
+const Cheerio = require('cheerio');
 
 const HOLDINGS: Array<object> = [
     {
@@ -350,82 +351,69 @@ const getAllStocksByPriceRange = async (minPrice: number, maxPrice: number, symb
     });
 };
 
-const runBatch = async (chunk, withinDays) => {
-    const promise = new Promise(async (resolve) => {
-        const listOfVolumePromiseCalls = [];
-        chunk.forEach((currentSymbol: string) => {
-            listOfVolumePromiseCalls.push(run(currentSymbol, withinDays));
-        });
-        const volumesList = await Promise.all(listOfVolumePromiseCalls);
-        setTimeout(() => {
-            resolve(volumesList);
-        }, 1000);
-    });
-    return promise;
-}
-
-const run  = (stockSymbol: string, withinDay) => {
-    const puppeteer = require('puppeteer');
-    return new Promise(async (resolve, reject) => {
-        try {
-            const browser = await puppeteer.launch({args: ['--no-sandbox']});
-            const page = await browser.newPage();
-            await page.goto(`https://finance.yahoo.com/quote/${stockSymbol}/history`);
-            const volumeDataForStock = await page.evaluate((withinDay) => {
-                const numDaysBetween = function(d1: any, d2: any) {
-                    const diff = Math.abs(d1.getTime() - d2.getTime());
-                    return diff / (1000 * 60 * 60 * 24);
-                };
-                const scrape = (withinDay) => {
-                    const currentDate = new Date();
-                    const currentYear = currentDate.getFullYear();
-                    const currentMonth = currentDate.getMonth();
-                    const currentDay = currentDate.getDate();
-                    const table = [];
-                    const tableEl = document.querySelectorAll('table[data-test]');
-                    const hasTable = tableEl && tableEl[0] && tableEl[0].childNodes && tableEl[0].childNodes[1] && tableEl[0].childNodes[1].childNodes;
-                    const listOfTableRows = hasTable
-                        ? document.querySelectorAll('table[data-test]')[0].childNodes[1].childNodes
-                        : [];
-                    listOfTableRows.forEach((tableRowEl: any) => {
-                        const rowData = {};
-                        const date = tableRowEl.firstElementChild.textContent;
-                        rowData['date'] = date;
-                        const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
-                        const stockDate = new Date(date);
-                        const volumeString = tableRowEl.lastElementChild.textContent;
-                        rowData['volume'] = !volumeString || volumeString === '-'
-                            ? '-'
-                            : parseInt(volumeString.replace(/,/g, ''));
-                        if ((withinDay && numDaysBetween(stockDate, currentDateFormatted) <= withinDay) || !withinDay) {
-                                table.push(rowData);
-                        }
-                    });
-                    return table;
+const getVolumeFromYahoo = async (stockSymbol: string, ...args: any[]) => {
+    const withinDays = args[0];
+    const numDaysBetween = function(d1: any, d2: any) {
+        const diff = Math.abs(d1.getTime() - d2.getTime());
+        return diff / (1000 * 60 * 60 * 24);
+    };
+    return new Promise((resolve: any, reject: any) => {
+        const options = {
+            uri: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+            headers: {
+                'User-Agent': ((new UserAgent()).data).toString()
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            // Process html like you would with jQuery...
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+            const currentDay = currentDate.getDate();
+            const table = [];
+            const tableEl = $('table[data-test]');
+            const hasTable = tableEl && tableEl.children() && tableEl.children().eq(1) && tableEl.children().eq(1).children();
+            const listOfTableRows = hasTable
+                ? hasTable
+                : [];
+            listOfTableRows.each(function(this: any, index: number) {
+                let tableRowEl = $(this);
+                const rowData = {};
+                const date = tableRowEl.children().first().text();
+                rowData['date'] = date;
+                const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
+                const stockDate = new Date(date);
+                const volumeString = tableRowEl.children().last().text();
+                rowData['volume'] = !volumeString || volumeString === '-'
+                    ? '-'
+                    : parseInt(volumeString.replace(/,/g, ''));
+                if ((withinDays && numDaysBetween(stockDate, currentDateFormatted) <= withinDays) || !withinDays) {
+                        table.push(rowData);
                 }
-                const volumeData = scrape(withinDay);
-                return volumeData;
-            }, withinDay);
-            browser.close();
-            return resolve({
-                'symbol': stockSymbol,
-                volumeData: volumeDataForStock,
             });
-        } catch (e) {
-            return reject(e);
-        }
-    })
+            resolve({
+                'symbol': stockSymbol,
+                volumeData: table,
+            });
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
 }
 
-const runAll = async (stockSymbols, withinDays) => {
-    const chunkStockSumbols = _.chunk(stockSymbols, 10);
-    const chunkPromises = [];
-    for (let i = 0; i < chunkStockSumbols.length; i++) {
-        const chunkPromise = await runBatch(chunkStockSumbols[i], withinDays);
-        chunkPromises.push(chunkPromise);
-        console.log('finishing batch #:', i + 1);
+const runAll = async (stockSymbols, scrapeFunction, ...args: any[]) => {
+    const listOfVolumePromiseCalls = [];
+    for (let i = 0; i < stockSymbols.length; i++) {
+        listOfVolumePromiseCalls.push(scrapeFunction(stockSymbols[i], ...args));
     }
-    return chunkPromises;
+    const volumesList = await Promise.all(listOfVolumePromiseCalls);
+    return volumesList;
 }
 
 const runPinkInfoScrape = (stockSymbol: string) => {
@@ -434,28 +422,48 @@ const runPinkInfoScrape = (stockSymbol: string) => {
         try {
             const browser = await puppeteer.launch({args: ['--no-sandbox']});
             const page = await browser.newPage();
+            // page.on('console', consoleObj => console.log(consoleObj.text()));
             await page.goto(`https://www.otcmarkets.com/stock/${stockSymbol}/financials`);
-            const hasPink = await page.evaluate(() => {
+            await page.waitFor(1*1000);  //← unwanted workaround
+
+            const otcObject = await page.evaluate(() => {
                 const scrapeOtc = () => {
-                    const rootEl = document.getElementById('root');
-                    const spanList = rootEl ? rootEl.querySelectorAll('span') : [];
-                    let hasPinkData = false;
+                    const rootEl = document.querySelectorAll('span');
+                    const spanList = rootEl ? rootEl : [];
+                    let otcObj: any = {
+                        // hasPinkData: false,
+                        // verifiedProfile: undefined,
+                        // pennyStockExempt: false,
+                        // transferAgentVerified: false,
+                    };
                     spanList.forEach((span) => {
                         const spanContent = span.textContent;
                         if (spanContent.toLowerCase().indexOf('pink current information') >= 0){
-                            hasPinkData = true;
-                            return;
+                            otcObj.hasPinkData = true;
+                        }
+                        if (spanContent.toLowerCase().indexOf('verified profile') >= 0){
+                            otcObj.verifiedProfile = spanContent;
+                        }
+                        if (spanContent.toLowerCase().indexOf('penny stock exempt') >= 0){
+                            otcObj.pennyStockExempt = true;
+                        }
+                        if (spanContent.toLowerCase().indexOf('transfer agent verified') >= 0){
+                            otcObj.transferAgentVerified = true;
+                        }
+                        if (spanContent.toLowerCase().indexOf('shell') >= 0){
+                            otcObj.hasShell = true;
                         }
                     })
-                    return hasPinkData;
+                    return otcObj;
                 }
+  
                 const pinkData = scrapeOtc();
                 return pinkData;
             });
             browser.close();
             return resolve({
                 'symbol': stockSymbol,
-                'hasPink': hasPink,
+                'data': otcObject,
             });
         } catch (e) {
             return reject(e);
@@ -472,7 +480,7 @@ const runPinkInfoBatch = async (chunk) => {
         const volumesList = await Promise.all(listOfVolumePromiseCalls);
         setTimeout(() => {
             resolve(volumesList);
-        }, 1000);
+        }, 500);
     });
     return promise;
 }
@@ -493,7 +501,7 @@ export const getVolumeForStocks = functions.runWith({ timeoutSeconds: 540, memor
     const withinDays: number | undefined = _.get(request, ['query', 'withinDays'], undefined);
     //"SRMX,HCMC,NAKD,KYNC,AMC,PHIL,NOK,CTRM,ALKM,IGEX,HVCW,VPER,BRNW,BB,ILUS,AFOM,WRFX,BIEL,ETFM,RSHN,DSCR,MAXD,GRLF,AAL,PLTR,NSAV,UATG,SIRI,GE,RIG,FPVD,KPAY,HMNY,NEOM,NTRR,BBBY,IDEX,F,M,ICTY,SPCE,LUMN,PLUG,INQD,NPHC,T,IRNC,BNGO,NWGC,BIOL,TGRR,VSPC,DMNXF,FUBO,NAK,MAC,GRST,INTC,XSPA,GEVO,WKHS,TNXP,VIAC,ERIC,CCIV,RDWD,MJWL,KR,ZNGA,NNDM,SNDD,MJNA,GM,CBBT,TLRY,TTOO,DISCA,DD,XCLL,WTII,SWN,GOLD,CNK,XRT,SBFM,PURA,MLFB,GBHL,AUY,SKT,OPK,PBF,GHSI,KOSS,IVR,DISCK,FOXA,RMSL,CLVS,XLI,IRM,EGOC,FXI,TXMD,HPE,STX,VTMB,FTI,XLU,CUBV,KNDI,HST,FNMA,CLF,LPCN,SBUX,APRU,LGBI,APHA,NEE,AEO,INTK,IPOE,WBA,AHT,TRCH,CDEV,GTE,SPWR,NOVN,SDC,CETY,DVN,GNW,AR,CRSR,NHMD,MRVL,GEO,BKRKF,BGS,UMC,MIK,GOGO,RYCEY,UNVC,CX,AMWL,ON,HPQ,IEMG,GRCU,OEG,TENX,XLB,MYFT,ACRX,MARK,JNPR,AESE,UAMY,AVVH,AGNC,LLBO,DISH,FLEX,TBLT,LTHUQ,MUR,AAPT,KGKG"
     try {
-        const data: any = await runAll(symbols, withinDays);
+        const data: any = await runAll(symbols, getVolumeFromYahoo, withinDays);
         response.set('Access-Control-Allow-Origin', "*")
         response.set('Access-Control-Allow-Methods', 'GET, POST')
         response.status(200).send(data.flat());
