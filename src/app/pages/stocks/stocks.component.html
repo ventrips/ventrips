@@ -46,7 +46,7 @@
                 </button>
                 <div>
                     <button [disabled]="volumeGraphLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getVolumeGraphs()">
-                        Get Volumes 
+                        Get Volumes
                         <span *ngIf="volumeGraphLoading">
                             <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
                         </span>
@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <button [disabled]="pinkDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getPinkData()">
-                        Get Pink Data 
+                        Get Pink Data
                         <span *ngIf="pinkDataLoading">
                             <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
                         </span>
@@ -104,6 +104,10 @@
                             <p *ngIf="stock.otcData.pennyStockExempt" class="text-success">Penny Stock Exempt</p>
                             <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
                             <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
+                        </div>
+                        <div>
+                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
+                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=5&amp;t=1&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
                         </div>
                     </div>
                 </li>
