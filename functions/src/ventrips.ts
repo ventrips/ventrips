@@ -286,6 +286,33 @@ const getYahooFinanceStockDetails = async (stockSymbols: Array<string>): Promise
     });
 };
 
+const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<object>> => {
+    const defaultUserAgentOptions: object = {
+        headers: {
+            'User-Agent': ((new UserAgent()).data).toString()
+        },
+        json: true
+    };
+    return new Promise(async (resolve: any) => {
+        // resolve(require('./../mocks/ventrips/yahoo-finance.json')); return;
+        let yahooFinanceResponse: Array<object> = [];
+        const tickerSymbolChunks: any = _.chunk(stockSymbols, 1500);
+        for (const tickerSymbolChunk of tickerSymbolChunks) {
+            const yahooFinanceOptions: object = _.assign({
+                uri: 'https://query2.finance.yahoo.com/v7/finance/quote',
+                qs: {
+                    symbols: _.toString(tickerSymbolChunk),
+                }
+            }, defaultUserAgentOptions);
+
+            let yahooFinanceChunkResponse: Array<object> = await RequestPromise(yahooFinanceOptions);
+            yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
+            yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
+        };
+        resolve(yahooFinanceResponse);
+    });
+};
+
 const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<object>> => {
     const defaultUserAgentOptions: object = {
         headers: {
@@ -499,7 +526,7 @@ const runPinkInfoScrape = (stockSymbol: string) => {
                     })
                     return otcObj;
                 }
-  
+
                 const pinkData = scrapeOtc();
                 return pinkData;
             });
@@ -782,6 +809,53 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
         final = _.orderBy(final, (datum: object) => {
             return _.toNumber(_.get(datum, sortByFields, 0));
         }, 'asc');
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
+    }
+});
+
+export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
+    try {
+        let bestStocks: Array<any>;
+        // 1. Get All Stock Symbols From FinViz
+        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        // 2. Get Financial Data from Yahoo Finance For All Filtered Stocks
+        bestStocks = await getYahooFinance(finnHubStockSymbols);
+        // 3. Filter stocks under $100 and 200m in market cap
+        bestStocks = _.filter(bestStocks, (yahooFinanceStock: object) => {
+            const regularMarketPrice: number = _.get(yahooFinanceStock, ['regularMarketPrice']);
+            const marketCap: number = _.get(yahooFinanceStock, ['marketCap']);
+            return (regularMarketPrice >= 0.0001 && regularMarketPrice <= 100) && marketCap <= 200000000;
+        });
+        // 4. Get Pink Status or Greater From OTC Markets / Something better to scrape
+        // 5. Filter All Stock Symbols based on Pink Status or Greater
+        // 6. Calculate mean averages of volume and market price
+        // 7. Filter stocks even further from mean calculations
+        // 8. Get SEC Report Dates
+        // 9. Filter By Most Recent
+
+        // Application Utilities
+        // 1. Fetch News
+        // 2. Fetch Social Media
+        // 3. Fetch SEC Data
+
+        // Export stock and its data into CSV
+        // Feed CSV file into frontend
+        // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
+
+        bestStocks = _.orderBy(bestStocks, (datum: object) => {
+            return _.toNumber(_.get(datum, ['yahooFinance', 'regularMarketVolume'], 0));
+        }, 'asc');
+
+        const final: object = {
+            results: _.get(bestStocks, ['length'], 0),
+            data: bestStocks
+        };
+
+        console.log(JSON.stringify(final, null, 4));
         response.send(final);
     } catch (error) {
         console.log(JSON.stringify(error, null, 4));
