@@ -466,7 +466,7 @@ const runPinkInfoScrape = (stockSymbol: string) => {
             const browser = await puppeteer.launch({args: ['--no-sandbox']});
             const page = await browser.newPage();
             // page.on('console', consoleObj => console.log(consoleObj.text()));
-            await page.goto(`https://www.otcmarkets.com/stock/${stockSymbol}/financials`);
+            await page.goto(`https://www.otcmarkets.com/stock/${stockSymbol}/profile`);
             await page.waitFor(1*1000);  //← unwanted workaround
 
             const otcObject = await page.evaluate(() => {
