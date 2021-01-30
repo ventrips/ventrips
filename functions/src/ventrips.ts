@@ -313,6 +313,23 @@ const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<objec
     });
 };
 
+const getOTCMarkets = async (): Promise<Array<object>> => {
+    const defaultUserAgentOptions: object = {
+        headers: {
+            'User-Agent': ((new UserAgent()).data).toString()
+        },
+        json: true
+    };
+    return new Promise(async (resolve: any) => {
+        const otcMarketsOptions: object = _.assign({
+            uri: 'https://www.otcmarkets.com/research/stock-screener/api?country=USA&sortField=price&sortOrder=asc&pageSize=10000',
+        }, defaultUserAgentOptions);
+
+        const otcMarketsResponse: any = await RequestPromise(otcMarketsOptions);
+        resolve(_.get(JSON.parse(otcMarketsResponse), ['stocks'], []));
+    });
+};
+
 const getAlphaVantageStockChart = async (stockSymbol: string): Promise<Array<object>> => {
     const defaultUserAgentOptions: object = {
         headers: {
@@ -816,14 +833,28 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
     }
 });
 
+const isGoodPennyStock = (otcMarketPennyStock: any): boolean => {
+    const isCaveatEmptor: boolean = _.get(otcMarketPennyStock, ['caveatEmptor'], true);
+    const isPinkCurrentOrGreater: boolean = !_.includes(['Grey', 'Expert Market', 'Pink No Information'], _.get(otcMarketPennyStock, ['market']));
+    const isCountryUSA: boolean = _.isEqual(_.get(otcMarketPennyStock, ['country']), 'USA');
+    return isPinkCurrentOrGreater && !isCaveatEmptor && isCountryUSA;
+}
+
 export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
     try {
         let bestStocks: Array<any>;
         // 1. Get All Stock Symbols From FinViz
         const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        // 2. Get All U.S. Penny Stock Statuses From OTC Markets
+        const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
+        // 3. Filter stocks that are Pink Information or greater
+        // const goodPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => isGoodPennyStock(otcMarketPennyStock));
+        const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
+        const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
+        const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
         // 2. Get Financial Data from Yahoo Finance For All Filtered Stocks
-        bestStocks = await getYahooFinance(finnHubStockSymbols);
+        bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
         // 3. Filter stocks under $100 and 200m in market cap
         bestStocks = _.filter(bestStocks, (yahooFinanceStock: object) => {
             const regularMarketPrice: number = _.get(yahooFinanceStock, ['regularMarketPrice']);
@@ -831,7 +862,6 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             const regularMarketVolume: number = _.get(yahooFinanceStock, ['regularMarketVolume'], 0);
             return (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) && (marketCap >= 100000 && marketCap <= 50000000) && (regularMarketVolume >= 0);
         });
-        // 4. Get Pink Status or Greater From OTC Markets / Something better to scrape
         // 5. Filter All Stock Symbols based on Pink Status or Greater
         // 6. Calculate mean averages of volume and market price
         // 7. Filter stocks even further from mean calculations
@@ -853,7 +883,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
 
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
-            data: bestStocks
+            data: _.map(bestStocks, (bestStock) => bestStock.symbol)
         };
 
         // console.log(JSON.stringify(final, null, 4));
