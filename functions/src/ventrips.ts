@@ -897,10 +897,10 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             return _.has(bestStock, 'regularMarketVolume') && (regularMarketVolume >= 1000) &&
                    _.has(bestStock, 'averageDailyVolume10Day') && (averageDailyVolume10Day >= 1000) &&
                    _.has(bestStock, 'averageDailyVolume3Month') && (averageDailyVolume3Month >= 1000) &&
-                   (averageDailyVolume10Day >= averageDailyVolume3Month) &&
-                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 /* && regularMarketPrice <= 10 */) &&
-                   (fiftyDayAverage >= twoHundredDayAverage) &&
-                   _.has(bestStock, 'marketCap') && (marketCap >= 100) &&
+                   (averageDailyVolume10Day >= averageDailyVolume3Month * 0.5) &&
+                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 100) &&
+                   (fiftyDayAverage >= twoHundredDayAverage * 0.5) &&
+                   _.has(bestStock, 'marketCap') && (marketCap >= 100 && marketCap <= 5000000000) &&
                    _.has(bestStock, 'fiftyDayAverageChangePercent') && (fiftyDayAverageChangePercent >= 0) &&
                    _.has(bestStock, 'twoHundredDayAverageChangePercent') && (twoHundredDayAverageChangePercent >= 0)
             ;
