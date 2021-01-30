@@ -315,6 +315,8 @@ const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<objec
             fullExchangeName: null,
             marketCap: null,
             regularMarketPrice: null,
+            fiftyDayAverage: null,
+            twoHundredDayAverage: null,
             regularMarketChangePercent: null,
             regularMarketVolume: null,
             averageDailyVolume10Day: null,
@@ -885,10 +887,19 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['regularMarketPrice']));
             const marketCap: number = _.toNumber(_.get(bestStock, ['marketCap']));
             const regularMarketVolume: number = _.toNumber(_.get(bestStock, ['regularMarketVolume'], 0));
+            const averageDailyVolume10Day: number = _.toNumber(_.get(bestStock, ['averageDailyVolume10Day'], 0));
+            const averageDailyVolume3Month: number = _.toNumber(_.get(bestStock, ['averageDailyVolume3Month'], 0));
             const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['fiftyDayAverageChangePercent'], 0));
             const twoHundredDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['twoHundredDayAverageChangePercent'], 0));
+            const fiftyDayAverage: number = _.toNumber(_.get(bestStock, ['fiftyDayAverage'], 0));
+            const twoHundredDayAverage: number = _.toNumber(_.get(bestStock, ['twoHundredDayAverage'], 0));
+
             return _.has(bestStock, 'regularMarketVolume') && (regularMarketVolume >= 1000) &&
+                   _.has(bestStock, 'averageDailyVolume10Day') && (averageDailyVolume10Day >= 1000) &&
+                   _.has(bestStock, 'averageDailyVolume3Month') && (averageDailyVolume3Month >= 1000) &&
+                   (averageDailyVolume10Day >= averageDailyVolume3Month) &&
                    _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+                   (fiftyDayAverage >= twoHundredDayAverage) &&
                    _.has(bestStock, 'marketCap') && (marketCap >= 100) &&
                    _.has(bestStock, 'fiftyDayAverageChangePercent') && (fiftyDayAverageChangePercent >= 0) &&
                    _.has(bestStock, 'twoHundredDayAverageChangePercent') && (twoHundredDayAverageChangePercent >= 0)
