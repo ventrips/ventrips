@@ -315,7 +315,12 @@ const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<objec
             fullExchangeName: null,
             marketCap: null,
             regularMarketPrice: null,
-            regularMarketVolume: null
+            regularMarketChangePercent: null,
+            regularMarketVolume: null,
+            averageDailyVolume10Day: null,
+            averageDailyVolume3Month: null,
+            fiftyDayAverageChangePercent: null,
+            twoHundredDayAverageChangePercent: null,
         };
         const yahooFinanceStockDetails: Array<any> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
             return _.pick(yahooFinanceDatum, _.keys(filteredKeys));
@@ -870,19 +875,24 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             if (_.isEqual(_.get(bestStock, ['fullExchangeName']), 'Other OTC')) {
                 const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['symbol']) });
                 if (!_.isNil(pennyStockFound)) {
-                    return _.assign(bestStock, pennyStockFound);
+                    return _.assign(bestStock, { otcMarkets: pennyStockFound });
                 };
             };
             return bestStock;
         });
         // 5. Filter stocks by criteria
-        bestStocks = _.filter(bestStocks, (yahooFinanceStock: object) => {
-            const regularMarketPrice: number = _.toNumber(_.get(yahooFinanceStock, ['regularMarketPrice']));
-            const marketCap: number = _.toNumber(_.get(yahooFinanceStock, ['marketCap']));
-            const regularMarketVolume: number = _.toNumber(_.get(yahooFinanceStock, ['regularMarketVolume'], 0));
-            return _.has(yahooFinanceStock, 'regularMarketVolume') && (regularMarketVolume >= 1) &&
-                   _.has(yahooFinanceStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
-                   _.has(yahooFinanceStock, 'marketCap') && (marketCap >= 1);
+        bestStocks = _.filter(bestStocks, (bestStock: object) => {
+            const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['regularMarketPrice']));
+            const marketCap: number = _.toNumber(_.get(bestStock, ['marketCap']));
+            const regularMarketVolume: number = _.toNumber(_.get(bestStock, ['regularMarketVolume'], 0));
+            const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['fiftyDayAverageChangePercent'], 0));
+            const twoHundredDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['twoHundredDayAverageChangePercent'], 0));
+            return _.has(bestStock, 'regularMarketVolume') && (regularMarketVolume >= 1000) &&
+                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+                   _.has(bestStock, 'marketCap') && (marketCap >= 100) &&
+                   _.has(bestStock, 'fiftyDayAverageChangePercent') && (fiftyDayAverageChangePercent >= 0) &&
+                   _.has(bestStock, 'twoHundredDayAverageChangePercent') && (twoHundredDayAverageChangePercent >= 0)
+            ;
         });
         // 5. Filter All Stock Symbols based on Pink Status or Greater
         // 6. Calculate mean averages of volume and market price
