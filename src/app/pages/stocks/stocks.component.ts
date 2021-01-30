@@ -147,6 +147,7 @@ export class StocksComponent implements OnInit {
         this.stocks.data.forEach((currentStock, i) => {
           if (currentStock.symbol === secStockData.symbol) {
             this.stocks.data[i].secData = secStockData.data;
+            this.stocks.data[i].secStats = secStockData.stats;
           }
         });
       }

@@ -117,6 +117,14 @@
                             <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
                         </div>
                         <div *ngIf="stock.secData">
+                            <div *ngIf="stock.secStats">
+                                <h3>SEC stats</h3>
+                                <p *ngIf="stock.secStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secStats.averageNumberPostsPerYear}}</p>
+                                <p *ngIf="stock.secStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secStats.averageNumberPostsPerMonth}}</p>
+                                <p *ngIf="stock.secStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secStats.averageNumberOfDaysBetweenPosts}}</p>
+                                <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}}</p>
+                                <p *ngIf="stock.secStats.numberOfReports" class="text-success">Total number of reports: {{stock.secStats.numberOfReports}}</p>
+                            </div>
                             <table class="table">
                                 <thead>
                                   <tr>
