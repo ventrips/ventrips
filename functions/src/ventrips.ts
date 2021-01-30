@@ -847,7 +847,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
 
         bestStocks = _.orderBy(bestStocks, (datum: object) => {
-            return _.toNumber(_.get(datum, ['yahooFinance', 'regularMarketVolume'], 0));
+            return _.toNumber(_.get(datum, ['regularMarketVolume'], 0));
         }, 'asc');
 
         const final: object = {
@@ -855,7 +855,8 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             data: bestStocks
         };
 
-        console.log(JSON.stringify(final, null, 4));
+        // console.log(JSON.stringify(final, null, 4));
+        console.log(_.get(final, ['results'], 0));
         response.send(final);
     } catch (error) {
         console.log(JSON.stringify(error, null, 4));
