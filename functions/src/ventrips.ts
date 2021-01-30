@@ -309,7 +309,18 @@ const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<objec
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        resolve(yahooFinanceResponse);
+        const filteredKeys: object = {
+            symbol: null,
+            longName: null,
+            fullExchangeName: null,
+            marketCap: null,
+            regularMarketPrice: null,
+            regularMarketVolume: null
+        };
+        const yahooFinanceStockDetails: Array<any> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
+            return _.pick(yahooFinanceDatum, _.keys(filteredKeys));
+        });
+        resolve(yahooFinanceStockDetails);
     });
 };
 
@@ -322,7 +333,7 @@ const getOTCMarkets = async (): Promise<Array<object>> => {
     };
     return new Promise(async (resolve: any) => {
         const otcMarketsOptions: object = _.assign({
-            uri: 'https://www.otcmarkets.com/research/stock-screener/api?country=USA&sortField=price&sortOrder=asc&pageSize=10000',
+            uri: 'https://www.otcmarkets.com/research/stock-screener/api?pageSize=100000',
         }, defaultUserAgentOptions);
 
         const otcMarketsResponse: any = await RequestPromise(otcMarketsOptions);
@@ -849,18 +860,29 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         // 2. Get All U.S. Penny Stock Statuses From OTC Markets
         const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
         // 3. Filter stocks that are Pink Information or greater
-        // const goodPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => isGoodPennyStock(otcMarketPennyStock));
         const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
         const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
         const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
-        // 2. Get Financial Data from Yahoo Finance For All Filtered Stocks
+        // 4. Get Financial Data from Yahoo Finance For All Filtered Stocks
         bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
-        // 3. Filter stocks under $100 and 200m in market cap
+        // 5. Add OTC Details
+        bestStocks = _.map(bestStocks, (bestStock: any) => {
+            if (_.isEqual(_.get(bestStock, ['fullExchangeName']), 'Other OTC')) {
+                const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['symbol']) });
+                if (!_.isNil(pennyStockFound)) {
+                    return _.assign(bestStock, pennyStockFound);
+                };
+            };
+            return bestStock;
+        });
+        // 5. Filter stocks by criteria
         bestStocks = _.filter(bestStocks, (yahooFinanceStock: object) => {
-            const regularMarketPrice: number = _.get(yahooFinanceStock, ['regularMarketPrice']);
-            const marketCap: number = _.get(yahooFinanceStock, ['marketCap']);
-            const regularMarketVolume: number = _.get(yahooFinanceStock, ['regularMarketVolume'], 0);
-            return (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) && (marketCap >= 100000 && marketCap <= 50000000) && (regularMarketVolume >= 0);
+            const regularMarketPrice: number = _.toNumber(_.get(yahooFinanceStock, ['regularMarketPrice']));
+            const marketCap: number = _.toNumber(_.get(yahooFinanceStock, ['marketCap']));
+            const regularMarketVolume: number = _.toNumber(_.get(yahooFinanceStock, ['regularMarketVolume'], 0));
+            return _.has(yahooFinanceStock, 'regularMarketVolume') && (regularMarketVolume >= 1) &&
+                   _.has(yahooFinanceStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+                   _.has(yahooFinanceStock, 'marketCap') && (marketCap >= 1);
         });
         // 5. Filter All Stock Symbols based on Pink Status or Greater
         // 6. Calculate mean averages of volume and market price
@@ -883,7 +905,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
 
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
-            data: _.map(bestStocks, (bestStock) => bestStock.symbol)
+            data: bestStocks
         };
 
         // console.log(JSON.stringify(final, null, 4));
