@@ -828,7 +828,8 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         bestStocks = _.filter(bestStocks, (yahooFinanceStock: object) => {
             const regularMarketPrice: number = _.get(yahooFinanceStock, ['regularMarketPrice']);
             const marketCap: number = _.get(yahooFinanceStock, ['marketCap']);
-            return (regularMarketPrice >= 0.0001 && regularMarketPrice <= 100) && marketCap <= 200000000;
+            const regularMarketVolume: number = _.get(yahooFinanceStock, ['regularMarketVolume'], 0);
+            return (regularMarketPrice >= 0.0001 && regularMarketPrice <= 100) && (marketCap >= 10000000 && marketCap <= 200000000) && (regularMarketVolume >= 1);
         });
         // 4. Get Pink Status or Greater From OTC Markets / Something better to scrape
         // 5. Filter All Stock Symbols based on Pink Status or Greater
