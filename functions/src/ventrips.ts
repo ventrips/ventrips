@@ -921,7 +921,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
 
         bestStocks = _.orderBy(bestStocks, (datum: object) => {
-            return _.toNumber(_.get(datum, ['regularMarketVolume'], 0));
+            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
         }, 'asc');
 
         const final: object = {
