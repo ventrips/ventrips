@@ -105,6 +105,8 @@
                             <a [href]="_.get(stock, ['resources', key])" [title]="_.startCase(key)" target="__blank" class="mb-2 mr-2" *ngFor="let key of _.get(stock, ['resources'], []) | keys">{{_.startCase(key)}}</a>
                         </div>
                         <div class="d-flex flex-wrap">
+                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
+                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=5&amp;t=1&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
                             <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.loading"></app-stock-graph>
                         </div>
                         <div *ngIf="stock.otcData">
@@ -139,10 +141,6 @@
                                     </tr>
                                   </tbody>
                             </table>
-                        </div>
-                        <div>
-                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
-                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=5&amp;t=1&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
                         </div>
                     </div>
                 </li>
