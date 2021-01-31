@@ -643,6 +643,96 @@ const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
     });
 }
 
+const calcPriceGrowth = async (data) => {
+    let lowest = undefined;
+    let highest = undefined;
+    data.forEach((stockData) => {
+        const currentLowest = stockData.low;
+        const currentHighest = stockData.high;
+        lowest = (lowest === undefined)
+            ? currentLowest
+            : (currentLowest < lowest)
+                ? currentLowest 
+                : lowest;
+        highest = (highest === undefined)
+            ? currentHighest
+            : (currentHighest > highest)
+                ? currentHighest 
+                : highest;
+    });
+    const percentGrowth = (highest / lowest) * 100;
+    return {
+        lowestPrice: lowest,
+        highestPrice: highest,
+        percentGrowth,
+    }
+};
+
+const getDataForYahoo = async (stockSymbol: string, ...args: any[]) => {
+    const withinDays = args[0];
+    const numDaysBetween = function(d1: any, d2: any) {
+        const diff = Math.abs(d1.getTime() - d2.getTime());
+        return diff / (1000 * 60 * 60 * 24);
+    };
+    return new Promise((resolve: any, reject: any) => {
+        const options = {
+            uri: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
+            headers: {
+                'User-Agent': ((new UserAgent()).data).toString()
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            // Process html like you would with jQuery...
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+            const currentDay = currentDate.getDate();
+            const table = [];
+            const tableEl = $('table[data-test]');
+            
+            const hasTable = tableEl && tableEl.children() && tableEl.children().eq(1) && tableEl.children().eq(1).children();
+            const listOfTableRows = hasTable
+                ? hasTable
+                : [];
+            listOfTableRows.each(function(this: any, index: number) {
+                let tableRowEl = $(this);
+                const rowData = {};
+                const date = tableRowEl.children().first().text();
+                rowData['date'] = date;
+                rowData['open'] = parseFloat(tableRowEl.children().eq(1).text());
+                rowData['high'] = parseFloat(tableRowEl.children().eq(2).text());
+                rowData['low'] = parseFloat(tableRowEl.children().eq(3).text());
+                rowData['close'] = parseFloat(tableRowEl.children().eq(4).text());
+                rowData['adjClose'] = parseFloat(tableRowEl.children().eq(5).text());
+                const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
+                const stockDate = new Date(date);
+                const volumeString = tableRowEl.children().last().text();
+                rowData['volume'] = !volumeString || volumeString === '-'
+                    ? '-'
+                    : parseInt(volumeString.replace(/,/g, ''));
+                if ((withinDays && numDaysBetween(stockDate, currentDateFormatted) <= withinDays) || !withinDays) {
+                    table.push(rowData);
+                }
+            });
+            // calculate lowest / highest price and % growth in timespan
+            const growthStats = calcPriceGrowth(table);
+            resolve({
+                'symbol': stockSymbol,
+                financialData: table,
+                growthStats,
+            });
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            reject(err);
+            return err;
+        });
+    });
+}
+
 const runAll = async (stockSymbols, scrapeFunction, ...args: any[]) => {
     const listOfVolumePromiseCalls = [];
     for (let i = 0; i < stockSymbols.length; i++) {
@@ -1006,11 +1096,41 @@ const scrapeSecPage = (stockSymbol: string, ...args: any[]) => {
     return promise;
 };
 
+const scrapeYahooPage = (stockSymbol: string, ...args: any[]) => {
+    const promise = new Promise((resolve) => {
+        const debounceFunction = _.debounce(async () => {
+            try {
+                const data = await getDataForYahoo(stockSymbol, args);
+                console.log('finishing ' + stockSymbol);
+                resolve(data);
+            } catch (err) {
+                resolve(undefined)
+            }
+        }, 0);
+        debounceFunction();
+    });
+    return promise;
+};
+
 const runBatchForSec = async (chunkSymbols) => {
     const promise = new Promise(async (resolve) => {
         const listOfScrapeCalls = [];
         chunkSymbols.forEach((currentSymbol: string) => {
             listOfScrapeCalls.push(scrapeSecPage(currentSymbol));
+        });
+        const data = await Promise.all(listOfScrapeCalls);
+        setTimeout(() => {
+            resolve(data);
+        }, 0);
+    });
+    return promise;
+};
+
+const runBatchForYahoo = async (chunkSymbols) => {
+    const promise = new Promise(async (resolve) => {
+        const listOfScrapeCalls = [];
+        chunkSymbols.forEach((currentSymbol: string) => {
+            listOfScrapeCalls.push(scrapeYahooPage(currentSymbol));
         });
         const data = await Promise.all(listOfScrapeCalls);
         setTimeout(() => {
@@ -1026,6 +1146,19 @@ const runStockBatchesForSec = async (stockSymbols, inBatchesOf) => {
     let totalCount = 0;
     for (let i = 0; i < chunkStockSumbols.length; i++) {
         const chunkPromise = await runBatchForSec(chunkStockSumbols[i]);
+        chunkPromises.push(chunkPromise);
+        totalCount += chunkStockSumbols[i].length;
+        console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
+    }
+    return chunkPromises.flat();
+};
+
+const runStockBatchesForYahoo = async (stockSymbols, inBatchesOf) => {
+    const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
+    const chunkPromises: any = [];
+    let totalCount = 0;
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+        const chunkPromise = await runBatchForYahoo(chunkStockSumbols[i]);
         chunkPromises.push(chunkPromise);
         totalCount += chunkStockSumbols[i].length;
         console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
@@ -1182,11 +1315,81 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
             data: bestStocks,
-            secResponse,
         };
         let jsonData = JSON.stringify(final, null, 4);
         const today: any = new Date().toISOString();
         fs.writeFileSync(`./mocks/best-stocks/getFilteredBestStocks-${today}.json`, jsonData);
+
+        // console.log(JSON.stringify(final, null, 4));
+        console.log(_.get(final, ['results'], 0));
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
+    }
+});
+
+export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
+    try {
+        let bestStocks: Array<any>;
+        const bestStocksResponseJson = require('./../mocks/best-stocks/filtered-best-stocks-small-sample.json');
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/getFilteredBestStocks-2021-01-31T05:26:28.908Z.json');
+        if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
+            throw new Error('No JSON found for best stocks');
+        };
+        bestStocks = bestStocksResponseJson.data;
+        const stockSymbols = [];
+        bestStocks.forEach((bestStock) => {
+            stockSymbols.push(bestStock.symbol);
+        });
+
+        // 8. Get SEC Report Dates
+        const financialResponse = await runStockBatchesForYahoo(stockSymbols, 2);
+
+        // 9. Filter By Most Recent
+        // binding sec data to each best stock...
+        if (financialResponse && financialResponse.length > 0) {
+            financialResponse.forEach((secData) => {
+                bestStocks.forEach((bestStock, index) => {
+                    if (bestStock.symbol === secData.symbol) {
+                        bestStock.financialData = _.get(secData, 'financialData', undefined);
+                        bestStock.growthStats = _.get(secData, 'growthStats', undefined);
+                    }
+                    bestStocks[index] = bestStock;
+                })
+            });
+        }
+
+        // Now filtering based on reporting stats...
+        bestStocks = _.filter(bestStocks, (bestStock: any) => {
+            const percentGrowth: number = _.toNumber(_.get(bestStock, 'growthStats.percentGrowth', 0));
+
+            return percentGrowth > 0 &&
+                percentGrowth <= 10000;
+        });
+
+        // Application Utilities
+        // 1. Fetch News
+        // 2. Fetch Social Media
+        // 3. Fetch SEC Data
+
+        // Export stock and its data into CSV
+        // Feed CSV file into frontend
+        // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
+
+        bestStocks = _.orderBy(bestStocks, (datum: object) => {
+            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
+        }, 'asc');
+
+        const final: object = {
+            results: _.get(bestStocks, ['length'], 0),
+            data: bestStocks,
+            financialResponse,
+        };
+        let jsonData = JSON.stringify(final, null, 4);
+        const today: any = new Date().toISOString();
+        fs.writeFileSync(`./mocks/best-stocks/getFinalBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
