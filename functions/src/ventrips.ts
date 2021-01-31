@@ -1104,7 +1104,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             data: bestStocks
         };
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString();
+        const today: any = new Date().toISOString().slice(0, 10);
         fs.writeFileSync(`./mocks/best-stocks/getBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
@@ -1121,7 +1121,7 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
     try {
         let bestStocks: Array<any>;
         // const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks.json');
-        const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks-small-sample.json');
+        const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks-2021-01-31T05:00:00.551Z.json');
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
         };
