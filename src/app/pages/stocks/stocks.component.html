@@ -28,179 +28,194 @@
         </section>
     </div>
     <div class="container-fluid mb-5 min-height-50vh">
-        <!-- <app-symbol-search-bar [showHeader]="true"></app-symbol-search-bar> -->
+        <app-symbol-search-bar [showHeader]="true"></app-symbol-search-bar>
         <!-- <ng-container *ngIf="!_.isEmpty(data)">
             <h4 class="mb-4">Recent Searches</h4>
             <div class="mb-4 d-flex flex-wrap align-items-center">
                <a *ngFor="let item of data" title="{{item?.yahooFinance?.longName}} ({{item?.yahooFinance?.symbol}})" [routerLink]="[item?.metaData?.symbol]" class="h3"><span class="badge badge-warning p-3 mb-3 mr-3" [innerHTML]="item?.metaData?.symbol | searchHighlight: searchTerm: 'text-white': 'bg-dark'"></span></a>
             </div>
         </ng-container> -->
-        <section class="mt-5">
-            <app-best-stocks></app-best-stocks>
-        </section>
-        <!-- <section class="mt-5">
-            <h3>Trending Stocks By Volume</h3>
-            <div class="text-center">
-                <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshStocks()">
-                    <ng-container *ngIf="isPlatformBrowser()">
-                        <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                    </ng-container>
-                    Refresh
-                </button>
-                <div>
-                    <button [disabled]="volumeGraphLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getVolumeGraphs()">
-                        Get Volumes
-                        <span *ngIf="volumeGraphLoading">
-                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                        </span>
-                    </button>
-                    <input placeholder="Enter number of days" [(ngModel)]="withinDays" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
-                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocks" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
-                </div>
-                <div class="mt-1">
-                    <button [disabled]="pinkDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getPinkData()">
-                        Get Pink Data
-                        <span *ngIf="pinkDataLoading">
-                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                        </span>
-                    </button>
-                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForPink" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
-                </div>
-                <div class="mt-1">
-                    <button [disabled]="secDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getSecData()">
-                        Get Sec Data
-                        <span *ngIf="secDataLoading">
-                            <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
-                        </span>
-                    </button>
-                    <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForSec" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
-                </div>
-                <p class="small text-secondary my-3 mr-3" *ngIf="stocksUpdated">
-                    Last Updated: {{stocksUpdated | timeStampDate:'short'}} ({{stocksUpdated | timeAgo}})
-                </p>
-            </div>
-            <h5 class="text-right mb-4" *ngIf="stocks?.results">Results: {{stocks?.results}}</h5>
-            <ul class="list-unstyled">
-                <li class="media mb-4" *ngFor="let stock of _.get(stocks, ['data'], []); let index = index;">
-                    <span class="mr-3 font-weight-bold">{{index + 1}}.</span>
-                    <div class="media-body">
-                        <div class="d-flex flex-wrap align-items-center">
-                            <h3 class="mr-2">{{stock?.symbol}} - {{stock?.company}}</h3>
-                            <h4 [ngClass]="{'text-success': _.get(stock, ['priceChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['priceChange'], 0)}" class="mr-2">{{stock?.price | currency:'USD':'symbol':'1.2-4'}} <span>({{_.get(stock, ['priceChange'], 0)}}%)</span></h4>
-                            <h4 [ngClass]="{'text-success': _.get(stock, ['volumeChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['volumeChange'], 0)}" class="mr-2">{{_.get(stock, ['volume'], 0)  | number}} ({{_.get(stock, ['volumeChange'], 0)}}%)</h4>
-                            <h4 class="mr-2">{{_.get(stock, ['marketCap'], 0) | currency:'USD':'symbol':'1.0-0'}}</h4>
-                            <h4 class="mr-2">{{_.get(stock, ['fullExchangeName'])}}</h4>
-                            <div *ngIf="_.get(stock, ['recommended'])" class="badge badge-dark font-weight-bold mr-2">
+        <ngb-tabset [justify]="'justified'" #t="ngbTabset">
+            <ngb-tab id="tab-selectbyid1">
+                <ng-template ngbTabTitle>
+                    Trending Stocks By Volume
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="mt-5">
+                        <div class="text-center">
+                            <button *ngIf="authService?.canEdit(user)" class="btn btn-warning" (click)="refreshStocks()">
                                 <ng-container *ngIf="isPlatformBrowser()">
-                                    <fa-icon [icon]="['fas', 'star']" class="text-warning mr-1 fa-1x"></fa-icon>
+                                    <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
                                 </ng-container>
-                                <span>Recommended</span>
+                                Refresh
+                            </button>
+                            <div>
+                                <button [disabled]="volumeGraphLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getVolumeGraphs()">
+                                    Get Volumes
+                                    <span *ngIf="volumeGraphLoading">
+                                        <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                                    </span>
+                                </button>
+                                <input placeholder="Enter number of days" [(ngModel)]="withinDays" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
+                                <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocks" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                             </div>
-                        </div>
-                        <div class="d-flex flex-wrap" *ngFor="let key of _.get(stock, ['holdings'], []) | keys">
-                            <h4 class="mr-2">[Since {{_.get(stock, ['holdings', key, 'firstOwned'])}}] {{key}}
-                                <span class="badge badge-pill" [ngClass]="{'badge-warning': _.get(stock, ['holdings', key, 'sharesChange'], 0) == 0, 'badge-success': _.get(stock, ['holdings', key, 'sharesChange'], 0) > 0, 'badge-danger': 0 > _.get(stock, ['holdings', key, 'sharesChange'], 0)}">{{_.get(stock, ['holdings', key, 'changeInShares'], 0) | number}} ({{_.get(stock, ['holdings', key, 'sharesChange'], 0)}}%)</span>
-                                -
-                                <span class="mr-2" [ngClass]="{'text-warning': _.get(stock, ['holdings', key, 'sharesChange'], 0) == 0, 'text-success': _.get(stock, ['holdings', key, 'sharesChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['holdings', key, 'sharesChange'], 0)}">{{_.get(stock, ['holdings', key, 'changeType'])}}</span>
-                            </h4>
-                        </div>
-                        <div class="d-flex flex-wrap">
-                            <a [href]="_.get(stock, ['resources', key])" [title]="_.startCase(key)" target="__blank" class="mb-2 mr-2" *ngFor="let key of _.get(stock, ['resources'], []) | keys">{{_.startCase(key)}}</a>
-                        </div>
-                        <div class="d-flex flex-wrap">
-                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
-                            <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=5&amp;t=1&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
-                            <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.loading"></app-stock-graph>
-                        </div>
-                        <div *ngIf="stock.otcData">
-                            <p *ngIf="stock.otcData.hasPinkData" class="text-success">Pink Current Information</p>
-                            <p *ngIf="stock.otcData.verifiedProfile" class="text-success">{{stock.otcData.verifiedProfile}}</p>
-                            <p *ngIf="stock.otcData.pennyStockExempt" class="text-success">Penny Stock Exempt</p>
-                            <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
-                            <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
-                        </div>
-                        <div *ngIf="stock.mixedStats">
-                            <h3>SEC & OTC stats</h3>
-                            <p *ngIf="stock.mixedStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.mixedStats.averageNumberPostsPerYear}}</p>
-                            <p *ngIf="stock.mixedStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.mixedStats.averageNumberPostsPerMonth}}</p>
-                            <p *ngIf="stock.mixedStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.mixedStats.averageNumberOfDaysBetweenPosts}}</p>
-                            <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}}</p>
-                            <p *ngIf="stock.mixedStats.numberOfReports" class="text-success">Total number of reports: {{stock.mixedStats.numberOfReports}}</p>
-                        </div>
-                        <div *ngIf="stock.secData">
-                            <button (click)="stock.hideSecData = !stock.hideSecData">{{stock.hideSecData ? 'Hide' : 'Show'}}</button>
-                            <div *ngIf="stock.secStats">
-                                <h3>SEC stats</h3>
-                                <p *ngIf="stock.secStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secStats.averageNumberPostsPerYear}}</p>
-                                <p *ngIf="stock.secStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secStats.averageNumberPostsPerMonth}}</p>
-                                <p *ngIf="stock.secStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secStats.averageNumberOfDaysBetweenPosts}}</p>
-                                <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}}</p>
-                                <p *ngIf="stock.secStats.numberOfReports" class="text-success">Total number of reports: {{stock.secStats.numberOfReports}}</p>
+                            <div class="mt-1">
+                                <button [disabled]="pinkDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getPinkData()">
+                                    Get Pink Data
+                                    <span *ngIf="pinkDataLoading">
+                                        <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                                    </span>
+                                </button>
+                                <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForPink" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                             </div>
-                            <table class="table" *ngIf="stock.hideSecData">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Form</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Link</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let report of stock.secData; let index = index;">
-                                      <th scope="row">{{index}}</th>
-                                      <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
-                                      <td *ngIf="report.reportText">{{report.reportText}}</td>
-                                      <td *ngIf="report.reportDate">{{report.reportDate}}</td>
-                                      <td *ngIf="report.reportLink">
-                                        <a href="https://sec.report/{{report.reportLink}}" target="_blank">
-                                            Link to report
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                            </table>
-                        </div>
-                        <div *ngIf="stock.secOtcData">
-                            <button (click)="stock.hideSecOtcData = !stock.hideSecOtcData">{{stock.hideSecOtcData ? 'Hide' : 'Show'}}</button>
-                            <div *ngIf="stock.secOtcStats">
-                                <h3>OTC stats</h3>
-                                <p *ngIf="stock.secOtcStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secOtcStats.averageNumberPostsPerYear}}</p>
-                                <p *ngIf="stock.secOtcStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secOtcStats.averageNumberPostsPerMonth}}</p>
-                                <p *ngIf="stock.secOtcStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secOtcStats.averageNumberOfDaysBetweenPosts}}</p>
-                                <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
-                                <p *ngIf="stock.secOtcStats.numberOfReports" class="text-success">Total number of reports: {{stock.secOtcStats.numberOfReports}}</p>
+                            <div class="mt-1">
+                                <button [disabled]="secDataLoading"  class="ml-1 mr-1 btn btn-warning" (click)="getSecData()">
+                                    Get Sec Data
+                                    <span *ngIf="secDataLoading">
+                                        <fa-icon [icon]="['fas', 'sync']" class="mr-2"></fa-icon>
+                                    </span>
+                                </button>
+                                <input placeholder="Enter number of stocks" [(ngModel)]="numberOfStocksForSec" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  />
                             </div>
-                            <table class="table" *ngIf="stock.hideSecOtcData">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Form</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Link</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let report of stock.secOtcData; let index = index;">
-                                      <th scope="row">{{index}}</th>
-                                      <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
-                                      <td *ngIf="report.reportText">{{report.reportText}}</td>
-                                      <td *ngIf="report.reportDate">{{report.reportDate}}</td>
-                                      <td *ngIf="report.reportLink">
-                                        <a href="https://sec.report/{{report.reportLink}}" target="_blank">
-                                            Link to report
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                            </table>
+                            <p class="small text-secondary my-3 mr-3" *ngIf="stocksUpdated">
+                                Last Updated: {{stocksUpdated | timeStampDate:'short'}} ({{stocksUpdated | timeAgo}})
+                            </p>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </section> -->
+                        <h5 class="text-right mb-4" *ngIf="stocks?.results">Results: {{stocks?.results}}</h5>
+                        <ul class="list-unstyled">
+                            <li class="media mb-4" *ngFor="let stock of _.get(stocks, ['data'], []); let index = index;">
+                                <span class="mr-3 font-weight-bold">{{index + 1}}.</span>
+                                <div class="media-body">
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <h3 class="mr-2">{{stock?.symbol}} - {{stock?.company}}</h3>
+                                        <h4 [ngClass]="{'text-success': _.get(stock, ['priceChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['priceChange'], 0)}" class="mr-2">{{stock?.price | currency:'USD':'symbol':'1.2-4'}} <span>({{_.get(stock, ['priceChange'], 0)}}%)</span></h4>
+                                        <h4 [ngClass]="{'text-success': _.get(stock, ['volumeChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['volumeChange'], 0)}" class="mr-2">{{_.get(stock, ['volume'], 0)  | number}} ({{_.get(stock, ['volumeChange'], 0)}}%)</h4>
+                                        <h4 class="mr-2">{{_.get(stock, ['marketCap'], 0) | currency:'USD':'symbol':'1.0-0'}}</h4>
+                                        <h4 class="mr-2">{{_.get(stock, ['fullExchangeName'])}}</h4>
+                                        <div *ngIf="_.get(stock, ['recommended'])" class="badge badge-dark font-weight-bold mr-2">
+                                            <ng-container *ngIf="isPlatformBrowser()">
+                                                <fa-icon [icon]="['fas', 'star']" class="text-warning mr-1 fa-1x"></fa-icon>
+                                            </ng-container>
+                                            <span>Recommended</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap" *ngFor="let key of _.get(stock, ['holdings'], []) | keys">
+                                        <h4 class="mr-2">[Since {{_.get(stock, ['holdings', key, 'firstOwned'])}}] {{key}}
+                                            <span class="badge badge-pill" [ngClass]="{'badge-warning': _.get(stock, ['holdings', key, 'sharesChange'], 0) == 0, 'badge-success': _.get(stock, ['holdings', key, 'sharesChange'], 0) > 0, 'badge-danger': 0 > _.get(stock, ['holdings', key, 'sharesChange'], 0)}">{{_.get(stock, ['holdings', key, 'changeInShares'], 0) | number}} ({{_.get(stock, ['holdings', key, 'sharesChange'], 0)}}%)</span>
+                                            -
+                                            <span class="mr-2" [ngClass]="{'text-warning': _.get(stock, ['holdings', key, 'sharesChange'], 0) == 0, 'text-success': _.get(stock, ['holdings', key, 'sharesChange'], 0) > 0, 'text-danger': 0 > _.get(stock, ['holdings', key, 'sharesChange'], 0)}">{{_.get(stock, ['holdings', key, 'changeType'])}}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap">
+                                        <a [href]="_.get(stock, ['resources', key])" [title]="_.startCase(key)" target="__blank" class="mb-2 mr-2" *ngFor="let key of _.get(stock, ['resources'], []) | keys">{{_.startCase(key)}}</a>
+                                    </div>
+                                    <div class="d-flex flex-wrap">
+                                        <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=0&amp;t=17&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
+                                        <img src="https://ih.advfn.com/p.php?pid=staticchart&amp;s={{stock.symbol}}&amp;p=5&amp;t=1&amp;width=500&amp;height=300&amp;vol=1&amp;min_pre=180&amp;min_after=240&amp;delay=1" style="border-width:0px;height:300px;width:500px;">
+                                        <app-stock-graph [volumeData]="stock.volumeData" [disableGraph]="stock.loading"></app-stock-graph>
+                                    </div>
+                                    <div *ngIf="stock.otcData">
+                                        <p *ngIf="stock.otcData.hasPinkData" class="text-success">Pink Current Information</p>
+                                        <p *ngIf="stock.otcData.verifiedProfile" class="text-success">{{stock.otcData.verifiedProfile}}</p>
+                                        <p *ngIf="stock.otcData.pennyStockExempt" class="text-success">Penny Stock Exempt</p>
+                                        <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
+                                        <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
+                                    </div>
+                                    <div *ngIf="stock.mixedStats">
+                                        <h3>SEC & OTC stats</h3>
+                                        <p *ngIf="stock.mixedStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.mixedStats.averageNumberPostsPerYear}}</p>
+                                        <p *ngIf="stock.mixedStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.mixedStats.averageNumberPostsPerMonth}}</p>
+                                        <p *ngIf="stock.mixedStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.mixedStats.averageNumberOfDaysBetweenPosts}}</p>
+                                        <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}}</p>
+                                        <p *ngIf="stock.mixedStats.numberOfReports" class="text-success">Total number of reports: {{stock.mixedStats.numberOfReports}}</p>
+                                    </div>
+                                    <div *ngIf="stock.secData">
+                                        <button (click)="stock.hideSecData = !stock.hideSecData">{{stock.hideSecData ? 'Hide' : 'Show'}}</button>
+                                        <div *ngIf="stock.secStats">
+                                            <h3>SEC stats</h3>
+                                            <p *ngIf="stock.secStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secStats.averageNumberPostsPerYear}}</p>
+                                            <p *ngIf="stock.secStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secStats.averageNumberPostsPerMonth}}</p>
+                                            <p *ngIf="stock.secStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secStats.averageNumberOfDaysBetweenPosts}}</p>
+                                            <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}}</p>
+                                            <p *ngIf="stock.secStats.numberOfReports" class="text-success">Total number of reports: {{stock.secStats.numberOfReports}}</p>
+                                        </div>
+                                        <table class="table" *ngIf="stock.hideSecData">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Form</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Link</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let report of stock.secData; let index = index;">
+                                                <th scope="row">{{index}}</th>
+                                                <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
+                                                <td *ngIf="report.reportText">{{report.reportText}}</td>
+                                                <td *ngIf="report.reportDate">{{report.reportDate}}</td>
+                                                <td *ngIf="report.reportLink">
+                                                    <a href="https://sec.report/{{report.reportLink}}" target="_blank">
+                                                        Link to report
+                                                    </a>
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="stock.secOtcData">
+                                        <button (click)="stock.hideSecOtcData = !stock.hideSecOtcData">{{stock.hideSecOtcData ? 'Hide' : 'Show'}}</button>
+                                        <div *ngIf="stock.secOtcStats">
+                                            <h3>OTC stats</h3>
+                                            <p *ngIf="stock.secOtcStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secOtcStats.averageNumberPostsPerYear}}</p>
+                                            <p *ngIf="stock.secOtcStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secOtcStats.averageNumberPostsPerMonth}}</p>
+                                            <p *ngIf="stock.secOtcStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secOtcStats.averageNumberOfDaysBetweenPosts}}</p>
+                                            <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
+                                            <p *ngIf="stock.secOtcStats.numberOfReports" class="text-success">Total number of reports: {{stock.secOtcStats.numberOfReports}}</p>
+                                        </div>
+                                        <table class="table" *ngIf="stock.hideSecOtcData">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Form</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Link</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let report of stock.secOtcData; let index = index;">
+                                                <th scope="row">{{index}}</th>
+                                                <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
+                                                <td *ngIf="report.reportText">{{report.reportText}}</td>
+                                                <td *ngIf="report.reportDate">{{report.reportDate}}</td>
+                                                <td *ngIf="report.reportLink">
+                                                    <a href="https://sec.report/{{report.reportLink}}" target="_blank">
+                                                        Link to report
+                                                    </a>
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid2">
+                <ng-template ngbTabTitle>
+                    Best Stocks
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="mt-5">
+                        <app-best-stocks></app-best-stocks>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
     <!-- Horizontal Display Ad-->
     <section class="container-fluid text-center pt-2 mb-5">
