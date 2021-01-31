@@ -548,7 +548,6 @@ const calculateDateStats = (data) => {
         averageNumberOfDaysBetweenPosts,
         numberOfDaysSinceLastPublish,
         numberOfReports,
-        sortedDates,
     }
 }
 
@@ -990,6 +989,49 @@ const isGoodPennyStock = (otcMarketPennyStock: any): boolean => {
     return isPinkCurrentOrGreater && !isCaveatEmptor && isCountryUSA;
 }
 
+const scrapeSecPage = (stockSymbol: string, ...args: any[]) => {
+    const promise = new Promise((resolve) => {
+        const debounceFunction = _.debounce(async () => {
+            try {
+                const data = await getDataForSec(stockSymbol, args);
+                console.log('finishing ' + stockSymbol);
+                resolve(data);
+            } catch (err) {
+                resolve(undefined)
+            }
+        }, 5000);
+        debounceFunction();
+    });
+    return promise;
+};
+
+const runBatchForSec = async (chunkSymbols) => {
+    const promise = new Promise(async (resolve) => {
+        const listOfScrapeCalls = [];
+        chunkSymbols.forEach((currentSymbol: string) => {
+            listOfScrapeCalls.push(scrapeSecPage(currentSymbol));
+        });
+        const data = await Promise.all(listOfScrapeCalls);
+        setTimeout(() => {
+            resolve(data);
+        }, 0);
+    });
+    return promise;
+};
+
+const runStockBatchesForSec = async (stockSymbols, inBatchesOf) => {
+    const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
+    const chunkPromises: any = [];
+    let totalCount = 0;
+    for (let i = 0; i < chunkStockSumbols.length; i++) {
+        const chunkPromise = await runBatchForSec(chunkStockSumbols[i]);
+        chunkPromises.push(chunkPromise);
+        totalCount += chunkStockSumbols[i].length;
+        console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
+    }
+    return chunkPromises.flat();
+};
+
 export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
     try {
@@ -1059,6 +1101,85 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
             data: bestStocks
+        };
+
+        // console.log(JSON.stringify(final, null, 4));
+        console.log(_.get(final, ['results'], 0));
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
+    }
+});
+
+export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    cors(request, response);
+    try {
+        let bestStocks: Array<any>;
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks.json');
+        const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks-small-sample.json');
+        if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
+            throw new Error('No JSON found for best stocks');
+        };
+        bestStocks = bestStocksResponseJson.data;
+        const stockSymbols = [];
+        bestStocks.forEach((bestStock) => {
+            stockSymbols.push(bestStock.symbol);
+        });
+
+        // 8. Get SEC Report Dates
+        const secResponse = await runStockBatchesForSec(stockSymbols, 5);
+
+        // 9. Filter By Most Recent
+        // binding sec data to each best stock...
+        if (secResponse && secResponse.length > 0) {
+            secResponse.forEach((secData) => {
+                bestStocks.forEach((bestStock, index) => {
+                    if (bestStock.symbol === secData.symbol) {
+                        bestStock.secData = _.get(secData, 'data', undefined);
+                        bestStock.secOtcData = _.get(secData, 'secOtcData', undefined);
+                        bestStock.secStats = _.get(secData, 'stats', undefined);
+                        bestStock.secOtcStats = _.get(secData, 'secOtcStats', undefined);
+                        bestStock.mixedStats = _.get(secData, 'mixedStats', undefined);
+                    }
+                    bestStocks[index] = bestStock;
+                })
+            });
+        }
+
+        // Now filtering based on reporting stats...
+        bestStocks = _.filter(bestStocks, (bestStock: any) => {
+            const numberOfDaysSinceLastPublish: number = _.toNumber(_.get(bestStock, 'mixedStats.numberOfDaysSinceLastPublish', 0));
+            const averageNumberOfDaysBetweenPosts: number = _.toNumber(_.get(bestStock, 'mixedStats.averageNumberOfDaysBetweenPosts', 0));
+            const numberOfReports: number = _.toNumber(_.get(bestStock, 'mixedStats.numberOfReports', 0));
+            const averageNumberPostsPerYear: number = _.toNumber(_.get(bestStock, 'mixedStats.averageNumberPostsPerYear', 0));
+            const averageNumberPostsPerMonth: number = _.toNumber(_.get(bestStock, 'mixedStats.averageNumberPostsPerMonth', 0));
+
+            return numberOfDaysSinceLastPublish <= 365 &&
+                   averageNumberOfDaysBetweenPosts >= 1 &&
+                   numberOfReports >= 1 &&
+                   averageNumberPostsPerYear >= 1 &&
+                   averageNumberPostsPerMonth >= 1;
+
+        });
+
+        // Application Utilities
+        // 1. Fetch News
+        // 2. Fetch Social Media
+        // 3. Fetch SEC Data
+
+        // Export stock and its data into CSV
+        // Feed CSV file into frontend
+        // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
+
+        bestStocks = _.orderBy(bestStocks, (datum: object) => {
+            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
+        }, 'asc');
+
+        const final: object = {
+            results: _.get(bestStocks, ['length'], 0),
+            data: bestStocks,
+            secResponse,
         };
 
         // console.log(JSON.stringify(final, null, 4));
