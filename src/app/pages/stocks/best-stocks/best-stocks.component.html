@@ -18,10 +18,14 @@
                         </div>
                     </h3>
                     <div class="d-flex flex-wrap align-items-center">
-                        <h4 class="mr-2"><span class="font-weight-bold">Price:</span> {{stock?.yahooFinance?.regularMarketPrice | currency:'USD':'symbol':'1.2-4'}}</h4>
-                        <h4 class="mr-2"><span class="font-weight-bold">Volume:</span> {{_.get(stock, ['yahooFinance', 'regularMarketVolume'], 0)  | number}}</h4>
-                        <h4 class="mr-2"><span class="font-weight-bold">Market Cap:</span> {{_.get(stock, ['yahooFinance', 'marketCap'], 0) | currency:'USD':'symbol':'1.0-0'}}</h4>
-                        <h4 class="mr-2"><span class="font-weight-bold">Exchange:</span> {{_.get(stock, ['yahooFinance', 'fullExchangeName'])}}</h4>
+                        <h4 class="mr-2">
+                            <span class="font-weight-bold">Price:</span> {{stock?.yahooFinance?.regularMarketPrice | currency:'USD':'symbol':'1.2-4'}}</h4>
+                        <h4 class="mr-2">
+                            <span class="font-weight-bold">Volume:</span> {{_.get(stock, ['yahooFinance', 'regularMarketVolume'], 0) | number}}</h4>
+                        <h4 class="mr-2">
+                            <span class="font-weight-bold">Market Cap:</span> {{_.get(stock, ['yahooFinance', 'marketCap'], 0) | currency:'USD':'symbol':'1.0-0'}}</h4>
+                        <h4 class="mr-2">
+                            <span class="font-weight-bold">Exchange:</span> {{_.get(stock, ['yahooFinance', 'fullExchangeName'])}}</h4>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap">
@@ -38,83 +42,87 @@
                     <p *ngIf="stock.otcData.transferAgentVerified" class="text-success">Transfer Agent Verified</p>
                     <p *ngIf="stock.otcData.hasShell" class="text-success">Shell</p>
                 </div>
-                <div *ngIf="stock.mixedStats">
-                    <h3>SEC & OTC stats</h3>
-                    <p *ngIf="stock.mixedStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.mixedStats.averageNumberPostsPerYear}} posts</p>
-                    <p *ngIf="stock.mixedStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.mixedStats.averageNumberPostsPerMonth}} posts</p>
-                    <p *ngIf="stock.mixedStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.mixedStats.averageNumberOfDaysBetweenPosts}} days</p>
-                    <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}} days</p>
-                    <p *ngIf="stock.mixedStats.numberOfReports" class="text-success">Total number of reports: {{stock.mixedStats.numberOfReports}} reports</p>
-                </div>
-                <div *ngIf="stock.secData">
-                    <button (click)="stock.hideSecData = !stock.hideSecData">{{stock.hideSecData ? 'Hide' : 'Show'}}</button>
-                    <div *ngIf="stock.secStats">
-                        <h3>SEC stats</h3>
+                <div class="row">
+                    <div class="col" *ngIf="stock.secStats">
+                        <h3>SEC Stats</h3>
                         <p *ngIf="stock.secStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secStats.averageNumberPostsPerYear}} posts</p>
                         <p *ngIf="stock.secStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secStats.averageNumberPostsPerMonth}} posts</p>
                         <p *ngIf="stock.secStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secStats.averageNumberOfDaysBetweenPosts}} days</p>
                         <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}} days</p>
                         <p *ngIf="stock.secStats.numberOfReports" class="text-success">Total number of reports: {{stock.secStats.numberOfReports}} reports</p>
                     </div>
-                    <table class="table" *ngIf="stock.hideSecData">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Form</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let report of stock.secData; let index = index;">
-                                <th scope="row">{{index}}</th>
-                                <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
-                                <td *ngIf="report.reportText">{{report.reportText}}</td>
-                                <td *ngIf="report.reportDate">{{report.reportDate}}</td>
-                                <td *ngIf="report.reportLink">
-                                <a href="https://sec.report/{{report.reportLink}}" target="_blank">
-                                    Link to report
-                                </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>
-                <div *ngIf="stock.secOtcData">
-                    <button (click)="stock.hideSecOtcData = !stock.hideSecOtcData">{{stock.hideSecOtcData ? 'Hide' : 'Show'}}</button>
-                    <div *ngIf="stock.secOtcStats">
-                        <h3>OTC stats</h3>
-                        <p *ngIf="stock.secOtcStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secOtcStats.averageNumberPostsPerYear}}</p>
-                        <p *ngIf="stock.secOtcStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secOtcStats.averageNumberPostsPerMonth}}</p>
-                        <p *ngIf="stock.secOtcStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secOtcStats.averageNumberOfDaysBetweenPosts}}</p>
-                        <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
-                        <p *ngIf="stock.secOtcStats.numberOfReports" class="text-success">Total number of reports: {{stock.secOtcStats.numberOfReports}}</p>
+                    <div class="col" *ngIf="stock.mixedStats">
+                        <h3>SEC &amp; OTC Stats</h3>
+                        <p *ngIf="stock.mixedStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.mixedStats.averageNumberPostsPerYear}} posts</p>
+                        <p *ngIf="stock.mixedStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.mixedStats.averageNumberPostsPerMonth}} posts</p>
+                        <p *ngIf="stock.mixedStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.mixedStats.averageNumberOfDaysBetweenPosts}} days</p>
+                        <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}} days</p>
+                        <p *ngIf="stock.mixedStats.numberOfReports" class="text-success">Total number of reports: {{stock.mixedStats.numberOfReports}} reports</p>
                     </div>
-                    <table class="table" *ngIf="stock.hideSecOtcData">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Form</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let report of stock.secOtcData; let index = index;">
-                                <th scope="row">{{index}}</th>
-                                <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
-                                <td *ngIf="report.reportText">{{report.reportText}}</td>
-                                <td *ngIf="report.reportDate">{{report.reportDate}}</td>
-                                <td *ngIf="report.reportLink">
-                                <a href="https://sec.report/{{report.reportLink}}" target="_blank">
-                                    Link to report
-                                </a>
-                                </td>
-                            </tr>
+                </div>
+                <div class="row">
+                    <div class="col" *ngIf="stock.secData">
+                        <button (click)="stock.hideSecData = !stock.hideSecData">{{stock.hideSecData ? 'Hide SEC Filings' : 'Show SEC Filings'}}</button>
+                        <table class="table" *ngIf="stock.hideSecData">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Form</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let report of stock.secData; let index = index;">
+                                    <th scope="row">{{index}}</th>
+                                    <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
+                                    <td *ngIf="report.reportText">{{report.reportText}}</td>
+                                    <td *ngIf="report.reportDate">{{report.reportDate}}</td>
+                                    <td *ngIf="report.reportLink">
+                                        <a href="https://sec.report/{{report.reportLink}}" target="_blank">
+                                            Link to report
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
-                    </table>
+                        </table>
+                    </div>
+                    <div class="col" *ngIf="stock.secOtcData">
+                        <button (click)="stock.hideSecOtcData = !stock.hideSecOtcData">{{stock.hideSecOtcData ? 'Hide OTC Filings' : 'Show OTC Filings'}}</button>
+                        <div *ngIf="stock.secOtcStats">
+                            <h3>OTC stats</h3>
+                            <p *ngIf="stock.secOtcStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secOtcStats.averageNumberPostsPerYear}}</p>
+                            <p *ngIf="stock.secOtcStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secOtcStats.averageNumberPostsPerMonth}}</p>
+                            <p *ngIf="stock.secOtcStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secOtcStats.averageNumberOfDaysBetweenPosts}}</p>
+                            <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
+                            <p *ngIf="stock.secOtcStats.numberOfReports" class="text-success">Total number of reports: {{stock.secOtcStats.numberOfReports}}</p>
+                        </div>
+                        <table class="table" *ngIf="stock.hideSecOtcData">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Form</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let report of stock.secOtcData; let index = index;">
+                                    <th scope="row">{{index}}</th>
+                                    <td *ngIf="report.formColumnText">{{report.formColumnText}}</td>
+                                    <td *ngIf="report.reportText">{{report.reportText}}</td>
+                                    <td *ngIf="report.reportDate">{{report.reportDate}}</td>
+                                    <td *ngIf="report.reportLink">
+                                        <a href="https://sec.report/{{report.reportLink}}" target="_blank">
+                                            Link to report
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </li>
