@@ -11,6 +11,7 @@ import { ShortCutsComponent } from './symbol/short-cuts/short-cuts.component';
 import { SymbolSearchBarComponent } from './symbol-search-bar/symbol-search-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StockGraphComponent } from './stock-graph/stock-graph.component';
+import { BestStocksComponent } from './best-stocks/best-stocks.component';
 @NgModule({
   declarations: [
     StocksComponent,
@@ -18,7 +19,8 @@ import { StockGraphComponent } from './stock-graph/stock-graph.component';
     DynamicChartComponent,
     ShortCutsComponent,
     SymbolSearchBarComponent,
-    StockGraphComponent
+    StockGraphComponent,
+    BestStocksComponent
   ],
   imports: [
     CommonModule,
