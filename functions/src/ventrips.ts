@@ -1104,7 +1104,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             data: bestStocks
         };
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString().slice(0, 10);
+        const today: any = new Date().toISOString();
         fs.writeFileSync(`./mocks/best-stocks/getBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
@@ -1185,7 +1185,7 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
             secResponse,
         };
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString().slice(0, 10);;
+        const today: any = new Date().toISOString();
         fs.writeFileSync(`./mocks/best-stocks/getFilteredBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
