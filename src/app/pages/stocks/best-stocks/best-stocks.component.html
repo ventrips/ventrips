@@ -43,7 +43,7 @@
                     <p *ngIf="stock.mixedStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.mixedStats.averageNumberPostsPerYear}} posts</p>
                     <p *ngIf="stock.mixedStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.mixedStats.averageNumberPostsPerMonth}} posts</p>
                     <p *ngIf="stock.mixedStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.mixedStats.averageNumberOfDaysBetweenPosts}} days</p>
-                    <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}} days</p>
+                    <p *ngIf="stock.mixedStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.mixedStats.numberOfDaysSinceLastPublish}} days</p>
                     <p *ngIf="stock.mixedStats.numberOfReports" class="text-success">Total number of reports: {{stock.mixedStats.numberOfReports}} reports</p>
                 </div>
                 <div *ngIf="stock.secData">
@@ -53,7 +53,7 @@
                         <p *ngIf="stock.secStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secStats.averageNumberPostsPerYear}} posts</p>
                         <p *ngIf="stock.secStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secStats.averageNumberPostsPerMonth}} posts</p>
                         <p *ngIf="stock.secStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secStats.averageNumberOfDaysBetweenPosts}} days</p>
-                        <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}} days</p>
+                        <p *ngIf="stock.secStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.secStats.numberOfDaysSinceLastPublish}} days</p>
                         <p *ngIf="stock.secStats.numberOfReports" class="text-success">Total number of reports: {{stock.secStats.numberOfReports}} reports</p>
                     </div>
                     <table class="table" *ngIf="stock.hideSecData">
@@ -88,7 +88,7 @@
                         <p *ngIf="stock.secOtcStats.averageNumberPostsPerYear" class="text-success">Average number of posts per year: {{stock.secOtcStats.averageNumberPostsPerYear}}</p>
                         <p *ngIf="stock.secOtcStats.averageNumberPostsPerMonth" class="text-success">Average number of posts per month: {{stock.secOtcStats.averageNumberPostsPerMonth}}</p>
                         <p *ngIf="stock.secOtcStats.averageNumberOfDaysBetweenPosts" class="text-success">Average number of days between posts: {{stock.secOtcStats.averageNumberOfDaysBetweenPosts}}</p>
-                        <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Average number of days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
+                        <p *ngIf="stock.secOtcStats.numberOfDaysSinceLastPublish" class="text-success">Days since last post: {{stock.secOtcStats.numberOfDaysSinceLastPublish}}</p>
                         <p *ngIf="stock.secOtcStats.numberOfReports" class="text-success">Total number of reports: {{stock.secOtcStats.numberOfReports}}</p>
                     </div>
                     <table class="table" *ngIf="stock.hideSecOtcData">
