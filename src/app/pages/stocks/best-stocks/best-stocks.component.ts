@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import bestStocksJson from './../../../../../functions/mocks/best-stocks/getFinalBestStocks-2021-01-31T14:54:31.963Z.json';
+import bestStocksJson from './../../../../../functions/mocks/best-stocks/getBestStocks3-2021-01-31.json';
 import * as _ from 'lodash';
 
 @Component({

@@ -311,25 +311,31 @@ const getYahooFinance = async (stockSymbols: Array<string>): Promise<Array<objec
             yahooFinanceChunkResponse = _.get(yahooFinanceChunkResponse, ['quoteResponse', 'result'], []);
             yahooFinanceResponse = _.concat(yahooFinanceResponse, yahooFinanceChunkResponse);
         };
-        const filteredKeys: object = {
-            symbol: null,
-            longName: null,
-            fullExchangeName: null,
-            marketCap: null,
-            regularMarketPrice: null,
-            fiftyDayAverage: null,
-            twoHundredDayAverage: null,
-            regularMarketChangePercent: null,
-            regularMarketVolume: null,
-            averageDailyVolume10Day: null,
-            averageDailyVolume3Month: null,
-            fiftyDayAverageChangePercent: null,
-            twoHundredDayAverageChangePercent: null,
-        };
-        const yahooFinanceStockDetails: Array<any> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
-            return _.pick(yahooFinanceDatum, _.keys(filteredKeys));
+        /* Uncomment to use only specific keys */
+        // const filteredKeys: object = {
+        //     symbol: null,
+        //     longName: null,
+        //     fullExchangeName: null,
+        //     marketCap: null,
+        //     regularMarketPrice: null,
+        //     fiftyDayAverage: null,
+        //     twoHundredDayAverage: null,
+        //     regularMarketChangePercent: null,
+        //     regularMarketVolume: null,
+        //     averageDailyVolume10Day: null,
+        //     averageDailyVolume3Month: null,
+        //     fiftyDayAverageChangePercent: null,
+        //     twoHundredDayAverageChangePercent: null,
+        // };
+        // yahooFinanceResponse = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
+        //     return _.pick(yahooFinanceDatum, _.keys(filteredKeys));
+        // });
+        const yahooFinanceFinalResponse: Array<any> = _.map(yahooFinanceResponse, (yahooFinanceDatum: object) => {
+            return {
+                yahooFinance: yahooFinanceDatum
+            }
         });
-        resolve(yahooFinanceStockDetails);
+        resolve(yahooFinanceFinalResponse);
     });
 };
 
@@ -637,6 +643,8 @@ const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
         })
         .catch((err: any) => {
             // Crawling failed...
+            console.log('error on sec::', err);
+            console.log(`err on ${stockSymbol}`);
             reject(err);
             return err;
         });
@@ -1170,7 +1178,8 @@ const runStockBatchesForYahoo = async (stockSymbols, inBatchesOf, withinDays) =>
     return chunkPromises.flat();
 };
 
-export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+/* #1: Uses FinnHub to fetch for all stocks, OTC Markets to filter out bad penny stocks, Yahoo Finance to filter by our criteria on price, market cap, and historic volumes */
+export const getBestStocks1 = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
     cors(request, response);
     try {
         let bestStocks: Array<any>;
@@ -1186,8 +1195,8 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
         // 5. Add OTC Details
         bestStocks = _.map(bestStocks, (bestStock: any) => {
-            if (_.isEqual(_.get(bestStock, ['fullExchangeName']), 'Other OTC')) {
-                const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['symbol']) });
+            if (_.isEqual(_.get(bestStock, ['yahooFinance', 'fullExchangeName']), 'Other OTC')) {
+                const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['yahooFinance', 'symbol']) });
                 if (!_.isNil(pennyStockFound)) {
                     return _.assign(bestStock, { otcMarkets: pennyStockFound });
                 };
@@ -1196,25 +1205,25 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         });
         // 5. Filter stocks by criteria
         bestStocks = _.filter(bestStocks, (bestStock: object) => {
-            const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['regularMarketPrice']));
-            const marketCap: number = _.toNumber(_.get(bestStock, ['marketCap']));
-            const regularMarketVolume: number = _.toNumber(_.get(bestStock, ['regularMarketVolume'], 0));
-            const averageDailyVolume10Day: number = _.toNumber(_.get(bestStock, ['averageDailyVolume10Day'], 0));
-            const averageDailyVolume3Month: number = _.toNumber(_.get(bestStock, ['averageDailyVolume3Month'], 0));
-            const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['fiftyDayAverageChangePercent'], 0));
-            const twoHundredDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['twoHundredDayAverageChangePercent'], 0));
-            const fiftyDayAverage: number = _.toNumber(_.get(bestStock, ['fiftyDayAverage'], 0));
-            const twoHundredDayAverage: number = _.toNumber(_.get(bestStock, ['twoHundredDayAverage'], 0));
+            const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice']));
+            const marketCap: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'marketCap']));
+            const regularMarketVolume: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketVolume'], 0));
+            const averageDailyVolume10Day: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'averageDailyVolume10Day'], 0));
+            const averageDailyVolume3Month: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'averageDailyVolume3Month'], 0));
+            const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent'], 0));
+            const twoHundredDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'twoHundredDayAverageChangePercent'], 0));
+            const fiftyDayAverage: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyDayAverage'], 0));
+            const twoHundredDayAverage: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'twoHundredDayAverage'], 0));
 
-            return _.has(bestStock, 'regularMarketVolume') && (regularMarketVolume >= 1000) &&
-                   _.has(bestStock, 'averageDailyVolume10Day') && (averageDailyVolume10Day >= 1000) &&
-                   _.has(bestStock, 'averageDailyVolume3Month') && (averageDailyVolume3Month >= 1000) &&
+            return _.has(bestStock, ['yahooFinance', 'regularMarketVolume']) && (regularMarketVolume >= 1000) &&
+                   _.has(bestStock, ['yahooFinance', 'averageDailyVolume10Day']) && (averageDailyVolume10Day >= 1000) &&
+                   _.has(bestStock, ['yahooFinance', 'averageDailyVolume3Month']) && (averageDailyVolume3Month >= 1000) &&
                    (averageDailyVolume10Day >= averageDailyVolume3Month * 0.5) &&
-                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+                   _.has(bestStock, ['yahooFinance', 'regularMarketPrice']) && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
                    (fiftyDayAverage >= twoHundredDayAverage * 0.5) &&
-                   _.has(bestStock, 'marketCap') && (marketCap >= 100 && marketCap <= 100000000) &&
-                   _.has(bestStock, 'fiftyDayAverageChangePercent') && (fiftyDayAverageChangePercent >= 0) &&
-                   _.has(bestStock, 'twoHundredDayAverageChangePercent') && (twoHundredDayAverageChangePercent >= 0)
+                   _.has(bestStock, ['yahooFinance', 'marketCap']) && (marketCap >= 100 && marketCap <= 100000000) &&
+                   _.has(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent']) && (fiftyDayAverageChangePercent >= 0) &&
+                   _.has(bestStock, ['yahooFinance', 'twoHundredDayAverageChangePercent']) && (twoHundredDayAverageChangePercent >= 0)
             ;
         });
         // 5. Filter All Stock Symbols based on Pink Status or Greater
@@ -1232,8 +1241,8 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         // Feed CSV file into frontend
         // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
 
-        bestStocks = _.orderBy(bestStocks, (datum: object) => {
-            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
+        bestStocks = _.orderBy(bestStocks, (bestStock: object) => {
+            return _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice'], 0));
         }, 'asc');
 
         const final: object = {
@@ -1242,7 +1251,7 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
         };
         let jsonData = JSON.stringify(final, null, 4);
         const today: any = new Date().toISOString().slice(0, 10);
-        fs.writeFileSync(`./mocks/best-stocks/getBestStocks-${today}.json`, jsonData);
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks1-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
@@ -1253,30 +1262,59 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
     }
 });
 
-export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+/* #2: Uses SEC to calculate reports and filter by our criteria on post frequency  */
+export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    const today: any = new Date().toISOString().slice(0, 10);
     cors(request, response);
     try {
         let bestStocks: Array<any>;
         // const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks.json');
-        const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks-2021-01-31T05:00:00.551Z.json');
+        const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks1-${today}.json`);
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
         };
         bestStocks = bestStocksResponseJson.data;
-        const stockSymbols = [];
-        bestStocks.forEach((bestStock) => {
-            stockSymbols.push(bestStock.symbol);
+        const stockSymbols = _.map(bestStocks, (bestStock: any) => _.get(bestStock, ['yahooFinance', 'symbol']));
+        // 8. Get SEC Report Dates
+        let secResponse = await runStockBatchesForSec(stockSymbols, 100);
+        let storeSecJSON = JSON.stringify(secResponse, null, 4);
+        fs.writeFileSync(`./mocks/best-stocks/SecData-${today}.json`, storeSecJSON);
+        // let secResponse = require(`./../mocks/best-stocks/SecData-${today}.json`);
+
+        // output missing symbols due to error
+        const missingStocks = [];
+        stockSymbols.forEach((symbol) => {
+            if (secResponse && secResponse.length > 0) {
+                let found = false;
+                secResponse.forEach((current) => {
+                    if (current && current.symbol === symbol) {
+                        found = true;
+                        return;
+                    }
+                });
+                if (!found) {
+                    missingStocks.push(symbol);
+                }
+            } else {
+                missingStocks.push(symbol);
+            }
         });
 
-        // 8. Get SEC Report Dates
-        const secResponse = await runStockBatchesForSec(stockSymbols, 100);
+        console.log(`number of missing stocks ${missingStocks.length}`);
 
         // 9. Filter By Most Recent
         // binding sec data to each best stock...
         if (secResponse && secResponse.length > 0) {
-            secResponse.forEach((secData) => {
+            // remove null entries
+            secResponse = secResponse.filter((current) => {
+                return current;
+            });
+            secResponse.forEach((secData, i) => {
                 bestStocks.forEach((bestStock, index) => {
-                    if (bestStock.symbol === secData.symbol) {
+                    if (!secData) {
+                        console.log('hey', i);
+                    }
+                    if (_.isEqual(_.get(bestStock, ['yahooFinance', 'symbol']), secData.symbol)) {
                         bestStock.secData = _.get(secData, 'data', undefined);
                         bestStock.secOtcData = _.get(secData, 'secOtcData', undefined);
                         bestStock.secStats = _.get(secData, 'stats', undefined);
@@ -1284,6 +1322,7 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
                         bestStock.mixedStats = _.get(secData, 'mixedStats', undefined);
                     }
                     bestStocks[index] = bestStock;
+                    // console.log(JSON.stringify(_.get(bestStocks, [index, 'secData'])));
                 })
             });
         }
@@ -1299,9 +1338,10 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
             return numberOfDaysSinceLastPublish <= 30 &&
                    averageNumberOfDaysBetweenPosts <= 20 &&
                    numberOfReports >= 1 &&
-                   averageNumberPostsPerYear >= 10 &&
+                   averageNumberPostsPerYear >= 2 &&
                    averageNumberPostsPerMonth >= 2;
         });
+        console.log(bestStocks.length);
 
         // Application Utilities
         // 1. Fetch News
@@ -1312,17 +1352,17 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
         // Feed CSV file into frontend
         // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
 
-        bestStocks = _.orderBy(bestStocks, (datum: object) => {
-            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
+        bestStocks = _.orderBy(bestStocks, (bestStock: object) => {
+            return _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice'], 0));
         }, 'asc');
 
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
             data: bestStocks,
+            missingStocks,
         };
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString();
-        fs.writeFileSync(`./mocks/best-stocks/getFilteredBestStocks-${today}.json`, jsonData);
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks2-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
@@ -1333,25 +1373,27 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
     }
 });
 
-export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+/* #3: Uses Yahoo Finance to calculate and only look for growth stocks */
+export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    const today: any = new Date().toISOString().slice(0, 10);
     cors(request, response);
     try {
         let bestStocks: Array<any>;
         //const bestStocksResponseJson = require('./../mocks/best-stocks/filtered-best-stocks-small-sample.json');
-        const bestStocksResponseJson = require('./../mocks/best-stocks/getFilteredBestStocks-2021-01-31T05:26:28.908Z.json');
+        const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks2-${today}.json`);
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
         };
 
         bestStocks = bestStocksResponseJson.data;
-        const stockSymbols = [];
-        bestStocks.forEach((bestStock) => {
-            stockSymbols.push(bestStock.symbol);
-        });
+        const stockSymbols = _.map(bestStocks, (bestStock: any) => _.get(bestStock, ['yahooFinance', 'symbol']));
 
         // 8. Get SEC Report Dates
         // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
         let financialResponse = await runStockBatchesForYahoo(stockSymbols, 100, 60);
+
+        let storeYahooFinanceJSON = JSON.stringify(financialResponse, null, 4);
+        fs.writeFileSync(`./mocks/best-stocks/yahooFinanceData-${today}.json`, storeYahooFinanceJSON);
 
         // console.log('finance response:: ', financialResponse);
         // const jsonData2 = JSON.stringify(financialResponse, null, 4);
@@ -1387,7 +1429,7 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
             });
             financialResponse.forEach((financeData) => {
                 bestStocks.forEach((bestStock, index) => {
-                    if (bestStock.symbol === financeData.symbol) {
+                    if (_.isEqual(_.get(bestStock, ['yahooFinance', 'symbol']), financeData.symbol)) {
                         bestStock.financialData = _.get(financeData, 'financialData', undefined);
                         bestStock.growthStats = _.get(financeData, 'growthStats', undefined);
                     }
@@ -1413,8 +1455,8 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
         // Feed CSV file into frontend
         // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
 
-        bestStocks = _.orderBy(bestStocks, (datum: object) => {
-            return _.toNumber(_.get(datum, ['regularMarketPrice'], 0));
+        bestStocks = _.orderBy(bestStocks, (bestStock: object) => {
+            return _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice'], 0));
         }, 'asc');
 
         const final: object = {
@@ -1424,8 +1466,7 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
         };
 
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString();
-        fs.writeFileSync(`./mocks/best-stocks/getFinalBestStocks-${today}.json`, jsonData);
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks3-${today}.json`, jsonData);
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
         response.send(final);
