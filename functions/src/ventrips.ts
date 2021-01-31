@@ -474,7 +474,7 @@ const removeDuplicateDays = (dates) => {
     const comparisonValues = dates.map(v => v.valueOf());
     const uniqueDates = dates.filter((v,i) => comparisonValues.indexOf(v.valueOf()) == i);
     return uniqueDates;
-} 
+}
 
 const calcAveragePostsPer = (dates, per) => {
     const mapOf = {};
@@ -582,7 +582,7 @@ const getSecDataObject = ($) => {
 const getSecOtcObject = ($) => {
     const secData = [];
     try {
-        const header = $('#documents h4'); 
+        const header = $('#documents h4');
         const hasOtcTable = _.includes(header.text().toLowerCase(), 'otc filings - financial reports');
         if (hasOtcTable) {
             const tableRowElements  =  header.eq(3).next('table').find('tr');
@@ -619,7 +619,7 @@ const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
         RequestPromise(options)
         .then(($: any) => {
             // Process html like you would with jQuery...
-   
+
             const secData = getSecDataObject($);
             const secOtcData = getSecOtcObject($);
             const stats = calculateDateStats(secData);
@@ -1155,12 +1155,11 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
             const averageNumberPostsPerYear: number = _.toNumber(_.get(bestStock, 'mixedStats.averageNumberPostsPerYear', 0));
             const averageNumberPostsPerMonth: number = _.toNumber(_.get(bestStock, 'mixedStats.averageNumberPostsPerMonth', 0));
 
-            return numberOfDaysSinceLastPublish <= 365 &&
-                   averageNumberOfDaysBetweenPosts >= 1 &&
+            return numberOfDaysSinceLastPublish <= 30 &&
+                   averageNumberOfDaysBetweenPosts <= 20 &&
                    numberOfReports >= 1 &&
-                   averageNumberPostsPerYear >= 1 &&
-                   averageNumberPostsPerMonth >= 1;
-
+                   averageNumberPostsPerYear >= 10 &&
+                   averageNumberPostsPerMonth >= 2;
         });
 
         // Application Utilities
