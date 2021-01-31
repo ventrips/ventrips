@@ -28,7 +28,7 @@
         </section>
     </div>
     <div class="container-fluid mb-5 min-height-50vh">
-        <app-symbol-search-bar [showHeader]="true"></app-symbol-search-bar>
+        <!-- <app-symbol-search-bar [showHeader]="true"></app-symbol-search-bar> -->
         <!-- <ng-container *ngIf="!_.isEmpty(data)">
             <h4 class="mb-4">Recent Searches</h4>
             <div class="mb-4 d-flex flex-wrap align-items-center">
@@ -37,6 +37,16 @@
         </ng-container> -->
         <ngb-tabset [justify]="'justified'" #t="ngbTabset">
             <ngb-tab id="tab-selectbyid1">
+                <ng-template ngbTabTitle>
+                    Best Stocks
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <section class="mt-5">
+                        <app-best-stocks></app-best-stocks>
+                    </section>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid2">
                 <ng-template ngbTabTitle>
                     Trending Stocks By Volume
                 </ng-template>
@@ -202,16 +212,6 @@
                                 </div>
                             </li>
                         </ul>
-                    </section>
-                </ng-template>
-            </ngb-tab>
-            <ngb-tab id="tab-selectbyid2">
-                <ng-template ngbTabTitle>
-                    Best Stocks
-                </ng-template>
-                <ng-template ngbTabContent>
-                    <section class="mt-5">
-                        <app-best-stocks></app-best-stocks>
                     </section>
                 </ng-template>
             </ngb-tab>
