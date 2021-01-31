@@ -19,22 +19,22 @@ export class BestStocksComponent implements OnInit {
     // Add resource links
     _.forEach(_.get(this.stocks, ['data'], []), (stock: any) => {
       _.set(stock, 'resources', {
-        OTCMarkets: `https://www.otcmarkets.com/stock/${_.get(stock, ['symbol'])}/financials`,
-        linkedin: `https://www.linkedin.com/jobs/search/?keywords=${_.get(stock, ['longName'])}`,
-        googleCEO: `https://www.google.com/search?q=${_.get(stock, ['longName'])}%20CEO`,
-        googleWebsite: `https://www.google.com/search?q=${_.get(stock, ['longName'])}%20website`,
-        googleNews: `https://www.google.com/search?q=${_.get(stock, ['symbol'])}%20${_.get(stock, ['longName'])}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
-        googleTrends: `https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=${_.get(stock, ['symbol'])}%20stock`,
-        googleSearchForStock: `https://www.google.com/search?q=${_.get(stock, ['symbol'])}%20stock`,
-        youtube: `https://www.youtube.com/results?search_query=${_.get(stock, ['longName'])}`,
-        reddit: `https://www.reddit.com/search/?q=${_.get(stock, ['symbol'])}&sort=new&type=link`,
-        yahooVolumeHistory: `https://finance.yahoo.com/quote/${_.get(stock, ['symbol'])}/history`,
-        twitter: `https://twitter.com/search?q=%24${_.get(stock, ['symbol'])}&src=typed_query`,
-        stockTwits: `https://stocktwits.com/symbol/${_.get(stock, ['symbol'])}`,
-        CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${_.get(stock, ['symbol'])}`,
-        marketBeat: `${this.getMarketBeatUrl(_.get(stock, ['symbol']), _.get(stock, ['fullExchangeName']))}`,
-        whaleWisdom: `https://whalewisdom.com/stock/${_.get(stock, ['symbol'])}`,
-        walletInvestor: `https://walletinvestor.com/stock-forecast/${_.get(stock, ['symbol'])}-stock-prediction`
+        OTCMarkets: `https://www.otcmarkets.com/stock/${_.get(stock, ['yahooFinance', 'symbol'])}/financials`,
+        linkedin: `https://www.linkedin.com/jobs/search/?keywords=${_.get(stock, ['yahooFinance', 'longName'])}`,
+        googleCEO: `https://www.google.com/search?q=${_.get(stock, ['yahooFinance', 'longName'])}%20CEO`,
+        googleWebsite: `https://www.google.com/search?q=${_.get(stock, ['yahooFinance', 'longName'])}%20website`,
+        googleNews: `https://www.google.com/search?q=${_.get(stock, ['yahooFinance', 'symbol'])}%20${_.get(stock, ['yahooFinance', 'longName'])}&tbm=nws&source=lnt&tbs=sbd:1&tbs=qdr:d`,
+        googleTrends: `https://trends.google.com/trends/explore?date=today%201-m&geo=US&q=${_.get(stock, ['yahooFinance', 'symbol'])}%20stock`,
+        googleSearchForStock: `https://www.google.com/search?q=${_.get(stock, ['yahooFinance', 'symbol'])}%20stock`,
+        youtube: `https://www.youtube.com/results?search_query=${_.get(stock, ['yahooFinance', 'longName'])}`,
+        reddit: `https://www.reddit.com/search/?q=${_.get(stock, ['yahooFinance', 'symbol'])}&sort=new&type=link`,
+        yahooVolumeHistory: `https://finance.yahoo.com/quote/${_.get(stock, ['yahooFinance', 'symbol'])}/history`,
+        twitter: `https://twitter.com/search?q=%24${_.get(stock, ['yahooFinance', 'symbol'])}&src=typed_query`,
+        stockTwits: `https://stocktwits.com/symbol/${_.get(stock, ['yahooFinance', 'symbol'])}`,
+        CNNForecast: `http://markets.money.cnn.com/research/quote/forecasts.asp?symb=${_.get(stock, ['yahooFinance', 'symbol'])}`,
+        marketBeat: `${this.getMarketBeatUrl(_.get(stock, ['yahooFinance', 'symbol']), _.get(stock, ['yahooFinance', 'fullExchangeName']))}`,
+        whaleWisdom: `https://whalewisdom.com/stock/${_.get(stock, ['yahooFinance', 'symbol'])}`,
+        walletInvestor: `https://walletinvestor.com/stock-forecast/${_.get(stock, ['yahooFinance', 'symbol'])}-stock-prediction`
       });
     });
   }
