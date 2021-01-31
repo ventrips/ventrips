@@ -652,12 +652,12 @@ const calcPriceGrowth = (data) => {
         lowest = (lowest === undefined)
             ? currentLowest
             : (currentLowest < lowest)
-                ? currentLowest 
+                ? currentLowest
                 : lowest;
         highest = (highest === undefined)
             ? currentHighest
             : (currentHighest > highest)
-                ? currentHighest 
+                ? currentHighest
                 : highest;
     });
     const percentGrowth = (highest / lowest) * 100;
@@ -693,7 +693,7 @@ const getDataForYahoo = async (stockSymbol: string, ...args: any[]) => {
             const currentDay = currentDate.getDate();
             const table = [];
             const tableEl = $('table[data-test]');
-            
+
             const hasTable = tableEl && tableEl.children() && tableEl.children().eq(1) && tableEl.children().eq(1).children();
             const listOfTableRows = hasTable
                 ? hasTable
@@ -1377,7 +1377,7 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
         });
 
         console.log(`number of missing stocks ${missingStocks.length}`);
-    
+
         // 9. Filter By Most Recent
         // binding sec data to each best stock...
         if (financialResponse && financialResponse.length > 0) {
@@ -1401,7 +1401,7 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
             const percentGrowth: number = _.toNumber(_.get(bestStock, 'growthStats.percentGrowth', 0));
 
             return percentGrowth > 0 &&
-                percentGrowth <= 2000;
+                percentGrowth <= 500;
         });
 
         // Application Utilities
