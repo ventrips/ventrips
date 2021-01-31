@@ -10,6 +10,7 @@ const isBullish = require('is-bullish');
 const csvToJson = require('csvtojson');
 const Cheerio = require('cheerio');
 const moment = require('moment');
+const fs = require('fs');
 
 const HOLDINGS: Array<object> = [
     {
@@ -999,7 +1000,7 @@ const scrapeSecPage = (stockSymbol: string, ...args: any[]) => {
             } catch (err) {
                 resolve(undefined)
             }
-        }, 5000);
+        }, 0);
         debounceFunction();
     });
     return promise;
@@ -1072,9 +1073,9 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
                    _.has(bestStock, 'averageDailyVolume10Day') && (averageDailyVolume10Day >= 1000) &&
                    _.has(bestStock, 'averageDailyVolume3Month') && (averageDailyVolume3Month >= 1000) &&
                    (averageDailyVolume10Day >= averageDailyVolume3Month * 0.5) &&
-                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 100) &&
+                   _.has(bestStock, 'regularMarketPrice') && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
                    (fiftyDayAverage >= twoHundredDayAverage * 0.5) &&
-                   _.has(bestStock, 'marketCap') && (marketCap >= 100 && marketCap <= 5000000000) &&
+                   _.has(bestStock, 'marketCap') && (marketCap >= 100 && marketCap <= 100000000) &&
                    _.has(bestStock, 'fiftyDayAverageChangePercent') && (fiftyDayAverageChangePercent >= 0) &&
                    _.has(bestStock, 'twoHundredDayAverageChangePercent') && (twoHundredDayAverageChangePercent >= 0)
             ;
@@ -1102,6 +1103,9 @@ export const getBestStocks = functions.runWith({ timeoutSeconds: 540, memory: '5
             results: _.get(bestStocks, ['length'], 0),
             data: bestStocks
         };
+        let jsonData = JSON.stringify(final, null, 4);
+        const today: any = new Date().toISOString().slice(0, 10);
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
@@ -1128,7 +1132,7 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
         });
 
         // 8. Get SEC Report Dates
-        const secResponse = await runStockBatchesForSec(stockSymbols, 5);
+        const secResponse = await runStockBatchesForSec(stockSymbols, 100);
 
         // 9. Filter By Most Recent
         // binding sec data to each best stock...
@@ -1180,6 +1184,9 @@ export const getFilteredBestStocks = functions.runWith({ timeoutSeconds: 540, me
             data: bestStocks,
             secResponse,
         };
+        let jsonData = JSON.stringify(final, null, 4);
+        const today: any = new Date().toISOString().slice(0, 10);;
+        fs.writeFileSync(`./mocks/best-stocks/getFilteredBestStocks-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
