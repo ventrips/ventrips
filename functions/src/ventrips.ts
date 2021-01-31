@@ -521,7 +521,15 @@ const calcNumberOfDaysSinceLastPublish = (dates) => {
 
 const calculateDateStats = (data) => {
     // const data = [{"symbol":"FTEG","data":[{"formColumnText":"QUALIF","reportLink":"/Document/9999999994-19-000119/","reportText":"Notice of Qualification","reportDate":"2019-08-14 00:15:10"},{"formColumnText":"UPLOAD","reportLink":"/Document/0000000000-19-012166/","reportText":"Securities Filing Public Response","reportDate":"2019-08-07"},{"formColumnText":"CORRESP","reportLink":"/Document/0001683168-19-002487/","reportText":"S.E.C. Correspondence Letter","reportDate":"2019-08-07"},{"formColumnText":"1-A POS","reportLink":"/Document/0001683168-19-002376/","reportText":"Form 1-A Amendment","reportDate":"2019-07-30 13:05:52"},{"formColumnText":"QUALIF","reportLink":"/Document/9999999994-19-000088/","reportText":"Notice of Qualification","reportDate":"2019-07-01 00:15:27"},{"formColumnText":"CORRESP","reportLink":"/Document/0001683168-19-002009/","reportText":"S.E.C. Correspondence Letter","reportDate":"2019-06-25 15:02:32"},{"formColumnText":"CORRESP","reportLink":"/Document/0001683168-19-002003/","reportText":"S.E.C. Correspondence Letter","reportDate":"2019-06-25 14:15:07"},{"formColumnText":"1-A/A","reportLink":"/Document/0001683168-19-001648/","reportText":"Offering Statement 1-A [Amended]","reportDate":"2019-05-20 16:09:52"},{"formColumnText":"1-A/A","reportLink":"/Document/0001683168-19-000774/","reportText":"Offering Statement 1-A [Amended]","reportDate":"2019-03-26 08:26:33"},{"formColumnText":"CORRESP","reportLink":"/Document/0001683168-19-000493/","reportText":"S.E.C. Correspondence Letter","reportDate":"2019-02-25 16:49:38"},{"formColumnText":"1-A/A","reportLink":"/Document/0001683168-19-000492/","reportText":"Offering Statement 1-A [Amended]","reportDate":"2019-02-25 16:43:43"},{"formColumnText":"UPLOAD","reportLink":"/Document/0000000000-19-001715/","reportText":"Securities Filing Public Response","reportDate":"2019-02-11 09:00:37"},{"formColumnText":"1-A","reportLink":"/Document/0001683168-18-003833/","reportText":"Offering Statement 1-A","reportDate":"2019-01-02 08:23:55"},{"formColumnText":"15-12G","reportLink":"/Document/0001352392-10-000117/","reportText":"Notice of termination of registration of a class of securities under Section 12(g)","reportDate":"2010-05-05 14:23:28"},{"formColumnText":"10QSB/A","reportLink":"/Document/0000932440-05-000006/","reportText":"Quarterly/Transition Report [Small Business] [Amended]","reportDate":"2005-01-06 13:18:30"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-04-000425/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2004-11-12 16:50:35"},{"formColumnText":"10QSB/A","reportLink":"/Document/0000932440-04-000330/","reportText":"Quarterly/Transition Report [Small Business] [Amended]","reportDate":"2004-08-24 15:14:21"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-04-000325/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2004-08-20 15:45:34"},{"formColumnText":"NT 10-Q","reportLink":"/Document/0000932440-04-000321/","reportText":"Notice of Late Quarterly Filing","reportDate":"2004-08-16 14:35:03"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-04-000224/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2004-05-20 17:00:21"},{"formColumnText":"NT 10-Q","reportLink":"/Document/0000932440-04-000222/","reportText":"Notice of Late Quarterly Filing","reportDate":"2004-05-18 10:22:59"},{"formColumnText":"10KSB","reportLink":"/Document/0000932440-04-000144/","reportText":"Annual Report","reportDate":"2004-04-14 15:39:24"},{"formColumnText":"NT 10-K","reportLink":"/Document/0000932440-04-000116/","reportText":"Notice of Late Annual Filing","reportDate":"2004-03-30 14:56:48"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-03-000350/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2003-11-14 17:48:41"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-03-000248/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2003-08-14 16:02:57"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-03-000177/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2003-05-15 15:04:04"},{"formColumnText":"10KSB","reportLink":"/Document/0000932440-03-000113/","reportText":"Annual Report","reportDate":"2003-03-31 15:03:04"},{"formColumnText":"5","reportLink":"/Document/0000932440-03-000089/","reportText":"Annual Security Ownership Report","reportDate":"2003-03-13 15:09:24"},{"formColumnText":"4","reportLink":"/Document/0000932440-02-000455/","reportText":"Security Sale/Purchase Record","reportDate":"2002-11-19 15:49:04"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-02-000442/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2002-11-14 11:33:49"},{"formColumnText":"8-K","reportLink":"/Document/0000932440-02-000428/","reportText":"Current Report","reportDate":"2002-11-12 11:44:43"},{"formColumnText":"8-K","reportLink":"/Document/0000932440-02-000418/","reportText":"Current Report","reportDate":"2002-10-24 16:09:31"},{"formColumnText":"8-K","reportLink":"/Document/0000932440-02-000382/","reportText":"Current Report","reportDate":"2002-09-06 12:09:29"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-02-000361/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2002-08-14 15:03:42"},{"formColumnText":"10KSB/A","reportLink":"/Document/0000932440-02-000335/","reportText":"Annual Report [Amended]","reportDate":"2002-07-11 16:15:40"},{"formColumnText":"10QSB/A","reportLink":"/Document/0000932440-02-000332/","reportText":"Quarterly/Transition Report [Small Business] [Amended]","reportDate":"2002-07-11 16:11:48"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-02-000248/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2002-05-15 13:37:39"},{"formColumnText":"PRER14A","reportLink":"/Document/0000932440-02-000209/","reportText":"Preliminary revised proxy soliciting materials","reportDate":"2002-05-02 16:44:11"},{"formColumnText":"10KSB/A","reportLink":"/Document/0000932440-02-000207/","reportText":"Annual Report [Amended]","reportDate":"2002-05-02 16:32:31"},{"formColumnText":"10KSB","reportLink":"/Document/0000932440-02-000138/","reportText":"Annual Report","reportDate":"2002-03-19 00:00:00"},{"formColumnText":"PRE 14A","reportLink":"/Document/0000932440-02-000140/","reportText":"Preliminary Proxy Soliciting Materials","reportDate":"2002-03-19 00:00:00"},{"formColumnText":"PRE 14A","reportLink":"/Document/0000932440-02-000005/","reportText":"Preliminary Proxy Soliciting Materials","reportDate":"2002-01-09 00:00:00"},{"formColumnText":"10-Q","reportLink":"/Document/0000932440-01-500258/","reportText":"Quarterly Report","reportDate":"2001-11-13 00:00:00"},{"formColumnText":"4","reportLink":"/Document/0000891554-01-504845/","reportText":"Security Sale/Purchase Record","reportDate":"2001-09-07 00:00:00"},{"formColumnText":"SC 13D","reportLink":"/Document/0001095811-01-504598/","reportText":"Acquisition Statement","reportDate":"2001-08-27 00:00:00"},{"formColumnText":"8-K","reportLink":"/Document/0000932440-01-500194/","reportText":"Current Report","reportDate":"2001-08-24 00:00:00"},{"formColumnText":"10QSB","reportLink":"/Document/0000932440-01-500171/","reportText":"Quarterly/Transition Report [Small Business]","reportDate":"2001-08-14 00:00:00"},{"formColumnText":"10-Q","reportLink":"/Document/0000891554-01-502274/","reportText":"Quarterly Report","reportDate":"2001-04-27 00:00:00"},{"formColumnText":"10KSB","reportLink":"/Document/0000891554-01-502048/","reportText":"Annual Report","reportDate":"2001-04-12 00:00:00"},{"formColumnText":"NT 10-K","reportLink":"/Document/0000932440-01-000122/","reportText":"Notice of Late Annual Filing","reportDate":"2001-04-02 00:00:00"}]}];
-    const dates = data.map((reportData) => {
+    if (!data || data.length === 0) {
+        return undefined;
+    }
+    const datesNoInvalid = data.filter((reportData) => {
+        const reportDate = reportData.reportDate;
+        const reportDateWithoutTimeStamp = reportDate.split(' ')[0];
+        return (!_.includes(reportDateWithoutTimeStamp, '0000-00-00'));
+    });
+    const dates = datesNoInvalid.map((reportData) => {
         const reportDate = reportData.reportDate;
         const reportDateWithoutTimeStamp = reportDate.split(' ')[0];
         const momentDate = moment(reportDateWithoutTimeStamp);
@@ -540,24 +548,15 @@ const calculateDateStats = (data) => {
         averageNumberOfDaysBetweenPosts,
         numberOfDaysSinceLastPublish,
         numberOfReports,
+        sortedDates,
     }
 }
 
-const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
-    return new Promise((resolve: any, reject: any) => {
-        const options = {
-            uri: `https://sec.report/Ticker/${stockSymbol}`,
-            headers: {
-                'User-Agent': ((new UserAgent()).data).toString()
-            },
-            json: true,
-            transform: (body: any) => Cheerio.load(body)
-        };
-        RequestPromise(options)
-        .then(($: any) => {
-            // Process html like you would with jQuery...
-            const secData = [];
-            const tableRowElements = $('#document_heading').parent().find('table tr'); // .//first().children().first().text()
+const getSecDataObject = ($) => {
+    const secData = [];
+    try {
+        const tableRowElements = $('#document_heading').parent().find('table tr');
+        if (tableRowElements) {
             tableRowElements.each(function(this: any, index: number) {
                 if (index !== 0) {
                     const tableRowEl= $(this);
@@ -573,11 +572,67 @@ const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
                     secData.push(reportObj);
                 }
             });
+        }
+    }
+    catch (err) {
+        console.log('ERROR::getSecDataObject:: error getting sec report data');
+    }
+    return secData;
+}
+
+const getSecOtcObject = ($) => {
+    const secData = [];
+    try {
+        const header = $('#documents h4'); 
+        const hasOtcTable = _.includes(header.text().toLowerCase(), 'otc filings - financial reports');
+        if (hasOtcTable) {
+            const tableRowElements  =  header.eq(3).next('table').find('tr');
+            tableRowElements.each(function(this: any, index: number) {
+                if (index !== 0) {
+                    const tableRowEl = $(this);
+                    let reportObj: any = {};
+                    const reportLink = tableRowEl.children().first().find('a').attr("href");
+                    const reportText = tableRowEl.children().first().text();
+                    const reportDate = tableRowEl.children().last().text();
+                    reportObj.reportLink = reportLink;
+                    reportObj.reportText = reportText;
+                    reportObj.reportDate = reportDate;
+                    secData.push(reportObj);
+                }
+            });
+        }
+    } catch (err) {
+        console.log('ERROR::getSecOtcObject:: error getting otc report data');
+    }
+    return secData;
+}
+
+const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
+    return new Promise((resolve: any, reject: any) => {
+        const options = {
+            uri: `https://sec.report/Ticker/${stockSymbol}`,
+            headers: {
+                'User-Agent': ((new UserAgent()).data).toString()
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            // Process html like you would with jQuery...
+   
+            const secData = getSecDataObject($);
+            const secOtcData = getSecOtcObject($);
             const stats = calculateDateStats(secData);
+            const secOtcStats = calculateDateStats(secOtcData);
+            const mixedStats = calculateDateStats(secData.concat(secOtcData));
             resolve({
                 'symbol': stockSymbol,
                 data: secData,
+                secOtcData,
                 stats,
+                secOtcStats,
+                mixedStats,
             });
         })
         .catch((err: any) => {
@@ -706,6 +761,7 @@ export const getPinkInfoForStocks = functions.runWith({ timeoutSeconds: 540, mem
 });
 
 export const getSecData = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request:any, response): Promise<any> => {
+    cors(request, response);
     const symbols: Array<string> = _.compact(_.split(_.get(request, ['query', 'symbols'], ''), ','));
     try {
         const data: any = await runAll(symbols, getDataForSec);
