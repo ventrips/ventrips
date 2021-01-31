@@ -643,7 +643,7 @@ const getDataForSec = async (stockSymbol: string, ...args: any[]) => {
     });
 }
 
-const calcPriceGrowth = async (data) => {
+const calcPriceGrowth = (data) => {
     let lowest = undefined;
     let highest = undefined;
     data.forEach((stockData) => {
@@ -661,6 +661,7 @@ const calcPriceGrowth = async (data) => {
                 : highest;
     });
     const percentGrowth = (highest / lowest) * 100;
+
     return {
         lowestPrice: lowest,
         highestPrice: highest,
@@ -719,6 +720,7 @@ const getDataForYahoo = async (stockSymbol: string, ...args: any[]) => {
             });
             // calculate lowest / highest price and % growth in timespan
             const growthStats = calcPriceGrowth(table);
+
             resolve({
                 'symbol': stockSymbol,
                 financialData: table,
@@ -727,6 +729,8 @@ const getDataForYahoo = async (stockSymbol: string, ...args: any[]) => {
         })
         .catch((err: any) => {
             // Crawling failed...
+            console.log('error on finance::', err);
+            console.log(`err on ${stockSymbol}`);
             reject(err);
             return err;
         });
@@ -1106,7 +1110,7 @@ const scrapeYahooPage = (stockSymbol: string, ...args: any[]) => {
             } catch (err) {
                 resolve(undefined)
             }
-        }, 0);
+        }, 500);
         debounceFunction();
     });
     return promise;
@@ -1126,11 +1130,11 @@ const runBatchForSec = async (chunkSymbols) => {
     return promise;
 };
 
-const runBatchForYahoo = async (chunkSymbols) => {
+const runBatchForYahoo = async (chunkSymbols, ...args: any[]) => {
     const promise = new Promise(async (resolve) => {
         const listOfScrapeCalls = [];
         chunkSymbols.forEach((currentSymbol: string) => {
-            listOfScrapeCalls.push(scrapeYahooPage(currentSymbol));
+            listOfScrapeCalls.push(scrapeYahooPage(currentSymbol, args));
         });
         const data = await Promise.all(listOfScrapeCalls);
         setTimeout(() => {
@@ -1153,12 +1157,12 @@ const runStockBatchesForSec = async (stockSymbols, inBatchesOf) => {
     return chunkPromises.flat();
 };
 
-const runStockBatchesForYahoo = async (stockSymbols, inBatchesOf) => {
+const runStockBatchesForYahoo = async (stockSymbols, inBatchesOf, withinDays) => {
     const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
     const chunkPromises: any = [];
     let totalCount = 0;
     for (let i = 0; i < chunkStockSumbols.length; i++) {
-        const chunkPromise = await runBatchForYahoo(chunkStockSumbols[i]);
+        const chunkPromise = await runBatchForYahoo(chunkStockSumbols[i], withinDays);
         chunkPromises.push(chunkPromise);
         totalCount += chunkStockSumbols[i].length;
         console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
@@ -1333,11 +1337,12 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        const bestStocksResponseJson = require('./../mocks/best-stocks/filtered-best-stocks-small-sample.json');
-        // const bestStocksResponseJson = require('./../mocks/best-stocks/getFilteredBestStocks-2021-01-31T05:26:28.908Z.json');
+        //const bestStocksResponseJson = require('./../mocks/best-stocks/filtered-best-stocks-small-sample.json');
+        const bestStocksResponseJson = require('./../mocks/best-stocks/getFilteredBestStocks-2021-01-31T05:26:28.908Z.json');
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
         };
+
         bestStocks = bestStocksResponseJson.data;
         const stockSymbols = [];
         bestStocks.forEach((bestStock) => {
@@ -1345,16 +1350,46 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
         });
 
         // 8. Get SEC Report Dates
-        const financialResponse = await runStockBatchesForYahoo(stockSymbols, 2);
+        // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
+        let financialResponse = await runStockBatchesForYahoo(stockSymbols, 100, 60);
 
+        // console.log('finance response:: ', financialResponse);
+        // const jsonData2 = JSON.stringify(financialResponse, null, 4);
+        // fs.writeFileSync(`./mocks/best-stocks/financialResponse.json`, jsonData2);
+
+        // output missing symbols due to error
+        const missingStocks = [];
+        stockSymbols.forEach((symbol) => {
+            if (financialResponse && financialResponse.length > 0) {
+                let found = false;
+                financialResponse.forEach((current) => {
+                    if (current && current.symbol === symbol) {
+                        found = true;
+                        return;
+                    }
+                });
+                if (!found) {
+                    missingStocks.push(symbol);
+                }
+            } else {
+                missingStocks.push(symbol);
+            }
+        });
+
+        console.log(`number of missing stocks ${missingStocks.length}`);
+    
         // 9. Filter By Most Recent
         // binding sec data to each best stock...
         if (financialResponse && financialResponse.length > 0) {
-            financialResponse.forEach((secData) => {
+            // remove null entries
+            financialResponse = financialResponse.filter((current) => {
+                return current;
+            });
+            financialResponse.forEach((financeData) => {
                 bestStocks.forEach((bestStock, index) => {
-                    if (bestStock.symbol === secData.symbol) {
-                        bestStock.financialData = _.get(secData, 'financialData', undefined);
-                        bestStock.growthStats = _.get(secData, 'growthStats', undefined);
+                    if (bestStock.symbol === financeData.symbol) {
+                        bestStock.financialData = _.get(financeData, 'financialData', undefined);
+                        bestStock.growthStats = _.get(financeData, 'growthStats', undefined);
                     }
                     bestStocks[index] = bestStock;
                 })
@@ -1366,7 +1401,7 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
             const percentGrowth: number = _.toNumber(_.get(bestStock, 'growthStats.percentGrowth', 0));
 
             return percentGrowth > 0 &&
-                percentGrowth <= 10000;
+                percentGrowth <= 2000;
         });
 
         // Application Utilities
@@ -1385,12 +1420,12 @@ export const getFinalBestStocks = functions.runWith({ timeoutSeconds: 540, memor
         const final: object = {
             results: _.get(bestStocks, ['length'], 0),
             data: bestStocks,
-            financialResponse,
+            missingStocks,
         };
+
         let jsonData = JSON.stringify(final, null, 4);
         const today: any = new Date().toISOString();
         fs.writeFileSync(`./mocks/best-stocks/getFinalBestStocks-${today}.json`, jsonData);
-
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
         response.send(final);
