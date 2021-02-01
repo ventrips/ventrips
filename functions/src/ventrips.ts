@@ -677,73 +677,10 @@ const calcPriceGrowth = (data) => {
     }
 };
 
-const getDataForYahoo = async (stockSymbol: string, ...args: any[]) => {
-    const withinDays = args[0];
-    const numDaysBetween = function(d1: any, d2: any) {
-        const diff = Math.abs(d1.getTime() - d2.getTime());
-        return diff / (1000 * 60 * 60 * 24);
-    };
-    return new Promise((resolve: any, reject: any) => {
-        const options = {
-            uri: `https://finance.yahoo.com/quote/${stockSymbol}/history`,
-            headers: {
-                'User-Agent': ((new UserAgent()).data).toString()
-            },
-            json: true,
-            transform: (body: any) => Cheerio.load(body)
-        };
-        RequestPromise(options)
-        .then(($: any) => {
-            // Process html like you would with jQuery...
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth();
-            const currentDay = currentDate.getDate();
-            const table = [];
-            const tableEl = $('table[data-test]');
-
-            const hasTable = tableEl && tableEl.children() && tableEl.children().eq(1) && tableEl.children().eq(1).children();
-            const listOfTableRows = hasTable
-                ? hasTable
-                : [];
-            listOfTableRows.each(function(this: any, index: number) {
-                let tableRowEl = $(this);
-                const rowData = {};
-                const date = tableRowEl.children().first().text();
-                rowData['date'] = date;
-                rowData['open'] = parseFloat(tableRowEl.children().eq(1).text());
-                rowData['high'] = parseFloat(tableRowEl.children().eq(2).text());
-                rowData['low'] = parseFloat(tableRowEl.children().eq(3).text());
-                rowData['close'] = parseFloat(tableRowEl.children().eq(4).text());
-                rowData['adjClose'] = parseFloat(tableRowEl.children().eq(5).text());
-                const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
-                const stockDate = new Date(date);
-                const volumeString = tableRowEl.children().last().text();
-                rowData['volume'] = !volumeString || volumeString === '-'
-                    ? '-'
-                    : parseInt(volumeString.replace(/,/g, ''));
-                if ((withinDays && numDaysBetween(stockDate, currentDateFormatted) <= withinDays) || !withinDays) {
-                    table.push(rowData);
-                }
-            });
-            // calculate lowest / highest price and % growth in timespan
-            const growthStats = calcPriceGrowth(table);
-
-            resolve({
-                'symbol': stockSymbol,
-                financialData: table,
-                growthStats,
-            });
-        })
-        .catch((err: any) => {
-            // Crawling failed...
-            console.log('error on finance::', err);
-            console.log(`err on ${stockSymbol}`);
-            reject(err);
-            return err;
-        });
-    });
-}
+const numDaysBetween = function(d1: any, d2: any) {
+    const diff = Math.abs(d1.getTime() - d2.getTime());
+    return diff / (1000 * 60 * 60 * 24);
+};
 
 const runAll = async (stockSymbols, scrapeFunction, ...args: any[]) => {
     const listOfVolumePromiseCalls = [];
@@ -1092,72 +1029,150 @@ const isGoodPennyStock = (otcMarketPennyStock: any): boolean => {
     return isPinkCurrentOrGreater && !isCaveatEmptor && isCountryUSA;
 }
 
-const scrapeSecPage = (stockSymbol: string, ...args: any[]) => {
+const scrapeYahoo = ($, args: any) => {
+    const withinDays = args[0];
+
+    // Process html like you would with jQuery...
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const table = [];
+    const tableEl = $('table[data-test]');
+
+    const hasTable = tableEl && tableEl.children() && tableEl.children().eq(1) && tableEl.children().eq(1).children();
+    const listOfTableRows = hasTable
+        ? hasTable
+        : [];
+    listOfTableRows.each(function(this: any, index: number) {
+        let tableRowEl = $(this);
+        const rowData = {};
+        const date = tableRowEl.children().first().text();
+        rowData['date'] = date;
+        rowData['open'] = parseFloat(tableRowEl.children().eq(1).text());
+        rowData['high'] = parseFloat(tableRowEl.children().eq(2).text());
+        rowData['low'] = parseFloat(tableRowEl.children().eq(3).text());
+        rowData['close'] = parseFloat(tableRowEl.children().eq(4).text());
+        rowData['adjClose'] = parseFloat(tableRowEl.children().eq(5).text());
+        const currentDateFormatted = new Date(currentYear, currentMonth, currentDay);
+        const stockDate = new Date(date);
+        const volumeString = tableRowEl.children().last().text();
+        rowData['volume'] = !volumeString || volumeString === '-'
+            ? '-'
+            : parseInt(volumeString.replace(/,/g, ''));
+        if ((withinDays && numDaysBetween(stockDate, currentDateFormatted) <= withinDays) || !withinDays) {
+            table.push(rowData);
+        }
+    });
+    // calculate lowest / highest price and % growth in timespan
+    const growthStats = calcPriceGrowth(table);
+
+    return {
+        financialData: table,
+        growthStats,
+    };
+};
+
+const scrapeSec = ($, args: any) => {
+    // Process html like you would with jQuery...
+    const secData = getSecDataObject($);
+    const secOtcData = getSecOtcObject($);
+    const stats = calculateDateStats(secData);
+    const secOtcStats = calculateDateStats(secOtcData);
+    const mixedStats = calculateDateStats(secData.concat(secOtcData));
+    return {
+        data: secData,
+        secOtcData,
+        stats,
+        secOtcStats,
+        mixedStats,
+    };
+}
+
+const generateScrapeUrl = (url, stockSymbol) => {
+    return url.replace('[symbol]', stockSymbol);
+};
+
+const scrapeUrl = async (scrapeFunction, url, stockSymbol: string, args: any[]) => {
+    const shouldThrowError = _.get(args, '[1]');
+    const mockSymbols = _.get(args, '[2]');
+
+    return new Promise((resolve: any, reject: any) => {
+        const uri = generateScrapeUrl(url, stockSymbol);
+        const options = {
+            uri: uri,
+            headers: {
+                'User-Agent': ((new UserAgent()).data).toString()
+            },
+            json: true,
+            transform: (body: any) => Cheerio.load(body)
+        };
+        RequestPromise(options)
+        .then(($: any) => {
+            if (shouldThrowError && mockSymbols && mockSymbols.length > 0 && _.includes(mockSymbols, stockSymbol)) {
+                throw new Error("mock error");
+            }
+            const data = scrapeFunction($, args);
+            resolve({
+                'symbol': stockSymbol,
+                ...data,
+            });
+        })
+        .catch((err: any) => {
+            // Crawling failed...
+            console.error(`ERROR on stock ${stockSymbol}::`, err);
+            const errorObj = {
+                'symbol': stockSymbol,
+                'errorMsg': `ERROR on stock:: ${stockSymbol} for url:: ${uri} :: Error message:: ${_.get(err, 'message', '')}`,
+            };
+            reject(errorObj);
+            return errorObj;
+        });
+    });
+};
+
+const DEBOUNCE_TIME_FOR_SCRAPE_CALL = 0;
+const DEBOUNCE_TIME_FOR_BATCH_CALL = 1000;
+const RETRY_DEBOUNCE_TIME = 5000;
+const WITHIN_DAYS = 30;
+
+const runDebounceCall = (scrapeFunction, url, stockSymbol: string, args: any[]) => {
     const promise = new Promise((resolve) => {
         const debounceFunction = _.debounce(async () => {
             try {
-                const data = await getDataForSec(stockSymbol, args);
+                const data = await scrapeUrl(scrapeFunction, url, stockSymbol, args);
                 console.log('finishing ' + stockSymbol);
                 resolve(data);
             } catch (err) {
-                resolve(undefined)
+                resolve(err)
             }
-        }, 0);
+        }, DEBOUNCE_TIME_FOR_SCRAPE_CALL);
         debounceFunction();
     });
     return promise;
 };
 
-const scrapeYahooPage = (stockSymbol: string, ...args: any[]) => {
-    const promise = new Promise((resolve) => {
-        const debounceFunction = _.debounce(async () => {
-            try {
-                const data = await getDataForYahoo(stockSymbol, args);
-                console.log('finishing ' + stockSymbol);
-                resolve(data);
-            } catch (err) {
-                resolve(undefined)
-            }
-        }, 500);
-        debounceFunction();
-    });
-    return promise;
-};
-
-const runBatchForSec = async (chunkSymbols) => {
+const runSingleBatch = async (scrapeFunction, url, chunkSymbols, args: any[]) => {
     const promise = new Promise(async (resolve) => {
         const listOfScrapeCalls = [];
-        chunkSymbols.forEach((currentSymbol: string) => {
-            listOfScrapeCalls.push(scrapeSecPage(currentSymbol));
+        chunkSymbols.forEach((currentSymbol: string, index: number) => {
+            listOfScrapeCalls.push(runDebounceCall(scrapeFunction, url, currentSymbol, args));
         });
         const data = await Promise.all(listOfScrapeCalls);
         setTimeout(() => {
             resolve(data);
-        }, 0);
+        }, DEBOUNCE_TIME_FOR_BATCH_CALL);
     });
     return promise;
-};
+}
 
-const runBatchForYahoo = async (chunkSymbols, ...args: any[]) => {
-    const promise = new Promise(async (resolve) => {
-        const listOfScrapeCalls = [];
-        chunkSymbols.forEach((currentSymbol: string) => {
-            listOfScrapeCalls.push(scrapeYahooPage(currentSymbol, args));
-        });
-        const data = await Promise.all(listOfScrapeCalls);
-        setTimeout(() => {
-            resolve(data);
-        }, 0);
-    });
-    return promise;
-};
-
-const runStockBatchesForSec = async (stockSymbols, inBatchesOf) => {
+const runBatchScript = async (stockSymbols, scrapeFunction, url, inBatchesOf, args) => {
     const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
     const chunkPromises: any = [];
     let totalCount = 0;
     for (let i = 0; i < chunkStockSumbols.length; i++) {
-        const chunkPromise = await runBatchForSec(chunkStockSumbols[i]);
+
+        const chunkPromise = await runSingleBatch(scrapeFunction, url, chunkStockSumbols[i], args);
         chunkPromises.push(chunkPromise);
         totalCount += chunkStockSumbols[i].length;
         console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
@@ -1165,17 +1180,51 @@ const runStockBatchesForSec = async (stockSymbols, inBatchesOf) => {
     return chunkPromises.flat();
 };
 
-const runStockBatchesForYahoo = async (stockSymbols, inBatchesOf, withinDays) => {
-    const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
-    const chunkPromises: any = [];
-    let totalCount = 0;
-    for (let i = 0; i < chunkStockSumbols.length; i++) {
-        const chunkPromise = await runBatchForYahoo(chunkStockSumbols[i], withinDays);
-        chunkPromises.push(chunkPromise);
-        totalCount += chunkStockSumbols[i].length;
-        console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
+const generateScrapeScript = (scrapeFunction, url, inBatchesOf) => {
+    return async (stockSymbols, ...args2) => {;
+        return await runBatchScript(stockSymbols, scrapeFunction, url, inBatchesOf, args2);
     }
-    return chunkPromises.flat();
+}
+
+const debounceScrape = () => {
+    return new Promise(async (resolve) => {
+        console.log(`Attempting retry in ${RETRY_DEBOUNCE_TIME / 1000} seconds...`);
+        setTimeout(() => {
+            resolve(true);
+        }, RETRY_DEBOUNCE_TIME);
+    });
+}
+
+const getMissingStocks = (list) => {
+    const missingStockObj = {
+        missingStockSymbols: [],
+        missingStockObjects: [],
+    }
+    if (list && list.length > 0) {
+        list.forEach((currentStock) => {
+            if (_.has(currentStock, 'errorMsg') && _.has(currentStock, 'symbol')) {
+                missingStockObj.missingStockSymbols.push(currentStock.symbol);
+                missingStockObj.missingStockObjects.push(currentStock);
+            }
+        });
+    }
+    return missingStockObj;
+}
+
+const retry = async (scrapeScript, missingStockSymbols, data, args) => {
+    let finalData = data;
+    if (missingStockSymbols.length > 0) {
+        await debounceScrape();
+        console.log(`Attempting to retry stocks: ${missingStockSymbols.join(', ')}`);
+        const recoveredSecResponse = await scrapeScript(missingStockSymbols, ...args);
+        // filter out stocks with errors in current list before merging recovered stocks...
+        finalData = finalData.filter((currentStock) => {
+            return !_.has(currentStock, 'errorMsg') && _.has(currentStock, 'symbol');
+        })
+        // merge recovered stocks
+        finalData = finalData.concat(recoveredSecResponse);
+    }
+    return finalData;
 };
 
 /* #1: Uses FinnHub to fetch for all stocks, OTC Markets to filter out bad penny stocks, Yahoo Finance to filter by our criteria on price, market cap, and historic volumes */
@@ -1268,7 +1317,7 @@ export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        // const bestStocksResponseJson = require('./../mocks/best-stocks/best-stocks.json');
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks1-small-sample.json');
         const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks1-${today}.json`);
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
@@ -1276,31 +1325,19 @@ export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '
         bestStocks = bestStocksResponseJson.data;
         const stockSymbols = _.map(bestStocks, (bestStock: any) => _.get(bestStock, ['yahooFinance', 'symbol']));
         // 8. Get SEC Report Dates
-        let secResponse = await runStockBatchesForSec(stockSymbols, 100);
+        // let secResponse = await runStockBatchesForSec(stockSymbols, 100);
+        const scrapeScript = generateScrapeScript(scrapeSec, `https://sec.report/Ticker/[symbol]`, 100);
+        let secResponse = await scrapeScript(stockSymbols); // test add undefined, true, ['HJLI', 'ICCC']
+
+        // attempt to retry api call
+        const missingStockSymbols = _.get(getMissingStocks(secResponse), 'missingStockSymbols', []);
+        secResponse = await retry(scrapeScript, missingStockSymbols, secResponse, []); // test add [undefined, true, ['ICCC']]
+        // retrieve missing stocks to output in final json
+        const missingStocks = _.get(getMissingStocks(secResponse), 'missingStockObjects', []);
+
         let storeSecJSON = JSON.stringify(secResponse, null, 4);
         fs.writeFileSync(`./mocks/best-stocks/SecData-${today}.json`, storeSecJSON);
         // let secResponse = require(`./../mocks/best-stocks/SecData-${today}.json`);
-
-        // output missing symbols due to error
-        const missingStocks = [];
-        stockSymbols.forEach((symbol) => {
-            if (secResponse && secResponse.length > 0) {
-                let found = false;
-                secResponse.forEach((current) => {
-                    if (current && current.symbol === symbol) {
-                        found = true;
-                        return;
-                    }
-                });
-                if (!found) {
-                    missingStocks.push(symbol);
-                }
-            } else {
-                missingStocks.push(symbol);
-            }
-        });
-
-        console.log(`number of missing stocks ${missingStocks.length}`);
 
         // 9. Filter By Most Recent
         // binding sec data to each best stock...
@@ -1311,9 +1348,6 @@ export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '
             });
             secResponse.forEach((secData, i) => {
                 bestStocks.forEach((bestStock, index) => {
-                    if (!secData) {
-                        console.log('hey', i);
-                    }
                     if (_.isEqual(_.get(bestStock, ['yahooFinance', 'symbol']), secData.symbol)) {
                         bestStock.secData = _.get(secData, 'data', undefined);
                         bestStock.secOtcData = _.get(secData, 'secOtcData', undefined);
@@ -1341,7 +1375,6 @@ export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '
                    averageNumberPostsPerYear >= 2 &&
                    averageNumberPostsPerMonth >= 2;
         });
-        console.log(bestStocks.length);
 
         // Application Utilities
         // 1. Fetch News
@@ -1379,7 +1412,7 @@ export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        //const bestStocksResponseJson = require('./../mocks/best-stocks/filtered-best-stocks-small-sample.json');
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks2-small-sample.json');
         const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks2-${today}.json`);
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
@@ -1390,7 +1423,15 @@ export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '
 
         // 8. Get SEC Report Dates
         // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
-        let financialResponse = await runStockBatchesForYahoo(stockSymbols, 100, 60);
+
+        const scrapeScript = generateScrapeScript(scrapeYahoo, `https://finance.yahoo.com/quote/[symbol]/history`, 50);
+        let financialResponse = await scrapeScript(stockSymbols, WITHIN_DAYS); // test error handling.. add ,true, ['LBSR', 'SIML']
+
+        // attempt to retry api call
+        const missingStockSymbols = _.get(getMissingStocks(financialResponse), 'missingStockSymbols', []);
+        financialResponse = await retry(scrapeScript, missingStockSymbols, financialResponse, [WITHIN_DAYS]); //test error handling.. add ,true, ['LBSR', 'SIML']
+        // retrieve missing stocks to output in final json
+        const missingStocks = _.get(getMissingStocks(financialResponse), 'missingStockObjects', []);
 
         let storeYahooFinanceJSON = JSON.stringify(financialResponse, null, 4);
         fs.writeFileSync(`./mocks/best-stocks/yahooFinanceData-${today}.json`, storeYahooFinanceJSON);
@@ -1398,27 +1439,6 @@ export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '
         // console.log('finance response:: ', financialResponse);
         // const jsonData2 = JSON.stringify(financialResponse, null, 4);
         // fs.writeFileSync(`./mocks/best-stocks/financialResponse.json`, jsonData2);
-
-        // output missing symbols due to error
-        const missingStocks = [];
-        stockSymbols.forEach((symbol) => {
-            if (financialResponse && financialResponse.length > 0) {
-                let found = false;
-                financialResponse.forEach((current) => {
-                    if (current && current.symbol === symbol) {
-                        found = true;
-                        return;
-                    }
-                });
-                if (!found) {
-                    missingStocks.push(symbol);
-                }
-            } else {
-                missingStocks.push(symbol);
-            }
-        });
-
-        console.log(`number of missing stocks ${missingStocks.length}`);
 
         // 9. Filter By Most Recent
         // binding sec data to each best stock...

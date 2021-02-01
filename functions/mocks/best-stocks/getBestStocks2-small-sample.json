@@ -1,0 +1,3476 @@
+{
+    "results": 8,
+    "data": [
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "regularMarketChange": -0.00009999995,
+          "regularMarketChangePercent": -9.090904,
+          "regularMarketTime": 1611953893,
+          "regularMarketPrice": 0.001,
+          "regularMarketDayHigh": 0.0012,
+          "regularMarketDayRange": "9.0E-4 - 0.0012",
+          "regularMarketDayLow": 0.0009,
+          "regularMarketVolume": 285894591,
+          "regularMarketPreviousClose": 0.0011,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.001,
+          "averageDailyVolume3Month": 308802859,
+          "averageDailyVolume10Day": 843770540,
+          "fiftyTwoWeekLowChange": 0.00096000003,
+          "fiftyTwoWeekLowChangePercent": 24.000002,
+          "fiftyTwoWeekRange": "4.0E-5 - 0.4998",
+          "fiftyTwoWeekHighChange": -0.4988,
+          "fiftyTwoWeekHighChangePercent": -0.99799925,
+          "fiftyTwoWeekLow": 0.00004,
+          "fiftyTwoWeekHigh": 0.4998,
+          "earningsTimestamp": 1597416360,
+          "earningsTimestampStart": 1597416360,
+          "earningsTimestampEnd": 1597416360,
+          "tradeable": false,
+          "marketState": "CLOSED",
+          "firstTradeDateMilliseconds": 1252935000000,
+          "priceHint": 4,
+          "exchange": "PNK",
+          "shortName": "SIMLATUS CORPORATION",
+          "longName": "Simlatus Corporation",
+          "messageBoardId": "finmb_588508331",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "market": "us_market",
+          "esgPopulated": false,
+          "epsTrailingTwelveMonths": -0.007,
+          "sharesOutstanding": 2995990016,
+          "bookValue": -0.006,
+          "fiftyDayAverage": 0.0006453125,
+          "fiftyDayAverageChange": 0.00035468757,
+          "fiftyDayAverageChangePercent": 0.5496369,
+          "twoHundredDayAverage": 0.00035000002,
+          "twoHundredDayAverageChange": 0.00065000006,
+          "twoHundredDayAverageChangePercent": 1.8571429,
+          "marketCap": 2995990,
+          "priceToBook": -0.16666667,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "displayName": "Simlatus",
+          "symbol": "SIML"
+        },
+        "otcMarkets": {
+          "securityId": 365328,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "SIML",
+          "securityName": "SIMLATUS CORP",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "California",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 3663,
+          "industry": "Radio and TV communications equipment",
+          "volume": 489494018,
+          "volumeChange": 3.249881,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.0011,
+          "shortInterestRatio": 0,
+          "pct1Day": -0.153846,
+          "pct5Day": -0.153846,
+          "pct4Weeks": 0.571429,
+          "pct13Weeks": 4.5,
+          "isBank": "N",
+          "perfQxComp4Weeks": -382.657807,
+          "perfQxComp13Weeks": 16.682018,
+          "perfQxBillion4Weeks": -144.369643,
+          "perfQxBillion13Weeks": 16.874436,
+          "perfQxBanks4Weeks": 8.553934,
+          "perfQxBanks13Weeks": 22.335518,
+          "perfQxIntl4Weeks": -215.594421,
+          "perfQxIntl13Weeks": 17.053753,
+          "perfQxUs4Weeks": 42.710519,
+          "perfQxUs13Weeks": 8.85766,
+          "perfQb4Weeks": 6.119607,
+          "perfQb13Weeks": 10.171078,
+          "perfSp4Weeks": 113.859812,
+          "perfSp13Weeks": 30.682526,
+          "perfQxDiv4Weeks": 134.788951,
+          "perfQxDiv13Weeks": 16.161948,
+          "perfQxCan4Weeks": 0.309782,
+          "perfQxCan13Weeks": 0.340851
+        },
+        "secData": [
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-21-000004/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-21 15:58:37"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-21-000002/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-07 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-20-000030/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-11-10 00:00:00"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001399306-20-000028/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2020-09-04 00:00:00"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001399306-20-000026/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2020-08-21 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-20-000024/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-20-000019/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-29 00:00:00"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001399306-20-000016/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-06-02 18:15:06"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-20-000013/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-08 14:08:50"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-20-000011/",
+            "reportText": "Current Report",
+            "reportDate": "2020-04-13 17:56:35"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001399306-20-000009/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2020-03-31 15:37:29"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-20-000007/",
+            "reportText": "Current Report",
+            "reportDate": "2020-03-19 17:53:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-20-000004/",
+            "reportText": "Current Report",
+            "reportDate": "2020-03-06 16:53:20"
+          },
+          {
+            "formColumnText": "SC 13G/A",
+            "reportLink": "/Document/0001213900-20-003497/",
+            "reportText": "Ownership Acquisition Statement [Amended]",
+            "reportDate": "2020-02-13 11:09:35"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001399306-20-000002/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2020-01-07 18:07:22"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001399306-19-000084/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2019-12-26 07:52:39"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-19-000082/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-11-19 18:43:11"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001399306-19-000079/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2019-11-15 12:57:33"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000077/",
+            "reportText": "Current Report",
+            "reportDate": "2019-09-19 12:01:05"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001399306-19-000075/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-09-18 13:59:35"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000073/",
+            "reportText": "Current Report",
+            "reportDate": "2019-09-16 12:22:03"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001399306-19-000071/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2019-08-30 14:18:16"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-012950/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-08-28 17:34:44"
+          },
+          {
+            "formColumnText": "PRER14C",
+            "reportLink": "/Document/0001399306-19-000068/",
+            "reportText": "Preliminary revised information statements",
+            "reportDate": "2019-08-22 18:29:45"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001399306-19-000069/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-08-22 18:27:43"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001399306-19-000061/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-08-15 13:18:20"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-19-000059/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-08-14 14:04:44"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000057/",
+            "reportText": "Current Report",
+            "reportDate": "2019-08-06 18:11:43"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-011957/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-08-02 09:32:09"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000055/",
+            "reportText": "Current Report",
+            "reportDate": "2019-08-01 13:54:40"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001399306-19-000053/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-07-25 09:58:11"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000051/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-24 17:29:51"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001399306-19-000050/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2019-07-24 17:29:16"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000047/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-15 17:45:14"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001399306-19-000045/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-06-28 20:13:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000044/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-28 19:22:47"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000041/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-20 15:14:39"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000039/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-31 15:41:56"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000036/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-29 15:21:31"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001399306-19-000034/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-05-20 17:18:48"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000031/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-20 14:07:57"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001399306-19-000029/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2019-05-15 16:15:29"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001399306-19-000027/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-05-13 17:40:04"
+          },
+          {
+            "formColumnText": "10-KT",
+            "reportLink": "/Document/0001399306-19-000025/",
+            "reportText": "Transition report pursuant to Rule 13a-10 or 15d-10",
+            "reportDate": "2019-05-08 16:23:43"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000023/",
+            "reportText": "Current Report",
+            "reportDate": "2019-04-12 19:10:27"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000021/",
+            "reportText": "Current Report",
+            "reportDate": "2019-04-08 19:22:47"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001399306-19-000019/",
+            "reportText": "Current Report",
+            "reportDate": "2019-04-03 11:18:42"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001399306-19-000015/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2019-04-01 14:30:49"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-003102/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-02-25 14:10:18"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001399306-19-000013/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-02-21 17:06:31"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.6315789473684212,
+          "averageNumberOfDaysBetweenPosts": 15.466666666666667,
+          "numberOfDaysSinceLastPublish": 10,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.6315789473684212,
+          "averageNumberOfDaysBetweenPosts": 15.466666666666667,
+          "numberOfDaysSinceLastPublish": 10,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "regularMarketChange": -0.000054999953,
+          "regularMarketChangePercent": -1.8333318,
+          "regularMarketTime": 1611952987,
+          "regularMarketPrice": 0.002945,
+          "regularMarketDayHigh": 0.0032,
+          "regularMarketDayRange": "0.0029 - 0.0032",
+          "regularMarketDayLow": 0.0029,
+          "regularMarketVolume": 5127114,
+          "regularMarketPreviousClose": 0.003,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.003,
+          "averageDailyVolume3Month": 6936674,
+          "averageDailyVolume10Day": 7862371,
+          "fiftyTwoWeekLowChange": 0.0013450001,
+          "fiftyTwoWeekLowChangePercent": 0.8406251,
+          "fiftyTwoWeekRange": "0.0016 - 0.0037",
+          "fiftyTwoWeekHighChange": -0.0007549999,
+          "fiftyTwoWeekHighChangePercent": -0.20405403,
+          "fiftyTwoWeekLow": 0.0016,
+          "fiftyTwoWeekHigh": 0.0037,
+          "epsTrailingTwelveMonths": 0,
+          "sharesOutstanding": 4949819904,
+          "bookValue": 0,
+          "fiftyDayAverage": 0.0026225806,
+          "fiftyDayAverageChange": 0.00032241945,
+          "fiftyDayAverageChangePercent": 0.122939765,
+          "twoHundredDayAverage": 0.0026225806,
+          "twoHundredDayAverageChange": 0.00032241945,
+          "twoHundredDayAverageChangePercent": 0.122939765,
+          "marketCap": 14577220,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "firstTradeDateMilliseconds": 1608042600000,
+          "priceHint": 4,
+          "exchange": "PNK",
+          "shortName": "LIBERTY STAR URANIUM & METALS C",
+          "longName": "Liberty Star Uranium & Metals Corp.",
+          "messageBoardId": "finmb_3565868",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "market": "us_market",
+          "esgPopulated": false,
+          "tradeable": false,
+          "displayName": "Liberty Star Uranium",
+          "symbol": "LBSR"
+        },
+        "otcMarkets": {
+          "securityId": 127958,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "LBSR",
+          "securityName": "LIBERTY STAR URANIM NEW",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "Arizona",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 1000,
+          "industry": "Metal Mining",
+          "volume": 5004959,
+          "volumeChange": 1.026349,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.003,
+          "shortInterest": 20,
+          "shortInterestPercent": -99.93,
+          "shortInterestRatio": 0,
+          "pct1Day": -0.0625,
+          "pct5Day": 0.111111,
+          "pct4Weeks": 0.052632,
+          "pct13Weeks": 2.333333,
+          "pct52Weeks": 1.727273,
+          "isBank": "N",
+          "perfQxComp4Weeks": -35.244798,
+          "perfQxComp13Weeks": 8.649935,
+          "perfQxComp52Weeks": 14.702046,
+          "perfQxBillion4Weeks": -13.297204,
+          "perfQxBillion13Weeks": 8.749708,
+          "perfQxBillion52Weeks": 15.755393,
+          "perfQxBanks4Weeks": 0.787862,
+          "perfQxBanks13Weeks": 11.58138,
+          "perfQxBanks52Weeks": -95.264673,
+          "perfQxIntl4Weeks": -19.857381,
+          "perfQxIntl13Weeks": 8.842687,
+          "perfQxIntl52Weeks": 15.621363,
+          "perfQxUs4Weeks": 3.933864,
+          "perfQxUs13Weeks": 4.59286,
+          "perfQxUs52Weeks": 4.186122,
+          "perfQb4Weeks": 0.563648,
+          "perfQb13Weeks": 5.273893,
+          "perfQb52Weeks": 5.252952,
+          "perfSp4Weeks": 10.487088,
+          "perfSp13Weeks": 15.909458,
+          "perfSp52Weeks": 11.844177,
+          "perfQxDiv4Weeks": 12.414772,
+          "perfQxDiv13Weeks": 8.380269,
+          "perfQxDiv52Weeks": 12.221039,
+          "perfQxCan4Weeks": 0.028533,
+          "perfQxCan13Weeks": 0.176737,
+          "perfQxCan52Weeks": 0.200064
+        },
+        "secData": [
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-21-001158/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-15 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-023531/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-12-14 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-023139/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-08 17:41:28"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-021053/",
+            "reportText": "Current Report",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-020003/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-27 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-019324/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-13 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-017539/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-09-10 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-017006/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-31 00:00:00"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001493152-20-015119/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2020-08-10 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-014091/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-28 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-012420/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-01 20:08:21"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-20-012367/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-07-01 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-20-012368/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-07-01 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-011726/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-24 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-011090/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-12 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-010027/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-28 16:00:04"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-20-007432/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-04-30 15:35:31"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-001372/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-30 13:20:31"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-000643/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-15 17:17:53"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-019544/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-12-20 17:10:15"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001493152-19-019295/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2019-12-16 16:33:31"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-019184/",
+            "reportText": "Current Report",
+            "reportDate": "2019-12-13 16:29:35"
+          },
+          {
+            "formColumnText": "3",
+            "reportLink": "/Document/0001493152-19-016334/",
+            "reportText": "Security Ownership Statement",
+            "reportDate": "2019-11-01 16:31:58"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-016088/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-29 14:54:36"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-015640/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-18 14:33:02"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-015612/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-17 16:48:52"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-015591/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-16 18:24:36"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-015489/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-15 13:06:49"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-014651/",
+            "reportText": "Current Report",
+            "reportDate": "2019-09-27 11:00:23"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-014167/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-09-16 16:26:15"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-013241/",
+            "reportText": "Current Report",
+            "reportDate": "2019-08-21 18:13:07"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-19-011488/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2019-08-01 15:06:29"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-19-011390/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2019-07-31 13:09:06"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-19-011385/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2019-07-31 11:45:51"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-19-011359/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2019-07-30 17:29:30"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001493152-19-011353/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2019-07-30 17:15:41"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-011033/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-24 15:48:50"
+          },
+          {
+            "formColumnText": "3",
+            "reportLink": "/Document/0001493152-19-011012/",
+            "reportText": "Security Ownership Statement",
+            "reportDate": "2019-07-24 10:47:46"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009910/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-28 17:37:16"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-009207/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-06-14 15:57:44"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-008411/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-30 09:21:26"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-008032/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-21 17:28:29"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-19-007636/",
+            "reportText": "Annual Report",
+            "reportDate": "2019-05-16 15:44:30"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001493152-19-006240/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2019-05-01 13:31:48"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-005460/",
+            "reportText": "Current Report",
+            "reportDate": "2019-04-16 15:48:21"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-004016/",
+            "reportText": "Current Report",
+            "reportDate": "2019-03-27 16:57:15"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-001863/",
+            "reportText": "Current Report",
+            "reportDate": "2019-02-13 18:35:52"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001493152-19-000653/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-01-15 16:09:22"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-18-017961/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2018-12-26 17:10:31"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-18-017652/",
+            "reportText": "Current Report",
+            "reportDate": "2018-12-18 14:29:07"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 12.5,
+          "averageNumberPostsPerMonth": 2.0833333333333335,
+          "averageNumberOfDaysBetweenPosts": 17.068181818181817,
+          "numberOfDaysSinceLastPublish": 16,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 12.5,
+          "averageNumberPostsPerMonth": 2.0833333333333335,
+          "averageNumberOfDaysBetweenPosts": 17.068181818181817,
+          "numberOfDaysSinceLastPublish": 16,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "market": "us_market",
+          "esgPopulated": false,
+          "firstTradeDateMilliseconds": 1114435800000,
+          "priceHint": 4,
+          "regularMarketChange": -0.0003999998,
+          "regularMarketChangePercent": -9.090904,
+          "regularMarketTime": 1611953991,
+          "regularMarketPrice": 0.004,
+          "regularMarketDayHigh": 0.0048,
+          "regularMarketDayRange": "0.0038 - 0.0048",
+          "regularMarketDayLow": 0.0038,
+          "regularMarketVolume": 207382226,
+          "regularMarketPreviousClose": 0.0044,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.0046,
+          "averageDailyVolume3Month": 376992316,
+          "averageDailyVolume10Day": 431859474,
+          "fiftyTwoWeekLowChange": 0.0039600004,
+          "fiftyTwoWeekLowChangePercent": 99.00001,
+          "fiftyTwoWeekRange": "4.0E-5 - 0.0099",
+          "fiftyTwoWeekHighChange": -0.0058999998,
+          "fiftyTwoWeekHighChangePercent": -0.5959596,
+          "fiftyTwoWeekLow": 0.00004,
+          "fiftyTwoWeekHigh": 0.0099,
+          "earningsTimestamp": 1542247200,
+          "earningsTimestampStart": 1542247200,
+          "earningsTimestampEnd": 1542247200,
+          "epsTrailingTwelveMonths": 0,
+          "sharesOutstanding": 3456179968,
+          "bookValue": 0,
+          "fiftyDayAverage": 0.0027030304,
+          "fiftyDayAverageChange": 0.0012969698,
+          "fiftyDayAverageChangePercent": 0.47982067,
+          "twoHundredDayAverage": 0.0008794964,
+          "twoHundredDayAverageChange": 0.0031205039,
+          "twoHundredDayAverageChangePercent": 3.5480576,
+          "marketCap": 13824721,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "tradeable": false,
+          "exchange": "PNK",
+          "shortName": "SOCIAL LIFE NETWORK INC",
+          "longName": "Social Life Network, Inc.",
+          "messageBoardId": "finmb_366809642",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "displayName": "Social Life Network",
+          "symbol": "WDLF"
+        },
+        "otcMarkets": {
+          "securityId": 268462,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "WDLF",
+          "securityName": "SOCIAL LIFE NETWORK INC",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "Colorado",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 7370,
+          "industry": "Services-Computer Programming, Data Processing, Etc.",
+          "volume": 429835483,
+          "volumeChange": 1.149127,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.0044,
+          "shortInterestRatio": 0,
+          "pct1Day": -0.185185,
+          "pct5Day": 0.517241,
+          "pct4Weeks": 1.004556,
+          "pct13Weeks": 43,
+          "pct52Weeks": -0.266667,
+          "isBank": "N",
+          "perfQxComp4Weeks": -672.701965,
+          "perfQxComp13Weeks": 159.405946,
+          "perfQxComp52Weeks": -2.26979,
+          "perfQxBillion4Weeks": -253.797886,
+          "perfQxBillion13Weeks": 161.24461,
+          "perfQxBillion52Weeks": -2.432412,
+          "perfQxBanks4Weeks": 15.037582,
+          "perfQxBanks13Weeks": 213.428285,
+          "perfQxBanks52Weeks": 14.707528,
+          "perfQxIntl4Weeks": -379.0091,
+          "perfQxIntl13Weeks": 162.958086,
+          "perfQxIntl52Weeks": -2.411719,
+          "perfQxUs4Weeks": 75.083925,
+          "perfQxUs13Weeks": 84.639858,
+          "perfQxUs52Weeks": -0.646278,
+          "perfQb4Weeks": 10.758101,
+          "perfQb13Weeks": 97.190305,
+          "perfQb52Weeks": -0.810982,
+          "perfSp4Weeks": 200.162438,
+          "perfSp13Weeks": 293.188581,
+          "perfSp52Weeks": -1.828575,
+          "perfQxDiv4Weeks": 236.955292,
+          "perfQxDiv13Weeks": 154.436389,
+          "perfQxDiv52Weeks": -1.886757,
+          "perfQxCan4Weeks": 0.544588,
+          "perfQxCan13Weeks": 3.257017,
+          "perfQxCan52Weeks": -0.030887
+        },
+        "secData": [
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-21-000482/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-29 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-21-000278/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-15 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-007599/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-31 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-007411/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-21 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-007247/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-14 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-007213/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-11 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-007234/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-11 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001477932-20-006573/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-11-16 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001477932-20-004904/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001477932-20-003627/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-29 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-002827/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-15 16:10:14"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-002474/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-08 16:15:34"
+          },
+          {
+            "formColumnText": "SC 13G",
+            "reportLink": "/Document/0001104659-20-050352/",
+            "reportText": "Ownership Acquisition Statement",
+            "reportDate": "2020-04-23 16:32:43"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001477932-20-001862/",
+            "reportText": "Current Report",
+            "reportDate": "2020-04-09 08:00:36"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-002948/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-04-06 17:10:40"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001493152-20-005773/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2020-04-03 16:29:24"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-20-005774/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-04-03 14:14:08"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-002700/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-03-27 15:30:09"
+          },
+          {
+            "formColumnText": "PRER14C",
+            "reportLink": "/Document/0001493152-20-004566/",
+            "reportText": "Preliminary revised information statements",
+            "reportDate": "2020-03-23 18:57:31"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-20-004528/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-03-23 16:45:39"
+          },
+          {
+            "formColumnText": "PRER14C",
+            "reportLink": "/Document/0001493152-20-004526/",
+            "reportText": "Preliminary revised information statements",
+            "reportDate": "2020-03-23 16:42:07"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-20-004440/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-03-20 16:27:27"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-002434/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-03-19 12:26:43"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001493152-20-003639/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2020-03-10 13:47:55"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-003530/",
+            "reportText": "Current Report",
+            "reportDate": "2020-03-06 16:59:51"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001493152-20-001851/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2020-02-10 13:31:53"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001493152-20-001310/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2020-01-29 14:19:49"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-001043/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-24 16:06:11"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-000947/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-23 06:06:09"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-019874/",
+            "reportText": "Current Report",
+            "reportDate": "2019-12-30 16:46:38"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-019762/",
+            "reportText": "Current Report",
+            "reportDate": "2019-12-27 15:51:55"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-019459/",
+            "reportText": "Current Report",
+            "reportDate": "2019-12-19 15:33:38"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001493152-19-018246/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-11-22 15:24:26"
+          },
+          {
+            "formColumnText": "D/A",
+            "reportLink": "/Document/0001493152-19-018245/",
+            "reportText": "Stock / Securites Offering [Amended]",
+            "reportDate": "2019-11-22 15:23:37"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-018129/",
+            "reportText": "Current Report",
+            "reportDate": "2019-11-20 16:45:19"
+          },
+          {
+            "formColumnText": "D/A",
+            "reportLink": "/Document/0001493152-19-017863/",
+            "reportText": "Stock / Securites Offering [Amended]",
+            "reportDate": "2019-11-18 17:24:57"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-017794/",
+            "reportText": "Current Report",
+            "reportDate": "2019-11-15 17:47:14"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-017436/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-11-14 16:00:39"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-011327/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-07-30 12:15:08"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-010025/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-01 16:59:12"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009593/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-24 09:00:10"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009580/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-21 16:58:47"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009579/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-21 16:56:06"
+          },
+          {
+            "formColumnText": "8-K/A",
+            "reportLink": "/Document/0001493152-19-008472/",
+            "reportText": "Current Report [Amended]",
+            "reportDate": "2019-05-31 16:01:22"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-008218/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-24 13:30:22"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001493152-19-007668/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2019-05-16 17:15:29"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-19-001122/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2019-05-15 00:15:13"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-007023/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-05-14 13:12:02"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-008435/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-05-14 12:53:54"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001493152-19-007013/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2019-05-14 11:52:14"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 3.3333333333333335,
+          "averageNumberOfDaysBetweenPosts": 15.24390243902439,
+          "numberOfDaysSinceLastPublish": 2,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 3.3333333333333335,
+          "averageNumberOfDaysBetweenPosts": 15.24390243902439,
+          "numberOfDaysSinceLastPublish": 2,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "esgPopulated": false,
+          "priceHint": 4,
+          "firstTradeDateMilliseconds": 1252935000000,
+          "exchange": "PNK",
+          "shortName": "KIBUSH CAPITAL CORPORATION",
+          "longName": "Kibush Capital Corporation",
+          "messageBoardId": "finmb_10185549",
+          "market": "us_market",
+          "regularMarketChange": -0.00074999966,
+          "regularMarketChangePercent": -15.789467,
+          "regularMarketTime": 1611953792,
+          "regularMarketPrice": 0.004,
+          "regularMarketDayHigh": 0.0055,
+          "regularMarketDayRange": "0.0038 - 0.0055",
+          "regularMarketDayLow": 0.0038,
+          "regularMarketVolume": 3958733,
+          "regularMarketPreviousClose": 0.00475,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.0055,
+          "averageDailyVolume3Month": 7605650,
+          "averageDailyVolume10Day": 7537870,
+          "fiftyTwoWeekLowChange": 0.0037000002,
+          "fiftyTwoWeekLowChangePercent": 12.333334,
+          "fiftyTwoWeekRange": "3.0E-4 - 0.00715",
+          "fiftyTwoWeekHighChange": -0.0031499998,
+          "fiftyTwoWeekHighChangePercent": -0.44055942,
+          "fiftyTwoWeekLow": 0.0003,
+          "fiftyTwoWeekHigh": 0.00715,
+          "earningsTimestamp": 1592328120,
+          "earningsTimestampStart": 1592328120,
+          "earningsTimestampEnd": 1592328120,
+          "epsTrailingTwelveMonths": 0,
+          "sharesOutstanding": 443355008,
+          "bookValue": -0.006,
+          "fiftyDayAverage": 0.0031046874,
+          "fiftyDayAverageChange": 0.00089531275,
+          "fiftyDayAverageChangePercent": 0.2883745,
+          "twoHundredDayAverage": 0.002078321,
+          "twoHundredDayAverageChange": 0.0019216791,
+          "twoHundredDayAverageChangePercent": 0.9246305,
+          "marketCap": 1773416,
+          "priceToBook": -0.6666667,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "tradeable": false,
+          "displayName": "Kibush Capital",
+          "symbol": "DLCR"
+        },
+        "otcMarkets": {
+          "securityId": 294438,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "DLCR",
+          "securityName": "KIBUSH CAPITAL CORP",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "Nevada",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 1400,
+          "industry": "Mining & Quarrying of Nonmetallic Minerals (No Fuels)",
+          "volume": 9448194,
+          "volumeChange": 1.056961,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.00475,
+          "shortInterest": 143957,
+          "shortInterestPercent": 2887.28,
+          "shortInterestRatio": 0.000325,
+          "pct1Day": 0.055556,
+          "pct5Day": 0.010638,
+          "pct4Weeks": 0.826923,
+          "pct13Weeks": 1.794118,
+          "pct52Weeks": 8.5,
+          "isBank": "N",
+          "perfQxComp4Weeks": -553.75,
+          "perfQxComp13Weeks": 6.651,
+          "perfQxComp52Weeks": 72.349543,
+          "perfQxBillion4Weeks": -208.919531,
+          "perfQxBillion13Weeks": 6.727716,
+          "perfQxBillion52Weeks": 77.53312,
+          "perfQxBanks4Weeks": 12.37853,
+          "perfQxBanks13Weeks": 8.905011,
+          "perfQxBanks52Weeks": -468.802471,
+          "perfQxIntl4Weeks": -311.990004,
+          "perfQxIntl13Weeks": 6.799209,
+          "perfQxIntl52Weeks": 76.873547,
+          "perfQxUs4Weeks": 61.807049,
+          "perfQxUs13Weeks": 3.531485,
+          "perfQxUs52Weeks": 20.600126,
+          "perfQb4Weeks": 8.855777,
+          "perfQb13Weeks": 4.055136,
+          "perfQb52Weeks": 25.850054,
+          "perfSp4Weeks": 164.768286,
+          "perfSp13Weeks": 12.232903,
+          "perfSp52Weeks": 58.285816,
+          "perfQxDiv4Weeks": 195.055165,
+          "perfQxDiv13Weeks": 6.443652,
+          "perfQxDiv52Weeks": 60.140378,
+          "perfQxCan4Weeks": 0.44829,
+          "perfQxCan13Weeks": 0.135895,
+          "perfQxCan52Weeks": 0.984526
+        },
+        "secData": [
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001493152-21-000012/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2021-01-04 00:00:00"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-20-002432/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2020-09-14 00:00:00"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001493152-20-017582/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2020-09-11 00:00:00"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001493152-20-017427/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2020-09-08 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-016857/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-27 18:11:38"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-016726/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-26 00:00:00"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001493152-20-015634/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001493152-20-013999/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2020-07-24 20:22:03"
+          },
+          {
+            "formColumnText": "10-Q/A",
+            "reportLink": "/Document/0001493152-20-012597/",
+            "reportText": "Quarterly Report [Amended]",
+            "reportDate": "2020-07-06 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-012031/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-29 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q/A",
+            "reportLink": "/Document/0001493152-20-011674/",
+            "reportText": "Quarterly Report [Amended]",
+            "reportDate": "2020-06-24 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-011274/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-16 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-010685/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-05 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-010526/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-04 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-010434/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-03 08:00:12"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-009877/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-27 08:00:28"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-008142/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-11 06:10:42"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-005003/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-03-30 06:23:38"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-20-004031/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-03-16 16:31:56"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-001997/",
+            "reportText": "Current Report",
+            "reportDate": "2020-02-11 20:28:31"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-000895/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-22 06:05:07"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-000428/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-09 21:49:46"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-19-002394/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2019-10-28 00:15:59"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-015859/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-10-23 10:36:39"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-015442/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-10-15 06:35:19"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001493152-19-015381/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2019-10-11 06:18:51"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-015380/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-10-11 06:15:25"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-014406/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-10-08 17:09:54"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001493152-19-014900/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2019-10-02 21:43:58"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-014904/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-10-02 17:29:23"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-013684/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-09-18 09:48:40"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001493152-19-014051/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2019-09-12 17:33:41"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-014052/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-09-12 17:31:06"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-013072/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-09-03 13:32:12"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-013317/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-08-23 16:38:42"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001493152-19-012687/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2019-08-14 20:01:49"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001493152-19-011750/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2019-08-06 21:45:45"
+          },
+          {
+            "formColumnText": "1-A-W",
+            "reportLink": "/Document/0001493152-19-011331/",
+            "reportText": "Withdrawl of Form 1-A",
+            "reportDate": "2019-07-30 14:22:27"
+          },
+          {
+            "formColumnText": "1-A/A",
+            "reportLink": "/Document/0001493152-19-010900/",
+            "reportText": "Offering Statement 1-A [Amended]",
+            "reportDate": "2019-07-19 19:14:55"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-010841/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-18 21:40:06"
+          },
+          {
+            "formColumnText": "1-A",
+            "reportLink": "/Document/0001493152-19-008526/",
+            "reportText": "Offering Statement 1-A",
+            "reportDate": "2019-06-03 06:15:40"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-008329/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-29 11:00:10"
+          },
+          {
+            "formColumnText": "10-Q/A",
+            "reportLink": "/Document/0001493152-19-007572/",
+            "reportText": "Quarterly Report [Amended]",
+            "reportDate": "2019-05-15 19:49:49"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-006978/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-05-13 21:44:39"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-002449/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-02-22 16:31:12"
+          },
+          {
+            "formColumnText": "SC 13G/A",
+            "reportLink": "/Document/0001144204-19-008318/",
+            "reportText": "Ownership Acquisition Statement [Amended]",
+            "reportDate": "2019-02-14 17:15:00"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001493152-19-001866/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2019-02-13 19:07:29"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-19-001650/",
+            "reportText": "Annual Report",
+            "reportDate": "2019-02-11 06:16:20"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-18-012271/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2018-08-20 06:31:26"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001493152-18-011944/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2018-08-14 20:33:37"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 12.5,
+          "averageNumberPostsPerMonth": 2.9411764705882355,
+          "averageNumberOfDaysBetweenPosts": 18.869565217391305,
+          "numberOfDaysSinceLastPublish": 27,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 12.5,
+          "averageNumberPostsPerMonth": 2.9411764705882355,
+          "averageNumberOfDaysBetweenPosts": 18.869565217391305,
+          "numberOfDaysSinceLastPublish": 27,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "esgPopulated": false,
+          "priceHint": 4,
+          "firstTradeDateMilliseconds": 1360679400000,
+          "exchange": "PNK",
+          "shortName": "MARIJUANA COMPANY OF AMERICA IN",
+          "longName": "Marijuana Company of America, Inc.",
+          "messageBoardId": "finmb_412646",
+          "market": "us_market",
+          "regularMarketChange": -0.00090000033,
+          "regularMarketChangePercent": -10.465119,
+          "regularMarketTime": 1611953994,
+          "regularMarketPrice": 0.0077,
+          "regularMarketDayHigh": 0.009,
+          "regularMarketDayRange": "0.0075 - 0.009",
+          "regularMarketDayLow": 0.0075,
+          "regularMarketVolume": 131997778,
+          "regularMarketPreviousClose": 0.0086,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.009,
+          "averageDailyVolume3Month": 186240544,
+          "averageDailyVolume10Day": 265647700,
+          "fiftyTwoWeekLowChange": 0.0069,
+          "fiftyTwoWeekLowChangePercent": 8.625,
+          "fiftyTwoWeekRange": "8.0E-4 - 0.0749",
+          "fiftyTwoWeekHighChange": -0.067200005,
+          "fiftyTwoWeekHighChangePercent": -0.8971963,
+          "fiftyTwoWeekLow": 0.0008,
+          "fiftyTwoWeekHigh": 0.0749,
+          "earningsTimestamp": 1605783540,
+          "earningsTimestampStart": 1605783540,
+          "earningsTimestampEnd": 1605783540,
+          "epsTrailingTwelveMonths": -0.033,
+          "sharesOutstanding": 1913880064,
+          "bookValue": -0.003,
+          "fiftyDayAverage": 0.0058750003,
+          "fiftyDayAverageChange": 0.0018249997,
+          "fiftyDayAverageChangePercent": 0.31063822,
+          "twoHundredDayAverage": 0.0028384058,
+          "twoHundredDayAverageChange": 0.004861594,
+          "twoHundredDayAverageChangePercent": 1.7127904,
+          "marketCap": 14736876,
+          "priceToBook": -2.5666666,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "tradeable": false,
+          "displayName": "Marijuana Co of America",
+          "symbol": "MCOA"
+        },
+        "otcMarkets": {
+          "securityId": 346388,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "MCOA",
+          "securityName": "MARIJUANA CO OF AMER INC",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "California",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 2833,
+          "industry": "Medicinal and botanicals",
+          "volume": 227258208,
+          "volumeChange": 2.630675,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.0086,
+          "shortInterest": 244848,
+          "shortInterestPercent": 645.58,
+          "shortInterestRatio": 0.000064,
+          "pct1Day": -0.022727,
+          "pct5Day": 0.075,
+          "pct4Weeks": 1.077295,
+          "pct13Weeks": 5.615385,
+          "pct52Weeks": -0.8,
+          "isBank": "N",
+          "perfQxComp4Weeks": -721.411639,
+          "perfQxComp13Weeks": 20.816877,
+          "perfQxComp52Weeks": -6.809369,
+          "perfQxBillion4Weeks": -272.175136,
+          "perfQxBillion13Weeks": 21.056988,
+          "perfQxBillion52Weeks": -7.297235,
+          "perfQxBanks4Weeks": 16.126439,
+          "perfQxBanks13Weeks": 27.871672,
+          "perfQxBanks52Weeks": 44.122585,
+          "perfQxIntl4Weeks": -406.452768,
+          "perfQxIntl13Weeks": 21.280752,
+          "perfQxIntl52Weeks": -7.235157,
+          "perfQxUs4Weeks": 80.520676,
+          "perfQxUs13Weeks": 11.053148,
+          "perfQxUs52Weeks": -1.938835,
+          "perfQb4Weeks": 11.537084,
+          "perfQb13Weeks": 12.692115,
+          "perfQb52Weeks": -2.432946,
+          "perfSp4Weeks": 214.655999,
+          "perfSp13Weeks": 38.287596,
+          "perfSp52Weeks": -5.485724,
+          "perfQxDiv4Weeks": 254.112987,
+          "perfQxDiv13Weeks": 20.167901,
+          "perfQxDiv52Weeks": -5.660271,
+          "perfQxCan4Weeks": 0.584021,
+          "perfQxCan13Weeks": 0.425335,
+          "perfQxCan52Weeks": -0.092661
+        },
+        "secData": [
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001573281-21-000003/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2021-01-28 12:36:16"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001573281-21-000002/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2021-01-25 21:44:59"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001079973-21-000005/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-06 00:00:00"
+          },
+          {
+            "formColumnText": "4/A",
+            "reportLink": "/Document/0001573281-21-000001/",
+            "reportText": "Security Sale/Purchase Record [Amended]",
+            "reportDate": "2021-01-04 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001079973-20-001066/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-10 00:00:00"
+          },
+          {
+            "formColumnText": "4/A",
+            "reportLink": "/Document/0001573281-20-000005/",
+            "reportText": "Security Sale/Purchase Record [Amended]",
+            "reportDate": "2020-12-08 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001573281-20-000006/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-12-08 00:00:00"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-20-003395/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2020-12-03 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001079973-20-001045/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-12-02 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001573281-20-000004/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-12-02 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-011471/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-12-01 00:00:00"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001079973-20-001039/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2020-11-24 00:00:00"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001079973-20-001031/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-11-23 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001079973-20-000999/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-11-16 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-030606/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-08 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001573281-20-000003/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-10-06 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-030001/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-05 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001262463-20-000389/",
+            "reportText": "Current Report",
+            "reportDate": "2020-09-30 00:00:00"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001262463-20-000388/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2020-09-29 00:00:00"
+          },
+          {
+            "formColumnText": "RW WD",
+            "reportLink": "/Document/0001262463-20-000378/",
+            "reportText": "Withdrawal of a Registration Withdrawal Request",
+            "reportDate": "2020-09-23 00:00:00"
+          },
+          {
+            "formColumnText": "RW",
+            "reportLink": "/Document/0001262463-20-000379/",
+            "reportText": "Registration Withdrawal Request",
+            "reportDate": "2020-09-23 00:00:00"
+          },
+          {
+            "formColumnText": "RW",
+            "reportLink": "/Document/0001262463-20-000377/",
+            "reportText": "Registration Withdrawal Request",
+            "reportDate": "2020-09-21 00:00:00"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-20-002472/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2020-09-16 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-008642/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-09-14 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001262463-20-000366/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-09-14 00:00:00"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001262463-20-000354/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-09-04 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001262463-20-000347/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-09-03 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001262463-20-000333/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001262463-20-000334/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-20-002131/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2020-08-13 00:00:00"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001262463-20-000307/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2020-08-11 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001262463-20-000308/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-08-11 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001262463-20-000298/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-08-10 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-007222/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-08-07 00:00:00"
+          },
+          {
+            "formColumnText": "3",
+            "reportLink": "/Document/0001262463-20-000294/",
+            "reportText": "Security Ownership Statement",
+            "reportDate": "2020-07-31 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001262463-20-000295/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-07-31 00:00:00"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001262463-20-000291/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2020-07-27 20:03:03"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001262463-20-000287/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-07-23 00:00:00"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001262463-20-000285/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2020-07-22 20:03:42"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-006544/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-07-17 00:00:00"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001262463-20-000273/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-07-02 00:00:00"
+          },
+          {
+            "formColumnText": "SC 13G/A",
+            "reportLink": "/Document/0001567619-20-012734/",
+            "reportText": "Ownership Acquisition Statement [Amended]",
+            "reportDate": "2020-07-01 13:44:33"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001262463-20-000263/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-29 18:44:58"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001262463-20-000261/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-25 00:00:00"
+          },
+          {
+            "formColumnText": "10-K/A",
+            "reportLink": "/Document/0001262463-20-000258/",
+            "reportText": "Annual Report [Amended]",
+            "reportDate": "2020-06-24 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001262463-20-000251/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-19 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001262463-20-000248/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-16 00:00:00"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001262463-20-000247/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2020-06-15 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001262463-20-000239/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-06-09 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001262463-20-000221/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-05-29 17:49:49"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 25,
+          "averageNumberPostsPerMonth": 5.555555555555555,
+          "averageNumberOfDaysBetweenPosts": 5.5476190476190474,
+          "numberOfDaysSinceLastPublish": 3,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 25,
+          "averageNumberPostsPerMonth": 5.555555555555555,
+          "averageNumberOfDaysBetweenPosts": 5.5476190476190474,
+          "numberOfDaysSinceLastPublish": 3,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "regularMarketChange": -0.0010000002,
+          "regularMarketChangePercent": -6.5359488,
+          "regularMarketTime": 1611953974,
+          "regularMarketPrice": 0.0143,
+          "regularMarketDayHigh": 0.0165,
+          "regularMarketDayRange": "0.0124 - 0.0165",
+          "regularMarketDayLow": 0.0124,
+          "regularMarketVolume": 71700370,
+          "regularMarketPreviousClose": 0.0153,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.0156,
+          "averageDailyVolume3Month": 83238095,
+          "averageDailyVolume10Day": 132174737,
+          "fiftyTwoWeekLowChange": 0.012399999,
+          "fiftyTwoWeekLowChangePercent": 6.526315,
+          "fiftyTwoWeekRange": "0.0019 - 0.1799",
+          "fiftyTwoWeekHighChange": -0.1656,
+          "fiftyTwoWeekHighChangePercent": -0.92051136,
+          "fiftyTwoWeekLow": 0.0019,
+          "fiftyTwoWeekHigh": 0.1799,
+          "epsTrailingTwelveMonths": -0.047,
+          "sharesOutstanding": 1010280000,
+          "bookValue": -0.037,
+          "fiftyDayAverage": 0.008314849,
+          "fiftyDayAverageChange": 0.005985151,
+          "fiftyDayAverageChangePercent": 0.7198148,
+          "twoHundredDayAverage": 0.005857338,
+          "twoHundredDayAverageChange": 0.008442662,
+          "twoHundredDayAverageChangePercent": 1.4413819,
+          "marketCap": 14447004,
+          "priceToBook": -0.38648647,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "firstTradeDateMilliseconds": 889021800000,
+          "priceHint": 4,
+          "exchange": "PNK",
+          "shortName": "BANTEK INC",
+          "longName": "Bantec, Inc.",
+          "messageBoardId": "finmb_550356411",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "market": "us_market",
+          "esgPopulated": false,
+          "tradeable": false,
+          "displayName": "Bantek",
+          "symbol": "BANT"
+        },
+        "otcMarkets": {
+          "securityId": 360903,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "BANT",
+          "securityName": "BANTEC INC",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "New Jersey",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 3721,
+          "industry": "Aircraft",
+          "volume": 81723012,
+          "volumeChange": 3.53262,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": true,
+          "price": 0.0153,
+          "shortInterestRatio": 0,
+          "pct1Day": -0.125714,
+          "pct5Day": -0.26087,
+          "pct4Weeks": 4.464286,
+          "pct13Weeks": 3.636364,
+          "isBank": "N",
+          "perfQxComp4Weeks": -2989.51412,
+          "perfQxComp13Weeks": 13.480418,
+          "perfQxBillion4Weeks": -1127.887835,
+          "perfQxBillion13Weeks": 13.635908,
+          "perfQxBanks4Weeks": 66.82761,
+          "perfQxBanks13Weeks": 18.048904,
+          "perfQxIntl4Weeks": -1684.331417,
+          "perfQxIntl13Weeks": 13.780811,
+          "perfQxUs4Weeks": 333.675929,
+          "perfQxUs13Weeks": 7.157705,
+          "perfQb4Weeks": 47.809426,
+          "perfQb13Weeks": 8.219053,
+          "perfSp4Weeks": 889.529784,
+          "perfSp13Weeks": 24.79396,
+          "perfQxDiv4Weeks": 1053.038681,
+          "perfQxDiv13Weeks": 13.06016,
+          "perfQxCan4Weeks": 2.420172,
+          "perfQxCan13Weeks": 0.275435
+        },
+        "secData": [
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-21-003731/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-22 16:15:23"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001213900-21-001662/",
+            "reportText": "Annual Report",
+            "reportDate": "2021-01-12 00:00:00"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001213900-20-045160/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2020-12-29 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-044577/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-28 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-036292/",
+            "reportText": "Current Report",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-025896/",
+            "reportText": "Current Report",
+            "reportDate": "2020-09-09 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-024135/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-28 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001213900-20-022186/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-14 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-018477/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-24 00:00:00"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-20-001883/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2020-07-22 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-018140/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-21 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q/A",
+            "reportLink": "/Document/0001213900-20-017925/",
+            "reportText": "Quarterly Report [Amended]",
+            "reportDate": "2020-07-20 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-20-017927/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-07-20 00:00:00"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001213900-20-017849/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2020-07-17 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001213900-20-015931/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-06-26 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-015557/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-23 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-015259/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-18 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-005235/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-06-12 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-014669/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-11 00:00:00"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001213900-20-014267/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-06-05 17:43:22"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-013891/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-02 13:25:30"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-012787/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-18 13:21:37"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-010884/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-04 13:22:14"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-20-010297/",
+            "reportText": "Current Report",
+            "reportDate": "2020-04-28 16:53:20"
+          },
+          {
+            "formColumnText": "RW",
+            "reportLink": "/Document/0001213900-20-009467/",
+            "reportText": "Registration Withdrawal Request",
+            "reportDate": "2020-04-17 16:49:43"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001213900-20-006670/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-03-17 15:52:16"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001213900-20-004059/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2020-02-18 06:14:34"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001213900-20-002774/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-02-06 15:34:54"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001213900-20-000018/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2020-01-02 12:43:53"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-19-023015/",
+            "reportText": "Current Report",
+            "reportDate": "2019-11-12 18:23:20"
+          },
+          {
+            "formColumnText": "SC 13G/A",
+            "reportLink": "/Document/0001078782-19-000816/",
+            "reportText": "Ownership Acquisition Statement [Amended]",
+            "reportDate": "2019-11-08 12:45:13"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001213900-19-016427/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2019-08-21 11:01:58"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001213900-19-015888/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-08-14 17:22:53"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001213900-19-013758/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2019-07-26 17:28:10"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001213900-19-012083/",
+            "reportText": "Current Report",
+            "reportDate": "2019-07-03 17:15:27"
+          },
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-19-001433/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2019-06-26 00:16:01"
+          },
+          {
+            "formColumnText": "SC 13G",
+            "reportLink": "/Document/0001078782-19-000539/",
+            "reportText": "Ownership Acquisition Statement",
+            "reportDate": "2019-06-19 10:52:38"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-010788/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-06-14 16:41:35"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001213900-19-010755/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2019-06-14 15:13:19"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-010463/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-06-10 21:34:48"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-010332/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-06-07 16:59:43"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-010169/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-06-06 11:42:09"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001213900-19-010167/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2019-06-06 11:36:07"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001213900-19-008747/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-05-15 13:45:28"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-007990/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-05-07 19:17:15"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001213900-19-007988/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2019-05-07 19:17:11"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-008123/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-05-07 10:20:44"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001213900-19-006713/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-04-18 16:58:44"
+          },
+          {
+            "formColumnText": "POS AM",
+            "reportLink": "/Document/0001213900-19-006711/",
+            "reportText": "Post-Effective Filing Amendment",
+            "reportDate": "2019-04-18 16:57:20"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-007258/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-04-17 16:54:46"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.7777777777777777,
+          "averageNumberOfDaysBetweenPosts": 15,
+          "numberOfDaysSinceLastPublish": 9,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.7777777777777777,
+          "averageNumberOfDaysBetweenPosts": 15,
+          "numberOfDaysSinceLastPublish": 9,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "esgPopulated": false,
+          "priceHint": 4,
+          "firstTradeDateMilliseconds": 907939800000,
+          "exchange": "PNK",
+          "shortName": "DATA443 RISK MITIGATION INC",
+          "longName": "Data443 Risk Mitigation, Inc.",
+          "messageBoardId": "finmb_48900090",
+          "market": "us_market",
+          "regularMarketChange": -0.002100001,
+          "regularMarketChangePercent": -12.280707,
+          "regularMarketTime": 1611953965,
+          "regularMarketPrice": 0.015,
+          "regularMarketDayHigh": 0.0179,
+          "regularMarketDayRange": "0.0133 - 0.0179",
+          "regularMarketDayLow": 0.0133,
+          "regularMarketVolume": 23414775,
+          "regularMarketPreviousClose": 0.0171,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.0175,
+          "averageDailyVolume3Month": 26834610,
+          "averageDailyVolume10Day": 50849640,
+          "fiftyTwoWeekLowChange": 0.0101499995,
+          "fiftyTwoWeekLowChangePercent": 2.0927835,
+          "fiftyTwoWeekRange": "0.00485 - 0.34",
+          "fiftyTwoWeekHighChange": -0.32500002,
+          "fiftyTwoWeekHighChangePercent": -0.9558824,
+          "fiftyTwoWeekLow": 0.00485,
+          "fiftyTwoWeekHigh": 0.34,
+          "sharesOutstanding": 827360000,
+          "fiftyDayAverage": 0.00960375,
+          "fiftyDayAverageChange": 0.0053962497,
+          "fiftyDayAverageChangePercent": 0.5618899,
+          "twoHundredDayAverage": 0.011002681,
+          "twoHundredDayAverageChange": 0.0039973184,
+          "twoHundredDayAverageChangePercent": 0.36330402,
+          "marketCap": 12410400,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "tradeable": false,
+          "displayName": "Data443 Risk Mitigation",
+          "symbol": "ATDS"
+        },
+        "otcMarkets": {
+          "securityId": 351053,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "ATDS",
+          "securityName": "DATA443 RISK MITIGATION",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "North Carolina",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 7372,
+          "industry": "Prepackaged software",
+          "volume": 22941202,
+          "volumeChange": 2.452224,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.0171,
+          "shortInterest": 268760,
+          "shortInterestPercent": -21.28,
+          "shortInterestRatio": 0.000268,
+          "pct1Day": -0.033898,
+          "pct5Day": 0.103226,
+          "pct4Weeks": 1.714286,
+          "pct13Weeks": 1.150943,
+          "pct52Weeks": -0.9316,
+          "isBank": "N",
+          "perfQxComp4Weeks": -1147.973422,
+          "perfQxComp13Weeks": 4.26668,
+          "perfQxComp52Weeks": -7.92951,
+          "perfQxBillion4Weeks": -433.108929,
+          "perfQxBillion13Weeks": 4.315893,
+          "perfQxBillion52Weeks": -8.49763,
+          "perfQxBanks4Weeks": 25.661802,
+          "perfQxBanks13Weeks": 5.712648,
+          "perfQxBanks52Weeks": 51.380751,
+          "perfQxIntl4Weeks": -646.783264,
+          "perfQxIntl13Weeks": 4.361757,
+          "perfQxIntl52Weeks": -8.425341,
+          "perfQxUs4Weeks": 128.131557,
+          "perfQxUs13Weeks": 2.265481,
+          "perfQxUs52Weeks": -2.257774,
+          "perfQb4Weeks": 18.35882,
+          "perfQb13Weeks": 2.601408,
+          "perfQb52Weeks": -2.833166,
+          "perfSp4Weeks": 341.579437,
+          "perfSp13Weeks": 7.847522,
+          "perfSp52Weeks": -6.388125,
+          "perfQxDiv4Weeks": 404.366854,
+          "perfQxDiv13Weeks": 4.133664,
+          "perfQxDiv52Weeks": -6.591385,
+          "perfQxCan4Weeks": 0.929346,
+          "perfQxCan13Weeks": 0.087178,
+          "perfQxCan52Weeks": -0.107904
+        },
+        "secData": [
+          {
+            "formColumnText": "EFFECT",
+            "reportLink": "/Document/9999999995-21-000282/",
+            "reportText": "Notice of Effectiveness",
+            "reportDate": "2021-01-27 00:15:14"
+          },
+          {
+            "formColumnText": "S-1/A",
+            "reportLink": "/Document/0001493152-21-001523/",
+            "reportText": "IPO Investment Prospectus [Amended]",
+            "reportDate": "2021-01-21 15:41:59"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001493152-20-024298/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-12-28 00:00:00"
+          },
+          {
+            "formColumnText": "RW",
+            "reportLink": "/Document/0001493152-20-023816/",
+            "reportText": "Registration Withdrawal Request",
+            "reportDate": "2020-12-17 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-023852/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-17 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-022832/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-02 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-011416/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-11-30 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-022064/",
+            "reportText": "Current Report",
+            "reportDate": "2020-11-20 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-021394/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-11-16 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-20-021141/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-010347/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-11-02 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-018919/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-05 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-018804/",
+            "reportText": "Current Report",
+            "reportDate": "2020-10-02 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-20-018354/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-09-25 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-017237/",
+            "reportText": "Current Report",
+            "reportDate": "2020-09-03 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-008234/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-09-01 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-016527/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-21 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-015477/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-13 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-014876/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-06 00:00:00"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-20-014049/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2020-07-27 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-013141/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-13 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-013083/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-10 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-006166/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-07-09 00:00:00"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-20-005163/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2020-06-10 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-009282/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-18 11:26:43"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-20-009021/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-05-15 14:07:19"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-20-006607/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-04-17 13:33:31"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001493152-20-006559/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2020-04-16 17:06:54"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-006383/",
+            "reportText": "Current Report",
+            "reportDate": "2020-04-14 17:08:14"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001493152-20-004971/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2020-03-27 21:18:07"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001493152-20-001377/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-01-30 14:50:19"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-20-001309/",
+            "reportText": "Current Report",
+            "reportDate": "2020-01-29 14:16:32"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-017279/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-11-14 12:10:34"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-016127/",
+            "reportText": "Current Report",
+            "reportDate": "2019-10-29 19:18:55"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-014339/",
+            "reportText": "Current Report",
+            "reportDate": "2019-09-20 08:43:30"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-012306/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-08-14 08:01:18"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001493152-19-010692/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2019-07-16 15:49:08"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001493152-19-009745/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2019-06-26 16:36:04"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009743/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-26 16:33:40"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-009482/",
+            "reportText": "Current Report",
+            "reportDate": "2019-06-20 14:10:29"
+          },
+          {
+            "formColumnText": "S-8",
+            "reportLink": "/Document/0001493152-19-007893/",
+            "reportText": "Employee Benefit Plan Security Offering",
+            "reportDate": "2019-05-20 16:33:09"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-007881/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-20 16:07:35"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001493152-19-007193/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-05-15 07:31:40"
+          },
+          {
+            "formColumnText": "UPLOAD",
+            "reportLink": "/Document/0000000000-19-008069/",
+            "reportText": "Securities Filing Public Response",
+            "reportDate": "2019-05-06 14:37:18"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-006259/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-01 17:12:30"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-006253/",
+            "reportText": "Current Report",
+            "reportDate": "2019-05-01 16:15:48"
+          },
+          {
+            "formColumnText": "CORRESP",
+            "reportLink": "/Document/0001493152-19-005824/",
+            "reportText": "S.E.C. Correspondence Letter",
+            "reportDate": "2019-04-24 13:08:53"
+          },
+          {
+            "formColumnText": "10-12G/A",
+            "reportLink": "/Document/0001493152-19-005823/",
+            "reportText": "Initial general form for registration of a class of securities pursuant to section 12(g) [Amended]",
+            "reportDate": "2019-04-24 13:07:12"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001493152-19-005663/",
+            "reportText": "Current Report",
+            "reportDate": "2019-04-19 15:28:23"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001493152-19-005187/",
+            "reportText": "Annual Report",
+            "reportDate": "2019-04-12 11:33:41"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.5,
+          "averageNumberOfDaysBetweenPosts": 14.75,
+          "numberOfDaysSinceLastPublish": 4,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 2.5,
+          "averageNumberOfDaysBetweenPosts": 14.75,
+          "numberOfDaysSinceLastPublish": 4,
+          "numberOfReports": 50
+        }
+      },
+      {
+        "yahooFinance": {
+          "language": "en-US",
+          "region": "US",
+          "quoteType": "EQUITY",
+          "quoteSourceName": "Delayed Quote",
+          "triggerable": false,
+          "currency": "USD",
+          "marketState": "CLOSED",
+          "market": "us_market",
+          "esgPopulated": false,
+          "firstTradeDateMilliseconds": 1147440600000,
+          "priceHint": 4,
+          "regularMarketChange": 0.0019999985,
+          "regularMarketChangePercent": 12.4999895,
+          "regularMarketTime": 1611953728,
+          "regularMarketPrice": 0.018,
+          "regularMarketDayHigh": 0.0185,
+          "regularMarketDayRange": "0.01515 - 0.0185",
+          "regularMarketDayLow": 0.01515,
+          "regularMarketVolume": 2144749,
+          "regularMarketPreviousClose": 0.016,
+          "bid": 0,
+          "ask": 0,
+          "bidSize": 0,
+          "askSize": 0,
+          "fullExchangeName": "Other OTC",
+          "financialCurrency": "USD",
+          "regularMarketOpen": 0.01775,
+          "averageDailyVolume3Month": 4332298,
+          "averageDailyVolume10Day": 12257575,
+          "fiftyTwoWeekLowChange": 0.0158,
+          "fiftyTwoWeekLowChangePercent": 7.181818,
+          "fiftyTwoWeekRange": "0.0022 - 0.06",
+          "fiftyTwoWeekHighChange": -0.042,
+          "fiftyTwoWeekHighChangePercent": -0.7,
+          "fiftyTwoWeekLow": 0.0022,
+          "fiftyTwoWeekHigh": 0.06,
+          "earningsTimestamp": 1558018740,
+          "earningsTimestampStart": 1558018740,
+          "earningsTimestampEnd": 1558018740,
+          "epsTrailingTwelveMonths": -0.02,
+          "sharesOutstanding": 146110000,
+          "bookValue": -0.021,
+          "fiftyDayAverage": 0.010344375,
+          "fiftyDayAverageChange": 0.0076556243,
+          "fiftyDayAverageChangePercent": 0.74007607,
+          "twoHundredDayAverage": 0.009926377,
+          "twoHundredDayAverageChange": 0.008073622,
+          "twoHundredDayAverageChangePercent": 0.8133504,
+          "marketCap": 2629980,
+          "priceToBook": -0.8571428,
+          "sourceInterval": 15,
+          "exchangeDataDelayedBy": 0,
+          "tradeable": false,
+          "exchange": "PNK",
+          "shortName": "IIOT OXYS INC",
+          "longName": "IIOT-OXYS, Inc.",
+          "messageBoardId": "finmb_411622892",
+          "exchangeTimezoneName": "America/New_York",
+          "exchangeTimezoneShortName": "EST",
+          "gmtOffSetMilliseconds": -18000000,
+          "displayName": "IIOT-OXYS",
+          "symbol": "ITOX"
+        },
+        "otcMarkets": {
+          "securityId": 257764,
+          "reportDate": "Jan 28, 2021 12:00:00 AM",
+          "symbol": "ITOX",
+          "securityName": "IIOT-OXYS INC",
+          "market": "Pink Current",
+          "marketId": 20,
+          "securityType": "Common Stock",
+          "country": "USA",
+          "state": "Massachusetts",
+          "forexCountry": "USA",
+          "caveatEmptor": false,
+          "industryId": 7372,
+          "industry": "Prepackaged software",
+          "volume": 4036990,
+          "volumeChange": 5.68675,
+          "dividendYield": 0,
+          "dividendPayer": false,
+          "penny": false,
+          "price": 0.016,
+          "shortInterestRatio": 0,
+          "pct1Day": -0.139785,
+          "pct5Day": -0.111111,
+          "pct4Weeks": 0.83908,
+          "pct13Weeks": 0.72043,
+          "pct52Weeks": -0.753846,
+          "isBank": "N",
+          "perfQxComp4Weeks": -561.891206,
+          "perfQxComp13Weeks": 2.670717,
+          "perfQxComp52Weeks": -6.416521,
+          "perfQxBillion4Weeks": -211.991056,
+          "perfQxBillion13Weeks": 2.701523,
+          "perfQxBillion52Weeks": -6.87624,
+          "perfQxBanks4Weeks": 12.560518,
+          "perfQxBanks13Weeks": 3.575818,
+          "perfQxBanks52Weeks": 41.577052,
+          "perfQxIntl4Weeks": -316.576866,
+          "perfQxIntl13Weeks": 2.73023,
+          "perfQxIntl52Weeks": -6.817744,
+          "perfQxUs4Weeks": 62.715733,
+          "perfQxUs13Weeks": 1.418072,
+          "perfQxUs52Weeks": -1.826979,
+          "perfQb4Weeks": 8.985974,
+          "perfQb13Weeks": 1.628345,
+          "perfQb52Weeks": -2.292584,
+          "perfSp4Weeks": 167.190701,
+          "perfSp13Weeks": 4.912137,
+          "perfSp52Weeks": -5.16924,
+          "perfQxDiv4Weeks": 197.922857,
+          "perfQxDiv13Weeks": 2.587456,
+          "perfQxDiv52Weeks": -5.333717,
+          "perfQxCan4Weeks": 0.454881,
+          "perfQxCan13Weeks": 0.054569,
+          "perfQxCan52Weeks": -0.087315
+        },
+        "secData": [
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-21-000192/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-20 08:30:06"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-21-000177/",
+            "reportText": "Current Report",
+            "reportDate": "2021-01-19 09:30:05"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-21-000001/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2021-01-04 00:00:00"
+          },
+          {
+            "formColumnText": "DEF 14C",
+            "reportLink": "/Document/0001683168-20-004404/",
+            "reportText": "Definitive information statements",
+            "reportDate": "2020-12-21 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-004347/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-17 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-004243/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-10 00:00:00"
+          },
+          {
+            "formColumnText": "PRE 14C",
+            "reportLink": "/Document/0001683168-20-004228/",
+            "reportText": "Preliminary information statement not related to a contested matter or merger/acquisition",
+            "reportDate": "2020-12-09 00:00:00"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-20-000026/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2020-12-07 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-004176/",
+            "reportText": "Current Report",
+            "reportDate": "2020-12-04 00:00:00"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-20-000024/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2020-11-24 14:48:57"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-20-000023/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2020-11-24 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-004079/",
+            "reportText": "Current Report",
+            "reportDate": "2020-11-24 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001683168-20-003967/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-11-16 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-003901/",
+            "reportText": "Current Report",
+            "reportDate": "2020-11-13 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001553997-20-000019/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001553997-20-000020/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001553997-20-000021/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-11-12 00:00:00"
+          },
+          {
+            "formColumnText": "S-1",
+            "reportLink": "/Document/0001683168-20-003357/",
+            "reportText": "IPO Investment Prospectus",
+            "reportDate": "2020-10-05 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-003272/",
+            "reportText": "Current Report",
+            "reportDate": "2020-09-25 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001683168-20-003118/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-09-14 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-002942/",
+            "reportText": "Current Report",
+            "reportDate": "2020-09-01 00:00:00"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001683168-20-002810/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2020-08-19 00:00:00"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001683168-20-002781/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2020-08-17 00:00:00"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-20-000013/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2020-08-13 20:57:07"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-002459/",
+            "reportText": "Current Report",
+            "reportDate": "2020-08-03 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-002431/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-31 00:00:00"
+          },
+          {
+            "formColumnText": "D/A",
+            "reportLink": "/Document/0001553997-20-000010/",
+            "reportText": "Stock / Securites Offering [Amended]",
+            "reportDate": "2020-07-09 00:00:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-002191/",
+            "reportText": "Current Report",
+            "reportDate": "2020-07-06 00:00:00"
+          },
+          {
+            "formColumnText": "NT 10-Q",
+            "reportLink": "/Document/0001683168-20-002110/",
+            "reportText": "Notice of Late Quarterly Filing",
+            "reportDate": "2020-06-29 00:00:00"
+          },
+          {
+            "formColumnText": "10-K",
+            "reportLink": "/Document/0001683168-20-002038/",
+            "reportText": "Annual Report",
+            "reportDate": "2020-06-22 20:39:48"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-001976/",
+            "reportText": "Current Report",
+            "reportDate": "2020-06-17 00:00:00"
+          },
+          {
+            "formColumnText": "4",
+            "reportLink": "/Document/0001553997-20-000009/",
+            "reportText": "Security Sale/Purchase Record",
+            "reportDate": "2020-06-12 00:00:00"
+          },
+          {
+            "formColumnText": "D/A",
+            "reportLink": "/Document/0001553997-20-000007/",
+            "reportText": "Stock / Securites Offering [Amended]",
+            "reportDate": "2020-06-03 10:31:39"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-001778/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-29 08:30:16"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-001708/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-22 13:20:49"
+          },
+          {
+            "formColumnText": "NT 10-K",
+            "reportLink": "/Document/0001683168-20-001582/",
+            "reportText": "Notice of Late Annual Filing",
+            "reportDate": "2020-05-15 08:59:10"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-001572/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-14 17:25:38"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-001364/",
+            "reportText": "Current Report",
+            "reportDate": "2020-05-01 08:30:11"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-000975/",
+            "reportText": "Current Report",
+            "reportDate": "2020-03-27 12:38:09"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-20-000870/",
+            "reportText": "Current Report",
+            "reportDate": "2020-03-19 06:00:43"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-19-003803/",
+            "reportText": "Current Report",
+            "reportDate": "2019-11-22 17:16:01"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001683168-19-003626/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-11-14 16:07:04"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-19-000024/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-09-26 12:56:22"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-19-000023/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-09-26 12:52:29"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-19-000022/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-09-26 12:48:29"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-19-000021/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-09-26 12:41:00"
+          },
+          {
+            "formColumnText": "8-K",
+            "reportLink": "/Document/0001683168-19-002886/",
+            "reportText": "Current Report",
+            "reportDate": "2019-09-10 17:30:43"
+          },
+          {
+            "formColumnText": "SC 13D",
+            "reportLink": "/Document/0001683168-19-002764/",
+            "reportText": "Acquisition Statement",
+            "reportDate": "2019-08-27 17:20:29"
+          },
+          {
+            "formColumnText": "D",
+            "reportLink": "/Document/0001553997-19-000017/",
+            "reportText": "Stock / Securites Offering",
+            "reportDate": "2019-08-19 11:36:25"
+          },
+          {
+            "formColumnText": "10-Q",
+            "reportLink": "/Document/0001683168-19-002608/",
+            "reportText": "Quarterly Report",
+            "reportDate": "2019-08-14 14:26:12"
+          }
+        ],
+        "secOtcData": [],
+        "secStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 3.8461538461538463,
+          "averageNumberOfDaysBetweenPosts": 12.380952380952381,
+          "numberOfDaysSinceLastPublish": 11,
+          "numberOfReports": 50
+        },
+        "mixedStats": {
+          "averageNumberPostsPerYear": 16.666666666666668,
+          "averageNumberPostsPerMonth": 3.8461538461538463,
+          "averageNumberOfDaysBetweenPosts": 12.380952380952381,
+          "numberOfDaysSinceLastPublish": 11,
+          "numberOfReports": 50
+        }
+      }
+    ],
+    "missingStocks": []
+  }
