@@ -1641,7 +1641,7 @@ export const getBestStocks4 = functions.runWith({ timeoutSeconds: 540, memory: '
         // 8. Get SEC Report Dates
         // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
 
-        const scrapeScript = generateScrapeScript(scrapeYahooFinancials, `https://finance.yahoo.com/quote/[symbol]/financials`, 1);
+        const scrapeScript = generateScrapeScript(scrapeYahooFinancials, `https://finance.yahoo.com/quote/[symbol]/financials`, 50);
         let financialResponse = await scrapeScript(stockSymbols); // test error handling.. add ,true, ['LBSR', 'SIML']
 
         // attempt to retry api call
