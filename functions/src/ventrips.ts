@@ -1089,6 +1089,133 @@ const scrapeSec = ($, args: any) => {
     };
 }
 
+const validateDate = (testdate) => {
+    const date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/ ;
+    return date_regex.test(testdate);
+}
+
+const validateNumber = (s) => {
+    return s.match(/([\d,]+)/);
+}
+
+const generateStatsObject = (table) => {
+    const stats = {};
+    const referenceKey = {
+        headerIndex: undefined,
+        datesIndices: [],
+    };
+    const exclude = ['breakdown', 'ttm'];
+    if (table && table.headers.length > 0 && table.rows.length > 0) {
+        // find the index of the category name 
+        table.headers.forEach((col, index) => {
+            if (!moment.isMoment(col) && col.toLowerCase() === exclude[0]) {
+                referenceKey['headerIndex'] = index;  
+            } else if (moment.isMoment(col)) {
+                referenceKey['datesIndices'].push({
+                    date: col,
+                    index,
+                });
+            }
+        });
+        // find the indices of the date stats
+        table.rows.forEach((row) => {
+            if (row && row.length > 0) {
+                const headerName = row[referenceKey.headerIndex].replace(/[ ]/g, "_").toLowerCase();
+                const values = [];
+                referenceKey.datesIndices.forEach((date, index) => {
+                    const value = row[date.index];
+                    values.push({
+                        date: date.date,
+                        value: value
+                    });
+                    values.sort((a, b) => b.date.valueOf() - a.date.valueOf());
+                });
+                stats[headerName] = values;
+            } 
+        })
+    }
+
+    return stats;
+}
+
+const calcPercentProfitGrowth = (currentProfit, previousProfit) => {
+    return (previousProfit / (currentProfit - previousProfit)) * 100;
+}
+
+const generatePercentProfitGrowth = (data) => {
+    const profitGrowth = {
+        overallPercentProfitGrowth: undefined,
+        averagePercentProfitGrowth: undefined,
+    }
+
+    let profit = _.get(data, 'gross_profit', []);
+    profit = profit.filter((current) => {
+        return current.value !== '-';
+    });
+    if (profit.length > 1) {
+        let totalProfitGrowth = 0;
+        profitGrowth.overallPercentProfitGrowth = calcPercentProfitGrowth(profit[0].value, profit[profit.length - 1].value);
+        for (let i = profit.length - 1; i > 0; i--) {
+             totalProfitGrowth += calcPercentProfitGrowth(profit[i - 1].value, profit[i].value);
+        }
+        profitGrowth.averagePercentProfitGrowth = (totalProfitGrowth / (profit.length - 1));
+    }
+    return profitGrowth;
+}
+
+const scrapeYahooFinancials = ($, args: any) => {
+    // get the table headers.. excluding breakdown and TTM columns
+    const tableEl = $("#Main").find("[data-test='" + 'qsp-financial' + "']");
+    const tableHeaderRowEl = tableEl ? tableEl.find(`[class="D(tbr) C($primaryColor)"]`).children() : undefined;
+    const table: any = {
+        headers: [],
+        rows: [],
+    }
+    // const exclude = ['breakdown', 'ttm'];
+    tableHeaderRowEl.each(function(this: any, index: number) {
+        const columnEl = $(this);
+        const columnText = columnEl && columnEl.text() && columnEl.text() !== '' ? columnEl.text() : undefined;
+        if (columnText && validateDate(columnText)) {
+            const momentDateSplit = columnText.split('/');
+            const month = momentDateSplit[0];
+            const date = momentDateSplit[1];
+            const year = momentDateSplit[2];
+            table.headers.push(moment(`${year}-${month}-${date}`));
+        } else {
+        // if (!_.includes(columnText, exclude) && columnText) {
+            table.headers.push(columnText);
+        // }
+        }
+
+    });
+    // get row data
+    const tableRowsEl = tableEl ? tableEl.find(`[class="D(tbrg)"]`).find("[data-test='fin-row']") : [];
+    tableRowsEl.each(function(this: any, index: number) {
+        const rowData = [];
+        const tableColumns = $(this).first().children().first().children();
+        const tableColumnsEl = tableColumns ? tableColumns: [];
+        tableColumnsEl.each(function(index2, this2) {
+            const tableColumnEl = $(this2);
+            const value = tableColumnEl.text();
+            if (value && value !== '-' && validateNumber(value)) {
+                rowData.push(parseFloat(value.replace(/,/g, '')));
+            } else {
+                rowData.push(value);
+            }
+        });
+        table.rows.push(rowData);
+    });
+
+    const data = generateStatsObject(table);
+    const percentProfitGrowth = generatePercentProfitGrowth(data);
+    return {
+        data,
+        stats: {
+            ...percentProfitGrowth,
+        }
+    };
+}
+
 const generateScrapeUrl = (url, stockSymbol) => {
     return url.replace('[symbol]', stockSymbol);
 };
@@ -1487,6 +1614,97 @@ export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '
 
         let jsonData = JSON.stringify(final, null, 4);
         fs.writeFileSync(`./mocks/best-stocks/getBestStocks3-${today}.json`, jsonData);
+        // console.log(JSON.stringify(final, null, 4));
+        console.log(_.get(final, ['results'], 0));
+        response.send(final);
+    } catch (error) {
+        console.log(JSON.stringify(error, null, 4));
+        response.status(500).send(error);
+    }
+});
+
+/* #3: Uses Yahoo Finance to calculate and only look for growth stocks */
+export const getBestStocks4 = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    const today: any = new Date().toISOString().slice(0, 10);
+    cors(request, response);
+    try {
+        let bestStocks: Array<any>;
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks3-small-sample.json');
+        const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks3-${today}.json`);
+        if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
+            throw new Error('No JSON found for best stocks');
+        };
+
+        bestStocks = bestStocksResponseJson.data;
+        const stockSymbols = _.map(bestStocks, (bestStock: any) => _.get(bestStock, ['yahooFinance', 'symbol']));
+
+        // 8. Get SEC Report Dates
+        // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
+
+        const scrapeScript = generateScrapeScript(scrapeYahooFinancials, `https://finance.yahoo.com/quote/[symbol]/financials`, 1);
+        let financialResponse = await scrapeScript(stockSymbols); // test error handling.. add ,true, ['LBSR', 'SIML']
+
+        // attempt to retry api call
+        const missingStockSymbols = _.get(getMissingStocks(financialResponse), 'missingStockSymbols', []);
+        financialResponse = await retry(scrapeScript, missingStockSymbols, financialResponse, []); //test error handling.. add ,true, ['LBSR', 'SIML']
+        // retrieve missing stocks to output in final json
+        const missingStocks = _.get(getMissingStocks(financialResponse), 'missingStockObjects', []);
+
+        let storeYahooStatementJSON = JSON.stringify(financialResponse, null, 4);
+        fs.writeFileSync(`./mocks/best-stocks/yahooStatementData-${today}.json`, storeYahooStatementJSON);
+
+        // console.log('finance response:: ', financialResponse);
+        // const jsonData2 = JSON.stringify(financialResponse, null, 4);
+        // fs.writeFileSync(`./mocks/best-stocks/financialResponse.json`, jsonData2);
+
+        // 9. Filter By Most Recent
+        // binding sec data to each best stock...
+        if (financialResponse && financialResponse.length > 0) {
+            // remove null entries
+            financialResponse = financialResponse.filter((current) => {
+                return current;
+            });
+            financialResponse.forEach((financeData) => {
+                bestStocks.forEach((bestStock, index) => {
+                    if (_.isEqual(_.get(bestStock, ['yahooFinance', 'symbol']), financeData.symbol)) {
+                        bestStock.statementData = _.get(financeData, 'data', undefined);
+                        bestStock.statementStats = _.get(financeData, 'stats', undefined);
+                    }
+                    bestStocks[index] = bestStock;
+                })
+            });
+        }
+
+        // Now filtering based on reporting stats...
+        bestStocks = _.filter(bestStocks, (bestStock: any) => {
+            const overallPercentProfitGrowth: number = _.toNumber(_.get(bestStock, 'statementStats.overallPercentProfitGrowth', 0));
+            const averagePercentProfitGrowth: number = _.toNumber(_.get(bestStock, 'statementStats.averagePercentProfitGrowth', 0));
+            
+            return overallPercentProfitGrowth >= 0 &&
+                averagePercentProfitGrowth >= 0;
+        });
+
+        // Application Utilities
+        // 1. Fetch News
+        // 2. Fetch Social Media
+        // 3. Fetch SEC Data
+
+        // Export stock and its data into CSV
+        // Feed CSV file into frontend
+        // Frontend renders all filtered stocks from CSV and display more sec info, graphs, etc
+
+        bestStocks = _.orderBy(bestStocks, (bestStock: object) => {
+            return _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice'], 0));
+        }, 'asc');
+
+        const final: object = {
+            results: _.get(bestStocks, ['length'], 0),
+            data: bestStocks,
+            missingStocks,
+        };
+
+        let jsonData = JSON.stringify(final, null, 4);
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks4-${today}.json`, jsonData);
         // console.log(JSON.stringify(final, null, 4));
         console.log(_.get(final, ['results'], 0));
         response.send(final);
