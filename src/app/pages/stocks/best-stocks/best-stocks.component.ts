@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import bestStocksJson from './../../../../../functions/mocks/best-stocks/getBestStocks3-2021-01-31.json';
+import bestStocksJson from './../../../../../functions/mocks/best-stocks/getBestStocks3-2021-02-01.json';
 import * as _ from 'lodash';
 
 @Component({
@@ -28,6 +28,7 @@ export class BestStocksComponent implements OnInit {
         googleSearchForStock: `https://www.google.com/search?q=${_.get(stock, ['yahooFinance', 'symbol'])}%20stock`,
         youtube: `https://www.youtube.com/results?search_query=${_.get(stock, ['yahooFinance', 'longName'])}`,
         reddit: `https://www.reddit.com/search/?q=${_.get(stock, ['yahooFinance', 'symbol'])}&sort=new&type=link`,
+        yahooFinancials: `https://finance.yahoo.com/quote/${_.get(stock, ['yahooFinance', 'symbol'])}/financials`,
         yahooVolumeHistory: `https://finance.yahoo.com/quote/${_.get(stock, ['yahooFinance', 'symbol'])}/history`,
         twitter: `https://twitter.com/search?q=%24${_.get(stock, ['yahooFinance', 'symbol'])}&src=typed_query`,
         stockTwits: `https://stocktwits.com/symbol/${_.get(stock, ['yahooFinance', 'symbol'])}`,
