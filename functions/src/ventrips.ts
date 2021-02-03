@@ -1441,30 +1441,30 @@ export const getBestStocks1 = functions.runWith({ timeoutSeconds: 540, memory: '
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        // // 1. Get All Stock Symbols From FinViz
-        // const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
-        // // 2. Get All U.S. Penny Stock Statuses From OTC Markets
-        // const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
-        // // 3. Filter stocks that are Pink Information or greater
-        // const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
-        // const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
-        // const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
-        // // 4. Get Financial Data from Yahoo Finance For All Filtered Stocks
-        // bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
-        // // 5. Add OTC Details
-        // bestStocks = _.map(bestStocks, (bestStock: any) => {
-        //     if (_.isEqual(_.get(bestStock, ['yahooFinance', 'fullExchangeName']), 'Other OTC')) {
-        //         const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['yahooFinance', 'symbol']) });
-        //         if (!_.isNil(pennyStockFound)) {
-        //             return _.assign(bestStock, { otcMarkets: pennyStockFound });
-        //         };
-        //     };
-        //     return bestStock;
-        // });
-        // fs.writeFileSync(`./mocks/best-stocks/getBestStocks1-FULL-${today}.json`, JSON.stringify(bestStocks, null, 4));
+        // 1. Get All Stock Symbols From FinViz
+        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        // 2. Get All U.S. Penny Stock Statuses From OTC Markets
+        const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
+        // 3. Filter stocks that are Pink Information or greater
+        const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
+        const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
+        const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
+        // 4. Get Financial Data from Yahoo Finance For All Filtered Stocks
+        bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
+        // 5. Add OTC Details
+        bestStocks = _.map(bestStocks, (bestStock: any) => {
+            if (_.isEqual(_.get(bestStock, ['yahooFinance', 'fullExchangeName']), 'Other OTC')) {
+                const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['yahooFinance', 'symbol']) });
+                if (!_.isNil(pennyStockFound)) {
+                    return _.assign(bestStock, { otcMarkets: pennyStockFound });
+                };
+            };
+            return bestStock;
+        });
+        fs.writeFileSync(`./mocks/best-stocks/getBestStocks1-FULL-${today}.json`, JSON.stringify(bestStocks, null, 4));
 
         // Uncomment for real API
-        bestStocks = require(`./../mocks/best-stocks/getBestStocks1-FULL-2021-02-02.json`);
+        // bestStocks = require(`./../mocks/best-stocks/getBestStocks1-FULL-2021-02-03.json`);
 
         // 5. Filter stocks by criteria
         bestStocks = _.filter(bestStocks, (bestStock: object) => {
