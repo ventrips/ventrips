@@ -1090,7 +1090,7 @@ const scrapeSec = ($, args: any) => {
 }
 
 const validateDate = (testdate) => {
-    const date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/ ;
+    const date_regex = /([\\\d,]+)/ ;
     return date_regex.test(testdate);
 }
 
@@ -1139,7 +1139,12 @@ const generateStatsObject = (table) => {
 }
 
 const calcPercentProfitGrowth = (currentProfit, previousProfit) => {
-    return (previousProfit / (currentProfit - previousProfit)) * 100;
+    if (previousProfit === 0) {
+        // ex current: 100 , previous: -100... 100% improvement or 0 - 0
+        return currentProfit;
+    } else {
+        return ((currentProfit - previousProfit) / (previousProfit)) * 100;
+    }
 }
 
 const generatePercentProfitGrowth = (data) => {
@@ -1171,10 +1176,12 @@ const scrapeYahooFinancials = ($, args: any) => {
         headers: [],
         rows: [],
     }
+
     // const exclude = ['breakdown', 'ttm'];
     tableHeaderRowEl.each(function(this: any, index: number) {
         const columnEl = $(this);
         const columnText = columnEl && columnEl.text() && columnEl.text() !== '' ? columnEl.text() : undefined;
+
         if (columnText && validateDate(columnText)) {
             const momentDateSplit = columnText.split('/');
             const month = momentDateSplit[0];
@@ -1190,6 +1197,7 @@ const scrapeYahooFinancials = ($, args: any) => {
     });
     // get row data
     const tableRowsEl = tableEl ? tableEl.find(`[class="D(tbrg)"]`).find("[data-test='fin-row']") : [];
+
     tableRowsEl.each(function(this: any, index: number) {
         const rowData = [];
         const tableColumns = $(this).first().children().first().children();
@@ -1212,7 +1220,7 @@ const scrapeYahooFinancials = ($, args: any) => {
         data,
         stats: {
             ...percentProfitGrowth,
-        }
+        },
     };
 }
 
@@ -1258,7 +1266,7 @@ const scrapeUrl = async (scrapeFunction, url, stockSymbol: string, args: any[]) 
     });
 };
 
-const DEBOUNCE_TIME_FOR_SCRAPE_CALL = 0;
+const DEBOUNCE_TIME_FOR_SCRAPE_CALL = 500;
 const DEBOUNCE_TIME_FOR_BATCH_CALL = 1000;
 const RETRY_DEBOUNCE_TIME = 5000;
 const WITHIN_DAYS = 30;
@@ -1279,13 +1287,20 @@ const runDebounceCall = (scrapeFunction, url, stockSymbol: string, args: any[]) 
     return promise;
 };
 
-const runSingleBatch = async (scrapeFunction, url, chunkSymbols, args: any[]) => {
+const runSingleBatch = async (scrapeFunction, url, chunkSymbols, runSequential, args: any[]) => {
     const promise = new Promise(async (resolve) => {
         const listOfScrapeCalls = [];
-        chunkSymbols.forEach((currentSymbol: string, index: number) => {
-            listOfScrapeCalls.push(runDebounceCall(scrapeFunction, url, currentSymbol, args));
-        });
-        const data = await Promise.all(listOfScrapeCalls);
+        if (runSequential) {
+            for (let i = 0; i < chunkSymbols.length - 1; i++) {
+                const d = await runDebounceCall(scrapeFunction, url, chunkSymbols[i], args);
+                listOfScrapeCalls.push(d);
+            }
+        } else {
+            chunkSymbols.forEach((currentSymbol: string, index: number) => {
+                listOfScrapeCalls.push(runDebounceCall(scrapeFunction, url, currentSymbol, args));
+            });
+        }
+        const data = runSequential ? listOfScrapeCalls : await Promise.all(listOfScrapeCalls);
         setTimeout(() => {
             resolve(data);
         }, DEBOUNCE_TIME_FOR_BATCH_CALL);
@@ -1293,13 +1308,13 @@ const runSingleBatch = async (scrapeFunction, url, chunkSymbols, args: any[]) =>
     return promise;
 }
 
-const runBatchScript = async (stockSymbols, scrapeFunction, url, inBatchesOf, args) => {
+const runBatchScript = async (stockSymbols, scrapeFunction, url, inBatchesOf, runSequential, args) => {
     const chunkStockSumbols = _.chunk(stockSymbols, inBatchesOf);
     const chunkPromises: any = [];
     let totalCount = 0;
     for (let i = 0; i < chunkStockSumbols.length; i++) {
 
-        const chunkPromise = await runSingleBatch(scrapeFunction, url, chunkStockSumbols[i], args);
+        const chunkPromise = await runSingleBatch(scrapeFunction, url, chunkStockSumbols[i], runSequential, args);
         chunkPromises.push(chunkPromise);
         totalCount += chunkStockSumbols[i].length;
         console.log(`Finishing ${totalCount} of ${stockSymbols.length}`);
@@ -1307,9 +1322,9 @@ const runBatchScript = async (stockSymbols, scrapeFunction, url, inBatchesOf, ar
     return chunkPromises.flat();
 };
 
-const generateScrapeScript = (scrapeFunction, url, inBatchesOf) => {
+const generateScrapeScript = (scrapeFunction, url, inBatchesOf, runSequential) => {
     return async (stockSymbols, ...args2) => {;
-        return await runBatchScript(stockSymbols, scrapeFunction, url, inBatchesOf, args2);
+        return await runBatchScript(stockSymbols, scrapeFunction, url, inBatchesOf, runSequential, args2);
     }
 }
 
@@ -1453,7 +1468,7 @@ export const getBestStocks2 = functions.runWith({ timeoutSeconds: 540, memory: '
         const stockSymbols = _.map(bestStocks, (bestStock: any) => _.get(bestStock, ['yahooFinance', 'symbol']));
         // 8. Get SEC Report Dates
         // let secResponse = await runStockBatchesForSec(stockSymbols, 100);
-        const scrapeScript = generateScrapeScript(scrapeSec, `https://sec.report/Ticker/[symbol]`, 100);
+        const scrapeScript = generateScrapeScript(scrapeSec, `https://sec.report/Ticker/[symbol]`, 100, false);
         let secResponse = await scrapeScript(stockSymbols); // test add undefined, true, ['HJLI', 'ICCC']
 
         // attempt to retry api call
@@ -1551,7 +1566,7 @@ export const getBestStocks3 = functions.runWith({ timeoutSeconds: 540, memory: '
         // 8. Get SEC Report Dates
         // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
 
-        const scrapeScript = generateScrapeScript(scrapeYahoo, `https://finance.yahoo.com/quote/[symbol]/history`, 50);
+        const scrapeScript = generateScrapeScript(scrapeYahoo, `https://finance.yahoo.com/quote/[symbol]/history`, 50, false);
         let financialResponse = await scrapeScript(stockSymbols, WITHIN_DAYS); // test error handling.. add ,true, ['LBSR', 'SIML']
 
         // attempt to retry api call
@@ -1629,7 +1644,7 @@ export const getBestStocks4 = functions.runWith({ timeoutSeconds: 540, memory: '
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        // const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks3-small-sample.json');
+        // const bestStocksResponseJson = require('./../mocks/best-stocks/getBestStocks3-small-sample-smaller.json');
         const bestStocksResponseJson = require(`./../mocks/best-stocks/getBestStocks3-${today}.json`);
         if (_.isUndefined(bestStocksResponseJson) || _.isNull(bestStocksResponseJson || _.isEmpty(bestStocksResponseJson))) {
             throw new Error('No JSON found for best stocks');
@@ -1641,7 +1656,7 @@ export const getBestStocks4 = functions.runWith({ timeoutSeconds: 540, memory: '
         // 8. Get SEC Report Dates
         // let financialResponse = require('./../mocks/best-stocks/financialResponse.json');
 
-        const scrapeScript = generateScrapeScript(scrapeYahooFinancials, `https://finance.yahoo.com/quote/[symbol]/financials`, 50);
+        const scrapeScript = generateScrapeScript(scrapeYahooFinancials, `https://finance.yahoo.com/quote/[symbol]/financials`, 50, true);
         let financialResponse = await scrapeScript(stockSymbols); // test error handling.. add ,true, ['LBSR', 'SIML']
 
         // attempt to retry api call

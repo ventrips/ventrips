@@ -123,6 +123,13 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="col" *ngIf="stock.statementStats">
+                        <div *ngIf="stock.statementStats">
+                            <h3>Profit stats</h3>
+                            <p *ngIf="stock.statementStats.overallPercentProfitGrowth" class="text-success">Overall percent growth: {{stock.statementStats.overallPercentProfitGrowth}}</p>
+                            <p *ngIf="stock.statementStats.averagePercentProfitGrowth" class="text-success">Average percent growth: {{stock.statementStats.averagePercentProfitGrowth}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </li>
