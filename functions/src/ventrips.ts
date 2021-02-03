@@ -1480,7 +1480,7 @@ export const getBestStocks1 = functions.runWith({ timeoutSeconds: 540, memory: '
             const fiftyTwoWeekLowChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyTwoWeekLowChangePercent'], 0));
 
                     // _.has(bestStock, ['yahooFinance', 'marketCap']) && (marketCap >= 0) &&
-            return  _.has(bestStock, ['yahooFinance', 'regularMarketPrice']) && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+            return  _.has(bestStock, ['yahooFinance', 'regularMarketPrice']) && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 11) &&
                     _.has(bestStock, ['yahooFinance', 'fiftyDayAverage']) &&
                     _.has(bestStock, ['yahooFinance', 'twoHundredDayAverage']) &&
                     (regularMarketPrice >= (fiftyDayAverage * .75)) &&
