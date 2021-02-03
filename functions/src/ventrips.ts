@@ -1191,14 +1191,28 @@ const generatePercentGrowth = (data, key) => {
     return profitGrowth;
 }
 
+const turnToActualNumber = (value) => {
+    if (value && value !== '-') {
+        const isNegative = value.indexOf('(') >= 0;
+        const newValue = parseFloat(value.replace(/[\(\),]/g, ''));
+        if (isNegative) {
+            newValue * -1;
+        }
+        return newValue;
+    } else {
+        return '-';
+    }
+};
+
+
 const getOtcQuarterlyEarnings = (response, args: any) => {
     let data = [];
     if (response && response.length > 0) {
         response.forEach((quarterData) => {
             quarterData['date'] = moment(quarterData.periodEndDate);
-            quarterData['_profit'] = quarterData.grossProfit && quarterData.grossProfit !== '-' ? parseFloat(quarterData.grossProfit.replace(/[\(\),]/g, '')) : '-';
-            quarterData['_operatingIncome'] = quarterData.operatingIncome && quarterData.operatingIncome !== '-' ? parseFloat(quarterData.operatingIncome.replace(/[\(\),]/g, '')) : '-';
-            quarterData['_operatingMargin'] = quarterData.operatingMargin && quarterData.operatingMargin !== '-' ? parseFloat(quarterData.operatingMargin.replace(/[\(\),]/g, '')) : '-';
+            quarterData['_profit'] = turnToActualNumber(quarterData.grossProfit);
+            quarterData['_operatingIncome'] = turnToActualNumber(quarterData.operatingIncome);
+            quarterData['_operatingMargin'] = turnToActualNumber(quarterData.operatingMargin); 
             data.push(quarterData);
         });
     }

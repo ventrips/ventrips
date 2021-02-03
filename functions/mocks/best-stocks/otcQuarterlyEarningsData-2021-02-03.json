@@ -1014,18 +1014,115 @@
     },
     {
         "symbol": "BSPK",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "8/31/2020",
+                "totalRevenue": "6",
+                "costOfRevenue": "2",
+                "grossProfit": "3",
+                "salesGeneralAndAdmin": "53",
+                "otherExpenses": "37",
+                "totalExpenses": "90",
+                "operatingIncome": "(86)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(86)",
+                "interestExpense": "0",
+                "earningsBeforeTax": "(86)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(86)",
+                "netIncome": "(86)",
+                "earningsperShare": "0",
+                "grossMargin": "0.5648",
+                "operatingMargin": "-498.575",
+                "date": "2020-08-31T00:00:00.000Z",
+                "_profit": 3,
+                "_operatingIncome": 86,
+                "_operatingMargin": -498.575
+            },
+            {
+                "periodEndDate": "5/31/2020",
+                "totalRevenue": "0",
+                "costOfRevenue": "0",
+                "grossProfit": "0",
+                "salesGeneralAndAdmin": "3,161",
+                "otherExpenses": "50",
+                "totalExpenses": "3,212",
+                "operatingIncome": "(3,212)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(3,212)",
+                "interestExpense": "(242)",
+                "earningsBeforeTax": "(3,454)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(3,454)",
+                "netIncome": "(3,454)",
+                "earningsperShare": "-0.03",
+                "grossMargin": "-5.8802",
+                "operatingMargin": "-529.0512",
+                "date": "2020-05-31T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 3212,
+                "_operatingMargin": -529.0512
+            },
+            {
+                "periodEndDate": "2/29/2020",
+                "totalRevenue": "0",
+                "costOfRevenue": "0",
+                "grossProfit": "0",
+                "salesGeneralAndAdmin": "190",
+                "otherExpenses": "126",
+                "totalExpenses": "317",
+                "operatingIncome": "(317)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(317)",
+                "interestExpense": "(275)",
+                "earningsBeforeTax": "(682)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(682)",
+                "netIncome": "(682)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "-4.7172",
+                "operatingMargin": "-136.9413",
+                "date": "2020-02-29T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 317,
+                "_operatingMargin": -136.9413
+            },
+            {
+                "periodEndDate": "11/30/2019",
+                "totalRevenue": "1",
+                "costOfRevenue": "1",
+                "grossProfit": "0",
+                "salesGeneralAndAdmin": "241",
+                "otherExpenses": "157",
+                "totalExpenses": "399",
+                "operatingIncome": "(398)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(398)",
+                "interestExpense": "(17)",
+                "earningsBeforeTax": "(416)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(416)",
+                "netIncome": "(416)",
+                "earningsperShare": "0",
+                "grossMargin": "0.3749",
+                "operatingMargin": "-229.1898",
+                "date": "2019-11-30T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 398,
+                "_operatingMargin": -229.1898
+            }
+        ],
         "stats": {
             "profitStats": {
                 "overallPercentProfitGrowth": 0,
                 "averagePercentProfitGrowth": 0
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -78.39195979899498,
+                "averagePercentProfitGrowth": 265.1916373630905
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": -348.43932499999994
             }
         }
     },
@@ -1932,15 +2029,108 @@
     },
     {
         "symbol": "BSRC",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "34",
+                "salesGeneralAndAdmin": "122",
+                "otherExpenses": "1",
+                "totalExpenses": "158",
+                "operatingIncome": "(158)",
+                "additionalIncomeExpenseItems": "(15,695)",
+                "earningsBeforeInterestTaxes": "(158)",
+                "interestExpense": "(208)",
+                "earningsBeforeTax": "(16,062)",
+                "netIncomeOperations": "(16,062)",
+                "netIncome": "(16,062)",
+                "earningsperShare": "-0.06",
+                "grossMargin": "0",
+                "operatingMargin": "0",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 158,
+                "_operatingMargin": 0
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "40",
+                "salesGeneralAndAdmin": "100",
+                "otherExpenses": "1",
+                "totalExpenses": "141",
+                "operatingIncome": "(141)",
+                "additionalIncomeExpenseItems": "6,507",
+                "earningsBeforeInterestTaxes": "(141)",
+                "interestExpense": "(231)",
+                "earningsBeforeTax": "6,134",
+                "netIncomeOperations": "6,134",
+                "netIncome": "6,134",
+                "earningsperShare": "0.03",
+                "grossMargin": "0",
+                "operatingMargin": "0",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 141,
+                "_operatingMargin": 0
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "43",
+                "salesGeneralAndAdmin": "118",
+                "otherExpenses": "1",
+                "totalExpenses": "163",
+                "operatingIncome": "(163)",
+                "additionalIncomeExpenseItems": "(6,676)",
+                "earningsBeforeInterestTaxes": "(163)",
+                "interestExpense": "(225)",
+                "earningsBeforeTax": "(7,065)",
+                "netIncomeOperations": "(7,065)",
+                "netIncome": "(7,065)",
+                "earningsperShare": "-0.05",
+                "grossMargin": "0",
+                "operatingMargin": "0",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 163,
+                "_operatingMargin": 0
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "84",
+                "salesGeneralAndAdmin": "101",
+                "otherExpenses": "1",
+                "totalExpenses": "186",
+                "operatingIncome": "(186)",
+                "additionalIncomeExpenseItems": "2,866",
+                "earningsBeforeInterestTaxes": "(186)",
+                "interestExpense": "(242)",
+                "earningsBeforeTax": "2,437",
+                "netIncomeOperations": "2,437",
+                "netIncome": "2,437",
+                "earningsperShare": "0.01",
+                "grossMargin": "0",
+                "operatingMargin": "0",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 186,
+                "_operatingMargin": 0
+            }
+        ],
         "stats": {
             "profitStats": {
                 "overallPercentProfitGrowth": 0,
                 "averagePercentProfitGrowth": 0
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -15.053763440860216,
+                "averagePercentProfitGrowth": -4.601928774844801
             },
             "operatingMarginStats": {
                 "averageOperatingMargin": 0
@@ -2506,35 +2696,221 @@
     },
     {
         "symbol": "ZIVO",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "1,294",
+                "salesGeneralAndAdmin": "458",
+                "otherExpenses": "1,610",
+                "totalExpenses": "3,364",
+                "operatingIncome": "(3,364)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(3,364)",
+                "interestExpense": "(138)",
+                "earningsBeforeTax": "(3,502)",
+                "netIncomeOperations": "(3,502)",
+                "netIncome": "(3,502)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "1",
+                "operatingMargin": "-528.6957",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 3364,
+                "_operatingMargin": -528.6957
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "436",
+                "salesGeneralAndAdmin": "374",
+                "otherExpenses": "219",
+                "totalExpenses": "1,029",
+                "operatingIncome": "(1,029)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(1,029)",
+                "interestExpense": "(136)",
+                "earningsBeforeTax": "(1,166)",
+                "netIncomeOperations": "(1,166)",
+                "netIncome": "(1,166)",
+                "earningsperShare": "0",
+                "grossMargin": "1",
+                "operatingMargin": "-439.1655",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 1029,
+                "_operatingMargin": -439.1655
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "20",
+                "grossProfit": "20",
+                "researchAndDevelopment": "1,576",
+                "salesGeneralAndAdmin": "693",
+                "otherExpenses": "156",
+                "totalExpenses": "2,426",
+                "operatingIncome": "(2,406)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(2,406)",
+                "interestExpense": "(136)",
+                "earningsBeforeTax": "(2,542)",
+                "netIncomeOperations": "(2,542)",
+                "netIncome": "(2,542)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "1",
+                "operatingMargin": "-120.3061",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 20,
+                "_operatingIncome": 2406,
+                "_operatingMargin": -120.3061
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "0",
+                "grossProfit": "0",
+                "researchAndDevelopment": "467",
+                "salesGeneralAndAdmin": "3,014",
+                "otherExpenses": "291",
+                "totalExpenses": "3,773",
+                "operatingIncome": "(3,773)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(3,773)",
+                "interestExpense": "(358)",
+                "earningsBeforeTax": "(4,131)",
+                "netIncomeOperations": "(4,131)",
+                "netIncome": "(4,131)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0",
+                "operatingMargin": "0",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 0,
+                "_operatingIncome": 3773,
+                "_operatingMargin": 0
+            }
+        ],
         "stats": {
             "profitStats": {
                 "overallPercentProfitGrowth": 0,
                 "averagePercentProfitGrowth": 0
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -10.84018022793533,
+                "averagePercentProfitGrowth": 44.48543438059445
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": -362.72243333333336
             }
         }
     },
     {
         "symbol": "CLSH",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "11/30/2020",
+                "totalRevenue": "4,907",
+                "costOfRevenue": "2,209",
+                "grossProfit": "2,698",
+                "salesGeneralAndAdmin": "2,801",
+                "totalExpenses": "2,801",
+                "operatingIncome": "(102)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(102)",
+                "interestExpense": "(746)",
+                "earningsBeforeTax": "(849)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(849)",
+                "netIncome": "(849)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.5264",
+                "operatingMargin": "-1.8457",
+                "date": "2020-11-30T00:00:00.000Z",
+                "_profit": 2698,
+                "_operatingIncome": 102,
+                "_operatingMargin": -1.8457
+            },
+            {
+                "periodEndDate": "8/31/2020",
+                "totalRevenue": "3,780",
+                "costOfRevenue": "1,788",
+                "grossProfit": "1,992",
+                "salesGeneralAndAdmin": "2,404",
+                "totalExpenses": "2,404",
+                "operatingIncome": "(412)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(412)",
+                "interestExpense": "(732)",
+                "earningsBeforeTax": "(1,145)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(1,145)",
+                "netIncome": "(1,145)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.5269",
+                "operatingMargin": "-0.1091",
+                "date": "2020-08-31T00:00:00.000Z",
+                "_profit": 1992,
+                "_operatingIncome": 412,
+                "_operatingMargin": -0.1091
+            },
+            {
+                "periodEndDate": "5/31/2020",
+                "totalRevenue": "2,778",
+                "costOfRevenue": "1,422",
+                "grossProfit": "1,355",
+                "salesGeneralAndAdmin": "2,243",
+                "totalExpenses": "2,243",
+                "operatingIncome": "(26,072)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(26,072)",
+                "interestExpense": "(686)",
+                "earningsBeforeTax": "(26,747)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(26,747)",
+                "netIncome": "(26,747)",
+                "earningsperShare": "-0.21",
+                "grossMargin": "0.5",
+                "operatingMargin": "-2.3498",
+                "date": "2020-05-31T00:00:00.000Z",
+                "_profit": 1355,
+                "_operatingIncome": 26072,
+                "_operatingMargin": -2.3498
+            },
+            {
+                "periodEndDate": "2/29/2020",
+                "totalRevenue": "3,224",
+                "costOfRevenue": "1,537",
+                "grossProfit": "1,686",
+                "salesGeneralAndAdmin": "2,213",
+                "totalExpenses": "2,213",
+                "operatingIncome": "(526)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(526)",
+                "interestExpense": "(725)",
+                "earningsBeforeTax": "(1,251)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(1,251)",
+                "netIncome": "(1,251)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.4923",
+                "operatingMargin": "-0.2976",
+                "date": "2020-02-29T00:00:00.000Z",
+                "_profit": 1686,
+                "_operatingIncome": 526,
+                "_operatingMargin": -0.2976
+            }
+        ],
         "stats": {
             "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": 60.02372479240806,
+                "averagePercentProfitGrowth": 20.94019048709974
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -80.6083650190114,
+                "averagePercentProfitGrowth": 1560.9971710953514
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": -1.15055
             }
         }
     },
@@ -3758,18 +4134,111 @@
     },
     {
         "symbol": "JSDA",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "3,541",
+                "costOfRevenue": "2,619",
+                "grossProfit": "922",
+                "salesGeneralAndAdmin": "1,316",
+                "totalExpenses": "1,316",
+                "operatingIncome": "(394)",
+                "additionalIncomeExpenseItems": "(9)",
+                "earningsBeforeInterestTaxes": "(394)",
+                "interestExpense": "(40)",
+                "earningsBeforeTax": "(443)",
+                "incomeTax": "7",
+                "netIncomeOperations": "(450)",
+                "netIncome": "(450)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.2123",
+                "operatingMargin": "-0.2452",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 922,
+                "_operatingIncome": 394,
+                "_operatingMargin": -0.2452
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "3,098",
+                "costOfRevenue": "2,512",
+                "grossProfit": "586",
+                "salesGeneralAndAdmin": "1,283",
+                "totalExpenses": "1,283",
+                "operatingIncome": "(697)",
+                "additionalIncomeExpenseItems": "5",
+                "earningsBeforeInterestTaxes": "(697)",
+                "interestExpense": "(38)",
+                "earningsBeforeTax": "(730)",
+                "incomeTax": "8",
+                "netIncomeOperations": "(738)",
+                "netIncome": "(738)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.1982",
+                "operatingMargin": "-0.2545",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 586,
+                "_operatingIncome": 697,
+                "_operatingMargin": -0.2545
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "2,792",
+                "costOfRevenue": "2,210",
+                "grossProfit": "582",
+                "salesGeneralAndAdmin": "1,461",
+                "totalExpenses": "1,461",
+                "operatingIncome": "(879)",
+                "additionalIncomeExpenseItems": "30",
+                "earningsBeforeInterestTaxes": "(879)",
+                "interestExpense": "(38)",
+                "earningsBeforeTax": "(887)",
+                "incomeTax": "4",
+                "netIncomeOperations": "(891)",
+                "netIncome": "(891)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.2084",
+                "operatingMargin": "-0.3148",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 582,
+                "_operatingIncome": 879,
+                "_operatingMargin": -0.3148
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "2,163",
+                "costOfRevenue": "1,792",
+                "grossProfit": "371",
+                "salesGeneralAndAdmin": "1,244",
+                "totalExpenses": "1,244",
+                "operatingIncome": "(873)",
+                "additionalIncomeExpenseItems": "22",
+                "earningsBeforeInterestTaxes": "(873)",
+                "interestExpense": "(67)",
+                "earningsBeforeTax": "(918)",
+                "incomeTax": "12",
+                "netIncomeOperations": "(930)",
+                "netIncome": "(930)",
+                "earningsperShare": "-0.01",
+                "grossMargin": "0.2071",
+                "operatingMargin": "-0.2044",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 371,
+                "_operatingIncome": 873,
+                "_operatingMargin": -0.2044
+            }
+        ],
         "stats": {
             "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": 148.51752021563343,
+                "averagePercentProfitGrowth": 38.29949484876449
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -54.86827033218786,
+                "averagePercentProfitGrowth": -21.16336157245548
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": -0.254725
             }
         }
     },
@@ -4096,18 +4565,99 @@
     },
     {
         "symbol": "PERS",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "1,664",
+                "grossProfit": "1,664",
+                "salesGeneralAndAdmin": "415",
+                "otherExpenses": "595",
+                "totalExpenses": "1,010",
+                "operatingIncome": "654",
+                "earningsBeforeInterestTaxes": "654",
+                "earningsBeforeTax": "654",
+                "netIncomeOperations": "654",
+                "netIncome": "654",
+                "earningsperShare": "0.012",
+                "grossMargin": "1",
+                "operatingMargin": "0.7165",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 1664,
+                "_operatingIncome": 654,
+                "_operatingMargin": 0.7165
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "3",
+                "grossProfit": "3",
+                "salesGeneralAndAdmin": "338",
+                "otherExpenses": "(335)",
+                "totalExpenses": "3",
+                "operatingIncome": "0",
+                "earningsBeforeInterestTaxes": "0",
+                "earningsBeforeTax": "0",
+                "netIncomeOperations": "0",
+                "netIncome": "0",
+                "earningsperShare": "0",
+                "grossMargin": "1",
+                "operatingMargin": "0.7685",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 3,
+                "_operatingIncome": 0,
+                "_operatingMargin": 0.7685
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "5,289",
+                "grossProfit": "5,289",
+                "salesGeneralAndAdmin": "708",
+                "otherExpenses": "371",
+                "totalExpenses": "1,079",
+                "operatingIncome": "4,210",
+                "earningsBeforeInterestTaxes": "4,210",
+                "earningsBeforeTax": "4,210",
+                "netIncomeOperations": "4,210",
+                "netIncome": "4,210",
+                "earningsperShare": "0.08",
+                "grossMargin": "1",
+                "operatingMargin": "0.796",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 5289,
+                "_operatingIncome": 4210,
+                "_operatingMargin": 0.796
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "5,215",
+                "grossProfit": "5,215",
+                "salesGeneralAndAdmin": "582",
+                "otherExpenses": "777",
+                "totalExpenses": "1,359",
+                "operatingIncome": "3,856",
+                "earningsBeforeInterestTaxes": "3,856",
+                "earningsBeforeTax": "3,856",
+                "netIncomeOperations": "3,856",
+                "netIncome": "3,856",
+                "earningsperShare": "0.074",
+                "grossMargin": "1",
+                "operatingMargin": "0.7704",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 5215,
+                "_operatingIncome": 3856,
+                "_operatingMargin": 0.7704
+            }
+        ],
         "stats": {
             "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -68.09204218600192,
+                "averagePercentProfitGrowth": 18422.714123954993
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -83.03941908713693,
+                "averagePercentProfitGrowth": -37.64253013473157
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": 0.7628499999999999
             }
         }
     },
@@ -4577,18 +5127,111 @@
     },
     {
         "symbol": "CVSI",
-        "data": [],
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "5,564",
+                "costOfRevenue": "3,106",
+                "grossProfit": "2,458",
+                "researchAndDevelopment": "412",
+                "salesGeneralAndAdmin": "5,197",
+                "totalExpenses": "5,609",
+                "operatingIncome": "(3,151)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(3,151)",
+                "earningsBeforeTax": "(3,157)",
+                "incomeTax": "0",
+                "netIncomeOperations": "(3,157)",
+                "netIncome": "(3,157)",
+                "earningsperShare": "-0.03",
+                "grossMargin": "0.453",
+                "operatingMargin": "-0.7168",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 2458,
+                "_operatingIncome": 3151,
+                "_operatingMargin": -0.7168
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "5,396",
+                "costOfRevenue": "3,074",
+                "grossProfit": "2,322",
+                "researchAndDevelopment": "746",
+                "salesGeneralAndAdmin": "6,233",
+                "totalExpenses": "6,979",
+                "operatingIncome": "(4,657)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(4,657)",
+                "earningsBeforeTax": "(4,661)",
+                "incomeTax": "20",
+                "netIncomeOperations": "(4,681)",
+                "netIncome": "(4,681)",
+                "earningsperShare": "-0.05",
+                "grossMargin": "0.5312",
+                "operatingMargin": "-0.5364",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 2322,
+                "_operatingIncome": 4657,
+                "_operatingMargin": -0.5364
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "8,270",
+                "costOfRevenue": "4,262",
+                "grossProfit": "4,008",
+                "researchAndDevelopment": "1,509",
+                "salesGeneralAndAdmin": "7,819",
+                "totalExpenses": "9,328",
+                "operatingIncome": "(5,320)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(5,320)",
+                "earningsBeforeTax": "(5,310)",
+                "incomeTax": "(158)",
+                "netIncomeOperations": "(5,152)",
+                "netIncome": "(5,152)",
+                "earningsperShare": "-0.05",
+                "grossMargin": "0.4846",
+                "operatingMargin": "-0.6433",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 4008,
+                "_operatingIncome": 5320,
+                "_operatingMargin": -0.6433
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "9,328",
+                "costOfRevenue": "5,178",
+                "grossProfit": "4,150",
+                "researchAndDevelopment": "1,303",
+                "salesGeneralAndAdmin": "10,190",
+                "totalExpenses": "11,493",
+                "operatingIncome": "(7,343)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "(7,343)",
+                "earningsBeforeTax": "(7,330)",
+                "incomeTax": "(644)",
+                "netIncomeOperations": "(6,686)",
+                "netIncome": "(6,686)",
+                "earningsperShare": "-0.07",
+                "grossMargin": "0.6535",
+                "operatingMargin": "-0.3211",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 4150,
+                "_operatingIncome": 7343,
+                "_operatingMargin": -0.3211
+            }
+        ],
         "stats": {
             "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -40.7710843373494,
+                "averagePercentProfitGrowth": -13.210178399984274
             },
             "operatingIncomeStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
+                "overallPercentProfitGrowth": -57.08838349448454,
+                "averagePercentProfitGrowth": -24.116956322764153
             },
             "operatingMarginStats": {
-                "averageOperatingMargin": 0
+                "averageOperatingMargin": -0.5544
             }
         }
     },
@@ -12865,124 +13508,6 @@
         }
     },
     {
-        "symbol": "MMLP",
-        "data": [
-            {
-                "periodEndDate": "9/30/2020",
-                "totalRevenue": "152,533",
-                "costOfRevenue": "77,345",
-                "grossProfit": "75,188",
-                "salesGeneralAndAdmin": "10,339",
-                "otherExpenses": "58,358",
-                "totalExpenses": "68,697",
-                "operatingIncome": "6,491",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeInterestTaxes": "6,491",
-                "interestExpense": "(12,943)",
-                "earningsBeforeTax": "(10,446)",
-                "incomeTax": "373",
-                "netIncomeOperations": "(10,819)",
-                "discontinuedOperations": "0",
-                "netIncome": "(10,819)",
-                "earningsperShare": "-0.27",
-                "grossMargin": "0.4611",
-                "operatingMargin": "0.0655",
-                "date": "2020-09-30T00:00:00.000Z",
-                "_profit": 75188,
-                "_operatingIncome": 6491,
-                "_operatingMargin": 0.0655
-            },
-            {
-                "periodEndDate": "6/30/2020",
-                "totalRevenue": "140,638",
-                "costOfRevenue": "63,290",
-                "grossProfit": "77,348",
-                "salesGeneralAndAdmin": "9,858",
-                "otherExpenses": "59,530",
-                "totalExpenses": "69,388",
-                "operatingIncome": "7,960",
-                "additionalIncomeExpenseItems": "4",
-                "earningsBeforeInterestTaxes": "7,960",
-                "interestExpense": "(9,377)",
-                "earningsBeforeTax": "(1,413)",
-                "incomeTax": "790",
-                "netIncomeOperations": "(2,203)",
-                "discontinuedOperations": "0",
-                "netIncome": "(2,203)",
-                "earningsperShare": "-0.06",
-                "grossMargin": "0.4596",
-                "operatingMargin": "0.0883",
-                "date": "2020-06-30T00:00:00.000Z",
-                "_profit": 77348,
-                "_operatingIncome": 7960,
-                "_operatingMargin": 0.0883
-            },
-            {
-                "periodEndDate": "3/31/2020",
-                "totalRevenue": "198,883",
-                "costOfRevenue": "108,810",
-                "grossProfit": "90,073",
-                "salesGeneralAndAdmin": "10,462",
-                "otherExpenses": "64,011",
-                "totalExpenses": "74,473",
-                "operatingIncome": "15,600",
-                "additionalIncomeExpenseItems": "3",
-                "earningsBeforeInterestTaxes": "15,600",
-                "interestExpense": "(9,925)",
-                "earningsBeforeTax": "9,162",
-                "incomeTax": "347",
-                "netIncomeOperations": "8,815",
-                "discontinuedOperations": "0",
-                "netIncome": "8,815",
-                "earningsperShare": "0.22",
-                "grossMargin": "0.4529",
-                "operatingMargin": "0.0784",
-                "date": "2020-03-31T00:00:00.000Z",
-                "_profit": 90073,
-                "_operatingIncome": 15600,
-                "_operatingMargin": 0.0784
-            },
-            {
-                "periodEndDate": "12/31/2019",
-                "totalRevenue": "241,862",
-                "costOfRevenue": "146,063",
-                "grossProfit": "95,799",
-                "salesGeneralAndAdmin": "10,533",
-                "otherExpenses": "67,239",
-                "totalExpenses": "77,772",
-                "operatingIncome": "18,027",
-                "additionalIncomeExpenseItems": "3",
-                "earningsBeforeInterestTaxes": "18,027",
-                "interestExpense": "(11,060)",
-                "earningsBeforeTax": "6,970",
-                "incomeTax": "328",
-                "netIncomeOperations": "6,642",
-                "discontinuedOperations": "0",
-                "netIncome": "6,642",
-                "earningsperShare": "0.16",
-                "grossMargin": "0.4183",
-                "operatingMargin": "0.0686",
-                "date": "2019-12-31T00:00:00.000Z",
-                "_profit": 95799,
-                "_operatingIncome": 18027,
-                "_operatingMargin": 0.0686
-            }
-        ],
-        "stats": {
-            "profitStats": {
-                "overallPercentProfitGrowth": -21.514838359481832,
-                "averagePercentProfitGrowth": -7.63236722589864
-            },
-            "operatingIncomeStats": {
-                "overallPercentProfitGrowth": -63.99289953957952,
-                "averagePercentProfitGrowth": -26.964090489700315
-            },
-            "operatingMarginStats": {
-                "averageOperatingMargin": 0.07519999999999999
-            }
-        }
-    },
-    {
         "symbol": "CREX",
         "data": [
             {
@@ -13811,92 +14336,6 @@
         }
     },
     {
-        "symbol": "EQS",
-        "data": [
-            {
-                "periodEndDate": "9/30/2020",
-                "totalRevenue": "101",
-                "salesGeneralAndAdmin": "531",
-                "otherExpenses": "293",
-                "totalExpenses": "824",
-                "operatingIncome": "(723)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(4,038)",
-                "netIncomeOperations": "(4,038)",
-                "netIncome": "(4,038)",
-                "earningsperShare": "-0.3",
-                "date": "2020-09-30T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 723,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "6/30/2020",
-                "totalRevenue": "95",
-                "salesGeneralAndAdmin": "387",
-                "otherExpenses": "371",
-                "totalExpenses": "758",
-                "operatingIncome": "(663)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "2,574",
-                "netIncomeOperations": "2,574",
-                "netIncome": "2,574",
-                "earningsperShare": "0.19",
-                "date": "2020-06-30T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 663,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "3/31/2020",
-                "totalRevenue": "97",
-                "salesGeneralAndAdmin": "535",
-                "otherExpenses": "488",
-                "totalExpenses": "1,023",
-                "operatingIncome": "(926)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(7,174)",
-                "netIncomeOperations": "(7,174)",
-                "netIncome": "(7,174)",
-                "earningsperShare": "-0.53",
-                "date": "2020-03-31T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 926,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "12/31/2019",
-                "totalRevenue": "152",
-                "salesGeneralAndAdmin": "579",
-                "otherExpenses": "351",
-                "totalExpenses": "930",
-                "operatingIncome": "(778)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(3,116)",
-                "netIncomeOperations": "(3,116)",
-                "netIncome": "(3,116)",
-                "earningsperShare": "-0.23",
-                "date": "2019-12-31T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 778,
-                "_operatingMargin": "-"
-            }
-        ],
-        "stats": {
-            "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
-            },
-            "operatingIncomeStats": {
-                "overallPercentProfitGrowth": -7.069408740359898,
-                "averagePercentProfitGrowth": -0.10960595310943926
-            },
-            "operatingMarginStats": {
-                "averageOperatingMargin": 0
-            }
-        }
-    },
-    {
         "symbol": "VTNR",
         "data": [
             {
@@ -14466,96 +14905,6 @@
         }
     },
     {
-        "symbol": "RCG",
-        "data": [
-            {
-                "periodEndDate": "3/31/2009",
-                "totalRevenue": "153",
-                "salesGeneralAndAdmin": "71",
-                "nonRecurringItems": "223",
-                "otherExpenses": "78",
-                "totalExpenses": "373",
-                "operatingIncome": "(220)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(585)",
-                "netIncomeOperations": "(585)",
-                "netIncome": "(585)",
-                "earningsperShare": "-0.13",
-                "date": "2009-03-31T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 220,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "12/31/2008",
-                "totalRevenue": "125",
-                "salesGeneralAndAdmin": "110",
-                "nonRecurringItems": "107",
-                "otherExpenses": "80",
-                "totalExpenses": "298",
-                "operatingIncome": "(172)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(3,741)",
-                "netIncomeOperations": "(3,741)",
-                "netIncome": "(3,741)",
-                "earningsperShare": "-0.84",
-                "date": "2008-12-31T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 172,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "9/30/2008",
-                "totalRevenue": "156",
-                "salesGeneralAndAdmin": "82",
-                "nonRecurringItems": "65",
-                "otherExpenses": "99",
-                "totalExpenses": "247",
-                "operatingIncome": "(91)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(6,036)",
-                "netIncomeOperations": "(6,036)",
-                "netIncome": "(6,036)",
-                "earningsperShare": "-1.35",
-                "date": "2008-09-30T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 91,
-                "_operatingMargin": "-"
-            },
-            {
-                "periodEndDate": "6/30/2008",
-                "totalRevenue": "110",
-                "salesGeneralAndAdmin": "151",
-                "nonRecurringItems": "61",
-                "otherExpenses": "127",
-                "totalExpenses": "340",
-                "operatingIncome": "(230)",
-                "additionalIncomeExpenseItems": "0",
-                "earningsBeforeTax": "(4,309)",
-                "netIncomeOperations": "(4,309)",
-                "netIncome": "(4,309)",
-                "earningsperShare": "-0.97",
-                "date": "2008-06-30T00:00:00.000Z",
-                "_profit": "-",
-                "_operatingIncome": 230,
-                "_operatingMargin": "-"
-            }
-        ],
-        "stats": {
-            "profitStats": {
-                "overallPercentProfitGrowth": 0,
-                "averagePercentProfitGrowth": 0
-            },
-            "operatingIncomeStats": {
-                "overallPercentProfitGrowth": -4.3478260869565215,
-                "averagePercentProfitGrowth": 18.827727715493136
-            },
-            "operatingMarginStats": {
-                "averageOperatingMargin": 0
-            }
-        }
-    },
-    {
         "symbol": "YVR",
         "data": [
             {
@@ -15096,6 +15445,300 @@
             },
             "operatingMarginStats": {
                 "averageOperatingMargin": -1.6136
+            }
+        }
+    },
+    {
+        "symbol": "MMLP",
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "152,533",
+                "costOfRevenue": "77,345",
+                "grossProfit": "75,188",
+                "salesGeneralAndAdmin": "10,339",
+                "otherExpenses": "58,358",
+                "totalExpenses": "68,697",
+                "operatingIncome": "6,491",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeInterestTaxes": "6,491",
+                "interestExpense": "(12,943)",
+                "earningsBeforeTax": "(10,446)",
+                "incomeTax": "373",
+                "netIncomeOperations": "(10,819)",
+                "discontinuedOperations": "0",
+                "netIncome": "(10,819)",
+                "earningsperShare": "-0.27",
+                "grossMargin": "0.4611",
+                "operatingMargin": "0.0655",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": 75188,
+                "_operatingIncome": 6491,
+                "_operatingMargin": 0.0655
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "140,638",
+                "costOfRevenue": "63,290",
+                "grossProfit": "77,348",
+                "salesGeneralAndAdmin": "9,858",
+                "otherExpenses": "59,530",
+                "totalExpenses": "69,388",
+                "operatingIncome": "7,960",
+                "additionalIncomeExpenseItems": "4",
+                "earningsBeforeInterestTaxes": "7,960",
+                "interestExpense": "(9,377)",
+                "earningsBeforeTax": "(1,413)",
+                "incomeTax": "790",
+                "netIncomeOperations": "(2,203)",
+                "discontinuedOperations": "0",
+                "netIncome": "(2,203)",
+                "earningsperShare": "-0.06",
+                "grossMargin": "0.4596",
+                "operatingMargin": "0.0883",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": 77348,
+                "_operatingIncome": 7960,
+                "_operatingMargin": 0.0883
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "198,883",
+                "costOfRevenue": "108,810",
+                "grossProfit": "90,073",
+                "salesGeneralAndAdmin": "10,462",
+                "otherExpenses": "64,011",
+                "totalExpenses": "74,473",
+                "operatingIncome": "15,600",
+                "additionalIncomeExpenseItems": "3",
+                "earningsBeforeInterestTaxes": "15,600",
+                "interestExpense": "(9,925)",
+                "earningsBeforeTax": "9,162",
+                "incomeTax": "347",
+                "netIncomeOperations": "8,815",
+                "discontinuedOperations": "0",
+                "netIncome": "8,815",
+                "earningsperShare": "0.22",
+                "grossMargin": "0.4529",
+                "operatingMargin": "0.0784",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": 90073,
+                "_operatingIncome": 15600,
+                "_operatingMargin": 0.0784
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "241,862",
+                "costOfRevenue": "146,063",
+                "grossProfit": "95,799",
+                "salesGeneralAndAdmin": "10,533",
+                "otherExpenses": "67,239",
+                "totalExpenses": "77,772",
+                "operatingIncome": "18,027",
+                "additionalIncomeExpenseItems": "3",
+                "earningsBeforeInterestTaxes": "18,027",
+                "interestExpense": "(11,060)",
+                "earningsBeforeTax": "6,970",
+                "incomeTax": "328",
+                "netIncomeOperations": "6,642",
+                "discontinuedOperations": "0",
+                "netIncome": "6,642",
+                "earningsperShare": "0.16",
+                "grossMargin": "0.4183",
+                "operatingMargin": "0.0686",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": 95799,
+                "_operatingIncome": 18027,
+                "_operatingMargin": 0.0686
+            }
+        ],
+        "stats": {
+            "profitStats": {
+                "overallPercentProfitGrowth": -21.514838359481832,
+                "averagePercentProfitGrowth": -7.63236722589864
+            },
+            "operatingIncomeStats": {
+                "overallPercentProfitGrowth": -63.99289953957952,
+                "averagePercentProfitGrowth": -26.964090489700315
+            },
+            "operatingMarginStats": {
+                "averageOperatingMargin": 0.07519999999999999
+            }
+        }
+    },
+    {
+        "symbol": "EQS",
+        "data": [
+            {
+                "periodEndDate": "9/30/2020",
+                "totalRevenue": "101",
+                "salesGeneralAndAdmin": "531",
+                "otherExpenses": "293",
+                "totalExpenses": "824",
+                "operatingIncome": "(723)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(4,038)",
+                "netIncomeOperations": "(4,038)",
+                "netIncome": "(4,038)",
+                "earningsperShare": "-0.3",
+                "date": "2020-09-30T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 723,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "6/30/2020",
+                "totalRevenue": "95",
+                "salesGeneralAndAdmin": "387",
+                "otherExpenses": "371",
+                "totalExpenses": "758",
+                "operatingIncome": "(663)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "2,574",
+                "netIncomeOperations": "2,574",
+                "netIncome": "2,574",
+                "earningsperShare": "0.19",
+                "date": "2020-06-30T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 663,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "3/31/2020",
+                "totalRevenue": "97",
+                "salesGeneralAndAdmin": "535",
+                "otherExpenses": "488",
+                "totalExpenses": "1,023",
+                "operatingIncome": "(926)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(7,174)",
+                "netIncomeOperations": "(7,174)",
+                "netIncome": "(7,174)",
+                "earningsperShare": "-0.53",
+                "date": "2020-03-31T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 926,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "12/31/2019",
+                "totalRevenue": "152",
+                "salesGeneralAndAdmin": "579",
+                "otherExpenses": "351",
+                "totalExpenses": "930",
+                "operatingIncome": "(778)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(3,116)",
+                "netIncomeOperations": "(3,116)",
+                "netIncome": "(3,116)",
+                "earningsperShare": "-0.23",
+                "date": "2019-12-31T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 778,
+                "_operatingMargin": "-"
+            }
+        ],
+        "stats": {
+            "profitStats": {
+                "overallPercentProfitGrowth": 0,
+                "averagePercentProfitGrowth": 0
+            },
+            "operatingIncomeStats": {
+                "overallPercentProfitGrowth": -7.069408740359898,
+                "averagePercentProfitGrowth": -0.10960595310943926
+            },
+            "operatingMarginStats": {
+                "averageOperatingMargin": 0
+            }
+        }
+    },
+    {
+        "symbol": "RCG",
+        "data": [
+            {
+                "periodEndDate": "3/31/2009",
+                "totalRevenue": "153",
+                "salesGeneralAndAdmin": "71",
+                "nonRecurringItems": "223",
+                "otherExpenses": "78",
+                "totalExpenses": "373",
+                "operatingIncome": "(220)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(585)",
+                "netIncomeOperations": "(585)",
+                "netIncome": "(585)",
+                "earningsperShare": "-0.13",
+                "date": "2009-03-31T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 220,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "12/31/2008",
+                "totalRevenue": "125",
+                "salesGeneralAndAdmin": "110",
+                "nonRecurringItems": "107",
+                "otherExpenses": "80",
+                "totalExpenses": "298",
+                "operatingIncome": "(172)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(3,741)",
+                "netIncomeOperations": "(3,741)",
+                "netIncome": "(3,741)",
+                "earningsperShare": "-0.84",
+                "date": "2008-12-31T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 172,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "9/30/2008",
+                "totalRevenue": "156",
+                "salesGeneralAndAdmin": "82",
+                "nonRecurringItems": "65",
+                "otherExpenses": "99",
+                "totalExpenses": "247",
+                "operatingIncome": "(91)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(6,036)",
+                "netIncomeOperations": "(6,036)",
+                "netIncome": "(6,036)",
+                "earningsperShare": "-1.35",
+                "date": "2008-09-30T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 91,
+                "_operatingMargin": "-"
+            },
+            {
+                "periodEndDate": "6/30/2008",
+                "totalRevenue": "110",
+                "salesGeneralAndAdmin": "151",
+                "nonRecurringItems": "61",
+                "otherExpenses": "127",
+                "totalExpenses": "340",
+                "operatingIncome": "(230)",
+                "additionalIncomeExpenseItems": "0",
+                "earningsBeforeTax": "(4,309)",
+                "netIncomeOperations": "(4,309)",
+                "netIncome": "(4,309)",
+                "earningsperShare": "-0.97",
+                "date": "2008-06-30T00:00:00.000Z",
+                "_profit": "-",
+                "_operatingIncome": 230,
+                "_operatingMargin": "-"
+            }
+        ],
+        "stats": {
+            "profitStats": {
+                "overallPercentProfitGrowth": 0,
+                "averagePercentProfitGrowth": 0
+            },
+            "operatingIncomeStats": {
+                "overallPercentProfitGrowth": -4.3478260869565215,
+                "averagePercentProfitGrowth": 18.827727715493136
+            },
+            "operatingMarginStats": {
+                "averageOperatingMargin": 0
             }
         }
     }
