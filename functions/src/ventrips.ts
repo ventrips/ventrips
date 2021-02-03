@@ -1106,10 +1106,10 @@ const generateStatsObject = (table) => {
     };
     const exclude = ['breakdown', 'ttm'];
     if (table && table.headers.length > 0 && table.rows.length > 0) {
-        // find the index of the category name 
+        // find the index of the category name
         table.headers.forEach((col, index) => {
             if (!moment.isMoment(col) && col.toLowerCase() === exclude[0]) {
-                referenceKey['headerIndex'] = index;  
+                referenceKey['headerIndex'] = index;
             } else if (moment.isMoment(col)) {
                 referenceKey['datesIndices'].push({
                     date: col,
@@ -1131,7 +1131,7 @@ const generateStatsObject = (table) => {
                     values.sort((a, b) => b.date.valueOf() - a.date.valueOf());
                 });
                 stats[headerName] = values;
-            } 
+            }
         })
     }
 
@@ -1356,52 +1356,61 @@ const retry = async (scrapeScript, missingStockSymbols, data, args) => {
 
 /* #1: Uses FinnHub to fetch for all stocks, OTC Markets to filter out bad penny stocks, Yahoo Finance to filter by our criteria on price, market cap, and historic volumes */
 export const getBestStocks1 = functions.runWith({ timeoutSeconds: 540, memory: '512MB' }).https.onRequest(async (request, response): Promise<any> => {
+    const today: any = new Date().toISOString().slice(0, 10);
     cors(request, response);
     try {
         let bestStocks: Array<any>;
-        // 1. Get All Stock Symbols From FinViz
-        const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
-        // 2. Get All U.S. Penny Stock Statuses From OTC Markets
-        const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
-        // 3. Filter stocks that are Pink Information or greater
-        const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
-        const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
-        const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
-        // 4. Get Financial Data from Yahoo Finance For All Filtered Stocks
-        bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
-        // 5. Add OTC Details
-        bestStocks = _.map(bestStocks, (bestStock: any) => {
-            if (_.isEqual(_.get(bestStock, ['yahooFinance', 'fullExchangeName']), 'Other OTC')) {
-                const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['yahooFinance', 'symbol']) });
-                if (!_.isNil(pennyStockFound)) {
-                    return _.assign(bestStock, { otcMarkets: pennyStockFound });
-                };
-            };
-            return bestStock;
-        });
+        // // 1. Get All Stock Symbols From FinViz
+        // const finnHubStockSymbols: Array<string> = await getFinnHubStockSymbols();
+        // // 2. Get All U.S. Penny Stock Statuses From OTC Markets
+        // const otcMarketsPennyStocks: Array<any> = await getOTCMarkets();
+        // // 3. Filter stocks that are Pink Information or greater
+        // const badPennyStocks: Array<any> = _.filter(otcMarketsPennyStocks, (otcMarketPennyStock: any) => !isGoodPennyStock(otcMarketPennyStock));
+        // const badPennyStockSymbols: Array<string> = _.map(badPennyStocks, (badPennyStock: any) => _.get(badPennyStock, ['symbol']));
+        // const goodFinnHubStockSymbols: Array<string> =  _.filter(finnHubStockSymbols, (stockSymbol: string) => !_.includes(badPennyStockSymbols, stockSymbol));
+        // // 4. Get Financial Data from Yahoo Finance For All Filtered Stocks
+        // bestStocks = await getYahooFinance(goodFinnHubStockSymbols);
+        // // 5. Add OTC Details
+        // bestStocks = _.map(bestStocks, (bestStock: any) => {
+        //     if (_.isEqual(_.get(bestStock, ['yahooFinance', 'fullExchangeName']), 'Other OTC')) {
+        //         const pennyStockFound: any = _.find(otcMarketsPennyStocks, { symbol: _.get(bestStock, ['yahooFinance', 'symbol']) });
+        //         if (!_.isNil(pennyStockFound)) {
+        //             return _.assign(bestStock, { otcMarkets: pennyStockFound });
+        //         };
+        //     };
+        //     return bestStock;
+        // });
+        // fs.writeFileSync(`./mocks/best-stocks/getBestStocks1-FULL-${today}.json`, JSON.stringify(bestStocks, null, 4));
+
+        // Uncomment for real API
+        bestStocks = require(`./../mocks/best-stocks/getBestStocks1-FULL-2021-02-02.json`);
+
         // 5. Filter stocks by criteria
         bestStocks = _.filter(bestStocks, (bestStock: object) => {
-            const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice']));
-            const marketCap: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'marketCap']));
-            const regularMarketVolume: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketVolume'], 0));
+            // const marketCap: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'marketCap'], 0));
             const averageDailyVolume10Day: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'averageDailyVolume10Day'], 0));
             const averageDailyVolume3Month: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'averageDailyVolume3Month'], 0));
-            const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent'], 0));
             const twoHundredDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'twoHundredDayAverageChangePercent'], 0));
+            const fiftyDayAverageChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent'], 0));
+            const regularMarketPrice: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'regularMarketPrice'], 0));
             const fiftyDayAverage: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyDayAverage'], 0));
             const twoHundredDayAverage: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'twoHundredDayAverage'], 0));
+            const fiftyTwoWeekLowChangePercent: number = _.toNumber(_.get(bestStock, ['yahooFinance', 'fiftyTwoWeekLowChangePercent'], 0));
 
-            return _.has(bestStock, ['yahooFinance', 'regularMarketVolume']) && (regularMarketVolume >= 1000) &&
-                   _.has(bestStock, ['yahooFinance', 'averageDailyVolume10Day']) && (averageDailyVolume10Day >= 1000) &&
-                   _.has(bestStock, ['yahooFinance', 'averageDailyVolume3Month']) && (averageDailyVolume3Month >= 1000) &&
-                   (averageDailyVolume10Day >= averageDailyVolume3Month * 0.5) &&
-                   _.has(bestStock, ['yahooFinance', 'regularMarketPrice']) && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
-                   (fiftyDayAverage >= twoHundredDayAverage * 0.5) &&
-                   _.has(bestStock, ['yahooFinance', 'marketCap']) && (marketCap >= 100 && marketCap <= 100000000) &&
-                   _.has(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent']) && (fiftyDayAverageChangePercent >= 0) &&
-                   _.has(bestStock, ['yahooFinance', 'twoHundredDayAverageChangePercent']) && (twoHundredDayAverageChangePercent >= 0)
-            ;
+                    // _.has(bestStock, ['yahooFinance', 'marketCap']) && (marketCap >= 0) &&
+            return  _.has(bestStock, ['yahooFinance', 'regularMarketPrice']) && (regularMarketPrice >= 0.0001 && regularMarketPrice <= 10) &&
+                    _.has(bestStock, ['yahooFinance', 'fiftyDayAverage']) &&
+                    _.has(bestStock, ['yahooFinance', 'twoHundredDayAverage']) &&
+                    (regularMarketPrice >= (fiftyDayAverage * .75)) &&
+                    (fiftyDayAverage >= (twoHundredDayAverage * .75)) &&
+                    _.has(bestStock, ['yahooFinance', 'averageDailyVolume10Day']) && (averageDailyVolume10Day >= 10000) &&
+                    _.has(bestStock, ['yahooFinance', 'averageDailyVolume3Month']) && (averageDailyVolume3Month >= 10000) &&
+                    (averageDailyVolume10Day >= (averageDailyVolume3Month * .75)) &&
+                    _.has(bestStock, ['yahooFinance', 'fiftyDayAverageChangePercent']) && (fiftyDayAverageChangePercent >= -1) &&
+                    _.has(bestStock, ['yahooFinance', 'twoHundredDayAverageChangePercent']) && (twoHundredDayAverageChangePercent >= 0) &&
+                    _.has(bestStock, ['yahooFinance', 'fiftyTwoWeekLowChangePercent']) && (fiftyTwoWeekLowChangePercent >= 0);
         });
+
         // 5. Filter All Stock Symbols based on Pink Status or Greater
         // 6. Calculate mean averages of volume and market price
         // 7. Filter stocks even further from mean calculations
@@ -1426,7 +1435,6 @@ export const getBestStocks1 = functions.runWith({ timeoutSeconds: 540, memory: '
             data: bestStocks
         };
         let jsonData = JSON.stringify(final, null, 4);
-        const today: any = new Date().toISOString().slice(0, 10);
         fs.writeFileSync(`./mocks/best-stocks/getBestStocks1-${today}.json`, jsonData);
 
         // console.log(JSON.stringify(final, null, 4));
@@ -1679,7 +1687,7 @@ export const getBestStocks4 = functions.runWith({ timeoutSeconds: 540, memory: '
         bestStocks = _.filter(bestStocks, (bestStock: any) => {
             const overallPercentProfitGrowth: number = _.toNumber(_.get(bestStock, 'statementStats.overallPercentProfitGrowth', 0));
             const averagePercentProfitGrowth: number = _.toNumber(_.get(bestStock, 'statementStats.averagePercentProfitGrowth', 0));
-            
+
             return overallPercentProfitGrowth >= 0 &&
                 averagePercentProfitGrowth >= 0;
         });
