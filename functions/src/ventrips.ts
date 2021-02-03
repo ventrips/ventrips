@@ -1025,8 +1025,9 @@ export const getStockHoldingsInCommon = functions.runWith({ timeoutSeconds: 540,
 const isGoodPennyStock = (otcMarketPennyStock: any): boolean => {
     const isCaveatEmptor: boolean = _.get(otcMarketPennyStock, ['caveatEmptor'], true);
     const isPinkCurrentOrGreater: boolean = !_.includes(['Grey', 'Expert Market', 'Pink No Information'], _.get(otcMarketPennyStock, ['market']));
+    const isValidSecurityType: boolean = _.includes(['Common Stock', 'ADRs', 'Foreign Ordinary Shares'], _.get(otcMarketPennyStock, ['securityType']));
     const isCountryUSA: boolean = _.isEqual(_.get(otcMarketPennyStock, ['country']), 'USA');
-    return isPinkCurrentOrGreater && !isCaveatEmptor && isCountryUSA;
+    return isPinkCurrentOrGreater && isValidSecurityType && !isCaveatEmptor && isCountryUSA;
 }
 
 const scrapeYahoo = ($, args: any) => {
